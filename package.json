@@ -1,7 +1,14 @@
 {
   "name": "@nexcomponent/lib",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "React UI Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GHDryanovski19/nexcomponent-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/GHDryanovski19/nexcomponent-ui/issues"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "style": "dist/css/style.css",
@@ -15,7 +22,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_55121ea79e3f0bd"
+    "chromatic": "npx chromatic --project-token=chpt_55121ea79e3f0bd",
+    "semantic-release": "semantic-release"
   },
   "author": {
     "name": "Georgi Dryanovski"
@@ -49,7 +57,8 @@
     "sass": "^1.74.1",
     "storybook": "^8.0.6",
     "tslib": "^2.6.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "semantic-release": "^24.0.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
