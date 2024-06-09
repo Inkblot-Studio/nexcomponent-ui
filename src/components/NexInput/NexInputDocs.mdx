@@ -1,0 +1,66 @@
+NexInput Component
+------------------
+
+[NexInput Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexinput--docs)
+
+`NexInput `is a versatile component used to create input fields within your React application. It offers the following features:
+
+* **Input Types:** `NexInput `supports various input types including text, password, email, number, and more.
+* **Password Peeking:** You can enable a peek button for password inputs to allow users to toggle password visibility.
+* **Customization:** `NexInput `allows customization of input field width, size, and additional class names.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Usage
+
+To use `NexInput`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexInput from '@nexcomponent/lib/src/components/NexInput/index';
+
+function MyComponent() {
+  return (
+    <NexInput
+      type="text"
+      placeholder="Enter your text here"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **type (required):** Type of the input field (e.g., text, password, email).
+* **peekButton (optional):** Enable or disable the peek button for password inputs.
+* **className (optional):** Custom class name to be applied to the input field wrapper.
+* **width (optional):** Width of the input field in pixels.
+* **fieldSize (optional - default: 'normal'):** Size of the input field (can be 'small', 'normal', or 'large').
+* **rest (optional):** Any additional props supported by the HTML input element (e.g., placeholder, value, onChange).
+
+### Example
+
+```tsx
+import React from 'react';
+import NexInput from '@nexcomponent/lib/src/components/NexInput/index';
+
+function MyComponent() {
+  return (
+    <NexInput
+      type="password"
+      placeholder="Enter your password"
+      peekButton={true}
+      className="custom-input"
+      width={200}
+      fieldSize="large"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexInput` can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the input type, placeholder text, width, size, and styling to match your application's design requirements.

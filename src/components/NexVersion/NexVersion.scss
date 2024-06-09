@@ -1,0 +1,72 @@
+@import "../../utils/mixin.scss";
+
+.nex-version-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: calculate(60px);
+    gap: calculate(20px);
+    transition: all 0.2s ease-in-out;
+  
+    .nex-version {
+        position: relative;
+        padding: calculate(10px) calculate(10px);
+        border-radius: calculate(8px);
+        background-color: var(--nex-primary-color);
+        color: #fff;
+        cursor: pointer;
+        z-index: 1;
+        transition: all 0.2s ease-in-out;
+  
+      &.clicked {
+        position: relative;
+        z-index: 1;
+      }
+  
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 0;
+        height: calculate(2px);
+        background-color: #fff;
+        transform: translateY(-50%);
+        transition: width 0.2s ease-in-out;
+      }
+  
+      &.clicked::after {
+        width: 100%;
+      }
+    }
+
+    .nex-version-edit-wrapper {
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: calculate(20px);
+      transition: opacity 300ms ease-in-out;
+      
+      &.fade-enter {
+        opacity: 0;
+      }
+      
+      &.fade-enter-done {
+        opacity: 1;
+        transition: opacity 300ms ease-in-out;
+      }
+      
+      &.fade-exit {
+        opacity: 0;
+      }
+      
+      &.fade-exit-done {
+        opacity: 0;
+        transition: opacity 300ms ease-in-out;
+      }
+    }
+
+    .arrow-icon {
+      color: var(--nex-primary-color);
+    }
+}

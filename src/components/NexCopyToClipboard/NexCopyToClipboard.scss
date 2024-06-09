@@ -1,0 +1,60 @@
+@import "../../utils/mixin.scss";
+
+.nex-copy-to-clipboard {
+    width: calculate(50px);
+    height: calculate(50px);
+    border: none;
+    border-radius: calculate(8px);
+    background-color: var(--nex-font-color);
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  
+    &--primary {
+        background-color: var(--nex-primary-color);
+        color: var(--nex-primary-contrast-color);
+    }
+
+    &--secondary {
+        background-color: var(--nex-secondary-color);
+        color: var(--nex-secondary-contrast-color);
+    }
+
+    &--tertiary {
+        background-color: var(--nex-tertiary-color);
+        color: var(--nex-tertiary-contrast-color);
+    }
+
+    &--quaternary {
+        background-color: var(--nex-quaternary-color);
+        color: var(--nex-quaternary-contrast-color);
+    }
+
+    &--success {
+        background-color: var(--nex-success);
+        color: #fff;
+    }
+
+    &--info {
+        background-color: var(--nex-info);
+        color: #fff;
+    }
+
+    &--warning {
+        background-color: var(--nex-warning);
+        color: #fff;
+    }
+
+    &--danger {
+        background-color: var(--nex-danger);
+        color: #fff;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+  
+    .fa-copy {
+      font-size: 1.2em;
+    }
+}

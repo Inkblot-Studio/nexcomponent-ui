@@ -1,0 +1,44 @@
+## NexButton Component
+
+[View NexButton story in Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexbutton--docs)
+
+`NexButton` is a customizable button component designed for use in React applications. It offers the following features:
+
+* **Button Types:** `NexButton` supports various types of buttons including primary, secondary, tertiary, quaternary, success, info, warning, and danger.
+* **Button Sizes:** You can customize the size of the button according to your design requirements.
+* **Flexibility:** `NexButton` can be easily integrated into any React application and styled to match your design system.
+
+### Props
+
+* `onClick`: Function to be called when the button is clicked.
+* `className`: Additional CSS class names to be applied to the button.
+* `size`: Size of the button. Can be 'small', 'normal', or 'large'. Default is 'normal'.
+* `type`: Type of the button. Can be 'primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', or 'danger'.
+* `inverted`: Boolean indicating if the button should have an inverted color scheme.
+* `text`: Text to be displayed on the button.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexButton from '@nexcomponent/lib/src/components/NexButton/NexButton';
+
+const MyComponent = () => {
+  const handleClick = () => {
+    console.log('Button clicked!');
+  };
+
+  return (
+    <div>
+      <h1>My Component</h1>
+      <NexButton onClick={handleClick} type="primary" size="large" text="Click me" />
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+### Styling
+
+`NexButton` uses CSS classes for styling. You can customize the appearance of the button by modifying the corresponding CSS classes in your project.

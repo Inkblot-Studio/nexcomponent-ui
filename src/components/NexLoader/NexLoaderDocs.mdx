@@ -1,0 +1,48 @@
+## NexLoader Component
+
+[NexLoader Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexloader--docs)
+
+`NexLoader `is a component designed to display loading animations within your React application. It offers the following features:
+
+* **Loading Animation:** `NexLoader `displays a simple yet customizable loading animation to indicate that content is being loaded or processed.
+* **Customization:** You can customize the appearance of the loader by adjusting the size, color, and other styling properties.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless loading experience for all users.
+
+### Usage
+
+To use `NexLoader`, simply import the component:
+
+```tsx
+import React from 'react';
+import NexLoader from '@nexcomponent/lib/src/components/NexLoader';
+
+function MyComponent() {
+  return (
+    <NexLoader />
+  );
+}
+
+export default MyComponent;
+```
+
+### Example
+
+```tsx
+import React from 'react';
+import NexLoader from '@nexcomponent/lib/src/components/NexLoader';
+
+function MyComponent() {
+  return (
+    <div>
+      <p>Loading...</p>
+      <NexLoader />
+    </div>
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexLoader `can be customized by adjusting the styles defined in the accompanying CSS file (`NexLoader.scss`). You can modify the size, color, animation, and other styling properties to match your application's design requirements.

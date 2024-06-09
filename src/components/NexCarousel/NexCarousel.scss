@@ -1,0 +1,95 @@
+@import "../../utils/mixin.scss";
+
+.nex-carousel {
+    position: relative;
+    overflow: hidden;
+    padding: calculate(20px) 0;
+
+    &.nex-carousel-dots-top {
+      margin-top: calculate(20px);
+    }
+
+    &.nex-carousel-dots-bottom {
+      margin-bottom: calculate(20px);
+    }
+
+    .nex-slides {
+      display: flex;
+      gap: calculate(20px);
+      transition: transform 0.5s ease;
+    }
+    
+    .nex-slide {
+      flex: 0 0 calc(100% - calculate(20px));
+    }
+    
+    .nex-carousel-line {
+      position: relative;
+      top: 100%;
+      left: 0;
+      height: calculate(6px);
+      border-radius: calculate(8px);
+      background-color: var(--nex-primary-color);
+      transition: width 0.5s ease;
+    }
+    
+    .nex-carousel-nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: calculate(25px);
+      padding: calculate(8px);
+      border: none;
+      border-radius: 50%;
+      background: rgba( 255, 255, 255, 0.25 );
+      backdrop-filter: blur( 4px );
+      -webkit-backdrop-filter: blur( 4px );
+      border-radius: calculate(8px);
+      border: calculate(1px) solid rgba( 255, 255, 255, 0.18 );
+      color: var(--nex-font-color);
+      cursor: pointer;
+      transition: color 200ms ease-in-out;
+
+      &:hover {
+        color: var(--nex-primary-color);
+      }
+    }
+    
+    .nex-prev {
+      left: 0;
+    }
+    
+    .nex-next {
+      right: 0;
+    }
+    
+    .nex-carousel-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+
+      &.top {
+        top: 0;
+      }
+
+      &.bottom {
+        bottom: 0;
+      }
+    }
+    
+    .nex-carousel-dot {
+      width: calculate(12px);
+      height: calculate(12px);
+      border-radius: 50%;
+      background-color: var(--nex-complimentary-color);
+      margin: 0 calculate(23px);
+      cursor: pointer;
+    }
+    
+    .nex-carousel-dot.active {
+      background-color: var(--nex-primary-color);
+    }
+}
+  
+  

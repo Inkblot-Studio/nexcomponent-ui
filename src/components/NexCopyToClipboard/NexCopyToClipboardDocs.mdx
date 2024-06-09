@@ -1,0 +1,59 @@
+## NexCopyToClipboard Component
+
+[NexCopyToClipboard Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexcopytoclipboard--docs)
+
+`NexCopyToClipboard `is a component designed to facilitate copying text to the clipboard within your React application. It offers the following features:
+
+* **Clipboard Copy:** `NexCopyToClipboard `allows users to easily copy text content to their clipboard with a single click.
+* **Customization:** You can customize the appearance of the copy button by providing a custom class name and specifying the type of button (e.g., primary, secondary).
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Usage
+
+To use `NexCopyToClipboard`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexCopyToClipboard from '@nexcomponent/lib/src/components/NexCopyToClipboard/index';
+
+function MyComponent() {
+  return (
+    <NexCopyToClipboard
+      textToCopy="Text to be copied"
+      type="primary"
+      className="custom-class"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **textToCopy (required):** The text content to be copied to the clipboard.
+* **type (optional):** Type of the copy button (e.g., primary, secondary). Default is no specific type.
+* **className (optional):** Custom class name to be applied to the copy button.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexCopyToClipboard from '@nexcomponent/lib/src/components/NexCopyToClipboard/index';
+
+function MyComponent() {
+  return (
+    <NexCopyToClipboard
+      textToCopy="Text to be copied"
+      type="primary"
+      className="custom-class"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexCopyToClipboard `can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the button type, class name, and styling to match your application's design requirements.

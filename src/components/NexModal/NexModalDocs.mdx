@@ -1,0 +1,74 @@
+NexModal Component
+------------------
+
+[NexModal Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexmodal--docs)
+
+`NexModal `is a component designed to display modal dialogs within your React application. It offers the following features:
+
+* **Modal Content:** `NexModal `displays customizable content within a modal dialog, including text, buttons, and other elements.
+* **Button Actions:** You can define actions for buttons within the modal to handle user interactions such as confirming or canceling an action.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Usage
+
+To use `NexModal`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexModal from '@nexcomponent/lib/src/components/NexModal/index';
+
+function MyComponent() {
+  const handleOpenModal = () => {
+    // Set state or trigger action to open the modal
+  };
+
+  const handleCloseModal = () => {
+    // Set state or trigger action to close the modal
+  };
+
+  return (
+    <>
+      <button onClick={handleOpenModal}>Open Modal</button>
+      <NexModal setOpenModal={handleCloseModal} />
+    </>
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **setOpenModal (required):** Function to control the visibility of the modal. When called with `true`, the modal is displayed. When called with `false`, the modal is hidden.
+
+### Example
+
+```tsx
+import React, { useState } from 'react';
+import NexModal from '@nexcomponent/lib/src/components/NexModal/index';
+
+function MyComponent() {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  return (
+    <>
+      <button onClick={handleOpenModal}>Open Modal</button>
+      {openModal && <NexModal setOpenModal={handleCloseModal} />}
+    </>
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexModal `can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the modal content, button actions, and styling to match your application's design requirements.

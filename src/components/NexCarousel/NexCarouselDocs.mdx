@@ -1,0 +1,89 @@
+## NexCarousel Component
+
+[NexCarousel Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexcarousel--docs)
+
+`NexCarousel` is a versatile component used to create image carousels or sliders within your React application. It offers the following features:
+
+* **Automatic Slideshow:** `NexCarousel` supports automatic looping through the elements at specified intervals, providing a seamless slideshow experience.
+* **Navigation Buttons:** You can enable navigation buttons to allow users to manually navigate through the carousel.
+* **Customization:** `NexCarousel` allows customization of navigation button positions, line indicators, and more, to match your design system.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Prerequisites
+
+* Before using `NexCarousel` component, ensure that you have installed the necessary dependencies and set up your project environment appropriately.
+
+### Usage
+
+##### Basic Usage
+
+To use `NexCarousel`, simply import the component and wrap your carousel content with it:
+
+```tsx
+import React from 'react';
+import NexCarousel from '@nexcomponent/lib/src/components/NexCarousel/index';
+
+function MyComponent() {
+  return (
+    <NexCarousel>
+      {/* Your carousel content here */}
+    </NexCarousel>
+  );
+}
+
+export default MyComponent;
+```
+
+##### With Automatic Slideshow
+
+You can enable automatic slideshow by providing the `interval` prop with the desired interval in seconds:
+
+```tsx
+import React from 'react';
+import NexCarousel from '@nexcomponent/lib/src/components/NexCarousel/index';
+
+function MyComponent() {
+  return (
+    <NexCarousel interval={5}>
+      {/* Your carousel content here */}
+    </NexCarousel>
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **children (required):** The content elements to be displayed within the carousel.
+* **navButtons (optional - default: false):** Enable or disable navigation buttons.
+* **navigationPosition (optional - default: 'bottom'):** Position of navigation buttons (can be 'top', 'bottom', 'left', or 'right').
+* **line (optional - default: false):** Enable or disable line indicators.
+* **interval (optional):** Interval in seconds for automatic slideshow. If provided, the carousel will automatically switch elements at the specified interval.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexCarousel from '@nexcomponent/lib/src/components/NexCarousel/index';
+
+function MyComponent() {
+  return (
+    <NexCarousel navButtons={true} navigationPosition="bottom" line={true} interval={3}>
+      {/* Your carousel content here */}
+    </NexCarousel>
+  );
+}
+
+export default MyComponent;
+```
+
+### Additional Functionality
+
+`NexCarousel` also provides additional functionality to programmatically manage the carousel:
+
+* `handleNext()`**:** Function to navigate to the next slide.
+* `handlePrev()`**:** Function to navigate to the previous slide.
+* `handleJumpToSlide(index: number)`**:** Function to jump to a specific slide by index.
+
+You can use these functions as needed within your components to control the carousel behavior.

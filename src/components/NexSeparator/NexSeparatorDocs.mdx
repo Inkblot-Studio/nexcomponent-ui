@@ -1,0 +1,64 @@
+## NexSeparator Component
+
+[NexSeparator Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexseparator--docs)
+
+`NexSeparator `is a component designed to create separators or divider lines within your React application. It offers the following features:
+
+* **Customizable Separator:** `NexSeparator `allows customization of separator line color, text content, background color, and font size.
+* **Flexibility:** The component can be easily integrated into various parts of your application to visually separate different sections or content.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Usage
+
+To use `NexSeparator`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexSeparator from '@nexcomponent/lib/src/components/NexSeparator';
+
+function MyComponent() {
+  return (
+    <NexSeparator
+      text="Separator Text"
+      backgroundColor="#f0f0f0"
+      fontSize={16}
+      color="#333"
+    />
+  );
+}
+
+export default MyComponent;
+
+```
+
+### Props
+
+* **className (optional):** Custom class name to be applied to the separator wrapper.
+* **text (optional):** Text content to be displayed alongside the separator line.
+* **backgroundColor (optional - default: '#fff'):** Background color of the text container.
+* **fontSize (optional - default: 14):** Font size of the text content.
+* **color (optional):** Color of the separator line and text content.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexSeparator from '@nexcomponent/lib/src/components/NexSeparator';
+
+function MyComponent() {
+  return (
+    <NexSeparator
+      text="Separator Text"
+      backgroundColor="#f0f0f0"
+      fontSize={16}
+      color="#333"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexSeparator `can be customized by adjusting the styles defined in the accompanying CSS file (`NexSeparator.scss`). You can modify the separator line color, text content styling, and other appearance properties to match your application's design requirements.

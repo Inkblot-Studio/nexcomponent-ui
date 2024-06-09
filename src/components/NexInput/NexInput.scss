@@ -1,0 +1,60 @@
+@import "../../utils/mixin.scss";
+
+.nex-input {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 1;
+    width: 100%;
+    border: calculate(1px) solid #ddd;
+    border-radius: calculate(8px);
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out;
+    outline: none;
+    color: var(--nex-font-color);
+    padding: calculate(20px);
+
+    &:focus {
+      border-color: var(--nex-primary-color);
+    }
+  }
+
+  &--small {
+    input {
+        padding: calculate(13px);
+    }
+  }
+
+  &--large {
+    input {
+        padding: calculate(25px);
+        font-size: calculate(20px);
+    }
+  }
+
+  .peek-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: calculate(20px);
+    border: none;
+    background: none;
+    font-size: calculate(15px);
+    color: var(--nex-primary-color);
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
+.password-wrapper {
+  position: relative;
+
+  input {
+    &:not(:last-child) {
+        padding-right: calculate(80px);
+    }
+  } 
+}

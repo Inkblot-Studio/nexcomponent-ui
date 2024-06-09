@@ -1,0 +1,41 @@
+@import './colors.scss';
+
+$mobile-width: 481px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@function calculate($size) {
+    $design_width: 1440px;
+    $design_height: 1024px;
+    @return #{(calc($size / ($design-width / $design-height * 16px)))}rem;
+}
+
+@mixin initial {
+    @media (max-width: #{mobile-width}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: #{$tablet-width}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+@mixin breakpoint-max ($breakpoint-max) {
+    @media (max-width: #{$breakpoint-max}) {
+        @content;
+    }
+}

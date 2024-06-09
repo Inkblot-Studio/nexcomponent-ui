@@ -1,0 +1,110 @@
+## NexAlert Component
+[View NexAlert story in Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexalert--docs)
+
+`NexAlert` is a versatile component used to display different types of alerts within your application. It offers the following features:
+
+- **Types of Alerts:** `NexAlert` supports various types of alerts including success, error, warning, and informational messages.
+- **Customization:** You can customize the message content, type of alert, duration of display, and the presence of a dismiss button.
+- **Flexibility:** `NexAlert` can be easily integrated into any React application and styled to match your design system.
+- **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Prerequisites
+- Before using `NexAlert` component, ensure that you have installed the necessary dependencies and set up your project environment appropriately.
+- Make sure the ```<NexAlertsProvider>``` wraps the contents of your page.
+
+```tsx
+// App.tsx
+(...)
+import { NexAlertsProvider } from "@nexcomponent/lib/src/components/NexAlert/index";
+
+function App() {
+  return (
+        <NexAlertsProvider>
+            // Your app content
+        </NexAlertsProvider>
+    )
+}
+```
+
+### Usage
+
+##### Alert Stacking
+
+When multiple alerts are triggered, `NexAlert` provides a stacking mechanism to manage the display of these alerts:
+
+1. **Maximum Number of Alerts:** `NexAlert` limits the number of alerts that can be displayed simultaneously. By default, it allows up to 4 alerts to be displayed at once.
+
+2. **Stacking Behavior:** When a new alert is triggered and the maximum number of alerts is already displayed, `NexAlert` automatically dismisses the oldest alert to make room for the new one. This ensures that the most recent alerts are always visible to the user.
+
+3. **Order of Dismissal:** The oldest alert in the stack (the one that has been displayed the longest) is dismissed first to accommodate the new alert. This ensures that alerts are dismissed in the order they were triggered, maintaining a consistent user experience.
+
+### Example
+
+```jsx
+import React, { useEffect } from 'react';
+import { useAlerts } from './NexAlertsProvider';
+
+const MyComponent = () => {
+  const { addAlert } = useAlerts();
+
+  useEffect(() => {
+    // Simulate triggering multiple alerts
+    addAlert({ type: 'info', message: 'Info 1' });
+    addAlert({ type: 'error', message: 'Error 1' });
+    addAlert({ type: 'success', message: 'Success 1' });
+    addAlert({ type: 'warning', message: 'Warning 1' });
+  }, []);
+
+  return (
+    <div>
+      <h1>My Component</h1>
+      {/* Your component JSX */}
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+### Managing Alerts
+
+`NexAlert` provides a `useAlerts` hook and a `clearAlerts` method to manage alerts programmatically:
+
+- **useAlerts Hook:** This hook provides functions to add alerts and clear all alerts. It ensures that alerts are managed within the context of a `NexAlertsProvider`.
+
+- **clearAlerts Method:** The `clearAlerts` method clears all alerts currently displayed by dismissing them from the stack. This can be useful for scenarios where you want to remove all alerts at once, such as after a user action or when navigating away from a page.
+
+### Example
+
+```jsx
+import React, { useEffect } from 'react';
+import { useAlerts } from './NexAlertsProvider';
+
+const MyComponent = () => {
+  const { addAlert, clearAlerts } = useAlerts();
+
+  useEffect(() => {
+    // Simulate triggering multiple alerts
+    addAlert({ type: 'info', message: 'Info 1' });
+    addAlert({ type: 'error', message: 'Error 1' });
+    addAlert({ type: 'success', message: 'Success 1' });
+    addAlert({ type: 'warning', message: 'Warning 1' });
+
+    // Clear all alerts after 5 seconds
+    const timeoutId = setTimeout(() => {
+      clearAlerts();
+    }, 5000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <div>
+      <h1>My Component</h1>
+      {/* Your component JSX */}
+    </div>
+  );
+};
+
+export default MyComponent;
+```

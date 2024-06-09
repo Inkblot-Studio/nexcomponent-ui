@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  font-family: "Open Sans", sans-serif;
+  
+    /* Primary colors */
+  --nex-primary-color: #1f9be1;
+  --nex-primary-contrast-color: #f3f3f3;
+
+  /* Secondary colors */
+  --nex-secondary-color: #ef910a;
+  --nex-secondary-contrast-color: #f3f3f3;
+
+  /* Tertiary colors */
+  --nex-tertiary-color: #88ffca;
+  --nex-tertiary-contrast-color: #f3f3f3;
+
+  /* Quaternary colors */
+  --nex-quaternary-color: #4addef;
+  --nex-quaternary-contrast-color: #f3f3f3;
+
+  /* Font color */
+  --nex-font-color: #1e1d2a;
+
+  /* Background color */
+  --nex-background-color: #f3f3f3;
+
+  /*Complimentary color*/
+  --nex-complimentary-color: #bababa;
+
+  /* Bootstrap */
+  --nex-success: #5cb85c;
+  --nex-info: #5bc0de;
+  --nex-warning: #f0ad4e;
+  --nex-danger: #d9534f;
+}

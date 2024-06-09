@@ -1,0 +1,67 @@
+@import "../../utils/mixin.scss";
+
+.nex-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calculate(336px);
+    padding: calculate(25px) calculate(8px);
+    overflow: hidden;
+
+    @include mobile {
+        width: 100%;
+    }
+    
+    .nex-card-inner-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+
+        .nex-card-image {
+            align-self: center;
+            width: calculate(320px);
+            border-radius: calculate(25px);
+    
+            @include mobile {
+                width: calculate(435px);
+            }
+        }
+
+        .nex-card-title {
+            margin-top: calculate(25px);
+            font-size: calculate(23px);
+            font-weight: 800;
+
+            @include mobile {
+                font-size: calculate(50px);
+            }
+        }
+
+        .nex-card-text {
+            font-size: calculate(16px);
+            margin: calculate(8px) 0;
+
+            @include mobile {
+                font-size: calculate(22px);
+            }
+        }
+        
+        .nex-card-actions {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin-top: calculate(10px);
+            width: calculate(336px);
+        }
+    }
+
+    .nex-card-footer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: calculate(10px);
+    }
+}
+  
+  

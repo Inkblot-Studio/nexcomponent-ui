@@ -1,0 +1,84 @@
+## NexNav Component
+
+[NexNav Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexnav--docs)
+
+`NexNav `is a component designed to create navigation bars or menus within your React application. It offers the following features:
+
+* **Navigation Menu:** `NexNav` displays a customizable navigation menu with logo, menu items, and optional identity links (e.g., login, sign up).
+* **Mobile-Friendly:** The component includes a responsive design, making it suitable for desktop and mobile devices.
+* **Customization:** You can customize the appearance and behavior of the navigation menu by adjusting various props and styles.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless navigation experience for all users.
+
+### Usage
+
+To use `NexNav`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexNav from '@nexcomponent/lib/src/components/NexNav';
+
+function MyComponent() {
+  const navItems = [
+    { label: 'Home', onClick: () => console.log('Home clicked') },
+    { label: 'About', onClick: () => console.log('About clicked') },
+    // Add more menu items as needed
+  ];
+
+  return (
+    <NexNav
+      logoSrc="/path/to/logo.png"
+      altText="Company Name"
+      navItems={navItems}
+      identity={true}
+      identityProps={{
+        onLoginClick: () => console.log('Login clicked'),
+        onSignUpClick: () => console.log('Sign Up clicked')
+      }}
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **logoSrc (optional):** URL of the logo image to be displayed in the navigation bar.
+* **altText (required):** Alternate text for the logo image, or the company name if no logo is provided.
+* **identity (optional - default: false):** Whether to display identity links (e.g., login, sign up) in the navigation menu.
+* **navItems (required):** Array of menu items to be displayed in the navigation menu. Each item should have a `label` and an optional `onClick` function.
+* **identityProps (optional):** Additional props for identity links, including `onLoginClick` and `onSignUpClick` functions.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexNav from '@nexcomponent/lib/src/components/NexNav';
+
+function MyComponent() {
+  const navItems = [
+    { label: 'Home', onClick: () => console.log('Home clicked') },
+    { label: 'About', onClick: () => console.log('About clicked') },
+    // Add more menu items as needed
+  ];
+
+  return (
+    <NexNav
+      logoSrc="/path/to/logo.png"
+      altText="Company Name"
+      navItems={navItems}
+      identity={true}
+      identityProps={{
+        onLoginClick: () => console.log('Login clicked'),
+        onSignUpClick: () => console.log('Sign Up clicked')
+      }}
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexNav `can be customized by adjusting the styles defined in the accompanying CSS file (`NexNav.scss`). You can modify the appearance, layout, and behavior of the navigation menu to match your application's design requirements.

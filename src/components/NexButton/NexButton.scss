@@ -1,0 +1,191 @@
+@import "../../utils/mixin.scss";
+
+.nex-button {
+    min-width: calculate(170px);
+    min-height: calculate(40px);
+    padding: calculate(5px) calculate(15px);
+    border: calculate(1px) solid transparent;
+    border-radius: calculate(28px);
+    font-size: calculate(22px);
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+    
+    &--small {
+        min-width: calculate(150px);
+        padding: calculate(5px) calculate(15px);
+        font-size: calculate(16px);
+    }
+
+    &--large {
+        min-height: calculate(75px);
+        min-width: calculate(370px);
+        font-size: calculate(23px);
+        font-weight: 800;
+    }
+
+    &--primary {
+        background-color: var(--nex-primary-color);
+        color: var(--nex-primary-contrast-color);
+
+        &:hover {
+            border-color: var(--nex-primary-contrast-color);
+        }
+    }
+
+    &--secondary {
+        background-color: var(--nex-secondary-color);
+        color: var(--nex-secondary-contrast-color);
+        
+        &:hover {
+            border-color: var(--nex-secondary-contrast-color);
+        }
+    }
+
+    &--tertiary {
+        background-color: var(--nex-tertiary-color);
+        color: var(--nex-tertiary-contrast-color);
+
+        &:hover {
+            border-color: var(--nex-tertiary-contrast-color);
+        }
+    }
+
+    &--quaternary {
+        background-color: var(--nex-quaternary-color);
+        color: var(--nex-quaternary-contrast-color);
+        
+        &:hover {
+            border-color: var(--nex-quaternary-contrast-color);
+        }
+    }
+
+    &--success {
+        background-color: var(--nex-success);
+        color: #fff;
+
+        &:hover {
+            border-color: #fff;
+        }
+    }
+
+    &--info {
+        background-color: var(--nex-info);
+        color: #fff;
+
+        &:hover {
+            border-color: #fff;
+        }
+    }
+
+    &--warning {
+        background-color: var(--nex-warning);
+        color: #fff;
+
+        &:hover {
+            border-color: #fff;
+        }
+    }
+
+    &--danger {
+        background-color: var(--nex-danger);
+        color: #fff;
+
+        &:hover {
+            border-color: #fff;
+        }
+    }
+
+    &.inverted {
+        &.nex-button--primary {
+            border-color: var(--nex-primary-color);
+            background-color: var(--nex-primary-contrast-color);
+            color: var(--nex-primary-color);
+
+            &:hover {
+                background-color: var(--nex-primary-color);
+                color: var(--nex-primary-contrast-color);
+            }
+        }
+
+        &.nex-button--secondary {
+            border-color: var(--nex-secondary-color);
+            background-color: var(--nex-secondary-contrast-color);
+            color: var(--nex-secondary-color);
+
+            &:hover {
+                background-color: var(--nex-secondary-color);
+                color: var(--nex-secondary-contrast-color);
+            }
+        }
+
+        &.nex-button--tertiary {
+            border-color: var(--nex-tertiary-color);
+            background-color: var(--nex-tertiary-contrast-color);
+            color: var(--nex-tertiary-color);
+
+            &:hover {
+                background-color: var(--nex-tertiary-color);
+                color: var(--nex-tertiary-contrast-color);
+            }
+        }
+
+        &.nex-button--quaternary {
+            border-color: var(--nex-quaternary-color);
+            background-color: var(--nex-quaternary-contrast-color);
+            color: var(--nex-quaternary-color);
+
+            &:hover {
+                background-color: var(--nex-quaternary-color);
+                color: var(--nex-quaternary-contrast-color);
+            }
+        }
+
+        &.nex-button--success {
+            border-color: var(--nex-success);
+            background-color: var(--nex-background-color);
+            color: var(--nex-success);
+
+            &:hover {
+                background-color: var(--nex-success);
+                color: #fff;
+            }
+        }
+
+        &.nex-button--info {
+            border-color: var(--nex-info);
+            background-color: var(--nex-background-color);
+            color: var(--nex-info);
+
+            &:hover {
+                background-color: var(--nex-info);
+                color: #fff;
+            }
+        }
+
+        &.nex-button--warning {
+            border-color: var(--nex-warning);
+            background-color: var(--nex-background-color);
+            color: var(--nex-warning);
+
+            &:hover {
+                background-color: var(--nex-warning);
+                color: #fff;
+            }
+        }
+
+        &.nex-button--danger {
+            border-color: var(--nex-danger);
+            background-color: var(--nex-background-color);
+            color: var(--nex-danger);
+
+            &:hover {
+                background-color: var(--nex-danger);
+                color: #fff;
+            }
+        }
+    }
+
+    &:hover {
+        border-color: #fff;
+    }
+}

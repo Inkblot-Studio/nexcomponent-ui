@@ -1,0 +1,60 @@
+## NexVersion Component
+
+[NexVersion Storybook](http://localhost:6006/?path=/docs/nexcomponent-nexversion--docs)
+
+`NexVersion `is a component designed to display and edit version numbers within your React application. It offers the following features:
+
+* **Editable Version:** `NexVersion `allows users to edit the displayed version number by clicking on it.
+* **Save Functionality:** Users can save the edited version number, triggering a provided callback function to handle the update.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+### Usage
+
+To use `NexVersion`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexVersion from '@nexcomponent/lib/src/components/NexVersion';
+
+function MyComponent() {
+  const handleSaveVersion = (newVersion: string) => {
+    // Handle saving the new version
+    console.log('New version:', newVersion);
+  };
+
+  return (
+    <NexVersion version="1.0.0" handleSave={handleSaveVersion} />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **version (required):** The version number to be displayed and edited.
+* **handleSave (optional):** Callback function to handle saving the edited version number.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexVersion from '@nexcomponent/lib/src/components/NexVersion';
+
+function MyComponent() {
+  const handleSaveVersion = (newVersion: string) => {
+    // Handle saving the new version
+    console.log('New version:', newVersion);
+  };
+
+  return (
+    <NexVersion version="1.0.0" handleSave={handleSaveVersion} />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexVersion `can be customized by adjusting the styles defined in the accompanying CSS file (`NexVersion.scss`). You can modify the appearance and behavior of the version number display and editing interface to match your application's design requirements.
