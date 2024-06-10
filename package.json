@@ -72,5 +72,6 @@
   },
   "release": {
     "branches": ["main", "next"]
-  }
+  },
+  "private": false
 }
