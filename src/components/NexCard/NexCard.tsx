@@ -16,6 +16,7 @@ const NexCard: React.FC<NexCardProps> = ({ title, image, content, actions, foote
         <div className="nex-card-footer">
           <NexSeparator />
           {footer}
+          Test Change
         </div>
       )}
     </div>
