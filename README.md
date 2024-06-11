@@ -48,3 +48,5 @@ npm run chromatic
 
 This script runs Chromatic to perform visual regression testing.
 Please note that for the chromatic script to work, you need to provide a valid project token.
+
+TEST TEXT
