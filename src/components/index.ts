@@ -1,11 +1,11 @@
-export * from './NexAlert'
-export * from './NexButton'
-export * from './NexCard'
-export * from './NexCarousel'
-export * from './NexCopyToClipboard'
-export * from './NexInput'
-export * from './NexLoader'
-export * from './NexModal'
-export * from './NexNav'
-export * from './NexSeparator'
-export * from './NexVersion'
+export * from './NexAlert';
+export { default as NexButton } from './NexButton';
+export { default as NexCard } from './NexCard';
+export { default as NexCarousel } from './NexCarousel';
+export { default as NexCopyToClipboard } from './NexCopyToClipboard';
+export { default as NexInput } from './NexInput';
+export { default as NexLoader } from './NexLoader';
+export { default as NexModal } from './NexModal';
+export { default as NexNav } from './NexNav';
+export { default as NexSeparator } from './NexSeparator';
+export { default as NexVersion } from './NexVersion';
