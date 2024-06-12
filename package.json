@@ -1,6 +1,6 @@
 {
   "name": "@nexcomponent/lib",
-  "version": "0.0.0-development",
+  "version": "0.0.2-development",
   "description": "React UI Library",
   "repository": {
     "type": "git",
@@ -30,7 +30,10 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@chromatic-com/storybook": "^1.2.25",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -64,7 +67,6 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@nexcomponent/lib": "0.0.0-development",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/github": "^10.0.6",
