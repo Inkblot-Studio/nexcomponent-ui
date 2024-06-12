@@ -44,7 +44,7 @@ const NexAlertsProvider: FC<NexAlertsProviderProps> = ({ children }) => {
   );
 };
 
-export const useAlerts = () => {
+const useAlerts = () => {
     const [alertIds, setAlertIds] = useState<string[]>([]);
     const alertIdsRef = useRef<string[]>(alertIds);
     const context = useContext(NexAlertsContext);
@@ -69,4 +69,4 @@ export const useAlerts = () => {
     return { addAlert: addAlertWithId, clearAlerts };
 };
 
-export default NexAlertsProvider;
+export { NexAlertsProvider, useAlerts };;
