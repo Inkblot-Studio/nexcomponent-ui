@@ -2,19 +2,11 @@ import React, { createContext, useState, useContext, useRef, FC, ReactNode } fro
 import { NexAlertsWrapper } from './NexAlert';
 
 import { NexAlertProps } from './NexAlert.types';
+import { AlertsContextType } from './NexAlert.types';
+import { NexAlertsProviderProps } from './NexAlert.types';
 import { NexAlert } from './NexAlert';
 
-interface AlertsContextType {
-  alerts: NexAlertProps[];
-  addAlert: (alert: Omit<NexAlertProps, 'id'>) => string;
-  dismissAlert: (id: string) => void;
-}
-
 const NexAlertsContext = createContext<AlertsContextType | undefined>(undefined);
-
-interface NexAlertsProviderProps {
-  children: ReactNode;
-}
 
 const NexAlertsProvider: FC<NexAlertsProviderProps> = ({ children }) => {
   const [alerts, setAlerts] = useState<NexAlertProps[]>([]);
