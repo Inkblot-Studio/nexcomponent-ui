@@ -32,6 +32,7 @@ export default [
         presets: ['@babel/preset-react', '@babel/preset-typescript']
       })
     ],
+    external: ['react', 'react-dom'], // Specify React and React DOM as external dependencies
   },
   {
     input: 'dist/esm/types/index.d.ts',
