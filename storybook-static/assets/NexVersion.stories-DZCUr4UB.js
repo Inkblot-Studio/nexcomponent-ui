@@ -1,0 +1,12 @@
+import{r as t,R as e}from"./index-CDs2tPxN.js";import{F as h,c as w}from"./index-DFXOujFz.js";import{N as C}from"./NexInput-BMm3H-eH.js";import{N as y}from"./NexButton-DLodcaQ-.js";import{C as k}from"./CSSTransition-BNtILy1J.js";import"./index-27BIJqHF.js";import"./inheritsLoose-Co2FXOuK.js";import"./index-B-yFm4aN.js";const f=({version:o,handleSave:a})=>{const r=t.useRef(null),[i,n]=t.useState(!1),[c,u]=t.useState(o),[m,d]=t.useState(o);t.useEffect(()=>{const l=V=>{r.current&&!r.current.contains(V.target)&&(u(m),n(!1))};return document.addEventListener("click",l),()=>{document.removeEventListener("click",l)}},[m]);const N=()=>{n(!0),d(c)},E=l=>{u(l.target.value)},S=()=>{a&&a(c),n(!1),setTimeout(()=>{d(c)},300)};return e.createElement("div",{className:"nex-version-wrapper",ref:r},e.createElement("div",{className:`nex-version ${i?"clicked":""}`,onClick:N},m),e.createElement(k,{in:i,classNames:"fade",timeout:300,mountOnEnter:!0,unmountOnExit:!0},e.createElement("div",{className:"nex-version-edit-wrapper"},e.createElement(h,{icon:w,className:"arrow-icon"}),e.createElement(C,{type:"text",placeholder:c,onChange:E,fieldSize:"small",width:80}),e.createElement(y,{onClick:S,text:"Save",type:"success"}))))},x=f;f.__docgenInfo={description:"",methods:[],displayName:"NexVersion",props:{version:{required:!0,tsType:{name:"string"},description:""},handleSave:{required:!1,tsType:{name:"signature",type:"function",raw:"(value: string) => void",signature:{arguments:[{type:{name:"string"},name:"value"}],return:{name:"void"}}},description:""}}};const L={title:"NexComponent/NexVersion",component:x,tags:["autodocs"]},I=o=>{const[a,r]=t.useState("1.0.0"),i=n=>{console.log("New version:",n),r(n)};return e.createElement("div",{style:{margin:"20px"}},e.createElement(x,{...o,version:a,handleSave:i}))},s=I.bind({});s.args={};var p,v,g;s.parameters={...s.parameters,docs:{...(p=s.parameters)==null?void 0:p.docs,source:{originalSource:`args => {
+  const [version, setVersion] = useState('1.0.0');
+  const handleSave = (newVersion: string) => {
+    console.log('New version:', newVersion);
+    setVersion(newVersion);
+  };
+  return <div style={{
+    margin: '20px'
+  }}>\r
+      <NexVersion {...args} version={version} handleSave={handleSave} />\r
+    </div>;
+}`,...(g=(v=s.parameters)==null?void 0:v.docs)==null?void 0:g.source}}};const $=["Default"];export{s as Default,$ as __namedExportsOrder,L as default};
