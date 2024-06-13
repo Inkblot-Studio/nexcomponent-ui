@@ -1,0 +1,32 @@
+name: Chromatic Integration
+
+on:
+  push:
+    branches:
+      - main  # Replace with your main branch name
+  pull_request:
+    branches:
+      - main  # Replace with your main branch name
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'  # Adjust to your Node.js version
+
+      - name: Install dependencies
+        run: npm clean-install
+        
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+
+      - name: Run Chromatic
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npm run chromatic
