@@ -2,27 +2,45 @@
 name: 'Chromatic Publish'
 
 # Event for the workflow
-on: push
+on: 
+  push:
+    branches:
+        - main  # Replace with your main branch name
+  pull_request:
+    branches:
+        - main  # Replace with your main branch name
 
-# List of jobs
 jobs:
-  test:
-    # Operating System
+  chromatic:
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: lts/*
-          cache: 'yarn'
-      - run: yarn
-      #👇 Adds Chromatic as a step in the workflow
+          node-version: 'lts/*'  # Adjust to your Node.js version
+
+      - name: Install dependencies
+        run: npm clean-install
+        
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Run Chromatic
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npm run chromatic
+        
       - uses: chromaui/action@v1
-        # Options required for Chromatic's GitHub Action
+      # Options required for Chromatic's GitHub Action
         with:
-          #👇 Chromatic projectToken,
+        #👇 Chromatic projectToken,
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
