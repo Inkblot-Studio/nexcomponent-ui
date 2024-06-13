@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as t}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function r(o){const n={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...t(),...o.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h2,{id:"nexloader-component",children:"NexLoader Component"}),`
+import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as i}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function r(o){const n={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...i(),...o.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h2,{id:"nexloader-component",children:"NexLoader Component"}),`
 `,e.jsx(n.p,{children:e.jsx(n.a,{href:"http://localhost:6006/?path=/docs/nexcomponent-nexloader--docs",rel:"nofollow",children:"NexLoader Storybook"})}),`
 `,e.jsxs(n.p,{children:[e.jsx(n.code,{children:"NexLoader "}),"is a component designed to display loading animations within your React application. It offers the following features:"]}),`
 `,e.jsxs(n.ul,{children:[`
@@ -9,7 +9,7 @@ import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as t}from"
 `,e.jsx(n.h3,{id:"usage",children:"Usage"}),`
 `,e.jsxs(n.p,{children:["To use ",e.jsx(n.code,{children:"NexLoader"}),", simply import the component:"]}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexLoader from '@nexcomponent/lib/src/components/NexLoader';\r
+import NexLoader from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -21,7 +21,7 @@ export default MyComponent;
 `})}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexLoader from '@nexcomponent/lib/src/components/NexLoader';\r
+import NexLoader from '@nexcomponent/lib/NexLoader';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -35,4 +35,4 @@ function MyComponent() {\r
 export default MyComponent;
 `})}),`
 `,e.jsx(n.h3,{id:"customization",children:"Customization"}),`
-`,e.jsxs(n.p,{children:[e.jsx(n.code,{children:"NexLoader "}),"can be customized by adjusting the styles defined in the accompanying CSS file (",e.jsx(n.code,{children:"NexLoader.scss"}),"). You can modify the size, color, animation, and other styling properties to match your application's design requirements."]})]})}function c(o={}){const{wrapper:n}={...t(),...o.components};return n?e.jsx(n,{...o,children:e.jsx(r,{...o})}):r(o)}export{c as default};
+`,e.jsxs(n.p,{children:[e.jsx(n.code,{children:"NexLoader "}),"can be customized by adjusting the styles defined in the accompanying CSS file (",e.jsx(n.code,{children:"NexLoader.scss"}),"). You can modify the size, color, animation, and other styling properties to match your application's design requirements."]})]})}function d(o={}){const{wrapper:n}={...i(),...o.components};return n?e.jsx(n,{...o,children:e.jsx(r,{...o})}):r(o)}export{d as default};

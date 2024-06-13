@@ -13,7 +13,7 @@ import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as i}from"
 `,n.jsx(e.h3,{id:"example-usage",children:"Example Usage"}),`
 `,n.jsxs(e.p,{children:["Here's an example demonstrating the usage of the ",n.jsx(e.code,{children:"NexButton"})," component:"]}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexButton from '@nexcomponent/lib/src/components/NexButton/NexButton';\r
+import NexButton from '@nexcomponent/lib/';\r
 \r
 const MyComponent = () => {\r
   const handleClick = () => {\r
@@ -31,7 +31,7 @@ const MyComponent = () => {\r
 export default MyComponent;
 `})}),`
 `,n.jsx(e.h2,{id:"documentation",children:"Documentation"}),`
-`,n.jsxs(e.p,{children:["For detailed documentation on each component and its props, visit the ",n.jsx(e.a,{href:"https://nexcomponent-docs.com/",rel:"nofollow",children:"official documentation"}),"."]}),`
+`,n.jsxs(e.p,{children:["For detailed documentation on each component and its props, visit the ",n.jsx(e.a,{href:"https://660bbf3a9a332dc43820f2de-qpeztnzcao.chromatic.com/?path=/docs/getting-started--docs",rel:"nofollow",children:"official documentation"}),"."]}),`
 `,n.jsx(e.h2,{id:"styling",children:"Styling"}),`
 `,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"@nexcomponent/lib"})," components come with minimal styling. You can customize the styles by either:"]}),`
 `,n.jsxs(e.ul,{children:[`
@@ -44,5 +44,4 @@ export default MyComponent;
 `,n.jsxs(e.li,{children:["Join our community on ",n.jsx(e.a,{href:"",children:"Discord"}),"."]}),`
 `,n.jsxs(e.li,{children:["Report bugs or request features on ",n.jsx(e.a,{href:"https://github.com/nexcomponent/lib/issues",rel:"nofollow",children:"GitHub"}),"."]}),`
 `]}),`
-`,n.jsxs(e.p,{children:["That's it! You're now ready to start using ",n.jsx(e.code,{children:"@nexcomponent/lib"})," in your React application. Happy coding!"]}),`
-`,n.jsx(e.p,{children:"Test Text 2"})]})}function c(t={}){const{wrapper:e}={...i(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{c as default};
+`,n.jsxs(e.p,{children:["That's it! You're now ready to start using ",n.jsx(e.code,{children:"@nexcomponent/lib"})," in your React application. Happy coding!"]})]})}function l(t={}){const{wrapper:e}={...i(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{l as default};

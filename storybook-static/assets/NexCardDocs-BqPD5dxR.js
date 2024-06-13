@@ -1,4 +1,4 @@
-import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function o(t){const e={a:"a",code:"code",h2:"h2",h3:"h3",h5:"h5",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...r(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h2,{id:"nexcard-component",children:"NexCard Component"}),`
+import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as i}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function o(t){const e={a:"a",code:"code",h2:"h2",h3:"h3",h5:"h5",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...i(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h2,{id:"nexcard-component",children:"NexCard Component"}),`
 `,n.jsx(e.p,{children:n.jsx(e.a,{href:"http://localhost:6006/?path=/docs/nexcomponent-nexcard--docs",rel:"nofollow",children:"NexCard Storybook"})}),`
 `,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexCard"})," is a versatile component used to display cards with various content within your React application. It offers the following features:"]}),`
 `,n.jsxs(e.ul,{children:[`
@@ -11,7 +11,7 @@ import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"
 `,n.jsx(e.h5,{id:"basic-usage",children:"Basic Usage"}),`
 `,n.jsxs(e.p,{children:["To use ",n.jsx(e.code,{children:"NexCard"}),", simply import the component and provide the necessary props:"]}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCard from '@nexcomponent/lib/src/components/NexCard/index';\r
+import NexCard from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -37,7 +37,7 @@ export default MyComponent;
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCard from '@nexcomponent/lib/src/components/NexCard/index';\r
+import NexCard from '@nexcomponent/lib/NexCard/index';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -54,4 +54,4 @@ function MyComponent() {\r
 export default MyComponent;
 `})}),`
 `,n.jsx(e.h3,{id:"customization",children:"Customization"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexCard"})," can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, layout, and styling to match your application's design requirements."]})]})}function a(t={}){const{wrapper:e}={...r(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{a as default};
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexCard"})," can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, layout, and styling to match your application's design requirements."]})]})}function a(t={}){const{wrapper:e}={...i(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{a as default};

@@ -10,7 +10,7 @@ import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"
 `,n.jsx(e.h3,{id:"usage",children:"Usage"}),`
 `,n.jsxs(e.p,{children:["To use ",n.jsx(e.code,{children:"NexNav"}),", simply import the component and provide the necessary props:"]}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexNav from '@nexcomponent/lib/src/components/NexNav';\r
+import NexNav from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   const navItems = [\r
@@ -45,7 +45,7 @@ export default MyComponent;
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexNav from '@nexcomponent/lib/src/components/NexNav';\r
+import NexNav from '@nexcomponent/lib/NexNav';\r
 \r
 function MyComponent() {\r
   const navItems = [\r

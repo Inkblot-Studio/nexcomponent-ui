@@ -9,7 +9,7 @@ import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as t}from"
 `,e.jsx(n.h3,{id:"usage",children:"Usage"}),`
 `,e.jsxs(n.p,{children:["To use ",e.jsx(n.code,{children:"NexSeparator"}),", simply import the component and provide the necessary props:"]}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexSeparator from '@nexcomponent/lib/src/components/NexSeparator';\r
+import NexSeparator from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -35,7 +35,7 @@ export default MyComponent;\r
 `]}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexSeparator from '@nexcomponent/lib/src/components/NexSeparator';\r
+import NexSeparator from '@nexcomponent/lib/NexSeparator';\r
 \r
 function MyComponent() {\r
   return (\r

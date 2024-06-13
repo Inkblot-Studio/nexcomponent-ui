@@ -14,7 +14,7 @@ import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as t}from"
 `]}),`
 `,e.jsx(r.pre,{children:e.jsx(r.code,{className:"language-tsx",children:`// App.tsx\r
 (...)\r
-import { NexAlertsProvider } from "@nexcomponent/lib/src/components/NexAlert/index";\r
+import { NexAlertsProvider } from "@nexcomponent/lib";\r
 \r
 function App() {\r
   return (\r

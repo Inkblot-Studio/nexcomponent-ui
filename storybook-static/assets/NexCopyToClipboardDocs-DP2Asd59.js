@@ -9,7 +9,7 @@ import{j as e}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"
 `,e.jsx(o.h3,{id:"usage",children:"Usage"}),`
 `,e.jsxs(o.p,{children:["To use ",e.jsx(o.code,{children:"NexCopyToClipboard"}),", simply import the component and provide the necessary props:"]}),`
 `,e.jsx(o.pre,{children:e.jsx(o.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCopyToClipboard from '@nexcomponent/lib/src/components/NexCopyToClipboard/index';\r
+import NexCopyToClipboard from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -31,7 +31,7 @@ export default MyComponent;
 `]}),`
 `,e.jsx(o.h3,{id:"example",children:"Example"}),`
 `,e.jsx(o.pre,{children:e.jsx(o.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCopyToClipboard from '@nexcomponent/lib/src/components/NexCopyToClipboard/index';\r
+import NexCopyToClipboard from '@nexcomponent/lib/NexCopyToClipboard/index';\r
 \r
 function MyComponent() {\r
   return (\r

@@ -28,7 +28,7 @@ Here's an example demonstrating the usage of the `NexButton` component:
 
 ```tsx
 import React from 'react';
-import NexButton from '@nexcomponent/lib/src/components/NexButton/NexButton';
+import NexButton from '@nexcomponent/lib/';
 
 const MyComponent = () => {
   const handleClick = () => {

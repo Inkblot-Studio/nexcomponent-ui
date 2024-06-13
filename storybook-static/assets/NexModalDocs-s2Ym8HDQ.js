@@ -9,7 +9,7 @@ import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"
 `,n.jsx(e.h3,{id:"usage",children:"Usage"}),`
 `,n.jsxs(e.p,{children:["To use ",n.jsx(e.code,{children:"NexModal"}),", simply import the component and provide the necessary props:"]}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexModal from '@nexcomponent/lib/src/components/NexModal/index';\r
+import NexModal from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   const handleOpenModal = () => {\r
@@ -36,7 +36,7 @@ export default MyComponent;
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React, { useState } from 'react';\r
-import NexModal from '@nexcomponent/lib/src/components/NexModal/index';\r
+import NexModal from '@nexcomponent/lib/NexModal/index';\r
 \r
 function MyComponent() {\r
   const [openModal, setOpenModal] = useState(false);\r

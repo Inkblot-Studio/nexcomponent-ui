@@ -1,4 +1,4 @@
-import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as s}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function o(t){const e={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...s(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h2,{id:"nexbutton-component",children:"NexButton Component"}),`
+import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as r}from"./index-CqcSDpoT.js";import"./index-CDs2tPxN.js";function o(t){const e={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...r(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h2,{id:"nexbutton-component",children:"NexButton Component"}),`
 `,n.jsx(e.p,{children:n.jsx(e.a,{href:"http://localhost:6006/?path=/docs/nexcomponent-nexbutton--docs",rel:"nofollow",children:"View NexButton story in Storybook"})}),`
 `,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexButton"})," is a customizable button component designed for use in React applications. It offers the following features:"]}),`
 `,n.jsxs(e.ul,{children:[`
@@ -17,7 +17,7 @@ import{j as n}from"./jsx-runtime-qGIIFXMu.js";import{useMDXComponents as s}from"
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexButton from '@nexcomponent/lib/src/components/NexButton/NexButton';\r
+import NexButton from '@nexcomponent/lib';\r
 \r
 const MyComponent = () => {\r
   const handleClick = () => {\r
@@ -35,4 +35,4 @@ const MyComponent = () => {\r
 export default MyComponent;
 `})}),`
 `,n.jsx(e.h3,{id:"styling",children:"Styling"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexButton"})," uses CSS classes for styling. You can customize the appearance of the button by modifying the corresponding CSS classes in your project."]})]})}function l(t={}){const{wrapper:e}={...s(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{l as default};
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexButton"})," uses CSS classes for styling. You can customize the appearance of the button by modifying the corresponding CSS classes in your project."]})]})}function l(t={}){const{wrapper:e}={...r(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{l as default};
