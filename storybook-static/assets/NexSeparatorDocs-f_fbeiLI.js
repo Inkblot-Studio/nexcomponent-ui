@@ -35,7 +35,7 @@ export default MyComponent;\r
 `]}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexSeparator from '@nexcomponent/lib/NexSeparator';\r
+import NexSeparator from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r

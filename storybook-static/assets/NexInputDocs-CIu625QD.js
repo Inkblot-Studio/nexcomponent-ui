@@ -34,7 +34,7 @@ export default MyComponent;
 `]}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexInput from '@nexcomponent/lib/NexInput/index';\r
+import NexInput from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r

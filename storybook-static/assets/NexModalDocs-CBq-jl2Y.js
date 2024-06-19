@@ -36,7 +36,7 @@ export default MyComponent;
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React, { useState } from 'react';\r
-import NexModal from '@nexcomponent/lib/NexModal/index';\r
+import NexModal from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   const [openModal, setOpenModal] = useState(false);\r
@@ -60,4 +60,4 @@ function MyComponent() {\r
 export default MyComponent;
 `})}),`
 `,n.jsx(e.h3,{id:"customization",children:"Customization"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexModal "}),"can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the modal content, button actions, and styling to match your application's design requirements."]})]})}function d(o={}){const{wrapper:e}={...r(),...o.components};return e?n.jsx(e,{...o,children:n.jsx(t,{...o})}):t(o)}export{d as default};
+`,n.jsxs(e.p,{children:[n.jsx(e.code,{children:"NexModal "}),"can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the modal content, button actions, and styling to match your application's design requirements."]})]})}function i(o={}){const{wrapper:e}={...r(),...o.components};return e?n.jsx(e,{...o,children:n.jsx(t,{...o})}):t(o)}export{i as default};

@@ -45,7 +45,7 @@ export default MyComponent;
 `]}),`
 `,n.jsx(e.h3,{id:"example",children:"Example"}),`
 `,n.jsx(e.pre,{children:n.jsx(e.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexNav from '@nexcomponent/lib/NexNav';\r
+import NexNav from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   const navItems = [\r

@@ -30,7 +30,7 @@ export default MyComponent;
 `,e.jsx(n.h5,{id:"with-automatic-slideshow",children:"With Automatic Slideshow"}),`
 `,e.jsxs(n.p,{children:["You can enable automatic slideshow by providing the ",e.jsx(n.code,{children:"interval"})," prop with the desired interval in seconds:"]}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCarousel from '@nexcomponent/lib/NexCarousel/index';\r
+import NexCarousel from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -52,7 +52,7 @@ export default MyComponent;
 `]}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexCarousel from '@nexcomponent/lib/NexCarousel/index';\r
+import NexCarousel from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r

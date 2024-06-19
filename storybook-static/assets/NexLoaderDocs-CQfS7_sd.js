@@ -21,7 +21,7 @@ export default MyComponent;
 `})}),`
 `,e.jsx(n.h3,{id:"example",children:"Example"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-tsx",children:`import React from 'react';\r
-import NexLoader from '@nexcomponent/lib/NexLoader';\r
+import NexLoader from '@nexcomponent/lib';\r
 \r
 function MyComponent() {\r
   return (\r
@@ -35,4 +35,4 @@ function MyComponent() {\r
 export default MyComponent;
 `})}),`
 `,e.jsx(n.h3,{id:"customization",children:"Customization"}),`
-`,e.jsxs(n.p,{children:[e.jsx(n.code,{children:"NexLoader "}),"can be customized by adjusting the styles defined in the accompanying CSS file (",e.jsx(n.code,{children:"NexLoader.scss"}),"). You can modify the size, color, animation, and other styling properties to match your application's design requirements."]})]})}function d(o={}){const{wrapper:n}={...i(),...o.components};return n?e.jsx(n,{...o,children:e.jsx(r,{...o})}):r(o)}export{d as default};
+`,e.jsxs(n.p,{children:[e.jsx(n.code,{children:"NexLoader "}),"can be customized by adjusting the styles defined in the accompanying CSS file (",e.jsx(n.code,{children:"NexLoader.scss"}),"). You can modify the size, color, animation, and other styling properties to match your application's design requirements."]})]})}function c(o={}){const{wrapper:n}={...i(),...o.components};return n?e.jsx(n,{...o,children:e.jsx(r,{...o})}):r(o)}export{c as default};

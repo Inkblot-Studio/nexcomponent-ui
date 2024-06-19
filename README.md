@@ -28,7 +28,7 @@ Here's an example demonstrating the usage of the `NexButton` component:
 
 ```tsx
 import React from 'react';
-import NexButton from '@nexcomponent/lib/';
+import NexButton from '@nexcomponent/lib';
 
 const MyComponent = () => {
   const handleClick = () => {
@@ -48,7 +48,7 @@ export default MyComponent;
 
 ## Documentation
 
-For detailed documentation on each component and its props, visit the [official documentation](https://660bbf3a9a332dc43820f2de-qpeztnzcao.chromatic.com/?path=/docs/getting-started--docs).
+For detailed documentation on each component and its props, visit the [official documentation](https://main--6672d9cb533920c89e299205.chromatic.com).
 
 ## Styling
 
