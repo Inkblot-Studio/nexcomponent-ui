@@ -2,12 +2,13 @@ import './NexNav.scss';
 import React, { useState } from 'react';
 import { NexNavProps } from './NexNav.types';
 import NexButton from '../NexButton';
+import { CSSTransition } from "react-transition-group";
 
 const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, identityProps }) => {
-  const [open, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setOpen(!open);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -23,10 +24,10 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
           </div>
         )}
 
-        <nav className={`nex-nav-inner-wrapper ${open ? 'open' : ''}`}>
-          <div className={`nex-nav-right ${open ? 'open' : ''}`}>
+        <nav className={`nex-nav-inner-wrapper`}>
+          <div className={`nex-nav-right`}>
             <ul className='nex-nav-list'>
-              {navItems.map((item, index) => (
+              {navItems.length && navItems.map((item, index) => (
                 <li key={index} className='nex-nav-item' onClick={item.onClick}> 
                   <a className='nex-nav-link'>{item.label}</a>
                 </li>
@@ -41,12 +42,36 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
           </div>
         </nav>
 
-        <div className={`burger ${open ? 'open' : ''}`} onClick={toggleMenu}>
+        <div className={`burger ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
           <div />
           <div />
           <div />
         </div>
       </div>
+
+      <CSSTransition
+        in={isMenuOpen}
+        classNames="fade"
+        timeout={200}
+        mountOnEnter
+        unmountOnExit
+      > 
+        <div className="nex-nav-mobile">
+          <div className="nex-nav-list">
+            {navItems.length && navItems.map((item, index) => (
+                <li key={index} className='nex-nav-item' onClick={item.onClick}> 
+                  <a className='nex-nav-link'>{item.label}</a>
+                </li>
+            ))}
+          </div>
+          {identity && (
+            <div className='identity'>
+              <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
+              <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+            </div>
+          )}
+        </div>
+      </CSSTransition>
     </>
   );
 };
