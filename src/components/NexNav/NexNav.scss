@@ -3,11 +3,12 @@
 .nex-nav {
     display: flex;
     justify-content: flex-end;
-    height: calculate(131px);
+    height: calculate(110px);
+    background-color: rgba(var(--nex-primary-color-rgb), 0.05);
 
     .nex-nav-client-logo, .nex-nav-client-name {
         position: absolute;
-        top: calculate(47px);
+        top: calculate(30px);
         left: calculate(86.67px);
         height: calculate(50px);
         max-width: calculate(250px);
@@ -18,22 +19,22 @@
         }
 
         .client-name {
-            line-height: calculate(50px);
-            font-size: calculate(36px);
+            line-height: calculate(45.13px);
+            font-size: calculate(32px);
             color: var(--nex-primary-color);
-            font-weight: 300;
-            font-family: 'Oswald', sans-serif;
+            font-weight: 900;
         }
 
         @include mobile {
             position: fixed;
-            left: calculate(47px);
+            left: calculate(30px);
         }
     }
     
     .nex-nav-inner-wrapper {
         display: flex;
-        padding: calculate(47px) 5vw;
+        align-items: baseline;
+        padding: calculate(30px) 5vw;
         background-color: transparent;
     
         .nex-nav-right {
@@ -42,11 +43,11 @@
     
             .nex-nav-list {
                 display: flex;
+                align-items: center;
                 list-style: none;
-                gap: clamp(calculate(20px), 3vw, calculate(86.67px));
+                gap: clamp(calculate(10px), 1vw, calculate(50px));
                 margin: 0;
                 padding: 0;
-                transition: 100ms all ease-in-out;
     
                 .nex-nav-item {
                     display: flex;
@@ -59,18 +60,24 @@
     
                     .nex-nav-link {
                         text-decoration: none;
+                        padding: 0 calculate(15px);
+                        border-radius: calculate(20px);
                         color: var(--nex-font-color);
-                        transition: all 100ms ease-in-out;
+                        transition: background 200ms ease-in-out;
     
                         &:hover {
-                            color: var(--nex-primary-color);
+                            background: rgba(0, 0, 0, 0.1);
                         }
                     }
                 }
     
                 .identity {
                     display: flex;
-                    gap: clamp(calculate(10px), 1vw, calculate(30px));
+                    gap: clamp(calculate(10px), 1vw, calculate(50px));
+
+                    .identity-item {
+                        min-height: calculate(50px);
+                    }
                 }
             }    
         }
@@ -78,66 +85,52 @@
         @include mobile {
             flex-flow: column nowrap;
             align-items: center;
-            background-color: var(--nex-primary-color);
-            box-shadow: 0 0 calculate(10px) rgb(0 0 0 / 15%);
             position: fixed;
-            transform: translateX(100%);
             top: 0;
             right: 0;
             height: 100%;
             width: 0;
-            transition: transform 200ms ease-in-out;
+            padding: 0;
+            background-color: #fff;
+            box-shadow: 0 0 calculate(10px) rgb(0 0 0 / 15%);
+            transform: translateX(100%);
             opacity: 0%;
             z-index: 19;
-    
-            .nex-nav-right .nex-nav-list {
-                flex-direction: column;
-                align-items: center;
-                gap: calculate(40px);
-
-                .nex-nav-item .nex-nav-link {
-                    color: #fff;
-                }
-            }
+            transition: transform 200ms ease-in-out;
     
             &.open {
                 opacity: 100%;
-                width: calculate(250px);
+                width: calculate(262px);
                 padding-top: calculate(131px);
                 transform: translateX(0);
-    
+
                 .nex-nav-right .nex-nav-list {
-                    
-                    .nex-nav-item:not(.nex-nav-login):not(.nex-nav-sign-up) {
-                        background: rgba(255, 255, 255, 0.4);
-                        transition: all 100ms ease-in-out;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: calculate(50px);
+    
+                    .nex-nav-item .nex-nav-link {
+                        width: calculate(200px);
+                        height: calculate(50px);
+                        padding: 0;
+                        background-color: #F0F0F0;
+                        text-align: center;
 
                         &:hover {
-                            border-color: #fff;
-                        }
-
-                        .nex-nav-link {
-                            &:hover {
-                                color: #fff;
-                            }
+                            background: rgba(0, 0, 0, 0.1);
                         }
                     }
-
-                    .nex-nav-item {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: calculate(220px);
-                        height: calculate(50px);
-                        border-radius: calculate(8px);
-                        transition: opacity 200ms ease-in;
-                    }
-
-                    .identity {                
+    
+                    .identity {
+                        flex: 1;
+                        justify-content: end;
                         flex-direction: column;
-                        
-                        .nex-nav-login, .nex-nav-sign-up {
-                            padding: 0;
+                        gap: calculate(50px);
+                        margin-bottom: calculate(211px);
+    
+                        .identity-item {
+                            line-height: calculate(20.7px);
+                            width: calculate(200px);
                         }
                     }
                 }
@@ -149,8 +142,8 @@
         width: 2rem;
         height: 2rem;
         position: absolute;
-        top: calculate(47px);
-        right: calculate(47px);
+        top: calculate(30px);
+        right: calculate(30px);
         z-index: 20;
         display: none;
     
@@ -165,7 +158,7 @@
             width: 2rem;
             height: 0.25rem;
             background-color: var(--nex-font-color);
-            border-radius: calculate(8px);
+            border-radius: calculate(20px);
             transform-origin: calculate(1px);
             transition: all 200ms linear;
     
@@ -185,7 +178,7 @@
     
         &.open {
             div {
-                background-color: #fff;
+                background-color: var(--nex-primary-color);
 
                 &:nth-child(1) {
                     transform: rotate(45deg);

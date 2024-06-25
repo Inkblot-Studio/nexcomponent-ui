@@ -8,7 +8,12 @@ export default {
   tags: ['autodocs'],
 } as Meta<typeof NexNav>;
 
-const Template: StoryFn<typeof NexNav> = (args) => <NexNav {...args} />;
+const Template: StoryFn<typeof NexNav> = (args) => (
+  <div style={{ height: '200vh' }}> 
+    <NexNav {...args} />
+  </div>
+);
+
 
 export const NexNavTest = Template.bind({});
 NexNavTest.args = {

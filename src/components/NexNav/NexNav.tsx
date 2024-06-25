@@ -33,8 +33,8 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
               ))}
               {identity && (
                 <div className='identity'>
-                  <NexButton text='Login' type='secondary' onClick={identityProps?.onLoginClick} />
-                  <NexButton text='Sign Up' type='secondary' onClick={identityProps?.onSignUpClick} inverted={true} />
+                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
+                  <NexButton className='identity-item' text='Sign Up' onClick={identityProps?.onSignUpClick} inverted/>
                 </div>
               )}
             </ul>
