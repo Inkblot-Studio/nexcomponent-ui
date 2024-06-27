@@ -46,24 +46,6 @@
       align-items: center;
       gap: calculate(20px);
       transition: opacity 300ms ease-in-out;
-      
-      &.fade-enter {
-        opacity: 0;
-      }
-      
-      &.fade-enter-done {
-        opacity: 1;
-        transition: opacity 300ms ease-in-out;
-      }
-      
-      &.fade-exit {
-        opacity: 0;
-      }
-      
-      &.fade-exit-done {
-        opacity: 0;
-        transition: opacity 300ms ease-in-out;
-      }
     }
 
     .arrow-icon {

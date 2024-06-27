@@ -1,14 +1,33 @@
 import './NexNav.scss';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { NexNavProps } from './NexNav.types';
 import NexButton from '../NexButton';
-import { CSSTransition } from "react-transition-group";
+import { motion, AnimatePresence } from "framer-motion";
+import { useClickAway } from 'react-use';
 
 const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, identityProps }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useRef(null);
+  
+  useClickAway(ref, (event) => {
+    const target = event.target as HTMLElement;
+
+    if (target.closest('.burger')) {
+      return;
+    }
+
+    setIsMenuOpen(false);
+  });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const navSwipeAnimation = {
+    initial: { x: '100%', opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    exit: { x: '100%', opacity: 0, transition: { delay: 0.2 } },
+    transition: { duration: 0.3 },
   };
 
   return (
@@ -35,7 +54,7 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
               {identity && (
                 <div className='identity'>
                   <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-                  <NexButton className='identity-item' text='Sign Up' onClick={identityProps?.onSignUpClick} inverted/>
+                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
                 </div>
               )}
             </ul>
@@ -49,29 +68,32 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
         </div>
       </div>
 
-      <CSSTransition
-        in={isMenuOpen}
-        classNames="fade"
-        timeout={200}
-        mountOnEnter
-        unmountOnExit
-      > 
-        <div className="nex-nav-mobile">
-          <div className="nex-nav-list">
-            {navItems.length && navItems.map((item, index) => (
-                <li key={index} className='nex-nav-item' onClick={item.onClick}> 
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            <motion.div
+              {...navSwipeAnimation}
+              className="nex-nav-mobile"
+              ref={ref}
+              aria-label="Sidebar"
+            >
+            <div className='nex-nav-list'>
+              {navItems.length && navItems.map((item, index) => (
+                <li key={index} className='nex-nav-item' onClick={toggleMenu}>
                   <a className='nex-nav-link'>{item.label}</a>
                 </li>
-            ))}
-          </div>
-          {identity && (
-            <div className='identity'>
-              <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-              <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+              ))}
+              {identity && (
+                <div className='identity'>
+                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
+                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </CSSTransition>
+          </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

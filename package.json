@@ -48,7 +48,6 @@
     "@storybook/react-vite": "^8.1.10",
     "@storybook/test": "^8.1.10",
     "@types/react": "^18.2.73",
-    "@types/react-transition-group": "^4.4.10",
     "chromatic": "^11.3.0",
     "react": "^18.3.1",
     "rollup": "^4.13.2",
@@ -73,9 +72,10 @@
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.0",
     "autoprefixer": "^10.4.19",
+    "framer-motion": "^11.2.12",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.22.3",
-    "react-transition-group": "^4.4.5",
+    "react-use": "^17.5.0",
     "styled-components": "^6.1.8"
   },
   "release": {
