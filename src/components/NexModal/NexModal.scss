@@ -41,23 +41,5 @@
             justify-content: space-evenly;
             align-items: center;
         }
-
-        &.fade-enter {
-            opacity: 0;
-        }
-          
-        &.fade-enter-done {
-            opacity: 1;
-            transition: opacity 200ms ease-in-out;
-        }
-        
-        &.fade-exit {
-            opacity: 0;
-        }
-        
-        &.fade-exit-done {
-            opacity: 0;
-            transition: opacity 200ms ease-in-out;
-        }
     }
 }

@@ -13,7 +13,7 @@ const NexButton: React.FC<NexButtonProps> = ({ onClick, className, size = 'norma
     return size ? `nex-button--${size}` : '';
   };
 
-  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getColorClass(type)} ${inverted && 'inverted' || ''}`;
+  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getColorClass(type)} ${inverted ? 'inverted' : ''} ${!type && inverted ? 'inverted-default' : ''}`;
 
   return (
     <button className={buttonClasses} onClick={onClick}>

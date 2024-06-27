@@ -10,6 +10,14 @@ $desktop-width: 1024px;
     @return #{(calc($size / ($design-width / $design-height * 16px)))}rem;
 }
 
+@function hex-to-rgb($hex) {
+    $r: red($hex);
+    $g: green($hex);
+    $b: blue($hex);
+  
+    @return #{$r}, #{$g}, #{$b};
+}
+
 @mixin initial {
     @media (max-width: #{mobile-width}) {
         @content;

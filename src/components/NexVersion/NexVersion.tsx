@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import NexInput from '../NexInput';
 import NexButton from '../NexButton';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
 import './NexVersion.scss';
 
 const NexVersion: React.FC<NexVersionProps> = ({ version, handleSave }) => {
@@ -42,30 +42,38 @@ const NexVersion: React.FC<NexVersionProps> = ({ version, handleSave }) => {
       handleSave(newVersion);
     }
     setIsEditing(false);
-
-    setTimeout(() => {
-      setOriginalVersion(newVersion);
-    }, 300);
+    setOriginalVersion(newVersion);
   };
 
   return (
     <div className="nex-version-wrapper" ref={wrapperRef}>
-      <div className={`nex-version ${isEditing ? 'clicked' : ''}`} onClick={handleClick}>
-        {originalVersion}
-      </div>
-      <CSSTransition
-        in={isEditing}
-        classNames="fade"
-        timeout={300}
-        mountOnEnter
-        unmountOnExit
+      <motion.div
+        className={`nex-version ${isEditing ? 'clicked' : ''}`}
+        onClick={handleClick}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isEditing ? 0.5 : 1 }}
+        transition={{ duration: 0.3 }}
       >
-        <div className="nex-version-edit-wrapper">
+        {originalVersion}
+      </motion.div>
+      {isEditing && (
+        <motion.div
+          className="nex-version-edit-wrapper"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <FontAwesomeIcon icon={faArrowRight} className="arrow-icon" />
-          <NexInput type="text" placeholder={newVersion} onChange={handleInputChange} fieldSize="small" width={80} />
+          <NexInput
+            type="text"
+            placeholder={newVersion}
+            onChange={handleInputChange}
+            fieldSize="small"
+            width={80}
+          />
           <NexButton onClick={handleSaveClick} text="Save" type="success" />
-        </div>
-      </CSSTransition>
+        </motion.div>
+      )}
     </div>
   );
 };
