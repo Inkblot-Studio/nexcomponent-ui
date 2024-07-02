@@ -16,7 +16,7 @@
     .nex-slides {
       display: flex;
       gap: calculate(20px);
-      transition: transform 0.5s ease;
+      transition: transform 0.7s cubic-bezier(.215,.61,.355,1);
     }
     
     .nex-slide {
