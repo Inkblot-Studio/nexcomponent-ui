@@ -26,6 +26,7 @@ export const NexNavTest = Template.bind({});
 NexNavTest.args = {
   displayName: 'CMDT',
   identity: true,
+  homeButtonHandler: () => console.log('Home clicked'),
   navItems: [
     { label: 'Home', onClick: () => console.log('Home clicked') },
     { label: 'About', onClick: () => console.log('About clicked') },

@@ -1,12 +1,13 @@
 import './NexNav.scss';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { NexNavProps } from './NexNav.types';
 import NexButton from '../NexButton';
 import { motion, AnimatePresence } from "framer-motion";
 import { useClickAway } from 'react-use';
 
-const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, identity, navItems, identityProps }) => {
+const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler, identity, navItems, identityProps }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const ref = useRef(null);
   
   useClickAway(ref, (event) => {
@@ -23,6 +24,25 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, identity, navItem
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsAtTop(true);
+      } else {
+        setIsAtTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   const navSwipeAnimation = {
     initial: { y: '-100%', opacity: 0 },
     animate: { y: 0, opacity: 1 },
@@ -32,14 +52,14 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, identity, navItem
 
   return (
     <>
-      <div className="nex-nav">
+      <div className={`nex-nav ${!isAtTop ? 'not-at-top' : '' }`}>
         <nav className={`nex-nav-inner-wrapper`}>
           {logoSrc ? (
-            <div className='nex-nav-client-logo'>
+            <div className='nex-nav-client-logo' onClick={homeButtonHandler}>
               <img src={logoSrc} alt={displayName} className='nex-nav-logo' />
             </div>
           ) : (
-            <div className='nex-nav-client-name'>
+            <div className='nex-nav-client-name' onClick={homeButtonHandler}>
               <div className='client-name'>{displayName}</div>
             </div>
           )}
@@ -51,6 +71,7 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, identity, navItem
               </li>
             ))}
           </ul>
+
           {identity && (
               <div className='identity'>
                 <div className="identity-item text-button" onClick={identityProps?.onLoginClick}>Log in</div>
@@ -60,7 +81,7 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, identity, navItem
         </nav>
       </div>
 
-      <div className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
+      <div className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : '' }`} onClick={toggleMenu}>
           <div />
           <div />
           <div />
