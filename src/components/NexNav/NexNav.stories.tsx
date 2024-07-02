@@ -1,5 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
+import storyBackround from '../../assets/img/story_background.jpg';
 import NexNav from './NexNav';
 
 export default {
@@ -9,15 +10,21 @@ export default {
 } as Meta<typeof NexNav>;
 
 const Template: StoryFn<typeof NexNav> = (args) => (
-  <div style={{ height: '200vh' }}> 
+  <div
+    style={{
+      height: '200vh',
+      backgroundImage: `url(${storyBackround})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+    }}
+  >
     <NexNav {...args} />
   </div>
 );
 
-
 export const NexNavTest = Template.bind({});
 NexNavTest.args = {
-  altText: 'CMDT',
+  displayName: 'CMDT',
   identity: true,
   navItems: [
     { label: 'Home', onClick: () => console.log('Home clicked') },
@@ -28,5 +35,5 @@ NexNavTest.args = {
   identityProps: {
     onLoginClick: () => console.log('Login clicked'),
     onSignUpClick: () => console.log('Sign Up clicked'),
-  }
+  },
 };

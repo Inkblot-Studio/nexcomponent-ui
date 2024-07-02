@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import "../../utils/mixin.scss";
+
+.nex-footer-wrapper {
+    display: grid;
+    min-height: calculate(100px);
+    margin: 0.5rem 2.4rem;
+    padding: 3.2rem 2.4rem 1.6rem;
+    border-radius: calculate(20px);
+    background-color: var(--nex-font-color);
+
+    .utility-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.7rem;
+        grid-area: span 1 / span 2 / span 1 / span 2;
+
+        .nex-footer-client-logo {
+            img {
+                max-height: calculate(50px);
+            }
+        }
+
+        .nex-footer-client-name {
+            font-size: calculate(24px);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .copyright {
+            font-size: 0.8em;
+            color: rgba($color: #fff, $alpha: 0.7);
+            line-height: 1.5;
+        }
+    }
+
+    .socials-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 42px);
+        grid-column-gap: calculate(10px);
+        grid-row-gap: calculate(12px);
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 1rem;
+  
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calculate(42px);
+            width: calculate(42px);
+            border: calculate(2px) solid rgba($color: #fff, $alpha: 0.7);
+            border-radius: 50%;
+            color: #fff;
+            transition: all 100ms ease-in-out;
+
+            &:hover {
+                background-color: transparent;
+                border-color: transparent;
+                color: #fff; // Reset text color on hover
+
+                // Specific hover colors for each social media type
+                &.facebook:hover {
+                    background-color: #1877f2; // Facebook blue
+                    border-color: #1877f2;
+                }
+
+                &.twitter:hover {
+                    background-color: #1da1f2; // Twitter blue
+                    border-color: #1da1f2;
+                }
+
+                &.instagram:hover {
+                    background-color: #c13584; // Instagram purple
+                    border-color: #c13584;
+                }
+
+                &.linkedin:hover {
+                    background-color: #0077b5; // LinkedIn blue
+                    border-color: #0077b5;
+                }
+
+                &.github:hover {
+                    background-color: #333; // GitHub dark
+                    border-color: #333;
+                }
+
+                &.youtube:hover {
+                    background-color: #ff0000; // YouTube red
+                    border-color: #ff0000;
+                }
+
+                &.pinterest:hover {
+                    background-color: #bd081c; // Pinterest red
+                    border-color: #bd081c;
+                }
+
+                &.snapchat:hover {
+                    background-color: #fffc00; // Snapchat yellow
+                    border-color: #fffc00;
+                }
+
+                &.tiktok:hover {
+                    background-color: #000; // TikTok black
+                    border-color: #000;
+                }
+
+                &.reddit:hover {
+                    background-color: #ff4500; // Reddit orange-red
+                    border-color: #ff4500;
+                }
+
+                &.tumblr:hover {
+                    background-color: #36465d; // Tumblr dark blue
+                    border-color: #36465d;
+                }
+
+                &.medium:hover {
+                    background-color: #00ab6c; // Medium green
+                    border-color: #00ab6c;
+                }
+
+                &.vimeo:hover {
+                    background-color: #1ab7ea; // Vimeo blue
+                    border-color: #1ab7ea;
+                }
+
+                &.stackoverflow:hover {
+                    background-color: #f48024; // Stack Overflow orange
+                    border-color: #f48024;
+                }
+
+                &.behance:hover {
+                    background-color: #1769ff; // Behance blue
+                    border-color: #1769ff;
+                }
+
+                &.dribbble:hover {
+                    background-color: #ea4c89; // Dribbble pink
+                    border-color: #ea4c89;
+                }
+
+                &.flickr:hover {
+                    background-color: #0063dc; // Flickr blue
+                    border-color: #0063dc;
+                }
+
+                &.whatsapp:hover {
+                    background-color: #25d366; // WhatsApp green
+                    border-color: #25d366;
+                }
+
+                &.telegram:hover {
+                    background-color: #0088cc; // Telegram blue
+                    border-color: #0088cc;
+                }
+
+                &.slack:hover {
+                    background-color: #4a154b; // Slack purple
+                    border-color: #4a154b;
+                }
+
+                &.discord:hover {
+                    background-color: #7289da; // Discord blue
+                    border-color: #7289da;
+                }
+
+                &.spotify:hover {
+                    background-color: #1ed760; // Spotify green
+                    border-color: #1ed760;
+                }
+
+                &.quora:hover {
+                    background-color: #b92b27; // Quora red
+                    border-color: #b92b27;
+                }
+
+                &.soundcloud:hover {
+                    background-color: #ff5500; // SoundCloud orange
+                    border-color: #ff5500;
+                }
+
+                &.apple:hover {
+                    background-color: #000; // Apple black
+                    border-color: #000;
+                }
+
+                &.google:hover {
+                    background-color: #4285f4; // Google blue
+                    border-color: #4285f4;
+                }
+
+                &.amazon:hover {
+                    background-color: #ff9900; // Amazon orange-yellow
+                    border-color: #ff9900;
+                }
+
+                &.microsoft:hover {
+                    background-color: #00a1f1; // Microsoft blue
+                    border-color: #00a1f1;
+                }
+
+                &.dropbox:hover {
+                    background-color: #007ee5; // Dropbox blue
+                    border-color: #007ee5;
+                }
+
+                &.wordpress:hover {
+                    background-color: #21759b; // WordPress blue
+                    border-color: #21759b;
+                }
+
+                &.blogger:hover {
+                    background-color: #f57d00; // Blogger orange
+                    border-color: #f57d00;
+                }
+
+                &.tripadvisor:hover {
+                    background-color: #00af87; // TripAdvisor green
+                    border-color: #00af87;
+                }
+
+                &.weibo:hover {
+                    background-color: #e6162d; // Weibo red
+                    border-color: #e6162d;
+                }
+
+                &.wechat:hover {
+                    background-color: #7bb32e; // WeChat green
+                    border-color: #7bb32e;
+                }
+
+                &.xing:hover {
+                    background-color: #006567; // Xing dark turquoise
+                    border-color: #006567;
+                }
+
+                &.qq:hover {
+                    background-color: #eb6101; // QQ orange
+                    border-color: #eb6101;
+                }
+
+                &.vk:hover {
+                    background-color: #4a76a8; // VK blue
+                    border-color: #4a76a8;
+                }
+
+                &.patreon:hover {
+                    background-color: #f96854; // Patreon red
+                    border-color: #f96854;
+                }
+
+                &.deviantart:hover {
+                    background-color: #05cc47; // DeviantArt green
+                    border-color: #05cc47;
+                }
+
+                &.drupal:hover {
+                    background-color: #0077c0; // Drupal blue
+                    border-color: #0077c0;
+                }
+
+                &.joomla:hover {
+                    background-color: #f44321; // Joomla red
+                    border-color: #f44321;
+                }
+
+                &.mastodon:hover {
+                    background-color: #2b90d9; // Mastodon blue
+                    border-color: #2b90d9;
+                }
+
+                &.mix:hover {
+                    background-color: #ff6600; // Mix orange
+                    border-color: #ff6600;
+                }
+
+                &.foursquare:hover {
+                    background-color: #f94877; // Foursquare pink
+                    border-color: #f94877;
+                }
+
+                &.meetup:hover {
+                    background-color: #e0393e; // Meetup red
+                    border-color: #e0393e;
+                }
+
+                &.steam:hover {
+                    background-color: #171a21; // Steam dark
+                    border-color: #171a21;
+                }
+
+                &.xbox:hover {
+                    background-color: #107c10; // Xbox green
+                    border-color: #107c10;
+                }
+
+                &.playstation:hover {
+                    background-color: #003087; // PlayStation blue
+                    border-color: #003087;
+                }
+
+                &.skype:hover {
+                    background-color: #00aff0; // Skype blue
+                    border-color: #00aff0;
+                }
+
+                &.teamspeak:hover {
+                    background-color: #5e8d91; // TeamSpeak teal
+                    border-color: #5e8d91;
+                }
+
+                &.goodreads:hover {
+                    background-color: #553b08; // Goodreads brown
+                    border-color: #553b08;
+                }
+
+                &.houzz:hover {
+                    background-color: #7ac143; // Houzz green
+                    border-color: #7ac143;
+                }
+
+                &.yelp:hover {
+                    background-color: #c41200; // Yelp red
+                    border-color: #c41200;
+                }
+
+                &.myspace:hover {
+                    background-color: #000; // MySpace black
+                    border-color: #000;
+                }
+
+                &.periscope:hover {
+                    background-color: #3aa4c6; // Periscope light blue
+                    border-color: #3aa4c6;
+                }
+
+                &.diaspora:hover {
+                    background-color: #545454; // Diaspora dark gray
+                    border-color: #545454;
+                }
+            }
+        }
+    }
+
+    .secondary-task-content-wrapper {
+        grid-area: span 1 / span 4 / span 1 / span 4;
+    }
+
+    .cinzel {
+        font-family: "Cinzel", serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+    }
+}

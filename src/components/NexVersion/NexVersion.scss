@@ -6,7 +6,7 @@
     align-items: center;
     height: calculate(60px);
     gap: calculate(20px);
-    transition: all 0.2s ease-in-out;
+    transition: all .2s cubic-bezier(.215,.61,.355,1);;
   
     .nex-version {
         position: relative;
@@ -16,7 +16,7 @@
         color: #fff;
         cursor: pointer;
         z-index: 1;
-        transition: all 0.2s ease-in-out;
+        transition: all .2s cubic-bezier(.215,.61,.355,1);;
   
       &.clicked {
         position: relative;
