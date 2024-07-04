@@ -27,7 +27,7 @@ function MyComponent() {
   return (
     <NexNav
       logoSrc="/path/to/logo.png"
-      altText="Company Name"
+      displayName="Company Name"
       navItems={navItems}
       identity={true}
       identityProps={{
@@ -44,7 +44,7 @@ export default MyComponent;
 ### Props
 
 * **logoSrc (optional):** URL of the logo image to be displayed in the navigation bar.
-* **altText (required):** Alternate text for the logo image, or the company name if no logo is provided.
+* **displayName (required):** Alternate text for the logo image, or the company name if no logo is provided.
 * **identity (optional - default: false):** Whether to display identity links (e.g., login, sign up) in the navigation menu.
 * **navItems (required):** Array of menu items to be displayed in the navigation menu. Each item should have a `label` and an optional `onClick` function.
 * **identityProps (optional):** Additional props for identity links, including `onLoginClick` and `onSignUpClick` functions.
@@ -65,7 +65,7 @@ function MyComponent() {
   return (
     <NexNav
       logoSrc="/path/to/logo.png"
-      altText="Company Name"
+      displayName="Company Name"
       navItems={navItems}
       identity={true}
       identityProps={{

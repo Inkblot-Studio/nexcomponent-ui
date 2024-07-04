@@ -1,18 +1,19 @@
 import './NexNav.scss';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { NexNavProps } from './NexNav.types';
 import NexButton from '../NexButton';
 import { motion, AnimatePresence } from "framer-motion";
 import { useClickAway } from 'react-use';
 
-const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, identityProps }) => {
+const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler, identity, navItems, identityProps }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const ref = useRef(null);
   
   useClickAway(ref, (event) => {
     const target = event.target as HTMLElement;
 
-    if (target.closest('.burger')) {
+    if (target.closest('.nex-nav-burger')) {
       return;
     }
 
@@ -23,49 +24,67 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsAtTop(true);
+      } else {
+        setIsAtTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   const navSwipeAnimation = {
-    initial: { x: '100%', opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    exit: { x: '100%', opacity: 0, transition: { delay: 0.2 } },
+    initial: { y: '-100%', opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    exit: { y: '-100%', opacity: 0, transition: { delay: 0.2 } },
     transition: { duration: 0.3 },
   };
 
   return (
     <>
-      <div className="nex-nav">
-        {logoSrc ? (
-          <div className='nex-nav-client-logo'>
-            <img src={logoSrc} alt={altText} className='nex-nav-logo' />
-          </div>
-        ) : (
-          <div className='nex-nav-client-name'>
-            <div className='client-name'>{altText}</div>
-          </div>
-        )}
-
+      <div className={`nex-nav ${!isAtTop ? 'not-at-top' : '' }`}>
         <nav className={`nex-nav-inner-wrapper`}>
-          <div className={`nex-nav-right`}>
-            <ul className='nex-nav-list'>
-              {navItems.length && navItems.map((item, index) => (
-                <li key={index} className='nex-nav-item' onClick={item.onClick}> 
-                  <a className='nex-nav-link'>{item.label}</a>
-                </li>
-              ))}
-              {identity && (
-                <div className='identity'>
-                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
-                </div>
-              )}
-            </ul>
-          </div>
-        </nav>
+          {logoSrc ? (
+            <div className='nex-nav-client-logo' onClick={homeButtonHandler}>
+              <img src={logoSrc} alt={displayName} className='nex-nav-logo' />
+            </div>
+          ) : (
+            <div className='nex-nav-client-name' onClick={homeButtonHandler}>
+              <div className='client-name'>{displayName}</div>
+            </div>
+          )}
 
-        <div className={`burger ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
+          <ul className='nex-nav-list'>
+            {navItems.length && navItems.map((item, index) => (
+              <li key={index} className='nex-nav-item' onClick={item.onClick}> 
+                <a className='nex-nav-link'>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+
+          {identity && (
+              <div className='identity'>
+                <div className="identity-item text-button" onClick={identityProps?.onLoginClick}>Log in</div>
+                <NexButton className='identity-item' text='Sign Up' onClick={identityProps?.onSignUpClick} inverted/>
+              </div>
+          )}
+        </nav>
+      </div>
+
+      <div className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : '' }`} onClick={toggleMenu}>
           <div />
           <div />
           <div />
-        </div>
       </div>
 
       <AnimatePresence>
@@ -83,13 +102,13 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, altText, identity, navItems, i
                   <a className='nex-nav-link'>{item.label}</a>
                 </li>
               ))}
-              {identity && (
-                <div className='identity'>
-                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
-                </div>
-              )}
             </div>
+            {identity && (
+              <div className='identity'>
+                <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
+                <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+              </div>
+            )}
           </motion.div>
           </>
         )}

@@ -2,13 +2,13 @@
 
 .nex-button {
     min-height: calculate(40px);
-    padding: calculate(14px) calculate(30px);
+    padding: calculate(12px) calculate(16px);
     border: none;
     border-radius: calculate(20px);
     background-color: #F0F0F0;
     font-size: calculate(18px);
     line-height: calculate(20.7px);
-    transition: all 200ms ease-in-out;
+    transition: all .2s cubic-bezier(.215,.61,.355,1);
     cursor: pointer;
 
     &:hover {
