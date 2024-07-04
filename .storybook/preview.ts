@@ -1,5 +1,7 @@
 import type { Preview } from "@storybook/react";
 
+import NexComponentTheme from "./NexComponentTheme";
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -8,8 +10,13 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    layout: 'fullscreen'
+    layout: 'fullscreen',
+    docs: {
+      theme: NexComponentTheme,
+    },
   },
+
+  tags: ["autodocs"]
 };
 
 export default preview;
