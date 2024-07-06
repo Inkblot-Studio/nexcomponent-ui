@@ -24,4 +24,40 @@ Default.args = {
     buttonLabel: 'Click Me',
     buttonHandle: () => alert('Button clicked!'),
     backgroundUrl: storyHeroSection,
-  };
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+    title: 'Hero Card Title',
+    subtitle: 'This is the subtitle of the hero card.',
+    type: 'primary',
+    buttonLabel: 'Click Me',
+    buttonHandle: () => alert('Button clicked!'),
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+    title: 'Hero Card Title',
+    subtitle: 'This is the subtitle of the hero card.',
+    type: 'secondary',
+    buttonLabel: 'Click Me',
+    buttonHandle: () => alert('Button clicked!'),
+};
+
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+    title: 'Hero Card Title',
+    subtitle: 'This is the subtitle of the hero card.',
+    type: 'tertiary',
+    buttonLabel: 'Click Me',
+    buttonHandle: () => alert('Button clicked!'),
+};
+
+export const Quaternary = Template.bind({});
+Quaternary.args = {
+    title: 'Hero Card Title',
+    subtitle: 'This is the subtitle of the hero card.',
+    type: 'quaternary',
+    buttonLabel: 'Click Me',
+    buttonHandle: () => alert('Button clicked!'),
+};

@@ -15,12 +15,16 @@ const NexHeroCard: React.FC<NexHeroCardProps> = ({ title, subtitle, type, button
     return colorNames.includes(type as string) ? `nex-hero-card-wrapper--${type}` : '';
   };
 
-  const heroCardClasses = `nex-hero-card-wrapper ${getTypeClass(type)}`;
+  const heroCardClasses = `nex-hero-card-wrapper ${getTypeClass(type)} ${backgroundUrl ? 'has-background' : ''}`;
 
-  const backgroundStyle = backgroundUrl ? { backgroundImage: `url(${backgroundUrl})` } : {};
+  const backgroundStyle = backgroundUrl ? { '--background-url': `url(${backgroundUrl})` } as React.CSSProperties : {};
 
   return (
     <div className={heroCardClasses} style={backgroundStyle}>
+      {!backgroundUrl && (
+          <div className="background-blob"></div>
+      )}
+
       <div className="content">
         <div className="title">{title}</div>
         <div className="subtitle">{subtitle}</div>
