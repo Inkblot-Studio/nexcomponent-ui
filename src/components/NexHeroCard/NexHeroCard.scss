@@ -1,0 +1,107 @@
+@import "../../utils/mixin.scss";
+
+.nex-hero-card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: calculate(640px);
+    margin: calculate(68px);
+    padding: calculate(64px);
+    border: calculate(1px) solid rgba($color: #000, $alpha: 0.05);
+    border-radius: calculate(50px);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: min-height .2s cubic-bezier(.215,.61,.355,1);
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calculate(60px);
+        color: #fff;
+
+        .title {
+            font-size: calculate(64px);
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: calculate(20px);
+        }
+
+        .hero-button {
+            width: calculate(435px);
+        }
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+        min-height: calculate(779px);
+        text-align: left;
+    }
+
+    &--primary {
+        background-color: var(--nex-primary-color);
+
+        .content {
+            color: var(--nex-primary-contrast-color);
+        }
+    }
+
+    &--secondary {
+        background-color: var(--nex-secondary-color);
+
+        .content {
+            color: var(--nex-secondary-contrast-color);
+        }
+    }
+
+    &--tertiary {
+        background-color: var(--nex-tertiary-color);
+
+        .content {
+            color: var(--nex-tertiary-contrast-color);
+        }
+    }
+
+    &--quaternary {
+        background-color: var(--nex-quaternary-color);
+
+        .content { 
+            color: var(--nex-quaternary-contrast-color);
+        }
+    }
+
+    &--success {
+        background-color: var(--nex-success);
+
+        .content {
+            color: #fff;
+        }
+    }
+
+    &--info {
+        background-color: var(--nex-info);
+        
+        .content {
+            color: #fff;
+        }
+    }
+
+    &--warning {
+        background-color: var(--nex-warning);
+        
+        .content {
+            color: #fff;
+        }
+    }
+
+    &--danger {
+        background-color: var(--nex-danger);
+        
+        .content {
+            color: #fff;
+        }
+    }
+}

@@ -4,6 +4,12 @@ import NexSeparator from '../NexSeparator';
 import './NexCard.scss';
 
 const NexCard: React.FC<NexCardProps> = ({ title, image, content, actions, footer }) => {
+  const getColorClass = (type: string | undefined): string => {
+    if (!type) return '';
+    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger', 'glass'];
+    return colorNames.includes(type as string) ? `nex-button--${type}` : '';
+  };
+
   return (
     <div className="nex-card-wrapper">
       <div className="nex-card-inner-wrapper">
