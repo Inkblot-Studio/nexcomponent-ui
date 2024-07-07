@@ -1,0 +1,70 @@
+### NexHeroCard Component
+
+`NexHeroCard` is a prominent component designed to display hero sections with various content within your React application. It offers the following features:
+
+* **Content Display:** `NexHeroCard` supports displaying titles, subtitles, and a customizable button.
+* **Customization:** You can customize the appearance of the card, including the presence of a background image and button.
+* **Flexibility:** `NexHeroCard` can be easily integrated into any React application and styled to match your design system.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+* **Variations:** `NexHeroCard` can be rendered with or without a background image, and with or without a button.
+
+### Usage
+
+#### Basic Usage
+
+To use `NexHeroCard`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexHeroCard from '@nexcomponent/lib';
+
+function MyComponent() {
+  return (
+    <NexHeroCard
+      title="Hero Title"
+      subtitle="Hero Subtitle"
+      backgroundUrl="path/to/background.jpg"
+      buttonLabel="Click Me"
+      buttonHandle={() => console.log('Button clicked')}
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **title (optional):** Title of the hero card.
+* **subtitle (optional):** Subtitle of the hero card.
+* **type (optional):** Type of the hero card, which can determine its styling.
+* **buttonLabel (optional):** Label for the button.
+* **buttonHandle (optional):** Handler function to be called when the button is clicked.
+* **backgroundUrl (optional):** URL of the background image to be displayed on the hero card.
+
+
+
+### Example
+
+```tsx
+import React from 'react';
+import NexHeroCard from '@nexcomponent/lib';
+
+function MyComponent() {
+  return (
+    <NexHeroCard
+      title="Hero Title"
+      subtitle="Hero Subtitle"
+      backgroundUrl="path/to/background.jpg"
+      buttonLabel="Click Me"
+      buttonHandle={() => console.log('Button clicked')}
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexHeroCard` can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, layout, and styling to match your application's design requirements. The UI will vary depending on whether a background image is included or not, and the button can be styled using `NexButton`.

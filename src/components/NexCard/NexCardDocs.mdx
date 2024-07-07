@@ -1,15 +1,16 @@
-NexCard Component
+### NexCard Component
 
 `NexCard` is a versatile component used to display cards with various content within your React application. It offers the following features:
 
-* **Content Display:** `NexCard` supports displaying images, titles, text content, actions, and footer sections.
-* **Customization:** You can customize the appearance of the card, including the presence of images, titles, and footer sections.
+* **Content Display:** `NexCard` supports displaying images, titles, text content, and actions.
+* **Customization:** You can customize the appearance of the card, including the presence of images and titles.
 * **Flexibility:** `NexCard` can be easily integrated into any React application and styled to match your design system.
 * **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+* **Variations:** `NexCard` can be rendered with or without actions, images, and titles. Actions work best with `NexButton`.
 
 ### Usage
 
-##### Basic Usage
+#### Basic Usage
 
 To use `NexCard`, simply import the component and provide the necessary props:
 
@@ -21,10 +22,9 @@ function MyComponent() {
   return (
     <NexCard
       title="Card Title"
-      image="path/to/image.jpg"
+      imageUrl="path/to/image.jpg"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       actions={<button onClick={() => console.log('Action clicked')}>Action</button>}
-      footer={<div>Card Footer</div>}
     />
   );
 }
@@ -35,10 +35,9 @@ export default MyComponent;
 ### Props
 
 * **title (optional):** Title of the card.
-* **image (optional):** Image URL to be displayed on the card.
+* **imageUrl (optional):** Image URL to be displayed on the card.
 * **content (optional):** Text content to be displayed on the card.
-* **actions (optional):** Actions to be displayed on the card (e.g., buttons, links).
-* **footer (optional):** Footer content to be displayed below the card.
+* **actions (optional):** Actions to be displayed on the card (e.g., buttons, links). Works best with `NexButton`.
 
 ### Example
 
@@ -50,10 +49,9 @@ function MyComponent() {
   return (
     <NexCard
       title="Card Title"
-      image="path/to/image.jpg"
+      imageUrl="path/to/image.jpg"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       actions={<button onClick={() => console.log('Action clicked')}>Action</button>}
-      footer={<div>Card Footer</div>}
     />
   );
 }
@@ -63,4 +61,4 @@ export default MyComponent;
 
 ### Customization
 
-`NexCard` can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, layout, and styling to match your application's design requirements.
+`NexCard` can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, layout, and styling to match your application's design requirements. The UI will vary depending on whether an image is included or not.
