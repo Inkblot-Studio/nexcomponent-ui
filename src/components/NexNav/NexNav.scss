@@ -18,7 +18,7 @@
     transition: backdrop-filter 0.2s cubic-bezier(.215,.61,.355,1), border-color 0.2s cubic-bezier(.215,.61,.355,1);
 
     &.not-at-top {
-        border-color: calculate(1px) solid rgba($color: #000, $alpha: 0.05);
+        border-color: rgba($color: #000, $alpha: 0.05);
         backdrop-filter: blur( 20px );
         -webkit-backdrop-filter: blur( 20px );
     }

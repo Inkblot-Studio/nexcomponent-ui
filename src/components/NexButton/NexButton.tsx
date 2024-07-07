@@ -3,9 +3,9 @@ import './NexButton.scss';
 import { NexButtonProps } from './NexButton.types';
 
 const NexButton: React.FC<NexButtonProps> = ({ onClick, className, size = 'normal', inverted, type, text }) => {
-  const getColorClass = (type: string | undefined): string => {
+  const getTypeClass = (type: string | undefined): string => {
     if (!type) return '';
-    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger'];
+    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger', 'glass'];
     return colorNames.includes(type as string) ? `nex-button--${type}` : '';
   };
 
@@ -13,7 +13,7 @@ const NexButton: React.FC<NexButtonProps> = ({ onClick, className, size = 'norma
     return size ? `nex-button--${size}` : '';
   };
 
-  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getColorClass(type)} ${inverted ? 'inverted' : ''} ${!type && inverted ? 'inverted-default' : ''}`;
+  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getTypeClass(type)} ${inverted ? 'inverted' : ''} ${!type && inverted ? 'inverted-default' : ''}`;
 
   return (
     <button className={buttonClasses} onClick={onClick}>

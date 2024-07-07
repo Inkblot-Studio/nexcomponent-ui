@@ -1,0 +1,137 @@
+## NexFooter Component
+
+The `NexFooter` component is designed to be a flexible and visually appealing footer for your React application. It offers a variety of social media icons, customizable display options, and ensures proper copyright display.
+
+### Features
+
+* **Logo Display:** You can display a logo or a name depending on the provided props.
+* **Social Media Integration:** Includes a wide range of social media icons from FontAwesome.
+* **Customization:** The footer can be customized with different social media links and appearance settings.
+* **Responsive Design:** Ensures the footer looks good on all devices.
+
+### Usage
+
+To use the `NexFooter` component, import it into your React application and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexFooter from './NexFooter';
+import { NexFooterProps } from './NexFooter.types';
+
+const footerProps: NexFooterProps = {
+  logoSrc: 'path/to/logo.png',
+  displayName: 'My Company',
+  socials: [
+    { type: 'facebook', url: 'https://facebook.com/mycompany' },
+    { type: 'twitter', url: 'https://twitter.com/mycompany' },
+    // Add more social links as needed
+  ],
+};
+
+function App() {
+  return (
+    <div className="App">
+      {/* Other components */}
+      <NexFooter {...footerProps} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Props
+
+* **logoSrc (optional):** URL of the logo to be displayed. If not provided, the `displayName` will be shown instead.
+* **displayName (required):** The name of the company or application to be displayed.
+* **socials (optional):** Array of social media links. Each link should include a `type` (corresponding to a FontAwesome icon) and a `url`.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexFooter from './NexFooter';
+
+const footerProps = {
+  logoSrc: 'path/to/logo.png',
+  displayName: 'My Company',
+  socials: [
+    { type: 'facebook', url: 'https://facebook.com/mycompany' },
+    { type: 'twitter', url: 'https://twitter.com/mycompany' },
+  ],
+};
+
+function App() {
+  return (
+    <div className="App">
+      {/* Other components */}
+      <NexFooter {...footerProps} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Customization
+
+You can customize the `NexFooter` by providing different props or styles to match your application's design requirements. Adjust the logo, display name, and social media links to suit your needs.
+
+### Social Icons
+
+The `NexFooter` component supports a wide range of social media icons, including:
+
+* Facebook
+* Twitter
+* Instagram
+* LinkedIn
+* GitHub
+* YouTube
+* Pinterest
+* Snapchat
+* TikTok
+* Reddit
+* Tumblr
+* Medium
+* Vimeo
+* Stack Overflow
+* Behance
+* Dribbble
+* Flickr
+* WhatsApp
+* Telegram
+* Slack
+* Discord
+* Spotify
+* Quora
+* SoundCloud
+* Apple
+* Google
+* Amazon
+* Microsoft
+* Dropbox
+* WordPress
+* Blogger
+* Weibo
+* WeChat
+* Xing
+* QQ
+* VK
+* Patreon
+* DeviantArt
+* Drupal
+* Joomla
+* Mastodon
+* Mix
+* Foursquare
+* Meetup
+* Steam
+* Xbox
+* PlayStation
+* Skype
+* TeamSpeak
+* Goodreads
+* Houzz
+* Yelp
+* Periscope
+* Diaspora

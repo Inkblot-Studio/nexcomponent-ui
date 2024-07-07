@@ -1,0 +1,153 @@
+@import "../../utils/mixin.scss";
+
+.nex-hero-card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: calculate(640px);
+    margin: calculate(68px);
+    padding: calculate(64px);
+    border: calculate(1px) solid rgba(0, 0, 0, 0.05);
+    border-radius: calculate(50px);
+    position: relative;
+    overflow: hidden;
+    transition: min-height .2s cubic-bezier(.215,.61,.355,1);
+
+    &:before {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: transform 1s cubic-bezier(.215,.61,.355,1);
+    }
+
+    &:hover:before {
+        transform: scale(1.2);
+    }
+
+    &:not(.has-background) {
+        background-color: #fff;
+    }
+
+    &.has-background:before {
+        background-image: var(--background-url);
+    }
+
+    .content {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calculate(60px);
+        color: var(--nex-font-color);
+        transition: color .5s cubic-bezier(.215,.61,.355,1);
+
+        .title {
+            font-size: calculate(64px);
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: calculate(20px);
+        }
+
+        .hero-button {
+            width: calculate(435px);
+        }
+    }
+
+    &.has-background {
+        .content {
+            color: #fff;
+        }
+    }
+
+    &:hover {
+        .content {
+            color: #fff;
+        }
+
+        .background-blob {
+            -webkit-transform: scale(7);
+            -ms-transform: scale(7);
+            transform: scale(7);
+        }
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+        min-height: calculate(779px);
+        text-align: left;
+    }
+
+    .background-blob {
+        height: calculate(512px);
+        width: calculate(512px);
+        background-color: var(--nex-primary-color);
+      
+        z-index: 1;
+        position: absolute;
+        top: calculate(-300px);
+        right: calculate(-300px);
+      
+        border-radius: 50%;
+      
+        -webkit-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        transition: all .5s ease;
+    }
+
+    &--primary {
+        .background-blob {
+            background-color: var(--nex-primary-color);
+        }
+    }
+
+    &--secondary {
+        .background-blob {
+            background-color: var(--nex-secondary-color);
+        }
+    }
+
+    &--tertiary {
+        .background-blob {
+            background-color: var(--nex-tertiary-color);
+        }
+    }
+
+    &--quaternary {
+        .background-blob {
+            background-color: var(--nex-quaternary-color);
+        }
+    }
+
+    &--success {
+        .background-blob {
+            background-color: var(--nex-success);
+        }
+    }
+
+    &--info {
+        .background-blob {
+            background-color: var(--nex-info);
+        }
+    }
+
+    &--warning {
+        .background-blob {
+            background-color: var(--nex-warning);
+        }
+    }
+
+    &--danger {
+        .background-blob {
+            background-color: var(--nex-danger);
+        }
+    }
+}

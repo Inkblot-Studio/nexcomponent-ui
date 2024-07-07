@@ -1,10 +1,19 @@
-## Getting Started with @nexcomponent/lib React UI Library
+# NexComponent UI Library
 
-#### &#xA;Welcome to the getting started guide for \`@nexcomponent/lib\`! This guide will walk you through the process of installing the library and using its components in your React application.&#xA;
+Welcome to **NexComponent**, a comprehensive and flexible UI library designed for modern React applications. NexComponent provides a suite of reusable and customizable components to streamline your development process and ensure a consistent design across your project.
 
-### Installation
+## Key Features
 
-Install `@nexcomponent/lib` via npm or yarn:
+* **Versatile Components:** NexComponent includes a variety of UI components such as cards, buttons, forms, and more, all designed to be easily integrated into your React applications.
+* **Customizable:** All components are highly customizable, allowing you to adjust their appearance and behavior to fit your specific design requirements.
+* **Responsive Design:** Our components are built to be responsive, ensuring they look great on all devices and screen sizes.
+* **Accessibility:** We prioritize accessibility, ensuring that our components provide a seamless experience for all users, including those with disabilities.
+* **Consistent Styling:** Maintain a consistent look and feel across your application with NexComponent's cohesive styling and theming capabilities.
+* **Comprehensive Documentation:** Detailed documentation and examples are available to help you get started quickly and use our components effectively.
+
+## Installation
+
+To install NexComponent in your project, use npm or yarn:
 
 ```txt
 npm install @nexcomponent/lib --save
@@ -18,32 +27,23 @@ yarn add @nexcomponent/lib
 
 ## Usage
 
-### Importing Components
-
-Once installed, you can import components from `@nexcomponent/lib` into your React application:
-
-### Example Usage
-
-Here's an example demonstrating the usage of the `NexButton` component:
+Import and use the components in your React application:
 
 ```tsx
 import React from 'react';
-import NexButton from '@nexcomponent/lib';
+import { NexCard, NexHeroCard, NexButton } from '@nexcomponent/lib';
 
-const MyComponent = () => {
-  const handleClick = () => {
-    console.log('Button clicked!');
-  };
-
+function App() {
   return (
     <div>
-      <h1>My Component</h1>
-      <NexButton onClick={handleClick} type="primary" size="large" text="Click me" />
+      <NexCard title="Example Card" content="This is a sample card." />
+      <NexHeroCard title="Hero Title" subtitle="Hero Subtitle" />
+      <NexButton text="Click Me" onClick={() => alert('Button clicked!')} />
     </div>
   );
-};
+}
 
-export default MyComponent;
+export default App;
 ```
 
 ## Documentation
@@ -56,12 +56,6 @@ For detailed documentation on each component and its props, visit the [official 
 
 * Passing custom className or styles directly to the components.
 
-## Additional Resources
+## License
 
-For additional help or support, you can:
-
-* Visit the [official website](https://nexcomponent.com/).
-* Join our community on [Discord]().
-* Report bugs or request features on [GitHub](https://github.com/nexcomponent/lib/issues).
-
-That's it! You're now ready to start using `@nexcomponent/lib` in your React application. Happy coding!
+NexComponent is licensed under the MIT License. See the [LICENSE](#) file for more information.

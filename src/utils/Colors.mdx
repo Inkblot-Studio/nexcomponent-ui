@@ -1,10 +1,84 @@
-## Customizing Colors in Client Projects
+# Theming Guide for NexComponent
 
-The provided UI library incorporates a set of predefined color variables to maintain consistency across projects. These colors can be effortlessly customized at the root level of your client projects to align with your brand identity or design requirements.
+## Overview
 
-### Integration Steps
+NexComponent allows for extensive customization to ensure that your UI components align perfectly with your brand identity and design requirements. By leveraging CSS variables, you can easily adjust the colors and styles of the components throughout your application.
 
-**Root Level Customization**: Modify the color variables within the :root selector to reflect your desired palette:
+## Customizing Colors
+
+NexComponent uses a set of predefined color variables to maintain consistency. You can customize these colors at the root level of your project to reflect your desired palette.
+
+### Default Color Variables
+
+Below are the default color variables used by NexComponent:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  font-family: "Inter", sans-serif;
+
+  /* Primary colors */
+  --nex-primary-color: #3D4DE1;
+  --nex-primary-color-rgb: 61, 77, 225;
+  --nex-primary-opacity: 1;
+  --nex-primary-contrast-color: #f3f3f3;
+
+  /* Secondary colors */
+  --nex-secondary-color: #ef910a;
+  --nex-secondary-color-rgb: 239, 145, 10;
+  --nex-secondary-opacity: 1;
+  --nex-secondary-contrast-color: #f3f3f3;
+
+  /* Tertiary colors */
+  --nex-tertiary-color: #88ffca;
+  --nex-tertiary-color-rgb: 136, 255, 202;
+  --nex-tertiary-opacity: 1;
+  --nex-tertiary-contrast-color: #f3f3f3;
+
+  /* Quaternary colors */
+  --nex-quaternary-color: #4addef;
+  --nex-quaternary-color-rgb: 74, 221, 239;
+  --nex-quaternary-opacity: 1;
+  --nex-quaternary-contrast-color: #f3f3f3;
+
+  /* Font color */
+  --nex-font-color: #17181D;
+  --nex-font-color-rgb: 23, 24, 29;
+  --nex-font-opacity: 1;
+
+  /* Background color */
+  --nex-background-color: #f3f3f3;
+  --nex-background-color-rgb: 243, 243, 243;
+  --nex-background-opacity: 1;
+
+  /* Complimentary color */
+  --nex-complimentary-color: #bababa;
+  --nex-complimentary-color-rgb: 186, 186, 186;
+  --nex-complimentary-opacity: 1;
+
+  /* Bootstrap */
+  --nex-success: #5cb85c;
+  --nex-success-rgb: 92, 184, 92;
+  --nex-success-opacity: 1;
+
+  --nex-info: #5bc0de;
+  --nex-info-rgb: 91, 192, 222;
+  --nex-info-opacity: 1;
+
+  --nex-warning: #f0ad4e;
+  --nex-warning-rgb: 240, 173, 78;
+  --nex-warning-opacity: 1;
+
+  --nex-danger: #d9534f;
+  --nex-danger-rgb: 217, 83, 79;
+  --nex-danger-opacity: 1;
+}
+```
+
+### Customization Steps
+
+1. **Root Level Customization**: Modify the color variables within the `:root` selector to match your brand's color scheme:
 
 ```css
 :root {
@@ -40,17 +114,23 @@ The provided UI library incorporates a set of predefined color variables to main
   --nex-danger: #d9534f;
 }
 ```
-### Changing Colors
 
-To adapt the color scheme to your project's requirements:
+1. **Changing Colors**: Adjust the following variables to tailor the color scheme to your project's needs:
+   * **Primary Colors**: Update `--nex-primary-color` and `--nex-primary-contrast-color` for primary elements and their contrast.
+   * **Secondary Colors**: Modify `--nex-secondary-color` and `--nex-secondary-contrast-color` for secondary elements.
+   * **Tertiary and Quaternary Colors**: Customize `--nex-tertiary-color`, `--nex-tertiary-contrast-color`, `--nex-quaternary-color`, and `--nex-quaternary-contrast-color` as needed.
+   * **Font and Background Colors**: Adjust `--nex-font-color` and `--nex-background-color` to match your text and background preferences.
+   * **Complimentary Color**: Change `--nex-complimentary-color` for accents and highlights.
+   * **Bootstrap Colors**: Optionally, modify `--nex-success`, `--nex-info`, `--nex-warning`, and `--nex-danger` to seamlessly integrate with Bootstrap components.
 
-- Primary Colors: Adjust --nex-primary-color and --nex-primary-contrast-color for primary elements and their contrast.
-- econdary Colors: Modify --nex-secondary-color and --nex-secondary-contrast-color for secondary elements.
-- Tertiary and Quaternary Colors: Customize --nex-tertiary-color, --nex-tertiary-contrast-color, --nex-quaternary-color, and --nex-quaternary-contrast-color as needed.
-- Font and Background Colors: Alter --nex-font-color and --nex-background-color to match your text and background preferences.
-- Complimentary Color: Adjust --nex-complimentary-color for accents and highlights.
-- Bootstrap Colors: Optionally, modify --nex-success, --nex-info, --nex-warning, and --nex-danger to integrate with Bootstrap components seamlessly.
+### Applying Your Custom Theme
 
-By following these steps, you can effortlessly tailor the color scheme of your client projects while leveraging the flexibility and consistency offered by the UI library.
+After updating the variables, ensure your styles are correctly applied by importing your custom CSS file into your project:
 
-For further guidance or assistance, refer to the documentation of your chosen UI library or consult with your development team.
+```css
+import './path/to/your/custom.css';
+```
+
+By following these steps, you can effortlessly tailor the color scheme of your NexComponent library to match your brand and project requirements.
+
+For further guidance or assistance, refer to the detailed documentation of NexComponent or consult with your development team.

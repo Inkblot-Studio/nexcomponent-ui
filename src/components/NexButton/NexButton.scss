@@ -7,6 +7,7 @@
     border-radius: calculate(20px);
     background-color: #F0F0F0;
     font-size: calculate(18px);
+    font-weight: 500;
     line-height: calculate(20.7px);
     transition: all .2s cubic-bezier(.215,.61,.355,1);
     cursor: pointer;
@@ -190,6 +191,20 @@
 
         &:hover {
             background-color: rgba(var(--nex-font-color-rgb), 0.85);
+        }
+    }
+
+    
+    &--glass {
+        border: calculate(1px) solid rgba($color: #000, $alpha: 0.05);
+        background-color: transparent;
+        backdrop-filter: blur( 20px );
+        -webkit-backdrop-filter: blur( 20px );
+        color: #fff;
+
+        &:hover {
+            border-color: rgba($color: #000, $alpha: 0.25);
+            background-color: transparent;
         }
     }
 }
