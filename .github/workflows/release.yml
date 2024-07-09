@@ -27,7 +27,7 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: npm clean-install
-      - name: Build project and copy package.json to dist
+      - name: Build project
         run: npm run build
       - name: Pack for GitHub
         run: |
