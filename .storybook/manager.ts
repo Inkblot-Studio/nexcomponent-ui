@@ -1,6 +1,6 @@
 import { addons } from '@storybook/manager-api';
-import { themes } from '@storybook/theming';
+import NexComponentTheme from './NexComponentTheme';
  
 addons.setConfig({
-  theme: themes.dark,
+  theme: NexComponentTheme,
 });

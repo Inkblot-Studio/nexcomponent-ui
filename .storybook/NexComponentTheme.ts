@@ -1,41 +1,42 @@
 import { create } from '@storybook/theming';
+import ibsLogo from '../src/assets/img/ibs_logo.png'
 
 export default create({
-  base: 'light',
+  base: 'dark',
   
   // Typography
   fontBase: '"Open Sans", sans-serif',
   fontCode: 'monospace',
   
   brandTitle: 'NexComponent',
-  brandUrl: 'https://example.com',
-  brandImage: 'https://storybook.js.org/images/placeholders/350x150.png',
+  brandUrl: 'https://main--6672d9cb533920c89e299205.chromatic.com',
+  brandImage: ibsLogo,
   brandTarget: '_self',
   
   // Colors
-  colorPrimary: '#3A10E5',
-  colorSecondary: '#585C6D',
+  colorPrimary: '#BB86FC', // Soft purple primary color
+  colorSecondary: '#03DAC6', // Soft teal secondary color
   
   // UI
-  appBg: '#ffffff',
-  appContentBg: '#ffffff',
-  appPreviewBg: '#ffffff',
-  appBorderColor: '#585C6D',
-  appBorderRadius: 4,
+  appBg: '#121212', // Dark background
+  appContentBg: '#1E1E1E', // Slightly lighter dark background for content
+  appPreviewBg: '#fafafa', // Dark background for preview
+  appBorderColor: '#333333', // Dark grey border color
+  appBorderRadius: 8, // More rounded corners
   
   // Text colors
-  textColor: '#10162F',
-  textInverseColor: '#ffffff',
+  textColor: '#E0E0E0', // Light grey text color
+  textInverseColor: '#121212', // Dark inverse text color for readability
   
   // Toolbar default and active colors
-  barTextColor: '#9E9E9E',
-  barSelectedColor: '#585C6D',
-  barHoverColor: '#585C6D',
-  barBg: '#ffffff',
+  barTextColor: '#B3B3B3', // Light grey text color for toolbar
+  barSelectedColor: '#BB86FC', // Soft purple for selected toolbar items
+  barHoverColor: '#BB86FC', // Soft purple for hovered toolbar items
+  barBg: '#1E1E1E', // Slightly lighter dark background for toolbar
   
   // Form colors
-  inputBg: '#ffffff',
-  inputBorder: '#10162F',
-  inputTextColor: '#10162F',
-  inputBorderRadius: 2,
+  inputBg: '#1E1E1E', // Slightly lighter dark background for inputs
+  inputBorder: '#333333', // Dark grey border for inputs
+  inputTextColor: '#E0E0E0', // Light grey text color for inputs
+  inputBorderRadius: 8, // More rounded input elements
 });

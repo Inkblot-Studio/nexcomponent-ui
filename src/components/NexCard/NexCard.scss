@@ -117,6 +117,54 @@
         -o-transition: all .5s ease;
         transition: all .5s ease;
     }
+
+    &--primary {
+        .background-blob {
+            background-color: var(--nex-primary-color);
+        }
+    }
+
+    &--secondary {
+        .background-blob {
+            background-color: var(--nex-secondary-color);
+        }
+    }
+
+    &--tertiary {
+        .background-blob {
+            background-color: var(--nex-tertiary-color);
+        }
+    }
+
+    &--quaternary {
+        .background-blob {
+            background-color: var(--nex-quaternary-color);
+        }
+    }
+
+    &--success {
+        .background-blob {
+            background-color: var(--nex-success);
+        }
+    }
+
+    &--info {
+        .background-blob {
+            background-color: var(--nex-info);
+        }
+    }
+
+    &--warning {
+        .background-blob {
+            background-color: var(--nex-warning);
+        }
+    }
+
+    &--danger {
+        .background-blob {
+            background-color: var(--nex-danger);
+        }
+    }
 }
   
   
