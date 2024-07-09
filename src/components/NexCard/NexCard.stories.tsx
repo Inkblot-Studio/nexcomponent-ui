@@ -3,6 +3,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import NexCard from './NexCard';
 import { NexCardProps } from './NexCard.types';
 import NexButton from '../NexButton';
+import storyHeroSection from '../../assets/img/story_hero_section.jpg';
 
 export default {
   title: 'NexComponent/NexCard',
@@ -25,7 +26,7 @@ Default.args = {
 export const WithImage = Template.bind({});
 WithImage.args = {
   title: 'Card with Image',
-  imageUrl: 'https://img.freepik.com/free-photo/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai_188544-15588.jpg',
+  imageUrl: storyHeroSection,
   content: 'This card includes an image.',
 };
 
@@ -39,7 +40,7 @@ WithActions.args = {
 export const FullFeatured = Template.bind({});
 FullFeatured.args = {
   title: 'Full Featured Card',
-  imageUrl: 'https://png.pngtree.com/thumb_back/fh260/background/20230412/pngtree-colorful-abstract-ocean-waves-background-image_2357907.jpg',
+  imageUrl: storyHeroSection,
   content: 'This card has it all - image, content, actions, and footer.',
   actions: (
     <>

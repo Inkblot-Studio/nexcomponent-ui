@@ -1,0 +1,61 @@
+### NexInfoPanel Component
+
+`NexInfoPanel` is a versatile component used to display information panels with titles, content, and optional images within your React application. It offers the following features:
+
+* **Content Display:** `NexInfoPanel` supports displaying titles, text content, and optional background images.
+* **Customization:** You can customize the appearance of the panel, including the presence of background images and content alignment.
+* **Flexibility:** `NexInfoPanel` can be easily integrated into any React application and styled to match your design system.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+* **Responsive Design:** `NexInfoPanel` adjusts its layout responsively for desktop and mobile views, optimizing the display based on screen size.
+
+### Usage
+
+#### Basic Usage
+
+To use `NexInfoPanel`, import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexInfoPanel from '@nexcomponent/lib/NexInfoPanel';
+
+function MyComponent() {
+  return (
+    <NexInfoPanel
+      title="Panel Title"
+      imageUrl="path/to/image.jpg"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **title (required):** Title of the info panel.
+* **imageUrl (optional):** Image URL to be displayed as the background of the panel.
+* **content (required):** Text content to be displayed in the info panel.
+
+### Example
+
+```tsx
+import React from 'react';
+import NexInfoPanel from '@nexcomponent/lib/NexInfoPanel';
+
+function MyComponent() {
+  return (
+    <NexInfoPanel
+      title="Panel Title"
+      imageUrl="path/to/image.jpg"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexInfoPanel` can be customized by providing different props or styling to achieve the desired appearance and functionality. You can adjust the content, background image, and layout to suit your application's design requirements. The panel's layout varies depending on whether an image is included or not.
