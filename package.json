@@ -80,7 +80,6 @@
     "styled-components": "^6.1.8"
   },
   "release": {
-    "pkgRoot": "./dist",
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
       "main",
@@ -112,7 +111,13 @@
       }],
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
-      "@semantic-release/npm",
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "./dist",
+          "npmPublish": true
+        }
+      ],
       ["@semantic-release/github", {
         "assets": [
           {"path": "dist/*.tgz", "label": "Distribution"}
