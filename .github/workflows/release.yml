@@ -29,8 +29,8 @@ jobs:
         run: npm clean-install
       - name: Build project and copy package.json to dist
         run: npm run build
-      - name: Pack for Github
-        run: /
+      - name: Pack for GitHub
+        run: |
           cd dist
           npm pack
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
