@@ -13,9 +13,6 @@
   "module": "dist/esm/index.js",
   "style": "dist/css/style.css",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "rollup -c --watch",
     "build": "rollup -c && cp package.json dist/",
@@ -115,6 +112,7 @@
       [
         "@semantic-release/npm",
         {
+          "pkgRoot": "./dist",
           "npmPublish": true
         }
       ],
@@ -122,7 +120,19 @@
         "assets": [
           {"path": "dist/*.tgz", "label": "Distribution"}
         ]
-      }]
+      }],
+      [
+        "@semantic-release/git",
+        {
+           "assets": [
+              "package.json",
+              "README.md",
+              "CHANGELOG.md",
+              "dist/**/*.{js}"
+           ],
+           "message": "chore: Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
     ]
   },
   "private": false,
