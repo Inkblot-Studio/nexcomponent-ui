@@ -120,19 +120,7 @@
         "assets": [
           {"path": "dist/*.tgz", "label": "Distribution"}
         ]
-      }],
-      [
-        "@semantic-release/git",
-        {
-           "assets": [
-              "package.json",
-              "README.md",
-              "CHANGELOG.md",
-              "dist/**/*.{js}"
-           ],
-           "message": "chore: Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-        }
-      ]
+      }]
     ]
   },
   "private": false,
