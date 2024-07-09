@@ -27,10 +27,12 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: npm clean-install
-      - name: Build project
-        run: |
-          npm run build
-          cp package.json dist/
+      - name: Build project and copy package.json to dist
+        run: npm run build
+      - name: Pack for Github
+        run: /
+          cd dist
+          npm pack
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Release
@@ -38,3 +40,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+      - name: Publish to npm
+        run: npm publish ./dist --access public
