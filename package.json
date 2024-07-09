@@ -80,6 +80,7 @@
     "styled-components": "^6.1.8"
   },
   "release": {
+    "pkgRoot": "./dist",
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
       "main",
