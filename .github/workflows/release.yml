@@ -31,7 +31,6 @@ jobs:
         run: npm run build
       - name: Pack for GitHub
         run: |
-          cd dist
           npm pack
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
