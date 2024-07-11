@@ -33,7 +33,7 @@ interface NexButtonProps {
     onClick?: () => void;
     className?: string;
     size?: 'small' | 'normal' | 'large';
-    type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger') | string;
+    type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
     inverted?: boolean;
     text?: string;
 }
@@ -42,10 +42,10 @@ declare const NexButton: React$1.FC<NexButtonProps>;
 
 interface NexCardProps {
     title?: string;
-    image?: string;
+    imageUrl?: string;
+    type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
     content?: string;
     actions?: React.ReactNode;
-    footer?: React.ReactNode;
 }
 
 declare const NexCard: React$1.FC<NexCardProps>;
@@ -76,7 +76,7 @@ interface NexInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 declare const NexInput: React$1.FC<NexInputProps>;
 
-declare const NextLoader: () => React$1.JSX.Element;
+declare const NexLoader: () => React$1.JSX.Element;
 
 type NexLoaderProps = {
     size?: string;
@@ -99,7 +99,8 @@ type IdentityProps = {
 };
 type NexNavProps = {
     logoSrc?: string;
-    altText: string;
+    displayName: string;
+    homeButtonHandler: () => void;
     identity: boolean;
     navItems: NavItem[];
     identityProps?: IdentityProps;
@@ -124,4 +125,4 @@ interface NexVersionProps {
 
 declare const NexVersion: React$1.FC<NexVersionProps>;
 
-export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexInput, type NexInputProps, NextLoader as NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexVersion, type NexVersionProps, useAlerts };
+export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexVersion, type NexVersionProps, useAlerts };

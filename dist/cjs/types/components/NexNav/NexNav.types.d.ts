@@ -8,7 +8,8 @@ export type IdentityProps = {
 };
 export type NexNavProps = {
     logoSrc?: string;
-    altText: string;
+    displayName: string;
+    homeButtonHandler: () => void;
     identity: boolean;
     navItems: NavItem[];
     identityProps?: IdentityProps;

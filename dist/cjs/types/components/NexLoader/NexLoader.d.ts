@@ -1,4 +1,4 @@
 import React from "react";
 import "./NexLoader.scss";
-declare const NextLoader: () => React.JSX.Element;
-export default NextLoader;
+declare const NexLoader: () => React.JSX.Element;
+export default NexLoader;
