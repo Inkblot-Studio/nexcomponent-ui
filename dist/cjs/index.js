@@ -4912,7 +4912,10 @@ const NexInput = ({
 var css_248z$4 = ".nex-loader {\n  animation: rotate 2s linear infinite;\n  z-index: 2;\n  position: absolute;\n  top: 51.5%;\n  left: 48%;\n  width: 50px;\n  height: 50px;\n}\n.nex-loader .path {\n  fill: none;\n  stroke: #7d7d7d;\n  stroke-width: 6;\n  stroke-linecap: round;\n  animation: dash 1.5s ease-in-out infinite;\n}\n\n@keyframes rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes dash {\n  0% {\n    stroke-dasharray: 1, 150;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 90, 150;\n    stroke-dashoffset: -35;\n  }\n  100% {\n    stroke-dasharray: 90, 150;\n    stroke-dashoffset: -124;\n  }\n}";
 styleInject(css_248z$4);
 
-const NexLoader = () => {
+const NexLoader = ({
+  size,
+  color
+}) => {
   return /*#__PURE__*/React.createElement("svg", {
     className: "nex-loader",
     viewBox: "0 0 50 50"

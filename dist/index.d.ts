@@ -76,12 +76,12 @@ interface NexInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 declare const NexInput: React$1.FC<NexInputProps>;
 
-declare const NexLoader: () => React$1.JSX.Element;
-
 type NexLoaderProps = {
     size?: string;
     color?: string;
 };
+
+declare const NexLoader: React$1.FC<NexLoaderProps>;
 
 interface NexModalProps {
     setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
