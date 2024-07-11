@@ -50,6 +50,25 @@ interface NexCardProps {
 
 declare const NexCard: React$1.FC<NexCardProps>;
 
+interface NexHeroCardProps {
+    title: string;
+    subtitle: string;
+    type: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
+    buttonLabel?: string;
+    buttonHandle?: () => void;
+    backgroundUrl?: string;
+}
+
+declare const NexHeroCard: React$1.FC<NexHeroCardProps>;
+
+interface NexInfoPanelProps {
+    title: string;
+    content: string;
+    imageUrl: string;
+}
+
+declare const NexInfoPanel: React$1.FC<NexInfoPanelProps>;
+
 interface NexCarouselProps {
     children: React.ReactNode[];
     navButtons?: boolean;
@@ -108,6 +127,18 @@ type NexNavProps = {
 
 declare const NexNav: React$1.FC<NexNavProps>;
 
+interface SocialLink {
+    type: string;
+    url: string;
+}
+interface NexFooterProps {
+    logoSrc?: string;
+    displayName: string;
+    socials?: SocialLink[];
+}
+
+declare const NexFooter: React$1.FC<NexFooterProps>;
+
 interface NexSeparatorProps {
     className?: string;
     text?: string;
@@ -125,4 +156,4 @@ interface NexVersionProps {
 
 declare const NexVersion: React$1.FC<NexVersionProps>;
 
-export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexVersion, type NexVersionProps, useAlerts };
+export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexVersion, type NexVersionProps, type SocialLink, useAlerts };
