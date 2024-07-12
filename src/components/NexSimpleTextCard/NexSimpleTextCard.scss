@@ -1,0 +1,33 @@
+@import "../../utils/mixin.scss";
+
+.nex-simple-text-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: calculate(8px);
+    width: calculate(440px);
+    min-height: calculate(116px);
+    padding: 0 calculate(10px);
+    border: calculate(1px) solid transparent;
+    border-radius: calculate(20px);
+    color: var(--nex-font-color);
+
+    &.border {
+        border-color:  rgba(0, 0, 0, 0.05);
+    }
+
+    .title {
+        line-height: calculate(45.13px);
+        font-size: calculate(32px);
+        font-weight: 900;
+        text-align: justify;
+    }
+
+    .subtitle {
+        line-height: calculate(23px);
+        font-size: calculate(20px);
+        text-align: justify;
+    }
+}
+  
+  

@@ -1,0 +1,62 @@
+### NexSimpleTextCard Component
+
+`NexSimpleTextCard` is a component designed to display a simple text card within your React application. It offers straightforward rendering of a title and subtitle.
+
+#### Features
+
+* **Simple Content Display:** `NexSimpleTextCard` renders a title and subtitle within a bordered or borderless card.
+* **Customization:** You can customize the appearance by toggling the border and adjusting text styles.
+* **Flexibility:** Easily integrate `NexSimpleTextCard` into any React application for displaying basic text content.
+* **Accessibility:** The component ensures accessibility standards are met, providing a seamless experience for all users.
+
+Usage
+
+#### Basic Usage
+
+To use `NexSimpleTextCard`, simply import the component and provide the necessary props:
+
+```tsx
+import React from 'react';
+import NexSimpleTextCard from '@nexcomponent/lib';
+
+function MyComponent() {
+  return (
+    <NexSimpleTextCard
+      title="Card Title"
+      subtitle="Subtitle text here"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Props
+
+* **title (required):** Title of the card.
+* **subtitle (required):** Subtitle or additional text content to be displayed on the card.
+* **border (optional):** Boolean to determine if a border should be displayed around the card (default is `true`).
+
+### Example
+
+```tsx
+import React from 'react';
+import NexSimpleTextCard from '@nexcomponent/lib';
+
+function MyComponent() {
+  return (
+    <NexSimpleTextCard
+      title="Card Title"
+      subtitle="Subtitle text here"
+    />
+  );
+}
+
+export default MyComponent;
+```
+
+### Customization
+
+`NexSimpleTextCard` can be customized by adjusting the `border` prop to toggle the presence of a border around the card. Additionally, you can apply custom CSS classes or styles to modify the appearance and layout according to your application's design requirements.
+
+This documentation provides a clear overview of the `NexSimpleTextCard` component, its purpose, usage, props, and customization options for integrating it effectively into your React application.

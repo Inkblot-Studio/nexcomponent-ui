@@ -113,6 +113,24 @@ interface NexHeroCardProps {
  */
 declare const NexHeroCard: React$1.FC<NexHeroCardProps>;
 
+interface NexSimpleTextCardProps {
+    title: string;
+    subtitle: string;
+    border?: boolean;
+}
+
+/**
+ * NexSimpleTextCard component
+ *
+ * Component to display a simple text card with title and subtitle.
+ *
+ * @param {NexSimpleTextCardProps} props - Component properties
+ * @param {string} props.title - Title of the card
+ * @param {string} props.subtitle - Subtitle of the card
+ * @param {boolean} [props.border=true] - Whether to display a border around the card
+ */
+declare const NexSimpleTextCard: React$1.FC<NexSimpleTextCardProps>;
+
 interface NexInfoPanelProps {
     title: string;
     content: string;
@@ -311,4 +329,4 @@ interface NexVersionProps {
  */
 declare const NexVersion: React$1.FC<NexVersionProps>;
 
-export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexVersion, type NexVersionProps, type SocialLink, useAlerts };
+export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexSimpleTextCard, type NexSimpleTextCardProps, NexVersion, type NexVersionProps, type SocialLink, useAlerts };
