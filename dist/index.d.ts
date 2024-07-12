@@ -75,6 +75,8 @@ interface NexCardProps {
     type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
     content?: string;
     actions?: React.ReactNode;
+    border?: boolean;
+    className?: string;
 }
 
 /**
@@ -87,6 +89,8 @@ interface NexCardProps {
  * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the card which determines its style.
  * @param {string} imageUrl - The URL of the image to display in the card.
  * @param {React.ReactNode} actions - The actions or buttons to display in the card.
+ * @param {boolean} [border=true] - Whether to display a border around the card
+ * @param {string} className -  Additional class names to apply to the button.
  */
 declare const NexCard: React$1.FC<NexCardProps>;
 
@@ -117,6 +121,7 @@ interface NexSimpleTextCardProps {
     title: string;
     subtitle: string;
     border?: boolean;
+    className?: string;
 }
 
 /**
@@ -124,10 +129,10 @@ interface NexSimpleTextCardProps {
  *
  * Component to display a simple text card with title and subtitle.
  *
- * @param {NexSimpleTextCardProps} props - Component properties
- * @param {string} props.title - Title of the card
- * @param {string} props.subtitle - Subtitle of the card
- * @param {boolean} [props.border=true] - Whether to display a border around the card
+ * @param {string} title - Title of the card
+ * @param {string} subtitle - Subtitle of the card
+ * @param {boolean} [border=true] - Whether to display a border around the card
+ * @param {string} className -  Additional class names to apply to the button.
  */
 declare const NexSimpleTextCard: React$1.FC<NexSimpleTextCardProps>;
 

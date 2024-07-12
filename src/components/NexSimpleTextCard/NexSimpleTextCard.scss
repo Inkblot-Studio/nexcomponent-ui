@@ -12,21 +12,31 @@
     border-radius: calculate(20px);
     color: var(--nex-font-color);
 
+    @include mobile {
+        align-items: center;
+        width: 100%;
+    }
+
     &.border {
         border-color:  rgba(0, 0, 0, 0.05);
     }
 
-    .title {
-        line-height: calculate(45.13px);
-        font-size: calculate(32px);
-        font-weight: 900;
-        text-align: justify;
-    }
+    .nex-simple-text-card-inner-wrapper {
+        display: flex;
+        flex-direction: column;
 
-    .subtitle {
-        line-height: calculate(23px);
-        font-size: calculate(20px);
-        text-align: justify;
+        .title {
+            line-height: calculate(45.13px);
+            font-size: calculate(32px);
+            font-weight: 900;
+            text-align: justify;
+        }
+
+        .subtitle {
+            line-height: calculate(23px);
+            font-size: calculate(20px);
+            text-align: justify;
+        }
     }
 }
   

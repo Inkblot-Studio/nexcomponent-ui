@@ -5,4 +5,6 @@ export interface NexCardProps {
     type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
     content?: string;
     actions?: React.ReactNode;
+    border?: boolean;
+    className?: string;
 }

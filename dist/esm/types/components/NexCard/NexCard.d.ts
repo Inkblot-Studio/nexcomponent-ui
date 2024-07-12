@@ -11,6 +11,8 @@ import './NexCard.scss';
  * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the card which determines its style.
  * @param {string} imageUrl - The URL of the image to display in the card.
  * @param {React.ReactNode} actions - The actions or buttons to display in the card.
+ * @param {boolean} [border=true] - Whether to display a border around the card
+ * @param {string} className -  Additional class names to apply to the button.
  */
 declare const NexCard: React.FC<NexCardProps>;
 export default NexCard;

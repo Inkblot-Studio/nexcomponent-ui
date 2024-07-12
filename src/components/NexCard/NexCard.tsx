@@ -12,8 +12,10 @@ import './NexCard.scss';
  * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the card which determines its style.
  * @param {string} imageUrl - The URL of the image to display in the card.
  * @param {React.ReactNode} actions - The actions or buttons to display in the card.
+ * @param {boolean} [border=true] - Whether to display a border around the card
+ * @param {string} className -  Additional class names to apply to the button.
  */
-const NexCard: React.FC<NexCardProps> = ({ title, content, type, imageUrl, actions }) => {
+const NexCard: React.FC<NexCardProps> = ({ title, content, type, imageUrl, actions, border = true, className }) => {
   const getTypeClass = (type: string | undefined): string => {
     if (imageUrl) {
       return '';
@@ -25,7 +27,7 @@ const NexCard: React.FC<NexCardProps> = ({ title, content, type, imageUrl, actio
     return colorNames.includes(type as string) ? `nex-card-wrapper--${type}` : '';
   };
 
-  const cardClasses = `nex-card-wrapper ${getTypeClass(type)} ${imageUrl ? 'has-image' : ''}`;
+  const cardClasses = `nex-card-wrapper ${getTypeClass(type)} ${imageUrl ? 'has-image' : ''} ${border ? 'border' : '' } ${className ? className : '' }`;
 
   const backgroundStyle = imageUrl ? { '--background-url': `url(${imageUrl})` } as React.CSSProperties : {};
 

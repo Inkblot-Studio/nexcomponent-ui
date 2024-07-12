@@ -6,10 +6,14 @@
     align-items: center;
     width: calculate(440px);
     min-height: calculate(454px);
-    border: calculate(1px) solid rgba(0, 0, 0, 0.05);
+    border: calculate(1px) solid transparent;
     border-radius: calculate(34.5px);
     position: relative;
     overflow: hidden;
+
+    &.border {
+        border-color: rgba(0, 0, 0, 0.05);
+    }
 
     &:hover {
         .background-blob {

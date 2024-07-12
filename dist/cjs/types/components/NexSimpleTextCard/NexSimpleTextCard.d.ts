@@ -6,10 +6,10 @@ import './NexSimpleTextCard.scss';
  *
  * Component to display a simple text card with title and subtitle.
  *
- * @param {NexSimpleTextCardProps} props - Component properties
- * @param {string} props.title - Title of the card
- * @param {string} props.subtitle - Subtitle of the card
- * @param {boolean} [props.border=true] - Whether to display a border around the card
+ * @param {string} title - Title of the card
+ * @param {string} subtitle - Subtitle of the card
+ * @param {boolean} [border=true] - Whether to display a border around the card
+ * @param {string} className -  Additional class names to apply to the button.
  */
 declare const NexSimpleTextCard: React.FC<NexSimpleTextCardProps>;
 export default NexSimpleTextCard;
