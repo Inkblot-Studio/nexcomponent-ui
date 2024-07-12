@@ -13,4 +13,5 @@ export type NexNavProps = {
     identity: boolean;
     navItems: NavItem[];
     identityProps?: IdentityProps;
+    colorful?: boolean;
 };
