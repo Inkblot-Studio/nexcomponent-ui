@@ -21,13 +21,28 @@
         border-color: rgba($color: #000, $alpha: 0.05);
         backdrop-filter: blur( 20px );
         -webkit-backdrop-filter: blur( 20px );
+
+        .nex-nav-client-logo, 
+        .nex-nav-client-name {
+            &.colorful {
+                img, .client-name {
+                    background-color: var(--nex-background-color);
+    
+                    &:hover {
+                        background-color: rgba(var(--nex-background-color-rgb), 0.85);
+                    }
+                }
+            }
+        }
     }
 
     .nex-nav-client-logo, 
     .nex-nav-client-name {
         z-index: 21;
         display: flex;
+        align-items: center;
         height: calculate(50px);
+        max-width: calculate(200px);
 
         img {
             max-height: calculate(50px);
@@ -40,6 +55,13 @@
             color: var(--nex-font-color);
             font-weight: 900;
             cursor: pointer;
+        }
+
+        img, .client-name {
+            padding: calculate(5px) calculate(8px);
+            border-radius: calculate(20px);
+            background-color: transparent;
+            transition: background-color 0.2s cubic-bezier(.215,.61,.355,1)
         }
     }
     
@@ -54,7 +76,7 @@
         justify-content: space-between;
         align-items: center;
         max-width: 70rem;
-        padding: calculate(12px) calculate(12px) calculate(12px) calculate(20px);
+        padding: calculate(12px);
         background-color: transparent;
     
         .nex-nav-list {

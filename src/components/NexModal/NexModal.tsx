@@ -4,6 +4,13 @@ import "./NexModal.scss"
 import { NexModalProps } from "./NexModal.types";
 import NexButton from "../NexButton";
 
+/**
+ * NexModal component
+ *
+ * A modal component that displays a message and buttons for user interaction.
+ *
+ * @param {function} setOpenModal - Function to close the modal.
+ */
 const NexModal: React.FC<NexModalProps> = ({ setOpenModal }) => {
   const handleContinue = () => {
     setOpenModal(false);

@@ -14,5 +14,6 @@ export type NexNavProps = {
     homeButtonHandler: () => void;
     identity: boolean;
     navItems: NavItem[];
-    identityProps?: IdentityProps
+    identityProps?: IdentityProps;
+    colorful?: boolean;
 }

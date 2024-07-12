@@ -4,6 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { NexCopyToClipboardProps } from './NexCopyToClipboard.types';
 
+/**
+ * NexCopyToClipboard component
+ *
+ * A button component that copies text to the clipboard when clicked.
+ *
+ * @param {string} className - Additional class names for styling the button.
+ * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | string} type - The type of the button which determines its color style.
+ * @param {string} textToCopy - The text to be copied to the clipboard.
+ */
 const NexCopyToClipboard: React.FC<NexCopyToClipboardProps> = ({ className, type, textToCopy }) => {
 
     const getColorClass = (type: string | undefined): string => {

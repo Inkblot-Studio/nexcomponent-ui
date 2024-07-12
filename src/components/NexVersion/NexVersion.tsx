@@ -7,6 +7,15 @@ import NexButton from '../NexButton';
 import { motion } from 'framer-motion'; // Import motion from framer-motion
 import './NexVersion.scss';
 
+/**
+ * NexVersion component
+ *
+ * Component to display and edit a version number.
+ *
+ * @param {NexVersionProps} props - Component properties
+ * @param {string} props.version - Current version number to display and edit
+ * @param {(newVersion: string) => void} props.handleSave - Function to handle saving the edited version
+ */
 const NexVersion: React.FC<NexVersionProps> = ({ version, handleSave }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isEditing, setIsEditing] = useState(false);
