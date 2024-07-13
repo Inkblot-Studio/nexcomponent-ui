@@ -13,7 +13,7 @@
     transition: min-height .2s cubic-bezier(.215,.61,.355,1);
 
     &:before {
-        z-index: -1;
+        z-index: 0;
         content: "";
         position: absolute;
         top: 0;
