@@ -131,26 +131,28 @@ const NexFooter: React.FC<NexFooterProps> = ({ logoSrc, displayName, socials }) 
 
   return (
     <div className='nex-footer-wrapper'>
-      <div className="utility-content-wrapper">
-        {logoSrc ? (
-          <div className='nex-footer-client-logo'>
-            <img src={logoSrc} alt={displayName} className='nex-nav-logo' />
+      <div className='nex-footer-inner-wrapper'>
+        <div className="utility-content-wrapper">
+          {logoSrc ? (
+            <div className='nex-footer-client-logo'>
+              <img src={logoSrc} alt={displayName} className='nex-nav-logo' />
+            </div>
+          ) : (
+            <div className='nex-footer-client-name'>
+              <div className='client-name'>{displayName}</div>
+            </div>
+          )}
+          <div className="copyright">
+            © {displayName}. {currentYear} — All rights reserved.
           </div>
-        ) : (
-          <div className='nex-footer-client-name'>
-            <div className='client-name'>{displayName}</div>
-          </div>
-        )}
-        <div className="copyright">
-          © {displayName}. {currentYear} — All rights reserved.
-        </div>
 
-        <div className="socials-wrapper">
-          {socials && socials.map((social, index) => (
-            <a key={index} href={social.url} target="_blank" rel="noopener noreferrer" className={`social-icon ${social.type}`}>
-              <FontAwesomeIcon icon={socialIcons[social.type]} />
-            </a>
-          ))}
+          <div className="socials-wrapper">
+            {socials && socials.map((social, index) => (
+              <a key={index} href={social.url} target="_blank" rel="noopener noreferrer" className={`social-icon ${social.type}`}>
+                <FontAwesomeIcon icon={socialIcons[social.type]} />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>
