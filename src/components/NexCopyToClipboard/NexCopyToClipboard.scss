@@ -1,7 +1,7 @@
 @import "../../utils/mixin.scss";
 
 .nex-copy-to-clipboard {
-    padding: calculate(12px);
+    padding: calculate(12px) calculate(14px);
     border: none;
     border-radius: calculate(8px);
     background-color: var(--nex-font-color);
@@ -27,7 +27,7 @@
     }
 
     &--large {
-        padding: calculate(21px);
+        padding: calculate(20px) calculate(22px);
         border-radius: calculate(20px);
         
         .fa-copy { 
