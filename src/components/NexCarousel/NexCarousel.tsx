@@ -10,12 +10,13 @@ import './NexCarousel.scss';
  * A carousel component to display slides with optional navigation buttons, dots, and automatic slide transition.
  *
  * @param {React.ReactNode[]} children - The slides to display in the carousel.
+ * @param {string} className - Additional class names to apply to the carousel.
  * @param {boolean} [navButtons=false] - Whether to display navigation buttons.
  * @param {'top' | 'bottom' | 'left' | 'right'} [navigationPosition='bottom'] - The position of the navigation dots.
  * @param {boolean} [line] - Whether to display a progress line indicating the current slide.
  * @param {number} [interval] - The time in seconds between automatic slide transitions.
  */
-const NexCarousel: React.FC<NexCarouselProps> = ({ children, navButtons = false, navigationPosition = 'bottom', line, interval }) => {
+const NexCarousel: React.FC<NexCarouselProps> = ({ children, className, navButtons = false, navigationPosition = 'bottom', line, interval }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Function to handle next slide
@@ -53,7 +54,7 @@ const NexCarousel: React.FC<NexCarouselProps> = ({ children, navButtons = false,
   }, [interval]);
 
   return (
-    <div className={`nex-carousel nex-carousel-dots-${navigationPosition}`}>
+    <div className={`nex-carousel nex-carousel-dots-${navigationPosition} ${className ? className : '' }`}>
       <div className="nex-slides" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {children.map((child, index) => (
           <div className="nex-slide" key={index}>

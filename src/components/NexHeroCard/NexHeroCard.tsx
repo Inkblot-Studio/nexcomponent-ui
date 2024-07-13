@@ -14,8 +14,9 @@ import './NexHeroCard.scss';
  * @param {string} [buttonLabel] - The label text for the button.
  * @param {() => void} [buttonHandle] - The click handler function for the button.
  * @param {string} [backgroundUrl] - The URL for the background image of the hero card.
+ * @param {string} className - Additional class names to apply to the hero card.
  */
-const NexHeroCard: React.FC<NexHeroCardProps> = ({ title, subtitle, type, buttonLabel, buttonHandle, backgroundUrl }) => {
+const NexHeroCard: React.FC<NexHeroCardProps> = ({ title, subtitle, type, buttonLabel, buttonHandle, backgroundUrl, className }) => {
   const getTypeClass = (type: string | undefined): string => {
     if (backgroundUrl) {
       return '';
@@ -27,7 +28,7 @@ const NexHeroCard: React.FC<NexHeroCardProps> = ({ title, subtitle, type, button
     return colorNames.includes(type as string) ? `nex-hero-card-wrapper--${type}` : '';
   };
 
-  const heroCardClasses = `nex-hero-card-wrapper ${getTypeClass(type)} ${backgroundUrl ? 'has-background' : ''}`;
+  const heroCardClasses = `nex-hero-card-wrapper ${getTypeClass(type)} ${backgroundUrl ? 'has-background' : ''} ${className || ''}`;
 
   const backgroundStyle = backgroundUrl ? { '--background-url': `url(${backgroundUrl})` } as React.CSSProperties : {};
 

@@ -7,4 +7,5 @@ export interface NexFooterProps {
     logoSrc?: string;
     displayName: string;
     socials?: SocialLink[];
+    className?: string;
 }

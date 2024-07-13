@@ -5,4 +5,5 @@ export interface NexHeroCardProps {
     buttonLabel?: string,
     buttonHandle?: () => void;
     backgroundUrl?: string;
+    className?: string;
 }

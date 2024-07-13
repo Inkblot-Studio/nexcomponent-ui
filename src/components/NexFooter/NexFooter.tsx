@@ -125,12 +125,13 @@ const socialIcons: { [key: string]: any } = {
  * @param {string} logoSrc - The source URL for the logo image.
  * @param {string} displayName - The display name to be shown if the logo is not available.
  * @param {Array<{ type: string, url: string }>} socials - The list of social media icons and URLs to be displayed.
+ * @param {string} className - Additional class names for styling the footer.
  */
-const NexFooter: React.FC<NexFooterProps> = ({ logoSrc, displayName, socials }) => {
+const NexFooter: React.FC<NexFooterProps> = ({ logoSrc, displayName, socials, className }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className='nex-footer-wrapper'>
+    <div className={`nex-footer-wrapper ${className || ''}`}>
       <div className='nex-footer-inner-wrapper'>
         <div className="utility-content-wrapper">
           {logoSrc ? (
