@@ -10,10 +10,11 @@ import { NexCopyToClipboardProps } from './NexCopyToClipboard.types';
  * A button component that copies text to the clipboard when clicked.
  *
  * @param {string} className - Additional class names for styling the button.
+ * @param {'small' | 'normal' | 'large'} size - The size of the button. Default is 'normal'.
  * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | string} type - The type of the button which determines its color style.
  * @param {string} textToCopy - The text to be copied to the clipboard.
  */
-const NexCopyToClipboard: React.FC<NexCopyToClipboardProps> = ({ className, type, textToCopy }) => {
+const NexCopyToClipboard: React.FC<NexCopyToClipboardProps> = ({ className, size = 'normal', type, textToCopy }) => {
 
     const getColorClass = (type: string | undefined): string => {
         if (!type) return '';
@@ -21,11 +22,15 @@ const NexCopyToClipboard: React.FC<NexCopyToClipboardProps> = ({ className, type
         return colorNames.includes(type as string) ? `nex-copy-to-clipboard--${type}` : '';
     };
 
+    const getSizeClass = (size: string | undefined): string => {
+        return size ? `nex-copy-to-clipboard--${size}` : '';
+    };
+
     const handleCopy = () => {
         navigator.clipboard.writeText(textToCopy);
     };
 
-    const buttonClasses = `nex-copy-to-clipboard ${className || ''} ${getColorClass(type)}`;
+    const buttonClasses = `nex-copy-to-clipboard ${className || ''} ${getColorClass(type)} ${getSizeClass(size)}`;
 
     return (
         <button className={buttonClasses} onClick={handleCopy}>

@@ -1,14 +1,39 @@
 @import "../../utils/mixin.scss";
 
 .nex-copy-to-clipboard {
-    width: calculate(50px);
-    height: calculate(50px);
+    padding: calculate(12px);
     border: none;
     border-radius: calculate(8px);
     background-color: var(--nex-font-color);
     color: #fff;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: opacity .2s cubic-bezier(.215,.61,.355,1);
+    cursor: pointer;
+    
+    .fa-copy {
+        font-size: calculate(18px);
+        font-weight: 500;
+        line-height: calculate(20.7px);
+    }
+    
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &--small {
+        .fa-copy { 
+            font-size: calculate(16px);
+        }
+    }
+
+    &--large {
+        padding: calculate(21px);
+        border-radius: calculate(20px);
+        
+        .fa-copy { 
+            font-size: calculate(34px);
+        }
+    }
   
     &--primary {
         background-color: var(--nex-primary-color);
@@ -48,13 +73,5 @@
     &--danger {
         background-color: var(--nex-danger);
         color: #fff;
-    }
-
-    &:hover {
-        opacity: 0.8;
-    }
-  
-    .fa-copy {
-      font-size: 1.2em;
     }
 }
