@@ -59,6 +59,20 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const navSwipeAnimation = {
     initial: { y: '-100%', opacity: 0 },
@@ -109,7 +123,7 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler
           <>
             <motion.div
               {...navSwipeAnimation}
-              className="nex-nav-mobile"
+              className={`nex-nav-mobile ${identity ? 'identity' : '' }`}
               ref={ref}
               aria-label="Sidebar"
             >
