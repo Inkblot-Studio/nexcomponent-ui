@@ -12,6 +12,7 @@ import './NexHeroCard.scss';
  * @param {string} [buttonLabel] - The label text for the button.
  * @param {() => void} [buttonHandle] - The click handler function for the button.
  * @param {string} [backgroundUrl] - The URL for the background image of the hero card.
+ * @param {string} className - Additional class names to apply to the hero card.
  */
 declare const NexHeroCard: React.FC<NexHeroCardProps>;
 export default NexHeroCard;

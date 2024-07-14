@@ -101,6 +101,7 @@ interface NexHeroCardProps {
     buttonLabel?: string;
     buttonHandle?: () => void;
     backgroundUrl?: string;
+    className?: string;
 }
 
 /**
@@ -114,6 +115,7 @@ interface NexHeroCardProps {
  * @param {string} [buttonLabel] - The label text for the button.
  * @param {() => void} [buttonHandle] - The click handler function for the button.
  * @param {string} [backgroundUrl] - The URL for the background image of the hero card.
+ * @param {string} className - Additional class names to apply to the hero card.
  */
 declare const NexHeroCard: React$1.FC<NexHeroCardProps>;
 
@@ -137,6 +139,7 @@ interface NexSimpleTextCardProps {
 declare const NexSimpleTextCard: React$1.FC<NexSimpleTextCardProps>;
 
 interface NexInfoPanelProps {
+    className?: string;
     title: string;
     content: string;
     imageUrl: string;
@@ -146,7 +149,7 @@ interface NexInfoPanelProps {
  * NexInfoPanel component
  *
  * A panel component that displays a title, content, and an optional image.
- *
+ * @param {string} className - Additional class names to apply to the info panel.
  * @param {string} title - The title text to be displayed on the info panel.
  * @param {string} content - The content text to be displayed on the info panel.
  * @param {string} [imageUrl] - The URL for the background image of the info panel.
@@ -155,6 +158,7 @@ declare const NexInfoPanel: React$1.FC<NexInfoPanelProps>;
 
 interface NexCarouselProps {
     children: React.ReactNode[];
+    className?: string;
     navButtons?: boolean;
     navigationPosition?: 'top' | 'bottom';
     line?: boolean;
@@ -167,6 +171,7 @@ interface NexCarouselProps {
  * A carousel component to display slides with optional navigation buttons, dots, and automatic slide transition.
  *
  * @param {React.ReactNode[]} children - The slides to display in the carousel.
+ * @param {string} className - Additional class names to apply to the carousel.
  * @param {boolean} [navButtons=false] - Whether to display navigation buttons.
  * @param {'top' | 'bottom' | 'left' | 'right'} [navigationPosition='bottom'] - The position of the navigation dots.
  * @param {boolean} [line] - Whether to display a progress line indicating the current slide.
@@ -176,6 +181,7 @@ declare const NexCarousel: React$1.FC<NexCarouselProps>;
 
 interface NexCopyToClipboardProps {
     className?: string;
+    size?: 'small' | 'normal' | 'large';
     type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger') | string;
     textToCopy: string;
 }
@@ -186,6 +192,7 @@ interface NexCopyToClipboardProps {
  * A button component that copies text to the clipboard when clicked.
  *
  * @param {string} className - Additional class names for styling the button.
+ * @param {'small' | 'normal' | 'large'} size - The size of the button. Default is 'normal'.
  * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | string} type - The type of the button which determines its color style.
  * @param {string} textToCopy - The text to be copied to the clipboard.
  */
@@ -284,6 +291,7 @@ interface NexFooterProps {
     logoSrc?: string;
     displayName: string;
     socials?: SocialLink[];
+    className?: string;
 }
 
 /**
@@ -294,6 +302,7 @@ interface NexFooterProps {
  * @param {string} logoSrc - The source URL for the logo image.
  * @param {string} displayName - The display name to be shown if the logo is not available.
  * @param {Array<{ type: string, url: string }>} socials - The list of social media icons and URLs to be displayed.
+ * @param {string} className - Additional class names for styling the footer.
  */
 declare const NexFooter: React$1.FC<NexFooterProps>;
 
