@@ -82,8 +82,8 @@
 }
 
 .nex-alerts-wrapper {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
