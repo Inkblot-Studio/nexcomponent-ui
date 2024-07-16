@@ -208,7 +208,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    height: 20rem;
+    height: calculate(420px);
     width: 100%;
     padding-top: calculate(131px);
     background-color: #fff;
@@ -216,7 +216,7 @@
     overflow: hidden;
 
     &.identity {
-        height: 30rem;
+        height: calculate(620px);
     }
 
     .nex-nav-list {
