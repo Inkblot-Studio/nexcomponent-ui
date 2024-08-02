@@ -208,58 +208,59 @@
     position: fixed;
     top: 0;
     right: 0;
-    height: calculate(420px);
     width: 100%;
     padding-top: calculate(131px);
     background-color: #fff;
     box-shadow: 0 0 calculate(10px) rgb(0 0 0 / 15%);
     overflow: hidden;
 
-    &.identity {
-        height: calculate(620px);
-    }
+    .nex-nav-mobile-inner {
+        position: relative;
+        padding-bottom: calculate(50px);
 
-    .nex-nav-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: calculate(50px);
-
-        .nex-nav-item {
+        .nex-nav-list {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            line-height: calculate(50px);
-            font-size: calculate(22px);
-            cursor: pointer;
-
-            .nex-nav-link {
-                width: calculate(200px);
-                padding: 0;
-                border-radius: calculate(20px);
-                background-color: #F0F0F0;
-                color: var(--nex-font-color);
-                text-align: center;
-                text-decoration: none;
-                transition: background 200ms ease-in-out;
-
-                &:hover {
-                    background: rgba(0, 0, 0, 0.1);
+            gap: calculate(50px);
+    
+            .nex-nav-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                line-height: calculate(50px);
+                font-size: calculate(22px);
+                cursor: pointer;
+    
+                .nex-nav-link {
+                    width: calculate(200px);
+                    padding: 0;
+                    border-radius: calculate(20px);
+                    background-color: #F0F0F0;
+                    color: var(--nex-font-color);
+                    text-align: center;
+                    text-decoration: none;
+                    transition: background 200ms ease-in-out;
+    
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.1);
+                    }
                 }
             }
         }
-    }
+    
+        .identity {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            flex-direction: column;
+            gap: calculate(50px);
+            margin-top: calculate(50px);
 
-    .identity {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        flex-direction: column;
-        gap: calculate(50px);
-
-        .identity-item {
-            line-height: calculate(20.7px);
-            width: calculate(200px);
+            .identity-item {
+                line-height: calculate(20.7px);
+                width: calculate(200px);
+            }
         }
     }
 }

@@ -123,23 +123,25 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler
           <>
             <motion.div
               {...navSwipeAnimation}
-              className={`nex-nav-mobile ${identity ? 'identity' : '' }`}
+              className={`nex-nav-mobile`}
               ref={ref}
               aria-label="Sidebar"
             >
-            <div className='nex-nav-list'>
-              {navItems.length && navItems.map((item, index) => (
-                <li key={index} className='nex-nav-item' onClick={toggleMenu}>
-                  <a className='nex-nav-link'>{item.label}</a>
-                </li>
-              ))}
-            </div>
-            {identity && (
-              <div className='identity'>
-                <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-                <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+            <div className="nex-nav-mobile-inner">
+              <div className='nex-nav-list'>
+                {navItems.length && navItems.map((item, index) => (
+                  <li key={index} className='nex-nav-item' onClick={toggleMenu}>
+                    <a className='nex-nav-link'>{item.label}</a>
+                  </li>
+                ))}
               </div>
-            )}
+              {identity && (
+                <div className='identity'>
+                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
+                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
+                </div>
+              )}
+            </div>
           </motion.div>
           </>
         )}
