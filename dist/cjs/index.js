@@ -16417,7 +16417,10 @@ const NexNav = ({
   }, navItems.length && navItems.map((item, index) => /*#__PURE__*/React.createElement("li", {
     key: index,
     className: "nex-nav-item",
-    onClick: toggleMenu
+    onClick: () => {
+      setIsMenuOpen(false);
+      item.onClick();
+    }
   }, /*#__PURE__*/React.createElement("a", {
     className: "nex-nav-link"
   }, item.label)))), identity && /*#__PURE__*/React.createElement("div", {

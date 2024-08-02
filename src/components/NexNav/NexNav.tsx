@@ -130,7 +130,10 @@ const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler
             <div className="nex-nav-mobile-inner">
               <div className='nex-nav-list'>
                 {navItems.length && navItems.map((item, index) => (
-                  <li key={index} className='nex-nav-item' onClick={toggleMenu}>
+                  <li key={index} className='nex-nav-item' onClick={() => {
+                      setIsMenuOpen(false);
+                      item.onClick();
+                    }}>
                     <a className='nex-nav-link'>{item.label}</a>
                   </li>
                 ))}
