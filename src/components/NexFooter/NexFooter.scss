@@ -15,6 +15,12 @@
         padding: 3.2rem 2.4rem 1.6rem;
         border-radius: calculate(20px);
         background-color: var(--nex-font-color);
+
+        @include mobile {
+            margin: 0.5rem 0 0 0;
+            padding: 3.2rem 2.4rem;
+            border-radius: 0;
+        }
     
         .utility-content-wrapper {
             display: flex;
