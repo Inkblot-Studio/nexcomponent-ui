@@ -13,8 +13,6 @@ const NavItem: React.FC<NavItemProps> = ({ label, onClick, isActive = false }) =
       onClick={onClick}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       initial={false}
-      whileHover={{ backgroundColor: 'var(--nex-nav-link-hover-bg)' }}
-      transition={{ type: 'tween', duration: 0.15 }}
     >
       <span className={classNames('nex-nav-item__label', { active: isActive })}>
         {label}

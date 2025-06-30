@@ -1,6 +1,37 @@
+/**
+ * ========================================
+ * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS
+ * ========================================
+ * 
+ * Professional, minimal, and bold where it counts.
+ * Built for scalable systems that work with everything.
+ * 
+ * Design Philosophy:
+ * - Clean yet packed with functionality
+ * - Beautiful design that sells
+ * - Professional minimalism with bold accents
+ * - Apple-inspired innovation and quality
+ * 
+ * Usage:
+ * - Use tokens for all styling to maintain consistency
+ * - Scale from 3 languages to enterprise-level
+ * - Works in navigation bars, mobile, and future contexts
+ * - Maintainable single library for all clients
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 :root {
+  /* ================================
+     🎯 CORE BRAND IDENTITY
+     ================================ */
+  
+  /* NEX Signature - FF1801 Formula Red */
+  --nex-signature: #FF1801;
+  --nex-signature-light: #FF4D33;
+  --nex-signature-dark: #CC1301;
+  --nex-signature-contrast: #FFFFFF;
+
   /* ================================
      🎨 Core Brand Colors (Light Mode)
      ================================ */
@@ -44,67 +75,90 @@
   --nex-complimentary-color: #9A9A9A;
 
   /* ================================
-     🔠 Typography
+     🔠 Typography System
      ================================ */
-
+  
+  /* Font Family - Inter for professional, clean look */
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  --nex-font-weight-light: 300;
-  --nex-font-weight-regular: 400;
-  --nex-font-weight-medium: 500;
-  --nex-font-weight-bold: 700;
+  /* Font Weights - Balanced hierarchy */
+  --nex-font-weight-light: 300;      /* Subtle emphasis */
+  --nex-font-weight-regular: 400;    /* Body text */
+  --nex-font-weight-medium: 500;     /* Semi-bold emphasis */
+  --nex-font-weight-bold: 700;       /* Strong emphasis */
 
-  --nex-font-size-xs: 0.75rem;
-  --nex-font-size-sm: 0.875rem;
-  --nex-font-size-md: 1rem;
-  --nex-font-size-lg: 1.25rem;
-  --nex-font-size-xl: 1.5rem;
-  --nex-font-size-2xl: 2rem;
+  /* Font Sizes - Scalable system */
+  --nex-font-size-xs: 0.75rem;       /* 12px - Captions, labels */
+  --nex-font-size-sm: 0.875rem;      /* 14px - Small text, buttons */
+  --nex-font-size-md: 1rem;          /* 16px - Body text */
+  --nex-font-size-lg: 1.25rem;       /* 20px - Headings */
+  --nex-font-size-xl: 1.5rem;        /* 24px - Large headings */
+  --nex-font-size-2xl: 2rem;         /* 32px - Hero text */
 
-  --nex-line-height-tight: 1.2;
-  --nex-line-height-base: 1.5;
-  --nex-line-height-loose: 1.75;
-
-  /* ================================
-     📐 Spacing
-     ================================ */
-
-  --nex-spacing-xs: 0.25rem;
-  --nex-spacing-sm: 0.5rem;
-  --nex-spacing-md: 1rem;
-  --nex-spacing-lg: 1.5rem;
-  --nex-spacing-xl: 2rem;
-  --nex-spacing-2xl: 3rem;
+  /* Line Heights - Optimal readability */
+  --nex-line-height-tight: 1.2;      /* Headings, tight spacing */
+  --nex-line-height-base: 1.5;       /* Body text, comfortable reading */
+  --nex-line-height-loose: 1.75;     /* Large text, relaxed spacing */
 
   /* ================================
-     🌀 Elevation & Radius
+     📐 Spacing System
      ================================ */
-
-  --nex-radius-sm: 4px;
-  --nex-radius-md: 8px;
-  --nex-radius-lg: 16px;
-  --nex-radius-full: 9999px;
-
-  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  
+  /* 4px base unit system for consistent spacing */
+  --nex-spacing-xs: 0.25rem;         /* 4px - Micro spacing */
+  --nex-spacing-sm: 0.5rem;          /* 8px - Small gaps */
+  --nex-spacing-md: 1rem;            /* 16px - Standard spacing */
+  --nex-spacing-lg: 1.5rem;          /* 24px - Large spacing */
+  --nex-spacing-xl: 2rem;            /* 32px - Extra large */
+  --nex-spacing-2xl: 3rem;           /* 48px - Hero spacing */
 
   /* ================================
-     ⚡ Transitions & Z-index
+     🌀 Elevation & Radius System
      ================================ */
+  
+  /* Border Radius - Consistent rounding */
+  --nex-radius-sm: 4px;              /* Small elements, inputs */
+  --nex-radius-md: 8px;              /* Cards, buttons */
+  --nex-radius-lg: 16px;             /* Large cards, modals */
+  --nex-radius-full: 9999px;         /* Pills, avatars */
 
-  --nex-transition-fast: 150ms ease-in-out;
-  --nex-transition-base: 300ms ease;
-  --nex-transition-slow: 500ms ease;
+  /* Shadows - Subtle depth system */
+  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);    /* Subtle elevation */
+  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);     /* Small elevation */
+  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);     /* Medium elevation */
+  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);   /* Large elevation */
+  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);  /* Hero elevation */
 
-  --nex-z-index-dropdown: 1000;
-  --nex-z-index-sticky: 1020;
-  --nex-z-index-fixed: 1030;
-  --nex-z-index-modal: 1050;
-  --nex-z-index-popover: 1060;
-  --nex-z-index-tooltip: 1070;
+  /* ================================
+     ⚡ Transitions & Z-index System
+     ================================ */
+  
+  /* Transitions - Smooth, purposeful animations */
+  --nex-transition-fast: 150ms ease-in-out;    /* Micro-interactions */
+  --nex-transition-base: 300ms ease;           /* Standard transitions */
+  --nex-transition-slow: 500ms ease;           /* Complex animations */
+
+  /* Z-index - Layered system */
+  --nex-z-index-dropdown: 1000;      /* Dropdowns, menus */
+  --nex-z-index-sticky: 1020;        /* Sticky headers */
+  --nex-z-index-fixed: 1030;         /* Fixed elements */
+  --nex-z-index-modal: 1050;         /* Modals, overlays */
+  --nex-z-index-popover: 1060;       /* Tooltips, popovers */
+  --nex-z-index-tooltip: 1070;       /* Highest priority */
+
+  /* ================================
+     🎯 COMPONENT-SPECIFIC TOKENS
+     ================================ */
+  
+  /* Navigation-specific tokens */
+  --nex-nav-height: 64px;
+  --nex-nav-padding: var(--nex-spacing-md);
+  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);
+  
+  /* Language Switcher specific */
+  --nex-lang-switcher-height: 40px;
+  --nex-lang-switcher-width: 120px;
+  --nex-lang-dropdown-max-height: 300px;
 }
 
 /* ================================
@@ -112,11 +166,13 @@
    ================================ */
 
 [data-theme="dark"] {
+  /* Dark mode color adjustments */
   --nex-background-color: #121212;
   --nex-surface-color: #1E1E1E;
   --nex-font-color: #f3f3f3;
   --nex-muted-font-color: #999;
 
+  /* Adjusted brand colors for dark mode */
   --nex-primary-color: #3D4DE1;
   --nex-primary-light: #5965e8;
   --nex-primary-dark: #1f265b;
@@ -136,6 +192,21 @@
   --nex-border-color: #2e2e2e;
   --nex-complimentary-color: #7a7a7a;
 
+  /* Enhanced shadows for dark mode */
   --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);
   --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);
 }
+
+/**
+ * ========================================
+ * 📋 USAGE GUIDELINES
+ * ========================================
+ * 
+ * 1. Always use tokens for colors, spacing, typography
+ * 2. Scale from 3 languages to enterprise seamlessly
+ * 3. Maintain professional minimalism with bold accents
+ * 4. Use --nex-signature sparingly for maximum impact
+ * 5. Test in both light and dark modes
+ * 6. Ensure accessibility compliance
+ * 7. Optimize for mobile and desktop contexts
+ */

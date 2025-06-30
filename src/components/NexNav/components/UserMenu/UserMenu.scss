@@ -1,89 +1,323 @@
+/**
+ * ========================================
+ * 👤 NEX USER MENU
+ * ========================================
+ * 
+ * Ultra-slim, glassmorphic design inspired by iOS 16+
+ * Professional minimalism with innovative effects
+ * Consistent with LanguageSwitcher design philosophy
+ */
+
 .nex-user-menu {
   position: relative;
   display: flex;
   align-items: center;
-
+  
+  /* ================================
+     🎯 TRIGGER BUTTON - Ultra Slim
+     ================================ */
+  
   .nex-user-menu-trigger {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--nex-tertiary-color);
-    border-radius: var(--nex-radius-full);
-    width: 42px;
-    height: 42px;
-    border: none;
+    width: 36px;
+    height: 36px;
     padding: 0;
     cursor: pointer;
-    transition: background var(--nex-transition-fast);
-
+    
+    /* Glassmorphic Design */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--nex-radius-full);
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Reset */
+    outline: none;
+    user-select: none;
+    
+    /* Hover State - Subtle glassmorphic enhancement */
     &:hover {
-      background-color: var(--nex-quaternary-color);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Focus State - Signature accent */
+    &:focus-visible {
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+    }
+    
+    /* Active State - Signature immersion */
+    &:active {
+      background: rgba(255, 24, 1, 0.15);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border-color: rgba(255, 24, 1, 0.2);
     }
   }
 
+  /* ================================
+     🖼️ AVATAR STYLING - Clean
+     ================================ */
+  
   .nex-user-menu-avatar {
     object-fit: cover;
     width: 100%;
     height: 100%;
     border-radius: var(--nex-radius-full);
+    display: block;
   }
 
+  /* ================================
+     📋 DROPDOWN CONTAINER - Glassmorphic
+     ================================ */
+  
   .nex-user-menu-dropdown {
     list-style: none;
     margin: 0;
-    padding: 0.5rem 0;
+    padding: var(--nex-spacing-sm) 0;
     position: absolute;
-    top: 115%;
+    top: calc(100% + var(--nex-spacing-sm));
     right: 0;
-    min-width: 220px;
-    background-color: var(--nex-surface-color);
-    color: var(--nex-font-color);
+    min-width: 200px;
+    max-width: 280px;
+    
+    /* Advanced Glassmorphic Design */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--nex-radius-lg);
-    box-shadow: var(--nex-shadow-lg);
+    
+    /* Subtle shadow for depth */
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Layout */
     z-index: var(--nex-z-index-popover);
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      right: calc(-1 * var(--nex-spacing-md));
+      min-width: 220px;
+    }
+    
+    /* Mobile optimization */
+    @media (max-width: 480px) {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      transform: translate(-50%, -50%);
+      width: calc(100vw - 2rem);
+      max-width: 320px;
+      max-height: 70vh;
+    }
   }
 
+  /* ================================
+     📝 MENU SECTIONS
+     ================================ */
+  
   .nex-user-menu-section {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--nex-border-color);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .nex-user-menu-header {
     font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-medium);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--nex-spacing-sm);
+    color: var(--nex-font-color);
   }
 
   .badge {
-    background-color: var(--nex-primary-color);
-    color: white;
-    padding: 0.15rem 0.5rem;
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    color: var(--nex-signature);
+    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
     border-radius: var(--nex-radius-sm);
-    font-size: 0.75rem;
+    font-size: var(--nex-font-size-xs);
+    font-weight: var(--nex-font-weight-bold);
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255, 24, 1, 0.2);
   }
 
+  /* ================================
+     📝 MENU ITEMS - Glassmorphic
+     ================================ */
+  
   .nex-user-menu-item {
-    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    
+    /* Typography */
     font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-regular);
+    color: var(--nex-font-color);
+    
+    /* Layout */
     cursor: pointer;
-    transition: background var(--nex-transition-fast);
-
-    &:hover,
+    user-select: none;
+    outline: none;
+    border: none;
+    background: none;
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Hover State - Subtle glassmorphic enhancement */
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+    
+    /* Focus State */
     &:focus-visible {
-      background-color: rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.08);
+      outline: 2px solid var(--nex-signature);
+      outline-offset: -2px;
     }
-
+    
+    /* Active State */
+    &:active {
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+    }
+    
+    /* Danger State - Signature glassmorphic */
     &.danger {
-      color: var(--nex-danger);
+      color: var(--nex-signature);
+      font-weight: var(--nex-font-weight-medium);
+      
+      &:hover {
+        background: rgba(255, 24, 1, 0.1);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+      }
+      
+      &:active {
+        background: rgba(255, 24, 1, 0.15);
+        backdrop-filter: blur(24px) saturate(220%);
+        -webkit-backdrop-filter: blur(24px) saturate(220%);
+      }
     }
-
+    
+    /* Sign Up CTA - Bold glassmorphic */
     &.sign-up-cta {
       font-weight: var(--nex-font-weight-bold);
       text-align: center;
-      color: var(--nex-primary-color);
+      color: var(--nex-signature);
+      background: rgba(255, 24, 1, 0.05);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 24, 1, 0.1);
+      border-radius: var(--nex-radius-md);
+      margin: var(--nex-spacing-sm) var(--nex-spacing-md);
+      
+      &:hover {
+        background: rgba(255, 24, 1, 0.1);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        border-color: rgba(255, 24, 1, 0.2);
+      }
+      
+      &:active {
+        background: rgba(255, 24, 1, 0.15);
+        backdrop-filter: blur(24px) saturate(220%);
+        -webkit-backdrop-filter: blur(24px) saturate(220%);
+      }
+    }
+  }
+}
+
+/* ================================
+   📱 MOBILE OPTIMIZATIONS
+   ================================ */
+
+@media (max-width: 768px) {
+  .nex-user-menu {
+    .nex-user-menu-trigger {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .nex-user-menu-dropdown {
+      .nex-user-menu-item {
+        padding: var(--nex-spacing-md);
+        font-size: var(--nex-font-size-md);
+      }
+    }
+  }
+}
+
+/* ================================
+   🌒 DARK MODE ADJUSTMENTS
+   ================================ */
+
+[data-theme="dark"] .nex-user-menu {
+  .nex-user-menu-trigger {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  .nex-user-menu-dropdown {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .nex-user-menu-section {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .nex-user-menu-item {
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    &.danger {
+      &:hover {
+        background: rgba(255, 24, 1, 0.15);
+      }
+    }
+    
+    &.sign-up-cta {
+      background: rgba(255, 24, 1, 0.1);
+      border-color: rgba(255, 24, 1, 0.15);
+      
+      &:hover {
+        background: rgba(255, 24, 1, 0.15);
+        border-color: rgba(255, 24, 1, 0.25);
+      }
     }
   }
 }

@@ -45,8 +45,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
     <div className="nex-user-menu" ref={ref}>
       <motion.button
         className="nex-user-menu-trigger"
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onClick={toggleMenu}
         aria-haspopup="true"
         aria-expanded={open}
@@ -63,10 +61,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
         {open && (
           <motion.ul
             className="nex-user-menu-dropdown"
-            initial={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
             role="menu"
           >
             {user ? (
@@ -186,8 +184,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 }}
               >
                 <motion.div
-                  initial={{ scale: 0.95, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >

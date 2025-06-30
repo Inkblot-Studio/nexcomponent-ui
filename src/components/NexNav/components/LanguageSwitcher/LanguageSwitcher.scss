@@ -1,151 +1,372 @@
 @import "../../../../utils/mixin.scss";
 
+/**
+ * ========================================
+ * 🌍 NEX LANGUAGE SWITCHER
+ * ========================================
+ * 
+ * Ultra-slim, glassmorphic design inspired by iOS 16+
+ * Professional minimalism with innovative effects
+ */
+
 .nex-lang-switcher {
   position: relative;
   display: flex;
   align-items: center;
-
+  
+  /* ================================
+     🎯 TRIGGER BUTTON - Ultra Slim
+     ================================ */
+  
   .nex-lang-current {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1.1rem;
-    font-size: var(--nex-font-size-md);
-    border-radius: var(--nex-radius-lg);
-    background: var(--nex-tertiary-color);
-    color: var(--nex-tertiary-contrast-color);
-    transition: background var(--nex-transition-fast), box-shadow var(--nex-transition-base);
-    min-width: 140px;
-    justify-content: center;
-    box-shadow: var(--nex-shadow-sm);
-    border: 1.5px solid transparent;
-    position: relative;
+    gap: var(--nex-spacing-xs);
+    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    height: 32px;
+    min-width: 60px;
+    
+    /* Typography */
+    font-size: var(--nex-font-size-sm);
     font-weight: var(--nex-font-weight-medium);
-    &:hover,
+    line-height: 1;
+    letter-spacing: 0.02em;
+    
+    /* Glassmorphic Design */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--nex-radius-full);
+    
+    /* Color */
+    color: var(--nex-font-color);
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Layout */
+    justify-content: center;
+    user-select: none;
+    outline: none;
+    
+    /* Hover State - Subtle glassmorphic enhancement */
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Focus State - Signature accent */
     &:focus-visible {
-      background: var(--nex-tertiary-dark);
-      outline: none;
-      box-shadow: var(--nex-shadow-md);
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+    }
+    
+    /* Active State - Signature immersion */
+    &:active {
+      background: rgba(255, 24, 1, 0.15);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border-color: rgba(255, 24, 1, 0.2);
     }
   }
 
+  /* ================================
+     🔽 CHEVRON ICON - Minimal
+     ================================ */
+  
   .nex-lang-chevron {
-    margin-left: 0.5rem;
-    width: 1.1em;
-    height: 1.1em;
-    display: inline-block;
-    transition: transform var(--nex-transition-base);
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-left: var(--nex-spacing-xs);
     color: var(--nex-muted-font-color);
-    will-change: transform;
+    flex-shrink: 0;
+    transition: transform var(--nex-transition-fast);
+    opacity: 0.7;
+    
     &.open {
       transform: rotate(180deg);
+      color: var(--nex-signature);
+      opacity: 1;
     }
   }
 
+  /* ================================
+     🏳️ FLAG & ICON STYLING - Clean
+     ================================ */
+  
   .nex-lang-icon {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1rem;
+    height: 1rem;
     object-fit: cover;
-    border-radius: var(--nex-radius-full);
-    box-shadow: var(--nex-shadow-xs);
-    background: var(--nex-surface-color);
+    border-radius: var(--nex-radius-sm);
+    display: block;
   }
 
   .nex-lang-emoji {
-    font-size: 1.3rem;
+    font-size: 1rem;
     line-height: 1;
-    border-radius: var(--nex-radius-full);
-    background: var(--nex-surface-color);
-    box-shadow: var(--nex-shadow-xs);
-    padding: 0.1rem 0.2rem;
+    display: block;
   }
 
   .nex-lang-label {
     white-space: nowrap;
-    font-weight: var(--nex-font-weight-bold);
-    font-size: var(--nex-font-size-md);
-    letter-spacing: 0.01em;
+    font-weight: var(--nex-font-weight-medium);
+    font-size: var(--nex-font-size-sm);
+    letter-spacing: 0.02em;
   }
 
+  /* ================================
+     📋 DROPDOWN CONTAINER - Glassmorphic
+     ================================ */
+  
   .nex-lang-dropdown {
     position: absolute;
-    top: calc(100% + 0.4rem);
+    top: calc(100% + var(--nex-spacing-sm));
     right: 0;
-    width: 220px;
-    background: rgba(255,255,255,0.75);
-    box-shadow: var(--nex-shadow-lg);
+    min-width: 140px;
+    max-width: 240px;
+    
+    /* Advanced Glassmorphic Design */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--nex-radius-lg);
+    
+    /* Subtle shadow for depth */
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Layout */
+    padding: var(--nex-spacing-sm) 0;
     z-index: var(--nex-z-index-popover);
-    overflow: hidden;
-    backdrop-filter: blur(16px) saturate(180%);
-    border: 1.5px solid var(--nex-border-color);
-    padding: 0.5rem 0 0.5rem 0;
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      right: calc(-1 * var(--nex-spacing-md));
+      min-width: 180px;
+    }
+    
+    /* Mobile optimization */
     @media (max-width: 480px) {
-      width: 98vw;
-      left: 1vw;
-      right: 1vw;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      transform: translate(-50%, -50%);
+      width: calc(100vw - 2rem);
+      max-width: 280px;
+      max-height: 60vh;
     }
   }
 
-  [data-theme="dark"] & .nex-lang-dropdown {
-    background: rgba(30,30,30,0.85);
-  }
-
+  /* ================================
+     🔍 SEARCH INPUT - Glassmorphic
+     ================================ */
+  
   .nex-lang-search {
-    width: 90%;
-    margin: 0.3rem auto 0.6rem auto;
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--nex-radius-md);
-    border: 1px solid var(--nex-border-color);
-    background: var(--nex-surface-color);
-    color: var(--nex-font-color);
+    width: calc(100% - 2rem);
+    margin: 0 var(--nex-spacing-md) var(--nex-spacing-sm) var(--nex-spacing-md);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    
+    /* Typography */
     font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-regular);
+    
+    /* Glassmorphic Input */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--nex-radius-md);
+    color: var(--nex-font-color);
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Reset */
     outline: none;
-    transition: border var(--nex-transition-fast);
+    box-sizing: border-box;
+    
+    /* Placeholder */
+    &::placeholder {
+      color: var(--nex-muted-font-color);
+      font-weight: var(--nex-font-weight-regular);
+    }
+    
+    /* Focus State */
     &:focus {
-      border-color: var(--nex-primary-color);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--nex-signature);
+      box-shadow: 
+        0 0 0 3px rgba(255, 24, 1, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
   }
 
+  /* ================================
+     📜 SCROLLABLE LIST
+     ================================ */
+  
   .nex-lang-scroll {
-    max-height: 250px;
+    max-height: var(--nex-lang-dropdown-max-height);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    scroll-behavior: smooth;
+    
+    /* Custom Scrollbar */
     &::-webkit-scrollbar {
-      width: 4px;
+      width: 3px;
     }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
     &::-webkit-scrollbar-thumb {
-      background: var(--nex-border-color);
-      border-radius: var(--nex-radius-xs);
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--nex-radius-sm);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
+  /* ================================
+     📝 LANGUAGE ITEMS - Glassmorphic
+     ================================ */
+  
   .nex-lang-item {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    padding: 0.55rem 1.1rem;
-    font-size: var(--nex-font-size-md);
+    gap: var(--nex-spacing-sm);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    
+    /* Typography */
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-regular);
     color: var(--nex-font-color);
+    
+    /* Layout */
     cursor: pointer;
-    transition: background var(--nex-transition-fast), box-shadow var(--nex-transition-fast);
     user-select: none;
-    border-radius: var(--nex-radius-md);
-    position: relative;
     outline: none;
-    &:hover,
-    &:focus-visible {
-      background: var(--nex-nav-link-hover-bg, rgba(60, 67, 105, 0.08));
-      box-shadow: var(--nex-shadow-xs);
+    border: none;
+    background: none;
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Hover State - Subtle glassmorphic enhancement */
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
     }
+    
+    /* Focus State */
+    &:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: 2px solid var(--nex-signature);
+      outline-offset: -2px;
+    }
+    
+    /* Selected State - Signature glassmorphic */
     &[aria-selected='true'] {
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      color: var(--nex-signature);
       font-weight: var(--nex-font-weight-bold);
-      background: linear-gradient(90deg, var(--nex-primary-light) 0%, var(--nex-primary-color) 100%);
-      color: var(--nex-primary-contrast-color);
-      box-shadow: 0 2px 8px 0 rgba(60,67,105,0.10);
+      
+      /* Subtle glow effect */
+      box-shadow: inset 0 0 0 1px rgba(255, 24, 1, 0.2);
+    }
+    
+    /* Active State */
+    &:active {
+      background: rgba(255, 24, 1, 0.15);
+      backdrop-filter: blur(24px) saturate(220%);
+      -webkit-backdrop-filter: blur(24px) saturate(220%);
+    }
+  }
+}
+
+/* ================================
+   📱 MOBILE OPTIMIZATIONS
+   ================================ */
+
+@media (max-width: 768px) {
+  .nex-lang-switcher {
+    .nex-lang-current {
+      min-width: 48px;
+      padding: var(--nex-spacing-xs);
+      height: 28px;
+      
+      .nex-lang-label {
+        display: none; /* Show only flag on mobile */
+      }
+    }
+    
+    .nex-lang-dropdown {
+      .nex-lang-item {
+        padding: var(--nex-spacing-sm);
+        font-size: var(--nex-font-size-sm);
+      }
+    }
+  }
+}
+
+/* ================================
+   🌒 DARK MODE ADJUSTMENTS
+   ================================ */
+
+[data-theme="dark"] .nex-lang-switcher {
+  .nex-lang-current {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  .nex-lang-dropdown {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .nex-lang-search {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+    
+    &:focus {
+      background: rgba(0, 0, 0, 0.25);
+    }
+  }
+  
+  .nex-lang-item {
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    &[aria-selected='true'] {
+      background: rgba(255, 24, 1, 0.15);
     }
   }
 }
