@@ -259,6 +259,11 @@ type NavItem = {
 type User = {
     name: string;
     avatarUrl?: string;
+    role?: 'Admin' | 'Pro' | 'Member';
+};
+type SubscriptionInfo = {
+    tier: string;
+    renewalDate: string;
 };
 type NexNavProps = {
     logoSrc?: string;
@@ -270,9 +275,15 @@ type NexNavProps = {
     onLogin?: () => void;
     onLogout?: () => void;
     onProfile?: () => void;
-    onDevSwitchToggle?: () => void;
-    isDevMode?: boolean;
     languageOptions: LanguageOption[];
+    endorsementCount?: number;
+    subscription?: SubscriptionInfo;
+    onEndorsementsClick?: () => void;
+    onSubscriptionClick?: () => void;
+    onActivityLogClick?: () => void;
+    onSecurityClick?: () => void;
+    onIntegrationsClick?: () => void;
+    onAdminPanelClick?: () => void;
 };
 
 declare const NexNav: React$1.FC<NexNavProps>;
@@ -337,4 +348,4 @@ interface NexVersionProps {
  */
 declare const NexVersion: React$1.FC<NexVersionProps>;
 
-export { type AlertsContextType, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexSimpleTextCard, type NexSimpleTextCardProps, NexVersion, type NexVersionProps, type SocialLink, type User, useAlerts };
+export { type AlertsContextType, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexSimpleTextCard, type NexSimpleTextCardProps, NexVersion, type NexVersionProps, type SocialLink, type SubscriptionInfo, type User, useAlerts };

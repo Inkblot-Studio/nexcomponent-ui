@@ -14,8 +14,6 @@ export type MobileNavProps = {
     onLogin?: () => void;
     onLogout?: () => void;
     onProfile?: () => void;
-    onDevSwitchToggle?: () => void;
-    isDevMode?: boolean;
     currentLocale: string;
     languageOptions: LanguageOption[];
     onLocaleChange: (code: string) => void;

@@ -12,11 +12,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onLogin,
   onLogout,
   onProfile,
-  onDevSwitchToggle,
-  isDevMode,
   currentLocale,
   languageOptions,
-  onLocaleChange
+  onLocaleChange,
 }) => {
   return (
     <AnimatePresence>
@@ -31,10 +29,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
           <div className="nex-mobile-nav-inner">
             <ul className="nex-mobile-nav-list">
               {navItems.map((item, index) => (
-                <li key={index} className="nex-mobile-nav-item" onClick={() => {
-                  item.onClick();
-                  onClose();
-                }}>
+                <li
+                  key={index}
+                  className="nex-mobile-nav-item"
+                  onClick={() => {
+                    item.onClick();
+                    onClose();
+                  }}
+                >
                   {item.label}
                 </li>
               ))}
@@ -43,44 +45,65 @@ const MobileNav: React.FC<MobileNavProps> = ({
             <div className="nex-mobile-nav-section">
               {isAuthenticated ? (
                 <>
-                  <div className="nex-mobile-nav-item" onClick={() => {
-                    onProfile?.();
-                    onClose();
-                  }}>
+                  <div
+                    className="nex-mobile-nav-item"
+                    onClick={() => {
+                      onProfile?.();
+                      onClose();
+                    }}
+                  >
                     Profile
                   </div>
-                  {onDevSwitchToggle && (
-                    <div className="nex-mobile-nav-item" onClick={() => {
-                      onDevSwitchToggle();
+                  <div
+                    className="nex-mobile-nav-item danger"
+                    onClick={() => {
+                      onLogout?.();
                       onClose();
-                    }}>
-                      {isDevMode ? 'Exit Dev Mode' : 'Enter Dev Mode'}
-                    </div>
-                  )}
-                  <div className="nex-mobile-nav-item danger" onClick={() => {
-                    onLogout?.();
-                    onClose();
-                  }}>
+                    }}
+                  >
                     Log Out
                   </div>
                 </>
               ) : (
-                <div className="nex-mobile-nav-item" onClick={() => {
-                  onLogin?.();
-                  onClose();
-                }}>
+                <div
+                  className="nex-mobile-nav-item"
+                  onClick={() => {
+                    onLogin?.();
+                    onClose();
+                  }}
+                >
                   Log In
                 </div>
               )}
             </div>
 
             <div className="nex-mobile-nav-section">
-              {languageOptions.map(lang => (
-                <div key={lang.code} className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`} onClick={() => {
-                  onLocaleChange(lang.code);
-                  onClose();
-                }}>
-                  {lang.icon && <img src={lang.icon} alt={lang.label} className="nex-mobile-lang-icon" />}
+              {languageOptions.map((lang) => (
+                <div
+                  key={lang.code}
+                  className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`}
+                  onClick={() => {
+                    onLocaleChange(lang.code);
+                    onClose();
+                  }}
+                >
+                  {lang.icon ? (
+                    <img
+                      src={lang.icon}
+                      alt={lang.label}
+                      className="nex-mobile-lang-icon"
+                    />
+                  ) : (
+                    <span className="nex-mobile-lang-emoji">
+                      {String.fromCodePoint(
+                        ...lang.code
+                          .slice(0, 2)
+                          .toUpperCase()
+                          .split('')
+                          .map((char) => 127397 + char.charCodeAt(0))
+                      )}
+                    </span>
+                  )}
                   {lang.label}
                 </div>
               ))}

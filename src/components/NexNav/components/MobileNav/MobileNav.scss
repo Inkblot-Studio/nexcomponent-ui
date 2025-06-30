@@ -2,32 +2,29 @@
 
 .nex-mobile-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: var(--nex-surface-color);
   z-index: var(--nex-z-index-modal);
   display: flex;
   flex-direction: column;
-  padding-top: calculate(120px);
-  padding-bottom: calculate(30px);
+  padding-block: calc(120px) calc(30px);
   overflow-y: auto;
   box-shadow: var(--nex-shadow-lg);
+  transition: background var(--nex-transition-fast);
 }
 
 .nex-mobile-nav-inner {
   display: flex;
   flex-direction: column;
-  gap: calculate(30px);
-  padding: 0 calculate(20px);
+  gap: 2rem;
+  padding-inline: 1.5rem;
 }
 
 .nex-mobile-nav-list,
 .nex-mobile-nav-section {
   display: flex;
   flex-direction: column;
-  gap: calculate(20px);
+  gap: 1.25rem;
 }
 
 .nex-mobile-nav-item {
@@ -36,13 +33,17 @@
   padding: 0.75rem 1rem;
   border-radius: var(--nex-radius-md);
   background-color: transparent;
-  transition: background var(--nex-transition-fast);
+  transition: background var(--nex-transition-fast), color var(--nex-transition-fast);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background-color: var(--nex-nav-link-hover-bg, rgba(0, 0, 0, 0.05));
+    outline: none;
   }
 
   &.active {
@@ -61,4 +62,9 @@
   height: 1rem;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.nex-mobile-lang-emoji {
+  font-size: 1rem;
+  line-height: 1;
 }

@@ -8,6 +8,12 @@ export type NavItem = {
 export type User = {
   name: string;
   avatarUrl?: string;
+  role?: 'Admin' | 'Pro' | 'Member';
+};
+
+export type SubscriptionInfo = {
+  tier: string;
+  renewalDate: string;
 };
 
 export type NexNavProps = {
@@ -24,8 +30,16 @@ export type NexNavProps = {
   onLogout?: () => void;
   onProfile?: () => void;
 
-  onDevSwitchToggle?: () => void;
-  isDevMode?: boolean;
-
   languageOptions: LanguageOption[];
+
+  // Advanced features for UserMenu
+  endorsementCount?: number;
+  subscription?: SubscriptionInfo;
+
+  onEndorsementsClick?: () => void;
+  onSubscriptionClick?: () => void;
+  onActivityLogClick?: () => void;
+  onSecurityClick?: () => void;
+  onIntegrationsClick?: () => void;
+  onAdminPanelClick?: () => void;
 };

@@ -27,9 +27,15 @@ const NexNav: React.FC<NexNavProps> = ({
   onLogin,
   onLogout,
   onProfile,
-  onDevSwitchToggle,
-  isDevMode = false,
-  languageOptions
+  languageOptions,
+  subscription,
+  endorsementCount,
+  onEndorsementsClick,
+  onSubscriptionClick,
+  onActivityLogClick,
+  onSecurityClick,
+  onIntegrationsClick,
+  onAdminPanelClick
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -47,7 +53,7 @@ const NexNav: React.FC<NexNavProps> = ({
     if (stored) {
       setLocale(stored);
     } else {
-      const fallback = languageOptions.find(l => l.code === getDefaultLocale())?.code || 'en';
+      const fallback = languageOptions.find((l) => l.code === getDefaultLocale())?.code || 'en';
       setLocale(fallback);
       localStorage.setItem(LANG_KEY, fallback);
     }
@@ -104,8 +110,14 @@ const NexNav: React.FC<NexNavProps> = ({
                 user={user}
                 onLogout={onLogout}
                 onProfile={onProfile}
-                onDevSwitchToggle={onDevSwitchToggle}
-                isDevMode={isDevMode}
+                endorsementCount={endorsementCount}
+                subscription={subscription}
+                onEndorsementsClick={onEndorsementsClick}
+                onSubscriptionClick={onSubscriptionClick}
+                onActivityLogClick={onActivityLogClick}
+                onSecurityClick={onSecurityClick}
+                onIntegrationsClick={onIntegrationsClick}
+                onAdminPanelClick={onAdminPanelClick}
               />
             ) : (
               <div className="nex-nav-login-button" onClick={onLogin}>
@@ -134,8 +146,6 @@ const NexNav: React.FC<NexNavProps> = ({
             onLogin={onLogin}
             onLogout={onLogout}
             onProfile={onProfile}
-            onDevSwitchToggle={onDevSwitchToggle}
-            isDevMode={isDevMode}
             currentLocale={locale}
             languageOptions={languageOptions}
             onLocaleChange={handleLocaleChange}

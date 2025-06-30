@@ -1,24 +1,24 @@
-@import "../../../../utils/mixin.scss";
-
 .nex-user-menu {
   position: relative;
   display: flex;
   align-items: center;
 
   .nex-user-menu-trigger {
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--nex-tertiary-color);
-    color: var(--nex-tertiary-contrast-color);
     border-radius: var(--nex-radius-full);
-    width: 40px;
-    height: 40px;
-    font-weight: var(--nex-font-weight-bold);
-    font-size: var(--nex-font-size-sm);
-    overflow: hidden;
+    width: 42px;
+    height: 42px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     transition: background var(--nex-transition-fast);
+
+    &:hover {
+      background-color: var(--nex-quaternary-color);
+    }
   }
 
   .nex-user-menu-avatar {
@@ -29,30 +29,61 @@
   }
 
   .nex-user-menu-dropdown {
-    position: absolute;
-    top: 110%;
-    right: 0;
-    min-width: 180px;
-    background-color: var(--nex-surface-color);
-    border-radius: var(--nex-radius-md);
-    box-shadow: var(--nex-shadow-md);
+    list-style: none;
+    margin: 0;
     padding: 0.5rem 0;
+    position: absolute;
+    top: 115%;
+    right: 0;
+    min-width: 220px;
+    background-color: var(--nex-surface-color);
+    color: var(--nex-font-color);
+    border-radius: var(--nex-radius-lg);
+    box-shadow: var(--nex-shadow-lg);
     z-index: var(--nex-z-index-popover);
   }
 
-  .nex-user-menu-item {
+  .nex-user-menu-section {
     padding: 0.5rem 1rem;
-    cursor: pointer;
+    border-bottom: 1px solid var(--nex-border-color);
+  }
+
+  .nex-user-menu-header {
     font-size: var(--nex-font-size-sm);
-    color: var(--nex-font-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    background-color: var(--nex-primary-color);
+    color: white;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--nex-radius-sm);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .nex-user-menu-item {
+    padding: 0.6rem 1rem;
+    font-size: var(--nex-font-size-sm);
+    cursor: pointer;
     transition: background var(--nex-transition-fast);
 
-    &:hover {
-      background-color: var(--nex-nav-link-hover-bg, rgba(0, 0, 0, 0.05));
+    &:hover,
+    &:focus-visible {
+      background-color: rgba(0, 0, 0, 0.04);
     }
 
     &.danger {
       color: var(--nex-danger);
+    }
+
+    &.sign-up-cta {
+      font-weight: var(--nex-font-weight-bold);
+      text-align: center;
+      color: var(--nex-primary-color);
     }
   }
 }

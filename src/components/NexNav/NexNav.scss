@@ -7,7 +7,7 @@
   right: 0;
   z-index: var(--nex-z-index-sticky);
   width: 100%;
-  transition: all var(--nex-transition-base);
+  transition: background-color var(--nex-transition-base), border-color var(--nex-transition-base);
   background-color: transparent;
 
   &.not-at-top {
@@ -34,10 +34,10 @@
     cursor: pointer;
     border-radius: var(--nex-radius-md);
     padding: var(--nex-spacing-sm);
-    transition: background var(--nex-transition-fast);
+    transition: background-color var(--nex-transition-fast);
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--nex-hover-surface, rgba(0, 0, 0, 0.05));
     }
   }
 
@@ -64,10 +64,10 @@
     cursor: pointer;
     padding: var(--nex-spacing-sm) var(--nex-spacing-md);
     border-radius: var(--nex-radius-sm);
-    transition: background var(--nex-transition-fast);
+    transition: background-color var(--nex-transition-fast);
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--nex-hover-surface, rgba(0, 0, 0, 0.05));
     }
   }
 }

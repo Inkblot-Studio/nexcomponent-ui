@@ -6,6 +6,11 @@ export type NavItem = {
 export type User = {
     name: string;
     avatarUrl?: string;
+    role?: 'Admin' | 'Pro' | 'Member';
+};
+export type SubscriptionInfo = {
+    tier: string;
+    renewalDate: string;
 };
 export type NexNavProps = {
     logoSrc?: string;
@@ -17,7 +22,13 @@ export type NexNavProps = {
     onLogin?: () => void;
     onLogout?: () => void;
     onProfile?: () => void;
-    onDevSwitchToggle?: () => void;
-    isDevMode?: boolean;
     languageOptions: LanguageOption[];
+    endorsementCount?: number;
+    subscription?: SubscriptionInfo;
+    onEndorsementsClick?: () => void;
+    onSubscriptionClick?: () => void;
+    onActivityLogClick?: () => void;
+    onSecurityClick?: () => void;
+    onIntegrationsClick?: () => void;
+    onAdminPanelClick?: () => void;
 };
