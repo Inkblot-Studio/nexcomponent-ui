@@ -1,152 +1,145 @@
-import './NexNav.scss';
-import React, { useRef, useState, useEffect } from 'react';
-import { NexNavProps } from './NexNav.types';
-import NexButton from '../NexButton';
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
+import './NexNav.scss';
 
-/**
- * NexNav component
- *
- * Navigation component with a logo, menu items, and optional identity buttons.
- *
- * @param {string} logoSrc - Source URL for the logo image.
- * @param {string} displayName - Display name of the client or organization.
- * @param {Function} homeButtonHandler - Handler function for clicking on the logo or client name to navigate home.
- * @param {Object[]} navItems - Array of navigation items.
- * @param {string} navItems.label - Label/text for the navigation item.
- * @param {Function} navItems.onClick - Handler function for clicking on a navigation item.
- * @param {string} [identity] - Optional identity section with login and sign-up buttons.
- * @param {Object} identityProps - Props for identity section.
- * @param {Function} identityProps.onLoginClick - Handler function for clicking on the login button.
- * @param {Function} identityProps.onSignUpClick - Handler function for clicking on the sign-up button.
- * @param {boolean} [colorful=false] - Whether to apply colorful styling.
- */
-const NexNav: React.FC<NexNavProps> = ({ logoSrc, displayName, homeButtonHandler, identity, navItems, identityProps, colorful = false }) => {
+import NavItem from './components/NavItem';
+import UserMenu from './components/UserMenu';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import MobileNav from './components/MobileNav';
+
+import { NexNavProps } from './NexNav.types';
+
+const LANG_KEY = 'nex-locale';
+
+const getDefaultLocale = (): string => {
+  const lang = navigator.language || 'en';
+  return lang.split('-')[0];
+};
+
+const NexNav: React.FC<NexNavProps> = ({
+  logoSrc,
+  displayName,
+  homeButtonHandler,
+  navItems,
+  user,
+  isAuthenticated,
+  onLogin,
+  onLogout,
+  onProfile,
+  onDevSwitchToggle,
+  isDevMode = false,
+  languageOptions
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-  const ref = useRef(null);
-  
-  useClickAway(ref, (event) => {
-    const target = event.target as HTMLElement;
+  const [locale, setLocale] = useState('en');
+  const menuRef = useRef(null);
 
-    if (target.closest('.nex-nav-burger')) {
-      return;
+  useClickAway(menuRef, (e) => {
+    if (!(e.target as HTMLElement).closest('.nex-nav-burger')) {
+      setIsMenuOpen(false);
     }
-
-    setIsMenuOpen(false);
   });
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    const stored = localStorage.getItem(LANG_KEY);
+    if (stored) {
+      setLocale(stored);
+    } else {
+      const fallback = languageOptions.find(l => l.code === getDefaultLocale())?.code || 'en';
+      setLocale(fallback);
+      localStorage.setItem(LANG_KEY, fallback);
+    }
+  }, [languageOptions]);
+
+  const handleLocaleChange = (code: string) => {
+    setLocale(code);
+    localStorage.setItem(LANG_KEY, code);
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setIsAtTop(true);
-      } else {
-        setIsAtTop(false);
-      }
-    };
-
+    const handleScroll = () => setIsAtTop(window.scrollY === 0);
     window.addEventListener('scroll', handleScroll);
-    
     handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setIsMenuOpen(false);
-      }
+      if (window.innerWidth > 768) setIsMenuOpen(false);
     };
-
     window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const navSwipeAnimation = {
-    initial: { y: '-100%', opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    exit: { y: '-100%', opacity: 0, transition: { delay: 0.2 } },
-    transition: { duration: 0.3 },
-  };
 
   return (
     <>
-      <div className={`nex-nav ${!isAtTop ? 'not-at-top' : '' }`}>
-        <nav className='nex-nav-inner-wrapper'>
+      <div className={`nex-nav ${!isAtTop ? 'not-at-top' : ''}`}>
+        <nav className="nex-nav-inner-wrapper">
           {logoSrc ? (
-            <div className={`nex-nav-client-logo ${colorful ? 'colorful' : '' }`} onClick={homeButtonHandler}>
-              <img src={logoSrc} alt={displayName} className='nex-nav-logo' />
+            <div className="nex-nav-client-logo" onClick={homeButtonHandler}>
+              <img src={logoSrc} alt={displayName} className="nex-nav-logo" />
             </div>
           ) : (
-            <div className={`nex-nav-client-name ${colorful ? 'colorful' : '' }`} onClick={homeButtonHandler}>
-              <div className='client-name'>{displayName}</div>
+            <div className="nex-nav-client-name" onClick={homeButtonHandler}>
+              <div className="client-name">{displayName}</div>
             </div>
           )}
 
-          <ul className='nex-nav-list'>
-            {navItems.length && navItems.map((item, index) => (
-              <li key={index} className='nex-nav-item' onClick={item.onClick}> 
-                <a className='nex-nav-link'>{item.label}</a>
-              </li>
+          <ul className="nex-nav-list" role="menubar">
+            {navItems.map((item, i) => (
+              <NavItem key={i} label={item.label} onClick={item.onClick} />
             ))}
           </ul>
 
-          {identity && (
-              <div className='identity'>
-                <div className="identity-item text-button" onClick={identityProps?.onLoginClick}>Log in</div>
-                <NexButton className='identity-item' text='Sign Up' onClick={identityProps?.onSignUpClick} inverted/>
+          <div className="nex-nav-right">
+            <LanguageSwitcher
+              currentLocale={locale}
+              options={languageOptions}
+              onChange={handleLocaleChange}
+            />
+            {isAuthenticated && user && onLogout && onProfile ? (
+              <UserMenu
+                user={user}
+                onLogout={onLogout}
+                onProfile={onProfile}
+                onDevSwitchToggle={onDevSwitchToggle}
+                isDevMode={isDevMode}
+              />
+            ) : (
+              <div className="nex-nav-login-button" onClick={onLogin}>
+                Log In
               </div>
-          )}
+            )}
+          </div>
         </nav>
       </div>
 
-      <div className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : '' }`} onClick={toggleMenu}>
-          <div />
-          <div />
-          <div />
+      <div
+        className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <div /><div /><div />
       </div>
 
       <AnimatePresence>
         {isMenuOpen && (
-          <>
-            <motion.div
-              {...navSwipeAnimation}
-              className={`nex-nav-mobile`}
-              ref={ref}
-              aria-label="Sidebar"
-            >
-            <div className="nex-nav-mobile-inner">
-              <div className='nex-nav-list'>
-                {navItems.length && navItems.map((item, index) => (
-                  <li key={index} className='nex-nav-item' onClick={() => {
-                      setIsMenuOpen(false);
-                      item.onClick();
-                    }}>
-                    <a className='nex-nav-link'>{item.label}</a>
-                  </li>
-                ))}
-              </div>
-              {identity && (
-                <div className='identity'>
-                  <NexButton className='identity-item' text='Login' onClick={identityProps?.onLoginClick} inverted/>
-                  <NexButton className='identity-item' text='Sign Up' type='primary' onClick={identityProps?.onSignUpClick} inverted/>
-                </div>
-              )}
-            </div>
-          </motion.div>
-          </>
+          <MobileNav
+            isOpen={isMenuOpen}
+            onClose={() => setIsMenuOpen(false)}
+            navItems={navItems}
+            user={user}
+            isAuthenticated={isAuthenticated}
+            onLogin={onLogin}
+            onLogout={onLogout}
+            onProfile={onProfile}
+            onDevSwitchToggle={onDevSwitchToggle}
+            isDevMode={isDevMode}
+            currentLocale={locale}
+            languageOptions={languageOptions}
+            onLocaleChange={handleLocaleChange}
+          />
         )}
       </AnimatePresence>
     </>

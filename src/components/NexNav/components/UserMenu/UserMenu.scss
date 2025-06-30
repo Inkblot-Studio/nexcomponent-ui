@@ -1,0 +1,58 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .nex-user-menu-trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--nex-tertiary-color);
+    color: var(--nex-tertiary-contrast-color);
+    border-radius: var(--nex-radius-full);
+    width: 40px;
+    height: 40px;
+    font-weight: var(--nex-font-weight-bold);
+    font-size: var(--nex-font-size-sm);
+    overflow: hidden;
+    transition: background var(--nex-transition-fast);
+  }
+
+  .nex-user-menu-avatar {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--nex-radius-full);
+  }
+
+  .nex-user-menu-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    min-width: 180px;
+    background-color: var(--nex-surface-color);
+    border-radius: var(--nex-radius-md);
+    box-shadow: var(--nex-shadow-md);
+    padding: 0.5rem 0;
+    z-index: var(--nex-z-index-popover);
+  }
+
+  .nex-user-menu-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: var(--nex-font-size-sm);
+    color: var(--nex-font-color);
+    transition: background var(--nex-transition-fast);
+
+    &:hover {
+      background-color: var(--nex-nav-link-hover-bg, rgba(0, 0, 0, 0.05));
+    }
+
+    &.danger {
+      color: var(--nex-danger);
+    }
+  }
+}

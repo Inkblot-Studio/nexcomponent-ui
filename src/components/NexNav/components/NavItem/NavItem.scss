@@ -1,0 +1,32 @@
+@import "../../../../utils/mixin.scss";
+
+.navItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--nex-transition-fast);
+
+  &:focus-visible {
+    outline: 2px solid var(--nex-primary-color);
+    outline-offset: 2px;
+  }
+}
+
+.link {
+  padding: 0.5rem 1rem;
+  border-radius: var(--nex-radius-md);
+  font-size: var(--nex-font-size-md);
+  font-weight: var(--nex-font-weight-medium);
+  color: var(--nex-font-color);
+  transition: background var(--nex-transition-fast);
+
+  &:hover {
+    background-color: var(--nex-nav-link-hover-bg, rgba(0, 0, 0, 0.05));
+  }
+
+  &.active {
+    font-weight: var(--nex-font-weight-bold);
+    background-color: var(--nex-primary-light);
+    color: var(--nex-primary-contrast-color);
+  }
+}

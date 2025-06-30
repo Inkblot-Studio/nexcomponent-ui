@@ -246,41 +246,35 @@ interface NexModalProps {
  */
 declare const NexModal: React$1.FC<NexModalProps>;
 
+type LanguageOption = {
+    code: string;
+    label: string;
+    icon?: string;
+};
+
 type NavItem = {
     label: string;
     onClick: () => void;
 };
-type IdentityProps = {
-    onLoginClick: () => void;
-    onSignUpClick: () => void;
+type User = {
+    name: string;
+    avatarUrl?: string;
 };
 type NexNavProps = {
     logoSrc?: string;
     displayName: string;
     homeButtonHandler: () => void;
-    identity: boolean;
     navItems: NavItem[];
-    identityProps?: IdentityProps;
-    colorful?: boolean;
+    isAuthenticated: boolean;
+    user?: User;
+    onLogin?: () => void;
+    onLogout?: () => void;
+    onProfile?: () => void;
+    onDevSwitchToggle?: () => void;
+    isDevMode?: boolean;
+    languageOptions: LanguageOption[];
 };
 
-/**
- * NexNav component
- *
- * Navigation component with a logo, menu items, and optional identity buttons.
- *
- * @param {string} logoSrc - Source URL for the logo image.
- * @param {string} displayName - Display name of the client or organization.
- * @param {Function} homeButtonHandler - Handler function for clicking on the logo or client name to navigate home.
- * @param {Object[]} navItems - Array of navigation items.
- * @param {string} navItems.label - Label/text for the navigation item.
- * @param {Function} navItems.onClick - Handler function for clicking on a navigation item.
- * @param {string} [identity] - Optional identity section with login and sign-up buttons.
- * @param {Object} identityProps - Props for identity section.
- * @param {Function} identityProps.onLoginClick - Handler function for clicking on the login button.
- * @param {Function} identityProps.onSignUpClick - Handler function for clicking on the sign-up button.
- * @param {boolean} [colorful=false] - Whether to apply colorful styling.
- */
 declare const NexNav: React$1.FC<NexNavProps>;
 
 interface SocialLink {
@@ -343,4 +337,4 @@ interface NexVersionProps {
  */
 declare const NexVersion: React$1.FC<NexVersionProps>;
 
-export { type AlertsContextType, type IdentityProps, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexSimpleTextCard, type NexSimpleTextCardProps, NexVersion, type NexVersionProps, type SocialLink, useAlerts };
+export { type AlertsContextType, type NavItem, NexAlert, type NexAlertProps, NexAlertsProvider, type NexAlertsProviderProps, NexAlertsWrapper, NexButton, type NexButtonProps, NexCard, type NexCardProps, NexCarousel, type NexCarouselProps, NexCopyToClipboard, type NexCopyToClipboardProps, NexFooter, type NexFooterProps, NexHeroCard, type NexHeroCardProps, NexInfoPanel, type NexInfoPanelProps, NexInput, type NexInputProps, NexLoader, type NexLoaderProps, NexModal, type NexModalProps, NexNav, type NexNavProps, NexSeparator, type NexSeparatorProps, NexSimpleTextCard, type NexSimpleTextCardProps, NexVersion, type NexVersionProps, type SocialLink, type User, useAlerts };

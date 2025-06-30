@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  /* ================================
+     🎨 Core Brand Colors (Light Mode)
+     ================================ */
+
+  --nex-primary-color: #1A1F36;
+  --nex-primary-light: #3C4369;
+  --nex-primary-dark: #111527;
+  --nex-primary-contrast-color: #ffffff;
+
+  --nex-secondary-color: #8A94A6;
+  --nex-secondary-light: #B5BDCB;
+  --nex-secondary-dark: #5A6170;
+  --nex-secondary-contrast-color: #ffffff;
+
+  --nex-tertiary-color: #E6EDF4;
+  --nex-tertiary-dark: #CAD5E2;
+  --nex-tertiary-contrast-color: #1C1C1E;
+
+  --nex-quaternary-color: #D4D4D4;
+  --nex-quaternary-contrast-color: #1C1C1E;
+
+  /* ================================
+     🛑 State Colors
+     ================================ */
+
+  --nex-success: #4CAF50;
+  --nex-info: #2196F3;
+  --nex-warning: #FFC107;
+  --nex-danger: #F44336;
+
+  /* ================================
+     🖤 Grayscale & Surface
+     ================================ */
+
+  --nex-font-color: #1C1C1E;
+  --nex-muted-font-color: #707070;
+
+  --nex-background-color: #FAFAFC;
+  --nex-surface-color: #ffffff;
+  --nex-border-color: #D4D4D4;
+  --nex-complimentary-color: #9A9A9A;
+
+  /* ================================
+     🔠 Typography
+     ================================ */
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --nex-font-weight-light: 300;
+  --nex-font-weight-regular: 400;
+  --nex-font-weight-medium: 500;
+  --nex-font-weight-bold: 700;
+
+  --nex-font-size-xs: 0.75rem;
+  --nex-font-size-sm: 0.875rem;
+  --nex-font-size-md: 1rem;
+  --nex-font-size-lg: 1.25rem;
+  --nex-font-size-xl: 1.5rem;
+  --nex-font-size-2xl: 2rem;
+
+  --nex-line-height-tight: 1.2;
+  --nex-line-height-base: 1.5;
+  --nex-line-height-loose: 1.75;
+
+  /* ================================
+     📐 Spacing
+     ================================ */
+
+  --nex-spacing-xs: 0.25rem;
+  --nex-spacing-sm: 0.5rem;
+  --nex-spacing-md: 1rem;
+  --nex-spacing-lg: 1.5rem;
+  --nex-spacing-xl: 2rem;
+  --nex-spacing-2xl: 3rem;
+
+  /* ================================
+     🌀 Elevation & Radius
+     ================================ */
+
+  --nex-radius-sm: 4px;
+  --nex-radius-md: 8px;
+  --nex-radius-lg: 16px;
+  --nex-radius-full: 9999px;
+
+  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+  /* ================================
+     ⚡ Transitions & Z-index
+     ================================ */
+
+  --nex-transition-fast: 150ms ease-in-out;
+  --nex-transition-base: 300ms ease;
+  --nex-transition-slow: 500ms ease;
+
+  --nex-z-index-dropdown: 1000;
+  --nex-z-index-sticky: 1020;
+  --nex-z-index-fixed: 1030;
+  --nex-z-index-modal: 1050;
+  --nex-z-index-popover: 1060;
+  --nex-z-index-tooltip: 1070;
+}
+
+/* ================================
+   🌒 Dark Mode Overrides
+   ================================ */
+
+[data-theme="dark"] {
+  --nex-background-color: #121212;
+  --nex-surface-color: #1E1E1E;
+  --nex-font-color: #f3f3f3;
+  --nex-muted-font-color: #999;
+
+  --nex-primary-color: #3D4DE1;
+  --nex-primary-light: #5965e8;
+  --nex-primary-dark: #1f265b;
+  --nex-primary-contrast-color: #ffffff;
+
+  --nex-secondary-color: #A3ACC2;
+  --nex-secondary-light: #C5CCDA;
+  --nex-secondary-dark: #717A8C;
+  --nex-secondary-contrast-color: #1C1C1E;
+
+  --nex-tertiary-color: #2E2E2E;
+  --nex-tertiary-contrast-color: #f3f3f3;
+
+  --nex-quaternary-color: #3A3A3A;
+  --nex-quaternary-contrast-color: #f3f3f3;
+
+  --nex-border-color: #2e2e2e;
+  --nex-complimentary-color: #7a7a7a;
+
+  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);
+  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);
+}

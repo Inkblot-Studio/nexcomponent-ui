@@ -16,6 +16,7 @@ const Template: StoryFn<typeof NexNav> = (args) => (
       backgroundImage: `url(${storyBackround})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      fontFamily: 'Inter, sans-serif',
     }}
   >
     <NexNav {...args} />
@@ -25,16 +26,27 @@ const Template: StoryFn<typeof NexNav> = (args) => (
 export const NexNavTest = Template.bind({});
 NexNavTest.args = {
   displayName: 'CMDT',
-  identity: true,
-  homeButtonHandler: () => console.log('Home clicked'),
+  logoSrc: 'https://dummyimage.com/120x40/000/fff&text=LOGO',
+  homeButtonHandler: () => alert('🏠 Home clicked'),
   navItems: [
-    { label: 'Home', onClick: () => console.log('Home clicked') },
-    { label: 'About', onClick: () => console.log('About clicked') },
-    { label: 'Services', onClick: () => console.log('Services clicked') },
-    { label: 'Contact', onClick: () => console.log('Contact clicked') },
+    { label: 'Home', onClick: () => alert('🏡 Home clicked') },
+    { label: 'About', onClick: () => alert('ℹ️ About clicked') },
+    { label: 'Services', onClick: () => alert('🛠 Services clicked') },
+    { label: 'Contact', onClick: () => alert('📞 Contact clicked') },
   ],
-  identityProps: {
-    onLoginClick: () => console.log('Login clicked'),
-    onSignUpClick: () => console.log('Sign Up clicked'),
+  user: {
+    name: 'Jane Doe',
+    avatarUrl: 'https://i.pravatar.cc/40?img=3',
   },
+  isAuthenticated: true,
+  onLogin: () => alert('🔐 Login clicked'),
+  onLogout: () => alert('🚪 Logout clicked'),
+  onProfile: () => alert('👤 Profile clicked'),
+  onDevSwitchToggle: () => alert('🧪 Toggle Dev Mode'),
+  isDevMode: true,
+  languageOptions: [
+    { code: 'en', label: 'English' },
+    { code: 'bg', label: 'Български' },
+    { code: 'cs', label: 'Čeština' },
+  ],
 };
