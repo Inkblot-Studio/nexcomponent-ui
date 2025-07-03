@@ -96,7 +96,7 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
-  z-index: var(--nex-z-index-fixed);
+  z-index: calc(var(--nex-z-index-modal) + 10);
   transition: all var(--nex-transition-fast);
   box-shadow: 
     0 4px 15px -4px rgba(0, 0, 0, 0.1),
@@ -123,7 +123,6 @@
     backdrop-filter: blur(24px) saturate(220%);
     -webkit-backdrop-filter: blur(24px) saturate(220%);
     border-color: rgba(255, 24, 1, 0.2);
-    transform: scale(0.95);
   }
 
   &.menu-open {

@@ -42,9 +42,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
 }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const handleProfileToggle = () => setIsProfileOpen(!isProfileOpen);
   const handleLanguageToggle = () => setIsLanguageOpen(!isLanguageOpen);
+  const handleSettingsToggle = () => setIsSettingsOpen(!isSettingsOpen);
 
   const getLanguageEmoji = (code: string) => {
     const emojiMap: Record<string, string> = {
@@ -281,28 +283,23 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 )}
 
                 {/* Settings Section */}
-                {isAuthenticated && (
+                {isAuthenticated && (onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
                   <div className="nex-mobile-nav-section">
                     <h4 className="nex-mobile-nav-section-title">Settings</h4>
                     <div 
                       className="nex-mobile-nav-item"
-                      onClick={() => {
-                        // Toggle settings dropdown or navigate to settings
-                        if (onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) {
-                          // If we have settings items, show them inline
-                          return;
-                        }
-                        // Otherwise, this could navigate to a settings page
-                      }}
+                      onClick={handleSettingsToggle}
                     >
                       <Settings className="nex-mobile-nav-icon" />
                       <span className="nex-mobile-nav-text">Settings</span>
-                      {(onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
+                      {isSettingsOpen ? (
+                        <ChevronUp className="nex-mobile-nav-icon" />
+                      ) : (
                         <ChevronDown className="nex-mobile-nav-icon" />
                       )}
                     </div>
-                    {(onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
-                      <AnimatePresence>
+                    <AnimatePresence>
+                      {isSettingsOpen && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
@@ -363,8 +360,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             </div>
                           )}
                         </motion.div>
-                      </AnimatePresence>
-                    )}
+                      )}
+                    </AnimatePresence>
                   </div>
                 )}
 

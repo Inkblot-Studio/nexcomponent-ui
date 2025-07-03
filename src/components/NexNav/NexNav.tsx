@@ -131,10 +131,8 @@ const NexNav: React.FC<NexNavProps> = ({
       <motion.div
         className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
         style={{ 
-          zIndex: isMenuOpen ? 'var(--nex-z-index-modal)' : 'var(--nex-z-index-fixed)'
+          zIndex: isMenuOpen ? 'calc(var(--nex-z-index-modal) + 10)' : 'calc(var(--nex-z-index-modal) + 10)'
         }}
       >
         <div /><div /><div />
