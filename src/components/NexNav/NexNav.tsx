@@ -169,40 +169,41 @@ const NexNav: React.FC<NexNavProps> = ({
                 <span>Login</span>
               </div>
             )}
-            <button
-              className={`nex-nav-burger-btn${isMenuOpen ? ' menu-open' : ''}`}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              type="button"
-              style={{}}
-            >
-              <motion.div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} initial={false} animate={isMenuOpen ? 'open' : 'closed'}>
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 1, scale: 1, rotate: 0 }}
-                  animate={isMenuOpen ? { opacity: 0, scale: 0.7, rotate: 45 } : { opacity: 1, scale: 1, rotate: 0 }}
-                  exit={{ opacity: 0, scale: 0.7, rotate: 45 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  style={{ position: 'absolute' }}
-                >
-                  <Menu size={24} />
-                </motion.div>
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, scale: 0.7, rotate: -45 }}
-                  animate={isMenuOpen ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.7, rotate: -45 }}
-                  exit={{ opacity: 0, scale: 0.7, rotate: -45 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  style={{ position: 'absolute' }}
-                >
-                  <X size={24} className="nex-nav-x-shimmer" />
-                </motion.div>
-              </motion.div>
-            </button>
           </div>
         </nav>
       </motion.div>
+
+      {/* Hamburger button outside nav container to avoid z-index stacking context issues */}
+      <button
+        className={`nex-nav-burger-btn${isMenuOpen ? ' menu-open' : ''}`}
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        type="button"
+      >
+        <motion.div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} initial={false} animate={isMenuOpen ? 'open' : 'closed'}>
+          <motion.div
+            key="menu"
+            initial={{ opacity: 1, scale: 1, rotate: 0 }}
+            animate={isMenuOpen ? { opacity: 0, scale: 0.7, rotate: 45 } : { opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.7, rotate: 45 }}
+            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            style={{ position: 'absolute' }}
+          >
+            <Menu size={24} />
+          </motion.div>
+          <motion.div
+            key="close"
+            initial={{ opacity: 0, scale: 0.7, rotate: -45 }}
+            animate={isMenuOpen ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.7, rotate: -45 }}
+            exit={{ opacity: 0, scale: 0.7, rotate: -45 }}
+            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            style={{ position: 'absolute' }}
+          >
+            <X size={24} className="nex-nav-x-shimmer" />
+          </motion.div>
+        </motion.div>
+      </button>
 
       <AnimatePresence>
         {isMenuOpen && (
