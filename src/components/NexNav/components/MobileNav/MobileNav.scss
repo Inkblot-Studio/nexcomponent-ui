@@ -271,29 +271,20 @@
 }
 
 .nex-mobile-nav-footer {
-  margin-top: auto;
-  padding: var(--nex-spacing-sm);
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px) saturate(180%);
-  -webkit-backdrop-filter: blur(10px) saturate(180%);
-  border-radius: var(--nex-radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  text-align: center;
-  
-  .nex-mobile-nav-item {
-    font-size: var(--nex-font-size-xs);
-    color: var(--nex-muted-font-color);
-    background: transparent;
-    border: none;
-    padding: var(--nex-spacing-xs);
-    justify-content: center;
-    
-    &:hover {
-      color: var(--nex-font-color);
-      background: rgba(255, 255, 255, 0.03);
-      border-color: rgba(255, 255, 255, 0.05);
-    }
-  }
+  display: none !important;
+}
+
+.nex-mobile-nav-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--nex-radius-full);
+  background: transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 2px solid rgba(255,255,255,0.1);
+  overflow: hidden;
 }
 
 /* Dark mode adjustments */

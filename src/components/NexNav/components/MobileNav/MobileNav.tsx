@@ -48,25 +48,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
   const handleLanguageToggle = () => setIsLanguageOpen(!isLanguageOpen);
   const handleSettingsToggle = () => setIsSettingsOpen(!isSettingsOpen);
 
-  const getLanguageEmoji = (code: string) => {
-    const emojiMap: Record<string, string> = {
-      'en': '🇺🇸',
-      'es': '🇪🇸',
-      'fr': '🇫🇷',
-      'de': '🇩🇪',
-      'it': '🇮🇹',
-      'pt': '🇵🇹',
-      'ru': '🇷🇺',
-      'ja': '🇯🇵',
-      'ko': '🇰🇷',
-      'zh': '🇨🇳',
-      'ar': '🇸🇦',
-      'hi': '🇮🇳'
-    };
-    return emojiMap[code] || '🌐';
-  };
-
   const currentLanguage = languageOptions.find(lang => lang.code === currentLocale);
+
+  const hasHome = navItems.some(item => item.label.toLowerCase() === 'home');
 
   return (
     <AnimatePresence>
@@ -97,11 +81,41 @@ const MobileNav: React.FC<MobileNavProps> = ({
               <div className="nex-mobile-nav-header">
                 {isAuthenticated && user ? (
                   <>
-                    <img
-                      src={user.avatarUrl || 'https://via.placeholder.com/40'}
-                      alt={user.name}
-                      className="nex-mobile-nav-user-avatar"
-                    />
+                    {user.avatarUrl ? (
+                      <img
+                        src={user.avatarUrl}
+                        alt={user.name}
+                        className="nex-mobile-nav-user-avatar"
+                      />
+                    ) : (
+                      <span className="nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback">
+                        {/* Premium animated SVG avatar with initials */}
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <defs>
+                            <radialGradient id="mobileAvatarGradient" cx="50%" cy="50%" r="50%">
+                              <stop offset="0%" stopColor="#fff" stopOpacity="0.8"/>
+                              <stop offset="100%" stopColor="#e0e7ef" stopOpacity="0.95"/>
+                            </radialGradient>
+                            <linearGradient id="mobileAvatarShimmer" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                              <stop stopColor="#fff" stopOpacity="0.2"/>
+                              <stop offset="0.5" stopColor="#ff1801" stopOpacity="0.12"/>
+                              <stop offset="1" stopColor="#00b8ff" stopOpacity="0.12"/>
+                            </linearGradient>
+                          </defs>
+                          <circle cx="20" cy="20" r="20" fill="url(#mobileAvatarGradient)"/>
+                          <motion.rect
+                            x="-40" y="0" width="40" height="40"
+                            fill="url(#mobileAvatarShimmer)"
+                            animate={{ x: [ -40, 40 ] }}
+                            transition={{ repeat: Infinity, duration: 3.5, ease: 'linear' }}
+                            style={{ mixBlendMode: 'lighten' }}
+                          />
+                          <text x="50%" y="54%" textAnchor="middle" fill="#3a4256" fontSize="18" fontWeight="bold" fontFamily="inherit" dominantBaseline="middle" style={{ letterSpacing: 1 }}>
+                            {user.name?.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase()}
+                          </text>
+                        </svg>
+                      </span>
+                    )}
                     <div className="nex-mobile-nav-user-info">
                       <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
                       <div 
@@ -135,13 +149,15 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 {/* Main Navigation */}
                 <div className="nex-mobile-nav-section">
                   <h4 className="nex-mobile-nav-section-title">Navigation</h4>
-                  <div 
-                    className="nex-mobile-nav-item"
-                    onClick={onClose}
-                  >
-                    <Home className="nex-mobile-nav-icon" />
-                    <span className="nex-mobile-nav-text">Home</span>
-                  </div>
+                  {!hasHome && (
+                    <div 
+                      className="nex-mobile-nav-item"
+                      onClick={onClose}
+                    >
+                      <Home className="nex-mobile-nav-icon" />
+                      <span className="nex-mobile-nav-text">Home</span>
+                    </div>
+                  )}
                   {navItems.map((item, index) => (
                     <div
                       key={index}
@@ -163,11 +179,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     className="nex-mobile-nav-item"
                     onClick={handleLanguageToggle}
                   >
-                    <span className="nex-mobile-lang-emoji">
-                      {getLanguageEmoji(currentLocale)}
+                    <span className="nex-mobile-lang-abbr">
+                      {currentLocale.toUpperCase()}
                     </span>
                     <span className="nex-mobile-nav-text">
-                      {currentLanguage?.label || 'English'}
+                      {currentLanguage?.label || currentLocale.toUpperCase()}
                     </span>
                     {isLanguageOpen ? (
                       <ChevronUp className="nex-mobile-nav-icon" />
@@ -194,8 +210,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                           >
-                            <span className="nex-mobile-lang-emoji">
-                              {getLanguageEmoji(lang.code)}
+                            <span className="nex-mobile-lang-abbr">
+                              {lang.code.toUpperCase()}
                             </span>
                             <span className="nex-mobile-nav-text">{lang.label}</span>
                           </div>
@@ -375,11 +391,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
               </div>
 
               {/* Footer */}
-              <div className="nex-mobile-nav-footer">
+              {/* <div className="nex-mobile-nav-footer">
                 <div className="nex-mobile-nav-item">
                   <span className="nex-mobile-nav-text">Version 1.0.0</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </>
