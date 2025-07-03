@@ -9,6 +9,7 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileNav from './components/MobileNav';
 
 import { NexNavProps } from './NexNav.types';
+import { Fingerprint } from 'lucide-react';
 
 const LANG_KEY = 'nex-locale';
 
@@ -81,7 +82,50 @@ const NexNav: React.FC<NexNavProps> = ({
 
   return (
     <>
-      <div className={`nex-nav ${!isAtTop ? 'not-at-top' : ''}`}>
+      <motion.div
+        className={`nex-nav`}
+        initial={false}
+        animate={isAtTop ? 'atTop' : 'scrolled'}
+        variants={{
+          atTop: {
+            background: 'rgba(0,0,0,0)',
+            boxShadow: '0 0 0 0 rgba(0,0,0,0)',
+            borderBottom: '0px solid rgba(255,255,255,0)',
+            backdropFilter: 'blur(0px) saturate(100%)',
+            WebkitBackdropFilter: 'blur(0px) saturate(100%)',
+            transition: {
+              duration: 1.2,
+              ease: [0.4, 0, 0.2, 1],
+            },
+          },
+          scrolled: {
+            background: 'linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%), linear-gradient(90deg, rgba(255,24,1,0.08) 0%, rgba(0,184,255,0.08) 100%)',
+            boxShadow: '0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset',
+            borderBottom: '1.5px solid rgba(255,255,255,0.22)',
+            backdropFilter: 'blur(24px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+            transition: {
+              duration: 1.2,
+              ease: [0.4, 0, 0.2, 1],
+            },
+          },
+        }}
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 'var(--nex-z-index-sticky)', overflow: 'visible' }}
+      >
+        <motion.div
+          className="nex-nav-shimmer"
+          initial={{ opacity: 0, x: '-30%' }}
+          animate={isAtTop ? { opacity: 0, x: '-30%' } : { opacity: 0.7, x: '0%' }}
+          transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            pointerEvents: 'none',
+            zIndex: 0,
+            background: 'linear-gradient(120deg, rgba(255,255,255,0.18) 30%, rgba(255,24,1,0.12) 60%, rgba(0,184,255,0.12) 100%)',
+            filter: 'blur(8px)',
+          }}
+        />
         <nav className="nex-nav-inner-wrapper">
           {logoSrc ? (
             <div className="nex-nav-client-logo" onClick={homeButtonHandler}>
@@ -120,13 +164,14 @@ const NexNav: React.FC<NexNavProps> = ({
                 onAdminPanelClick={onAdminPanelClick}
               />
             ) : (
-              <div className="nex-nav-login-button" onClick={onLogin}>
-                Log In
+              <div className="nex-nav-login-button" onClick={onLogin} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--nex-font-size-xs)', fontWeight: 'var(--nex-font-weight-medium)', cursor: 'pointer' }}>
+                <Fingerprint size={18} />
+                <span>Login</span>
               </div>
             )}
           </div>
         </nav>
-      </div>
+      </motion.div>
 
       <motion.div
         className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`}
