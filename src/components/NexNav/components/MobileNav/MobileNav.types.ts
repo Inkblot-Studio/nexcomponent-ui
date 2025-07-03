@@ -7,6 +7,7 @@ export type MobileNavProps = {
   user?: {
     name: string;
     avatarUrl?: string;
+    role?: 'Admin' | 'Pro' | 'Member';
   };
   isAuthenticated: boolean;
   onLogin?: () => void;
@@ -15,4 +16,17 @@ export type MobileNavProps = {
   currentLocale: string;
   languageOptions: LanguageOption[];
   onLocaleChange: (code: string) => void;
+  
+  // Subscription and user menu props
+  endorsementCount?: number;
+  subscription?: {
+    tier: string;
+    renewalDate: string;
+  };
+  onEndorsementsClick?: () => void;
+  onSubscriptionClick?: () => void;
+  onActivityLogClick?: () => void;
+  onSecurityClick?: () => void;
+  onIntegrationsClick?: () => void;
+  onAdminPanelClick?: () => void;
 };

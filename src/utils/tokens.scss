@@ -67,7 +67,7 @@
      ================================ */
 
   --nex-font-color: #1C1C1E;
-  --nex-muted-font-color: #707070;
+  --nex-muted-font-color: #5A6170;
 
   --nex-background-color: #FAFAFC;
   --nex-surface-color: #ffffff;
@@ -78,8 +78,8 @@
      🔠 Typography System
      ================================ */
   
-  /* Font Family - Inter for professional, clean look */
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Font Family - High-end, professional font stack */
+  font-family: "Calibre", "Calibre Fallback", "PPNeueMontreal", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   /* Font Weights - Balanced hierarchy */
   --nex-font-weight-light: 300;      /* Subtle emphasis */
@@ -146,6 +146,16 @@
   --nex-z-index-popover: 1060;       /* Tooltips, popovers */
   --nex-z-index-tooltip: 1070;       /* Highest priority */
 
+  /* Glassmorphic effects - Light mode */
+  --nex-glass-bg: rgba(255, 255, 255, 0.85);
+  --nex-glass-bg-light: rgba(255, 255, 255, 0.6);
+  --nex-glass-bg-lighter: rgba(255, 255, 255, 0.4);
+  --nex-glass-bg-lightest: rgba(255, 255, 255, 0.2);
+  --nex-glass-border: rgba(255, 255, 255, 0.2);
+  --nex-glass-border-light: rgba(255, 255, 255, 0.1);
+  --nex-glass-shadow: rgba(0, 0, 0, 0.1);
+  --nex-glass-shadow-dark: rgba(0, 0, 0, 0.25);
+
   /* ================================
      🎯 COMPONENT-SPECIFIC TOKENS
      ================================ */
@@ -167,10 +177,10 @@
 
 [data-theme="dark"] {
   /* Dark mode color adjustments */
-  --nex-background-color: #121212;
-  --nex-surface-color: #1E1E1E;
+  --nex-background-color: #0a0a0a;
+  --nex-surface-color: #1a1a1a;
   --nex-font-color: #f3f3f3;
-  --nex-muted-font-color: #999;
+  --nex-muted-font-color: #A3ACC2;
 
   /* Adjusted brand colors for dark mode */
   --nex-primary-color: #3D4DE1;
@@ -195,6 +205,16 @@
   /* Enhanced shadows for dark mode */
   --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);
   --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);
+
+  /* Glassmorphic effects - Dark mode */
+  --nex-glass-bg: rgba(26, 26, 26, 0.85);
+  --nex-glass-bg-light: rgba(26, 26, 26, 0.6);
+  --nex-glass-bg-lighter: rgba(26, 26, 26, 0.4);
+  --nex-glass-bg-lightest: rgba(26, 26, 26, 0.2);
+  --nex-glass-border: rgba(255, 255, 255, 0.1);
+  --nex-glass-border-light: rgba(255, 255, 255, 0.05);
+  --nex-glass-shadow: rgba(0, 0, 0, 0.3);
+  --nex-glass-shadow-dark: rgba(0, 0, 0, 0.6);
 }
 
 /**

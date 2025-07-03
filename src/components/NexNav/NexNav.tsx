@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import './NexNav.scss';
 
@@ -73,7 +73,7 @@ const NexNav: React.FC<NexNavProps> = ({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) setIsMenuOpen(false);
+      if (window.innerWidth > 767) setIsMenuOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -128,12 +128,18 @@ const NexNav: React.FC<NexNavProps> = ({
         </nav>
       </div>
 
-      <div
+      <motion.div
         className={`nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{ 
+          zIndex: isMenuOpen ? 'var(--nex-z-index-modal)' : 'var(--nex-z-index-fixed)',
+          display: 'flex'
+        }}
       >
         <div /><div /><div />
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {isMenuOpen && (
@@ -149,6 +155,14 @@ const NexNav: React.FC<NexNavProps> = ({
             currentLocale={locale}
             languageOptions={languageOptions}
             onLocaleChange={handleLocaleChange}
+            endorsementCount={endorsementCount}
+            subscription={subscription}
+            onEndorsementsClick={onEndorsementsClick}
+            onSubscriptionClick={onSubscriptionClick}
+            onActivityLogClick={onActivityLogClick}
+            onSecurityClick={onSecurityClick}
+            onIntegrationsClick={onIntegrationsClick}
+            onAdminPanelClick={onAdminPanelClick}
           />
         )}
       </AnimatePresence>
