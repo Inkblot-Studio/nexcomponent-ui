@@ -41,10 +41,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onAdminPanelClick
 }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
   const handleProfileToggle = () => setIsProfileOpen(!isProfileOpen);
-  const handleSettingsToggle = () => setIsSettingsOpen(!isSettingsOpen);
+  const handleLanguageToggle = () => setIsLanguageOpen(!isLanguageOpen);
 
   const getLanguageEmoji = (code: string) => {
     const emojiMap: Record<string, string> = {
@@ -157,17 +157,24 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 {/* Language Switcher */}
                 <div className="nex-mobile-nav-section">
                   <h4 className="nex-mobile-nav-section-title">Language</h4>
-                  <div className="nex-mobile-nav-item">
+                  <div 
+                    className="nex-mobile-nav-item"
+                    onClick={handleLanguageToggle}
+                  >
                     <span className="nex-mobile-lang-emoji">
                       {getLanguageEmoji(currentLocale)}
                     </span>
                     <span className="nex-mobile-nav-text">
                       {currentLanguage?.label || 'English'}
                     </span>
-                    <ChevronDown className="nex-mobile-nav-icon" />
+                    {isLanguageOpen ? (
+                      <ChevronUp className="nex-mobile-nav-icon" />
+                    ) : (
+                      <ChevronDown className="nex-mobile-nav-icon" />
+                    )}
                   </div>
                   <AnimatePresence>
-                    {isSettingsOpen && (
+                    {isLanguageOpen && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
@@ -181,9 +188,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`}
                             onClick={() => {
                               onLocaleChange(lang.code);
-                              setIsSettingsOpen(false);
+                              setIsLanguageOpen(false);
                             }}
-                            style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                           >
                             <span className="nex-mobile-lang-emoji">
                               {getLanguageEmoji(lang.code)}
@@ -230,7 +237,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                               onProfile?.();
                               onClose();
                             }}
-                            style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                           >
                             <User className="nex-mobile-nav-icon" />
                             <span className="nex-mobile-nav-text">View Profile</span>
@@ -242,7 +249,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                                 onEndorsementsClick();
                                 onClose();
                               }}
-                              style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                              style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             >
                               <Crown className="nex-mobile-nav-icon" />
                               <span className="nex-mobile-nav-text">Endorsements</span>
@@ -279,18 +286,23 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     <h4 className="nex-mobile-nav-section-title">Settings</h4>
                     <div 
                       className="nex-mobile-nav-item"
-                      onClick={handleSettingsToggle}
+                      onClick={() => {
+                        // Toggle settings dropdown or navigate to settings
+                        if (onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) {
+                          // If we have settings items, show them inline
+                          return;
+                        }
+                        // Otherwise, this could navigate to a settings page
+                      }}
                     >
                       <Settings className="nex-mobile-nav-icon" />
                       <span className="nex-mobile-nav-text">Settings</span>
-                      {isSettingsOpen ? (
-                        <ChevronUp className="nex-mobile-nav-icon" />
-                      ) : (
+                      {(onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
                         <ChevronDown className="nex-mobile-nav-icon" />
                       )}
                     </div>
-                    <AnimatePresence>
-                      {isSettingsOpen && (
+                    {(onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
+                      <AnimatePresence>
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
@@ -305,7 +317,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                                 onActivityLogClick();
                                 onClose();
                               }}
-                              style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                              style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             >
                               <Activity className="nex-mobile-nav-icon" />
                               <span className="nex-mobile-nav-text">Activity Log</span>
@@ -318,7 +330,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                                 onSecurityClick();
                                 onClose();
                               }}
-                              style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                              style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             >
                               <Shield className="nex-mobile-nav-icon" />
                               <span className="nex-mobile-nav-text">Security</span>
@@ -331,7 +343,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                                 onIntegrationsClick();
                                 onClose();
                               }}
-                              style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                              style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             >
                               <Zap className="nex-mobile-nav-icon" />
                               <span className="nex-mobile-nav-text">Integrations</span>
@@ -351,24 +363,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             </div>
                           )}
                         </motion.div>
-                      )}
-                    </AnimatePresence>
+                      </AnimatePresence>
+                    )}
                   </div>
                 )}
 
                 {/* Logout */}
                 {isAuthenticated && onLogout && (
-                  <div className="nex-mobile-nav-section">
-                    <div 
-                      className="nex-mobile-nav-item danger"
-                      onClick={() => {
-                        onLogout();
-                        onClose();
-                      }}
-                    >
-                      <LogOut className="nex-mobile-nav-icon" />
-                      <span className="nex-mobile-nav-text">Log Out</span>
-                    </div>
+                  <div className="nex-mobile-nav-item danger">
+                    <LogOut className="nex-mobile-nav-icon" />
+                    <span className="nex-mobile-nav-text">Log Out</span>
                   </div>
                 )}
               </div>

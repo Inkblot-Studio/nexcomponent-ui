@@ -1,6 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import storyBackground from '../../assets/img/story_background.jpg';
+import storyLogo from '../../assets/img/nex_logo.svg';
 import NexNav from './NexNav';
 
 export default {
@@ -25,8 +26,8 @@ const Template: StoryFn<typeof NexNav> = (args) => (
 
 export const AuthenticatedFull = Template.bind({});
 AuthenticatedFull.args = {
-  displayName: 'CMDT',
-  logoSrc: 'https://dummyimage.com/120x40/000/fff&text=LOGO',
+  displayName: 'NexComponent',
+  logoSrc: storyLogo,
   homeButtonHandler: () => alert('🏠 Home clicked'),
   navItems: [
     { label: 'Home', onClick: () => alert('🏡 Home clicked') },

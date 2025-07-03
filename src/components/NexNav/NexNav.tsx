@@ -134,8 +134,7 @@ const NexNav: React.FC<NexNavProps> = ({
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         style={{ 
-          zIndex: isMenuOpen ? 'var(--nex-z-index-modal)' : 'var(--nex-z-index-fixed)',
-          display: 'flex'
+          zIndex: isMenuOpen ? 'var(--nex-z-index-modal)' : 'var(--nex-z-index-fixed)'
         }}
       >
         <div /><div /><div />
