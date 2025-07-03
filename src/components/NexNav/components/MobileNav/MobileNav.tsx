@@ -127,20 +127,20 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     </div>
                   </>
                 ) : (
-                  <>
-                    <div className="nex-mobile-nav-icon">
-                      <Fingerprint size={18} />
-                    </div>
-                    <div className="nex-mobile-nav-user-info">
-                      <h3 className="nex-mobile-nav-user-name">Guest User</h3>
-                      <div 
-                        className="nex-mobile-nav-user-tier"
-                        onClick={onLogin}
-                      >
-                        Login
-                      </div>
-                    </div>
-                  </>
+                  <div className="nex-mobile-nav-guest-content">
+                    <button
+                      className="nex-mobile-nav-signup-btn"
+                      onClick={onLogin}
+                    >
+                      Sign Up
+                    </button>
+                    <button 
+                      className="nex-mobile-nav-login-link"
+                      onClick={onLogin}
+                    >
+                      Already have an account? Sign in
+                    </button>
+                  </div>
                 )}
               </div>
 
