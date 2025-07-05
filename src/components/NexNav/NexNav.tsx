@@ -185,56 +185,18 @@ const NexNav: React.FC<NexNavProps> = ({
           aria-label="Primary navigation"
           onKeyDown={handleNavKeyDown}
         >
-          {/* Logo Section */}
-          {logoSrc ? (
-            <motion.div 
-              className="nex-nav-client-logo" 
-              onClick={handleHomeClick}
-              role="button"
-              tabIndex={0}
-              aria-label={`${displayName} - Go to home`}
-              onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
-              whileHover={{
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-                borderColor: "rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
-              }}
-              whileTap={{
-                backgroundColor: "rgba(255, 24, 1, 0.15)",
-                borderColor: "rgba(255, 24, 1, 0.2)"
-              }}
-              transition={{
-                duration: 0.2,
-                ease: [0.4, 0, 0.2, 1]
-              }}
-            >
-              <img src={logoSrc} alt={displayName} className="nex-nav-logo" />
-            </motion.div>
-          ) : (
-            <motion.div 
-              className="nex-nav-client-name" 
-              onClick={handleHomeClick}
-              role="button"
-              tabIndex={0}
-              aria-label={`${displayName} - Go to home`}
-              onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
-              whileHover={{
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-                borderColor: "rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
-              }}
-              whileTap={{
-                backgroundColor: "rgba(255, 24, 1, 0.15)",
-                borderColor: "rgba(255, 24, 1, 0.2)"
-              }}
-              transition={{
-                duration: 0.2,
-                ease: [0.4, 0, 0.2, 1]
-              }}
-            >
-              <div className="client-name">{displayName}</div>
-            </motion.div>
-          )}
+
+
+          {/* Logo Placeholder - Maintains space for mobile logo */}
+          <div 
+            className="nex-nav-logo-placeholder"
+            style={{
+              width: 'calc(100px + var(--nex-spacing-md) * 2)',
+              height: '44px',
+              flexShrink: 0,
+              marginLeft: 'var(--nex-spacing-md)'
+            }}
+          />
 
           {/* Navigation Items */}
           <ul 
@@ -381,6 +343,109 @@ const NexNav: React.FC<NexNavProps> = ({
           />
         )}
       </AnimatePresence>
+
+      {/* Mobile Logo - Always on top like hamburger */}
+      <motion.div
+        className="nex-nav-mobile-logo"
+        style={{
+          position: 'fixed',
+          top: 'var(--nex-spacing-md)',
+          left: 'var(--nex-spacing-md)',
+          zIndex: 'calc(var(--nex-z-index-modal) + 10)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 'auto',
+          height: '44px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onClick={handleHomeClick}
+        role="button"
+        tabIndex={0}
+        aria-label={`${displayName} - Go to home`}
+        onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
+
+      >
+        {logoSrc ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            padding: '8px',
+            boxSizing: 'border-box'
+          }}>
+            <img 
+              src={logoSrc} 
+              alt={displayName} 
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                filter: 'brightness(0.9) contrast(1.1)',
+                maxWidth: '24px',
+                maxHeight: '24px'
+              }}
+              onError={(e) => {
+                // Fallback to text if image fails to load
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextElementSibling?.classList.remove('fallback-hidden');
+              }}
+            />
+            <div 
+              className="fallback-hidden"
+              style={{
+                position: 'absolute',
+                fontSize: 'var(--nex-font-size-xs)',
+                fontWeight: 'var(--nex-font-weight-medium)',
+                color: 'var(--nex-font-color)',
+                textAlign: 'center',
+                lineHeight: 1,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                maxWidth: '28px',
+                display: 'none'
+              }}
+            >
+              {displayName?.slice(0, 2)}
+            </div>
+          </div>
+        ) : (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            padding: '4px 12px',
+            boxSizing: 'border-box'
+          }}>
+            <div style={{
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              color: 'var(--nex-color-text-primary)',
+              textAlign: 'center',
+              lineHeight: 1.2,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: 'none',
+              fontFamily: 'var(--nex-font-family-primary)',
+              letterSpacing: '0.02em',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              textRendering: 'optimizeLegibility'
+            }}>
+              {displayName || 'NexComponent'}
+            </div>
+          </div>
+        )}
+      </motion.div>
+
     </>
   );
 };

@@ -148,7 +148,7 @@
     top: -4px;
     right: -8px;
     box-shadow: 0 2px 4px rgba(255, 24, 1, 0.3);
-    animation: nex-badge-pulse 2s infinite;
+U    /* Removed pulsing animation for enterprise use */
     
     /* Ensure badge is always visible */
     z-index: 1;
@@ -179,8 +179,9 @@
     padding: 0 var(--nex-spacing-sm);
     min-width: 70px;
     
+    /* Keep consistent font size */
     &__label {
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm);
     }
     
     .nex-nav-item-icon {
@@ -191,7 +192,7 @@
     .nex-nav-item-badge {
       min-width: 16px;
       height: 16px;
-      font-size: 10px;
+      font-size: var(--nex-font-size-xs);
     }
   }
 }
@@ -201,8 +202,9 @@
     padding: 0 var(--nex-spacing-sm);
     min-width: 60px;
     
+    /* Keep consistent font size */
     &__label {
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm);
     }
     
     .nex-nav-item-icon {
@@ -213,7 +215,7 @@
     .nex-nav-item-badge {
       min-width: 14px;
       height: 14px;
-      font-size: 9px;
+      font-size: var(--nex-font-size-xs);
     }
   }
 }

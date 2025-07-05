@@ -46,8 +46,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--nex-spacing-md) var(--nex-spacing-lg);
-    height: var(--nex-nav-height);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
+    height: 56px;
     gap: var(--nex-spacing-lg);
   }
 
@@ -79,6 +79,8 @@
       outline: 2px solid var(--nex-signature);
       outline-offset: 2px;
     }
+    
+    /* Original logo restored - properly aligned with nav */
   }
 
   .nex-nav-client-logo img {
@@ -129,15 +131,11 @@
     margin: 0;
     padding: 0;
     flex: 1;
-    justify-content: center;
+    justify-content: center; /* Center align nav items */
     align-items: center;
     min-width: 0; /* Allow flex shrinking */
 
-    @media (max-width: 1024px) {
-      gap: var(--nex-spacing-sm);
-    }
-
-    @include mobile {
+    @media (max-width: 767px) {
       display: none;
     }
   }
@@ -153,11 +151,7 @@
     flex-shrink: 0;
     min-width: 0; /* Allow flex shrinking */
 
-    @media (max-width: 1024px) {
-      gap: var(--nex-spacing-sm);
-    }
-
-    @include mobile {
+    @media (max-width: 767px) {
       // Hide all children except the burger button
       > *:not(.nex-nav-burger-btn) {
         display: none !important;
@@ -278,7 +272,7 @@
   overflow: hidden;
   box-sizing: border-box;
 
-  @include mobile {
+  @media (max-width: 767px) {
     display: flex;
     position: fixed;
     top: var(--nex-spacing-md);
@@ -314,31 +308,21 @@
    📱 RESPONSIVE BREAKPOINTS
    ================================ */
 
-@media (max-width: 1280px) {
-  .nex-nav .nex-nav-inner-wrapper {
-    padding: var(--nex-spacing-md) var(--nex-spacing-md);
-    gap: var(--nex-spacing-md);
-  }
-}
-
-@media (max-width: 1024px) {
-  .nex-nav .nex-nav-inner-wrapper {
-    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
-    gap: var(--nex-spacing-sm);
-  }
-  
-  .nex-nav-client-name .client-name {
-    font-size: var(--nex-font-size-md);
-  }
-}
-
 @media (max-width: 768px) {
   .nex-nav .nex-nav-inner-wrapper {
-    padding: var(--nex-spacing-sm);
-    gap: var(--nex-spacing-xs);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    gap: var(--nex-spacing-lg);
   }
-  
-  .nex-nav-client-name .client-name {
-    font-size: var(--nex-font-size-sm);
+}
+
+/* ================================
+   📱 MOBILE LOGO - Always on Top
+   ================================ */
+
+  .nex-nav-mobile-logo {
+    display: flex !important; /* Show mobile logo everywhere since original is removed */
   }
+
+.fallback-hidden {
+  display: none !important;
 }
