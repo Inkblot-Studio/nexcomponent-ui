@@ -20,7 +20,6 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hasSubItems = subItems && subItems.length > 0;
 
   useClickAway(dropdownRef, () => {
@@ -82,11 +81,6 @@ const NavItem: React.FC<NavItemProps> = ({
 
   const handleMouseEnter = () => {
     if (hasSubItems && !disabled) {
-      // Clear any pending close timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
       setIsDropdownOpen(true);
     }
   };
@@ -140,16 +134,10 @@ const NavItem: React.FC<NavItemProps> = ({
 
   return (
     <div 
-      className="nex-nav-item-wrapper" 
+      className={classNames('nex-nav-item-wrapper', {
+        'has-dropdown-open': isDropdownOpen && hasSubItems
+      })}
       ref={dropdownRef}
-      onMouseLeave={() => {
-        // Add delay before closing to prevent glitchy behavior
-        if (hasSubItems) {
-          timeoutRef.current = setTimeout(() => {
-            setIsDropdownOpen(false);
-          }, 150);
-        }
-      }}
     >
       <motion.li
         className={classNames('nex-nav-item', {
@@ -187,7 +175,7 @@ const NavItem: React.FC<NavItemProps> = ({
             <motion.span 
               className="nex-nav-item-chevron"
               animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
               aria-hidden="true"
             >
               <ChevronDown size={14} />
@@ -216,48 +204,20 @@ const NavItem: React.FC<NavItemProps> = ({
             }}
             exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
             transition={{ 
-              duration: 0.3,
-              ease: [0.4, 0, 0.2, 1],
-              background: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
-              },
-              backdropFilter: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
-              },
-              WebkitBackdropFilter: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
-              },
-              borderColor: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
-              },
-              boxShadow: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
-              }
+              duration: 0,
+              ease: [0.4, 0, 0.2, 1]
             }}
             style={{ transformOrigin: 'top center' }}
             role="menu"
             aria-label={`${label} submenu`}
             onMouseEnter={() => {
               if (hasSubItems) {
-                // Clear any pending close timeout
-                if (timeoutRef.current) {
-                  clearTimeout(timeoutRef.current);
-                  timeoutRef.current = null;
-                }
                 setIsDropdownOpen(true);
               }
             }}
             onMouseLeave={() => {
-              // Add delay before closing to prevent glitchy behavior
               if (hasSubItems) {
-                timeoutRef.current = setTimeout(() => {
-                  setIsDropdownOpen(false);
-                }, 150);
+                setIsDropdownOpen(false);
               }
             }}
           >

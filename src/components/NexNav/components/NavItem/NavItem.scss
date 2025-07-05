@@ -13,6 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+
 }
 
 .nex-nav-item {
@@ -223,8 +225,7 @@
 .nex-nav-dropdown {
   position: absolute;
   top: calc(100% + var(--nex-spacing-sm));
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   min-width: 220px;
   max-width: 320px;
   
@@ -271,6 +272,8 @@
   &:hover::before {
     left: 100%;
   }
+  
+
   
 
 }
