@@ -211,7 +211,6 @@ const NexNav: React.FC<NexNavProps> = ({
                 onClick={item.onClick}
                 isActive={false} // You can add logic to determine active state
                 disabled={item.disabled}
-                icon={item.icon}
                 badge={item.badge}
                 subItems={item.subItems}
                 description={item.description}

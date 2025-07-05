@@ -12,7 +12,6 @@ const NavItem: React.FC<NavItemProps> = ({
   onClick, 
   isActive = false,
   disabled = false,
-  icon,
   badge,
   tooltip,
   subItems,
@@ -20,6 +19,7 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hasSubItems = subItems && subItems.length > 0;
 
   useClickAway(dropdownRef, () => {
@@ -81,6 +81,11 @@ const NavItem: React.FC<NavItemProps> = ({
 
   const handleMouseEnter = () => {
     if (hasSubItems && !disabled) {
+      // Clear any pending close timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
       setIsDropdownOpen(true);
     }
   };
@@ -137,9 +142,11 @@ const NavItem: React.FC<NavItemProps> = ({
       className="nex-nav-item-wrapper" 
       ref={dropdownRef}
       onMouseLeave={() => {
-        // Only close when mouse leaves the entire wrapper
+        // Add delay before closing to prevent glitchy behavior
         if (hasSubItems) {
-          setIsDropdownOpen(false);
+          timeoutRef.current = setTimeout(() => {
+            setIsDropdownOpen(false);
+          }, 150);
         }
       }}
     >
@@ -161,26 +168,12 @@ const NavItem: React.FC<NavItemProps> = ({
         aria-disabled={disabled}
         aria-current={isActive ? 'page' : undefined}
         initial={false}
-        whileHover={!disabled ? {
-          backgroundColor: "rgba(255, 255, 255, 0.08)",
-          borderColor: "rgba(255, 255, 255, 0.1)",
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
-        } : {}}
-        whileTap={!disabled ? {
-          backgroundColor: "rgba(255, 24, 1, 0.15)",
-          borderColor: "rgba(255, 24, 1, 0.2)"
-        } : {}}
         transition={{
           duration: 0.2,
           ease: [0.4, 0, 0.2, 1]
         }}
       >
-        <div className="nex-nav-item-content">
-          {icon && (
-            <span className="nex-nav-item-icon" aria-hidden="true">
-              {icon}
-            </span>
-          )}
+                <div className="nex-nav-item-content">
           <span className={classNames('nex-nav-item__label', { active: isActive })}>
             {label}
           </span>
@@ -215,13 +208,20 @@ const NavItem: React.FC<NavItemProps> = ({
             aria-label={`${label} submenu`}
             onMouseEnter={() => {
               if (hasSubItems) {
+                // Clear any pending close timeout
+                if (timeoutRef.current) {
+                  clearTimeout(timeoutRef.current);
+                  timeoutRef.current = null;
+                }
                 setIsDropdownOpen(true);
               }
             }}
             onMouseLeave={() => {
-              // Close dropdown when mouse leaves the dropdown area
+              // Add delay before closing to prevent glitchy behavior
               if (hasSubItems) {
-                setIsDropdownOpen(false);
+                timeoutRef.current = setTimeout(() => {
+                  setIsDropdownOpen(false);
+                }, 150);
               }
             }}
           >
@@ -243,19 +243,8 @@ const NavItem: React.FC<NavItemProps> = ({
                     duration: 0.1,
                     delay: index * 0.02
                   }}
-                  whileHover={!subItem.disabled ? {
-                    backgroundColor: "rgba(255, 255, 255, 0.08)"
-                  } : {}}
-                  whileTap={!subItem.disabled ? {
-                    backgroundColor: "rgba(255, 24, 1, 0.15)"
-                  } : {}}
                 >
                   <div className="nex-nav-sub-item-content">
-                    {subItem.icon && (
-                      <span className="nex-nav-sub-item-icon" aria-hidden="true">
-                        {subItem.icon}
-                      </span>
-                    )}
                     <div className="nex-nav-sub-item-text">
                       <span className="nex-nav-sub-item-label">{subItem.label}</span>
                       {subItem.description && (

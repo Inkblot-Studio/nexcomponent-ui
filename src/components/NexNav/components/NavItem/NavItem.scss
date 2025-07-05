@@ -33,10 +33,17 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box; /* Ensure consistent box model */
+  transition: all 0.3s ease; /* Smooth transitions for all hover states */
 
   /* ================================
-     🎯 FOCUS STATES (CSS only for accessibility)
+     🎯 HOVER & FOCUS STATES
      ================================ */
+
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
 
   &:focus-visible:not(.disabled) {
     outline: 2px solid var(--nex-signature);
@@ -44,6 +51,11 @@
     background: rgba(255, 24, 1, 0.1);
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
+  }
+
+  &:active:not(.disabled) {
+    background: rgba(255, 24, 1, 0.15);
+    border-color: rgba(255, 24, 1, 0.2);
   }
 
   /* ================================
@@ -222,6 +234,8 @@
   -webkit-backdrop-filter: blur(24px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--nex-radius-lg);
+  
+
   
   /* Subtle shadow for depth */
   box-shadow: 

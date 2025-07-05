@@ -3,7 +3,6 @@ import { LanguageOption } from './components/LanguageSwitcher/LanguageSwitcher.t
 export type NavSubItem = {
   label: string;
   onClick: () => void;
-  icon?: React.ReactNode;
   badge?: string | number;
   disabled?: boolean;
   description?: string;
@@ -12,7 +11,6 @@ export type NavSubItem = {
 export type NavItem = {
   label: string;
   onClick: () => void;
-  icon?: React.ReactNode;
   badge?: string | number;
   disabled?: boolean;
   subItems?: NavSubItem[];

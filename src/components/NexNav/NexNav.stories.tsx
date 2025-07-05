@@ -1,6 +1,5 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Home, Info, Settings, Users, FileText, ShoppingCart, HelpCircle, Bell } from 'lucide-react';
 import storyBackground from '../../assets/img/story_background.jpg';
 import storyLogo from '../../assets/img/nex_logo.svg';
 import NexNav from './NexNav';
@@ -38,7 +37,6 @@ AuthenticatedFull.args = {
     { 
       label: 'Components', 
       onClick: () => alert('🧩 Components clicked'),
-      icon: <Settings size={16} />,
       subItems: [
         {
           label: 'UI Components',
@@ -48,21 +46,18 @@ AuthenticatedFull.args = {
         {
           label: 'Navigation',
           onClick: () => alert('🧭 Navigation clicked'),
-          description: 'Smart navigation systems',
-          icon: <Settings size={14} />
+          description: 'Smart navigation systems'
         },
         {
           label: 'Forms & Inputs',
           onClick: () => alert('📝 Forms & Inputs clicked'),
-          description: 'Interactive form components',
-          icon: <FileText size={14} />
+          description: 'Interactive form components'
         }
       ]
     },
     { 
       label: 'Documentation', 
       onClick: () => alert('📚 Documentation clicked'),
-      icon: <FileText size={16} />,
       subItems: [
         {
           label: 'Getting Started',
@@ -85,7 +80,6 @@ AuthenticatedFull.args = {
     { 
       label: 'Resources', 
       onClick: () => alert('📦 Resources clicked'),
-      icon: <Users size={16} />,
       badge: '3',
       subItems: [
         {
@@ -96,21 +90,18 @@ AuthenticatedFull.args = {
         {
           label: 'Templates',
           onClick: () => alert('📋 Templates clicked'),
-          description: 'Ready-to-use templates',
-          icon: <FileText size={14} />
+          description: 'Ready-to-use templates'
         },
         {
           label: 'Community',
           onClick: () => alert('👥 Community clicked'),
-          description: 'Join our developer community',
-          icon: <Users size={14} />
+          description: 'Join our developer community'
         }
       ]
     },
     { 
       label: 'Support', 
       onClick: () => alert('🆘 Support clicked'),
-      icon: <HelpCircle size={16} />,
       subItems: [
         {
           label: 'Help Center',
@@ -125,8 +116,7 @@ AuthenticatedFull.args = {
         {
           label: 'Status',
           onClick: () => alert('📊 Status clicked'),
-          description: 'Service status and updates',
-          icon: <Bell size={14} />
+          description: 'Service status and updates'
         }
       ]
     }
@@ -203,7 +193,6 @@ WithDropdowns.args = {
     { 
       label: 'Components', 
       onClick: () => alert('🧩 Components clicked'),
-      icon: <Settings size={16} />,
       subItems: [
         {
           label: 'All Components',
@@ -219,15 +208,13 @@ WithDropdowns.args = {
         {
           label: 'Favorites',
           onClick: () => alert('⭐ Favorites clicked'),
-          description: 'Your saved components',
-          icon: <FileText size={14} />
+          description: 'Your saved components'
         }
       ]
     },
     { 
       label: 'Projects', 
       onClick: () => alert('📁 Projects clicked'),
-      icon: <FileText size={16} />,
       badge: '2',
       subItems: [
         {
@@ -238,21 +225,18 @@ WithDropdowns.args = {
         {
           label: 'Team Projects',
           onClick: () => alert('👥 Team Projects clicked'),
-          description: 'Collaborative workspaces',
-          icon: <Users size={14} />
+          description: 'Collaborative workspaces'
         },
         {
           label: 'Templates',
           onClick: () => alert('📋 Templates clicked'),
-          description: 'Ready-to-use project templates',
-          icon: <FileText size={14} />
+          description: 'Ready-to-use project templates'
         }
       ]
     },
     { 
       label: 'Analytics', 
       onClick: () => alert('📈 Analytics clicked'),
-      icon: <FileText size={16} />,
       subItems: [
         {
           label: 'Usage Stats',
@@ -262,21 +246,18 @@ WithDropdowns.args = {
         {
           label: 'Performance',
           onClick: () => alert('⚡ Performance clicked'),
-          description: 'Performance metrics and insights',
-          icon: <Settings size={14} />
+          description: 'Performance metrics and insights'
         },
         {
           label: 'Reports',
           onClick: () => alert('📋 Reports clicked'),
-          description: 'Detailed usage reports',
-          icon: <FileText size={14} />
+          description: 'Detailed usage reports'
         }
       ]
     },
     { 
       label: 'Account', 
       onClick: () => alert('👤 Account clicked'),
-      icon: <Users size={16} />,
       subItems: [
         {
           label: 'Profile',
@@ -286,20 +267,17 @@ WithDropdowns.args = {
         {
           label: 'Billing',
           onClick: () => alert('💳 Billing clicked'),
-          description: 'Subscription and billing info',
-          icon: <FileText size={14} />
+          description: 'Subscription and billing info'
         },
         {
           label: 'Team',
           onClick: () => alert('👥 Team clicked'),
-          description: 'Manage team members',
-          icon: <Users size={14} />
+          description: 'Manage team members'
         },
         {
           label: 'API Keys',
           onClick: () => alert('🔑 API Keys clicked'),
-          description: 'Manage API access',
-          icon: <Settings size={14} />
+          description: 'Manage API access'
         }
       ]
     }
