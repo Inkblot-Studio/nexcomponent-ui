@@ -3,7 +3,7 @@ import { NavSubItem } from '../../NexNav.types';
 
 export type NavItemProps = {
   label: string;
-  onClick: () => void;
+  onClick?: () => void; // Optional - not used when subItems are present
   isActive?: boolean;
   disabled?: boolean;
   badge?: string | number;

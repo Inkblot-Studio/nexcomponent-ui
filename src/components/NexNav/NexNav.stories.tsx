@@ -36,7 +36,6 @@ AuthenticatedFull.args = {
     },
     { 
       label: 'Components', 
-      onClick: () => alert('🧩 Components clicked'),
       subItems: [
         {
           label: 'UI Components',
@@ -57,7 +56,6 @@ AuthenticatedFull.args = {
     },
     { 
       label: 'Documentation', 
-      onClick: () => alert('📚 Documentation clicked'),
       subItems: [
         {
           label: 'Getting Started',
@@ -79,7 +77,6 @@ AuthenticatedFull.args = {
     },
     { 
       label: 'Resources', 
-      onClick: () => alert('📦 Resources clicked'),
       badge: '3',
       subItems: [
         {
@@ -101,7 +98,6 @@ AuthenticatedFull.args = {
     },
     { 
       label: 'Support', 
-      onClick: () => alert('🆘 Support clicked'),
       subItems: [
         {
           label: 'Help Center',
@@ -192,7 +188,6 @@ WithDropdowns.args = {
     },
     { 
       label: 'Components', 
-      onClick: () => alert('🧩 Components clicked'),
       subItems: [
         {
           label: 'All Components',
@@ -214,7 +209,6 @@ WithDropdowns.args = {
     },
     { 
       label: 'Projects', 
-      onClick: () => alert('📁 Projects clicked'),
       badge: '2',
       subItems: [
         {
@@ -236,7 +230,6 @@ WithDropdowns.args = {
     },
     { 
       label: 'Analytics', 
-      onClick: () => alert('📈 Analytics clicked'),
       subItems: [
         {
           label: 'Usage Stats',
@@ -257,7 +250,6 @@ WithDropdowns.args = {
     },
     { 
       label: 'Account', 
-      onClick: () => alert('👤 Account clicked'),
       subItems: [
         {
           label: 'Profile',

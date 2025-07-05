@@ -76,7 +76,11 @@ const NavItem: React.FC<NavItemProps> = ({
 
   const handleClick = () => {
     if (disabled) return;
-    onClick?.();
+    // If the nav item has sub-items, don't trigger the onClick
+    // The dropdown should be the only interaction
+    if (!hasSubItems) {
+      onClick?.();
+    }
   };
 
   const handleMouseEnter = () => {

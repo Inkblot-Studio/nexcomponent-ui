@@ -18,8 +18,14 @@ import NexNav from '@nexcomponent/lib';
 function MyComponent() {
   const navItems = [
     { label: 'Home', onClick: () => console.log('Home clicked') },
+    { 
+      label: 'Products', 
+      subItems: [
+        { label: 'Overview', onClick: () => console.log('Products Overview clicked') },
+        { label: 'Features', onClick: () => console.log('Features clicked') }
+      ]
+    },
     { label: 'About', onClick: () => console.log('About clicked') },
-    // Add more menu items as needed
   ];
 
   return (
@@ -27,11 +33,14 @@ function MyComponent() {
       logoSrc="/path/to/logo.png"
       displayName="Company Name"
       navItems={navItems}
-      identity={true}
-      identityProps={{
-        onLoginClick: () => console.log('Login clicked'),
-        onSignUpClick: () => console.log('Sign Up clicked')
-      }}
+      homeButtonHandler={() => console.log('Home clicked')}
+      isAuthenticated={true}
+      user={{ name: 'John Doe' }}
+      onLogout={() => console.log('Logout clicked')}
+      languageOptions={[
+        { code: 'en', label: 'English' },
+        { code: 'es', label: 'Español' }
+      ]}
     />
   );
 }
@@ -43,9 +52,20 @@ export default MyComponent;
 
 * **logoSrc (optional):** URL of the logo image to be displayed in the navigation bar.
 * **displayName (required):** Alternate text for the logo image, or the company name if no logo is provided.
-* **identity (optional - default: false):** Whether to display identity links (e.g., login, sign up) in the navigation menu.
-* **navItems (required):** Array of menu items to be displayed in the navigation menu. Each item should have a `label` and an optional `onClick` function.
-* **identityProps (optional):** Additional props for identity links, including `onLoginClick` and `onSignUpClick` functions.
+* **homeButtonHandler (required):** Function called when the home/logo button is clicked.
+* **navItems (required):** Array of menu items to be displayed in the navigation menu. Each item should have a `label` and an optional `onClick` function (not used when `subItems` are present).
+* **isAuthenticated (required):** Boolean indicating if the user is authenticated.
+* **user (optional):** User object with name, avatarUrl, and role properties.
+* **onLogin (optional):** Function called when login button is clicked.
+* **onLogout (optional):** Function called when logout button is clicked.
+* **onProfile (optional):** Function called when profile button is clicked.
+* **languageOptions (required):** Array of language options for the language switcher.
+
+### NavItem Behavior
+
+* **Nav items with sub-items:** Hover to open dropdown, click does nothing
+* **Nav items without sub-items:** Click to navigate directly
+* **Sub-items in dropdown:** Click to navigate to specific pages/sections
 
 ### Example
 
@@ -56,8 +76,14 @@ import NexNav from '@nexcomponent/lib';
 function MyComponent() {
   const navItems = [
     { label: 'Home', onClick: () => console.log('Home clicked') },
+    { 
+      label: 'Products', 
+      subItems: [
+        { label: 'Overview', onClick: () => console.log('Products Overview clicked') },
+        { label: 'Features', onClick: () => console.log('Features clicked') }
+      ]
+    },
     { label: 'About', onClick: () => console.log('About clicked') },
-    // Add more menu items as needed
   ];
 
   return (
@@ -65,11 +91,14 @@ function MyComponent() {
       logoSrc="/path/to/logo.png"
       displayName="Company Name"
       navItems={navItems}
-      identity={true}
-      identityProps={{
-        onLoginClick: () => console.log('Login clicked'),
-        onSignUpClick: () => console.log('Sign Up clicked')
-      }}
+      homeButtonHandler={() => console.log('Home clicked')}
+      isAuthenticated={true}
+      user={{ name: 'John Doe' }}
+      onLogout={() => console.log('Logout clicked')}
+      languageOptions={[
+        { code: 'en', label: 'English' },
+        { code: 'es', label: 'Español' }
+      ]}
     />
   );
 }

@@ -10,7 +10,7 @@ export type NavSubItem = {
 
 export type NavItem = {
   label: string;
-  onClick: () => void;
+  onClick?: () => void; // Optional - not used when subItems are present
   badge?: string | number;
   disabled?: boolean;
   subItems?: NavSubItem[];
