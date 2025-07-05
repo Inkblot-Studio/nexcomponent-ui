@@ -138,6 +138,16 @@ const NavItem: React.FC<NavItemProps> = ({
         'has-dropdown-open': isDropdownOpen && hasSubItems
       })}
       ref={dropdownRef}
+      onMouseEnter={() => {
+        if (hasSubItems && !disabled) {
+          setIsDropdownOpen(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (hasSubItems) {
+          setIsDropdownOpen(false);
+        }
+      }}
     >
       <motion.li
         className={classNames('nex-nav-item', {
@@ -151,7 +161,6 @@ const NavItem: React.FC<NavItemProps> = ({
         aria-expanded={hasSubItems ? isDropdownOpen : undefined}
         tabIndex={disabled ? -1 : 0}
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
         onKeyDown={handleKeyDown}
         aria-label={tooltip || label}
         aria-disabled={disabled}
@@ -210,16 +219,7 @@ const NavItem: React.FC<NavItemProps> = ({
             style={{ transformOrigin: 'top center' }}
             role="menu"
             aria-label={`${label} submenu`}
-            onMouseEnter={() => {
-              if (hasSubItems) {
-                setIsDropdownOpen(true);
-              }
-            }}
-            onMouseLeave={() => {
-              if (hasSubItems) {
-                setIsDropdownOpen(false);
-              }
-            }}
+
           >
             <motion.ul className="nex-nav-dropdown-list">
               {subItems.map((subItem, index) => (

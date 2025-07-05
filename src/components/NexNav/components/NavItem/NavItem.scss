@@ -14,7 +14,18 @@
   align-items: center;
   justify-content: center;
   
-
+  /* Invisible bridge to connect nav item to dropdown */
+  &.has-dropdown-open::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: var(--nex-spacing-sm);
+    background: transparent;
+    pointer-events: auto;
+    z-index: 2;
+  }
 }
 
 .nex-nav-item {
