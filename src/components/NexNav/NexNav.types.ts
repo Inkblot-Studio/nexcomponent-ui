@@ -1,8 +1,22 @@
 import { LanguageOption } from './components/LanguageSwitcher/LanguageSwitcher.types';
 
+export type NavSubItem = {
+  label: string;
+  onClick: () => void;
+  icon?: React.ReactNode;
+  badge?: string | number;
+  disabled?: boolean;
+  description?: string;
+};
+
 export type NavItem = {
   label: string;
   onClick: () => void;
+  icon?: React.ReactNode;
+  badge?: string | number;
+  disabled?: boolean;
+  subItems?: NavSubItem[];
+  description?: string;
 };
 
 export type User = {

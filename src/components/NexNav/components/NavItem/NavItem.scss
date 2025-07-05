@@ -8,6 +8,13 @@
  * Consistent with LanguageSwitcher and UserMenu design philosophy
  */
 
+.nex-nav-item-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .nex-nav-item {
   display: flex;
   align-items: center;
@@ -153,6 +160,249 @@
     /* Ensure badge is always visible */
     z-index: 1;
   }
+
+  /* ================================
+     🔽 CHEVRON STYLING
+     ================================ */
+
+  .nex-nav-item-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: inherit;
+    opacity: 0.7;
+    transition: all var(--nex-transition-fast);
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 2;
+    }
+  }
+
+  /* ================================
+     📋 DROPDOWN STATES
+     ================================ */
+
+  &.has-dropdown {
+    .nex-nav-item-content {
+      gap: var(--nex-spacing-xs);
+    }
+  }
+
+  &.dropdown-open {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.15);
+    
+    .nex-nav-item-chevron {
+      opacity: 1;
+      color: var(--nex-signature);
+    }
+  }
+}
+
+/* ================================
+   📋 DROPDOWN CONTAINER - Glassmorphic
+   ================================ */
+
+.nex-nav-dropdown {
+  position: absolute;
+  top: calc(100% + var(--nex-spacing-sm));
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  max-width: 320px;
+  
+  /* Advanced Glassmorphic Design */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--nex-radius-lg);
+  
+  /* Subtle shadow for depth */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  /* Layout */
+  z-index: var(--nex-z-index-popover);
+  overflow: hidden;
+  
+  /* Ensure dropdown appears above other elements */
+  isolation: isolate;
+  
+  /* Add subtle shimmer effect */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+.nex-nav-dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--nex-spacing-xs) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* ================================
+   📋 SUB-ITEM STYLING - Glassmorphic
+   ================================ */
+
+.nex-nav-sub-item {
+  display: flex;
+  align-items: center;
+  padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-family: var(--nex-font-family-primary);
+  transition: all var(--nex-transition-fast);
+  position: relative;
+  
+  /* Typography */
+  font-size: var(--nex-font-size-sm);
+  font-weight: var(--nex-font-weight-regular);
+  color: var(--nex-font-color);
+  
+  &:first-child {
+    border-top-left-radius: var(--nex-radius-md);
+    border-top-right-radius: var(--nex-radius-md);
+  }
+  
+  &:last-child {
+    border-bottom-left-radius: var(--nex-radius-md);
+    border-bottom-right-radius: var(--nex-radius-md);
+  }
+  
+  /* Hover State - Subtle glassmorphic enhancement */
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+  
+  /* Focus State */
+  &:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: -2px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+    
+    .nex-nav-sub-item-label {
+      color: var(--nex-muted-font-color);
+    }
+  }
+}
+
+.nex-nav-sub-item-content {
+  display: flex;
+  align-items: center;
+  gap: var(--nex-spacing-sm);
+  width: 100%;
+  position: relative;
+}
+
+.nex-nav-sub-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--nex-muted-font-color);
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2;
+  }
+}
+
+.nex-nav-sub-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.nex-nav-sub-item-label {
+  font-size: var(--nex-font-size-sm);
+  font-weight: var(--nex-font-weight-medium);
+  color: var(--nex-font-color);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /* Ensure consistent rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.nex-nav-sub-item-description {
+  font-size: var(--nex-font-size-xs);
+  font-weight: var(--nex-font-weight-normal);
+  color: var(--nex-muted-font-color);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /* Ensure consistent rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.nex-nav-sub-item-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--nex-spacing-xs);
+  background: var(--nex-signature);
+  color: var(--nex-signature-contrast);
+  border-radius: var(--nex-radius-full);
+  font-size: var(--nex-font-size-xs);
+  font-weight: var(--nex-font-weight-bold);
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(255, 24, 1, 0.3);
 }
 
 /* ================================
@@ -194,6 +444,16 @@
       height: 16px;
       font-size: var(--nex-font-size-xs);
     }
+    
+    .nex-nav-item-chevron {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  .nex-nav-dropdown {
+    min-width: 200px;
+    max-width: 280px;
   }
 }
 
@@ -217,6 +477,25 @@
       height: 14px;
       font-size: var(--nex-font-size-xs);
     }
+    
+    .nex-nav-item-chevron {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  
+  .nex-nav-dropdown {
+    min-width: 180px;
+    max-width: 240px;
+  }
+  
+  .nex-nav-sub-item {
+    padding: var(--nex-spacing-sm);
+  }
+  
+  .nex-nav-sub-item-icon {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -250,6 +529,47 @@
   &.disabled {
     opacity: 0.4;
   }
+  
+  &.dropdown-open {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+[data-theme="dark"] .nex-nav-dropdown {
+  background: rgba(26, 31, 54, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  &::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+  }
+}
+
+[data-theme="dark"] .nex-nav-sub-item {
+  color: var(--nex-font-color);
+  
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+  
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  &.disabled {
+    opacity: 0.4;
+  }
 }
 
 /* ================================
@@ -262,6 +582,12 @@
   outline-offset: 2px;
 }
 
+.nex-nav-sub-item:focus-visible {
+  /* Ensure focus is visible in all contexts */
+  outline: 2px solid var(--nex-signature);
+  outline-offset: -2px;
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .nex-nav-item {
@@ -272,6 +598,24 @@
     &:active:not(.disabled) {
       background: rgba(0, 0, 0, 0.1);
       border: 2px solid currentColor;
+    }
+  }
+  
+  .nex-nav-dropdown {
+    border: 2px solid currentColor;
+    background: var(--nex-background-color);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .nex-nav-sub-item {
+    border-bottom: 1px solid currentColor;
+    
+    &:hover:not(.disabled),
+    &:focus-visible:not(.disabled) {
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
   }
 }
@@ -288,5 +632,19 @@
     .nex-nav-item-badge {
       animation: none;
     }
+    
+    .nex-nav-item-chevron {
+      transition: none;
+    }
+  }
+  
+  .nex-nav-dropdown {
+    &::before {
+      transition: none;
+    }
+  }
+  
+  .nex-nav-sub-item {
+    transition: none;
   }
 }

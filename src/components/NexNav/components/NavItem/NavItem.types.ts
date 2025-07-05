@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { NavSubItem } from '../../NexNav.types';
 
 export type NavItemProps = {
   label: string;
@@ -8,4 +9,6 @@ export type NavItemProps = {
   icon?: ReactNode;
   badge?: string | number;
   tooltip?: string;
+  subItems?: NavSubItem[];
+  description?: string;
 };

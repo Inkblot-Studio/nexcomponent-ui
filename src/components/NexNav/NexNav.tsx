@@ -210,6 +210,11 @@ const NexNav: React.FC<NexNavProps> = ({
                 label={item.label} 
                 onClick={item.onClick}
                 isActive={false} // You can add logic to determine active state
+                disabled={item.disabled}
+                icon={item.icon}
+                badge={item.badge}
+                subItems={item.subItems}
+                description={item.description}
               />
             ))}
           </ul>
