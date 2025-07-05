@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import './NexNav.scss';
@@ -42,6 +42,57 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isAtTop, setIsAtTop] = useState(true);
   const [locale, setLocale] = useState('en');
   const menuRef = useRef(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Memoize scroll handler for performance
+  const handleScroll = useCallback(() => {
+    setIsAtTop(window.scrollY === 0);
+  }, []);
+
+  // Memoize resize handler for performance
+  const handleResize = useCallback(() => {
+    if (window.innerWidth > 767) setIsMenuOpen(false);
+  }, []);
+
+  // Memoize locale change handler
+  const handleLocaleChange = useCallback((code: string) => {
+    setLocale(code);
+    localStorage.setItem(LANG_KEY, code);
+  }, []);
+
+  // Memoize menu toggle handler
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  // Memoize close menu handler
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  // Memoize home button handler
+  const handleHomeClick = useCallback(() => {
+    if (homeButtonHandler) {
+      homeButtonHandler();
+    }
+  }, [homeButtonHandler]);
+
+  // Memoize login handler
+  const handleLoginClick = useCallback(() => {
+    if (onLogin) {
+      onLogin();
+    }
+  }, [onLogin]);
+
+  // Memoize nav items with proper accessibility
+  const memoizedNavItems = useMemo(() => {
+    return navItems.map((item, i) => ({
+      ...item,
+      key: `nav-item-${i}`,
+      'aria-label': item.label,
+      'aria-current': undefined // Will be set by NavItem component if needed
+    }));
+  }, [navItems]);
 
   useClickAway(menuRef, (e) => {
     if (!(e.target as HTMLElement).closest('.nex-nav-burger')) {
@@ -60,24 +111,22 @@ const NexNav: React.FC<NexNavProps> = ({
     }
   }, [languageOptions]);
 
-  const handleLocaleChange = (code: string) => {
-    setLocale(code);
-    localStorage.setItem(LANG_KEY, code);
-  };
-
   useEffect(() => {
-    const handleScroll = () => setIsAtTop(window.scrollY === 0);
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 767) setIsMenuOpen(false);
-    };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
+
+  // Keyboard navigation for the entire nav
+  const handleNavKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setIsMenuOpen(false);
+    }
   }, []);
 
   return (
@@ -111,6 +160,8 @@ const NexNav: React.FC<NexNavProps> = ({
           },
         }}
         style={{ position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 'var(--nex-z-index-sticky)', overflow: 'visible' }}
+        role="banner"
+        aria-label="Main navigation"
       >
         <motion.div
           className="nex-nav-shimmer"
@@ -125,25 +176,84 @@ const NexNav: React.FC<NexNavProps> = ({
             background: 'linear-gradient(120deg, rgba(255,255,255,0.18) 30%, rgba(255,24,1,0.12) 60%, rgba(0,184,255,0.12) 100%)',
             filter: 'blur(8px)',
           }}
+          aria-hidden="true"
         />
-        <nav className="nex-nav-inner-wrapper">
+        <nav 
+          className="nex-nav-inner-wrapper" 
+          ref={navRef}
+          role="navigation"
+          aria-label="Primary navigation"
+          onKeyDown={handleNavKeyDown}
+        >
+          {/* Logo Section */}
           {logoSrc ? (
-            <div className="nex-nav-client-logo" onClick={homeButtonHandler}>
+            <motion.div 
+              className="nex-nav-client-logo" 
+              onClick={handleHomeClick}
+              role="button"
+              tabIndex={0}
+              aria-label={`${displayName} - Go to home`}
+              onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
+              whileHover={{
+                backgroundColor: "rgba(255, 255, 255, 0.08)",
+                borderColor: "rgba(255, 255, 255, 0.1)",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+              }}
+              whileTap={{
+                backgroundColor: "rgba(255, 24, 1, 0.15)",
+                borderColor: "rgba(255, 24, 1, 0.2)"
+              }}
+              transition={{
+                duration: 0.2,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+            >
               <img src={logoSrc} alt={displayName} className="nex-nav-logo" />
-            </div>
+            </motion.div>
           ) : (
-            <div className="nex-nav-client-name" onClick={homeButtonHandler}>
+            <motion.div 
+              className="nex-nav-client-name" 
+              onClick={handleHomeClick}
+              role="button"
+              tabIndex={0}
+              aria-label={`${displayName} - Go to home`}
+              onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
+              whileHover={{
+                backgroundColor: "rgba(255, 255, 255, 0.08)",
+                borderColor: "rgba(255, 255, 255, 0.1)",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+              }}
+              whileTap={{
+                backgroundColor: "rgba(255, 24, 1, 0.15)",
+                borderColor: "rgba(255, 24, 1, 0.2)"
+              }}
+              transition={{
+                duration: 0.2,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+            >
               <div className="client-name">{displayName}</div>
-            </div>
+            </motion.div>
           )}
 
-          <ul className="nex-nav-list" role="menubar">
-            {navItems.map((item, i) => (
-              <NavItem key={i} label={item.label} onClick={item.onClick} />
+          {/* Navigation Items */}
+          <ul 
+            className="nex-nav-list" 
+            role="menubar"
+            aria-label="Main menu"
+          >
+            {memoizedNavItems.map((item, i) => (
+              <NavItem 
+                key={item.key || i}
+                label={item.label} 
+                onClick={item.onClick}
+                isActive={false} // You can add logic to determine active state
+              />
             ))}
           </ul>
 
-          <div className="nex-nav-right">
+          {/* Right Section */}
+          <div className="nex-nav-right" role="group" aria-label="User controls">
             <LanguageSwitcher
               currentLocale={locale}
               options={languageOptions}
@@ -164,24 +274,63 @@ const NexNav: React.FC<NexNavProps> = ({
                 onAdminPanelClick={onAdminPanelClick}
               />
             ) : (
-              <div className="nex-nav-login-button" onClick={onLogin} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: 'var(--nex-font-size-xs)', fontWeight: 'var(--nex-font-weight-medium)', cursor: 'pointer' }}>
-                <Fingerprint size={18} />
+              <motion.div 
+                className="nex-nav-login-button" 
+                onClick={handleLoginClick}
+                role="button"
+                tabIndex={0}
+                aria-label="Sign in to your account"
+                onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
+                whileHover={{
+                  backgroundColor: "rgba(255, 255, 255, 0.12)",
+                  borderColor: "rgba(255, 255, 255, 0.15)",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
+                }}
+                whileTap={{
+                  backgroundColor: "rgba(255, 24, 1, 0.15)",
+                  borderColor: "rgba(255, 24, 1, 0.2)"
+                }}
+                transition={{
+                  duration: 0.2,
+                  ease: [0.4, 0, 0.2, 1]
+                }}
+              >
+                <Fingerprint size={18} aria-hidden="true" />
                 <span>Login</span>
-              </div>
+              </motion.div>
             )}
           </div>
         </nav>
       </motion.div>
 
       {/* Hamburger button outside nav container to avoid z-index stacking context issues */}
-      <button
+      <motion.button
         className={`nex-nav-burger-btn${isMenuOpen ? ' menu-open' : ''}`}
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isMenuOpen}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-controls="mobile-nav-menu"
+        onClick={toggleMenu}
         type="button"
+        ref={menuRef}
+        whileHover={{
+          backgroundColor: "rgba(255, 255, 255, 0.12)",
+          borderColor: "rgba(255, 255, 255, 0.15)",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
+        }}
+        whileTap={{
+          backgroundColor: "rgba(255, 24, 1, 0.15)",
+          borderColor: "rgba(255, 24, 1, 0.2)"
+        }}
+        transition={{
+          duration: 0.2,
+          ease: [0.4, 0, 0.2, 1]
+        }}
       >
-        <motion.div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} initial={false} animate={isMenuOpen ? 'open' : 'closed'}>
+        <motion.div 
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+          initial={false} 
+          animate={isMenuOpen ? 'open' : 'closed'}
+        >
           <motion.div
             key="menu"
             initial={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -190,7 +339,7 @@ const NexNav: React.FC<NexNavProps> = ({
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             style={{ position: 'absolute' }}
           >
-            <Menu size={24} />
+            <Menu size={24} aria-hidden="true" />
           </motion.div>
           <motion.div
             key="close"
@@ -200,16 +349,17 @@ const NexNav: React.FC<NexNavProps> = ({
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             style={{ position: 'absolute' }}
           >
-            <X size={24} className="nex-nav-x-shimmer" />
+            <X size={24} className="nex-nav-x-shimmer" aria-hidden="true" />
           </motion.div>
         </motion.div>
-      </button>
+      </motion.button>
 
+      {/* Mobile Navigation */}
       <AnimatePresence>
         {isMenuOpen && (
           <MobileNav
             isOpen={isMenuOpen}
-            onClose={() => setIsMenuOpen(false)}
+            onClose={closeMenu}
             navItems={navItems}
             user={user}
             isAuthenticated={isAuthenticated}

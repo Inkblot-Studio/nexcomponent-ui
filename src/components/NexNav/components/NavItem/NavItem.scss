@@ -1,6 +1,6 @@
 /**
  * ========================================
- * 🧭 NEX NAV ITEM
+ * 🧭 NEX NAV ITEM - Enterprise Grade
  * ========================================
  * 
  * Ultra-slim, glassmorphic design inspired by iOS 16+
@@ -11,37 +11,162 @@
 .nex-nav-item {
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  justify-content: center;
+  padding: 0 var(--nex-spacing-md);
+  height: var(--nex-nav-item-height);
+  min-width: var(--nex-nav-item-min-width);
   cursor: pointer;
   user-select: none;
   outline: none;
   background: transparent;
-  border: none;
-  border-radius: 0;
+  border: 1px solid transparent; /* Always have a border to prevent layout shifts */
+  border-radius: var(--nex-radius-full);
   box-shadow: none;
-  transition: background var(--nex-transition-fast);
+  font-family: var(--nex-font-family-primary);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* Ensure consistent box model */
 
-  &:hover,
-  &:focus-visible,
-  &:active {
-    background: rgba(0,0,0,0.04);
-    border: none;
-    box-shadow: none;
-    outline: none;
+  /* ================================
+     🎯 FOCUS STATES (CSS only for accessibility)
+     ================================ */
+
+  &:focus-visible:not(.disabled) {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
   }
+
+  /* ================================
+     🚫 DISABLED STATE
+     ================================ */
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+    
+    .nex-nav-item__label {
+      color: var(--nex-muted-font-color);
+    }
+  }
+
+  /* ================================
+     📦 CONTENT LAYOUT
+     ================================ */
+
+  .nex-nav-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nex-spacing-xs);
+    width: 100%;
+    position: relative;
+  }
+
+  /* ================================
+     🎨 ICON STYLING
+     ================================ */
+
+  .nex-nav-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: inherit;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 2;
+    }
+  }
+
+  /* ================================
+     📝 LABEL STYLING - Enterprise Typography
+     ================================ */
 
   &__label {
     font-size: var(--nex-font-size-sm);
     font-weight: var(--nex-font-weight-medium);
+    font-family: var(--nex-font-family-primary);
     color: var(--nex-font-color);
     letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
     transition: all var(--nex-transition-fast);
+    text-align: center;
+    
+    /* Ensure consistent rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 
     &.active {
-      font-weight: var(--nex-font-weight-bold);
+      font-weight: var(--nex-font-weight-semibold);
       color: var(--nex-signature);
       text-shadow: 0 0 20px rgba(255, 24, 1, 0.3);
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background: var(--nex-signature);
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(255, 24, 1, 0.5);
+      }
     }
+  }
+
+  /* ================================
+     🔔 BADGE STYLING
+     ================================ */
+
+  .nex-nav-item-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 var(--nex-spacing-xs);
+    background: var(--nex-signature);
+    color: var(--nex-signature-contrast);
+    border-radius: var(--nex-radius-full);
+    font-size: var(--nex-font-size-xs);
+    font-weight: var(--nex-font-weight-bold);
+    line-height: 1;
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    box-shadow: 0 2px 4px rgba(255, 24, 1, 0.3);
+    animation: nex-badge-pulse 2s infinite;
+    
+    /* Ensure badge is always visible */
+    z-index: 1;
+  }
+}
+
+/* ================================
+   🎨 BADGE ANIMATION
+   ================================ */
+
+@keyframes nex-badge-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 }
 
@@ -49,11 +174,46 @@
    📱 MOBILE OPTIMIZATIONS
    ================================ */
 
+@media (max-width: 1024px) {
+  .nex-nav-item {
+    padding: 0 var(--nex-spacing-sm);
+    min-width: 70px;
+    
+    &__label {
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    .nex-nav-item-icon {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .nex-nav-item-badge {
+      min-width: 16px;
+      height: 16px;
+      font-size: 10px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .nex-nav-item {
-    padding: 0 12px;
+    padding: 0 var(--nex-spacing-sm);
+    min-width: 60px;
+    
     &__label {
-      font-size: var(--nex-font-size-md);
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    .nex-nav-item-icon {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .nex-nav-item-badge {
+      min-width: 14px;
+      height: 14px;
+      font-size: 9px;
     }
   }
 }
@@ -64,13 +224,67 @@
 
 [data-theme="dark"] .nex-nav-item {
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   box-shadow: none;
-  &:hover,
-  &:focus-visible,
-  &:active {
-    background: rgba(255,255,255,0.06);
-    border: none;
-    box-shadow: none;
+  
+  &:hover:not(.disabled),
+  &:focus-visible:not(.disabled),
+  &:active:not(.disabled) {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:focus-visible:not(.disabled) {
+    background: rgba(255, 24, 1, 0.15);
+    border: 1px solid rgba(255, 24, 1, 0.3);
+  }
+  
+  &:active:not(.disabled) {
+    background: rgba(255, 24, 1, 0.2);
+    border: 1px solid rgba(255, 24, 1, 0.4);
+  }
+  
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
+/* ================================
+   ♿ ACCESSIBILITY ENHANCEMENTS
+   ================================ */
+
+.nex-nav-item:focus-visible {
+  /* Ensure focus is visible in all contexts */
+  outline: 2px solid var(--nex-signature);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nex-nav-item {
+    border: 1px solid currentColor;
+    
+    &:hover:not(.disabled),
+    &:focus-visible:not(.disabled),
+    &:active:not(.disabled) {
+      background: rgba(0, 0, 0, 0.1);
+      border: 2px solid currentColor;
+    }
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nex-nav-item {
+    transition: none;
+    
+    &__label {
+      transition: none;
+    }
+    
+    .nex-nav-item-badge {
+      animation: none;
+    }
   }
 }

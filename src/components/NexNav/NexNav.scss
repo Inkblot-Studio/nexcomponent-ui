@@ -9,6 +9,7 @@
   width: 100%;
   transition: background-color var(--nex-transition-base), border-color var(--nex-transition-base);
   background-color: transparent;
+  font-family: var(--nex-font-family-primary);
 
   &.not-at-top {
     position: fixed;
@@ -46,13 +47,21 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--nex-spacing-md) var(--nex-spacing-lg);
+    height: var(--nex-nav-height);
+    gap: var(--nex-spacing-lg);
   }
 
+  /* ================================
+     🏢 LOGO SECTION - Enterprise Grade
+     ================================ */
+  
   .nex-nav-client-logo,
-  .nex-nav-client-name .client-name {
-    height: 36px;
-    min-width: 36px;
-    max-width: 180px;
+  .nex-nav-client-name {
+    flex-shrink: 0;
+    height: var(--nex-nav-logo-height);
+    width: var(--nex-nav-logo-width); /* Fixed width to prevent layout shifts */
+    min-width: var(--nex-nav-logo-width);
+    max-width: var(--nex-nav-logo-width);
     border-radius: var(--nex-radius-full);
     padding: 0 var(--nex-spacing-sm);
     display: flex;
@@ -60,21 +69,16 @@
     justify-content: center;
     overflow: hidden;
     background: transparent !important;
-    border: none !important;
+    border: 1px solid transparent !important; /* Always have a border to prevent layout shifts */
     box-shadow: none !important;
-    transition: none;
     cursor: pointer;
-  }
-
-  .nex-nav-client-logo:hover,
-  .nex-nav-client-logo:focus-visible,
-  .nex-nav-client-logo:active,
-  .nex-nav-client-name .client-name:hover,
-  .nex-nav-client-name .client-name:focus-visible,
-  .nex-nav-client-name .client-name:active {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    position: relative;
+    box-sizing: border-box; /* Ensure consistent box model */
+    
+    &:focus-visible {
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+    }
   }
 
   .nex-nav-client-logo img {
@@ -83,24 +87,75 @@
     width: auto;
     height: auto;
     display: block;
+    object-fit: contain;
   }
 
+  /* Enterprise Logo Typography */
+  .nex-nav-client-name .client-name {
+    font-family: var(--nex-font-family-logo);
+    font-weight: var(--nex-logo-font-weight);
+    font-size: var(--nex-font-size-lg);
+    letter-spacing: var(--nex-logo-letter-spacing);
+    font-feature-settings: var(--nex-logo-font-feature-settings);
+    color: var(--nex-font-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--nex-spacing-xs);
+    box-sizing: border-box;
+    
+    /* Ensure consistent rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* Prevent text from causing layout shifts */
+    display: block;
+    position: relative;
+  }
+
+  /* ================================
+     🧭 NAVIGATION LIST - Stable Layout
+     ================================ */
+  
   .nex-nav-list {
     display: flex;
     list-style: none;
-    gap: var(--nex-spacing-lg);
+    gap: var(--nex-spacing-md);
     margin: 0;
     padding: 0;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    min-width: 0; /* Allow flex shrinking */
+
+    @media (max-width: 1024px) {
+      gap: var(--nex-spacing-sm);
+    }
 
     @include mobile {
       display: none;
     }
   }
 
+  /* ================================
+     🎯 RIGHT SECTION - Consistent Spacing
+     ================================ */
+  
   .nex-nav-right {
     display: flex;
     align-items: center;
     gap: var(--nex-spacing-md);
+    flex-shrink: 0;
+    min-width: 0; /* Allow flex shrinking */
+
+    @media (max-width: 1024px) {
+      gap: var(--nex-spacing-sm);
+    }
 
     @include mobile {
       // Hide all children except the burger button
@@ -114,10 +169,14 @@
     }
   }
 
+  /* ================================
+     🔐 LOGIN BUTTON - Enterprise Style
+     ================================ */
+  
   .nex-nav-login-button {
-    height: 36px;
-    min-width: 36px;
-    max-width: 180px;
+    height: var(--nex-nav-item-height);
+    min-width: var(--nex-nav-item-height);
+    max-width: 120px;
     border-radius: var(--nex-radius-full);
     padding: 0 var(--nex-spacing-sm);
     display: flex;
@@ -126,30 +185,36 @@
     overflow: hidden;
     font-size: var(--nex-font-size-sm);
     font-weight: var(--nex-font-weight-medium);
+    font-family: var(--nex-font-family-primary);
     gap: var(--nex-spacing-xs);
     width: auto;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    transition: none;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
     cursor: pointer;
-  }
-
-  .nex-nav-login-button:hover,
-  .nex-nav-login-button:focus-visible,
-  .nex-nav-login-button:active {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    color: var(--nex-font-color);
+    box-sizing: border-box; /* Ensure consistent box model */
+    
+    &:focus-visible {
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+    }
   }
 
   .nex-nav-login-button span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100px;
+    max-width: 80px;
+    font-weight: var(--nex-font-weight-medium);
   }
 }
+
+/* ================================
+   🎨 ANIMATIONS - Optimized Performance
+   ================================ */
 
 @keyframes nex-nav-shimmer {
   0% {
@@ -178,12 +243,16 @@
   }
 }
 
+/* ================================
+   🍔 BURGER BUTTON - Enterprise Style
+   ================================ */
+
 .nex-nav-burger-btn {
   display: none;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  min-width: 36px;
+  height: var(--nex-nav-item-height);
+  min-width: var(--nex-nav-item-height);
   max-width: 44px;
   padding: 0 var(--nex-spacing-xs);
   border-radius: var(--nex-radius-full);
@@ -191,11 +260,13 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: var(--nex-font-color);
-  transition: all var(--nex-transition-fast);
   cursor: pointer;
   margin-left: var(--nex-spacing-xs);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* Ensure consistent box model */
 
   @include mobile {
     display: flex;
@@ -204,13 +275,7 @@
     right: var(--nex-spacing-lg);
     z-index: calc(var(--nex-z-index-tooltip) + 10);
   }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
+  
   &:focus-visible {
     outline: 2px solid var(--nex-signature);
     outline-offset: 2px;
@@ -218,12 +283,7 @@
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
   }
-  &:active {
-    background: rgba(255, 24, 1, 0.15);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
-    border-color: rgba(255, 24, 1, 0.2);
-  }
+  
   svg {
     display: block;
     width: 24px;
@@ -249,26 +309,35 @@
   }
 }
 
-.nex-nav-item {
-  height: 36px;
-  min-width: 36px;
-  border-radius: var(--nex-radius-full) !important;
-  padding: 0 var(--nex-spacing-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  transition: all var(--nex-transition-fast);
+/* ================================
+   📱 RESPONSIVE BREAKPOINTS
+   ================================ */
+
+@media (max-width: 1280px) {
+  .nex-nav .nex-nav-inner-wrapper {
+    padding: var(--nex-spacing-md) var(--nex-spacing-md);
+    gap: var(--nex-spacing-md);
+  }
 }
 
-.nex-nav-item:hover,
-.nex-nav-item:focus-visible,
-.nex-nav-item:active {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: none;
+@media (max-width: 1024px) {
+  .nex-nav .nex-nav-inner-wrapper {
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
+  }
+  
+  .nex-nav-client-name .client-name {
+    font-size: var(--nex-font-size-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .nex-nav .nex-nav-inner-wrapper {
+    padding: var(--nex-spacing-sm);
+    gap: var(--nex-spacing-xs);
+  }
+  
+  .nex-nav-client-name .client-name {
+    font-size: var(--nex-font-size-sm);
+  }
 }
