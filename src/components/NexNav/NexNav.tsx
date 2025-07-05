@@ -95,7 +95,8 @@ const NexNav: React.FC<NexNavProps> = ({
   }, [navItems]);
 
   useClickAway(menuRef, (e) => {
-    if (!(e.target as HTMLElement).closest('.nex-nav-burger')) {
+    if (!(e.target as HTMLElement).closest('.nex-nav-burger') && 
+        !(e.target as HTMLElement).closest('.nex-mobile-nav')) {
       setIsMenuOpen(false);
     }
   });

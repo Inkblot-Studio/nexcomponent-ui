@@ -1,9 +1,10 @@
 import { LanguageOption } from '../LanguageSwitcher/LanguageSwitcher.types';
+import { NavItem } from '../../NexNav.types';
 
 export type MobileNavProps = {
   isOpen: boolean;
   onClose: () => void;
-  navItems: { label: string; onClick: () => void }[];
+  navItems: NavItem[];
   user?: {
     name: string;
     avatarUrl?: string;
