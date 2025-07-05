@@ -160,30 +160,29 @@
   }
 
   /* ================================
-     🔔 BADGE STYLING
+     🔔 BADGE STYLING - Glassmorphic
      ================================ */
 
   .nex-nav-item-badge {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 var(--nex-spacing-xs);
-    background: var(--nex-signature);
-    color: var(--nex-signature-contrast);
-    border-radius: var(--nex-radius-full);
+    min-width: 16px;
+    height: auto;
+    padding: 2px 6px;
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    color: var(--nex-signature);
+    border-radius: var(--nex-radius-sm);
     font-size: var(--nex-font-size-xs);
-    font-weight: var(--nex-font-weight-bold);
+    font-weight: var(--nex-font-weight-medium);
     line-height: 1;
-    position: absolute;
-    top: -4px;
-    right: -8px;
-    box-shadow: 0 2px 4px rgba(255, 24, 1, 0.3);
-    /* Removed pulsing animation for enterprise use */
-    
-    /* Ensure badge is always visible */
-    z-index: 1;
+    border: 1px solid rgba(255, 24, 1, 0.2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    position: relative;
+    flex-shrink: 0;
   }
 
   /* ================================
@@ -422,17 +421,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 var(--nex-spacing-xs);
-  background: var(--nex-signature);
-  color: var(--nex-signature-contrast);
-  border-radius: var(--nex-radius-full);
+  min-width: 16px;
+  height: auto;
+  padding: 2px 6px;
+  background: rgba(255, 24, 1, 0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  color: var(--nex-signature);
+  border-radius: var(--nex-radius-sm);
   font-size: var(--nex-font-size-xs);
-  font-weight: var(--nex-font-weight-bold);
+  font-weight: var(--nex-font-weight-medium);
   line-height: 1;
+  border: 1px solid rgba(255, 24, 1, 0.2);
+  text-transform: none;
+  letter-spacing: 0.02em;
   flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(255, 24, 1, 0.3);
 }
 
 /* ================================
