@@ -10,4 +10,5 @@ export type NavItemProps = {
   tooltip?: string;
   subItems?: NavSubItem[];
   description?: string;
+  isAtTop?: boolean;
 };

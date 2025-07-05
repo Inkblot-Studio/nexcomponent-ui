@@ -15,7 +15,8 @@ const NavItem: React.FC<NavItemProps> = ({
   badge,
   tooltip,
   subItems,
-  description
+  description,
+  isAtTop = true
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -199,7 +200,7 @@ const NavItem: React.FC<NavItemProps> = ({
       <AnimatePresence>
         {isDropdownOpen && hasSubItems && (
           <motion.div
-            className="nex-nav-dropdown"
+            className={`nex-nav-dropdown${!isAtTop ? ' not-at-top' : ''}`}
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}

@@ -214,6 +214,7 @@ const NexNav: React.FC<NexNavProps> = ({
                 badge={item.badge}
                 subItems={item.subItems}
                 description={item.description}
+                isAtTop={isAtTop}
               />
             ))}
           </ul>
