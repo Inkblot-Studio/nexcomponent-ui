@@ -143,7 +143,7 @@ const NexNav: React.FC<NexNavProps> = ({
             backdropFilter: 'blur(0px) saturate(100%)',
             WebkitBackdropFilter: 'blur(0px) saturate(100%)',
             transition: {
-              duration: 1.2,
+              duration: 0.2,
               ease: [0.4, 0, 0.2, 1],
             },
           },
@@ -154,7 +154,7 @@ const NexNav: React.FC<NexNavProps> = ({
             backdropFilter: 'blur(24px) saturate(180%)',
             WebkitBackdropFilter: 'blur(24px) saturate(180%)',
             transition: {
-              duration: 1.2,
+              duration: 0.2,
               ease: [0.4, 0, 0.2, 1],
             },
           },
@@ -313,13 +313,14 @@ const NexNav: React.FC<NexNavProps> = ({
         type="button"
         ref={menuRef}
         whileHover={{
-          backgroundColor: "rgba(255, 255, 255, 0.12)",
-          borderColor: "rgba(255, 255, 255, 0.15)",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
+          borderColor: "rgba(255, 255, 255, 0.12)",
+          boxShadow: "0 3px 12px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15)"
         }}
         whileTap={{
-          backgroundColor: "rgba(255, 24, 1, 0.15)",
-          borderColor: "rgba(255, 24, 1, 0.2)"
+          backgroundColor: "rgba(255, 24, 1, 0.1)",
+          borderColor: "rgba(255, 24, 1, 0.15)",
+          boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 24, 1, 0.2)"
         }}
         transition={{
           duration: 0.2,
@@ -336,20 +337,20 @@ const NexNav: React.FC<NexNavProps> = ({
             initial={{ opacity: 1, scale: 1, rotate: 0 }}
             animate={isMenuOpen ? { opacity: 0, scale: 0.7, rotate: 45 } : { opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, scale: 0.7, rotate: 45 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             style={{ position: 'absolute' }}
           >
-            <Menu size={24} aria-hidden="true" />
+            <Menu size={20} aria-hidden="true" />
           </motion.div>
           <motion.div
             key="close"
             initial={{ opacity: 0, scale: 0.7, rotate: -45 }}
             animate={isMenuOpen ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.7, rotate: -45 }}
             exit={{ opacity: 0, scale: 0.7, rotate: -45 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             style={{ position: 'absolute' }}
           >
-            <X size={24} className="nex-nav-x-shimmer" aria-hidden="true" />
+            <X size={20} className="nex-nav-x-shimmer" aria-hidden="true" />
           </motion.div>
         </motion.div>
       </motion.button>

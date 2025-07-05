@@ -244,29 +244,39 @@
 }
 
 /* ================================
-   🍔 BURGER BUTTON - Enterprise Style
+   🔐 BURGER BUTTON - Clean Glassmorphic
    ================================ */
 
 .nex-nav-burger-btn {
   display: none;
   align-items: center;
   justify-content: center;
-  height: var(--nex-nav-item-height);
-  min-width: var(--nex-nav-item-height);
-  max-width: 44px;
-  padding: 0 var(--nex-spacing-xs);
+  height: 40px;
+  min-width: 40px;
+  max-width: 48px;
+  padding: 0 var(--nex-spacing-sm);
   border-radius: var(--nex-radius-full);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Clean glassmorphic background */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  
+  /* Subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  /* Clean shadow */
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
   color: var(--nex-font-color);
   cursor: pointer;
   margin-left: var(--nex-spacing-xs);
   position: relative;
   overflow: hidden;
-  box-sizing: border-box; /* Ensure consistent box model */
+  box-sizing: border-box;
 
   @include mobile {
     display: flex;
@@ -279,35 +289,26 @@
   &:focus-visible {
     outline: 2px solid var(--nex-signature);
     outline-offset: 2px;
-    background: rgba(255, 24, 1, 0.1);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    background: rgba(255, 24, 1, 0.08);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
   }
   
   svg {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: inherit;
+    opacity: 0.8;
   }
 }
 
 .nex-nav-burger-btn.menu-open .nex-nav-x-shimmer {
   filter: drop-shadow(0 0 8px #ff1801) drop-shadow(0 0 16px #ff1801cc);
-  animation: nex-x-shimmer 6s infinite linear;
+  /* Clean enterprise look - no animations */
 }
 
-@keyframes nex-x-shimmer {
-  0% {
-    filter: drop-shadow(0 0 8px #ff1801) drop-shadow(0 0 16px #ff1801cc);
-  }
-  50% {
-    filter: drop-shadow(0 0 16px #ff1801cc) drop-shadow(0 0 32px #ff1801aa);
-  }
-  100% {
-    filter: drop-shadow(0 0 8px #ff1801) drop-shadow(0 0 16px #ff1801cc);
-  }
-}
+/* Removed pulsating animation keyframes for enterprise use */
 
 /* ================================
    📱 RESPONSIVE BREAKPOINTS
