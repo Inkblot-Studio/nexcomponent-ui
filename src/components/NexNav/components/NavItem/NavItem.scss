@@ -272,17 +272,7 @@
     left: 100%;
   }
   
-  /* When nav is not at top, use the same background as the nav */
-  &.not-at-top {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.13);
-  }
+
 }
 
 .nex-nav-dropdown-list {
@@ -306,10 +296,10 @@
   user-select: none;
   outline: none;
   background: transparent;
-  border: none;
+  border: 1px solid transparent; /* Always have border to prevent layout shifts */
   border-radius: 0;
   font-family: var(--nex-font-family-primary);
-  transition: all var(--nex-transition-fast);
+  transition: background-color var(--nex-transition-fast), border-color var(--nex-transition-fast);
   position: relative;
   
   /* Typography */
@@ -330,8 +320,7 @@
   /* Hover State - Subtle glassmorphic enhancement */
   &:hover:not(.disabled) {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.08);
   }
   
   /* Focus State */
@@ -339,6 +328,7 @@
     outline: 2px solid var(--nex-signature);
     outline-offset: -2px;
     background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   &.disabled {
