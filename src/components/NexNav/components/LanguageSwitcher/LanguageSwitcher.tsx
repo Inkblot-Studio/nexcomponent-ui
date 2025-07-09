@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
+import { ChevronDown } from 'lucide-react';
 import './LanguageSwitcher.scss';
 import { LanguageSwitcherProps } from './LanguageSwitcher.types';
 
@@ -149,18 +150,6 @@ const getLanguageName = (code: string): string => {
   return nameMap[code.toLowerCase()] || code.toUpperCase().slice(0, 2);
 };
 
-const ChevronIcon = ({ open }: { open: boolean }) => (
-  <svg
-    className={`nex-lang-chevron${open ? ' open' : ''}`}
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   currentLocale,
   options,
@@ -234,7 +223,14 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         ) : (
           <span className="nex-lang-emoji">{getFlagEmoji(currentLocale)}</span>
         )}
-        <ChevronIcon open={open} />
+        <motion.span 
+          className="nex-lang-chevron"
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
+          aria-hidden="true"
+        >
+          <ChevronDown size={14} />
+        </motion.span>
       </div>
 
       <AnimatePresence>
@@ -244,7 +240,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             role="listbox"
           >
             {showSearch && (

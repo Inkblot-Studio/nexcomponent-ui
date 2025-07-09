@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import classNames from 'classnames';
+import { ChevronDown } from 'lucide-react';
 import './UserMenu.scss';
 import { UserMenuProps } from './UserMenu.types';
 
@@ -87,6 +88,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
             </svg>
           </span>
         )}
+        <motion.span 
+          className="nex-user-menu-chevron"
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
+          aria-hidden="true"
+        >
+          <ChevronDown size={14} />
+        </motion.span>
       </motion.button>
 
       <AnimatePresence>
@@ -96,7 +105,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             role="menu"
           >
             {user ? (

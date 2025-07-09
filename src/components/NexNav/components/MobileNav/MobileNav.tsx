@@ -254,13 +254,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     </motion.div>
                   )}
                 </motion.div>
-                <AnimatePresence>
-                  {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
+                {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
                     <motion.div
-                      variants={ANIMATION_VARIANTS.fadeIn}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -275,15 +272,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           }
                         }}
                         style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                        variants={ANIMATION_VARIANTS.fadeIn}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ ...slow, delay: subIndex * 0.05 }}
                       >
                         <span className="nex-mobile-nav-text">{subItem.label}</span>
                         {subItem.badge && (
                           <motion.span 
                             className="nex-mobile-nav-badge"
-                            variants={ANIMATION_VARIANTS.fadeIn}
-                            initial="initial"
-                            animate="animate"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             transition={slow}
                           >
                             {subItem.badge}
@@ -293,7 +291,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     ))}
                   </motion.div>
                 )}
-                </AnimatePresence>
               </motion.div>
             ))}
           </motion.div>
@@ -327,13 +324,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 <ChevronDown className="nex-mobile-nav-icon" />
               </motion.div>
             </motion.div>
-            <AnimatePresence>
-              {isLanguageOpen && (
+            {isLanguageOpen && (
                 <motion.div
-                  variants={ANIMATION_VARIANTS.fadeIn}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={slow}
                   style={{ overflow: 'hidden' }}
                 >
@@ -346,7 +340,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         setIsLanguageOpen(false);
                       }}
                       style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                      variants={ANIMATION_VARIANTS.fadeIn}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ ...slow, delay: languageOptions.indexOf(lang) * 0.05 }}
                     >
                       <span className="nex-mobile-lang-abbr">
                         {lang.code.toUpperCase()}
@@ -356,7 +352,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   ))}
                 </motion.div>
               )}
-            </AnimatePresence>
           </motion.div>
 
           {/* Profile Section */}
@@ -389,13 +384,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                <AnimatePresence>
-                  {isProfileOpen && (
+                {isProfileOpen && (
                     <motion.div
-                      variants={ANIMATION_VARIANTS.fadeIn}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -404,7 +396,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onProfile}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.05 }}
                         >
                           <User className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">View Profile</span>
@@ -415,15 +409,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onEndorsementsClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.1 }}
                         >
                           <Fingerprint className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Endorsements</span>
                           <motion.span 
                             className="nex-mobile-nav-badge"
-                            variants={ANIMATION_VARIANTS.fadeIn}
-                            initial="initial"
-                            animate="animate"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             transition={slow}
                           >
                             {endorsementCount}
@@ -435,15 +430,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onSubscriptionClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.15 }}
                         >
                           <Zap className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Subscription</span>
                           <motion.span 
                             className="nex-mobile-nav-badge"
-                            variants={ANIMATION_VARIANTS.fadeIn}
-                            initial="initial"
-                            animate="animate"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             transition={slow}
                           >
                             {subscription.tier === 'pro' ? 'Pro' : 'Free'}
@@ -452,7 +448,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       )}
                     </motion.div>
                   )}
-                </AnimatePresence>
               </motion.div>
             </motion.div>
           )}
@@ -487,13 +482,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                <AnimatePresence>
-                  {isSettingsOpen && (
+                {isSettingsOpen && (
                     <motion.div
-                      variants={ANIMATION_VARIANTS.fadeIn}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -502,7 +494,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onActivityLogClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.05 }}
                         >
                           <Activity className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Activity Log</span>
@@ -513,7 +507,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onSecurityClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.1 }}
                         >
                           <Shield className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Security</span>
@@ -524,7 +520,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onIntegrationsClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.15 }}
                         >
                           <Globe className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Integrations</span>
@@ -535,7 +533,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onAdminPanelClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          variants={ANIMATION_VARIANTS.fadeIn}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ ...slow, delay: 0.2 }}
                         >
                           <Crown className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Admin Panel</span>
@@ -543,7 +543,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       )}
                     </motion.div>
                   )}
-                </AnimatePresence>
               </motion.div>
             </motion.div>
           )}
