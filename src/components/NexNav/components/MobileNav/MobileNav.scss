@@ -55,7 +55,7 @@ body.nex-lock-scroll {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: calc(var(--nex-nav-height) + var(--nex-spacing-md));
+  padding-top: var(--nex-spacing-md);
   padding-bottom: var(--nex-spacing-md);
   padding-inline: var(--nex-spacing-md);
   overflow-y: auto;

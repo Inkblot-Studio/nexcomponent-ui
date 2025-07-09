@@ -133,9 +133,9 @@ const NexNav: React.FC<NexNavProps> = ({
   return (
     <>
       <motion.div
-        className={`nex-nav${!isAtTop ? ' not-at-top' : ''}`}
+        className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}`}
         initial={false}
-        animate={isAtTop ? 'atTop' : 'scrolled'}
+        animate={isAtTop && !isMenuOpen ? 'atTop' : 'scrolled'}
         variants={{
           atTop: {
             background: 'rgba(0,0,0,0)',
@@ -167,7 +167,7 @@ const NexNav: React.FC<NexNavProps> = ({
         <motion.div
           className="nex-nav-shimmer"
           initial={{ opacity: 0, x: '-30%' }}
-          animate={isAtTop ? { opacity: 0, x: '-30%' } : { opacity: 0.7, x: '0%' }}
+          animate={isAtTop && !isMenuOpen ? { opacity: 0, x: '-30%' } : { opacity: 0.7, x: '0%' }}
           transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1] }}
           style={{
             position: 'absolute',
