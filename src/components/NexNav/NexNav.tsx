@@ -9,10 +9,14 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileNav from './components/MobileNav';
 
 import { NexNavProps } from './NexNav.types';
-import { Fingerprint, Menu, X } from 'lucide-react';
+import { Fingerprint, Menu, X, MoreHorizontal, ChevronDown } from 'lucide-react';
 import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONFIG } from '../../utils/animationConfig';
+import classNames from 'classnames';
 
 const LANG_KEY = 'nex-locale';
+const MAX_NAV_ITEMS = 4;
+const MIN_ITEM_WIDTH = 120; // Minimum width per nav item
+const MORE_BUTTON_WIDTH = 80; // Width of the "More" button
 
 const getDefaultLocale = (): string => {
   const lang = navigator.language || 'en';
@@ -45,28 +49,125 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [availableWidth, setAvailableWidth] = useState(0);
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
 
-  // Ensure only one dropdown is open at a time
-  useEffect(() => {
-    if (isLanguageOpen && isUserOpen) {
-      setIsUserOpen(false);
-    }
-  }, [isLanguageOpen]);
-
-  useEffect(() => {
-    if (isUserOpen && isLanguageOpen) {
-      setIsLanguageOpen(false);
-    }
-  }, [isUserOpen]);
-  
-
+  const navListRef = useRef<HTMLUListElement>(null);
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
   
   // Use centralized animation configuration
   const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
-  
 
+  // Ensure only one dropdown is open at a time
+  useEffect(() => {
+    if (isLanguageOpen && (isUserOpen || isMoreOpen)) {
+      setIsUserOpen(false);
+      setIsMoreOpen(false);
+    }
+  }, [isLanguageOpen]);
+
+  useEffect(() => {
+    if (isUserOpen && (isLanguageOpen || isMoreOpen)) {
+      setIsLanguageOpen(false);
+      setIsMoreOpen(false);
+    }
+  }, [isUserOpen]);
+
+  useEffect(() => {
+    if (isMoreOpen && (isLanguageOpen || isUserOpen)) {
+      setIsLanguageOpen(false);
+      setIsUserOpen(false);
+    }
+  }, [isMoreOpen]);
+
+  // Calculate available width and determine visible items
+  const calculateVisibleItems = useCallback(() => {
+    if (!navListRef.current) return;
+
+    const container = navListRef.current;
+    const containerWidth = container.offsetWidth;
+    const itemElements = container.querySelectorAll('.nex-nav-item');
+    
+    let totalWidth = 0;
+    const newVisibleItems: number[] = [];
+    
+    // Calculate width needed for each item
+    for (let i = 0; i < navItems.length; i++) {
+      const item = navItems[i];
+      const itemElement = itemElements[i] as HTMLElement;
+      
+      if (itemElement) {
+        const itemWidth = itemElement.offsetWidth;
+        const requiredWidth = itemWidth + 16; // Add gap
+        
+        // Check if we can fit this item plus the "More" button if needed
+        const wouldNeedMoreButton = i >= MAX_NAV_ITEMS - 1;
+        const moreButtonSpace = wouldNeedMoreButton ? MORE_BUTTON_WIDTH : 0;
+        
+        if (totalWidth + requiredWidth + moreButtonSpace <= containerWidth) {
+          newVisibleItems.push(i);
+          totalWidth += requiredWidth;
+        } else {
+          break;
+        }
+      } else {
+        // Fallback calculation if element not found
+        const estimatedWidth = MIN_ITEM_WIDTH + 16;
+        const wouldNeedMoreButton = i >= MAX_NAV_ITEMS - 1;
+        const moreButtonSpace = wouldNeedMoreButton ? MORE_BUTTON_WIDTH : 0;
+        
+        if (totalWidth + estimatedWidth + moreButtonSpace <= containerWidth) {
+          newVisibleItems.push(i);
+          totalWidth += estimatedWidth;
+        } else {
+          break;
+        }
+      }
+    }
+    
+    setVisibleItems(newVisibleItems);
+    setAvailableWidth(containerWidth);
+  }, [navItems]);
+
+  // Recalculate on resize
+  useEffect(() => {
+    const handleResize = () => {
+      calculateVisibleItems();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [calculateVisibleItems]);
+
+  // Recalculate when nav items change
+  useEffect(() => {
+    // Small delay to ensure DOM is updated
+    const timer = setTimeout(calculateVisibleItems, 100);
+    return () => clearTimeout(timer);
+  }, [navItems, calculateVisibleItems]);
+
+  // Memoize nav items with proper accessibility
+  const memoizedNavItems = useMemo(() => {
+    return navItems.map((item, i) => ({
+      ...item,
+      key: `nav-item-${i}`,
+      'aria-label': item.label,
+      'aria-current': undefined // Will be set by NavItem component if needed
+    }));
+  }, [navItems]);
+
+  // Separate visible items and overflow items based on calculated space
+  const visibleNavItems = useMemo(() => {
+    return visibleItems.map(index => memoizedNavItems[index]).filter(Boolean);
+  }, [memoizedNavItems, visibleItems]);
+
+  const overflowNavItems = useMemo(() => {
+    return memoizedNavItems.filter((_, index) => !visibleItems.includes(index));
+  }, [memoizedNavItems, visibleItems]);
+
+  const hasOverflow = overflowNavItems.length > 0;
 
   // Memoize scroll handler for performance
   const handleScroll = useCallback(() => {
@@ -108,16 +209,6 @@ const NexNav: React.FC<NexNavProps> = ({
       onLogin();
     }
   }, [onLogin]);
-
-  // Memoize nav items with proper accessibility
-  const memoizedNavItems = useMemo(() => {
-    return navItems.map((item, i) => ({
-      ...item,
-      key: `nav-item-${i}`,
-      'aria-label': item.label,
-      'aria-current': undefined // Will be set by NavItem component if needed
-    }));
-  }, [navItems]);
 
   // Use centralized animation variants
   const shimmerVariants = {
@@ -190,6 +281,24 @@ const NexNav: React.FC<NexNavProps> = ({
       setIsMenuOpen(false);
     }
   });
+
+  // Close more dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.nex-nav-more-dropdown')) {
+        setIsMoreOpen(false);
+      }
+    };
+
+    if (isMoreOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMoreOpen]);
 
   useEffect(() => {
     const stored = localStorage.getItem(LANG_KEY);
@@ -300,8 +409,10 @@ const NexNav: React.FC<NexNavProps> = ({
             role="menubar"
             aria-label="Main menu"
             variants={stagger}
+            ref={navListRef}
           >
-            {memoizedNavItems.map((item, i) => (
+            {/* Show all items initially, then filter based on calculation */}
+            {(visibleItems.length === 0 ? memoizedNavItems.slice(0, MAX_NAV_ITEMS) : visibleNavItems).map((item, i) => (
               <motion.li
                 key={item.key || i}
                 variants={ANIMATION_VARIANTS.navItem}
@@ -318,6 +429,127 @@ const NexNav: React.FC<NexNavProps> = ({
                 />
               </motion.li>
             ))}
+            
+            {/* More dropdown for overflow items */}
+            {hasOverflow && visibleItems.length > 0 && (
+              <motion.li
+                variants={ANIMATION_VARIANTS.navItem}
+                style={{ position: 'relative' }}
+              >
+                <div 
+                  className="nex-nav-item-wrapper"
+                  style={{ position: 'relative' }}
+                >
+                  <motion.li
+                    className={classNames('nex-nav-item', {
+                      'has-dropdown': true,
+                      'dropdown-open': isMoreOpen
+                    })}
+                    role="menuitem"
+                    aria-haspopup="true"
+                    aria-expanded={isMoreOpen}
+                    tabIndex={0}
+                    onClick={() => setIsMoreOpen(!isMoreOpen)}
+                    initial={false}
+                    transition={{
+                      duration: 0.2,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
+                  >
+                                         <div className="nex-nav-item-content">
+                       <span className="nex-nav-item__label" style={{ fontSize: 'var(--nex-font-size-xs)' }}>
+                         More
+                       </span>
+                       <span className="nex-nav-item-badge" aria-label={`${overflowNavItems.length} additional items`}>
+                         {overflowNavItems.length}
+                       </span>
+                      <motion.span 
+                        className="nex-nav-item-chevron"
+                        animate={{ rotate: isMoreOpen ? 180 : 0 }}
+                        transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
+                        aria-hidden="true"
+                      >
+                        <ChevronDown size={14} />
+                      </motion.span>
+                    </div>
+                  </motion.li>
+
+                  {/* More dropdown menu */}
+                  <AnimatePresence>
+                    {isMoreOpen && (
+                      <motion.div
+                        className="nex-nav-dropdown"
+                        initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                        animate={{ 
+                          opacity: 1, 
+                          y: 0,
+                          scaleY: 1,
+                          background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+                          backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+                          WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+                          borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+                          boxShadow: isAtTop 
+                            ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                            : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+                        }}
+                        exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                        transition={{ 
+                          duration: 0,
+                          ease: [0.4, 0, 0.2, 1]
+                        }}
+                        style={{ 
+                          transformOrigin: 'top center',
+                          right: 0,
+                          left: 'auto'
+                        }}
+                        role="menu"
+                        aria-label="More options submenu"
+                      >
+                        <motion.ul className="nex-nav-dropdown-list">
+                          {overflowNavItems.map((item, index) => (
+                            <motion.li
+                              key={item.key || `overflow-${index}`}
+                              className={classNames('nex-nav-sub-item', {
+                                'disabled': item.disabled
+                              })}
+                              role="menuitem"
+                              tabIndex={item.disabled ? -1 : 0}
+                              onClick={() => {
+                                if (!item.disabled && item.onClick) {
+                                  item.onClick();
+                                  setIsMoreOpen(false);
+                                }
+                              }}
+                              aria-disabled={item.disabled}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ 
+                                duration: 0.1,
+                                delay: index * 0.02
+                              }}
+                            >
+                              <div className="nex-nav-sub-item-content">
+                                <div className="nex-nav-sub-item-text">
+                                  <span className="nex-nav-sub-item-label">{item.label}</span>
+                                  {item.description && (
+                                    <span className="nex-nav-sub-item-description">{item.description}</span>
+                                  )}
+                                </div>
+                                {item.badge && (
+                                  <span className="nex-nav-sub-item-badge" aria-label={`${item.badge} notifications`}>
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </div>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.li>
+            )}
           </motion.ul>
 
           {/* Right Section */}
