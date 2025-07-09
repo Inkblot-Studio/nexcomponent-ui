@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import './NexNav.scss';
 
@@ -12,6 +12,27 @@ import { NexNavProps } from './NexNav.types';
 import { Fingerprint, Menu, X } from 'lucide-react';
 
 const LANG_KEY = 'nex-locale';
+
+// Enterprise-level animation constants
+const ANIMATION_CONFIG = {
+  // Fast, responsive animations
+  fast: { duration: 0.15, ease: [0.4, 0, 0.2, 1] },
+  medium: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+  slow: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+  
+  // Spring configurations for natural feel
+  spring: { 
+    type: "spring", 
+    stiffness: 400, 
+    damping: 30,
+    mass: 0.8
+  },
+  
+  // Stagger delays for sequential animations
+  stagger: {
+    container: { delayChildren: 0.1, staggerChildren: 0.05 }
+  }
+};
 
 const getDefaultLocale = (): string => {
   const lang = navigator.language || 'en';
@@ -41,13 +62,40 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [locale, setLocale] = useState('en');
+  const [isInitialized, setIsInitialized] = useState(false);
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
+  
+  // Respect user's motion preferences
+  const shouldReduceMotion = useReducedMotion();
+  
+  // Motion values for advanced animations
+  const scrollY = useMotionValue(0);
+  const backgroundOpacity = useTransform(scrollY, [0, 50], [0, 0.7]);
+  const blurAmount = useTransform(scrollY, [0, 50], [0, 24]);
+  const shadowIntensity = useTransform(scrollY, [0, 50], [0, 0.12]);
+  
+  // Spring-based transforms for smooth animations with better ease-in-out
+  const springBackgroundOpacity = useSpring(backgroundOpacity, {
+    stiffness: 200,
+    damping: 25,
+    mass: 1,
+    restDelta: 0.001
+  });
+  
+  const springBlurAmount = useSpring(blurAmount, {
+    stiffness: 200,
+    damping: 25,
+    mass: 1,
+    restDelta: 0.001
+  });
 
   // Memoize scroll handler for performance
   const handleScroll = useCallback(() => {
-    setIsAtTop(window.scrollY === 0);
-  }, []);
+    const scrollPosition = window.scrollY;
+    setIsAtTop(scrollPosition === 0);
+    scrollY.set(scrollPosition);
+  }, [scrollY]);
 
   // Memoize resize handler for performance
   const handleResize = useCallback(() => {
@@ -60,7 +108,7 @@ const NexNav: React.FC<NexNavProps> = ({
     localStorage.setItem(LANG_KEY, code);
   }, []);
 
-  // Memoize menu toggle handler
+  // Memoize menu toggle handler with animation
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev);
   }, []);
@@ -94,6 +142,102 @@ const NexNav: React.FC<NexNavProps> = ({
     }));
   }, [navItems]);
 
+  // Optimized shimmer animation variants
+  const shimmerVariants = {
+    hidden: { 
+      opacity: 0,
+      x: '-100%',
+      scale: 0.8
+    },
+    visible: { 
+      opacity: shouldReduceMotion ? 0 : 0.6,
+      x: '0%',
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  // Nav container variants
+  const navVariants = {
+    initial: {
+      y: -100,
+      opacity: 0
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.4,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: shouldReduceMotion ? 0 : 0.05
+      }
+    }
+  };
+
+  // Nav item variants
+  const navItemVariants = {
+    initial: {
+      y: -20,
+      opacity: 0
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  // Burger button variants
+  const burgerVariants = {
+    closed: {
+      rotate: 0,
+      scale: 1,
+      transition: ANIMATION_CONFIG.fast
+    },
+    open: {
+      rotate: 180,
+      scale: 1.05,
+      transition: ANIMATION_CONFIG.fast
+    }
+  };
+
+  // Icon variants for smooth transitions
+  const iconVariants = {
+    closed: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: ANIMATION_CONFIG.fast
+    },
+    open: {
+      opacity: 0,
+      scale: 0.8,
+      rotate: 45,
+      transition: ANIMATION_CONFIG.fast
+    }
+  };
+
+  const closeIconVariants = {
+    closed: {
+      opacity: 0,
+      scale: 0.8,
+      rotate: -45,
+      transition: ANIMATION_CONFIG.fast
+    },
+    open: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: ANIMATION_CONFIG.fast
+    }
+  };
+
   useClickAway(menuRef, (e) => {
     if (!(e.target as HTMLElement).closest('.nex-nav-burger') && 
         !(e.target as HTMLElement).closest('.nex-mobile-nav')) {
@@ -110,6 +254,7 @@ const NexNav: React.FC<NexNavProps> = ({
       setLocale(fallback);
       localStorage.setItem(LANG_KEY, fallback);
     }
+    setIsInitialized(true);
   }, [languageOptions]);
 
   useEffect(() => {
@@ -132,65 +277,59 @@ const NexNav: React.FC<NexNavProps> = ({
 
   return (
     <>
-      <motion.div
+      <motion.nav
         className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}`}
-        initial={false}
-        animate={isAtTop && !isMenuOpen ? 'atTop' : 'scrolled'}
-        variants={{
-          atTop: {
-            background: 'rgba(0,0,0,0)',
-            boxShadow: '0 0 0 0 rgba(0,0,0,0)',
-            borderBottom: '0px solid rgba(255,255,255,0)',
-            backdropFilter: 'blur(0px) saturate(100%)',
-            WebkitBackdropFilter: 'blur(0px) saturate(100%)',
-            transition: {
-              duration: 0.2,
-              ease: [0.4, 0, 0.2, 1],
-            },
-          },
-          scrolled: {
-            background: 'rgba(255,255,255,0.7)',
-            boxShadow: '0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset',
-            borderBottom: '1.5px solid rgba(255,255,255,0.22)',
-            backdropFilter: 'blur(24px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-            transition: {
-              duration: 0.2,
-              ease: [0.4, 0, 0.2, 1],
-            },
-          },
+        ref={navRef}
+        initial="initial"
+        animate={isInitialized ? "animate" : "initial"}
+        variants={navVariants}
+        transition={{
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
         }}
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 'var(--nex-z-index-sticky)', overflow: 'visible' }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 'var(--nex-z-index-sticky)',
+          overflow: 'visible',
+          background: `rgba(255,255,255,${springBackgroundOpacity})`,
+          backdropFilter: `blur(${springBlurAmount}px) saturate(180%)`,
+          WebkitBackdropFilter: `blur(${springBlurAmount}px) saturate(180%)`,
+          borderBottom: isAtTop ? 'none' : `1.5px solid rgba(255,255,255,${springBackgroundOpacity.get() * 0.3})`,
+          boxShadow: isAtTop ? 'none' : `0 8px 32px -8px rgba(0,0,0,${shadowIntensity}), 0 0 0 1.5px rgba(255,255,255,${springBackgroundOpacity.get() * 0.15}) inset`
+        }}
         role="banner"
         aria-label="Main navigation"
       >
+        {/* Optimized Shimmer Effect */}
         <motion.div
           className="nex-nav-shimmer"
-          initial={{ opacity: 0, x: '-30%' }}
-          animate={isAtTop && !isMenuOpen ? { opacity: 0, x: '-30%' } : { opacity: 0.7, x: '0%' }}
-          transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1] }}
+          variants={shimmerVariants}
+          initial="hidden"
+          animate={isAtTop && !isMenuOpen ? "hidden" : "visible"}
           style={{
             position: 'absolute',
             top: 0, left: 0, right: 0, bottom: 0,
             pointerEvents: 'none',
             zIndex: 0,
-            background: 'linear-gradient(120deg, rgba(255,255,255,0.18) 30%, rgba(255,24,1,0.12) 60%, rgba(0,184,255,0.12) 100%)',
-            filter: 'blur(8px)',
+            background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 30%, rgba(255,24,1,0.08) 60%, rgba(0,184,255,0.08) 100%)',
+            filter: 'blur(6px)',
+            willChange: 'transform, opacity'
           }}
           aria-hidden="true"
         />
-        <nav 
-          className="nex-nav-inner-wrapper" 
-          ref={navRef}
-          role="navigation"
-          aria-label="Primary navigation"
-          onKeyDown={handleNavKeyDown}
+
+        <motion.div
+          className="nex-nav-inner-wrapper"
+          variants={ANIMATION_CONFIG.stagger}
         >
-
-
           {/* Logo Placeholder - Maintains space for mobile logo */}
-          <div 
+          <motion.div 
             className="nex-nav-logo-placeholder"
+            variants={navItemVariants}
             style={{
               width: 'calc(100px + var(--nex-spacing-md) * 2)',
               height: '44px',
@@ -200,47 +339,62 @@ const NexNav: React.FC<NexNavProps> = ({
           />
 
           {/* Navigation Items */}
-          <ul 
+          <motion.ul 
             className="nex-nav-list" 
             role="menubar"
             aria-label="Main menu"
+            variants={ANIMATION_CONFIG.stagger}
           >
             {memoizedNavItems.map((item, i) => (
-              <NavItem 
+              <motion.li
                 key={item.key || i}
-                label={item.label} 
-                onClick={item.onClick}
-                isActive={false} // You can add logic to determine active state
-                disabled={item.disabled}
-                badge={item.badge}
-                subItems={item.subItems}
-                description={item.description}
-                isAtTop={isAtTop}
-              />
+                variants={navItemVariants}
+              >
+                <NavItem 
+                  label={item.label} 
+                  onClick={item.onClick}
+                  isActive={false} // You can add logic to determine active state
+                  disabled={item.disabled}
+                  badge={item.badge}
+                  subItems={item.subItems}
+                  description={item.description}
+                  isAtTop={isAtTop}
+                />
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
 
           {/* Right Section */}
-          <div className="nex-nav-right" role="group" aria-label="User controls">
-            <LanguageSwitcher
-              currentLocale={locale}
-              options={languageOptions}
-              onChange={handleLocaleChange}
-            />
-            {isAuthenticated && user && onLogout && onProfile ? (
-              <UserMenu
-                user={user}
-                onLogout={onLogout}
-                onProfile={onProfile}
-                endorsementCount={endorsementCount}
-                subscription={subscription}
-                onEndorsementsClick={onEndorsementsClick}
-                onSubscriptionClick={onSubscriptionClick}
-                onActivityLogClick={onActivityLogClick}
-                onSecurityClick={onSecurityClick}
-                onIntegrationsClick={onIntegrationsClick}
-                onAdminPanelClick={onAdminPanelClick}
+          <motion.div 
+            className="nex-nav-right" 
+            role="group" 
+            aria-label="User controls"
+            variants={navItemVariants}
+          >
+            <motion.div variants={navItemVariants}>
+              <LanguageSwitcher
+                currentLocale={locale}
+                options={languageOptions}
+                onChange={handleLocaleChange}
               />
+            </motion.div>
+            
+            {isAuthenticated && user && onLogout && onProfile ? (
+              <motion.div variants={navItemVariants}>
+                <UserMenu
+                  user={user}
+                  onLogout={onLogout}
+                  onProfile={onProfile}
+                  endorsementCount={endorsementCount}
+                  subscription={subscription}
+                  onEndorsementsClick={onEndorsementsClick}
+                  onSubscriptionClick={onSubscriptionClick}
+                  onActivityLogClick={onActivityLogClick}
+                  onSecurityClick={onSecurityClick}
+                  onIntegrationsClick={onIntegrationsClick}
+                  onAdminPanelClick={onAdminPanelClick}
+                />
+              </motion.div>
             ) : (
               <motion.div 
                 className="nex-nav-login-button" 
@@ -249,82 +403,102 @@ const NexNav: React.FC<NexNavProps> = ({
                 tabIndex={0}
                 aria-label="Sign in to your account"
                 onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
+                variants={navItemVariants}
                 whileHover={{
                   backgroundColor: "rgba(255, 255, 255, 0.12)",
-                  borderColor: "rgba(255, 255, 255, 0.15)",
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
+                  borderColor: "rgba(255, 255, 255, 0.18)",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
+                  scale: shouldReduceMotion ? 1 : 1.02,
+                  transition: ANIMATION_CONFIG.fast
                 }}
                 whileTap={{
                   backgroundColor: "rgba(255, 24, 1, 0.15)",
-                  borderColor: "rgba(255, 24, 1, 0.2)"
+                  borderColor: "rgba(255, 24, 1, 0.25)",
+                  scale: shouldReduceMotion ? 1 : 0.98,
+                  transition: ANIMATION_CONFIG.fast
                 }}
-                transition={{
-                  duration: 0.2,
-                  ease: [0.4, 0, 0.2, 1]
+                whileFocus={{
+                  outline: "2px solid var(--nex-signature)",
+                  outlineOffset: "2px",
+                  transition: ANIMATION_CONFIG.fast
                 }}
               >
-                <Fingerprint size={18} aria-hidden="true" />
-                <span>Login</span>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={ANIMATION_CONFIG.fast}
+                >
+                  <Fingerprint size={18} aria-hidden="true" />
+                </motion.div>
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ ...ANIMATION_CONFIG.fast, delay: 0.05 }}
+                >
+                  Login
+                </motion.span>
               </motion.div>
             )}
-          </div>
-        </nav>
-      </motion.div>
-
-      {/* Hamburger button outside nav container to avoid z-index stacking context issues */}
-      <motion.button
-        className={`nex-nav-burger-btn${isMenuOpen ? ' menu-open' : ''}`}
-        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={isMenuOpen}
-        aria-controls="mobile-nav-menu"
-        onClick={toggleMenu}
-        type="button"
-        ref={menuRef}
-        whileHover={{
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          boxShadow: "0 3px 12px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15)"
-        }}
-        whileTap={{
-          backgroundColor: "rgba(255, 24, 1, 0.1)",
-          borderColor: "rgba(255, 24, 1, 0.15)",
-          boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 24, 1, 0.2)"
-        }}
-        transition={{
-          duration: 0.2,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-      >
-        <motion.div 
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
-          initial={false} 
-          animate={isMenuOpen ? 'open' : 'closed'}
-        >
-          <motion.div
-            key="menu"
-            initial={{ opacity: 1, scale: 1, rotate: 0 }}
-            animate={isMenuOpen ? { opacity: 0, scale: 0.7, rotate: 45 } : { opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.7, rotate: 45 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            style={{ position: 'absolute' }}
-          >
-            <Menu size={20} aria-hidden="true" />
-          </motion.div>
-          <motion.div
-            key="close"
-            initial={{ opacity: 0, scale: 0.7, rotate: -45 }}
-            animate={isMenuOpen ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.7, rotate: -45 }}
-            exit={{ opacity: 0, scale: 0.7, rotate: -45 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            style={{ position: 'absolute' }}
-          >
-            <X size={20} className="nex-nav-x-shimmer" aria-hidden="true" />
+            
+            {/* Mobile Burger Button - Also in nav for better accessibility */}
+            <motion.button
+              className="nex-nav-burger-btn"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav-menu"
+              onClick={toggleMenu}
+              type="button"
+              variants={burgerVariants}
+              animate={isMenuOpen ? "open" : "closed"}
+              whileHover={{
+                backgroundColor: "rgba(255, 255, 255, 0.12)",
+                borderColor: "rgba(255, 255, 255, 0.15)",
+                boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                scale: shouldReduceMotion ? 1 : 1.05,
+                transition: ANIMATION_CONFIG.fast
+              }}
+              whileTap={{
+                backgroundColor: "rgba(255, 24, 1, 0.12)",
+                borderColor: "rgba(255, 24, 1, 0.2)",
+                scale: shouldReduceMotion ? 1 : 0.95,
+                transition: ANIMATION_CONFIG.fast
+              }}
+              whileFocus={{
+                outline: "2px solid var(--nex-signature)",
+                outlineOffset: "2px",
+                transition: ANIMATION_CONFIG.fast
+              }}
+            >
+              <motion.div 
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+                initial={false}
+              >
+                <motion.div
+                  key="menu"
+                  variants={iconVariants}
+                  animate={isMenuOpen ? "open" : "closed"}
+                  style={{ position: 'absolute' }}
+                >
+                  <Menu size={20} aria-hidden="true" />
+                </motion.div>
+                <motion.div
+                  key="close"
+                  variants={closeIconVariants}
+                  animate={isMenuOpen ? "open" : "closed"}
+                  style={{ position: 'absolute' }}
+                >
+                  <X size={20} aria-hidden="true" />
+                </motion.div>
+              </motion.div>
+            </motion.button>
           </motion.div>
         </motion.div>
-      </motion.button>
+      </motion.nav>
 
-      {/* Mobile Navigation */}
-      <AnimatePresence>
+
+
+      {/* Mobile Navigation with Optimized Animations */}
+      <AnimatePresence mode="wait">
         {isMenuOpen && (
           <MobileNav
             isOpen={isMenuOpen}
@@ -350,9 +524,12 @@ const NexNav: React.FC<NexNavProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Mobile Logo - Always on top like hamburger */}
+      {/* Mobile Logo with Smooth Animations */}
       <motion.div
         className="nex-nav-mobile-logo"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={ANIMATION_CONFIG.medium}
         style={{
           position: 'fixed',
           top: 'var(--nex-spacing-md)',
@@ -363,29 +540,44 @@ const NexNav: React.FC<NexNavProps> = ({
           justifyContent: 'center',
           width: 'auto',
           height: '44px',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
+          cursor: 'pointer'
         }}
         onClick={handleHomeClick}
         role="button"
         tabIndex={0}
         aria-label={`${displayName} - Go to home`}
         onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
-
+        whileHover={{
+          scale: shouldReduceMotion ? 1 : 1.05,
+          transition: ANIMATION_CONFIG.fast
+        }}
+        whileTap={{
+          scale: shouldReduceMotion ? 1 : 0.95,
+          transition: ANIMATION_CONFIG.fast
+        }}
       >
         {logoSrc ? (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            padding: '8px',
-            boxSizing: 'border-box'
-          }}>
-            <img 
+          <motion.div 
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              padding: '8px',
+              boxSizing: 'border-box'
+            }}
+            whileHover={{
+              scale: shouldReduceMotion ? 1 : 1.1,
+              transition: ANIMATION_CONFIG.fast
+            }}
+          >
+            <motion.img 
               src={logoSrc} 
               alt={displayName} 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={ANIMATION_CONFIG.medium}
               style={{
                 width: '100%',
                 height: '100%',
@@ -400,8 +592,11 @@ const NexNav: React.FC<NexNavProps> = ({
                 e.currentTarget.nextElementSibling?.classList.remove('fallback-hidden');
               }}
             />
-            <div 
+            <motion.div 
               className="fallback-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={ANIMATION_CONFIG.medium}
               style={{
                 position: 'absolute',
                 fontSize: 'var(--nex-font-size-xs)',
@@ -417,41 +612,51 @@ const NexNav: React.FC<NexNavProps> = ({
               }}
             >
               {displayName?.slice(0, 2)}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ) : (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            padding: '4px 12px',
-            boxSizing: 'border-box'
-          }}>
-            <div style={{
-              fontSize: '0.9rem',
-              fontWeight: 600,
-              color: 'var(--nex-color-text-primary)',
-              textAlign: 'center',
-              lineHeight: 1.2,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              maxWidth: 'none',
-              fontFamily: 'var(--nex-font-family-primary)',
-              letterSpacing: '0.02em',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale',
-              textRendering: 'optimizeLegibility'
-            }}>
+          <motion.div 
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              padding: '4px 12px',
+              boxSizing: 'border-box'
+            }}
+            whileHover={{
+              scale: shouldReduceMotion ? 1 : 1.05,
+              transition: ANIMATION_CONFIG.fast
+            }}
+          >
+            <motion.div 
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={ANIMATION_CONFIG.medium}
+              style={{
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                color: 'var(--nex-color-text-primary)',
+                textAlign: 'center',
+                lineHeight: 1.2,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                maxWidth: 'none',
+                fontFamily: 'var(--nex-font-family-primary)',
+                letterSpacing: '0.02em',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                textRendering: 'optimizeLegibility'
+              }}
+            >
               {displayName || 'NexComponent'}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </motion.div>
-
     </>
   );
 };

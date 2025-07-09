@@ -7,10 +7,14 @@
   right: 0;
   z-index: var(--nex-z-index-sticky);
   width: 100%;
-  transition: background-color var(--nex-transition-base), border-color var(--nex-transition-base);
-  background-color: transparent;
   font-family: var(--nex-font-family-primary);
+  will-change: transform, opacity, backdrop-filter;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* Optimized backdrop filter for better performance */
   &.not-at-top {
     position: fixed;
     background: linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%),
@@ -21,22 +25,21 @@
     box-shadow: 0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset;
     overflow: visible;
     z-index: var(--nex-z-index-sticky);
-    transition: background 0.5s cubic-bezier(.4,0,.2,1), border-color 0.5s cubic-bezier(.4,0,.2,1), box-shadow 0.5s cubic-bezier(.4,0,.2,1);
     
+    /* Subtle shimmer effect for enterprise feel */
     &::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       pointer-events: none;
       z-index: 0;
-      /* Use multiple radial gradients for weird shapes */
       background:
-        radial-gradient(circle at 20% 40%, rgba(255,24,1,0.18) 0%, rgba(255,24,1,0.08) 40%, transparent 70%),
-        radial-gradient(circle at 80% 60%, rgba(0,184,255,0.16) 0%, rgba(0,184,255,0.08) 40%, transparent 70%),
-        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.13) 0%, transparent 80%);
-      opacity: 0.7;
-      filter: blur(12px);
-      animation: nex-nav-shimmer 12s cubic-bezier(.4,0,.2,1) infinite;
+        radial-gradient(circle at 20% 40%, rgba(255,24,1,0.12) 0%, rgba(255,24,1,0.06) 40%, transparent 70%),
+        radial-gradient(circle at 80% 60%, rgba(0,184,255,0.1) 0%, rgba(0,184,255,0.06) 40%, transparent 70%),
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 80%);
+      opacity: 0.6;
+      filter: blur(8px);
+      animation: nex-nav-subtle-shimmer 8s cubic-bezier(.4,0,.2,1) infinite;
     }
   }
 
@@ -49,6 +52,8 @@
     padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
     height: 56px;
     gap: var(--nex-spacing-lg);
+    position: relative;
+    z-index: 1;
   }
 
   /* ================================
@@ -59,7 +64,7 @@
   .nex-nav-client-name {
     flex-shrink: 0;
     height: var(--nex-nav-logo-height);
-    width: var(--nex-nav-logo-width); /* Fixed width to prevent layout shifts */
+    width: var(--nex-nav-logo-width);
     min-width: var(--nex-nav-logo-width);
     max-width: var(--nex-nav-logo-width);
     border-radius: var(--nex-radius-full);
@@ -69,18 +74,16 @@
     justify-content: center;
     overflow: hidden;
     background: transparent !important;
-    border: 1px solid transparent !important; /* Always have a border to prevent layout shifts */
+    border: 1px solid transparent !important;
     box-shadow: none !important;
     cursor: pointer;
     position: relative;
-    box-sizing: border-box; /* Ensure consistent box model */
+    box-sizing: border-box;
     
     &:focus-visible {
       outline: 2px solid var(--nex-signature);
       outline-offset: 2px;
     }
-    
-    /* Original logo restored - properly aligned with nav */
   }
 
   .nex-nav-client-logo img {
@@ -110,12 +113,10 @@
     padding: 0 var(--nex-spacing-xs);
     box-sizing: border-box;
     
-    /* Ensure consistent rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     
-    /* Prevent text from causing layout shifts */
     display: block;
     position: relative;
   }
@@ -131,9 +132,9 @@
     margin: 0;
     padding: 0;
     flex: 1;
-    justify-content: center; /* Center align nav items */
+    justify-content: center;
     align-items: center;
-    min-width: 0; /* Allow flex shrinking */
+    min-width: 0;
 
     @media (max-width: 767px) {
       display: none;
@@ -149,18 +150,19 @@
     align-items: center;
     gap: var(--nex-spacing-md);
     flex-shrink: 0;
-    min-width: 0; /* Allow flex shrinking */
+    min-width: 0;
 
-    @media (max-width: 767px) {
-      // Hide all children except the burger button
-      > *:not(.nex-nav-burger-btn) {
-        display: none !important;
-      }
-      > .nex-nav-burger-btn {
-        display: flex !important;
-      }
-      display: flex;
+      @media (max-width: 767px) {
+    > *:not(.nex-nav-burger-btn) {
+      display: none !important;
     }
+    > .nex-nav-burger-btn {
+      display: flex !important;
+      position: static;
+      margin-left: auto;
+    }
+    display: flex;
+  }
   }
 
   /* ================================
@@ -189,7 +191,8 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
     cursor: pointer;
     color: var(--nex-font-color);
-    box-sizing: border-box; /* Ensure consistent box model */
+    box-sizing: border-box;
+    will-change: transform, background-color, border-color, box-shadow;
     
     &:focus-visible {
       outline: 2px solid var(--nex-signature);
@@ -210,30 +213,26 @@
    🎨 ANIMATIONS - Optimized Performance
    ================================ */
 
-@keyframes nex-nav-shimmer {
+@keyframes nex-nav-subtle-shimmer {
   0% {
+    opacity: 0.6;
+    transform: translateX(-10%) scale(1) rotate(-1deg);
+  }
+  25% {
     opacity: 0.7;
-    transform: translateX(-20%) scale(1) rotate(-2deg);
+    transform: translateX(5%) scale(1.02, 0.98) rotate(1deg);
   }
-  20% {
-    opacity: 0.85;
-    transform: translateX(10%) scale(1.08, 0.96) rotate(2deg);
-  }
-  40% {
-    opacity: 1;
-    transform: translateX(20%) scale(1.12, 0.92) rotate(-3deg);
-  }
-  60% {
-    opacity: 0.9;
-    transform: translateX(0%) scale(1.05, 1.08) rotate(3deg);
-  }
-  80% {
+  50% {
     opacity: 0.8;
-    transform: translateX(-10%) scale(0.98, 1.04) rotate(-1deg);
+    transform: translateX(10%) scale(1.04, 0.96) rotate(-1deg);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(0%) scale(1.01, 1.02) rotate(1deg);
   }
   100% {
-    opacity: 0.7;
-    transform: translateX(-20%) scale(1) rotate(-2deg);
+    opacity: 0.6;
+    transform: translateX(-10%) scale(1) rotate(-1deg);
   }
 }
 
@@ -251,15 +250,12 @@
   padding: 0 var(--nex-spacing-sm);
   border-radius: var(--nex-radius-full);
   
-  /* Clean glassmorphic background */
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   
-  /* Subtle border */
   border: 1px solid rgba(255, 255, 255, 0.08);
   
-  /* Clean shadow */
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.06),
     0 1px 3px rgba(0, 0, 0, 0.04),
@@ -271,13 +267,15 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  will-change: transform, background-color, border-color, box-shadow;
 
   @media (max-width: 767px) {
-    display: flex;
+    display: flex !important;
     position: fixed;
     top: var(--nex-spacing-md);
     right: var(--nex-spacing-lg);
-    z-index: calc(var(--nex-z-index-tooltip) + 10);
+    z-index: calc(var(--nex-z-index-modal) + 20);
+    margin-left: 0;
   }
   
   &:focus-visible {
@@ -297,12 +295,6 @@
   }
 }
 
-.nex-nav-burger-btn.menu-open .nex-nav-x-shimmer {
-  /* Clean enterprise look - no animations */
-}
-
-/* Removed pulsating animation keyframes for enterprise use */
-
 /* ================================
    📱 RESPONSIVE BREAKPOINTS
    ================================ */
@@ -318,10 +310,39 @@
    📱 MOBILE LOGO - Always on Top
    ================================ */
 
-  .nex-nav-mobile-logo {
-    display: flex !important; /* Show mobile logo everywhere since original is removed */
-  }
+.nex-nav-mobile-logo {
+  display: flex !important;
+  will-change: transform;
+}
 
 .fallback-hidden {
   display: none !important;
+}
+
+/* ================================
+   🚀 PERFORMANCE OPTIMIZATIONS
+   ================================ */
+
+/* Hardware acceleration for animations */
+.nex-nav,
+.nex-nav-burger-btn,
+.nex-nav-mobile-logo,
+.nex-nav-login-button {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .nex-nav::before {
+    animation: none !important;
+  }
+  
+  .nex-nav,
+  .nex-nav-burger-btn,
+  .nex-nav-mobile-logo,
+  .nex-nav-login-button {
+    transition: none !important;
+  }
 }
