@@ -30,4 +30,8 @@ export interface UserMenuProps {
   enableSecuritySettings?: boolean;
   enableIntegrations?: boolean;
   enableAdminPanel?: boolean;
+  isAtTop?: boolean; // Controls dropdown background styling based on scroll position
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 }

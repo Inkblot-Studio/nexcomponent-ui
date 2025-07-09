@@ -8,4 +8,8 @@ export type LanguageSwitcherProps = {
   currentLocale: string;
   options: LanguageOption[];
   onChange: (code: string) => void;
+  isAtTop?: boolean; // Controls dropdown background styling based on scroll position
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 };

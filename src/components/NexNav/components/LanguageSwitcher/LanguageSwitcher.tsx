@@ -153,9 +153,12 @@ const getLanguageName = (code: string): string => {
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   currentLocale,
   options,
-  onChange
+  onChange,
+  isAtTop = true,
+  open = false,
+  onOpen,
+  onClose
 }) => {
-  const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -174,7 +177,9 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     );
   });
 
-  useClickAway(ref, () => setOpen(false));
+  useClickAway(ref, () => {
+    onClose && onClose();
+  });
 
   useEffect(() => {
     if (!open) {
@@ -192,20 +197,23 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) {
-        setOpen(false);
+        onClose && onClose();
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [open]);
+  }, [open, onClose]);
 
-  const toggle = () => setOpen(prev => !prev);
+  const handleToggle = () => {
+    // Always call onOpen which now handles the toggle logic
+    onOpen && onOpen();
+  };
 
   return (
     <div className="nex-lang-switcher" ref={ref}>
       <div
         className="nex-lang-current"
-        onClick={toggle}
+        onClick={handleToggle}
         role="button"
         tabIndex={0}
         aria-haspopup="listbox"
@@ -213,7 +221,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         onKeyDown={e => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            toggle();
+            handleToggle();
           }
         }}
       >
@@ -238,7 +246,16 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           <motion.div
             className="nex-lang-dropdown"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ 
+              opacity: 1,
+              background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+              boxShadow: isAtTop 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+            }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             role="listbox"
@@ -271,7 +288,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                   aria-selected={option.code === currentLocale}
                   onClick={() => {
                     onChange(option.code);
-                    setOpen(false);
+                    onClose && onClose();
                   }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -279,6 +296,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                     duration: 0.1,
                     delay: index * 0.02
                   }}
+                  whileHover={{
+                    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                    transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                  }}
+                  style={{ cursor: 'pointer' }}
                 >
                   {/* Show only emoji OR text, not both */}
                   {option.icon ? (

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import classNames from 'classnames';
-import { ChevronDown } from 'lucide-react';
+
 import './UserMenu.scss';
 import { UserMenuProps } from './UserMenu.types';
 
@@ -25,12 +25,21 @@ const UserMenu: React.FC<UserMenuProps> = ({
   enableSecuritySettings,
   enableIntegrations,
   enableAdminPanel,
+  isAtTop = true,
+  open = false,
+  onOpen,
+  onClose
 }) => {
-  const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  useClickAway(ref, () => setOpen(false));
-  const toggleMenu = () => setOpen(prev => !prev);
+  useClickAway(ref, () => {
+    onClose && onClose();
+  });
+
+  const handleToggle = () => {
+    // Always call onOpen which now handles the toggle logic
+    onOpen && onOpen();
+  };
 
   const initials =
     user?.name
@@ -46,7 +55,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
     <div className="nex-user-menu" ref={ref}>
       <motion.button
         className="nex-user-menu-trigger"
-        onClick={toggleMenu}
+        onClick={handleToggle}
         aria-haspopup="true"
         aria-expanded={open}
         aria-label="User menu"
@@ -88,14 +97,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             </svg>
           </span>
         )}
-        <motion.span 
-          className="nex-user-menu-chevron"
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
-          aria-hidden="true"
-        >
-          <ChevronDown size={14} />
-        </motion.span>
+
       </motion.button>
 
       <AnimatePresence>
@@ -103,7 +105,17 @@ const UserMenu: React.FC<UserMenuProps> = ({
           <motion.ul
             className="nex-user-menu-dropdown"
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+              boxShadow: isAtTop 
+                ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+            }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             role="menu"
@@ -118,111 +130,161 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 </div>
 
                 {onProfile && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     role="menuitem"
                     onClick={() => {
-                      setOpen(false);
+                      onClose && onClose();
                       onProfile();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Profile
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableEndorsements && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     role="menuitem"
-                    onClick={() => {
-                      setOpen(false);
-                      onEndorsementsClick?.();
+                                          onClick={() => {
+                        onClose && onClose();
+                        onEndorsementsClick?.();
+                      }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
                     }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Endorsements ({endorsementCount ?? 0})
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableSubscriptionInfo && subscription && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     role="menuitem"
                     onClick={() => {
-                      setOpen(false);
+                      onClose && onClose();
                       onSubscriptionClick?.();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Subscription: {subscription.tier}
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableAuditLog && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setOpen(false);
+                      onClose && onClose();
                       onActivityLogClick?.();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Activity Log
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableSecuritySettings && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setOpen(false);
+                      setLocalOpen(false);
+                      onClose && onClose();
                       onSecurityClick?.();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Security Settings
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableIntegrations && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setOpen(false);
+                      setLocalOpen(false);
+                      onClose && onClose();
                       onIntegrationsClick?.();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Manage Integrations
-                  </li>
+                  </motion.li>
                 )}
 
                 {enableAdminPanel && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setOpen(false);
+                      setLocalOpen(false);
+                      onClose && onClose();
                       onAdminPanelClick?.();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Admin Panel
-                  </li>
+                  </motion.li>
                 )}
 
                 {onLogout && (
-                  <li
+                  <motion.li
                     className="nex-user-menu-item danger"
                     onClick={() => {
-                      setOpen(false);
+                      setLocalOpen(false);
+                      onClose && onClose();
                       onLogout();
                     }}
+                    whileHover={{
+                      background: isAtTop ? 'rgba(255,180,180,0.18)' : 'rgba(255,180,180,0.85)',
+                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Log out
-                  </li>
+                  </motion.li>
                 )}
               </>
             ) : (
-              <li
+              <motion.li
                 className="nex-user-menu-item sign-up-cta"
                 onClick={() => {
-                  setOpen(false);
+                  setLocalOpen(false);
+                  onClose && onClose();
                   onSignUpClick?.();
                 }}
+                whileHover={{
+                  background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+                  transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                }}
+                style={{ cursor: 'pointer' }}
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -232,7 +294,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 >
                   Sign up to personalize
                 </motion.div>
-              </li>
+              </motion.li>
             )}
           </motion.ul>
         )}

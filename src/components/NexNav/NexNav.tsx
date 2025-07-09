@@ -43,6 +43,23 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isAtTop, setIsAtTop] = useState(true);
   const [locale, setLocale] = useState('en');
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+
+  // Ensure only one dropdown is open at a time
+  useEffect(() => {
+    if (isLanguageOpen && isUserOpen) {
+      setIsUserOpen(false);
+    }
+  }, [isLanguageOpen]);
+
+  useEffect(() => {
+    if (isUserOpen && isLanguageOpen) {
+      setIsLanguageOpen(false);
+    }
+  }, [isUserOpen]);
+  
+
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
   
@@ -311,11 +328,15 @@ const NexNav: React.FC<NexNavProps> = ({
             variants={ANIMATION_VARIANTS.navItem}
           >
             <motion.div variants={ANIMATION_VARIANTS.navItem}>
-              <LanguageSwitcher
-                currentLocale={locale}
-                options={languageOptions}
-                onChange={handleLocaleChange}
-              />
+                              <LanguageSwitcher
+                  currentLocale={locale}
+                  options={languageOptions}
+                  onChange={handleLocaleChange}
+                  isAtTop={isAtTop}
+                  open={isLanguageOpen}
+                  onOpen={() => setIsLanguageOpen(!isLanguageOpen)}
+                  onClose={() => setIsLanguageOpen(false)}
+                />
             </motion.div>
             
             {isAuthenticated && user && onLogout && onProfile ? (
@@ -332,6 +353,10 @@ const NexNav: React.FC<NexNavProps> = ({
                   onSecurityClick={onSecurityClick}
                   onIntegrationsClick={onIntegrationsClick}
                   onAdminPanelClick={onAdminPanelClick}
+                  isAtTop={isAtTop}
+                  open={isUserOpen}
+                  onOpen={() => setIsUserOpen(!isUserOpen)}
+                  onClose={() => setIsUserOpen(false)}
                 />
               </motion.div>
             ) : (
