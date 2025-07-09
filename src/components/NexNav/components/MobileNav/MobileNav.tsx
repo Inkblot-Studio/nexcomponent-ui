@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, 
@@ -65,32 +65,45 @@ const MobileNav: React.FC<MobileNavProps> = ({
 
   const hasHome = navItems.some(item => item.label.toLowerCase() === 'home');
 
+  // Prevent body scroll when mobile nav is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('nex-lock-scroll');
+    } else {
+      document.body.classList.remove('nex-lock-scroll');
+    }
+    return () => {
+      document.body.classList.remove('nex-lock-scroll');
+    };
+  }, [isOpen]);
+
   return (
     <motion.div
       className="nex-mobile-nav"
       initial={{
-        height: 0,
-        opacity: 1,
-        y: -24
+        opacity: 0,
+        y: '-100%'
       }}
       animate={{
-        height: '100vh',
         opacity: 1,
         y: 0
       }}
       exit={{
-        height: 0,
-        opacity: 1,
-        y: -24
+        opacity: 0,
+        y: '-100%'
       }}
       transition={{
-        height: { duration: 0.44, ease: [0.4, 0, 0.2, 1] },
-        y: { duration: 0.44, ease: [0.4, 0, 0.2, 1] }
+        duration: 0.44,
+        ease: [0.4, 0, 0.2, 1]
       }}
       style={{
         overflow: 'hidden',
         position: 'fixed',
-        inset: 0,
+        top: '71.99px', // exact nav height
+        left: 0,
+        right: 0,
+        width: '100%',
+        height: 'calc(100dvh - 71.99px)',
         zIndex: 'var(--nex-z-index-modal)',
         display: 'flex',
         flexDirection: 'column',
@@ -107,7 +120,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.28, delay: 0.12, ease: [0.4, 0, 0.2, 1] }}
-        style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+        style={{ height: '100%', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}
       >
         {/* Header with User Info */}
         <div className="nex-mobile-nav-header">

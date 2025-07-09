@@ -1,5 +1,14 @@
 @import "../../../../utils/mixin.scss";
 
+body.nex-lock-scroll {
+  overflow: hidden !important; /* Prevent all background scroll */
+  padding-right: 0 !important;
+}
+
+.nex-mobile-nav {
+  pointer-events: auto;
+}
+
 .nex-mobile-nav-backdrop {
   position: fixed;
   inset: 0;
@@ -26,12 +35,20 @@
 
 .nex-mobile-nav {
   position: fixed;
-  inset: 0;
+  top: 71.99px;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: var(--nex-z-index-modal);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* background and animation removed to allow Framer Motion to control them */
+  background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.10);
+  /* Remove height: auto and max-height: 80vh to allow full stretching */
 }
 
 .nex-mobile-nav-inner {
