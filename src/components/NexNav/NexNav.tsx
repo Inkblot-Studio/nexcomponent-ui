@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { AnimatePresence, motion, useMotionValue, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import './NexNav.scss';
 
@@ -10,29 +10,9 @@ import MobileNav from './components/MobileNav';
 
 import { NexNavProps } from './NexNav.types';
 import { Fingerprint, Menu, X } from 'lucide-react';
+import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONFIG } from '../../utils/animationConfig';
 
 const LANG_KEY = 'nex-locale';
-
-// Enterprise-level animation constants
-const ANIMATION_CONFIG = {
-  // Fast, responsive animations
-  fast: { duration: 0.15, ease: [0.4, 0, 0.2, 1] },
-  medium: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
-  slow: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-  
-  // Spring configurations for natural feel
-  spring: { 
-    type: "spring", 
-    stiffness: 400, 
-    damping: 30,
-    mass: 0.8
-  },
-  
-  // Stagger delays for sequential animations
-  stagger: {
-    container: { delayChildren: 0.1, staggerChildren: 0.05 }
-  }
-};
 
 const getDefaultLocale = (): string => {
   const lang = navigator.language || 'en';
@@ -66,36 +46,16 @@ const NexNav: React.FC<NexNavProps> = ({
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
   
-  // Respect user's motion preferences
-  const shouldReduceMotion = useReducedMotion();
+  // Use centralized animation configuration
+  const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
   
-  // Motion values for advanced animations
-  const scrollY = useMotionValue(0);
-  const backgroundOpacity = useTransform(scrollY, [0, 50], [0, 0.7]);
-  const blurAmount = useTransform(scrollY, [0, 50], [0, 24]);
-  const shadowIntensity = useTransform(scrollY, [0, 50], [0, 0.12]);
-  
-  // Spring-based transforms for smooth animations with better ease-in-out
-  const springBackgroundOpacity = useSpring(backgroundOpacity, {
-    stiffness: 200,
-    damping: 25,
-    mass: 1,
-    restDelta: 0.001
-  });
-  
-  const springBlurAmount = useSpring(blurAmount, {
-    stiffness: 200,
-    damping: 25,
-    mass: 1,
-    restDelta: 0.001
-  });
+
 
   // Memoize scroll handler for performance
   const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY;
     setIsAtTop(scrollPosition === 0);
-    scrollY.set(scrollPosition);
-  }, [scrollY]);
+  }, []);
 
   // Memoize resize handler for performance
   const handleResize = useCallback(() => {
@@ -142,7 +102,7 @@ const NexNav: React.FC<NexNavProps> = ({
     }));
   }, [navItems]);
 
-  // Optimized shimmer animation variants
+  // Use centralized animation variants
   const shimmerVariants = {
     hidden: { 
       opacity: 0,
@@ -177,19 +137,19 @@ const NexNav: React.FC<NexNavProps> = ({
     }
   };
 
-  // Nav item variants
-  const navItemVariants = {
-    initial: {
-      y: -20,
-      opacity: 0
+  // Background state variants with mobile nav integration
+  const backgroundVariants = {
+    atTop: {
+      ...ANIMATION_VARIANTS.background.atTop,
+      transition: medium
     },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.2,
-        ease: [0.4, 0, 0.2, 1]
-      }
+    scrolled: {
+      ...ANIMATION_VARIANTS.background.scrolled,
+      transition: medium
+    },
+    mobileOpen: {
+      ...ANIMATION_VARIANTS.background.mobileOpen,
+      transition: medium
     }
   };
 
@@ -198,43 +158,12 @@ const NexNav: React.FC<NexNavProps> = ({
     closed: {
       rotate: 0,
       scale: 1,
-      transition: ANIMATION_CONFIG.fast
+      transition: fast
     },
     open: {
       rotate: 180,
       scale: 1.05,
-      transition: ANIMATION_CONFIG.fast
-    }
-  };
-
-  // Icon variants for smooth transitions
-  const iconVariants = {
-    closed: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: ANIMATION_CONFIG.fast
-    },
-    open: {
-      opacity: 0,
-      scale: 0.8,
-      rotate: 45,
-      transition: ANIMATION_CONFIG.fast
-    }
-  };
-
-  const closeIconVariants = {
-    closed: {
-      opacity: 0,
-      scale: 0.8,
-      rotate: -45,
-      transition: ANIMATION_CONFIG.fast
-    },
-    open: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: ANIMATION_CONFIG.fast
+      transition: fast
     }
   };
 
@@ -283,10 +212,6 @@ const NexNav: React.FC<NexNavProps> = ({
         initial="initial"
         animate={isInitialized ? "animate" : "initial"}
         variants={navVariants}
-        transition={{
-          duration: 0.3,
-          ease: [0.4, 0, 0.2, 1]
-        }}
         style={{
           position: 'fixed',
           top: 0,
@@ -294,16 +219,26 @@ const NexNav: React.FC<NexNavProps> = ({
           right: 0,
           width: '100%',
           zIndex: 'var(--nex-z-index-sticky)',
-          overflow: 'visible',
-          background: `rgba(255,255,255,${springBackgroundOpacity})`,
-          backdropFilter: `blur(${springBlurAmount}px) saturate(180%)`,
-          WebkitBackdropFilter: `blur(${springBlurAmount}px) saturate(180%)`,
-          borderBottom: isAtTop ? 'none' : `1.5px solid rgba(255,255,255,${springBackgroundOpacity.get() * 0.3})`,
-          boxShadow: isAtTop ? 'none' : `0 8px 32px -8px rgba(0,0,0,${shadowIntensity}), 0 0 0 1.5px rgba(255,255,255,${springBackgroundOpacity.get() * 0.15}) inset`
+          overflow: 'visible'
         }}
         role="banner"
         aria-label="Main navigation"
       >
+        {/* Background state animation */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            pointerEvents: 'none',
+            zIndex: 0
+          }}
+          initial="atTop"
+          animate={isAtTop && !isMenuOpen ? "atTop" : isMenuOpen ? "mobileOpen" : "scrolled"}
+          variants={backgroundVariants}
+        />
         {/* Optimized Shimmer Effect */}
         <motion.div
           className="nex-nav-shimmer"
@@ -314,7 +249,7 @@ const NexNav: React.FC<NexNavProps> = ({
             position: 'absolute',
             top: 0, left: 0, right: 0, bottom: 0,
             pointerEvents: 'none',
-            zIndex: 0,
+            zIndex: 1,
             background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 30%, rgba(255,24,1,0.08) 60%, rgba(0,184,255,0.08) 100%)',
             filter: 'blur(6px)',
             willChange: 'transform, opacity'
@@ -324,12 +259,16 @@ const NexNav: React.FC<NexNavProps> = ({
 
         <motion.div
           className="nex-nav-inner-wrapper"
-          variants={ANIMATION_CONFIG.stagger}
+          variants={stagger}
+          style={{
+            position: 'relative',
+            zIndex: 2
+          }}
         >
           {/* Logo Placeholder - Maintains space for mobile logo */}
           <motion.div 
             className="nex-nav-logo-placeholder"
-            variants={navItemVariants}
+            variants={ANIMATION_VARIANTS.navItem}
             style={{
               width: 'calc(100px + var(--nex-spacing-md) * 2)',
               height: '44px',
@@ -343,12 +282,12 @@ const NexNav: React.FC<NexNavProps> = ({
             className="nex-nav-list" 
             role="menubar"
             aria-label="Main menu"
-            variants={ANIMATION_CONFIG.stagger}
+            variants={stagger}
           >
             {memoizedNavItems.map((item, i) => (
               <motion.li
                 key={item.key || i}
-                variants={navItemVariants}
+                variants={ANIMATION_VARIANTS.navItem}
               >
                 <NavItem 
                   label={item.label} 
@@ -369,9 +308,9 @@ const NexNav: React.FC<NexNavProps> = ({
             className="nex-nav-right" 
             role="group" 
             aria-label="User controls"
-            variants={navItemVariants}
+            variants={ANIMATION_VARIANTS.navItem}
           >
-            <motion.div variants={navItemVariants}>
+            <motion.div variants={ANIMATION_VARIANTS.navItem}>
               <LanguageSwitcher
                 currentLocale={locale}
                 options={languageOptions}
@@ -380,7 +319,7 @@ const NexNav: React.FC<NexNavProps> = ({
             </motion.div>
             
             {isAuthenticated && user && onLogout && onProfile ? (
-              <motion.div variants={navItemVariants}>
+              <motion.div variants={ANIMATION_VARIANTS.navItem}>
                 <UserMenu
                   user={user}
                   onLogout={onLogout}
@@ -403,37 +342,31 @@ const NexNav: React.FC<NexNavProps> = ({
                 tabIndex={0}
                 aria-label="Sign in to your account"
                 onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
-                variants={navItemVariants}
+                variants={ANIMATION_VARIANTS.navItem}
                 whileHover={{
-                  backgroundColor: "rgba(255, 255, 255, 0.12)",
-                  borderColor: "rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
-                  scale: shouldReduceMotion ? 1 : 1.02,
-                  transition: ANIMATION_CONFIG.fast
+                  ...ANIMATION_VARIANTS.button.hover,
+                  transition: fast
                 }}
                 whileTap={{
-                  backgroundColor: "rgba(255, 24, 1, 0.15)",
-                  borderColor: "rgba(255, 24, 1, 0.25)",
-                  scale: shouldReduceMotion ? 1 : 0.98,
-                  transition: ANIMATION_CONFIG.fast
+                  ...ANIMATION_VARIANTS.button.tap,
+                  transition: fast
                 }}
                 whileFocus={{
-                  outline: "2px solid var(--nex-signature)",
-                  outlineOffset: "2px",
-                  transition: ANIMATION_CONFIG.fast
+                  ...ANIMATION_VARIANTS.button.focus,
+                  transition: fast
                 }}
               >
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={ANIMATION_CONFIG.fast}
+                  transition={fast}
                 >
                   <Fingerprint size={18} aria-hidden="true" />
                 </motion.div>
                 <motion.span
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ ...ANIMATION_CONFIG.fast, delay: 0.05 }}
+                  transition={{ ...fast, delay: 0.05 }}
                 >
                   Login
                 </motion.span>
@@ -454,19 +387,17 @@ const NexNav: React.FC<NexNavProps> = ({
                 backgroundColor: "rgba(255, 255, 255, 0.12)",
                 borderColor: "rgba(255, 255, 255, 0.15)",
                 boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-                scale: shouldReduceMotion ? 1 : 1.05,
-                transition: ANIMATION_CONFIG.fast
+                transition: fast
               }}
               whileTap={{
                 backgroundColor: "rgba(255, 24, 1, 0.12)",
                 borderColor: "rgba(255, 24, 1, 0.2)",
-                scale: shouldReduceMotion ? 1 : 0.95,
-                transition: ANIMATION_CONFIG.fast
+                transition: fast
               }}
               whileFocus={{
                 outline: "2px solid var(--nex-signature)",
                 outlineOffset: "2px",
-                transition: ANIMATION_CONFIG.fast
+                transition: fast
               }}
             >
               <motion.div 
@@ -475,7 +406,7 @@ const NexNav: React.FC<NexNavProps> = ({
               >
                 <motion.div
                   key="menu"
-                  variants={iconVariants}
+                  variants={ANIMATION_VARIANTS.icon}
                   animate={isMenuOpen ? "open" : "closed"}
                   style={{ position: 'absolute' }}
                 >
@@ -483,7 +414,7 @@ const NexNav: React.FC<NexNavProps> = ({
                 </motion.div>
                 <motion.div
                   key="close"
-                  variants={closeIconVariants}
+                  variants={ANIMATION_VARIANTS.closeIcon}
                   animate={isMenuOpen ? "open" : "closed"}
                   style={{ position: 'absolute' }}
                 >
@@ -529,7 +460,7 @@ const NexNav: React.FC<NexNavProps> = ({
         className="nex-nav-mobile-logo"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={ANIMATION_CONFIG.medium}
+        transition={medium}
         style={{
           position: 'fixed',
           top: 'var(--nex-spacing-md)',
@@ -548,12 +479,10 @@ const NexNav: React.FC<NexNavProps> = ({
         aria-label={`${displayName} - Go to home`}
         onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
         whileHover={{
-          scale: shouldReduceMotion ? 1 : 1.05,
-          transition: ANIMATION_CONFIG.fast
+          transition: fast
         }}
         whileTap={{
-          scale: shouldReduceMotion ? 1 : 0.95,
-          transition: ANIMATION_CONFIG.fast
+          transition: fast
         }}
       >
         {logoSrc ? (
@@ -568,8 +497,7 @@ const NexNav: React.FC<NexNavProps> = ({
               boxSizing: 'border-box'
             }}
             whileHover={{
-              scale: shouldReduceMotion ? 1 : 1.1,
-              transition: ANIMATION_CONFIG.fast
+              transition: fast
             }}
           >
             <motion.img 
@@ -577,7 +505,7 @@ const NexNav: React.FC<NexNavProps> = ({
               alt={displayName} 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={ANIMATION_CONFIG.medium}
+              transition={medium}
               style={{
                 width: '100%',
                 height: '100%',
@@ -596,7 +524,7 @@ const NexNav: React.FC<NexNavProps> = ({
               className="fallback-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={ANIMATION_CONFIG.medium}
+              transition={medium}
               style={{
                 position: 'absolute',
                 fontSize: 'var(--nex-font-size-xs)',
@@ -626,14 +554,13 @@ const NexNav: React.FC<NexNavProps> = ({
               boxSizing: 'border-box'
             }}
             whileHover={{
-              scale: shouldReduceMotion ? 1 : 1.05,
-              transition: ANIMATION_CONFIG.fast
+              transition: fast
             }}
           >
             <motion.div 
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={ANIMATION_CONFIG.medium}
+              transition={medium}
               style={{
                 fontSize: '0.9rem',
                 fontWeight: 600,
