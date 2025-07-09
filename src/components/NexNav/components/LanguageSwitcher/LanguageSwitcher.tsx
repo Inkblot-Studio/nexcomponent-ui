@@ -163,6 +163,17 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
+  // Optimized animation configurations
+  const hoverAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+    transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
+  const tapAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.9)',
+    transition: { duration: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
   const current = options.find(opt => opt.code === currentLocale);
   const showSearch = options.length > 5;
 
@@ -234,7 +245,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         <motion.span 
           className="nex-lang-chevron"
           animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.03, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
           aria-hidden="true"
         >
           <ChevronDown size={14} />
@@ -296,10 +307,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                     duration: 0.1,
                     delay: index * 0.02
                   }}
-                  whileHover={{
-                    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                    transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                  }}
+                  whileHover={hoverAnimation}
+                  whileTap={tapAnimation}
                   style={{ cursor: 'pointer' }}
                 >
                   {/* Show only emoji OR text, not both */}

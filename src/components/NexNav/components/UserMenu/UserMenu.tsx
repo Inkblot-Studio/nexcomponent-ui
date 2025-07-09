@@ -32,6 +32,27 @@ const UserMenu: React.FC<UserMenuProps> = ({
 }) => {
   const ref = useRef(null);
 
+  // Optimized animation configurations
+  const hoverAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+    transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
+  const tapAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.9)',
+    transition: { duration: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
+  const dangerHoverAnimation = {
+    background: isAtTop ? 'rgba(255,180,180,0.18)' : 'rgba(255,180,180,0.85)',
+    transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
+  const dangerTapAnimation = {
+    background: isAtTop ? 'rgba(255,180,180,0.22)' : 'rgba(255,180,180,0.9)',
+    transition: { duration: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }
+  };
+
   useClickAway(ref, () => {
     onClose && onClose();
   });
@@ -137,10 +158,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
                       onClose && onClose();
                       onProfile();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Profile
@@ -151,14 +170,12 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <motion.li
                     className="nex-user-menu-item"
                     role="menuitem"
-                                          onClick={() => {
-                        onClose && onClose();
-                        onEndorsementsClick?.();
-                      }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                    onClick={() => {
+                      onClose && onClose();
+                      onEndorsementsClick?.();
                     }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Endorsements ({endorsementCount ?? 0})
@@ -173,10 +190,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
                       onClose && onClose();
                       onSubscriptionClick?.();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Subscription: {subscription.tier}
@@ -190,10 +205,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
                       onClose && onClose();
                       onActivityLogClick?.();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Activity Log
@@ -204,14 +217,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setLocalOpen(false);
                       onClose && onClose();
                       onSecurityClick?.();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Security Settings
@@ -222,14 +232,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setLocalOpen(false);
                       onClose && onClose();
                       onIntegrationsClick?.();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Manage Integrations
@@ -240,14 +247,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <motion.li
                     className="nex-user-menu-item"
                     onClick={() => {
-                      setLocalOpen(false);
                       onClose && onClose();
                       onAdminPanelClick?.();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={hoverAnimation}
+                    whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Admin Panel
@@ -258,14 +262,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <motion.li
                     className="nex-user-menu-item danger"
                     onClick={() => {
-                      setLocalOpen(false);
                       onClose && onClose();
                       onLogout();
                     }}
-                    whileHover={{
-                      background: isAtTop ? 'rgba(255,180,180,0.18)' : 'rgba(255,180,180,0.85)',
-                      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                    }}
+                    whileHover={dangerHoverAnimation}
+                    whileTap={dangerTapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
                     Log out
@@ -276,14 +277,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
               <motion.li
                 className="nex-user-menu-item sign-up-cta"
                 onClick={() => {
-                  setLocalOpen(false);
                   onClose && onClose();
                   onSignUpClick?.();
                 }}
-                whileHover={{
-                  background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-                  transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-                }}
+                whileHover={hoverAnimation}
+                whileTap={tapAnimation}
                 style={{ cursor: 'pointer' }}
               >
                 <motion.div
