@@ -41,17 +41,25 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onIntegrationsClick,
   onAdminPanelClick
 }) => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  // Single state to track which dropdown is open
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openNavItems, setOpenNavItems] = useState<Set<number>>(new Set());
 
   // Use centralized animation configuration
   const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
 
-  const handleProfileToggle = () => setIsProfileOpen(!isProfileOpen);
-  const handleLanguageToggle = () => setIsLanguageOpen(!isLanguageOpen);
-  const handleSettingsToggle = () => setIsSettingsOpen(!isSettingsOpen);
+  // Toggle handlers with exclusivity logic
+  const handleProfileToggle = () => {
+    setOpenDropdown(openDropdown === 'profile' ? null : 'profile');
+  };
+
+  const handleLanguageToggle = () => {
+    setOpenDropdown(openDropdown === 'language' ? null : 'language');
+  };
+
+  const handleSettingsToggle = () => {
+    setOpenDropdown(openDropdown === 'settings' ? null : 'settings');
+  };
   
   const handleNavItemToggle = (index: number) => {
     setOpenNavItems(prev => {
@@ -59,11 +67,21 @@ const MobileNav: React.FC<MobileNavProps> = ({
       if (newSet.has(index)) {
         newSet.delete(index);
       } else {
+        // Close all other nav items when opening a new one
+        newSet.clear();
         newSet.add(index);
       }
       return newSet;
     });
   };
+
+  // Close all dropdowns when mobile nav closes
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenDropdown(null);
+      setOpenNavItems(new Set());
+    }
+  }, [isOpen]);
 
   const currentLanguage = languageOptions.find(lang => lang.code === currentLocale);
 
@@ -318,13 +336,13 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 {currentLanguage?.label || currentLocale.toUpperCase()}
               </span>
               <motion.div
-                animate={{ rotate: isLanguageOpen ? 180 : 0 }}
+                animate={{ rotate: openDropdown === 'language' ? 180 : 0 }}
                 transition={slow}
               >
                 <ChevronDown className="nex-mobile-nav-icon" />
               </motion.div>
             </motion.div>
-            {isLanguageOpen && (
+            {openDropdown === 'language' && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -337,7 +355,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`}
                       onClick={() => {
                         onLocaleChange(lang.code);
-                        setIsLanguageOpen(false);
+                        setOpenDropdown(null);
                       }}
                       style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                       initial={{ opacity: 0 }}
@@ -378,13 +396,13 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   <User className="nex-mobile-nav-icon" />
                   <span className="nex-mobile-nav-text">Profile</span>
                   <motion.div
-                    animate={{ rotate: isProfileOpen ? 180 : 0 }}
+                    animate={{ rotate: openDropdown === 'profile' ? 180 : 0 }}
                     transition={slow}
                   >
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                {isProfileOpen && (
+                {openDropdown === 'profile' && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -476,13 +494,13 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   <Settings className="nex-mobile-nav-icon" />
                   <span className="nex-mobile-nav-text">Settings</span>
                   <motion.div
-                    animate={{ rotate: isSettingsOpen ? 180 : 0 }}
+                    animate={{ rotate: openDropdown === 'settings' ? 180 : 0 }}
                     transition={slow}
                   >
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                {isSettingsOpen && (
+                {openDropdown === 'settings' && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
