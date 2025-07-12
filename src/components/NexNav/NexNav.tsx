@@ -14,10 +14,52 @@ import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONF
 import classNames from 'classnames';
 
 const LANG_KEY = 'nex-locale';
-const MAX_NAV_ITEMS = 4;
-const MIN_ITEM_WIDTH = 120; // Minimum width per nav item
-const MORE_BUTTON_WIDTH = 80; // Width of the "More" button
-const SUBITEM_EXTRA_WIDTH = 20; // Extra width for items with subitems (chevron)
+const MAX_NAV_ITEMS = 5; // Increased to show more items when space allows
+const MIN_ITEM_WIDTH = 70; // Reduced for tighter packing
+const MORE_BUTTON_WIDTH = 50; // Reduced for better space efficiency
+const SUBITEM_EXTRA_WIDTH = 8; // Reduced for tighter spacing
+const ITEM_GAP = 4; // Reduced for much tighter spacing
+const SAFETY_MARGIN = 4; // Reduced for more aggressive use of space
+
+// Responsive constants based on container width - More aggressive
+const getResponsiveConstants = (containerWidth: number) => {
+  if (containerWidth <= 400) {
+    return {
+      minItemWidth: 50,
+      moreButtonWidth: 40,
+      itemGap: 2,
+      safetyMargin: 2
+    };
+  } else if (containerWidth <= 600) {
+    return {
+      minItemWidth: 60,
+      moreButtonWidth: 45,
+      itemGap: 3,
+      safetyMargin: 3
+    };
+  } else if (containerWidth <= 800) {
+    return {
+      minItemWidth: 65,
+      moreButtonWidth: 50,
+      itemGap: 4,
+      safetyMargin: 4
+    };
+  } else if (containerWidth <= 1200) {
+    return {
+      minItemWidth: 70,
+      moreButtonWidth: 55,
+      itemGap: 6,
+      safetyMargin: 6
+    };
+  } else {
+    return {
+      minItemWidth: 75,
+      moreButtonWidth: 60,
+      itemGap: 8,
+      safetyMargin: 8
+    };
+  }
+};
 
 // Debounce function to prevent excessive calculations
 const debounce = (func: Function, wait: number) => {
@@ -65,13 +107,10 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   
-  // Debug effect to log state changes
-  useEffect(() => {
-    console.log('More dropdown state changed:', isMoreOpen);
-  }, [isMoreOpen]);
   const [availableWidth, setAvailableWidth] = useState(0);
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [lastContainerWidth, setLastContainerWidth] = useState(0);
 
   const navListRef = useRef<HTMLUListElement>(null);
   const menuRef = useRef(null);
@@ -104,24 +143,58 @@ const NexNav: React.FC<NexNavProps> = ({
   }, [isMoreOpen]);
 
   // Improved width calculation with better handling of subitems
-  const calculateItemWidth = useCallback((item: any, element?: HTMLElement) => {
+  const calculateItemWidth = useCallback((item: any, element?: HTMLElement, containerWidth?: number) => {
+    const constants = getResponsiveConstants(containerWidth || window.innerWidth);
+    
     if (element) {
       const itemWidth = element.offsetWidth;
       const hasSubItems = item.subItems && item.subItems.length > 0;
       const extraWidth = hasSubItems ? SUBITEM_EXTRA_WIDTH : 0;
-      return itemWidth + extraWidth + 16; // Add gap
+      return itemWidth + extraWidth + constants.itemGap; // Add gap
     }
     
-    // Fallback calculation
-    const baseWidth = MIN_ITEM_WIDTH;
+    // Fallback calculation - very aggressive to use every pixel
+    const baseWidth = constants.minItemWidth;
     const hasSubItems = item.subItems && item.subItems.length > 0;
     const extraWidth = hasSubItems ? SUBITEM_EXTRA_WIDTH : 0;
     const labelLength = item.label.length;
-    const estimatedWidth = Math.max(baseWidth, labelLength * 8 + extraWidth + 32); // Rough estimation
-    return estimatedWidth + 16; // Add gap
+    
+    // Very aggressive width estimation - use every pixel
+    let estimatedWidth = baseWidth;
+    
+    if (containerWidth && containerWidth <= 400) {
+      // Very small container: Extremely aggressive
+      estimatedWidth = Math.max(baseWidth, labelLength * 6 + extraWidth + 12);
+    } else if (containerWidth && containerWidth <= 600) {
+      // Small container: Very aggressive
+      estimatedWidth = Math.max(baseWidth, labelLength * 7 + extraWidth + 16);
+    } else if (containerWidth && containerWidth <= 800) {
+      // Medium container: Aggressive
+      estimatedWidth = Math.max(baseWidth, labelLength * 8 + extraWidth + 20);
+    } else if (containerWidth && containerWidth <= 1200) {
+      // Large container: Moderate
+      estimatedWidth = Math.max(baseWidth, labelLength * 9 + extraWidth + 24);
+    } else {
+      // Extra large container: Generous
+      estimatedWidth = Math.max(baseWidth, labelLength * 10 + extraWidth + 28);
+    }
+    
+    // Minimal extra space for badges and descriptions
+    const badgeSpace = containerWidth && containerWidth <= 400 ? 8 : containerWidth && containerWidth <= 600 ? 10 : containerWidth && containerWidth <= 800 ? 12 : 16;
+    const descriptionSpace = containerWidth && containerWidth <= 400 ? 4 : containerWidth && containerWidth <= 600 ? 6 : containerWidth && containerWidth <= 800 ? 8 : 10;
+    
+    if (item.badge) {
+      estimatedWidth += badgeSpace;
+    }
+    
+    if (item.description) {
+      estimatedWidth += descriptionSpace;
+    }
+    
+    return estimatedWidth + constants.itemGap;
   }, []);
 
-  // Calculate available width and determine visible items with debouncing
+  // Smart condensation logic that prevents oscillation and removes multiple items at once
   const calculateVisibleItems = useCallback(() => {
     if (!navListRef.current || isCalculating) return;
 
@@ -137,44 +210,121 @@ const NexNav: React.FC<NexNavProps> = ({
       const container = navListRef.current;
       const containerWidth = container.offsetWidth;
       const itemElements = container.querySelectorAll('.nex-nav-item');
+      const constants = getResponsiveConstants(containerWidth);
       
-      let totalWidth = 0;
-      const newVisibleItems: number[] = [];
+      // Hysteresis to prevent oscillation - only recalculate if width changed significantly
+      const widthChange = Math.abs(containerWidth - lastContainerWidth);
+      const hysteresisThreshold = 20; // Only recalculate if width changed by more than 20px
       
-      // Calculate width needed for each item
+      if (widthChange < hysteresisThreshold && visibleItems.length > 0) {
+        setIsCalculating(false);
+        return;
+      }
+      
+      console.log('Calculating visible items:', {
+        containerWidth,
+        lastContainerWidth,
+        widthChange,
+        navItemsLength: navItems.length,
+        constants
+      });
+      
+      // Step 1: Calculate all item widths upfront
+      const itemWidths: number[] = [];
       for (let i = 0; i < navItems.length; i++) {
         const item = navItems[i];
         const itemElement = itemElements[i] as HTMLElement;
-        
-        const requiredWidth = calculateItemWidth(item, itemElement);
-        
-        // Check if we can fit this item plus the "More" button if needed
-        const wouldNeedMoreButton = i >= MAX_NAV_ITEMS - 1;
-        const moreButtonSpace = wouldNeedMoreButton ? MORE_BUTTON_WIDTH : 0;
-        
-        if (totalWidth + requiredWidth + moreButtonSpace <= containerWidth) {
-          newVisibleItems.push(i);
-          totalWidth += requiredWidth;
+        const width = calculateItemWidth(item, itemElement, containerWidth);
+        itemWidths.push(width);
+      }
+      
+      // Step 2: Determine if we should use condensation based on container width and item count
+      const shouldCondense = containerWidth < 800 || navItems.length > 4;
+      
+      if (!shouldCondense) {
+        // Show all items if we have enough space and not too many items
+        const newVisibleItems = Array.from({ length: navItems.length }, (_, i) => i);
+        console.log('No condensation needed:', newVisibleItems);
+        setVisibleItems(newVisibleItems);
+        setAvailableWidth(containerWidth);
+        setLastContainerWidth(containerWidth);
+        setIsCalculating(false);
+        return;
+      }
+      
+      // Step 3: Aggressive condensation logic
+      const availableSpace = containerWidth - constants.safetyMargin;
+      const moreButtonSpace = constants.moreButtonWidth;
+      const spaceWithMore = availableSpace - moreButtonSpace;
+      
+      // Calculate how many items we can fit with the "More" button
+      let totalWidth = 0;
+      let visibleCount = 0;
+      
+      for (let i = 0; i < navItems.length; i++) {
+        const itemWidth = itemWidths[i];
+        if (totalWidth + itemWidth <= spaceWithMore) {
+          totalWidth += itemWidth;
+          visibleCount = i + 1;
         } else {
           break;
         }
       }
       
+      // Step 4: Apply aggressive condensation rules
+      let finalVisibleCount = visibleCount;
+      
+      // Rule 1: If we have more than 3 items total, force condensation to show only 2-3 items
+      if (navItems.length > 3) {
+        finalVisibleCount = Math.min(finalVisibleCount, 3);
+      }
+      
+      // Rule 2: If container is very small, be even more aggressive
+      if (containerWidth <= 600) {
+        finalVisibleCount = Math.min(finalVisibleCount, 2);
+      }
+      
+      // Rule 3: If container is extremely small, show only 1 item
+      if (containerWidth <= 400) {
+        finalVisibleCount = Math.min(finalVisibleCount, 1);
+      }
+      
+      // Rule 4: Ensure we always show at least 1 item
+      finalVisibleCount = Math.max(1, finalVisibleCount);
+      
+      // Step 5: Create the new visible items array
+      const newVisibleItems = Array.from({ length: finalVisibleCount }, (_, i) => i);
+      
+      console.log('Aggressive condensation result:', {
+        shouldCondense,
+        containerWidth,
+        navItemsLength: navItems.length,
+        calculatedVisibleCount: visibleCount,
+        finalVisibleCount,
+        totalWidth,
+        spaceWithMore,
+        newVisibleItems,
+        willShowMore: finalVisibleCount < navItems.length,
+        itemsInMore: navItems.length - finalVisibleCount
+      });
+      
       setVisibleItems(newVisibleItems);
       setAvailableWidth(containerWidth);
+      setLastContainerWidth(containerWidth);
       setIsCalculating(false);
     });
-  }, [navItems, calculateItemWidth, isCalculating]);
+  }, [navItems, calculateItemWidth, isCalculating, lastContainerWidth, visibleItems.length]);
 
   // Debounced resize handler to prevent twitching
   const debouncedCalculateVisibleItems = useMemo(
-    () => debounce(calculateVisibleItems, 150),
+    () => debounce(calculateVisibleItems, 30), // Reduced to 30ms for faster responsiveness
     [calculateVisibleItems]
   );
 
   // Recalculate on resize with debouncing
   useEffect(() => {
     const handleResize = () => {
+      // Always recalculate condensation on resize, regardless of mobile mode
       debouncedCalculateVisibleItems();
     };
 
@@ -188,6 +338,11 @@ const NexNav: React.FC<NexNavProps> = ({
     const timer = setTimeout(calculateVisibleItems, 100);
     return () => clearTimeout(timer);
   }, [navItems, calculateVisibleItems]);
+
+  // Also recalculate when component mounts
+  useEffect(() => {
+    calculateVisibleItems();
+  }, [calculateVisibleItems]);
 
   // Memoize nav items with proper accessibility
   const memoizedNavItems = useMemo(() => {
@@ -218,7 +373,11 @@ const NexNav: React.FC<NexNavProps> = ({
 
   // Memoize resize handler for performance
   const handleResize = useCallback(() => {
-    if (window.innerWidth > 767) setIsMenuOpen(false);
+    // Only close mobile menu on resize, don't interfere with condensation
+    if (window.innerWidth > 767) {
+      setIsMenuOpen(false);
+    }
+    // Don't reset condensation state - let calculateVisibleItems handle it
   }, []);
 
   // Memoize locale change handler
@@ -330,7 +489,6 @@ const NexNav: React.FC<NexNavProps> = ({
       
       // Close if clicking outside the More dropdown area
       if (moreDropdownRef.current && !moreDropdownRef.current.contains(target)) {
-        console.log('Clicking outside More dropdown, closing...');
         setIsMoreOpen(false);
       }
     };
@@ -497,7 +655,6 @@ const NexNav: React.FC<NexNavProps> = ({
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      console.log('More button clicked, current state:', isMoreOpen);
                       setIsMoreOpen(prev => !prev);
                     }}
                     onKeyDown={(e) => {
