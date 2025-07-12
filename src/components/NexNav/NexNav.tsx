@@ -17,6 +17,20 @@ const LANG_KEY = 'nex-locale';
 const MAX_NAV_ITEMS = 4;
 const MIN_ITEM_WIDTH = 120; // Minimum width per nav item
 const MORE_BUTTON_WIDTH = 80; // Width of the "More" button
+const SUBITEM_EXTRA_WIDTH = 20; // Extra width for items with subitems (chevron)
+
+// Debounce function to prevent excessive calculations
+const debounce = (func: Function, wait: number) => {
+  let timeout: NodeJS.Timeout;
+  return function executedFunction(...args: any[]) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
 const getDefaultLocale = (): string => {
   const lang = navigator.language || 'en';
@@ -50,12 +64,19 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  
+  // Debug effect to log state changes
+  useEffect(() => {
+    console.log('More dropdown state changed:', isMoreOpen);
+  }, [isMoreOpen]);
   const [availableWidth, setAvailableWidth] = useState(0);
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const [isCalculating, setIsCalculating] = useState(false);
 
   const navListRef = useRef<HTMLUListElement>(null);
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
   
   // Use centralized animation configuration
   const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
@@ -82,25 +103,50 @@ const NexNav: React.FC<NexNavProps> = ({
     }
   }, [isMoreOpen]);
 
-  // Calculate available width and determine visible items
-  const calculateVisibleItems = useCallback(() => {
-    if (!navListRef.current) return;
+  // Improved width calculation with better handling of subitems
+  const calculateItemWidth = useCallback((item: any, element?: HTMLElement) => {
+    if (element) {
+      const itemWidth = element.offsetWidth;
+      const hasSubItems = item.subItems && item.subItems.length > 0;
+      const extraWidth = hasSubItems ? SUBITEM_EXTRA_WIDTH : 0;
+      return itemWidth + extraWidth + 16; // Add gap
+    }
+    
+    // Fallback calculation
+    const baseWidth = MIN_ITEM_WIDTH;
+    const hasSubItems = item.subItems && item.subItems.length > 0;
+    const extraWidth = hasSubItems ? SUBITEM_EXTRA_WIDTH : 0;
+    const labelLength = item.label.length;
+    const estimatedWidth = Math.max(baseWidth, labelLength * 8 + extraWidth + 32); // Rough estimation
+    return estimatedWidth + 16; // Add gap
+  }, []);
 
-    const container = navListRef.current;
-    const containerWidth = container.offsetWidth;
-    const itemElements = container.querySelectorAll('.nex-nav-item');
+  // Calculate available width and determine visible items with debouncing
+  const calculateVisibleItems = useCallback(() => {
+    if (!navListRef.current || isCalculating) return;
+
+    setIsCalculating(true);
     
-    let totalWidth = 0;
-    const newVisibleItems: number[] = [];
-    
-    // Calculate width needed for each item
-    for (let i = 0; i < navItems.length; i++) {
-      const item = navItems[i];
-      const itemElement = itemElements[i] as HTMLElement;
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      if (!navListRef.current) {
+        setIsCalculating(false);
+        return;
+      }
+
+      const container = navListRef.current;
+      const containerWidth = container.offsetWidth;
+      const itemElements = container.querySelectorAll('.nex-nav-item');
       
-      if (itemElement) {
-        const itemWidth = itemElement.offsetWidth;
-        const requiredWidth = itemWidth + 16; // Add gap
+      let totalWidth = 0;
+      const newVisibleItems: number[] = [];
+      
+      // Calculate width needed for each item
+      for (let i = 0; i < navItems.length; i++) {
+        const item = navItems[i];
+        const itemElement = itemElements[i] as HTMLElement;
+        
+        const requiredWidth = calculateItemWidth(item, itemElement);
         
         // Check if we can fit this item plus the "More" button if needed
         const wouldNeedMoreButton = i >= MAX_NAV_ITEMS - 1;
@@ -112,34 +158,29 @@ const NexNav: React.FC<NexNavProps> = ({
         } else {
           break;
         }
-      } else {
-        // Fallback calculation if element not found
-        const estimatedWidth = MIN_ITEM_WIDTH + 16;
-        const wouldNeedMoreButton = i >= MAX_NAV_ITEMS - 1;
-        const moreButtonSpace = wouldNeedMoreButton ? MORE_BUTTON_WIDTH : 0;
-        
-        if (totalWidth + estimatedWidth + moreButtonSpace <= containerWidth) {
-          newVisibleItems.push(i);
-          totalWidth += estimatedWidth;
-        } else {
-          break;
-        }
       }
-    }
-    
-    setVisibleItems(newVisibleItems);
-    setAvailableWidth(containerWidth);
-  }, [navItems]);
+      
+      setVisibleItems(newVisibleItems);
+      setAvailableWidth(containerWidth);
+      setIsCalculating(false);
+    });
+  }, [navItems, calculateItemWidth, isCalculating]);
 
-  // Recalculate on resize
+  // Debounced resize handler to prevent twitching
+  const debouncedCalculateVisibleItems = useMemo(
+    () => debounce(calculateVisibleItems, 150),
+    [calculateVisibleItems]
+  );
+
+  // Recalculate on resize with debouncing
   useEffect(() => {
     const handleResize = () => {
-      calculateVisibleItems();
+      debouncedCalculateVisibleItems();
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [calculateVisibleItems]);
+  }, [debouncedCalculateVisibleItems]);
 
   // Recalculate when nav items change
   useEffect(() => {
@@ -286,7 +327,10 @@ const NexNav: React.FC<NexNavProps> = ({
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('.nex-nav-more-dropdown')) {
+      
+      // Close if clicking outside the More dropdown area
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(target)) {
+        console.log('Clicking outside More dropdown, closing...');
         setIsMoreOpen(false);
       }
     };
@@ -439,8 +483,9 @@ const NexNav: React.FC<NexNavProps> = ({
                 <div 
                   className="nex-nav-item-wrapper"
                   style={{ position: 'relative' }}
+                  ref={moreDropdownRef}
                 >
-                  <motion.li
+                  <motion.button
                     className={classNames('nex-nav-item', {
                       'has-dropdown': true,
                       'dropdown-open': isMoreOpen
@@ -449,20 +494,32 @@ const NexNav: React.FC<NexNavProps> = ({
                     aria-haspopup="true"
                     aria-expanded={isMoreOpen}
                     tabIndex={0}
-                    onClick={() => setIsMoreOpen(!isMoreOpen)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('More button clicked, current state:', isMoreOpen);
+                      setIsMoreOpen(prev => !prev);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setIsMoreOpen(prev => !prev);
+                      }
+                    }}
+                    type="button"
                     initial={false}
                     transition={{
                       duration: 0.2,
                       ease: [0.4, 0, 0.2, 1]
                     }}
                   >
-                                         <div className="nex-nav-item-content">
-                       <span className="nex-nav-item__label" style={{ fontSize: 'var(--nex-font-size-xs)' }}>
-                         More
-                       </span>
-                       <span className="nex-nav-item-badge" aria-label={`${overflowNavItems.length} additional items`}>
-                         {overflowNavItems.length}
-                       </span>
+                    <div className="nex-nav-item-content">
+                      <span className="nex-nav-item__label" style={{ fontSize: 'var(--nex-font-size-xs)' }}>
+                        More
+                      </span>
+                      <span className="nex-nav-item-badge" aria-label={`${overflowNavItems.length} additional items`}>
+                        {overflowNavItems.length}
+                      </span>
                       <motion.span 
                         className="nex-nav-item-chevron"
                         animate={{ rotate: isMoreOpen ? 180 : 0 }}
@@ -472,7 +529,7 @@ const NexNav: React.FC<NexNavProps> = ({
                         <ChevronDown size={14} />
                       </motion.span>
                     </div>
-                  </motion.li>
+                  </motion.button>
 
                   {/* More dropdown menu */}
                   <AnimatePresence>
@@ -506,43 +563,90 @@ const NexNav: React.FC<NexNavProps> = ({
                         aria-label="More options submenu"
                       >
                         <motion.ul className="nex-nav-dropdown-list">
-                          {overflowNavItems.map((item, index) => (
-                            <motion.li
-                              key={item.key || `overflow-${index}`}
-                              className={classNames('nex-nav-sub-item', {
-                                'disabled': item.disabled
-                              })}
-                              role="menuitem"
-                              tabIndex={item.disabled ? -1 : 0}
-                              onClick={() => {
-                                if (!item.disabled && item.onClick) {
-                                  item.onClick();
-                                  setIsMoreOpen(false);
-                                }
-                              }}
-                              aria-disabled={item.disabled}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ 
-                                duration: 0.1,
-                                delay: index * 0.02
-                              }}
-                            >
-                              <div className="nex-nav-sub-item-content">
-                                <div className="nex-nav-sub-item-text">
-                                  <span className="nex-nav-sub-item-label">{item.label}</span>
-                                  {item.description && (
-                                    <span className="nex-nav-sub-item-description">{item.description}</span>
+                          {overflowNavItems.map((item, index) => {
+                            // If item has subitems, render them directly instead of the parent item
+                            if (item.subItems && item.subItems.length > 0) {
+                              return item.subItems.map((subItem, subIndex) => (
+                                <motion.li
+                                  key={`${subItem.label}-${subIndex}`}
+                                  className={classNames('nex-nav-sub-item', {
+                                    'disabled': subItem.disabled,
+                                    'from-parent': true // Indicate this came from a parent with subitems
+                                  })}
+                                  role="menuitem"
+                                  tabIndex={subItem.disabled ? -1 : 0}
+                                  onClick={() => {
+                                    if (!subItem.disabled && subItem.onClick) {
+                                      subItem.onClick();
+                                      setIsMoreOpen(false);
+                                    }
+                                  }}
+                                  aria-disabled={subItem.disabled}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ 
+                                    duration: 0.1,
+                                    delay: (index * item.subItems!.length + subIndex) * 0.02
+                                  }}
+                                >
+                                  <div className="nex-nav-sub-item-content">
+                                    <div className="nex-nav-sub-item-text">
+                                      <span className="nex-nav-sub-item-label">{subItem.label}</span>
+                                      {subItem.description && (
+                                        <span className="nex-nav-sub-item-description">{subItem.description}</span>
+                                      )}
+                                      {/* Show parent item name for context */}
+                                      <span className="nex-nav-sub-item-parent">{item.label}</span>
+                                    </div>
+                                    {subItem.badge && (
+                                      <span className="nex-nav-sub-item-badge" aria-label={`${subItem.badge} notifications`}>
+                                        {subItem.badge}
+                                      </span>
+                                    )}
+                                  </div>
+                                </motion.li>
+                              ));
+                            }
+                            
+                            // Regular item without subitems
+                            return (
+                              <motion.li
+                                key={item.key || `overflow-${index}`}
+                                className={classNames('nex-nav-sub-item', {
+                                  'disabled': item.disabled
+                                })}
+                                role="menuitem"
+                                tabIndex={item.disabled ? -1 : 0}
+                                onClick={() => {
+                                  if (!item.disabled && item.onClick) {
+                                    item.onClick();
+                                    setIsMoreOpen(false);
+                                  }
+                                }}
+                                aria-disabled={item.disabled}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ 
+                                  duration: 0.1,
+                                  delay: index * 0.02
+                                }}
+                              >
+                                <div className="nex-nav-sub-item-content">
+                                  <div className="nex-nav-sub-item-text">
+                                    <span className="nex-nav-sub-item-label">{item.label}</span>
+                                    {item.description && (
+                                      <span className="nex-nav-sub-item-description">{item.description}</span>
+                                    )}
+                                  </div>
+                                  {item.badge && (
+                                    <span className="nex-nav-sub-item-badge" aria-label={`${item.badge} notifications`}>
+                                      {item.badge}
+                                    </span>
                                   )}
                                 </div>
-                                {item.badge && (
-                                  <span className="nex-nav-sub-item-badge" aria-label={`${item.badge} notifications`}>
-                                    {item.badge}
-                                  </span>
-                                )}
-                              </div>
-                            </motion.li>
-                          ))}
+                              </motion.li>
+                            );
+                          })}
                         </motion.ul>
                       </motion.div>
                     )}

@@ -352,6 +352,17 @@
       color: var(--nex-muted-font-color);
     }
   }
+
+  /* Special styling for items that came from a parent with subitems */
+  &.from-parent {
+    border-left: 2px solid rgba(255, 24, 1, 0.2);
+    background: rgba(255, 24, 1, 0.02);
+    
+    &:hover {
+      background: rgba(255, 24, 1, 0.05);
+      border-left-color: rgba(255, 24, 1, 0.3);
+    }
+  }
 }
 
 .nex-nav-sub-item-content {
@@ -414,6 +425,30 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* Parent context indicator for subitems */
+.nex-nav-sub-item-parent {
+  font-size: var(--nex-font-size-xs);
+  font-weight: var(--nex-font-weight-medium);
+  color: var(--nex-signature);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+  
+  /* Ensure consistent rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Add subtle icon */
+  &::before {
+    content: '↳';
+    margin-right: 4px;
+    opacity: 0.6;
+  }
 }
 
 .nex-nav-sub-item-badge {
@@ -519,15 +554,6 @@
   .nex-nav-dropdown {
     min-width: 180px;
     max-width: 240px;
-  }
-  
-  .nex-nav-sub-item {
-    padding: var(--nex-spacing-sm);
-  }
-  
-  .nex-nav-sub-item-icon {
-    width: 14px;
-    height: 14px;
   }
 }
 
@@ -678,5 +704,27 @@
   
   .nex-nav-sub-item {
     transition: none;
+  }
+}
+
+/* ================================
+   🚀 PERFORMANCE OPTIMIZATIONS
+   ================================ */
+
+/* Hardware acceleration for animations */
+.nex-nav-item,
+.nex-nav-sub-item,
+.nex-nav-dropdown {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .nex-nav-item,
+  .nex-nav-sub-item,
+  .nex-nav-dropdown {
+    transition: none !important;
   }
 }
