@@ -79,6 +79,29 @@ const getDefaultLocale = (): string => {
   return lang.split('-')[0];
 };
 
+// Responsive left position hook
+function useResponsiveLeft() {
+  const [left, setLeft] = useState('var(--nex-spacing-md)');
+
+  useEffect(() => {
+    function updateLeft() {
+      const width = window.innerWidth;
+      if (width <= 768) {
+        setLeft('var(--nex-spacing-md)');
+      } else if (width <= 1440) {
+        setLeft('var(--nex-spacing-lg)');
+      } else {
+        setLeft(`calc((100vw - 1440px) / 2 + var(--nex-spacing-lg))`);
+      }
+    }
+    updateLeft();
+    window.addEventListener('resize', updateLeft);
+    return () => window.removeEventListener('resize', updateLeft);
+  }, []);
+
+  return left;
+}
+
 const NexNav: React.FC<NexNavProps> = ({
   logoSrc,
   displayName,
@@ -974,134 +997,139 @@ const NexNav: React.FC<NexNavProps> = ({
       </AnimatePresence>
 
       {/* Mobile Logo with Smooth Animations */}
-      <motion.div
-        className="nex-nav-mobile-logo"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={medium}
-        style={{
-          position: 'fixed',
-          top: 'var(--nex-spacing-md)',
-          left: 'var(--nex-spacing-md)',
-          zIndex: 'calc(var(--nex-z-index-modal) + 10)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: 'auto',
-          height: '44px',
-          cursor: 'pointer'
-        }}
-        onClick={handleHomeClick}
-        role="button"
-        tabIndex={0}
-        aria-label={`${displayName} - Go to home`}
-        onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
-        whileHover={{
-          transition: fast
-        }}
-        whileTap={{
-          transition: fast
-        }}
-      >
-        {logoSrc ? (
-          <motion.div 
+      {(() => {
+        const left = useResponsiveLeft();
+        return (
+          <motion.div
+            className="nex-nav-mobile-logo"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0, left }}
+            transition={medium}
             style={{
+              position: 'fixed',
+              top: 'var(--nex-spacing-md)',
+              zIndex: 'calc(var(--nex-z-index-modal) + 10)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '100%',
-              height: '100%',
-              padding: '8px',
-              boxSizing: 'border-box'
+              width: 'auto',
+              height: '44px',
+              cursor: 'pointer',
+              left,
             }}
+            onClick={handleHomeClick}
+            role="button"
+            tabIndex={0}
+            aria-label={`${displayName} - Go to home`}
+            onKeyDown={(e) => e.key === 'Enter' && handleHomeClick()}
             whileHover={{
               transition: fast
             }}
-          >
-            <motion.img 
-              src={logoSrc} 
-              alt={displayName} 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={medium}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                filter: 'brightness(0.9) contrast(1.1)',
-                maxWidth: '24px',
-                maxHeight: '24px'
-              }}
-              onError={(e) => {
-                // Fallback to text if image fails to load
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('fallback-hidden');
-              }}
-            />
-            <motion.div 
-              className="fallback-hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={medium}
-              style={{
-                position: 'absolute',
-                fontSize: 'var(--nex-font-size-xs)',
-                fontWeight: 'var(--nex-font-weight-medium)',
-                color: 'var(--nex-font-color)',
-                textAlign: 'center',
-                lineHeight: 1,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                maxWidth: '28px',
-                display: 'none'
-              }}
-            >
-              {displayName?.slice(0, 2)}
-            </motion.div>
-          </motion.div>
-        ) : (
-          <motion.div 
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-              height: '100%',
-              padding: '4px 12px',
-              boxSizing: 'border-box'
-            }}
-            whileHover={{
+            whileTap={{
               transition: fast
             }}
           >
-            <motion.div 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={medium}
-              style={{
-                fontSize: '0.9rem',
-                fontWeight: 600,
-                color: 'var(--nex-color-text-primary)',
-                textAlign: 'center',
-                lineHeight: 1.2,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                maxWidth: 'none',
-                fontFamily: 'var(--nex-font-family-primary)',
-                letterSpacing: '0.02em',
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale',
-                textRendering: 'optimizeLegibility'
-              }}
-            >
-              {displayName || 'NexComponent'}
-            </motion.div>
+            {logoSrc ? (
+              <motion.div 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%',
+                  padding: '8px',
+                  boxSizing: 'border-box'
+                }}
+                whileHover={{
+                  transition: fast
+                }}
+              >
+                <motion.img 
+                  src={logoSrc} 
+                  alt={displayName} 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={medium}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    filter: 'brightness(0.9) contrast(1.1)',
+                    maxWidth: '24px',
+                    maxHeight: '24px'
+                  }}
+                  onError={(e) => {
+                    // Fallback to text if image fails to load
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.nextElementSibling?.classList.remove('fallback-hidden');
+                  }}
+                />
+                <motion.div 
+                  className="fallback-hidden"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={medium}
+                  style={{
+                    position: 'absolute',
+                    fontSize: 'var(--nex-font-size-xs)',
+                    fontWeight: 'var(--nex-font-weight-medium)',
+                    color: 'var(--nex-font-color)',
+                    textAlign: 'center',
+                    lineHeight: 1,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    maxWidth: '28px',
+                    display: 'none'
+                  }}
+                >
+                  {displayName?.slice(0, 2)}
+                </motion.div>
+              </motion.div>
+            ) : (
+              <motion.div 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%',
+                  padding: '4px 12px',
+                  boxSizing: 'border-box'
+                }}
+                whileHover={{
+                  transition: fast
+                }}
+              >
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={medium}
+                  style={{
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    color: 'var(--nex-color-text-primary)',
+                    textAlign: 'center',
+                    lineHeight: 1.2,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    maxWidth: 'none',
+                    fontFamily: 'var(--nex-font-family-primary)',
+                    letterSpacing: '0.02em',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    textRendering: 'optimizeLegibility'
+                  }}
+                >
+                  {displayName || 'NexComponent'}
+                </motion.div>
+              </motion.div>
+            )}
           </motion.div>
-        )}
-      </motion.div>
+        );
+      })()}
     </>
   );
 };
