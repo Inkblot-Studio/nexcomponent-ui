@@ -53,22 +53,6 @@
     margin: 0;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--nex-signature);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 1px;
-    }
-    
-    &:hover::after {
-      width: 100%;
-    }
   }
 
   /* ================================
@@ -157,10 +141,6 @@
   &--black-glass {
     &__title {
       color: #ffffff;
-      
-      &::after {
-        background: rgba(255, 255, 255, 0.6);
-      }
     }
     
     &__link {
@@ -231,10 +211,6 @@
      ================================ */
   
   @media (prefers-reduced-motion: reduce) {
-    &__title::after {
-      transition: none;
-    }
-    
     &__link {
       transition: none;
     }

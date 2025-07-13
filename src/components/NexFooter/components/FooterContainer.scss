@@ -22,7 +22,7 @@
   background: var(--nex-background-color);
   color: var(--nex-font-color);
   will-change: transform, opacity, backdrop-filter;
-  overflow-x: hidden;
+  overflow: hidden;
   
   /* ================================
      📦 MAIN CONTENT AREA

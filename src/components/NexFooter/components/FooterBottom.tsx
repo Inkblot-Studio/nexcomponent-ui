@@ -81,15 +81,16 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                   className={`nex-footer-bottom__social-link ${social.type}`}
                   aria-label={`Follow us on ${social.type}`}
                   whileHover={{ 
-                    opacity: 0.8,
-                    scale: 1.05
+                    opacity: 0.9,
+                    scale: 1.05,
+                    color: theme === 'black-glass' ? '#ffffff' : undefined
                   }}
                   whileTap={{ 
                     scale: 0.95,
                     opacity: 0.7 
                   }}
                   transition={{ 
-                    duration: 0.15,
+                    duration: 0.2,
                     ease: [0.4, 0, 0.2, 1]
                   }}
                 >

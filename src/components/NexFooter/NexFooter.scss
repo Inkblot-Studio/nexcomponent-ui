@@ -34,6 +34,7 @@
   width: 100%;
   font-family: var(--nex-font-family-primary);
   will-change: transform, opacity;
+  overflow: hidden;
   
   /* Premium glass background matching NexNav */
   &::before {
