@@ -24,7 +24,7 @@
     align-items: center;
     gap: var(--nex-spacing-xs);
     padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-    height: 32px;
+    height: 36px;
     min-width: 60px;
     
     /* Typography */
@@ -50,6 +50,7 @@
     justify-content: center;
     user-select: none;
     outline: none;
+    box-sizing: border-box;
     
     /* Focus State - Signature accent (only CSS, no hover/active to avoid conflicts with Framer Motion) */
     &:focus-visible {
@@ -290,7 +291,7 @@
     .nex-lang-current {
       min-width: 48px;
       padding: var(--nex-spacing-xs);
-      height: 28px;
+      height: 32px;
       
       .nex-lang-label {
         display: none; /* Show only flag on mobile */

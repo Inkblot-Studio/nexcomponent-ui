@@ -175,7 +175,7 @@
     align-items: center;
     gap: var(--nex-spacing-xs);
     padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-    height: 32px;
+    height: 36px;
     min-width: 60px;
     max-width: 120px;
     border-radius: var(--nex-radius-full);
@@ -580,7 +580,7 @@
   
   /* Mobile login button - match language switcher height */
   .nex-nav-login-button {
-    height: 28px;
+    height: 32px;
     min-width: 48px;
     padding: var(--nex-spacing-xs);
     

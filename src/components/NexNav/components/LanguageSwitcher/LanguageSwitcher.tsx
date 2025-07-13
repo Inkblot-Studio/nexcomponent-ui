@@ -240,7 +240,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         whileHover={hoverAnimation}
         whileTap={tapAnimation}
       >
-        {/* Show only emoji OR text, not both */}
+        {/* Show flag/icon + language code only */}
         {current?.icon ? (
           <img src={current.icon} alt="" className="nex-lang-icon" />
         ) : (
