@@ -100,21 +100,21 @@
 }
 
 /* ================================
-   🌒 DARK MODE FOOTER TOKENS
+   🌑 BLACK GLASS FOOTER TOKENS
    ================================ */
 
-[data-theme="dark"] {
-  /* Dark mode glass effects */
-  --nex-footer-glass-bg: rgba(26, 26, 26, 0.6);
-  --nex-footer-glass-bg-light: rgba(26, 26, 26, 0.4);
-  --nex-footer-glass-bg-lighter: rgba(26, 26, 26, 0.2);
-  --nex-footer-glass-bg-lightest: rgba(26, 26, 26, 0.1);
-  --nex-footer-glass-border: rgba(255, 255, 255, 0.08);
+.nex-footer-container--black-glass {
+  /* Black glass glass effects */
+  --nex-footer-glass-bg: rgba(0, 0, 0, 0.6);
+  --nex-footer-glass-bg-light: rgba(0, 0, 0, 0.4);
+  --nex-footer-glass-bg-lighter: rgba(0, 0, 0, 0.2);
+  --nex-footer-glass-bg-lightest: rgba(0, 0, 0, 0.1);
+  --nex-footer-glass-border: rgba(255, 255, 255, 0.1);
   --nex-footer-glass-border-light: rgba(255, 255, 255, 0.05);
   --nex-footer-glass-shadow: rgba(0, 0, 0, 0.3);
   --nex-footer-glass-shadow-dark: rgba(0, 0, 0, 0.6);
   
-  /* Dark mode hover effects */
+  /* Black glass hover effects */
   --nex-footer-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 

@@ -127,46 +127,22 @@
 }
 
 /* ================================
-   🌒 DARK MODE ADAPTATIONS
-   ================================ */
-
-[data-theme="dark"] .nex-footer {
-  &::before {
-    background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.06) 0%, 
-      rgba(0, 0, 0, 0.03) 30%, 
-      rgba(0, 0, 0, 0.01) 60%,
-      rgba(0, 0, 0, 0.005) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  
-  &::after {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.015),
-      transparent
-    );
-  }
-}
-
-/* ================================
    🌑 BLACK GLASS PREMIUM THEME
    ================================ */
 
 .nex-footer-container--black-glass {
   background: linear-gradient(135deg, 
-    rgba(0, 0, 0, 0.92) 0%, 
-    rgba(15, 15, 15, 0.88) 50%,
-    rgba(0, 0, 0, 0.92) 100%);
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(10, 10, 10, 0.92) 50%,
+    rgba(0, 0, 0, 0.95) 100%);
   
   &::before {
     background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.3) 0%, 
-      rgba(15, 15, 15, 0.25) 30%, 
-      rgba(30, 30, 30, 0.15) 60%,
-      rgba(0, 0, 0, 0.08) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+      rgba(0, 0, 0, 0.4) 0%, 
+      rgba(10, 10, 10, 0.3) 30%, 
+      rgba(20, 20, 20, 0.2) 60%,
+      rgba(0, 0, 0, 0.1) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
@@ -175,19 +151,88 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 107, 53, 0.08),
-      rgba(247, 147, 30, 0.08),
+      rgba(255, 255, 255, 0.03),
       transparent
     );
   }
 
-  /* Enhanced content styling for black glass */
+  /* Enhanced content styling for black glass with better contrast */
   .nex-footer-content {
     color: #ffffff;
   }
 
   .nex-footer-inner {
     color: #ffffff;
+  }
+
+  /* Improved text contrast for black glass theme */
+  .nex-footer-branding__name span {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .nex-footer-branding__tagline {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nex-footer-sections__title {
+    color: #ffffff;
+  }
+
+  .nex-footer-sections__link {
+    color: rgba(255, 255, 255, 0.7);
+    
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .nex-footer-bottom__copyright {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nex-footer-bottom__link {
+    color: rgba(255, 255, 255, 0.7);
+    
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  /* Cleaner hover effects without signature colors */
+  .nex-footer-sections__title::after {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .nex-footer-sections__link::before {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Newsletter input styling for black glass */
+  .nex-footer-branding__newsletter-input input {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .nex-footer-branding__newsletter-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
   }
 }
 
@@ -201,13 +246,8 @@
       transition: none;
     }
     
-    &:hover::after {
-      left: -100%;
-    }
-    
     * {
       transition: none !important;
-      animation: none !important;
     }
   }
 }

@@ -3,15 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import NexFooter from './NexFooter';
 import storyBackground from '../../assets/img/story_background.jpg';
 import nexLogo from '../../assets/img/nex_logo.svg';
+import { NexFooterProps } from './NexFooter.types';
 
 const meta: Meta<typeof NexFooter> = {
-  title: 'NexComponent/NexFooter',
+  title: 'Components/NexFooter',
   component: NexFooter,
   parameters: {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A modern, scalable footer component with glassmorphic styling, contact forms, and developer tools integration.'
+        component: 'A premium footer component with glassmorphic design, featuring branding, navigation sections, developer tools, and contact forms. Supports multiple variants and themes with smooth animations and responsive design.'
       }
     }
   },
@@ -19,11 +20,11 @@ const meta: Meta<typeof NexFooter> = {
     variant: {
       control: { type: 'select' },
       options: ['default', 'compact', 'contact'],
-      description: 'Footer variant - default, compact, or contact form focused'
+      description: 'Footer layout variant'
     },
     theme: {
       control: { type: 'select' },
-      options: ['auto', 'light', 'dark', 'black-glass'],
+      options: ['auto', 'light', 'black-glass'],
       description: 'Theme variant for the footer'
     },
     displayName: {
@@ -45,22 +46,17 @@ const meta: Meta<typeof NexFooter> = {
   },
   decorators: [
     (Story, context) => {
-      const { theme } = context.args;
-      
+      const theme = context.args.theme;
       return (
-        <div
-          data-theme={theme === 'auto' ? undefined : theme}
-          style={{
+        <div 
+          style={{ 
             minHeight: '100vh',
-            backgroundImage: `url(${storyBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            fontFamily: 'Inter, sans-serif',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end'
+            background: theme === 'black-glass' 
+              ? 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)'
+              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%)',
+            padding: '20px'
           }}
+          data-theme={theme === 'auto' ? undefined : theme}
         >
           <Story />
         </div>
@@ -70,57 +66,70 @@ const meta: Meta<typeof NexFooter> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof NexFooter>;
 
-// Default footer with all features
+// Sample data for stories
+const sampleNavItems = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Features', url: '#features' },
+      { label: 'Pricing', url: '#pricing' },
+      { label: 'Documentation', url: '#docs' },
+      { label: 'API Reference', url: '#api' }
+    ]
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About Us', url: '#about' },
+      { label: 'Careers', url: '#careers' },
+      { label: 'Blog', url: '#blog' },
+      { label: 'Press', url: '#press' }
+    ]
+  },
+  {
+    title: 'Support',
+    links: [
+      { label: 'Help Center', url: '#help' },
+      { label: 'Contact Us', url: '#contact' },
+      { label: 'Status', url: '#status' },
+      { label: 'Community', url: '#community' }
+    ]
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', url: '#privacy' },
+      { label: 'Terms of Service', url: '#terms' },
+      { label: 'Cookie Policy', url: '#cookies' },
+      { label: 'GDPR', url: '#gdpr' }
+    ]
+  }
+];
+
+const sampleSocialLinks = [
+  { type: 'github', url: 'https://github.com' },
+  { type: 'twitter', url: 'https://twitter.com' },
+  { type: 'linkedin', url: 'https://linkedin.com' },
+  { type: 'discord', url: 'https://discord.gg' }
+];
+
 export const Default: Story = {
   args: {
+    variant: 'default',
+    theme: 'light',
+    logoSrc: '/src/assets/img/nex_logo.svg',
     displayName: 'NexComponent',
-    tagline: 'Building the future of web development with modern, accessible components.',
-    sections: [
-      {
-        title: 'Product',
-        links: [
-          { label: 'Components', url: '#' },
-          { label: 'Documentation', url: '#' },
-          { label: 'Examples', url: '#' },
-          { label: 'Changelog', url: '#' }
-        ]
-      },
-      {
-        title: 'Resources',
-        links: [
-          { label: 'Getting Started', url: '#' },
-          { label: 'Tutorials', url: '#' },
-          { label: 'API Reference', url: '#' },
-          { label: 'Design System', url: '#' }
-        ]
-      },
-      {
-        title: 'Company',
-        links: [
-          { label: 'About', url: '#' },
-          { label: 'Blog', url: '#' },
-          { label: 'Careers', url: '#' },
-          { label: 'Press', url: '#' }
-        ]
-      }
-    ],
+    tagline: 'Building the future of web components with premium design and performance.',
+    showLogoText: true,
+    sections: sampleNavItems,
     newsletter: {
       enabled: true,
-      placeholder: 'Enter your email for updates',
-      onSubmit: async (email: string) => {
-        console.log('Newsletter subscription:', email);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
+      placeholder: 'Enter your email',
+      onSubmit: (email: string) => console.log('Newsletter signup:', email)
     },
-    socials: [
-      { type: 'github', url: 'https://github.com/nexcomponent' },
-      { type: 'twitter', url: 'https://twitter.com/nexcomponent' },
-      { type: 'linkedin', url: 'https://linkedin.com/company/nexcomponent' },
-      { type: 'discord', url: 'https://discord.gg/nexcomponent' }
-    ],
+    socials: sampleSocialLinks,
     developerTools: {
       copyCommands: true,
       npmPackage: '@nexcomponent/ui',
@@ -129,175 +138,6 @@ export const Default: Story = {
   }
 };
 
-// Compact variant for space-constrained layouts
-export const Compact: Story = {
-  args: {
-    ...Default.args,
-    variant: 'compact',
-    tagline: 'Modern, accessible components for web development.'
-  }
-};
-
-// Contact-focused footer for lead generation
-export const Contact: Story = {
-  args: {
-    displayName: 'NexComponent',
-    tagline: 'Ready to build something amazing? Let\'s talk about your next project.',
-    variant: 'contact',
-    contact: {
-      enabled: true,
-      title: 'Get in Touch',
-      description: 'Have questions about our components or need help with implementation? We\'d love to hear from you.',
-      placeholder: 'Tell us about your project...',
-      buttonText: 'Send Message',
-      onSubmit: async (data: { email: string; message: string }) => {
-        console.log('Contact form submission:', data);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-      }
-    },
-    socials: [
-      { type: 'github', url: 'https://github.com/nexcomponent' },
-      { type: 'twitter', url: 'https://twitter.com/nexcomponent' },
-      { type: 'linkedin', url: 'https://linkedin.com/company/nexcomponent' }
-    ]
-  }
-};
-
-// Minimal footer with just branding and social links
-export const Minimal: Story = {
-  args: {
-    displayName: 'NexComponent',
-    tagline: 'Building the future of web development.',
-    socials: [
-      { type: 'github', url: 'https://github.com/nexcomponent' },
-      { type: 'twitter', url: 'https://twitter.com/nexcomponent' }
-    ]
-  }
-};
-
-// Developer-focused footer
-export const Developer: Story = {
-  args: {
-    displayName: 'NexComponent',
-    tagline: 'Built by developers, for developers.',
-    sections: [
-      {
-        title: 'Documentation',
-        links: [
-          { label: 'Getting Started', url: '#' },
-          { label: 'Components', url: '#' },
-          { label: 'API Reference', url: '#' },
-          { label: 'Examples', url: '#' }
-        ]
-      },
-      {
-        title: 'Community',
-        links: [
-          { label: 'GitHub', url: '#' },
-          { label: 'Discord', url: '#' },
-          { label: 'Stack Overflow', url: '#' },
-          { label: 'Blog', url: '#' }
-        ]
-      }
-    ],
-    developerTools: {
-      copyCommands: true,
-      npmPackage: '@nexcomponent/ui',
-      githubUrl: 'https://github.com/nexcomponent/ui'
-    },
-    socials: [
-      { type: 'github', url: 'https://github.com/nexcomponent' },
-      { type: 'discord', url: 'https://discord.gg/nexcomponent' }
-    ]
-  }
-};
-
-// Enterprise footer with comprehensive sections
-export const Enterprise: Story = {
-  args: {
-    displayName: 'NexComponent Enterprise',
-    tagline: 'Enterprise-grade component library for large-scale applications.',
-    logoSrc: nexLogo,
-    sections: [
-      {
-        title: 'Platform',
-        links: [
-          { label: 'Components', url: '#' },
-          { label: 'Design System', url: '#' },
-          { label: 'Themes', url: '#' },
-          { label: 'Integrations', url: '#' }
-        ]
-      },
-      {
-        title: 'Solutions',
-        links: [
-          { label: 'Enterprise', url: '#' },
-          { label: 'Startups', url: '#' },
-          { label: 'Agencies', url: '#' },
-          { label: 'Developers', url: '#' }
-        ]
-      },
-      {
-        title: 'Support',
-        links: [
-          { label: 'Documentation', url: '#' },
-          { label: 'Help Center', url: '#' },
-          { label: 'Contact Sales', url: '#' },
-          { label: 'Status', url: '#' }
-        ]
-      },
-      {
-        title: 'Company',
-        links: [
-          { label: 'About', url: '#' },
-          { label: 'Careers', url: '#' },
-          { label: 'Blog', url: '#' },
-          { label: 'Press', url: '#' }
-        ]
-      }
-    ],
-    newsletter: {
-      enabled: true,
-      placeholder: 'Subscribe to our newsletter',
-      onSubmit: async (email: string) => {
-        console.log('Enterprise newsletter subscription:', email);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-    },
-    socials: [
-      { type: 'github', url: 'https://github.com/nexcomponent' },
-      { type: 'twitter', url: 'https://twitter.com/nexcomponent' },
-      { type: 'linkedin', url: 'https://linkedin.com/company/nexcomponent' },
-      { type: 'youtube', url: 'https://youtube.com/nexcomponent' }
-    ],
-    developerTools: {
-      copyCommands: true,
-      npmPackage: '@nexcomponent/ui',
-      githubUrl: 'https://github.com/nexcomponent/ui'
-    }
-  }
-};
-
-// Logo only footer (no text)
-export const LogoOnly: Story = {
-  args: {
-    ...Default.args,
-    logoSrc: nexLogo,
-    showLogoText: false,
-    tagline: undefined
-  }
-};
-
-// Dark theme example
-export const DarkTheme: Story = {
-  args: {
-    ...Default.args,
-    theme: 'dark'
-  }
-};
-
-// Black glass theme example
 export const BlackGlass: Story = {
   args: {
     ...Default.args,
@@ -305,10 +145,55 @@ export const BlackGlass: Story = {
   }
 };
 
-// Light theme example
-export const LightTheme: Story = {
+export const Compact: Story = {
   args: {
     ...Default.args,
-    theme: 'light'
+    variant: 'compact'
+  }
+};
+
+export const Contact: Story = {
+  args: {
+    ...Default.args,
+    variant: 'contact',
+    contact: {
+      enabled: true,
+      title: 'Get in Touch',
+      description: 'Have questions about our components or need help with implementation? We\'d love to hear from you.',
+      placeholder: 'Tell us about your project...',
+      buttonText: 'Send Message',
+      onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
+    }
+  }
+};
+
+export const Minimal: Story = {
+  args: {
+    ...Default.args,
+    sections: undefined,
+    newsletter: undefined,
+    developerTools: undefined
+  }
+};
+
+export const LogoOnly: Story = {
+  args: {
+    ...Default.args,
+    showLogoText: false,
+    tagline: undefined,
+    sections: undefined,
+    newsletter: undefined,
+    developerTools: undefined
+  }
+};
+
+export const SectionsOnly: Story = {
+  args: {
+    ...Default.args,
+    logoSrc: undefined,
+    displayName: '',
+    tagline: undefined,
+    newsletter: undefined,
+    developerTools: undefined
   }
 };

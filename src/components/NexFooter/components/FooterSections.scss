@@ -61,7 +61,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--nex-signature), var(--nex-signature-light));
+      background: var(--nex-signature);
       transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 1px;
     }
@@ -108,7 +108,7 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: linear-gradient(90deg, var(--nex-signature), var(--nex-signature-light));
+      background: var(--nex-signature);
       transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
     }
@@ -172,13 +172,13 @@
     display: none; /* Hide sections in contact variant */
   }
 
-  /* Black Glass Theme */
+  /* Black Glass Theme - Improved contrast and cleaner design */
   &--black-glass {
     &__title {
       color: #ffffff;
       
       &::after {
-        background: linear-gradient(90deg, #ff6b35, #f7931e);
+        background: rgba(255, 255, 255, 0.6);
       }
     }
     
@@ -189,15 +189,15 @@
         color: #ffffff;
         
         &::before {
-          background: linear-gradient(90deg, #ff6b35, #f7931e);
+          background: rgba(255, 255, 255, 0.8);
         }
       }
       
       &:focus {
-        color: #ff6b35;
+        color: #ffffff;
         
         &::before {
-          background: linear-gradient(90deg, #ff6b35, #f7931e);
+          background: rgba(255, 255, 255, 0.8);
         }
       }
     }

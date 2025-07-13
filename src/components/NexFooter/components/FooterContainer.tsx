@@ -6,7 +6,7 @@ import './FooterContainer.scss';
 interface FooterContainerProps {
   children: React.ReactNode;
   variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
+  theme?: 'auto' | 'light' | 'black-glass';
   className?: string;
 }
 
@@ -20,28 +20,16 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
 
   // Get theme-aware styles
   const getThemeStyles = () => {
-    if (theme === 'dark') {
+    if (theme === 'black-glass') {
       return {
-        background: 'linear-gradient(120deg, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.08) 0%, rgba(0,184,255,0.08) 100%)',
-        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 30%, rgba(0, 0, 0, 0.02) 60%, rgba(0, 0, 0, 0.01) 100%)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.015), transparent)',
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.92) 50%, rgba(0, 0, 0, 0.95) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 10, 0.3) 30%, rgba(20, 20, 20, 0.2) 60%, rgba(0, 0, 0, 0.1) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
         gradientOverlay: `
-          radial-gradient(circle at 20% 40%, rgba(255,24,1,0.08) 0%, rgba(255,24,1,0.04) 40%, transparent 70%),
-          radial-gradient(circle at 80% 60%, rgba(0,184,255,0.06) 0%, rgba(0,184,255,0.04) 40%, transparent 70%),
+          radial-gradient(circle at 20% 40%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 40%, transparent 70%),
           radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 80%)
-        `
-      };
-    } else if (theme === 'black-glass') {
-      return {
-        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(15, 15, 15, 0.88) 50%, rgba(0, 0, 0, 0.92) 100%)',
-        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(15, 15, 15, 0.25) 30%, rgba(30, 30, 30, 0.15) 60%, rgba(0, 0, 0, 0.08) 100%)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.08), rgba(247, 147, 30, 0.08), transparent)',
-        gradientOverlay: `
-          radial-gradient(circle at 20% 40%, rgba(255,107,53,0.1) 0%, rgba(255,107,53,0.05) 40%, transparent 70%),
-          radial-gradient(circle at 80% 60%, rgba(247,147,30,0.08) 0%, rgba(247,147,30,0.04) 40%, transparent 70%),
-          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 80%)
         `
       };
     } else {
