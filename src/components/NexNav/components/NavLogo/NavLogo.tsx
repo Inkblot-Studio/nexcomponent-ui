@@ -15,14 +15,14 @@ const NavLogo: React.FC<NavLogoProps> = ({
   onHomeClick,
   left
 }) => {
-  const { medium, fast } = useAnimationConfig();
+  const { timing } = useAnimationConfig();
 
   return (
     <motion.div
       className="nex-nav-mobile-logo"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0, left }}
-      transition={medium}
+      transition={timing.medium}
       style={{
         position: 'fixed',
         top: 'var(--nex-spacing-md)',
@@ -41,10 +41,10 @@ const NavLogo: React.FC<NavLogoProps> = ({
       aria-label={`${displayName} - Go to home`}
       onKeyDown={(e) => e.key === 'Enter' && onHomeClick()}
       whileHover={{
-        transition: fast
+        transition: timing.fast
       }}
       whileTap={{
-        transition: fast
+        transition: timing.fast
       }}
     >
       {logoSrc ? (
@@ -59,7 +59,7 @@ const NavLogo: React.FC<NavLogoProps> = ({
             boxSizing: 'border-box'
           }}
           whileHover={{
-            transition: fast
+            transition: timing.fast
           }}
         >
           <motion.img 
@@ -67,7 +67,7 @@ const NavLogo: React.FC<NavLogoProps> = ({
             alt={displayName} 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={medium}
+            transition={timing.medium}
             style={{
               width: '100%',
               height: '100%',
@@ -86,7 +86,7 @@ const NavLogo: React.FC<NavLogoProps> = ({
             className="fallback-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={medium}
+            transition={timing.medium}
             style={{
               position: 'absolute',
               fontSize: 'var(--nex-font-size-xs)',
@@ -116,13 +116,13 @@ const NavLogo: React.FC<NavLogoProps> = ({
             boxSizing: 'border-box'
           }}
           whileHover={{
-            transition: fast
+            transition: timing.fast
           }}
         >
           <motion.div 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={medium}
+            transition={timing.medium}
             style={{
               fontSize: '0.9rem',
               fontWeight: 600,
