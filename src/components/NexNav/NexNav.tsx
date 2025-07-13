@@ -73,7 +73,7 @@ const NexNav: React.FC<NexNavProps> = ({
   const navRef = useRef<HTMLElement>(null);
   
   // Use centralized animation configuration
-  const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
+  const { timing, spring, stagger, shouldReduceMotion, variants } = useAnimationConfig();
 
   // Ensure only one dropdown is open at a time
   useEffect(() => {
@@ -171,30 +171,16 @@ const NexNav: React.FC<NexNavProps> = ({
   // Background state variants with mobile nav integration
   const backgroundVariants = {
     atTop: {
-      ...ANIMATION_VARIANTS.background.atTop,
-      transition: medium
+      ...variants.background.transparent,
+      transition: timing.medium
     },
     scrolled: {
-      ...ANIMATION_VARIANTS.background.scrolled,
-      transition: medium
+      ...variants.background.light,
+      transition: timing.medium
     },
     mobileOpen: {
-      ...ANIMATION_VARIANTS.background.mobileOpen,
-      transition: medium
-    }
-  };
-
-  // Burger button variants
-  const burgerVariants = {
-    closed: {
-      rotate: 0,
-      scale: 1,
-      transition: fast
-    },
-    open: {
-      rotate: 180,
-      scale: 1.05,
-      transition: fast
+      ...variants.background.medium,
+      transition: timing.medium
     }
   };
 
@@ -301,7 +287,7 @@ const NexNav: React.FC<NexNavProps> = ({
           {/* Logo Placeholder - Maintains space for mobile logo */}
           <motion.div 
             className="nex-nav-logo-placeholder"
-            variants={ANIMATION_VARIANTS.navItem}
+            variants={variants.mobileNav.navItem}
             style={{
               width: 'calc(100px + var(--nex-spacing-md) * 2)',
               height: '44px',
@@ -344,7 +330,7 @@ const NexNav: React.FC<NexNavProps> = ({
             onAdminPanelClick={onAdminPanelClick}
           />
             
-          {/* Mobile Burger Button - Also in nav for better accessibility */}
+          {/* Hamburger Button with Enterprise Animations */}
           <motion.button
             className="nex-nav-burger-btn"
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -352,23 +338,23 @@ const NexNav: React.FC<NexNavProps> = ({
             aria-controls="mobile-nav-menu"
             onClick={toggleMenu}
             type="button"
-            variants={burgerVariants}
+            variants={variants.interactive.hamburger.container}
             animate={isMenuOpen ? "open" : "closed"}
             whileHover={{
               backgroundColor: "rgba(255, 255, 255, 0.12)",
               borderColor: "rgba(255, 255, 255, 0.15)",
               boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-              transition: fast
+              transition: timing.fast
             }}
             whileTap={{
               backgroundColor: "rgba(255, 24, 1, 0.12)",
               borderColor: "rgba(255, 24, 1, 0.2)",
-              transition: fast
+              transition: timing.fast
             }}
             whileFocus={{
               outline: "2px solid var(--nex-signature)",
               outlineOffset: "2px",
-              transition: fast
+              transition: timing.fast
             }}
           >
             <motion.div 
@@ -377,7 +363,7 @@ const NexNav: React.FC<NexNavProps> = ({
             >
               <motion.div
                 key="menu"
-                variants={ANIMATION_VARIANTS.icon}
+                variants={variants.interactive.hamburger.menuIcon}
                 animate={isMenuOpen ? "open" : "closed"}
                 style={{ position: 'absolute' }}
               >
@@ -385,7 +371,7 @@ const NexNav: React.FC<NexNavProps> = ({
               </motion.div>
               <motion.div
                 key="close"
-                variants={ANIMATION_VARIANTS.closeIcon}
+                variants={variants.interactive.hamburger.closeIcon}
                 animate={isMenuOpen ? "open" : "closed"}
                 style={{ position: 'absolute' }}
               >

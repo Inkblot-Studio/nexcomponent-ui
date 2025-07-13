@@ -41,12 +41,21 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onIntegrationsClick,
   onAdminPanelClick
 }) => {
-  // Single state to track which dropdown is open
+  // State management
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openNavItems, setOpenNavItems] = useState<Set<number>>(new Set());
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
-  // Use centralized animation configuration
-  const { fast, medium, slow, stagger, shouldReduceMotion } = useAnimationConfig();
+  // Enterprise animation configuration
+  const { 
+    timing, 
+    spring, 
+    stagger, 
+    shouldReduceMotion, 
+    variants, 
+    colors, 
+    performance 
+  } = useAnimationConfig();
 
   // Toggle handlers with exclusivity logic
   const handleProfileToggle = () => {
@@ -67,7 +76,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
       if (newSet.has(index)) {
         newSet.delete(index);
       } else {
-        // Close all other nav items when opening a new one
         newSet.clear();
         newSet.add(index);
       }
@@ -80,11 +88,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
     if (!isOpen) {
       setOpenDropdown(null);
       setOpenNavItems(new Set());
+      setHoveredItem(null);
     }
   }, [isOpen]);
 
   const currentLanguage = languageOptions.find(lang => lang.code === currentLocale);
-
   const hasHome = navItems.some(item => item.label.toLowerCase() === 'home');
 
   // Prevent body scroll when mobile nav is open
@@ -102,15 +110,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
   return (
     <motion.div
       className="nex-mobile-nav"
-      variants={ANIMATION_VARIANTS.mobileNav}
+      variants={variants.mobileNav.container}
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={slow}
       style={{
         overflow: 'hidden',
         position: 'fixed',
-        top: '71.99px', // exact nav height
+        top: '71.99px',
         left: 0,
         right: 0,
         width: '100%',
@@ -118,39 +125,61 @@ const MobileNav: React.FC<MobileNavProps> = ({
         zIndex: 'var(--nex-z-index-modal)',
         display: 'flex',
         flexDirection: 'column',
-        background: 'linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%), linear-gradient(90deg, rgba(255,24,1,0.08) 0%, rgba(0,184,255,0.08) 100%)',
-        backdropFilter: 'blur(24px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-        borderBottom: '1.5px solid rgba(255, 255, 255, 0.22)',
-        boxShadow: '0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset'
+        background: colors.mobileNav.background.primary,
+        backdropFilter: colors.mobileNav.backdrop.medium,
+        WebkitBackdropFilter: colors.mobileNav.backdrop.medium,
+        borderBottom: colors.mobileNav.border.medium,
+        boxShadow: colors.mobileNav.shadow.medium,
+        ...performance.hardwareAcceleration
       }}
     >
       <motion.div
         className="nex-mobile-nav-inner"
-        variants={ANIMATION_VARIANTS.fadeIn}
+        variants={variants.fade.in}
         initial="initial"
         animate="animate"
         exit="exit"
-        transition={{ ...slow, delay: 0.15 }}
+        transition={timing.medium}
         style={{ 
           height: '100%', 
           display: 'flex', 
           flexDirection: 'column', 
-          overflowY: 'auto'
+          overflowY: 'auto',
+          ...performance.hardwareAcceleration
         }}
       >
         {/* Header with User Info */}
-        <div className="nex-mobile-nav-header">
+        <motion.div 
+          className="nex-mobile-nav-header"
+          variants={variants.mobileNav.header}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
           {isAuthenticated && user ? (
             <>
               {user.avatarUrl ? (
-                <img
+                <motion.img
                   src={user.avatarUrl}
                   alt={user.name}
                   className="nex-mobile-nav-user-avatar"
+                  variants={variants.mobileNav.avatar}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 />
               ) : (
-                <span className="nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback">
+                <motion.span 
+                  className="nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback"
+                  variants={variants.mobileNav.avatar}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   {/* Premium animated SVG avatar with initials */}
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -176,19 +205,22 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       {user.name?.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase()}
                     </text>
                   </svg>
-                </span>
+                </motion.span>
               )}
               <motion.div 
                 className="nex-mobile-nav-user-info"
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.fade.in}
                 initial="initial"
                 animate="animate"
-                transition={{ ...slow, delay: 0.25 }}
+                transition={{ ...timing.medium, delay: 0.1 }}
               >
                 <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
                 <motion.div 
                   className="nex-mobile-nav-user-tier"
                   onClick={onSubscriptionClick}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={spring.fast}
                 >
                   {subscription?.tier === 'pro' ? 'Pro' : 'Free'}
                 </motion.div>
@@ -197,50 +229,59 @@ const MobileNav: React.FC<MobileNavProps> = ({
           ) : (
             <motion.div 
               className="nex-mobile-nav-guest-content"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.fade.in}
               initial="initial"
               animate="animate"
-              transition={{ ...slow, delay: 0.3 }}
+              transition={{ ...timing.medium, delay: 0.15 }}
             >
               <motion.button
                 className="nex-mobile-nav-signup-btn"
                 onClick={onLogin}
+                whileHover={variants.interactive.button.hover}
+                whileTap={variants.interactive.button.tap}
+                transition={spring.fast}
               >
                 Sign Up
               </motion.button>
               <motion.button 
                 className="nex-mobile-nav-login-link"
                 onClick={onLogin}
+                whileHover={{ opacity: 0.8 }}
+                whileTap={{ scale: 0.98 }}
+                transition={spring.fast}
               >
                 Already have an account? Sign in
               </motion.button>
             </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* Navigation Items */}
         <motion.div 
           className="nex-mobile-nav-list"
-          variants={stagger}
+          variants={stagger.container}
           initial="initial"
           animate="animate"
-          transition={{ ...slow, delayChildren: 0.2, staggerChildren: 0.08 }}
+          style={performance.hardwareAcceleration}
         >
           {/* Main Navigation */}
           <motion.div 
             className="nex-mobile-nav-section"
-            variants={ANIMATION_VARIANTS.fadeIn}
+            variants={variants.mobileNav.navItem}
           >
             <motion.h4 
               className="nex-mobile-nav-section-title"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.sectionTitle}
             >
               Navigation
             </motion.h4>
             {!hasHome && (
               <motion.div 
                 className="nex-mobile-nav-item"
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.navItem}
+                whileHover={variants.interactive.navItem.hover}
+                whileTap={variants.interactive.navItem.active}
+                transition={spring.responsive}
               >
                 <span className="nex-mobile-nav-text">Home</span>
               </motion.div>
@@ -249,7 +290,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
               <motion.div 
                 key={index} 
                 style={{ marginBottom: 'var(--nex-spacing-xs)' }}
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.navItem}
               >
                 <motion.div
                   className="nex-mobile-nav-item"
@@ -261,12 +302,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       item.onClick();
                     }
                   }}
+                  whileHover={variants.interactive.navItem.hover}
+                  whileTap={variants.interactive.navItem.active}
+                  transition={spring.responsive}
                 >
                   <span className="nex-mobile-nav-text">{item.label}</span>
                   {item.subItems && item.subItems.length > 0 && (
                     <motion.div
-                      animate={{ rotate: openNavItems.has(index) ? 180 : 0 }}
-                      transition={slow}
+                      animate={openNavItems.has(index) ? "open" : "closed"}
+                      variants={variants.mobileNav.iconRotate}
+                      transition={spring.fast}
                     >
                       <ChevronDown className="nex-mobile-nav-icon" />
                     </motion.div>
@@ -275,29 +320,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 <AnimatePresence>
                   {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ 
-                        height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                        opacity: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
-                      }}
+                      variants={variants.mobileNav.dropdownContainer}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
                       <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
-                        variants={{
-                          hidden: { opacity: 0 },
-                          visible: {
-                            opacity: 1,
-                            transition: {
-                              delayChildren: 0.1,
-                              staggerChildren: 0.05
-                            }
-                          }
-                        }}
+                        variants={stagger.dropdown}
+                        initial="initial"
+                        animate="animate"
                       >
                         {item.subItems.map((subItem, subIndex) => (
                           <motion.div
@@ -310,37 +342,25 @@ const MobileNav: React.FC<MobileNavProps> = ({
                               }
                             }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                            variants={{
-                              hidden: { 
-                                opacity: 0, 
-                                y: -8,
-                                scale: 0.95
-                              },
-                              visible: { 
-                                opacity: 1, 
-                                y: 0,
-                                scale: 1,
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 400,
-                                  damping: 30
-                                }
-                              }
-                            }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
                           >
-                        <span className="nex-mobile-nav-text">{subItem.label}</span>
-                        {subItem.badge && (
-                          <motion.span 
-                            className="nex-mobile-nav-badge"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={slow}
-                          >
-                            {subItem.badge}
-                          </motion.span>
-                        )}
-                      </motion.div>
-                    ))}
+                            <span className="nex-mobile-nav-text">{subItem.label}</span>
+                            {subItem.badge && (
+                              <motion.span 
+                                className="nex-mobile-nav-badge"
+                                variants={variants.mobileNav.badge}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                              >
+                                {subItem.badge}
+                              </motion.span>
+                            )}
+                          </motion.div>
+                        ))}
                       </motion.div>
                     </motion.div>
                   )}
@@ -352,18 +372,21 @@ const MobileNav: React.FC<MobileNavProps> = ({
           {/* Language Switcher */}
           <motion.div 
             className="nex-mobile-nav-section"
-            variants={ANIMATION_VARIANTS.fadeIn}
+            variants={variants.mobileNav.navItem}
           >
             <motion.h4 
               className="nex-mobile-nav-section-title"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.sectionTitle}
             >
               Language
             </motion.h4>
             <motion.div 
               className="nex-mobile-nav-item"
               onClick={handleLanguageToggle}
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.navItem}
+              whileHover={variants.interactive.navItem.hover}
+              whileTap={variants.interactive.navItem.active}
+              transition={spring.responsive}
             >
               <span className="nex-mobile-lang-abbr">
                 {currentLocale.toUpperCase()}
@@ -372,8 +395,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 {currentLanguage?.label || currentLocale.toUpperCase()}
               </span>
               <motion.div
-                animate={{ rotate: openDropdown === 'language' ? 180 : 0 }}
-                transition={slow}
+                animate={openDropdown === 'language' ? "open" : "closed"}
+                variants={variants.mobileNav.iconRotate}
+                transition={spring.fast}
               >
                 <ChevronDown className="nex-mobile-nav-icon" />
               </motion.div>
@@ -381,29 +405,16 @@ const MobileNav: React.FC<MobileNavProps> = ({
             <AnimatePresence>
               {openDropdown === 'language' && (
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ 
-                    height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                    opacity: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
-                  }}
+                  variants={variants.mobileNav.dropdownContainer}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                   style={{ overflow: 'hidden' }}
                 >
                   <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={{
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: {
-                          delayChildren: 0.1,
-                          staggerChildren: 0.05
-                        }
-                      }
-                    }}
+                    variants={stagger.dropdown}
+                    initial="initial"
+                    animate="animate"
                   >
                     {languageOptions.map((lang) => (
                       <motion.div
@@ -414,131 +425,135 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           setOpenDropdown(null);
                         }}
                         style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                        variants={{
-                          hidden: { 
-                            opacity: 0, 
-                            y: -8,
-                            scale: 0.95
-                          },
-                          visible: { 
-                            opacity: 1, 
-                            y: 0,
-                            scale: 1,
-                            transition: {
-                              type: "spring",
-                              stiffness: 400,
-                              damping: 30
-                            }
-                          }
-                        }}
+                        variants={variants.mobileNav.dropdownItem}
+                        whileHover={variants.interactive.navItem.hover}
+                        whileTap={variants.interactive.navItem.active}
+                        transition={spring.responsive}
                       >
-                      <span className="nex-mobile-lang-abbr">
-                        {lang.code.toUpperCase()}
-                      </span>
-                      <span className="nex-mobile-nav-text">{lang.label}</span>
-                    </motion.div>
-                  ))}
-                    </motion.div>
+                        <span className="nex-mobile-lang-abbr">
+                          {lang.code.toUpperCase()}
+                        </span>
+                        <span className="nex-mobile-nav-text">{lang.label}</span>
+                      </motion.div>
+                    ))}
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Profile Section */}
           {isAuthenticated && user && (
             <motion.div 
               className="nex-mobile-nav-section"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.navItem}
             >
               <motion.h4 
                 className="nex-mobile-nav-section-title"
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.sectionTitle}
               >
                 Profile
               </motion.h4>
               <motion.div 
                 style={{ marginBottom: 'var(--nex-spacing-xs)' }}
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.navItem}
               >
                 <motion.div 
                   className="nex-mobile-nav-item"
                   onClick={handleProfileToggle}
-                  variants={ANIMATION_VARIANTS.fadeIn}
+                  variants={variants.mobileNav.navItem}
+                  whileHover={variants.interactive.navItem.hover}
+                  whileTap={variants.interactive.navItem.active}
+                  transition={spring.responsive}
                 >
                   <User className="nex-mobile-nav-icon" />
                   <span className="nex-mobile-nav-text">Profile</span>
                   <motion.div
-                    animate={{ rotate: openDropdown === 'profile' ? 180 : 0 }}
-                    transition={slow}
+                    animate={openDropdown === 'profile' ? "open" : "closed"}
+                    variants={variants.mobileNav.iconRotate}
+                    transition={spring.fast}
                   >
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                {openDropdown === 'profile' && (
+                <AnimatePresence>
+                  {openDropdown === 'profile' && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={slow}
+                      variants={variants.mobileNav.dropdownContainer}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
-                      {onProfile && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onProfile}
-                          style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.03 }}
-                        >
-                          <User className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">View Profile</span>
-                        </motion.div>
-                      )}
-                      {onEndorsementsClick && endorsementCount !== undefined && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onEndorsementsClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.06 }}
-                        >
-                          <Fingerprint className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Endorsements</span>
-                          <motion.span 
-                            className="nex-mobile-nav-badge"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={slow}
+                      <motion.div
+                        variants={stagger.fast}
+                        initial="initial"
+                        animate="animate"
+                      >
+                        {onProfile && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onProfile}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
                           >
-                            {endorsementCount}
-                          </motion.span>
-                        </motion.div>
-                      )}
-                      {onSubscriptionClick && subscription && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onSubscriptionClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.09 }}
-                        >
-                          <Zap className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Subscription</span>
-                          <motion.span 
-                            className="nex-mobile-nav-badge"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={slow}
+                            <User className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">View Profile</span>
+                          </motion.div>
+                        )}
+                        {onEndorsementsClick && endorsementCount !== undefined && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onEndorsementsClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
                           >
-                            {subscription.tier === 'pro' ? 'Pro' : 'Free'}
-                          </motion.span>
-                        </motion.div>
-                      )}
+                            <Fingerprint className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Endorsements</span>
+                            <motion.span 
+                              className="nex-mobile-nav-badge"
+                              variants={variants.mobileNav.badge}
+                              initial="initial"
+                              animate="animate"
+                              exit="exit"
+                            >
+                              {endorsementCount}
+                            </motion.span>
+                          </motion.div>
+                        )}
+                        {onSubscriptionClick && subscription && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onSubscriptionClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
+                          >
+                            <Zap className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Subscription</span>
+                            <motion.span 
+                              className="nex-mobile-nav-badge"
+                              variants={variants.mobileNav.badge}
+                              initial="initial"
+                              animate="animate"
+                              exit="exit"
+                            >
+                              {subscription.tier === 'pro' ? 'Pro' : 'Free'}
+                            </motion.span>
+                          </motion.div>
+                        )}
+                      </motion.div>
                     </motion.div>
                   )}
+                </AnimatePresence>
               </motion.div>
             </motion.div>
           )}
@@ -547,94 +562,110 @@ const MobileNav: React.FC<MobileNavProps> = ({
           {isAuthenticated && (onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && (
             <motion.div 
               className="nex-mobile-nav-section"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.navItem}
             >
               <motion.h4 
                 className="nex-mobile-nav-section-title"
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.sectionTitle}
               >
                 Settings
               </motion.h4>
               <motion.div 
                 style={{ marginBottom: 'var(--nex-spacing-xs)' }}
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.navItem}
               >
                 <motion.div 
                   className="nex-mobile-nav-item"
                   onClick={handleSettingsToggle}
-                  variants={ANIMATION_VARIANTS.fadeIn}
+                  variants={variants.mobileNav.navItem}
+                  whileHover={variants.interactive.navItem.hover}
+                  whileTap={variants.interactive.navItem.active}
+                  transition={spring.responsive}
                 >
                   <Settings className="nex-mobile-nav-icon" />
                   <span className="nex-mobile-nav-text">Settings</span>
                   <motion.div
-                    animate={{ rotate: openDropdown === 'settings' ? 180 : 0 }}
-                    transition={slow}
+                    animate={openDropdown === 'settings' ? "open" : "closed"}
+                    variants={variants.mobileNav.iconRotate}
+                    transition={spring.fast}
                   >
                     <ChevronDown className="nex-mobile-nav-icon" />
                   </motion.div>
                 </motion.div>
-                {openDropdown === 'settings' && (
+                <AnimatePresence>
+                  {openDropdown === 'settings' && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={slow}
+                      variants={variants.mobileNav.dropdownContainer}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
-                      {onActivityLogClick && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onActivityLogClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.03 }}
-                        >
-                          <Activity className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Activity Log</span>
-                        </motion.div>
-                      )}
-                      {onSecurityClick && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onSecurityClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.06 }}
-                        >
-                          <Shield className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Security</span>
-                        </motion.div>
-                      )}
-                      {onIntegrationsClick && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onIntegrationsClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.09 }}
-                        >
-                          <Globe className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Integrations</span>
-                        </motion.div>
-                      )}
-                      {onAdminPanelClick && (
-                        <motion.div
-                          className="nex-mobile-nav-item"
-                          onClick={onAdminPanelClick}
-                          style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ ...fast, delay: 0.12 }}
-                        >
-                          <Crown className="nex-mobile-nav-icon" />
-                          <span className="nex-mobile-nav-text">Admin Panel</span>
-                        </motion.div>
-                      )}
+                      <motion.div
+                        variants={stagger.fast}
+                        initial="initial"
+                        animate="animate"
+                      >
+                        {onActivityLogClick && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onActivityLogClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
+                          >
+                            <Activity className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Activity Log</span>
+                          </motion.div>
+                        )}
+                        {onSecurityClick && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onSecurityClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
+                          >
+                            <Shield className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Security</span>
+                          </motion.div>
+                        )}
+                        {onIntegrationsClick && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onIntegrationsClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
+                          >
+                            <Globe className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Integrations</span>
+                          </motion.div>
+                        )}
+                        {onAdminPanelClick && (
+                          <motion.div
+                            className="nex-mobile-nav-item"
+                            onClick={onAdminPanelClick}
+                            style={{ marginLeft: 'var(--nex-spacing-md)' }}
+                            variants={variants.mobileNav.dropdownItem}
+                            whileHover={variants.interactive.navItem.hover}
+                            whileTap={variants.interactive.navItem.active}
+                            transition={spring.responsive}
+                          >
+                            <Crown className="nex-mobile-nav-icon" />
+                            <span className="nex-mobile-nav-text">Admin Panel</span>
+                          </motion.div>
+                        )}
+                      </motion.div>
                     </motion.div>
                   )}
+                </AnimatePresence>
               </motion.div>
             </motion.div>
           )}
@@ -643,12 +674,21 @@ const MobileNav: React.FC<MobileNavProps> = ({
           {isAuthenticated && onLogout && (
             <motion.div 
               className="nex-mobile-nav-section"
-              variants={ANIMATION_VARIANTS.fadeIn}
+              variants={variants.mobileNav.navItem}
             >
               <motion.div 
                 className="nex-mobile-nav-item danger"
                 onClick={onLogout}
-                variants={ANIMATION_VARIANTS.fadeIn}
+                variants={variants.mobileNav.navItem}
+                whileHover={{ 
+                  backgroundColor: "rgba(255, 24, 1, 0.1)",
+                  scale: 1.02
+                }}
+                whileTap={{ 
+                  backgroundColor: "rgba(255, 24, 1, 0.15)",
+                  scale: 0.98
+                }}
+                transition={spring.responsive}
               >
                 <LogOut className="nex-mobile-nav-icon" />
                 <span className="nex-mobile-nav-text">Log Out</span>
