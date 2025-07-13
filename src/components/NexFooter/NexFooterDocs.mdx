@@ -1,138 +1,139 @@
-## NexFooter Component
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import * as NexFooterStories from './NexFooter.stories';
 
-The `NexFooter` component is designed to be a flexible and visually appealing footer for your React application. It offers a variety of social media icons, customizable display options, and ensures proper copyright display.
+<Meta of={NexFooterStories} />
 
-### Features
+# NexFooter
 
-* **Logo Display:** You can display a logo or a name depending on the provided props.
-* **Social Media Integration:** Includes a wide range of social media icons from FontAwesome.
-* **Customization:** The footer can be customized with different social media links and appearance settings.
-* **Responsive Design:** Ensures the footer looks good on all devices.
+Enterprise-grade footer component with glassmorphic styling that complements the NexNav design system. Features newsletter signup, developer tools, social media integration, and responsive design.
 
-### Usage
+## Features
 
-To use the `NexFooter` component, import it into your React application and provide the necessary props:
+- **Glassmorphic Design**: Matches NexNav styling with backdrop filters and subtle elevation
+- **Newsletter Integration**: Email capture with validation and submission handling
+- **Developer Tools**: NPM package commands with copy-to-clipboard functionality
+- **Social Media**: Configurable social links with platform-specific styling
+- **Responsive Layout**: Adaptive grid system for all screen sizes
+- **Accessibility**: Full keyboard navigation and screen reader support
+- **Framer Motion**: Smooth animations with reduced motion support
 
-```tsx
-import React from 'react';
-import NexFooter from './NexFooter';
-import { NexFooterProps } from './NexFooter.types';
-
-const footerProps: NexFooterProps = {
-  logoSrc: 'path/to/logo.png',
-  displayName: 'My Company',
-  socials: [
-    { type: 'facebook', url: 'https://facebook.com/mycompany' },
-    { type: 'twitter', url: 'https://twitter.com/mycompany' },
-    // Add more social links as needed
-  ],
-};
-
-function App() {
-  return (
-    <div className="App">
-      {/* Other components */}
-      <NexFooter {...footerProps} />
-    </div>
-  );
-}
-
-export default App;
-```
-
-### Props
-
-* **logoSrc (optional):** URL of the logo to be displayed. If not provided, the `displayName` will be shown instead.
-* **displayName (required):** The name of the company or application to be displayed.
-* **socials (optional):** Array of social media links. Each link should include a `type` (corresponding to a FontAwesome icon) and a `url`.
-* **className (optional):** Additional CSS class names to be applied to the footer.
-
-### Example
+## Usage
 
 ```tsx
-import React from 'react';
-import NexFooter from './NexFooter';
-
-const footerProps = {
-  logoSrc: 'path/to/logo.png',
-  displayName: 'My Company',
-  socials: [
-    { type: 'facebook', url: 'https://facebook.com/mycompany' },
-    { type: 'twitter', url: 'https://twitter.com/mycompany' },
-  ],
-};
+import { NexFooter } from '@nexcomponent/ui';
 
 function App() {
+  const handleNewsletterSubmit = async (email: string) => {
+    // Handle newsletter subscription
+    await subscribeToNewsletter(email);
+  };
+
   return (
-    <div className="App">
-      {/* Other components */}
-      <NexFooter {...footerProps} />
-    </div>
+    <NexFooter
+      displayName="NexComponent"
+      tagline="Professional React components for modern applications"
+      sections={[
+        {
+          title: 'Documentation',
+          links: [
+            { label: 'Getting Started', url: '/docs/getting-started' },
+            { label: 'Components', url: '/docs/components' }
+          ]
+        }
+      ]}
+      newsletter={{
+        enabled: true,
+        placeholder: 'Stay updated',
+        onSubmit: handleNewsletterSubmit
+      }}
+      socials={[
+        { type: 'github', url: 'https://github.com/nexcomponent' },
+        { type: 'twitter', url: 'https://twitter.com/nexcomponent' }
+      ]}
+      developerTools={{
+        npmPackage: '@nexcomponent/ui',
+        githubUrl: 'https://github.com/nexcomponent/ui'
+      }}
+    />
   );
 }
-
-export default App;
 ```
 
-### Customization
+## Examples
 
-You can customize the `NexFooter` by providing different props or styles to match your application's design requirements. Adjust the logo, display name, and social media links to suit your needs.
+### Default Footer
 
-### Social Icons
+<Canvas of={NexFooterStories.Default} />
 
-The `NexFooter` component supports a wide range of social media icons, including:
+### Enterprise Footer
 
-* Facebook
-* Twitter
-* Instagram
-* LinkedIn
-* GitHub
-* YouTube
-* Pinterest
-* Snapchat
-* TikTok
-* Reddit
-* Tumblr
-* Medium
-* Vimeo
-* Stack Overflow
-* Behance
-* Dribbble
-* Flickr
-* WhatsApp
-* Telegram
-* Slack
-* Discord
-* Spotify
-* Quora
-* SoundCloud
-* Apple
-* Google
-* Amazon
-* Microsoft
-* Dropbox
-* WordPress
-* Blogger
-* Weibo
-* WeChat
-* Xing
-* QQ
-* VK
-* Patreon
-* DeviantArt
-* Drupal
-* Joomla
-* Mastodon
-* Mix
-* Foursquare
-* Meetup
-* Steam
-* Xbox
-* PlayStation
-* Skype
-* TeamSpeak
-* Goodreads
-* Houzz
-* Yelp
-* Periscope
-* Diaspora
+Complete footer with all features enabled:
+
+<Canvas of={NexFooterStories.Enterprise} />
+
+### Minimal Footer
+
+Simple footer for basic applications:
+
+<Canvas of={NexFooterStories.Minimal} />
+
+### Custom Sections
+
+Footer with custom link sections:
+
+<Canvas of={NexFooterStories.CustomSections} />
+
+### Developer Focused
+
+Footer optimized for developer documentation:
+
+<Canvas of={NexFooterStories.DeveloperFocused} />
+
+### With Newsletter
+
+Footer with newsletter signup functionality:
+
+<Canvas of={NexFooterStories.WithNewsletter} />
+
+### With Developer Tools
+
+Footer with developer tools and NPM commands:
+
+<Canvas of={NexFooterStories.WithDeveloperTools} />
+
+## Props
+
+<ArgsTable of={NexFooterStories} />
+
+## Design System Integration
+
+The NexFooter component follows the same design principles as NexNav:
+
+- **Glassmorphic Styling**: Uses backdrop filters and subtle gradients
+- **Token-Based Design**: All styling uses design system tokens
+- **Consistent Spacing**: Follows the 4px base unit system
+- **Typography**: Uses the same font families and weights
+- **Color System**: Integrates with light/dark theme tokens
+- **Animation**: Uses Framer Motion with centralized configuration
+
+## Accessibility
+
+- **Semantic HTML**: Uses proper footer and navigation elements
+- **Keyboard Navigation**: Full keyboard support for all interactive elements
+- **Screen Readers**: Proper ARIA labels and semantic structure
+- **Focus Management**: Clear focus indicators and logical tab order
+- **Reduced Motion**: Respects user motion preferences
+
+## Performance
+
+- **Optimized Animations**: Uses `will-change` and hardware acceleration
+- **Lazy Loading**: Non-critical content loads efficiently
+- **Minimal Bundle**: Lightweight component with tree-shaking support
+- **Efficient Rendering**: Optimized re-renders with React best practices
+
+## Browser Support
+
+- **Modern Browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- **Backdrop Filter**: Graceful fallback for older browsers
+- **CSS Grid**: Responsive layout with fallback support
+- **ES6+ Features**: Modern JavaScript with Babel compilation
