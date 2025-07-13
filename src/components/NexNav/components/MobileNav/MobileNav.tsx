@@ -272,29 +272,62 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     </motion.div>
                   )}
                 </motion.div>
-                {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
+                <AnimatePresence>
+                  {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={slow}
+                      transition={{ 
+                        height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                        opacity: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
+                      }}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
-                    {item.subItems.map((subItem, subIndex) => (
                       <motion.div
-                        key={subIndex}
-                        className={`nex-mobile-nav-item ${subItem.disabled ? 'disabled' : ''}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (!subItem.disabled) {
-                            subItem.onClick();
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: {
+                            opacity: 1,
+                            transition: {
+                              delayChildren: 0.1,
+                              staggerChildren: 0.05
+                            }
                           }
                         }}
-                        style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ ...fast, delay: subIndex * 0.03 }}
                       >
+                        {item.subItems.map((subItem, subIndex) => (
+                          <motion.div
+                            key={subIndex}
+                            className={`nex-mobile-nav-item ${subItem.disabled ? 'disabled' : ''}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!subItem.disabled) {
+                                subItem.onClick();
+                              }
+                            }}
+                            style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                            variants={{
+                              hidden: { 
+                                opacity: 0, 
+                                y: -8,
+                                scale: 0.95
+                              },
+                              visible: { 
+                                opacity: 1, 
+                                y: 0,
+                                scale: 1,
+                                transition: {
+                                  type: "spring",
+                                  stiffness: 400,
+                                  damping: 30
+                                }
+                              }
+                            }}
+                          >
                         <span className="nex-mobile-nav-text">{subItem.label}</span>
                         {subItem.badge && (
                           <motion.span 
@@ -308,8 +341,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         )}
                       </motion.div>
                     ))}
-                  </motion.div>
-                )}
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </motion.div>
@@ -343,36 +378,71 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 <ChevronDown className="nex-mobile-nav-icon" />
               </motion.div>
             </motion.div>
-            {openDropdown === 'language' && (
+            <AnimatePresence>
+              {openDropdown === 'language' && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={slow}
+                  transition={{ 
+                    height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                    opacity: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
+                  }}
                   style={{ overflow: 'hidden' }}
                 >
-                  {languageOptions.map((lang) => (
-                    <motion.div
-                      key={lang.code}
-                      className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`}
-                      onClick={() => {
-                        onLocaleChange(lang.code);
-                        setOpenDropdown(null);
-                      }}
-                      style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ ...fast, delay: languageOptions.indexOf(lang) * 0.03 }}
-                    >
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: {
+                        opacity: 1,
+                        transition: {
+                          delayChildren: 0.1,
+                          staggerChildren: 0.05
+                        }
+                      }
+                    }}
+                  >
+                    {languageOptions.map((lang) => (
+                      <motion.div
+                        key={lang.code}
+                        className={`nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`}
+                        onClick={() => {
+                          onLocaleChange(lang.code);
+                          setOpenDropdown(null);
+                        }}
+                        style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
+                        variants={{
+                          hidden: { 
+                            opacity: 0, 
+                            y: -8,
+                            scale: 0.95
+                          },
+                          visible: { 
+                            opacity: 1, 
+                            y: 0,
+                            scale: 1,
+                            transition: {
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 30
+                            }
+                          }
+                        }}
+                      >
                       <span className="nex-mobile-lang-abbr">
                         {lang.code.toUpperCase()}
                       </span>
                       <span className="nex-mobile-nav-text">{lang.label}</span>
                     </motion.div>
                   ))}
-                </motion.div>
-              )}
-          </motion.div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
 
           {/* Profile Section */}
           {isAuthenticated && user && (
