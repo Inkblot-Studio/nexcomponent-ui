@@ -13,6 +13,15 @@ export interface FooterSection {
   links: FooterLink[];
 }
 
+export interface ContactForm {
+  enabled?: boolean;
+  title?: string;
+  description?: string;
+  placeholder?: string;
+  buttonText?: string;
+  onSubmit?: (data: { email: string; message: string }) => void;
+}
+
 export interface NexFooterProps {
   // Branding
   logoSrc?: string;
@@ -29,6 +38,9 @@ export interface NexFooterProps {
     onSubmit?: (email: string) => void;
   };
   
+  // Contact Form
+  contact?: ContactForm;
+  
   // Social Media
   socials?: SocialLink[];
   
@@ -38,6 +50,9 @@ export interface NexFooterProps {
     npmPackage?: string;
     githubUrl?: string;
   };
+  
+  // Variants
+  variant?: 'default' | 'compact' | 'contact';
   
   // Customization
   theme?: 'light' | 'dark' | 'auto';

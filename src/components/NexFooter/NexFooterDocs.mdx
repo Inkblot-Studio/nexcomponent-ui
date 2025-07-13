@@ -5,17 +5,19 @@ import * as NexFooterStories from './NexFooter.stories';
 
 # NexFooter
 
-Enterprise-grade footer component with glassmorphic styling that complements the NexNav design system. Features newsletter signup, developer tools, social media integration, and responsive design.
+A modern, scalable footer component with glassmorphic styling that perfectly complements the NexNav design system. Built with 2025 design trends, clean animations, and enterprise-grade features.
 
 ## Features
 
-- **Glassmorphic Design**: Matches NexNav styling with backdrop filters and subtle elevation
-- **Newsletter Integration**: Email capture with validation and submission handling
-- **Developer Tools**: NPM package commands with copy-to-clipboard functionality
-- **Social Media**: Configurable social links with platform-specific styling
-- **Responsive Layout**: Adaptive grid system for all screen sizes
-- **Accessibility**: Full keyboard navigation and screen reader support
-- **Framer Motion**: Smooth animations with reduced motion support
+- **2025 Design Trends**: Modern glassmorphic styling with subtle gradients and clean typography
+- **Contact Form Integration**: Built-in contact form for lead generation and customer support
+- **Developer Tools**: Copy-to-clipboard functionality for npm commands and GitHub links
+- **Newsletter Signup**: Email subscription with validation and loading states
+- **Social Media Integration**: Properly sized social icons with platform-specific styling
+- **Multiple Variants**: Default, compact, and contact-focused layouts
+- **Responsive Design**: Mobile-first approach with adaptive grid layouts
+- **Accessibility**: WCAG compliant with reduced motion support
+- **Theme Support**: Light, dark, and auto theme variants
 
 ## Usage
 
@@ -23,83 +25,70 @@ Enterprise-grade footer component with glassmorphic styling that complements the
 import { NexFooter } from '@nexcomponent/ui';
 
 function App() {
-  const handleNewsletterSubmit = async (email: string) => {
-    // Handle newsletter subscription
-    await subscribeToNewsletter(email);
-  };
-
   return (
     <NexFooter
-      displayName="NexComponent"
-      tagline="Professional React components for modern applications"
-      sections={[
-        {
-          title: 'Documentation',
-          links: [
-            { label: 'Getting Started', url: '/docs/getting-started' },
-            { label: 'Components', url: '/docs/components' }
-          ]
-        }
-      ]}
+      displayName="Your Company"
+      tagline="Building amazing products"
+      variant="default"
       newsletter={{
         enabled: true,
-        placeholder: 'Stay updated',
-        onSubmit: handleNewsletterSubmit
+        placeholder: "Stay updated",
+        onSubmit: async (email) => {
+          // Handle newsletter subscription
+        }
+      }}
+      contact={{
+        enabled: true,
+        title: "Get in Touch",
+        description: "We'd love to hear from you",
+        onSubmit: async (data) => {
+          // Handle contact form submission
+        }
       }}
       socials={[
-        { type: 'github', url: 'https://github.com/nexcomponent' },
-        { type: 'twitter', url: 'https://twitter.com/nexcomponent' }
+        { type: 'github', url: 'https://github.com/yourcompany' },
+        { type: 'twitter', url: 'https://twitter.com/yourcompany' }
       ]}
       developerTools={{
-        npmPackage: '@nexcomponent/ui',
-        githubUrl: 'https://github.com/nexcomponent/ui'
+        npmPackage: '@yourcompany/ui',
+        githubUrl: 'https://github.com/yourcompany/ui'
       }}
     />
   );
 }
 ```
 
-## Examples
+## Variants
 
-### Default Footer
+### Default
+The standard footer with all features enabled.
 
 <Canvas of={NexFooterStories.Default} />
 
-### Enterprise Footer
+### Compact
+Space-optimized variant for layouts with limited vertical space.
 
-Complete footer with all features enabled:
+<Canvas of={NexFooterStories.Compact} />
 
-<Canvas of={NexFooterStories.Enterprise} />
+### Contact
+Contact-focused variant with prominent contact form for lead generation.
 
-### Minimal Footer
+<Canvas of={NexFooterStories.Contact} />
 
-Simple footer for basic applications:
+### Minimal
+Clean, minimal footer with just branding and social links.
 
 <Canvas of={NexFooterStories.Minimal} />
 
-### Custom Sections
+### Developer
+Developer-focused footer with documentation links and tools.
 
-Footer with custom link sections:
+<Canvas of={NexFooterStories.Developer} />
 
-<Canvas of={NexFooterStories.CustomSections} />
+### Enterprise
+Comprehensive enterprise footer with multiple sections and features.
 
-### Developer Focused
-
-Footer optimized for developer documentation:
-
-<Canvas of={NexFooterStories.DeveloperFocused} />
-
-### With Newsletter
-
-Footer with newsletter signup functionality:
-
-<Canvas of={NexFooterStories.WithNewsletter} />
-
-### With Developer Tools
-
-Footer with developer tools and NPM commands:
-
-<Canvas of={NexFooterStories.WithDeveloperTools} />
+<Canvas of={NexFooterStories.Enterprise} />
 
 ## Props
 
@@ -107,33 +96,164 @@ Footer with developer tools and NPM commands:
 
 ## Design System Integration
 
-The NexFooter component follows the same design principles as NexNav:
+The NexFooter component is built to seamlessly integrate with the NexNav design system:
 
-- **Glassmorphic Styling**: Uses backdrop filters and subtle gradients
-- **Token-Based Design**: All styling uses design system tokens
-- **Consistent Spacing**: Follows the 4px base unit system
-- **Typography**: Uses the same font families and weights
-- **Color System**: Integrates with light/dark theme tokens
-- **Animation**: Uses Framer Motion with centralized configuration
+- **Consistent Styling**: Matches the navbar's glassmorphic design language
+- **Animation Patterns**: Uses the same hover animations and transitions
+- **Color Tokens**: Leverages the same design tokens for consistency
+- **Typography**: Follows the established font hierarchy and spacing
+- **Responsive Behavior**: Adapts to the same breakpoints and layouts
 
 ## Accessibility
 
-- **Semantic HTML**: Uses proper footer and navigation elements
-- **Keyboard Navigation**: Full keyboard support for all interactive elements
-- **Screen Readers**: Proper ARIA labels and semantic structure
-- **Focus Management**: Clear focus indicators and logical tab order
-- **Reduced Motion**: Respects user motion preferences
+- **Keyboard Navigation**: Full keyboard support with focus indicators
+- **Screen Readers**: Proper ARIA labels and semantic HTML structure
+- **Reduced Motion**: Respects user's motion preferences
+- **Color Contrast**: Meets WCAG AA standards for text contrast
+- **Form Validation**: Accessible form inputs with proper error handling
 
 ## Performance
 
-- **Optimized Animations**: Uses `will-change` and hardware acceleration
-- **Lazy Loading**: Non-critical content loads efficiently
-- **Minimal Bundle**: Lightweight component with tree-shaking support
-- **Efficient Rendering**: Optimized re-renders with React best practices
+- **Optimized Animations**: Uses CSS transforms and opacity for smooth performance
+- **Lazy Loading**: Social icons and images load efficiently
+- **Minimal Re-renders**: Optimized React component with proper memoization
+- **Bundle Size**: Lightweight with tree-shaking support
 
-## Browser Support
+## Customization
 
-- **Modern Browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-- **Backdrop Filter**: Graceful fallback for older browsers
-- **CSS Grid**: Responsive layout with fallback support
-- **ES6+ Features**: Modern JavaScript with Babel compilation
+### Styling
+The footer uses CSS custom properties for easy theming:
+
+```scss
+.nex-footer {
+  --nex-footer-background: rgba(255, 255, 255, 0.06);
+  --nex-footer-border: rgba(255, 255, 255, 0.08);
+  --nex-footer-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+```
+
+### Social Icons
+Add custom social platforms by extending the icon mapping:
+
+```tsx
+const customSocialIcons = {
+  ...socialIcons,
+  custom: () => <YourCustomIcon />
+};
+```
+
+### Contact Form
+Customize the contact form behavior and styling:
+
+```tsx
+contact={{
+  enabled: true,
+  title: "Custom Title",
+  description: "Custom description",
+  placeholder: "Custom placeholder",
+  buttonText: "Custom Button",
+  onSubmit: async (data) => {
+    // Custom submission logic
+  }
+}}
+```
+
+## Best Practices
+
+1. **Content Organization**: Group related links in logical sections
+2. **Social Media**: Include only active social platforms
+3. **Contact Information**: Provide clear ways for users to reach you
+4. **Newsletter**: Use compelling copy to encourage signups
+5. **Developer Tools**: Include relevant npm packages and GitHub links
+6. **Accessibility**: Test with screen readers and keyboard navigation
+7. **Performance**: Monitor bundle size and loading performance
+8. **Analytics**: Track newsletter signups and contact form submissions
+
+## Migration Guide
+
+### From v1.x to v2.x
+
+- `variant` prop now supports `'contact'` option
+- `contact` prop added for contact form functionality
+- Social icons now have fixed sizing (16px default, 14px compact)
+- Improved hover animations matching navbar patterns
+- Enhanced glassmorphic styling with 2025 design trends
+
+```tsx
+// Old
+<NexFooter variant="compact" />
+
+// New
+<NexFooter 
+  variant="contact"
+  contact={{
+    enabled: true,
+    onSubmit: handleContact
+  }}
+/>
+```
+
+## Examples
+
+### Basic Implementation
+```tsx
+<NexFooter
+  displayName="MyApp"
+  tagline="Building the future"
+  socials={[
+    { type: 'github', url: 'https://github.com/myapp' }
+  ]}
+/>
+```
+
+### With Newsletter
+```tsx
+<NexFooter
+  displayName="MyApp"
+  newsletter={{
+    enabled: true,
+    placeholder: "Subscribe for updates",
+    onSubmit: handleNewsletter
+  }}
+/>
+```
+
+### Contact Form
+```tsx
+<NexFooter
+  displayName="MyApp"
+  variant="contact"
+  contact={{
+    enabled: true,
+    title: "Get in Touch",
+    description: "We'd love to hear from you",
+    onSubmit: handleContact
+  }}
+/>
+```
+
+### Enterprise Setup
+```tsx
+<NexFooter
+  displayName="MyApp Enterprise"
+  logoSrc="/logo.svg"
+  sections={[
+    {
+      title: "Product",
+      links: [
+        { label: "Features", url: "/features" },
+        { label: "Pricing", url: "/pricing" }
+      ]
+    }
+  ]}
+  newsletter={{ enabled: true, onSubmit: handleNewsletter }}
+  developerTools={{
+    npmPackage: "@myapp/enterprise",
+    githubUrl: "https://github.com/myapp/enterprise"
+  }}
+  socials={[
+    { type: 'github', url: 'https://github.com/myapp' },
+    { type: 'linkedin', url: 'https://linkedin.com/company/myapp' }
+  ]}
+/>
+```
