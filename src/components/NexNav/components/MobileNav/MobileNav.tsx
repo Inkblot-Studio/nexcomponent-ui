@@ -274,8 +274,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 </motion.div>
                 {item.subItems && item.subItems.length > 0 && openNavItems.has(index) && (
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -290,9 +291,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           }
                         }}
                         style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ ...slow, delay: subIndex * 0.05 }}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ ...fast, delay: subIndex * 0.03 }}
                       >
                         <span className="nex-mobile-nav-text">{subItem.label}</span>
                         {subItem.badge && (
@@ -344,8 +345,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
             </motion.div>
             {openDropdown === 'language' && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
                   transition={slow}
                   style={{ overflow: 'hidden' }}
                 >
@@ -358,9 +360,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         setOpenDropdown(null);
                       }}
                       style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ ...slow, delay: languageOptions.indexOf(lang) * 0.05 }}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ ...fast, delay: languageOptions.indexOf(lang) * 0.03 }}
                     >
                       <span className="nex-mobile-lang-abbr">
                         {lang.code.toUpperCase()}
@@ -404,8 +406,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 </motion.div>
                 {openDropdown === 'profile' && (
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -414,9 +417,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onProfile}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.05 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.03 }}
                         >
                           <User className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">View Profile</span>
@@ -427,9 +430,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onEndorsementsClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.1 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.06 }}
                         >
                           <Fingerprint className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Endorsements</span>
@@ -448,9 +451,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onSubscriptionClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.15 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.09 }}
                         >
                           <Zap className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Subscription</span>
@@ -502,8 +505,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 </motion.div>
                 {openDropdown === 'settings' && (
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
                       transition={slow}
                       style={{ overflow: 'hidden', marginTop: 'var(--nex-spacing-sm)' }}
                     >
@@ -512,9 +516,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onActivityLogClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.05 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.03 }}
                         >
                           <Activity className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Activity Log</span>
@@ -525,9 +529,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onSecurityClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.1 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.06 }}
                         >
                           <Shield className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Security</span>
@@ -538,9 +542,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onIntegrationsClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.15 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.09 }}
                         >
                           <Globe className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Integrations</span>
@@ -551,9 +555,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                           className="nex-mobile-nav-item"
                           onClick={onAdminPanelClick}
                           style={{ marginLeft: 'var(--nex-spacing-md)' }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ ...slow, delay: 0.2 }}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ ...fast, delay: 0.12 }}
                         >
                           <Crown className="nex-mobile-nav-icon" />
                           <span className="nex-mobile-nav-text">Admin Panel</span>
