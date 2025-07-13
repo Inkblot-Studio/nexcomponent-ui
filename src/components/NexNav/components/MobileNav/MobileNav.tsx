@@ -237,17 +237,31 @@ const MobileNav: React.FC<MobileNavProps> = ({
               <motion.button
                 className="nex-mobile-nav-signup-btn"
                 onClick={onLogin}
-                whileHover={variants.interactive.button.hover}
-                whileTap={variants.interactive.button.tap}
-                transition={spring.fast}
+                whileHover={{
+                  backgroundColor: "rgba(255, 255, 255, 0.15)",
+                  borderColor: "rgba(255, 255, 255, 0.2)",
+                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+                  scale: 1.02
+                }}
+                whileTap={{
+                  backgroundColor: "rgba(255, 24, 1, 0.15)",
+                  borderColor: "rgba(255, 24, 1, 0.2)",
+                  scale: 0.98
+                }}
+                transition={spring.responsive}
               >
                 Sign Up
               </motion.button>
               <motion.button 
                 className="nex-mobile-nav-login-link"
                 onClick={onLogin}
-                whileHover={{ opacity: 0.8 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ 
+                  opacity: 0.8,
+                  scale: 1.02
+                }}
+                whileTap={{ 
+                  scale: 0.98
+                }}
                 transition={spring.fast}
               >
                 Already have an account? Sign in

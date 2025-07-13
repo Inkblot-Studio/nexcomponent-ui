@@ -420,34 +420,16 @@ body.nex-lock-scroll {
   font-size: var(--nex-font-size-sm);
   font-weight: var(--nex-font-weight-medium);
   cursor: pointer;
-  transition: all var(--nex-transition-fast);
   width: 100%;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+  will-change: transform, background-color, border-color, box-shadow;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease-in-out;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
-
-  &:active {
-    transform: translateY(1px);
+  /* Focus state only - let Framer Motion handle hover/active */
+  &:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
   }
 }
 
@@ -460,6 +442,13 @@ body.nex-lock-scroll {
   cursor: pointer;
   padding: var(--nex-spacing-xs) 0;
   text-align: center;
+  will-change: transform, opacity;
+  
+  /* Focus state only - let Framer Motion handle hover/active */
+  &:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+  }
 }
 
 /* Dark mode adjustments for guest content */
