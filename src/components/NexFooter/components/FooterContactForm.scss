@@ -20,10 +20,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--nex-spacing-lg);
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  width: 100%;
 
   /* ================================
      🏷️ TITLE STYLING
@@ -67,7 +68,7 @@
     line-height: var(--nex-line-height-base);
     margin: 0;
     text-align: center;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     transition: all var(--nex-transition-base);
     
@@ -396,6 +397,40 @@
       padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
       font-size: var(--nex-font-size-sm);
       min-height: 40px;
+    }
+  }
+
+  /* ================================
+     🎨 VARIANT MODIFICATIONS
+     ================================ */
+  
+  /* Contact Variant - Improved Layout */
+  &--contact {
+    max-width: 700px;
+    
+    @media (max-width: 1024px) {
+      max-width: 600px;
+    }
+    
+    @include mobile {
+      max-width: 100%;
+      gap: var(--nex-spacing-md);
+    }
+    
+    &__title {
+      font-size: var(--nex-font-size-2xl);
+      
+      @include mobile {
+        font-size: var(--nex-font-size-xl);
+      }
+    }
+    
+    &__description {
+      font-size: var(--nex-font-size-md);
+      
+      @include mobile {
+        font-size: var(--nex-font-size-sm);
+      }
     }
   }
 

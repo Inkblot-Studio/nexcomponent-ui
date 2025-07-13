@@ -58,8 +58,12 @@ const NexFooter: React.FC<NexFooterProps> = ({
   };
 
   // Determine theme class
-  const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : 
-                    theme === 'dark' ? 'nex-footer-container--dark' : '';
+  const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : '';
+
+  // Determine variant class
+  const variantClass = variant === 'compact' ? 'nex-footer-container--compact' :
+                      variant === 'contact' ? 'nex-footer-container--contact' :
+                      (!logoSrc && !displayName && sections.length > 0) ? 'nex-footer-container--sections-only' : '';
 
   return (
     <motion.footer
@@ -76,7 +80,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
       <FooterContainer
         variant={variant}
         theme={theme}
-        className={`${className} ${themeClass}`}
+        className={`${className} ${themeClass} ${variantClass}`}
       >
         <motion.div 
           className="nex-footer-content"

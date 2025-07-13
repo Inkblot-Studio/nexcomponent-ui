@@ -194,6 +194,28 @@ export const SectionsOnly: Story = {
     displayName: '',
     tagline: undefined,
     newsletter: undefined,
-    developerTools: undefined
+    developerTools: undefined,
+    variant: 'default'
+  }
+};
+
+export const ContactOnly: Story = {
+  args: {
+    ...Default.args,
+    logoSrc: undefined,
+    displayName: '',
+    tagline: undefined,
+    sections: undefined,
+    newsletter: undefined,
+    developerTools: undefined,
+    variant: 'contact',
+    contact: {
+      enabled: true,
+      title: 'Get in Touch',
+      description: 'Have questions about our components or need help with implementation? We\'d love to hear from you.',
+      placeholder: 'Tell us about your project...',
+      buttonText: 'Send Message',
+      onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
+    }
   }
 };
