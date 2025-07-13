@@ -13,6 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Invisible bridge to connect nav item to dropdown */
   &.has-dropdown-open::before {
@@ -46,7 +47,8 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box; /* Ensure consistent box model */
-  transition: all 0.3s ease; /* Smooth transitions for all hover states */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transitions for all states */
+  will-change: transform, opacity, background-color, border-color, box-shadow;
 
   /* ================================
      🎯 HOVER & FOCUS STATES
