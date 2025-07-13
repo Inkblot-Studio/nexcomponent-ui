@@ -24,40 +24,42 @@ const NexFooter: React.FC<NexFooterProps> = ({
   theme = 'auto',
   className = ''
 }) => {
-  const { timing, shouldReduceMotion, variants } = useAnimationConfig();
+  const { timing, shouldReduceMotion } = useAnimationConfig();
 
-  // Footer container variants matching NexNav approach
+  // Simplified footer container variants matching NexNav approach
   const footerVariants = {
     initial: {
       opacity: 0,
-      y: 20,
-      backdropFilter: 'blur(0px) saturate(100%)'
+      y: 20
     },
     animate: {
       opacity: 1,
       y: 0,
-      backdropFilter: 'blur(24px) saturate(180%)',
       transition: {
-        duration: shouldReduceMotion ? 0.3 : 0.6,
+        duration: shouldReduceMotion ? 0.3 : 0.5,
         ease: [0.4, 0, 0.2, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        staggerChildren: shouldReduceMotion ? 0 : 0.06,
         delayChildren: shouldReduceMotion ? 0 : 0.1
       }
     }
   };
 
-  // Content variants for staggered animations
+  // Simplified content variants for clean animations
   const contentVariants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 8 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.4,
+        duration: shouldReduceMotion ? 0.2 : 0.3,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
+
+  // Determine theme class
+  const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : 
+                    theme === 'dark' ? 'nex-footer-container--dark' : '';
 
   return (
     <motion.footer
@@ -74,7 +76,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
       <FooterContainer
         variant={variant}
         theme={theme}
-        className={className}
+        className={`${className} ${themeClass}`}
       >
         <motion.div 
           className="nex-footer-content"
@@ -93,6 +95,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
               showLogoText={showLogoText}
               newsletter={newsletter}
               variant={variant}
+              theme={theme}
             />
 
             {/* Footer Sections - Only show if not contact variant */}
@@ -100,14 +103,15 @@ const NexFooter: React.FC<NexFooterProps> = ({
               {sections.length > 0 && variant !== 'contact' && (
                 <motion.div
                   key="footer-sections"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={timing.medium}
                 >
                   <FooterSections
                     sections={sections}
                     variant={variant}
+                    theme={theme}
                   />
                 </motion.div>
               )}
@@ -118,14 +122,16 @@ const NexFooter: React.FC<NexFooterProps> = ({
               {contact?.enabled && variant === 'contact' && (
                 <motion.div
                   key="footer-contact"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={timing.medium}
+                  className={theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}
                 >
                   <FooterContactForm
                     contact={contact}
                     variant={variant}
+                    theme={theme}
                   />
                 </motion.div>
               )}
@@ -136,14 +142,15 @@ const NexFooter: React.FC<NexFooterProps> = ({
               {developerTools && variant !== 'contact' && (
                 <motion.div
                   key="footer-developer-tools"
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={timing.medium}
                 >
                   <FooterDeveloperTools
                     developerTools={developerTools}
                     variant={variant}
+                    theme={theme}
                   />
                 </motion.div>
               )}
@@ -154,12 +161,13 @@ const NexFooter: React.FC<NexFooterProps> = ({
         {/* Footer Bottom */}
         <motion.div
           variants={contentVariants}
-          transition={{ delay: shouldReduceMotion ? 0 : 0.2 }}
+          transition={{ delay: shouldReduceMotion ? 0 : 0.15 }}
         >
           <FooterBottom
             displayName={displayName}
             socials={socials}
             variant={variant}
+            theme={theme}
           />
         </motion.div>
       </FooterContainer>

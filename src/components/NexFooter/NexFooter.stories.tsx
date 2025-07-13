@@ -23,7 +23,7 @@ const meta: Meta<typeof NexFooter> = {
     },
     theme: {
       control: { type: 'select' },
-      options: ['light', 'dark', 'auto'],
+      options: ['auto', 'light', 'dark', 'black-glass'],
       description: 'Theme variant for the footer'
     },
     displayName: {
@@ -44,23 +44,28 @@ const meta: Meta<typeof NexFooter> = {
     }
   },
   decorators: [
-    (Story) => (
-      <div
-        style={{
-          minHeight: '100vh',
-          backgroundImage: `url(${storyBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          fontFamily: 'Inter, sans-serif',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end'
-        }}
-      >
-        <Story />
-      </div>
-    )
+    (Story, context) => {
+      const { theme } = context.args;
+      
+      return (
+        <div
+          data-theme={theme === 'auto' ? undefined : theme}
+          style={{
+            minHeight: '100vh',
+            backgroundImage: `url(${storyBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            fontFamily: 'Inter, sans-serif',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end'
+          }}
+        >
+          <Story />
+        </div>
+      );
+    }
   ]
 };
 
@@ -268,8 +273,8 @@ export const Enterprise: Story = {
     ],
     developerTools: {
       copyCommands: true,
-      npmPackage: '@nexcomponent/enterprise',
-      githubUrl: 'https://github.com/nexcomponent/enterprise'
+      npmPackage: '@nexcomponent/ui',
+      githubUrl: 'https://github.com/nexcomponent/ui'
     }
   }
 };
@@ -289,40 +294,21 @@ export const DarkTheme: Story = {
   args: {
     ...Default.args,
     theme: 'dark'
-  },
-  parameters: {
-    backgrounds: {
-      default: 'dark',
-      values: [
-        {
-          name: 'dark',
-          value: '#1a1a1a'
-        }
-      ]
-    }
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
-          fontFamily: 'Inter, sans-serif',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end'
-        }}
-      >
-        <Story />
-      </div>
-    )
-  ]
+  }
 };
 
-// With custom logo
-export const WithLogo: Story = {
+// Black glass theme example
+export const BlackGlass: Story = {
   args: {
     ...Default.args,
-    logoSrc: nexLogo
+    theme: 'black-glass'
+  }
+};
+
+// Light theme example
+export const LightTheme: Story = {
+  args: {
+    ...Default.args,
+    theme: 'light'
   }
 };

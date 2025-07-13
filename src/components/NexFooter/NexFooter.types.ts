@@ -56,6 +56,6 @@ export interface NexFooterProps {
   variant?: 'default' | 'compact' | 'contact';
   
   // Customization
-  theme?: 'light' | 'dark' | 'auto';
+  theme?: 'light' | 'dark' | 'auto' | 'black-glass';
   className?: string;
 }

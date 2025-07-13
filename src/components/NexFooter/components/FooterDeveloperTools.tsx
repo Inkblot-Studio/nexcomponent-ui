@@ -11,11 +11,13 @@ interface FooterDeveloperToolsProps {
     githubUrl?: string;
   };
   variant?: 'default' | 'compact' | 'contact';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
 }
 
 const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
   developerTools,
-  variant = 'default'
+  variant = 'default',
+  theme = 'auto'
 }) => {
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
   const { timing, shouldReduceMotion } = useAnimationConfig();
@@ -31,20 +33,20 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
     }
   }, []);
 
-  // Section variants for liquid glass entrance
+  // Simplified section variants for clean entrance
   const sectionVariants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 8 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.4,
+        duration: shouldReduceMotion ? 0.2 : 0.3,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  const toolsClass = `nex-footer-developer-tools ${variant === 'compact' ? 'nex-footer-developer-tools--compact' : ''} ${variant === 'contact' ? 'nex-footer-developer-tools--contact' : ''}`;
+  const toolsClass = `nex-footer-developer-tools ${variant === 'compact' ? 'nex-footer-developer-tools--compact' : ''} ${variant === 'contact' ? 'nex-footer-developer-tools--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-developer-tools--black-glass' : ''}`;
 
   if (!developerTools) return null;
 
@@ -55,7 +57,10 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
     >
       <motion.h3 
         className="nex-footer-developer-tools__title"
-        whileHover={{ x: 2 }}
+        whileHover={{ 
+          color: theme === 'black-glass' ? '#ff6b35' : undefined,
+          opacity: 0.9
+        }}
         transition={timing.fast}
       >
         Developer
@@ -65,7 +70,10 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
       {developerTools.npmPackage && (
         <motion.div 
           className="nex-footer-developer-tools__tool"
-          whileHover={{ y: -1 }}
+          whileHover={{ 
+            opacity: 0.9,
+            backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.1)' : undefined
+          }}
           transition={timing.fast}
         >
           <Package size={variant === 'compact' ? 14 : 16} />
@@ -76,8 +84,11 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
             onClick={() => handleCopy(`npm install ${developerTools.npmPackage}`, 'npm')}
             className="nex-footer-developer-tools__copy-button"
             aria-label="Copy npm install command"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ 
+              opacity: 0.8,
+              backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.2)' : undefined
+            }}
+            whileTap={{ opacity: 0.7 }}
             transition={timing.fast}
           >
             <AnimatePresence mode="wait">
@@ -114,8 +125,11 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
           target="_blank"
           rel="noopener noreferrer"
           className="nex-footer-developer-tools__github-link"
-          whileHover={{ x: 3 }}
-          whileTap={{ x: 1 }}
+          whileHover={{ 
+            color: theme === 'black-glass' ? '#ff6b35' : undefined,
+            opacity: 0.8
+          }}
+          whileTap={{ opacity: 0.7 }}
           transition={timing.fast}
         >
           <Github size={variant === 'compact' ? 14 : 16} />

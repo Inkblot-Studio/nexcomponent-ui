@@ -1,24 +1,24 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   🛠️ FOOTER DEVELOPER TOOLS - Liquid Glass Tools
+   🛠️ FOOTER DEVELOPER TOOLS - Premium Tools
    ================================
    
-   Premium developer tools section with liquid glass styling,
+   Premium developer tools section with clean styling,
    featuring npm package info and GitHub links.
    
    Design Philosophy:
    - Clean, technical aesthetic
    - Smooth copy interactions
-   - Consistent with overall design
-   - Premium button interactions
+   - Consistent with NexNav design
+   - Theme-aware color transitions
  */
 
 .nex-footer-developer-tools {
   display: flex;
   flex-direction: column;
   gap: var(--nex-spacing-md);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ================================
      🏷️ TITLE STYLING
@@ -30,7 +30,7 @@
     color: var(--nex-font-color);
     line-height: var(--nex-line-height-tight);
     margin: 0;
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     
     &::after {
@@ -59,25 +59,22 @@
     align-items: center;
     gap: var(--nex-spacing-sm);
     padding: var(--nex-spacing-sm);
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px) saturate(160%);
-    -webkit-backdrop-filter: blur(8px) saturate(160%);
-    border: 1px solid var(--nex-border-color);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--nex-radius-md);
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     &:hover {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px) saturate(180%);
-      -webkit-backdrop-filter: blur(12px) saturate(180%);
-      border-color: var(--nex-signature);
-      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.1);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     svg {
       color: var(--nex-muted-font-color);
       flex-shrink: 0;
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     &:hover svg {
@@ -99,7 +96,7 @@
     border-radius: var(--nex-radius-sm);
     border: none;
     outline: none;
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     &:hover {
       background: rgba(0, 0, 0, 0.08);
@@ -121,43 +118,20 @@
     border: none;
     border-radius: var(--nex-radius-sm);
     cursor: pointer;
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 4px rgba(255, 24, 1, 0.2);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
     
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-      );
-      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
     &:hover {
       box-shadow: 0 4px 8px rgba(255, 24, 1, 0.3);
-      
-      &::before {
-        left: 100%;
-      }
-    }
-    
-    &:active {
-      transform: scale(0.95);
+      opacity: 0.9;
     }
     
     svg {
       color: var(--nex-signature-contrast);
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -170,55 +144,32 @@
     align-items: center;
     gap: var(--nex-spacing-sm);
     padding: var(--nex-spacing-sm) var(--nex-spacing-md);
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px) saturate(160%);
-    -webkit-backdrop-filter: blur(8px) saturate(160%);
-    border: 1px solid var(--nex-border-color);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--nex-radius-md);
     color: var(--nex-font-color);
     text-decoration: none;
     font-size: var(--nex-font-size-sm);
     font-weight: var(--nex-font-weight-medium);
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     max-width: 100%;
     
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 24, 1, 0.1),
-        transparent
-      );
-      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
     &:hover {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px) saturate(180%);
-      -webkit-backdrop-filter: blur(12px) saturate(180%);
-      border-color: var(--nex-signature);
-      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.1);
-      
-      &::before {
-        left: 100%;
-      }
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     svg {
       color: var(--nex-muted-font-color);
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     span {
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     &:hover svg,
@@ -257,13 +208,78 @@
     &__github-link {
       padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
       font-size: var(--nex-font-size-xs);
-      gap: var(--nex-spacing-xs);
     }
   }
 
   /* Contact Variant */
   &--contact {
     display: none; /* Hide developer tools in contact variant */
+  }
+
+  /* Black Glass Theme */
+  &--black-glass {
+    &__title {
+      color: #ffffff;
+      
+      &::after {
+        background: linear-gradient(90deg, #ff6b35, #f7931e);
+      }
+    }
+    
+    &__tool {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      
+      &:hover {
+        background: rgba(255, 107, 53, 0.1);
+        border-color: rgba(255, 107, 53, 0.2);
+      }
+      
+      svg {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      &:hover svg {
+        color: #ff6b35;
+      }
+    }
+    
+    &__command {
+      background: rgba(0, 0, 0, 0.3);
+      color: #ffffff;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.4);
+      }
+    }
+    
+    &__copy-button {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      
+      &:hover {
+        box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+      }
+    }
+    
+    &__github-link {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      
+      &:hover {
+        background: rgba(255, 107, 53, 0.1);
+        border-color: rgba(255, 107, 53, 0.2);
+      }
+      
+      svg {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      &:hover svg,
+      &:hover span {
+        color: #ff6b35;
+      }
+    }
   }
 
   /* ================================
@@ -277,15 +293,16 @@
       
       &:hover {
         background: rgba(26, 26, 26, 0.6);
+        border-color: var(--nex-signature);
       }
     }
     
     &__command {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
       color: var(--nex-font-color);
       
       &:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(0, 0, 0, 0.3);
       }
     }
     
@@ -295,6 +312,7 @@
       
       &:hover {
         background: rgba(26, 26, 26, 0.6);
+        border-color: var(--nex-signature);
       }
     }
   }
@@ -303,12 +321,8 @@
      📱 RESPONSIVE BEHAVIOR
      ================================ */
   
-  @include mobile {
+  @media (max-width: 768px) {
     gap: var(--nex-spacing-sm);
-    
-    &__title {
-      font-size: var(--nex-font-size-sm);
-    }
     
     &__tool {
       padding: var(--nex-spacing-xs);
@@ -328,7 +342,6 @@
     &__github-link {
       padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
       font-size: var(--nex-font-size-xs);
-      gap: var(--nex-spacing-xs);
     }
   }
 
@@ -336,27 +349,22 @@
      ♿ ACCESSIBILITY ENHANCEMENTS
      ================================ */
   
-  @media (prefers-reduced-motion: reduce) {
-    &__copy-button::before,
-    &__github-link::before {
-      transition: none;
-    }
-    
-    &:hover .nex-footer-developer-tools__copy-button::before,
-    &:hover .nex-footer-developer-tools__github-link::before {
-      left: -100%;
-    }
-  }
-
-  /* ================================
-     🎯 INTERACTION ENHANCEMENTS
-     ================================ */
-  
-  /* Focus visible for keyboard navigation */
-  &__copy-button:focus-visible,
-  &__github-link:focus-visible {
+  &__copy-button:focus,
+  &__github-link:focus {
     outline: 2px solid var(--nex-signature);
     outline-offset: 2px;
-    border-radius: var(--nex-radius-sm);
+    border-radius: var(--nex-radius-md);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    &__tool,
+    &__copy-button,
+    &__github-link {
+      transition: none;
+      
+      svg {
+        transition: none;
+      }
+    }
   }
 } 

@@ -8,11 +8,13 @@ import './FooterContactForm.scss';
 interface FooterContactFormProps {
   contact: ContactForm;
   variant?: 'default' | 'compact' | 'contact';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
 }
 
 const FooterContactForm: React.FC<FooterContactFormProps> = ({
   contact,
-  variant = 'contact'
+  variant = 'contact',
+  theme = 'auto'
 }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -100,7 +102,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
     }
   };
 
-  const formClass = `nex-footer-contact-form ${variant === 'compact' ? 'nex-footer-contact-form--compact' : ''} ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''}`;
+  const formClass = `nex-footer-contact-form ${variant === 'compact' ? 'nex-footer-contact-form--compact' : ''} ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}`;
 
   return (
     <motion.div 
@@ -113,7 +115,10 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
       <motion.h3 
         className="nex-footer-contact-form__title"
         variants={inputVariants}
-        whileHover={{ x: shouldReduceMotion ? 0 : 2 }}
+        whileHover={{ 
+          x: shouldReduceMotion ? 0 : 1,
+          color: theme === 'black-glass' ? '#ff6b35' : undefined
+        }}
         transition={timing.fast}
       >
         {contact.title || 'Get in Touch'}
@@ -124,7 +129,10 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         <motion.p 
           className="nex-footer-contact-form__description"
           variants={inputVariants}
-          whileHover={{ x: shouldReduceMotion ? 0 : 2 }}
+          whileHover={{ 
+            x: shouldReduceMotion ? 0 : 1,
+            color: theme === 'black-glass' ? '#ffffff' : undefined
+          }}
           transition={timing.fast}
         >
           {contact.description}
@@ -170,7 +178,9 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         <motion.div 
           className={`nex-footer-contact-form__input ${focusedField === 'email' ? 'nex-footer-contact-form__input--focused' : ''}`}
           variants={inputVariants}
-          whileHover={{ y: shouldReduceMotion ? 0 : -1 }}
+          whileHover={{ 
+            y: shouldReduceMotion ? 0 : -1
+          }}
           transition={timing.fast}
         >
           <Mail size={16} />
@@ -190,7 +200,9 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         <motion.div 
           className={`nex-footer-contact-form__textarea ${focusedField === 'message' ? 'nex-footer-contact-form__textarea--focused' : ''}`}
           variants={inputVariants}
-          whileHover={{ y: shouldReduceMotion ? 0 : -1 }}
+          whileHover={{ 
+            y: shouldReduceMotion ? 0 : -1
+          }}
           transition={timing.fast}
         >
           <MessageCircle size={16} />
@@ -213,12 +225,10 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           className="nex-footer-contact-form__button"
           variants={inputVariants}
           whileHover={{ 
-            y: shouldReduceMotion ? 0 : -2,
-            scale: shouldReduceMotion ? 1 : 1.02
+            y: shouldReduceMotion ? 0 : -1
           }}
           whileTap={{ 
-            y: 0,
-            scale: 0.98
+            y: 0
           }}
           transition={spring.responsive}
         >

@@ -2,16 +2,16 @@
 @import './tokens.scss';
 
 /* ================================
-   🏢 NEX FOOTER - Liquid Glass System
+   🏢 NEX FOOTER - Premium Glass System
    ================================
    
    Main footer SCSS file - optimized for performance and consistency
    with NexNav styling approach.
    
    Design Philosophy:
-   - Fluid, premium, and effortless interactions
+   - Clean, premium, and effortless interactions
    - Consistent with NexNav design patterns
-   - Enhanced animations and visual feedback
+   - Subtle animations and visual feedback
    - Responsive and accessible design
  */
 
@@ -33,9 +33,9 @@
   z-index: 1;
   width: 100%;
   font-family: var(--nex-font-family-primary);
-  will-change: transform, opacity, backdrop-filter;
+  will-change: transform, opacity;
   
-  /* Enhanced liquid glass background */
+  /* Premium glass background matching NexNav */
   &::before {
     content: '';
     position: absolute;
@@ -44,19 +44,19 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.08) 0%, 
-      rgba(255, 255, 255, 0.04) 30%, 
-      rgba(255, 255, 255, 0.02) 60%,
-      rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+      rgba(255, 255, 255, 0.06) 0%, 
+      rgba(255, 255, 255, 0.03) 30%, 
+      rgba(255, 255, 255, 0.01) 60%,
+      rgba(255, 255, 255, 0.005) 100%);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     pointer-events: none;
     z-index: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Ambient light flow effect */
+  /* Subtle ambient light effect */
   &::after {
     content: '';
     position: absolute;
@@ -67,10 +67,10 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.02),
       transparent
     );
-    transition: left 12s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 8s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
@@ -91,8 +91,8 @@
     z-index: 1;
     
     &::before {
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
     }
   }
 }
@@ -100,8 +100,8 @@
 @media (max-width: 480px) {
   .nex-footer {
     &::before {
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(120%);
+      -webkit-backdrop-filter: blur(12px) saturate(120%);
     }
   }
 }
@@ -133,20 +133,61 @@
 [data-theme="dark"] .nex-footer {
   &::before {
     background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.08) 0%, 
-      rgba(0, 0, 0, 0.04) 30%, 
-      rgba(0, 0, 0, 0.02) 60%,
-      rgba(0, 0, 0, 0.01) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+      rgba(0, 0, 0, 0.06) 0%, 
+      rgba(0, 0, 0, 0.03) 30%, 
+      rgba(0, 0, 0, 0.01) 60%,
+      rgba(0, 0, 0, 0.005) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
   
   &::after {
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.015),
       transparent
     );
+  }
+}
+
+/* ================================
+   🌑 BLACK GLASS PREMIUM THEME
+   ================================ */
+
+.nex-footer-container--black-glass {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.92) 0%, 
+    rgba(15, 15, 15, 0.88) 50%,
+    rgba(0, 0, 0, 0.92) 100%);
+  
+  &::before {
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(15, 15, 15, 0.25) 30%, 
+      rgba(30, 30, 30, 0.15) 60%,
+      rgba(0, 0, 0, 0.08) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+  
+  &::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 107, 53, 0.08),
+      rgba(247, 147, 30, 0.08),
+      transparent
+    );
+  }
+
+  /* Enhanced content styling for black glass */
+  .nex-footer-content {
+    color: #ffffff;
+  }
+
+  .nex-footer-inner {
+    color: #ffffff;
   }
 }
 

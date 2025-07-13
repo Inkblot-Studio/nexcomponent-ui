@@ -1,39 +1,39 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   🏷️ FOOTER BRANDING - Liquid Glass Branding
+   FOOTER BRANDING - Premium Branding
    ================================
    
-   Premium branding section with liquid glass styling,
+   Premium branding section with clean styling,
    featuring logo, name, tagline, and newsletter signup.
    
    Design Philosophy:
-   - Fluid interactions with subtle hover effects
+   - Clean interactions with subtle hover effects
    - Premium glassmorphic input styling
    - Consistent spacing and typography
    - Elegant newsletter integration
-   - Enhanced visual feedback
+   - Theme-aware color transitions
  */
 
 .nex-footer-branding {
   display: flex;
   flex-direction: column;
   gap: var(--nex-spacing-md);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   /* ================================
-     🖼️ LOGO STYLING
+     LOGO STYLING
      ================================ */
   
   &__logo {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     img {
       max-height: 40px;
       width: auto;
       height: auto;
       object-fit: contain;
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
     
@@ -43,11 +43,11 @@
   }
   
   /* ================================
-     📝 BRAND NAME STYLING
+     BRAND NAME STYLING
      ================================ */
   
   &__name {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     span {
       font-family: var(--nex-font-family-logo);
@@ -56,7 +56,7 @@
       letter-spacing: var(--nex-logo-letter-spacing);
       color: var(--nex-font-color);
       line-height: var(--nex-line-height-tight);
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
@@ -66,7 +66,7 @@
   }
   
   /* ================================
-     💬 TAGLINE STYLING
+     TAGLINE STYLING
      ================================ */
   
   &__tagline {
@@ -75,7 +75,7 @@
     line-height: var(--nex-line-height-base);
     margin: 0;
     max-width: 280px;
-    transition: all var(--nex-transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     &:hover {
       color: var(--nex-font-color);
@@ -83,7 +83,7 @@
   }
 
   /* ================================
-     📨 MESSAGE STYLING
+     MESSAGE STYLING
      ================================ */
   
   &__message {
@@ -94,27 +94,27 @@
     border-radius: var(--nex-radius-md);
     font-size: var(--nex-font-size-xs);
     font-weight: var(--nex-font-weight-medium);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     
     &--success {
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.2);
       color: #16a34a;
-      backdrop-filter: blur(12px) saturate(180%);
-      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
     }
     
     &--error {
       background: rgba(239, 68, 68, 0.1);
       border: 1px solid rgba(239, 68, 68, 0.2);
       color: #dc2626;
-      backdrop-filter: blur(12px) saturate(180%);
-      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
     }
   }
 
   /* ================================
-     📧 NEWSLETTER SIGNUP - LIQUID GLASS
+     NEWSLETTER SIGNUP - PREMIUM
      ================================ */
   
   &__newsletter-container {
@@ -128,14 +128,14 @@
     display: flex;
     flex-direction: column;
     gap: var(--nex-spacing-sm);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     /* Input Container */
     &-input {
       position: relative;
       display: flex;
       align-items: center;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       width: 100%;
       max-width: 100%;
       
@@ -144,38 +144,37 @@
         left: var(--nex-spacing-sm);
         color: var(--nex-muted-font-color);
         z-index: 1;
-        transition: all var(--nex-transition-base);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       input {
         width: 100%;
         padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-        border: 1px solid var(--nex-border-color);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--nex-radius-md);
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(12px) saturate(180%);
-        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px) saturate(160%);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
         color: var(--nex-font-color);
         font-size: var(--nex-font-size-sm);
         font-family: var(--nex-font-family-primary);
-        transition: all var(--nex-transition-base);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         
         &::placeholder {
           color: var(--nex-muted-font-color);
-          transition: all var(--nex-transition-base);
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         &:focus {
           outline: none;
           border-color: var(--nex-signature);
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(16px) saturate(200%);
-          -webkit-backdrop-filter: blur(16px) saturate(200%);
+          background: rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(16px) saturate(180%);
+          -webkit-backdrop-filter: blur(16px) saturate(180%);
           box-shadow: 
             0 0 0 3px rgba(255, 24, 1, 0.1),
             0 4px 12px rgba(0, 0, 0, 0.1);
-          transform: translateY(-1px);
         }
         
         &:focus + svg {
@@ -200,63 +199,27 @@
       font-weight: var(--nex-font-weight-medium);
       font-family: var(--nex-font-family-primary);
       cursor: pointer;
-      transition: all var(--nex-transition-base);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
       position: relative;
       overflow: hidden;
-      max-width: 100%;
-      min-height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      &:hover:not(:disabled) {
+        box-shadow: 0 4px 12px rgba(255, 24, 1, 0.3);
       }
       
-      &:hover {
-        box-shadow: 0 4px 16px rgba(255, 24, 1, 0.3);
-        transform: translateY(-1px);
-        
-        &::before {
-          left: 100%;
-        }
-      }
-      
-      &:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
+      &:active:not(:disabled) {
+        transform: translateY(1px);
+        box-shadow: 0 1px 4px rgba(255, 24, 1, 0.2);
       }
       
       &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
-        transform: none;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        
-        &:hover {
-          transform: none;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        &::before {
-          left: -100%;
-        }
+        box-shadow: none;
       }
       
-      /* Spinner styling */
+      /* Loading spinner */
       &-spinner {
         display: flex;
         align-items: center;
@@ -265,8 +228,8 @@
         .spinner {
           width: 16px;
           height: 16px;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          border-top: 2px solid white;
+          border: 2px solid transparent;
+          border-top: 2px solid currentColor;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }
@@ -275,9 +238,10 @@
   }
 
   /* ================================
-     🎨 COMPACT VARIANT
+     VARIANT MODIFICATIONS
      ================================ */
   
+  /* Compact Variant */
   &--compact {
     gap: var(--nex-spacing-sm);
     
@@ -291,9 +255,11 @@
     
     &__tagline {
       font-size: var(--nex-font-size-xs);
+      max-width: 240px;
     }
     
     &__newsletter {
+      gap: var(--nex-spacing-xs);
       margin-top: var(--nex-spacing-sm);
       
       &-input input {
@@ -304,20 +270,123 @@
       &-button {
         padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
         font-size: var(--nex-font-size-xs);
-        min-height: 32px;
+      }
+    }
+  }
+
+  /* Contact Variant */
+  &--contact {
+    gap: var(--nex-spacing-lg);
+    
+    &__logo img {
+      max-height: 48px;
+    }
+    
+    &__name span {
+      font-size: var(--nex-font-size-2xl);
+    }
+    
+    &__tagline {
+      font-size: var(--nex-font-size-md);
+      max-width: 320px;
+    }
+    
+    &__newsletter {
+      gap: var(--nex-spacing-md);
+      margin-top: var(--nex-spacing-lg);
+      
+      &-input input {
+        padding: var(--nex-spacing-md) var(--nex-spacing-md) var(--nex-spacing-md) calc(var(--nex-spacing-md) + 24px);
+        font-size: var(--nex-font-size-md);
+      }
+      
+      &-button {
+        padding: var(--nex-spacing-md) var(--nex-spacing-lg);
+        font-size: var(--nex-font-size-md);
+      }
+    }
+  }
+
+  /* Black Glass Theme */
+  &--black-glass {
+    &__name span {
+      color: #ffffff;
+      
+      &:hover {
+        color: #ff6b35;
+      }
+    }
+    
+    &__tagline {
+      color: rgba(255, 255, 255, 0.7);
+      
+      &:hover {
+        color: #ffffff;
+      }
+    }
+    
+    &__newsletter-input {
+      input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+        
+        &:focus {
+          border-color: #ff6b35;
+          background: rgba(255, 255, 255, 0.08);
+        }
+      }
+      
+      svg {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      
+      &:focus-within svg {
+        color: #ff6b35;
+      }
+    }
+    
+    &__newsletter-button {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      
+      &:hover:not(:disabled) {
+        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
       }
     }
   }
 
   /* ================================
-     📱 RESPONSIVE DESIGN
+     DARK MODE ADAPTATIONS
+     ================================ */
+  
+  [data-theme="dark"] & {
+    &__newsletter-input {
+      input {
+        background: rgba(26, 26, 26, 0.4);
+        border-color: var(--nex-border-color);
+        color: var(--nex-font-color);
+        
+        &:focus {
+          background: rgba(26, 26, 26, 0.6);
+          border-color: var(--nex-signature);
+        }
+      }
+    }
+  }
+
+  /* ================================
+     RESPONSIVE BEHAVIOR
      ================================ */
   
   @media (max-width: 768px) {
     gap: var(--nex-spacing-sm);
     
     &__logo img {
-      max-height: 36px;
+      max-height: 32px;
     }
     
     &__name span {
@@ -330,53 +399,63 @@
     }
     
     &__newsletter {
+      gap: var(--nex-spacing-xs);
       margin-top: var(--nex-spacing-sm);
       
       &-input input {
+        padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 16px);
         font-size: var(--nex-font-size-xs);
       }
       
       &-button {
+        padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
         font-size: var(--nex-font-size-xs);
       }
     }
   }
 
-  @media (max-width: 480px) {
-    &__logo img {
-      max-height: 32px;
-    }
-    
-    &__name span {
-      font-size: var(--nex-font-size-md);
-    }
-    
-    &__tagline {
-      max-width: 200px;
-    }
-  }
-
   /* ================================
-     ♿ ACCESSIBILITY
+     ACCESSIBILITY ENHANCEMENTS
      ================================ */
   
+  &__newsletter-input:focus-within,
+  &__newsletter-button:focus {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+    border-radius: var(--nex-radius-md);
+  }
+  
   @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      animation: none !important;
+    &__logo,
+    &__name,
+    &__tagline,
+    &__newsletter-input,
+    &__newsletter-button {
+      transition: none;
+      
+      img,
+      span,
+      input,
+      svg {
+        transition: none;
+      }
     }
     
-    &__newsletter-button::before {
-      display: none;
+    &__newsletter-button-spinner .spinner {
+      animation: none;
     }
   }
 }
 
 /* ================================
-   🔄 SPINNER ANIMATION
+   ANIMATIONS
    ================================ */
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 } 

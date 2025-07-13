@@ -6,7 +6,7 @@ import './FooterContainer.scss';
 interface FooterContainerProps {
   children: React.ReactNode;
   variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'dark';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
   className?: string;
 }
 
@@ -18,6 +18,50 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
 }) => {
   const { timing, shouldReduceMotion } = useAnimationConfig();
 
+  // Get theme-aware styles
+  const getThemeStyles = () => {
+    if (theme === 'dark') {
+      return {
+        background: 'linear-gradient(120deg, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.08) 0%, rgba(0,184,255,0.08) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 30%, rgba(0, 0, 0, 0.02) 60%, rgba(0, 0, 0, 0.01) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.015), transparent)',
+        gradientOverlay: `
+          radial-gradient(circle at 20% 40%, rgba(255,24,1,0.08) 0%, rgba(255,24,1,0.04) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(0,184,255,0.06) 0%, rgba(0,184,255,0.04) 40%, transparent 70%),
+          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 80%)
+        `
+      };
+    } else if (theme === 'black-glass') {
+      return {
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(15, 15, 15, 0.88) 50%, rgba(0, 0, 0, 0.92) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(15, 15, 15, 0.25) 30%, rgba(30, 30, 30, 0.15) 60%, rgba(0, 0, 0, 0.08) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.08), rgba(247, 147, 30, 0.08), transparent)',
+        gradientOverlay: `
+          radial-gradient(circle at 20% 40%, rgba(255,107,53,0.1) 0%, rgba(255,107,53,0.05) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(247,147,30,0.08) 0%, rgba(247,147,30,0.04) 40%, transparent 70%),
+          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 80%)
+        `
+      };
+    } else {
+      // Light theme (default)
+      return {
+        background: 'linear-gradient(120deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.12) 0%, rgba(0,184,255,0.12) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.01) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
+        gradientOverlay: `
+          radial-gradient(circle at 20% 40%, rgba(255,24,1,0.15) 0%, rgba(255,24,1,0.08) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(0,184,255,0.12) 0%, rgba(0,184,255,0.08) 40%, transparent 70%),
+          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 80%)
+        `
+      };
+    }
+  };
+
+  const themeStyles = getThemeStyles();
+
   // Background variants matching NexNav approach
   const backgroundVariants = {
     initial: {
@@ -26,7 +70,7 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
     },
     animate: {
       backdropFilter: 'blur(24px) saturate(180%)',
-      background: 'linear-gradient(120deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.12) 0%, rgba(0,184,255,0.12) 100%)',
+      background: themeStyles.background,
       transition: {
         duration: shouldReduceMotion ? 0.2 : 0.4,
         ease: [0.4, 0, 0.2, 1]
@@ -77,10 +121,10 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.01) 100%)',
+          background: themeStyles.backgroundLayer,
           backdropFilter: 'blur(24px) saturate(180%)',
           WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-          borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+          borderTop: themeStyles.borderTop,
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -96,7 +140,7 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
           left: '-100%',
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
+          background: themeStyles.shimmer,
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -121,11 +165,7 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
           left: 0,
           right: 0,
           bottom: 0,
-          background: `
-            radial-gradient(circle at 20% 40%, rgba(255,24,1,0.15) 0%, rgba(255,24,1,0.08) 40%, transparent 70%),
-            radial-gradient(circle at 80% 60%, rgba(0,184,255,0.12) 0%, rgba(0,184,255,0.08) 40%, transparent 70%),
-            radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 80%)
-          `,
+          background: themeStyles.gradientOverlay,
           opacity: 0.8,
           filter: 'blur(8px)',
           pointerEvents: 'none',

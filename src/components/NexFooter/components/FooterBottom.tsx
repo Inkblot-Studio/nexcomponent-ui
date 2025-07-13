@@ -17,30 +17,32 @@ interface FooterBottomProps {
   displayName: string;
   socials?: SocialLink[];
   variant?: 'default' | 'compact' | 'contact';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
 }
 
 const FooterBottom: React.FC<FooterBottomProps> = ({
   displayName,
   socials = [],
-  variant = 'default'
+  variant = 'default',
+  theme = 'auto'
 }) => {
   const { timing, shouldReduceMotion } = useAnimationConfig();
   const currentYear = new Date().getFullYear();
 
-  // Section variants for liquid glass entrance
+  // Simplified section variants for clean entrance
   const sectionVariants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 8 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.4,
+        duration: shouldReduceMotion ? 0.2 : 0.3,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  const bottomClass = `nex-footer-bottom ${variant === 'compact' ? 'nex-footer-bottom--compact' : ''} ${variant === 'contact' ? 'nex-footer-bottom--contact' : ''}`;
+  const bottomClass = `nex-footer-bottom ${variant === 'compact' ? 'nex-footer-bottom--compact' : ''} ${variant === 'contact' ? 'nex-footer-bottom--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-bottom--black-glass' : ''}`;
 
   return (
     <motion.div 
@@ -50,7 +52,10 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
       <div className="nex-footer-bottom__container">
         <motion.div 
           className="nex-footer-bottom__copyright"
-          whileHover={{ x: 2 }}
+          whileHover={{ 
+            color: theme === 'black-glass' ? '#ff6b35' : undefined,
+            opacity: 0.9
+          }}
           transition={timing.fast}
         >
           © {currentYear} {displayName}. All rights reserved.
@@ -60,8 +65,8 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
         {socials.length > 0 && (
           <motion.div 
             className="nex-footer-bottom__socials"
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, ...timing.medium }}
           >
             {socials.map((social, index) => {
@@ -76,8 +81,11 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                   rel="noopener noreferrer"
                   className={`nex-footer-bottom__social-link ${social.type}`}
                   aria-label={`Follow us on ${social.type}`}
-                  whileHover={{ y: -2, scale: 1.05 }}
-                  whileTap={{ y: 0, scale: 0.95 }}
+                  whileHover={{ 
+                    color: theme === 'black-glass' ? '#ff6b35' : undefined,
+                    opacity: 0.8
+                  }}
+                  whileTap={{ opacity: 0.7 }}
                   transition={timing.fast}
                 >
                   <IconComponent />

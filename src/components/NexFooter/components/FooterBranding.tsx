@@ -15,6 +15,7 @@ interface FooterBrandingProps {
     onSubmit?: (email: string) => void;
   };
   variant?: 'default' | 'compact' | 'contact';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
 }
 
 const FooterBranding: React.FC<FooterBrandingProps> = ({
@@ -23,13 +24,14 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
   tagline,
   showLogoText = true,
   newsletter,
-  variant = 'default'
+  variant = 'default',
+  theme = 'auto'
 }) => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
-  const { timing, shouldReduceMotion, spring } = useAnimationConfig();
+  const { timing, shouldReduceMotion } = useAnimationConfig();
 
   // Newsletter submission handler
   const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
@@ -56,57 +58,54 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
     }
   }, [email, newsletter]);
 
-  // Section variants for liquid glass entrance
+  // Simplified section variants for clean entrance
   const sectionVariants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 8 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.4,
+        duration: shouldReduceMotion ? 0.2 : 0.3,
         ease: [0.4, 0, 0.2, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.05
+        staggerChildren: shouldReduceMotion ? 0 : 0.04
       }
     }
   };
 
-  // Item variants for staggered animations
+  // Simplified item variants for clean animations
   const itemVariants = {
-    initial: { opacity: 0, x: -10 },
+    initial: { opacity: 0, y: 4 },
     animate: { 
       opacity: 1, 
-      x: 0,
+      y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.3,
+        duration: shouldReduceMotion ? 0.1 : 0.2,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  // Message variants
+  // Simplified message variants
   const messageVariants = {
-    initial: { opacity: 0, y: -10, scale: 0.9 },
+    initial: { opacity: 0, y: -4 },
     animate: { 
       opacity: 1, 
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 30
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
       }
     },
     exit: { 
       opacity: 0, 
-      y: -10,
-      scale: 0.9,
+      y: -4,
       transition: {
-        duration: 0.2
+        duration: 0.15
       }
     }
   };
 
-  const brandingClass = `nex-footer-branding ${variant === 'compact' ? 'nex-footer-branding--compact' : ''} ${variant === 'contact' ? 'nex-footer-branding--contact' : ''}`;
+  const brandingClass = `nex-footer-branding ${variant === 'compact' ? 'nex-footer-branding--compact' : ''} ${variant === 'contact' ? 'nex-footer-branding--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-branding--black-glass' : ''}`;
 
   return (
     <motion.div 
@@ -121,11 +120,10 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
           className="nex-footer-branding__logo"
           variants={itemVariants}
           whileHover={{ 
-            y: shouldReduceMotion ? 0 : -2,
-            scale: shouldReduceMotion ? 1 : 1.02
+            opacity: 0.9
           }}
-          whileTap={{ scale: 0.98 }}
-          transition={spring.responsive}
+          whileTap={{ opacity: 0.8 }}
+          transition={timing.fast}
         >
           <img src={logoSrc} alt={displayName} />
         </motion.div>
@@ -135,8 +133,8 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
             className="nex-footer-branding__name"
             variants={itemVariants}
             whileHover={{ 
-              x: shouldReduceMotion ? 0 : 2,
-              color: 'var(--nex-signature)'
+              color: theme === 'black-glass' ? '#ff6b35' : undefined,
+              opacity: 0.9
             }}
             transition={timing.fast}
           >
@@ -151,8 +149,8 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
           className="nex-footer-branding__tagline"
           variants={itemVariants}
           whileHover={{ 
-            x: shouldReduceMotion ? 0 : 2,
-            color: 'var(--nex-font-color)'
+            color: theme === 'black-glass' ? '#ffffff' : undefined,
+            opacity: 0.9
           }}
           transition={timing.fast}
         >
@@ -202,7 +200,10 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
           >
             <motion.div 
               className="nex-footer-branding__newsletter-input"
-              whileHover={{ y: shouldReduceMotion ? 0 : -1 }}
+              whileHover={{ 
+                opacity: 0.9,
+                backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.1)' : undefined
+              }}
               transition={timing.fast}
             >
               <Mail size={variant === 'compact' ? 14 : 16} />
@@ -220,22 +221,19 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
               disabled={isSubmitting || !email.trim()}
               className="nex-footer-branding__newsletter-button"
               whileHover={{ 
-                y: shouldReduceMotion ? 0 : -1,
-                scale: shouldReduceMotion ? 1 : 1.02
+                opacity: 0.9,
+                backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.2)' : undefined
               }}
-              whileTap={{ 
-                y: 0,
-                scale: 0.98
-              }}
-              transition={spring.responsive}
+              whileTap={{ opacity: 0.8 }}
+              transition={timing.fast}
             >
               <AnimatePresence mode="wait">
                 {isSubmitting ? (
                   <motion.div
                     key="loading"
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={timing.fast}
                     className="nex-footer-branding__button-spinner"
                   >

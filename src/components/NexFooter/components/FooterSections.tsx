@@ -7,41 +7,43 @@ import './FooterSections.scss';
 interface FooterSectionsProps {
   sections: FooterSection[];
   variant?: 'default' | 'compact' | 'contact';
+  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
 }
 
 const FooterSections: React.FC<FooterSectionsProps> = ({
   sections,
-  variant = 'default'
+  variant = 'default',
+  theme = 'auto'
 }) => {
   const { timing, shouldReduceMotion } = useAnimationConfig();
 
-  // Section variants for liquid glass entrance
+  // Simplified section variants for clean entrance
   const sectionVariants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0, y: 8 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.4,
+        duration: shouldReduceMotion ? 0.2 : 0.3,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  // Link variants for staggered animation
+  // Simplified link variants for clean animations
   const linkVariants = {
-    initial: { opacity: 0, x: -5 },
+    initial: { opacity: 0, y: 4 },
     animate: { 
       opacity: 1, 
-      x: 0,
+      y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.3,
+        duration: shouldReduceMotion ? 0.1 : 0.2,
         ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  const sectionsClass = `nex-footer-sections ${variant === 'compact' ? 'nex-footer-sections--compact' : ''} ${variant === 'contact' ? 'nex-footer-sections--contact' : ''}`;
+  const sectionsClass = `nex-footer-sections ${variant === 'compact' ? 'nex-footer-sections--compact' : ''} ${variant === 'contact' ? 'nex-footer-sections--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-sections--black-glass' : ''}`;
 
   return (
     <motion.div 
@@ -54,11 +56,14 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
           className="nex-footer-sections__section"
           initial="initial"
           animate="animate"
-          transition={{ delay: index * 0.1 }}
+          transition={{ delay: index * 0.05 }}
         >
           <motion.h3 
             className="nex-footer-sections__title"
-            whileHover={{ x: 2 }}
+            whileHover={{ 
+              color: theme === 'black-glass' ? '#ff6b35' : undefined,
+              opacity: 0.9
+            }}
             transition={timing.fast}
           >
             {section.title}
@@ -67,7 +72,7 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
             className="nex-footer-sections__links"
             initial="initial"
             animate="animate"
-            transition={{ delayChildren: index * 0.1, staggerChildren: 0.05 }}
+            transition={{ delayChildren: index * 0.05, staggerChildren: 0.03 }}
           >
             {section.links.map((link, linkIndex) => (
               <motion.li 
@@ -79,8 +84,11 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nex-footer-sections__link"
-                  whileHover={{ x: 3 }}
-                  whileTap={{ x: 1 }}
+                  whileHover={{ 
+                    color: theme === 'black-glass' ? '#ff6b35' : undefined,
+                    opacity: 0.8
+                  }}
+                  whileTap={{ opacity: 0.7 }}
                   transition={timing.fast}
                 >
                   {link.label}
