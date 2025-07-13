@@ -49,7 +49,7 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
   const navListRef = useRef<HTMLUListElement>(null);
   const moreDropdownRef = useRef<HTMLDivElement>(null);
   
-  const { fast, shouldReduceMotion, stagger } = useAnimationConfig();
+  const { timing, shouldReduceMotion, stagger } = useAnimationConfig();
 
   // Calculate item width with responsive considerations
   const calculateItemWidth = useCallback((item: NavItemType, element?: HTMLElement, containerWidth?: number) => {
@@ -263,7 +263,7 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => (
         <motion.li
           key={item.key || i}
-          variants={ANIMATION_VARIANTS.navItem}
+          variants={ANIMATION_VARIANTS.mobileNav.navItem}
         >
           <NavItem 
             label={item.label} 
@@ -281,7 +281,7 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       {/* More dropdown for overflow items */}
       {hasOverflow && visibleItems.length > 0 && (
         <motion.li
-          variants={ANIMATION_VARIANTS.navItem}
+          variants={ANIMATION_VARIANTS.mobileNav.navItem}
           style={{ position: 'relative' }}
         >
           <div 
