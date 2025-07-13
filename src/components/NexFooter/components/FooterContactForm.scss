@@ -1,0 +1,390 @@
+@import '../../../utils/mixin.scss';
+
+/* ================================
+   📧 FOOTER CONTACT FORM - Liquid Glass Contact
+   ================================
+   
+   Premium contact form with liquid glass styling,
+   featuring email and message inputs with elegant interactions.
+   
+   Design Philosophy:
+   - Clean, professional form design
+   - Smooth input interactions
+   - Consistent with overall design
+   - Premium button interactions
+ */
+
+.nex-footer-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nex-spacing-lg);
+  max-width: 600px;
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ================================
+     🏷️ TITLE STYLING
+     ================================ */
+  
+  &__title {
+    font-size: var(--nex-font-size-2xl);
+    font-weight: var(--nex-font-weight-bold);
+    color: var(--nex-font-color);
+    line-height: var(--nex-line-height-tight);
+    margin: 0;
+    text-align: center;
+    transition: all var(--nex-transition-base);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--nex-signature), var(--nex-signature-light));
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2px;
+    }
+    
+    &:hover::after {
+      width: 60px;
+    }
+  }
+
+  /* ================================
+     📝 DESCRIPTION STYLING
+     ================================ */
+  
+  &__description {
+    font-size: var(--nex-font-size-md);
+    color: var(--nex-muted-font-color);
+    line-height: var(--nex-line-height-base);
+    margin: 0;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    transition: all var(--nex-transition-base);
+    
+    &:hover {
+      color: var(--nex-font-color);
+    }
+  }
+
+  /* ================================
+     📋 FORM STYLING
+     ================================ */
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nex-spacing-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ================================
+     📧 INPUT STYLING
+     ================================ */
+  
+  &__input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    svg {
+      position: absolute;
+      left: var(--nex-spacing-md);
+      color: var(--nex-muted-font-color);
+      z-index: 1;
+      transition: all var(--nex-transition-base);
+    }
+    
+    input {
+      width: 100%;
+      padding: var(--nex-spacing-md) var(--nex-spacing-md) var(--nex-spacing-md) calc(var(--nex-spacing-md) + 24px);
+      border: 1px solid var(--nex-border-color);
+      border-radius: var(--nex-radius-lg);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      color: var(--nex-font-color);
+      font-size: var(--nex-font-size-md);
+      font-family: var(--nex-font-family-primary);
+      transition: all var(--nex-transition-base);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      
+      &::placeholder {
+        color: var(--nex-muted-font-color);
+        transition: all var(--nex-transition-base);
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: var(--nex-signature);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
+        box-shadow: 
+          0 0 0 3px rgba(255, 24, 1, 0.1),
+          0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+      }
+      
+      &:focus + svg {
+        color: var(--nex-signature);
+      }
+    }
+  }
+
+  /* ================================
+     💬 TEXTAREA STYLING
+     ================================ */
+  
+  &__textarea {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    svg {
+      position: absolute;
+      left: var(--nex-spacing-md);
+      top: var(--nex-spacing-md);
+      color: var(--nex-muted-font-color);
+      z-index: 1;
+      transition: all var(--nex-transition-base);
+    }
+    
+    textarea {
+      width: 100%;
+      padding: var(--nex-spacing-md) var(--nex-spacing-md) var(--nex-spacing-md) calc(var(--nex-spacing-md) + 24px);
+      border: 1px solid var(--nex-border-color);
+      border-radius: var(--nex-radius-lg);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      color: var(--nex-font-color);
+      font-size: var(--nex-font-size-md);
+      font-family: var(--nex-font-family-primary);
+      line-height: var(--nex-line-height-base);
+      resize: vertical;
+      min-height: 120px;
+      transition: all var(--nex-transition-base);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      
+      &::placeholder {
+        color: var(--nex-muted-font-color);
+        transition: all var(--nex-transition-base);
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: var(--nex-signature);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
+        box-shadow: 
+          0 0 0 3px rgba(255, 24, 1, 0.1),
+          0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+      }
+      
+      &:focus + svg {
+        color: var(--nex-signature);
+      }
+    }
+  }
+
+  /* ================================
+     📤 SUBMIT BUTTON STYLING
+     ================================ */
+  
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nex-spacing-sm);
+    padding: var(--nex-spacing-md) var(--nex-spacing-xl);
+    background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-dark) 100%);
+    color: var(--nex-signature-contrast);
+    border: none;
+    border-radius: var(--nex-radius-lg);
+    font-size: var(--nex-font-size-md);
+    font-weight: var(--nex-font-weight-semibold);
+    font-family: var(--nex-font-family-primary);
+    cursor: pointer;
+    transition: all var(--nex-transition-base);
+    box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    &:hover {
+      box-shadow: 0 6px 20px rgba(255, 24, 1, 0.3);
+      transform: translateY(-2px);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      
+      &:hover {
+        box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
+        transform: none;
+      }
+    }
+    
+    svg {
+      transition: all var(--nex-transition-base);
+    }
+  }
+
+  /* ================================
+     🎨 VARIANT MODIFICATIONS
+     ================================ */
+  
+  /* Compact Variant */
+  &--compact {
+    gap: var(--nex-spacing-md);
+    
+    &__title {
+      font-size: var(--nex-font-size-xl);
+    }
+    
+    &__description {
+      font-size: var(--nex-font-size-sm);
+    }
+    
+    &__form {
+      gap: var(--nex-spacing-sm);
+    }
+    
+    &__input input {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+      font-size: var(--nex-font-size-sm);
+    }
+    
+    &__textarea textarea {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+      font-size: var(--nex-font-size-sm);
+      min-height: 100px;
+    }
+    
+    &__button {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
+      font-size: var(--nex-font-size-sm);
+    }
+  }
+
+  /* Contact Variant */
+  &--contact {
+    /* Default styling for contact variant */
+  }
+
+  /* ================================
+     🌒 DARK MODE ADAPTATIONS
+     ================================ */
+  
+  [data-theme="dark"] & {
+    &__input input,
+    &__textarea textarea {
+      background: rgba(26, 26, 26, 0.6);
+      border-color: var(--nex-border-color);
+      
+      &:focus {
+        background: rgba(26, 26, 26, 0.8);
+      }
+    }
+  }
+
+  /* ================================
+     📱 RESPONSIVE BEHAVIOR
+     ================================ */
+  
+  @include mobile {
+    gap: var(--nex-spacing-md);
+    
+    &__title {
+      font-size: var(--nex-font-size-xl);
+    }
+    
+    &__description {
+      font-size: var(--nex-font-size-sm);
+    }
+    
+    &__form {
+      gap: var(--nex-spacing-sm);
+    }
+    
+    &__input input {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+      font-size: var(--nex-font-size-sm);
+    }
+    
+    &__textarea textarea {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+      font-size: var(--nex-font-size-sm);
+      min-height: 100px;
+    }
+    
+    &__button {
+      padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
+      font-size: var(--nex-font-size-sm);
+    }
+  }
+
+  /* ================================
+     ♿ ACCESSIBILITY ENHANCEMENTS
+     ================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    &__button::before {
+      transition: none;
+    }
+    
+    &:hover .nex-footer-contact-form__button::before {
+      left: -100%;
+    }
+  }
+
+  /* ================================
+     🎯 INTERACTION ENHANCEMENTS
+     ================================ */
+  
+  /* Focus visible for keyboard navigation */
+  &__input input:focus-visible,
+  &__textarea textarea:focus-visible,
+  &__button:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+    border-radius: var(--nex-radius-sm);
+  }
+} 

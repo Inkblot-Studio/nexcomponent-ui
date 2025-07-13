@@ -1,0 +1,134 @@
+/* ================================
+   🎨 FOOTER DESIGN TOKENS
+   ================================
+   
+   Footer-specific design tokens for consistent styling
+   across all footer components.
+ */
+
+/* ================================
+   📐 FOOTER SPACING TOKENS
+   ================================ */
+
+:root {
+  /* Footer-specific spacing */
+  --nex-footer-spacing-xs: 0.25rem;    /* 4px - Micro spacing */
+  --nex-footer-spacing-sm: 0.5rem;     /* 8px - Small gaps */
+  --nex-footer-spacing-md: 1rem;       /* 16px - Standard spacing */
+  --nex-footer-spacing-lg: 1.5rem;     /* 24px - Large spacing */
+  --nex-footer-spacing-xl: 2rem;       /* 32px - Extra large */
+  --nex-footer-spacing-2xl: 3rem;      /* 48px - Hero spacing */
+  --nex-footer-spacing-3xl: 4rem;      /* 64px - Extra hero spacing */
+
+  /* ================================
+     🌀 FOOTER GLASS EFFECTS
+     ================================ */
+  
+  /* Light mode glass effects */
+  --nex-footer-glass-bg: rgba(255, 255, 255, 0.6);
+  --nex-footer-glass-bg-light: rgba(255, 255, 255, 0.4);
+  --nex-footer-glass-bg-lighter: rgba(255, 255, 255, 0.2);
+  --nex-footer-glass-bg-lightest: rgba(255, 255, 255, 0.1);
+  --nex-footer-glass-border: rgba(255, 255, 255, 0.12);
+  --nex-footer-glass-border-light: rgba(255, 255, 255, 0.08);
+  --nex-footer-glass-shadow: rgba(0, 0, 0, 0.05);
+  --nex-footer-glass-shadow-dark: rgba(0, 0, 0, 0.1);
+
+  /* ================================
+     🎯 FOOTER INTERACTION TOKENS
+     ================================ */
+  
+  /* Hover effects */
+  --nex-footer-hover-lift: -1px;
+  --nex-footer-hover-scale: 1.02;
+  --nex-footer-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  /* Active effects */
+  --nex-footer-active-lift: 0px;
+  --nex-footer-active-scale: 0.98;
+  
+  /* Focus effects */
+  --nex-footer-focus-outline: 2px solid var(--nex-signature);
+  --nex-footer-focus-offset: 2px;
+
+  /* ================================
+     📱 FOOTER RESPONSIVE TOKENS
+     ================================ */
+  
+  /* Mobile adjustments */
+  --nex-footer-mobile-spacing-multiplier: 0.75;
+  --nex-footer-mobile-font-multiplier: 0.875;
+  
+  /* Compact variant adjustments */
+  --nex-footer-compact-spacing-multiplier: 0.6;
+  --nex-footer-compact-font-multiplier: 0.8;
+  
+  /* Contact variant adjustments */
+  --nex-footer-contact-spacing-multiplier: 1.2;
+  --nex-footer-contact-font-multiplier: 1.1;
+
+  /* ================================
+     🎨 FOOTER COLOR TOKENS
+     ================================ */
+  
+  /* Social platform colors */
+  --nex-footer-social-github: #333;
+  --nex-footer-social-twitter: #1DA1F2;
+  --nex-footer-social-linkedin: #0077B5;
+  --nex-footer-social-youtube: #FF0000;
+  --nex-footer-social-discord: #7289DA;
+  
+  /* Social hover effects */
+  --nex-footer-social-github-hover: rgba(51, 51, 51, 0.1);
+  --nex-footer-social-twitter-hover: rgba(29, 161, 242, 0.1);
+  --nex-footer-social-linkedin-hover: rgba(0, 119, 181, 0.1);
+  --nex-footer-social-youtube-hover: rgba(255, 0, 0, 0.1);
+  --nex-footer-social-discord-hover: rgba(114, 137, 218, 0.1);
+
+  /* ================================
+     ⚡ FOOTER TRANSITION TOKENS
+     ================================ */
+  
+  /* Base transitions */
+  --nex-footer-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --nex-footer-transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --nex-footer-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shimmer effect timing */
+  --nex-footer-shimmer-duration: 8s;
+  --nex-footer-shimmer-delay: 4s;
+}
+
+/* ================================
+   🌒 DARK MODE FOOTER TOKENS
+   ================================ */
+
+[data-theme="dark"] {
+  /* Dark mode glass effects */
+  --nex-footer-glass-bg: rgba(26, 26, 26, 0.6);
+  --nex-footer-glass-bg-light: rgba(26, 26, 26, 0.4);
+  --nex-footer-glass-bg-lighter: rgba(26, 26, 26, 0.2);
+  --nex-footer-glass-bg-lightest: rgba(26, 26, 26, 0.1);
+  --nex-footer-glass-border: rgba(255, 255, 255, 0.08);
+  --nex-footer-glass-border-light: rgba(255, 255, 255, 0.05);
+  --nex-footer-glass-shadow: rgba(0, 0, 0, 0.3);
+  --nex-footer-glass-shadow-dark: rgba(0, 0, 0, 0.6);
+  
+  /* Dark mode hover effects */
+  --nex-footer-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================
+   ♿ ACCESSIBILITY FOOTER TOKENS
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Disable animations for reduced motion */
+    --nex-footer-transition-fast: 0ms;
+    --nex-footer-transition-base: 0ms;
+    --nex-footer-transition-slow: 0ms;
+    --nex-footer-shimmer-duration: 0ms;
+    --nex-footer-shimmer-delay: 0ms;
+  }
+} 

@@ -1,0 +1,315 @@
+@import '../../../utils/mixin.scss';
+
+/* ================================
+   🔽 FOOTER BOTTOM - Liquid Glass Foundation
+   ================================
+   
+   Premium footer bottom section with liquid glass styling,
+   featuring copyright and social media links.
+   
+   Design Philosophy:
+   - Clean separation with subtle border
+   - Elegant social link interactions
+   - Consistent with overall design
+   - Premium hover effects
+ */
+
+.nex-footer-bottom {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Subtle gradient overlay */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.01),
+      transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ================================
+     📦 CONTAINER STYLING
+     ================================ */
+  
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--nex-spacing-lg) var(--nex-spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--nex-spacing-lg);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    @include mobile {
+      flex-direction: column;
+      gap: var(--nex-spacing-md);
+      padding: var(--nex-spacing-md) var(--nex-spacing-md);
+      text-align: center;
+    }
+  }
+
+  /* ================================
+     📄 COPYRIGHT STYLING
+     ================================ */
+  
+  &__copyright {
+    font-size: var(--nex-font-size-sm);
+    color: var(--nex-muted-font-color);
+    line-height: var(--nex-line-height-base);
+    transition: all var(--nex-transition-base);
+    
+    &:hover {
+      color: var(--nex-font-color);
+    }
+  }
+
+  /* ================================
+     🔗 SOCIAL LINKS STYLING
+     ================================ */
+  
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: var(--nex-spacing-sm);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    border: 1px solid var(--nex-border-color);
+    border-radius: var(--nex-radius-md);
+    color: var(--nex-muted-font-color);
+    text-decoration: none;
+    transition: all var(--nex-transition-base);
+    position: relative;
+    overflow: hidden;
+    
+    /* Liquid glass hover effect */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 24, 1, 0.1),
+        transparent
+      );
+      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-color: var(--nex-signature);
+      color: var(--nex-signature);
+      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.1);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+    
+    /* Platform-specific colors */
+    &.github:hover {
+      border-color: #333;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(51, 51, 51, 0.2);
+    }
+    
+    &.twitter:hover {
+      border-color: #1DA1F2;
+      color: #1DA1F2;
+      box-shadow: 0 2px 8px rgba(29, 161, 242, 0.2);
+    }
+    
+    &.linkedin:hover {
+      border-color: #0077B5;
+      color: #0077B5;
+      box-shadow: 0 2px 8px rgba(0, 119, 181, 0.2);
+    }
+    
+    &.youtube:hover {
+      border-color: #FF0000;
+      color: #FF0000;
+      box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+    }
+    
+    &.discord:hover {
+      border-color: #7289DA;
+      color: #7289DA;
+      box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
+    }
+    
+    svg {
+      width: 16px;
+      height: 16px;
+      transition: all var(--nex-transition-base);
+    }
+  }
+
+  /* ================================
+     🎨 VARIANT MODIFICATIONS
+     ================================ */
+  
+  /* Compact Variant */
+  &--compact {
+    &__container {
+      padding: var(--nex-spacing-md) var(--nex-spacing-lg);
+      
+      @include mobile {
+        padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+      }
+    }
+    
+    &__copyright {
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &__social-link {
+      width: 32px;
+      height: 32px;
+      
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  /* Contact Variant */
+  &--contact {
+    &__container {
+      padding: var(--nex-spacing-xl) var(--nex-spacing-lg);
+      
+      @include mobile {
+        padding: var(--nex-spacing-lg) var(--nex-spacing-md);
+      }
+    }
+    
+    &__copyright {
+      font-size: var(--nex-font-size-md);
+    }
+    
+    &__social-link {
+      width: 40px;
+      height: 40px;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  /* ================================
+     🌒 DARK MODE ADAPTATIONS
+     ================================ */
+  
+  [data-theme="dark"] & {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    
+    &__social-link {
+      background: rgba(26, 26, 26, 0.4);
+      border-color: var(--nex-border-color);
+      
+      &:hover {
+        background: rgba(26, 26, 26, 0.6);
+      }
+    }
+  }
+
+  /* ================================
+     📱 RESPONSIVE BEHAVIOR
+     ================================ */
+  
+  @media (max-width: 768px) {
+    &__container {
+      flex-direction: column;
+      gap: var(--nex-spacing-md);
+      text-align: center;
+    }
+    
+    &__copyright {
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &__socials {
+      gap: var(--nex-spacing-xs);
+    }
+    
+    &__social-link {
+      width: 32px;
+      height: 32px;
+      
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  /* ================================
+     ♿ ACCESSIBILITY ENHANCEMENTS
+     ================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    &__social-link::before {
+      transition: none;
+    }
+    
+    &:hover .nex-footer-bottom__social-link::before {
+      left: -100%;
+    }
+  }
+
+  /* ================================
+     🎯 INTERACTION ENHANCEMENTS
+     ================================ */
+  
+  /* Focus visible for keyboard navigation */
+  &__social-link:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+    border-radius: var(--nex-radius-sm);
+  }
+
+  /* Hover state for entire bottom section */
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+} 

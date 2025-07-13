@@ -1,0 +1,209 @@
+@import '../../../utils/mixin.scss';
+
+/* ================================
+   🏢 FOOTER CONTAINER - Liquid Glass Foundation
+   ================================
+   
+   The foundation component that provides the liquid glass aesthetic
+   with ambient depth, subtle translucency, and light flow across surfaces.
+   
+   Design Philosophy:
+   - Fluid, premium, and effortless
+   - Subtle translucency with ambient depth
+   - Light flow across surfaces
+   - Whitespace and rhythm guide the eye
+ */
+
+.nex-footer-container {
+  position: relative;
+  width: 100%;
+  font-family: var(--nex-font-family-primary);
+  background: var(--nex-background-color);
+  color: var(--nex-font-color);
+  will-change: transform, opacity, backdrop-filter;
+  
+  /* Liquid Glass Background Layer */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.08) 0%, 
+      rgba(255, 255, 255, 0.04) 30%, 
+      rgba(255, 255, 255, 0.02) 60%,
+      rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+    z-index: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ambient Light Flow Effect */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    transition: left 12s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover::after {
+    left: 100%;
+  }
+
+  /* ================================
+     📦 MAIN CONTENT AREA
+     ================================ */
+  
+  .nex-footer-content {
+    position: relative;
+    z-index: 1;
+    padding: var(--nex-spacing-2xl) 0 var(--nex-spacing-xl);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    @include mobile {
+      padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
+    }
+  }
+
+  .nex-footer-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--nex-spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: var(--nex-spacing-2xl);
+    align-items: start;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--nex-spacing-xl);
+    }
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--nex-spacing-lg);
+      padding: 0 var(--nex-spacing-md);
+    }
+  }
+
+  /* ================================
+     🎨 VARIANT MODIFICATIONS
+     ================================ */
+  
+  /* Compact Variant */
+  &--compact {
+    .nex-footer-content {
+      padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
+      
+      @include mobile {
+        padding: var(--nex-spacing-lg) 0 var(--nex-spacing-md);
+      }
+    }
+    
+    .nex-footer-inner {
+      gap: var(--nex-spacing-lg);
+      
+      @media (max-width: 1024px) {
+        gap: var(--nex-spacing-md);
+      }
+      
+      @include mobile {
+        gap: var(--nex-spacing-sm);
+      }
+    }
+  }
+
+  /* Contact Variant */
+  &--contact {
+    .nex-footer-content {
+      padding: var(--nex-spacing-3xl) 0 var(--nex-spacing-2xl);
+      
+      @include mobile {
+        padding: var(--nex-spacing-2xl) 0 var(--nex-spacing-xl);
+      }
+    }
+    
+    .nex-footer-inner {
+      grid-template-columns: 1fr;
+      max-width: 800px;
+      gap: var(--nex-spacing-2xl);
+      
+      @include mobile {
+        gap: var(--nex-spacing-xl);
+      }
+    }
+  }
+
+  /* ================================
+     🌒 DARK MODE ADAPTATIONS
+     ================================ */
+  
+  &--dark {
+    &::before {
+      background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.08) 0%, 
+        rgba(0, 0, 0, 0.04) 30%, 
+        rgba(0, 0, 0, 0.02) 60%,
+        rgba(0, 0, 0, 0.01) 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    &::after {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.02),
+        transparent
+      );
+    }
+  }
+
+  /* ================================
+     📱 RESPONSIVE BEHAVIOR
+     ================================ */
+  
+  @media (max-width: 768px) {
+    &::before {
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+  }
+
+  @media (max-width: 480px) {
+    &::before {
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+    }
+  }
+
+  /* ================================
+     ♿ ACCESSIBILITY ENHANCEMENTS
+     ================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: none;
+    }
+    
+    &:hover::after {
+      left: -100%;
+    }
+  }
+} 
