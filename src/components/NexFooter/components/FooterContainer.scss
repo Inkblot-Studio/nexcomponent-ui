@@ -21,6 +21,7 @@
   background: var(--nex-background-color);
   color: var(--nex-font-color);
   will-change: transform, opacity, backdrop-filter;
+  overflow-x: hidden;
   
   /* Liquid Glass Background Layer */
   &::before {
@@ -60,6 +61,7 @@
     transition: left 12s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
   }
 
   &:hover::after {
@@ -90,6 +92,8 @@
     gap: var(--nex-spacing-2xl);
     align-items: start;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    box-sizing: border-box;
     
     @media (max-width: 1024px) {
       grid-template-columns: 1fr 1fr;

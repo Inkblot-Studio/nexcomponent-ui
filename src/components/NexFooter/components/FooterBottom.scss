@@ -55,6 +55,8 @@
     align-items: center;
     gap: var(--nex-spacing-lg);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    box-sizing: border-box;
     
     @include mobile {
       flex-direction: column;
@@ -106,6 +108,7 @@
     transition: all var(--nex-transition-base);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
     
     /* Liquid glass hover effect */
     &::before {

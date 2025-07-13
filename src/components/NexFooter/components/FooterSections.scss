@@ -97,6 +97,8 @@
     transition: all var(--nex-transition-base);
     position: relative;
     display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
     
     /* Liquid glass hover effect */
     &::before {
