@@ -16,7 +16,8 @@ export const FOOTER_ANIMATIONS = {
       transition: {
         duration: 0.6,
         ease: [0.4, 0, 0.2, 1],
-        staggerChildren: 0.08
+        staggerChildren: 0.08,
+        delayChildren: 0.1
       }
     }
   },
@@ -43,6 +44,57 @@ export const FOOTER_ANIMATIONS = {
       transition: {
         duration: 0.3,
         ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+
+  // Form field animations
+  formField: {
+    initial: { opacity: 0, y: 10, scale: 0.95 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+
+  // Button animations
+  button: {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 30
+      }
+    }
+  },
+
+  // Message animations
+  message: {
+    initial: { opacity: 0, y: -10, scale: 0.9 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 30
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      y: -10,
+      scale: 0.9,
+      transition: {
+        duration: 0.2
       }
     }
   },
@@ -78,6 +130,29 @@ export const FOOTER_ANIMATIONS = {
         repeatDelay: 4
       }
     }
+  },
+
+  // Stagger animations for lists
+  stagger: {
+    container: {
+      animate: {
+        transition: {
+          staggerChildren: 0.05,
+          delayChildren: 0.1
+        }
+      }
+    },
+    item: {
+      initial: { opacity: 0, x: -10 },
+      animate: { 
+        opacity: 1, 
+        x: 0,
+        transition: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      }
+    }
   }
 };
 
@@ -109,9 +184,44 @@ export const useFooterAnimations = () => {
           transition: { duration: 0.1 }
         }
       },
+      formField: {
+        initial: { opacity: 0 },
+        animate: { 
+          opacity: 1,
+          transition: { duration: 0.2 }
+        }
+      },
+      button: {
+        initial: { opacity: 0 },
+        animate: { 
+          opacity: 1,
+          transition: { duration: 0.2 }
+        }
+      },
+      message: {
+        initial: { opacity: 0 },
+        animate: { 
+          opacity: 1,
+          transition: { duration: 0.2 }
+        },
+        exit: { 
+          opacity: 0,
+          transition: { duration: 0.1 }
+        }
+      },
       hover: {},
       tap: {},
-      shimmer: { initial: {}, animate: {} }
+      shimmer: { initial: {}, animate: {} },
+      stagger: {
+        container: { animate: {} },
+        item: {
+          initial: { opacity: 0 },
+          animate: { 
+            opacity: 1,
+            transition: { duration: 0.1 }
+          }
+        }
+      }
     };
   }
 

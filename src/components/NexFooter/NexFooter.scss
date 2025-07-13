@@ -5,11 +5,14 @@
    🏢 NEX FOOTER - Liquid Glass System
    ================================
    
-   Main footer SCSS file - now simplified since styling is handled
-   by individual component SCSS files for better modularity.
+   Main footer SCSS file - optimized for performance and consistency
+   with NexNav styling approach.
    
-   This file serves as the entry point and can contain any
-   global footer-specific styles if needed.
+   Design Philosophy:
+   - Fluid, premium, and effortless interactions
+   - Consistent with NexNav design patterns
+   - Enhanced animations and visual feedback
+   - Responsive and accessible design
  */
 
 /* Import all component styles */
@@ -28,6 +31,54 @@
 .nex-footer {
   position: relative;
   z-index: 1;
+  width: 100%;
+  font-family: var(--nex-font-family-primary);
+  will-change: transform, opacity, backdrop-filter;
+  
+  /* Enhanced liquid glass background */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.08) 0%, 
+      rgba(255, 255, 255, 0.04) 30%, 
+      rgba(255, 255, 255, 0.02) 60%,
+      rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+    z-index: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ambient light flow effect */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    transition: left 12s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  &:hover::after {
+    left: 100%;
+  }
 }
 
 /* ================================
@@ -38,6 +89,20 @@
 @media (max-width: 768px) {
   .nex-footer {
     z-index: 1;
+    
+    &::before {
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .nex-footer {
+    &::before {
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+    }
   }
 }
 
@@ -59,4 +124,49 @@
   transition: background-color 0.3s ease, 
               border-color 0.3s ease, 
               color 0.3s ease;
+}
+
+/* ================================
+   🌒 DARK MODE ADAPTATIONS
+   ================================ */
+
+[data-theme="dark"] .nex-footer {
+  &::before {
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.08) 0%, 
+      rgba(0, 0, 0, 0.04) 30%, 
+      rgba(0, 0, 0, 0.02) 60%,
+      rgba(0, 0, 0, 0.01) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  &::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.02),
+      transparent
+    );
+  }
+}
+
+/* ================================
+   ♿ REDUCED MOTION SUPPORT
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .nex-footer {
+    &::after {
+      transition: none;
+    }
+    
+    &:hover::after {
+      left: -100%;
+    }
+    
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
 }

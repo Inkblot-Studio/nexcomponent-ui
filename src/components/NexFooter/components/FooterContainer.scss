@@ -12,6 +12,7 @@
    - Subtle translucency with ambient depth
    - Light flow across surfaces
    - Whitespace and rhythm guide the eye
+   - Consistent with NexNav styling
  */
 
 .nex-footer-container {
@@ -23,51 +24,6 @@
   will-change: transform, opacity, backdrop-filter;
   overflow-x: hidden;
   
-  /* Liquid Glass Background Layer */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.08) 0%, 
-      rgba(255, 255, 255, 0.04) 30%, 
-      rgba(255, 255, 255, 0.02) 60%,
-      rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    pointer-events: none;
-    z-index: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Ambient Light Flow Effect */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.03),
-      transparent
-    );
-    transition: left 12s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  &:hover::after {
-    left: 100%;
-  }
-
   /* ================================
      📦 MAIN CONTENT AREA
      ================================ */
@@ -160,7 +116,7 @@
      ================================ */
   
   &--dark {
-    &::before {
+    .nex-footer-background {
       background: linear-gradient(135deg, 
         rgba(0, 0, 0, 0.08) 0%, 
         rgba(0, 0, 0, 0.04) 30%, 
@@ -169,13 +125,19 @@
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
     
-    &::after {
+    .nex-footer-shimmer {
       background: linear-gradient(
         90deg,
         transparent,
         rgba(255, 255, 255, 0.02),
         transparent
       );
+    }
+    
+    .nex-footer-gradient-overlay {
+      background: radial-gradient(circle at 20% 40%, rgba(255,24,1,0.08) 0%, rgba(255,24,1,0.04) 40%, transparent 70%),
+        radial-gradient(circle at 80% 60%, rgba(0,184,255,0.06) 0%, rgba(0,184,255,0.04) 40%, transparent 70%),
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 80%);
     }
   }
 
@@ -184,16 +146,24 @@
      ================================ */
   
   @media (max-width: 768px) {
-    &::before {
+    .nex-footer-background {
       backdrop-filter: blur(16px) saturate(160%);
       -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+    
+    .nex-footer-gradient-overlay {
+      filter: blur(6px);
     }
   }
 
   @media (max-width: 480px) {
-    &::before {
+    .nex-footer-background {
       backdrop-filter: blur(12px) saturate(140%);
       -webkit-backdrop-filter: blur(12px) saturate(140%);
+    }
+    
+    .nex-footer-gradient-overlay {
+      filter: blur(4px);
     }
   }
 
@@ -202,12 +172,16 @@
      ================================ */
   
   @media (prefers-reduced-motion: reduce) {
-    &::after {
+    .nex-footer-shimmer {
       transition: none;
     }
     
-    &:hover::after {
-      left: -100%;
+    .nex-footer-gradient-overlay {
+      animation: none;
+    }
+    
+    * {
+      transition: none !important;
     }
   }
 } 

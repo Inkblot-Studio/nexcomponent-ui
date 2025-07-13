@@ -12,6 +12,7 @@
    - Smooth input interactions
    - Consistent with overall design
    - Premium button interactions
+   - Enhanced visual feedback
  */
 
 .nex-footer-contact-form {
@@ -21,6 +22,7 @@
   max-width: 600px;
   margin: 0 auto;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 
   /* ================================
      🏷️ TITLE STYLING
@@ -70,6 +72,37 @@
     
     &:hover {
       color: var(--nex-font-color);
+    }
+  }
+
+  /* ================================
+     📨 MESSAGE STYLING
+     ================================ */
+  
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: var(--nex-spacing-sm);
+    padding: var(--nex-spacing-md);
+    border-radius: var(--nex-radius-lg);
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-medium);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &--success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: #16a34a;
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+    }
+    
+    &--error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #dc2626;
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
     }
   }
 
@@ -138,6 +171,25 @@
       &:focus + svg {
         color: var(--nex-signature);
       }
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+    
+    &--focused {
+      input {
+        border-color: var(--nex-signature);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 
+          0 0 0 3px rgba(255, 24, 1, 0.1),
+          0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      svg {
+        color: var(--nex-signature);
+      }
     }
   }
 
@@ -199,6 +251,25 @@
       &:focus + svg {
         color: var(--nex-signature);
       }
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+    
+    &--focused {
+      textarea {
+        border-color: var(--nex-signature);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 
+          0 0 0 3px rgba(255, 24, 1, 0.1),
+          0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      svg {
+        color: var(--nex-signature);
+      }
     }
   }
 
@@ -225,6 +296,7 @@
     position: relative;
     overflow: hidden;
     max-width: 100%;
+    min-height: 48px;
     
     &::before {
       content: '';
@@ -253,32 +325,49 @@
     
     &:active {
       transform: translateY(0);
-      box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
+      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
     }
     
     &:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       
       &:hover {
-        box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
         transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      &::before {
+        left: -100%;
       }
     }
     
-    svg {
-      transition: all var(--nex-transition-base);
+    /* Spinner styling */
+    &-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
     }
   }
 
   /* ================================
-     🎨 VARIANT MODIFICATIONS
+     🎨 COMPACT VARIANT
      ================================ */
   
-  /* Compact Variant */
   &--compact {
     gap: var(--nex-spacing-md);
+    max-width: 500px;
     
     &__title {
       font-size: var(--nex-font-size-xl);
@@ -288,53 +377,33 @@
       font-size: var(--nex-font-size-sm);
     }
     
-    &__form {
-      gap: var(--nex-spacing-sm);
-    }
-    
-    &__input input {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-      font-size: var(--nex-font-size-sm);
-    }
-    
-    &__textarea textarea {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-      font-size: var(--nex-font-size-sm);
-      min-height: 100px;
+    &__input,
+    &__textarea {
+      input,
+      textarea {
+        padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+        font-size: var(--nex-font-size-sm);
+      }
+      
+      svg {
+        left: var(--nex-spacing-sm);
+        top: var(--nex-spacing-sm);
+      }
     }
     
     &__button {
       padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
       font-size: var(--nex-font-size-sm);
-    }
-  }
-
-  /* Contact Variant */
-  &--contact {
-    /* Default styling for contact variant */
-  }
-
-  /* ================================
-     🌒 DARK MODE ADAPTATIONS
-     ================================ */
-  
-  [data-theme="dark"] & {
-    &__input input,
-    &__textarea textarea {
-      background: rgba(26, 26, 26, 0.6);
-      border-color: var(--nex-border-color);
-      
-      &:focus {
-        background: rgba(26, 26, 26, 0.8);
-      }
+      min-height: 40px;
     }
   }
 
   /* ================================
-     📱 RESPONSIVE BEHAVIOR
+     📱 RESPONSIVE DESIGN
      ================================ */
   
-  @include mobile {
+  @media (max-width: 768px) {
+    max-width: 100%;
     gap: var(--nex-spacing-md);
     
     &__title {
@@ -345,19 +414,12 @@
       font-size: var(--nex-font-size-sm);
     }
     
-    &__form {
-      gap: var(--nex-spacing-sm);
-    }
-    
-    &__input input {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-      font-size: var(--nex-font-size-sm);
-    }
-    
-    &__textarea textarea {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-      font-size: var(--nex-font-size-sm);
-      min-height: 100px;
+    &__input,
+    &__textarea {
+      input,
+      textarea {
+        font-size: var(--nex-font-size-sm);
+      }
     }
     
     &__button {
@@ -366,30 +428,49 @@
     }
   }
 
+  @media (max-width: 480px) {
+    gap: var(--nex-spacing-sm);
+    
+    &__title {
+      font-size: var(--nex-font-size-lg);
+    }
+    
+    &__input,
+    &__textarea {
+      input,
+      textarea {
+        padding: var(--nex-spacing-sm);
+        font-size: var(--nex-font-size-sm);
+      }
+      
+      svg {
+        left: var(--nex-spacing-sm);
+        top: var(--nex-spacing-sm);
+      }
+    }
+  }
+
   /* ================================
-     ♿ ACCESSIBILITY ENHANCEMENTS
+     ♿ ACCESSIBILITY
      ================================ */
   
   @media (prefers-reduced-motion: reduce) {
-    &__button::before {
-      transition: none;
+    * {
+      transition: none !important;
+      animation: none !important;
     }
     
-    &:hover .nex-footer-contact-form__button::before {
-      left: -100%;
+    &__button::before {
+      display: none;
     }
   }
+}
 
-  /* ================================
-     🎯 INTERACTION ENHANCEMENTS
-     ================================ */
-  
-  /* Focus visible for keyboard navigation */
-  &__input input:focus-visible,
-  &__textarea textarea:focus-visible,
-  &__button:focus-visible {
-    outline: 2px solid var(--nex-signature);
-    outline-offset: 2px;
-    border-radius: var(--nex-radius-sm);
-  }
+/* ================================
+   🔄 SPINNER ANIMATION
+   ================================ */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 } 

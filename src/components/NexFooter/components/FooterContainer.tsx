@@ -6,7 +6,7 @@ import './FooterContainer.scss';
 interface FooterContainerProps {
   children: React.ReactNode;
   variant?: 'default' | 'compact' | 'contact';
-  theme?: 'light' | 'dark' | 'auto';
+  theme?: 'auto' | 'light' | 'dark';
   className?: string;
 }
 
@@ -17,72 +17,153 @@ const FooterContainer: React.FC<FooterContainerProps> = ({
   className = ''
 }) => {
   const { timing, shouldReduceMotion } = useAnimationConfig();
-  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>('light');
 
-  // Theme handling
-  React.useEffect(() => {
-    const handleThemeChange = () => {
-      if (theme === 'auto') {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
-                      window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setCurrentTheme(isDark ? 'dark' : 'light');
-      } else {
-        setCurrentTheme(theme);
-      }
-    };
-
-    handleThemeChange();
-    
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const observer = new MutationObserver(handleThemeChange);
-    
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
-    
-    mediaQuery.addEventListener('change', handleThemeChange);
-    
-    return () => {
-      observer.disconnect();
-      mediaQuery.removeEventListener('change', handleThemeChange);
-    };
-  }, [theme]);
-
-  // Container variants for liquid glass entrance
-  const containerVariants = {
-    initial: { 
-      opacity: 0, 
-      y: 20,
-      backdropFilter: 'blur(0px) saturate(100%)'
+  // Background variants matching NexNav approach
+  const backgroundVariants = {
+    initial: {
+      backdropFilter: 'blur(0px) saturate(100%)',
+      background: 'rgba(255, 255, 255, 0)'
     },
-    animate: { 
-      opacity: 1, 
-      y: 0,
+    animate: {
       backdropFilter: 'blur(24px) saturate(180%)',
+      background: 'linear-gradient(120deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.12) 0%, rgba(0,184,255,0.12) 100%)',
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.6,
-        ease: [0.4, 0, 0.2, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.08
+        duration: shouldReduceMotion ? 0.2 : 0.4,
+        ease: [0.4, 0, 0.2, 1]
       }
     }
   };
 
-  const footerClass = `nex-footer-container ${variant === 'compact' ? 'nex-footer-container--compact' : ''} ${variant === 'contact' ? 'nex-footer-container--contact' : ''} ${currentTheme === 'dark' ? 'nex-footer-container--dark' : ''} ${className}`.trim();
+  // Shimmer effect variants
+  const shimmerVariants = {
+    initial: { 
+      opacity: 0,
+      x: '-100%',
+      scale: 0.8
+    },
+    animate: { 
+      opacity: shouldReduceMotion ? 0 : 0.6,
+      x: '0%',
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  const containerClass = `nex-footer-container nex-footer-container--${variant} ${theme !== 'auto' ? `nex-footer-container--${theme}` : ''} ${className}`;
 
   return (
-    <motion.footer
-      className={footerClass}
+    <motion.div
+      className={containerClass}
       initial="initial"
       animate="animate"
-      variants={containerVariants}
-      role="contentinfo"
-      aria-label="Footer"
-      data-theme={currentTheme}
-      data-variant={variant}
+      variants={backgroundVariants}
+      style={{
+        position: 'relative',
+        width: '100%',
+        fontFamily: 'var(--nex-font-family-primary)',
+        willChange: 'transform, opacity, backdrop-filter',
+        overflow: 'hidden'
+      }}
     >
-      {children}
-    </motion.footer>
+      {/* Enhanced Liquid Glass Background Layer */}
+      <motion.div
+        className="nex-footer-background"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.01) 100%)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+        variants={backgroundVariants}
+      />
+
+      {/* Ambient Light Flow Effect - Enhanced */}
+      <motion.div
+        className="nex-footer-shimmer"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: '-100%',
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+        variants={shimmerVariants}
+        animate={{
+          x: shouldReduceMotion ? '-100%' : '100%',
+          transition: {
+            duration: shouldReduceMotion ? 0 : 12,
+            ease: [0.4, 0, 0.2, 1],
+            repeat: shouldReduceMotion ? 0 : Infinity,
+            repeatDelay: shouldReduceMotion ? 0 : 4
+          }
+        }}
+      />
+
+      {/* Subtle gradient overlays for depth */}
+      <motion.div
+        className="nex-footer-gradient-overlay"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            radial-gradient(circle at 20% 40%, rgba(255,24,1,0.15) 0%, rgba(255,24,1,0.08) 40%, transparent 70%),
+            radial-gradient(circle at 80% 60%, rgba(0,184,255,0.12) 0%, rgba(0,184,255,0.08) 40%, transparent 70%),
+            radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 80%)
+          `,
+          opacity: 0.8,
+          filter: 'blur(8px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+        animate={{
+          opacity: shouldReduceMotion ? 0.4 : 0.8,
+          transition: {
+            duration: shouldReduceMotion ? 0 : 8,
+            ease: [0.4, 0, 0.2, 1],
+            repeat: shouldReduceMotion ? 0 : Infinity,
+            repeatType: 'reverse'
+          }
+        }}
+      />
+
+      {/* Main Content Area */}
+      <motion.div
+        className="nex-footer-content-wrapper"
+        style={{
+          position: 'relative',
+          zIndex: 1
+        }}
+        variants={{
+          initial: { opacity: 0 },
+          animate: { 
+            opacity: 1,
+            transition: {
+              duration: shouldReduceMotion ? 0.2 : 0.4,
+              ease: [0.4, 0, 0.2, 1],
+              delay: shouldReduceMotion ? 0 : 0.1
+            }
+          }
+        }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
   );
 };
 
