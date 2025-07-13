@@ -57,7 +57,7 @@ const NavControls: React.FC<NavControlsProps> = ({
   onIntegrationsClick,
   onAdminPanelClick
 }) => {
-  const { fast } = useAnimationConfig();
+  const { timing, spring } = useAnimationConfig();
 
   const handleLoginClick = () => {
     if (onLogin) {
@@ -70,9 +70,9 @@ const NavControls: React.FC<NavControlsProps> = ({
       className="nex-nav-right" 
       role="group" 
       aria-label="User controls"
-      variants={ANIMATION_VARIANTS.navItem}
+      variants={ANIMATION_VARIANTS.mobileNav.navItem}
     >
-      <motion.div variants={ANIMATION_VARIANTS.navItem}>
+      <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
         <LanguageSwitcher
           currentLocale={currentLocale}
           options={languageOptions}
@@ -85,7 +85,7 @@ const NavControls: React.FC<NavControlsProps> = ({
       </motion.div>
       
       {isAuthenticated && user && onLogout && onProfile ? (
-        <motion.div variants={ANIMATION_VARIANTS.navItem}>
+        <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
           <UserMenu
             user={user}
             onLogout={onLogout}
@@ -112,31 +112,23 @@ const NavControls: React.FC<NavControlsProps> = ({
           tabIndex={0}
           aria-label="Sign in to your account"
           onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
-          variants={ANIMATION_VARIANTS.navItem}
-          whileHover={{
-            ...ANIMATION_VARIANTS.button.hover,
-            transition: fast
-          }}
-          whileTap={{
-            ...ANIMATION_VARIANTS.button.tap,
-            transition: fast
-          }}
-          whileFocus={{
-            ...ANIMATION_VARIANTS.button.focus,
-            transition: fast
-          }}
+          variants={ANIMATION_VARIANTS.mobileNav.navItem}
+          whileHover={ANIMATION_VARIANTS.interactive.button.hover}
+          whileTap={ANIMATION_VARIANTS.interactive.button.tap}
+          whileFocus={ANIMATION_VARIANTS.interactive.button.focus}
+          transition={spring.responsive}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={fast}
+            transition={timing.fast}
           >
-            <Fingerprint size={18} aria-hidden="true" />
+            <Fingerprint size={16} aria-hidden="true" />
           </motion.div>
           <motion.span
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ ...fast, delay: 0.05 }}
+            transition={{ ...timing.fast, delay: 0.05 }}
           >
             Login
           </motion.span>

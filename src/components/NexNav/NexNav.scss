@@ -170,33 +170,85 @@
      ================================ */
   
   .nex-nav-login-button {
-    height: var(--nex-nav-item-height);
-    min-width: var(--nex-nav-item-height);
-    max-width: 120px;
-    border-radius: var(--nex-radius-full);
-    padding: 0 var(--nex-spacing-sm);
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: var(--nex-spacing-xs);
+    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    height: 32px;
+    min-width: 60px;
+    max-width: 120px;
+    border-radius: var(--nex-radius-full);
     overflow: hidden;
+    
+    /* Typography */
     font-size: var(--nex-font-size-sm);
     font-weight: var(--nex-font-weight-medium);
     font-family: var(--nex-font-family-primary);
-    gap: var(--nex-spacing-xs);
-    width: auto;
-    background: rgba(255, 255, 255, 0.08) !important;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    
+    /* Glassmorphic Design - Matching Language Switcher */
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Color */
     color: var(--nex-font-color);
+    
+    /* Transitions */
+    transition: all var(--nex-transition-fast);
+    
+    /* Layout */
+    justify-content: center;
+    user-select: none;
+    outline: none;
     box-sizing: border-box;
     will-change: transform, background-color, border-color, box-shadow;
     
+    /* Hover State - Subtle glassmorphic enhancement */
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Focus State - Signature accent */
     &:focus-visible {
       outline: 2px solid var(--nex-signature);
       outline-offset: 2px;
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+    }
+    
+    /* Active State - Signature immersion */
+    &:active {
+      background: rgba(255, 24, 1, 0.15);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border-color: rgba(255, 24, 1, 0.2);
+    }
+
+    /* Icon styling */
+    svg {
+      width: 16px;
+      height: 16px;
+      color: inherit;
+      opacity: 0.8;
+      flex-shrink: 0;
+    }
+
+    /* Text styling */
+    span {
+      white-space: nowrap;
+      font-weight: var(--nex-font-weight-medium);
+      font-size: var(--nex-font-size-sm);
+      letter-spacing: 0.02em;
     }
   }
 
@@ -524,6 +576,21 @@
   .nex-nav .nex-nav-inner-wrapper {
     padding: var(--nex-spacing-sm) var(--nex-spacing-md);
     gap: var(--nex-spacing-lg);
+  }
+  
+  /* Mobile login button - match language switcher height */
+  .nex-nav-login-button {
+    height: 28px;
+    min-width: 48px;
+    padding: var(--nex-spacing-xs);
+    
+    /* Hide text on mobile, show only icon */
+    span {
+      display: none;
+    }
+    
+    /* Center the icon */
+    justify-content: center;
   }
 }
 

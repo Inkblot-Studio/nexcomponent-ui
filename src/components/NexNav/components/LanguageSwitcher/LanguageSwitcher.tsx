@@ -163,15 +163,17 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Optimized animation configurations
+  // Optimized animation configurations - avoiding backdrop-filter changes to prevent text blurring
   const hoverAnimation = {
-    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
-    transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+    backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.85)',
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
   };
 
   const tapAnimation = {
-    background: isAtTop ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.9)',
-    transition: { duration: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }
+    backgroundColor: isAtTop ? 'rgba(255,24,1,0.15)' : 'rgba(255,24,1,0.2)',
+    borderColor: 'rgba(255, 24, 1, 0.2)',
+    transition: { duration: 0.08, ease: [0.4, 0, 0.2, 1] }
   };
 
   const current = options.find(opt => opt.code === currentLocale);
@@ -222,7 +224,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
 
   return (
     <div className="nex-lang-switcher" ref={ref}>
-      <div
+      <motion.div
         className="nex-lang-current"
         onClick={handleToggle}
         role="button"
@@ -235,6 +237,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
             handleToggle();
           }
         }}
+        whileHover={hoverAnimation}
+        whileTap={tapAnimation}
       >
         {/* Show only emoji OR text, not both */}
         {current?.icon ? (
@@ -250,7 +254,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         >
           <ChevronDown size={14} />
         </motion.span>
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {open && (
