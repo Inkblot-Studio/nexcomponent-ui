@@ -220,64 +220,75 @@
   &--black-glass {
     &__title {
       color: #ffffff;
+      font-weight: 600;
       
       &::after {
-        background: linear-gradient(90deg, #ff6b35, #f7931e);
+        background: rgba(255, 255, 255, 0.6);
       }
     }
     
     &__tool {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
       
       &:hover {
-        background: rgba(255, 107, 53, 0.1);
-        border-color: rgba(255, 107, 53, 0.2);
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
       }
       
       svg {
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.8);
       }
       
       &:hover svg {
-        color: #ff6b35;
+        color: #ffffff;
       }
     }
     
     &__command {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       color: #ffffff;
+      font-weight: 500;
       
       &:hover {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5);
       }
     }
     
     &__copy-button {
-      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       
       &:hover {
-        box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      
+      svg {
+        color: #ffffff;
       }
     }
     
     &__github-link {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
       
       &:hover {
-        background: rgba(255, 107, 53, 0.1);
-        border-color: rgba(255, 107, 53, 0.2);
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
       }
       
       svg {
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.8);
       }
       
       &:hover svg,
       &:hover span {
-        color: #ff6b35;
+        color: #ffffff;
       }
     }
   }

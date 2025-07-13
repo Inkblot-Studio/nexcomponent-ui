@@ -53,7 +53,6 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
         <motion.div 
           className="nex-footer-bottom__copyright"
           whileHover={{ 
-            color: theme === 'black-glass' ? '#ff6b35' : undefined,
             opacity: 0.9
           }}
           transition={timing.fast}
@@ -82,11 +81,17 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                   className={`nex-footer-bottom__social-link ${social.type}`}
                   aria-label={`Follow us on ${social.type}`}
                   whileHover={{ 
-                    color: theme === 'black-glass' ? '#ff6b35' : undefined,
-                    opacity: 0.8
+                    opacity: 0.8,
+                    scale: 1.05
                   }}
-                  whileTap={{ opacity: 0.7 }}
-                  transition={timing.fast}
+                  whileTap={{ 
+                    scale: 0.95,
+                    opacity: 0.7 
+                  }}
+                  transition={{ 
+                    duration: 0.15,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
                 >
                   <IconComponent />
                 </motion.a>

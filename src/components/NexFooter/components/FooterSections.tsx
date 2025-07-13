@@ -61,7 +61,6 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
           <motion.h3 
             className="nex-footer-sections__title"
             whileHover={{ 
-              color: theme === 'black-glass' ? '#ff6b35' : undefined,
               opacity: 0.9
             }}
             transition={timing.fast}
@@ -85,11 +84,17 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
                   rel="noopener noreferrer"
                   className="nex-footer-sections__link"
                   whileHover={{ 
-                    color: theme === 'black-glass' ? '#ff6b35' : undefined,
-                    opacity: 0.8
+                    opacity: 0.8,
+                    y: -1
                   }}
-                  whileTap={{ opacity: 0.7 }}
-                  transition={timing.fast}
+                  whileTap={{ 
+                    opacity: 0.7,
+                    y: 0
+                  }}
+                  transition={{ 
+                    duration: 0.15,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
                 >
                   {link.label}
                 </motion.a>

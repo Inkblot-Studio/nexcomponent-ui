@@ -58,7 +58,7 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
       <motion.h3 
         className="nex-footer-developer-tools__title"
         whileHover={{ 
-          color: theme === 'black-glass' ? '#ff6b35' : undefined,
+          color: theme === 'black-glass' ? '#ffffff' : undefined,
           opacity: 0.9
         }}
         transition={timing.fast}
@@ -72,7 +72,7 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
           className="nex-footer-developer-tools__tool"
           whileHover={{ 
             opacity: 0.9,
-            backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.1)' : undefined
+            backgroundColor: theme === 'black-glass' ? 'rgba(255, 255, 255, 0.1)' : undefined
           }}
           transition={timing.fast}
         >
@@ -86,7 +86,7 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
             aria-label="Copy npm install command"
             whileHover={{ 
               opacity: 0.8,
-              backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.2)' : undefined
+              backgroundColor: theme === 'black-glass' ? 'rgba(255, 255, 255, 0.15)' : undefined
             }}
             whileTap={{ opacity: 0.7 }}
             transition={timing.fast}
@@ -126,7 +126,7 @@ const FooterDeveloperTools: React.FC<FooterDeveloperToolsProps> = ({
           rel="noopener noreferrer"
           className="nex-footer-developer-tools__github-link"
           whileHover={{ 
-            color: theme === 'black-glass' ? '#ff6b35' : undefined,
+            color: theme === 'black-glass' ? '#ffffff' : undefined,
             opacity: 0.8
           }}
           whileTap={{ opacity: 0.7 }}

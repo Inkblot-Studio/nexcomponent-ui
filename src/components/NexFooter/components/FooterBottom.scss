@@ -105,7 +105,7 @@
     border-radius: var(--nex-radius-md);
     color: var(--nex-muted-font-color);
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
@@ -116,36 +116,15 @@
       color: var(--nex-font-color);
     }
     
-    /* Platform-specific colors */
-    &.github:hover {
-      border-color: #333;
-      color: #333;
-    }
-    
-    &.twitter:hover {
-      border-color: #1DA1F2;
-      color: #1DA1F2;
-    }
-    
-    &.linkedin:hover {
-      border-color: #0077B5;
-      color: #0077B5;
-    }
-    
-    &.youtube:hover {
-      border-color: #FF0000;
-      color: #FF0000;
-    }
-    
-    &.discord:hover {
-      border-color: #7289DA;
-      color: #7289DA;
+    &:active {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(0.95);
     }
     
     svg {
       width: 16px;
       height: 16px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -217,40 +196,18 @@
     }
     
     &__social-link {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.8);
       
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
-        color: #ff6b35;
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #ffffff;
       }
       
-      /* Platform-specific colors for black glass */
-      &.github:hover {
-        border-color: #ff6b35;
-        color: #ff6b35;
-      }
-      
-      &.twitter:hover {
-        border-color: #ff6b35;
-        color: #ff6b35;
-      }
-      
-      &.linkedin:hover {
-        border-color: #ff6b35;
-        color: #ff6b35;
-      }
-      
-      &.youtube:hover {
-        border-color: #ff6b35;
-        color: #ff6b35;
-      }
-      
-      &.discord:hover {
-        border-color: #ff6b35;
-        color: #ff6b35;
+      &:active {
+        background: rgba(255, 255, 255, 0.15);
       }
     }
   }

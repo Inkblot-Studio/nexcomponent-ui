@@ -119,7 +119,7 @@ export const Default: Story = {
   args: {
     variant: 'default',
     theme: 'light',
-    logoSrc: '/src/assets/img/nex_logo.svg',
+    logoSrc: nexLogo,
     displayName: 'NexComponent',
     tagline: 'Building the future of web components with premium design and performance.',
     showLogoText: true,
