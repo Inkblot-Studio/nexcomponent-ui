@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Copy, Check, Mail, Github, Package, MessageCircle, Send } from 'lucide-react';
 import { useAnimationConfig } from '../../utils/animationConfig';
@@ -18,21 +18,55 @@ const NexFooter: React.FC<NexFooterProps> = ({
   logoSrc,
   displayName,
   tagline,
+  showLogoText = true, // Default to showing logo text
   sections = [],
   newsletter,
   contact,
   socials = [],
   developerTools,
   variant = 'default',
+  theme = 'auto',
   className = ''
 }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
   
   const { timing, shouldReduceMotion, variants } = useAnimationConfig();
   const currentYear = new Date().getFullYear();
+
+  // Theme handling
+  useEffect(() => {
+    const handleThemeChange = () => {
+      if (theme === 'auto') {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+                      window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setCurrentTheme(isDark ? 'dark' : 'light');
+      } else {
+        setCurrentTheme(theme);
+      }
+    };
+
+    handleThemeChange();
+    
+    // Listen for theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const observer = new MutationObserver(handleThemeChange);
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    
+    mediaQuery.addEventListener('change', handleThemeChange);
+    
+    return () => {
+      observer.disconnect();
+      mediaQuery.removeEventListener('change', handleThemeChange);
+    };
+  }, [theme]);
 
   // Newsletter submission handler
   const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
@@ -102,8 +136,8 @@ const NexFooter: React.FC<NexFooterProps> = ({
     }
   };
 
-  // Determine footer class based on variant
-  const footerClass = `nex-footer ${variant === 'compact' ? 'nex-footer-compact' : ''} ${variant === 'contact' ? 'nex-footer-contact' : ''} ${className}`.trim();
+  // Determine footer class based on variant and theme
+  const footerClass = `nex-footer ${variant === 'compact' ? 'nex-footer-compact' : ''} ${variant === 'contact' ? 'nex-footer-contact' : ''} ${currentTheme === 'dark' ? 'nex-footer-dark' : ''} ${className}`.trim();
 
   return (
     <motion.footer
@@ -113,6 +147,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
       variants={footerVariants}
       role="contentinfo"
       aria-label="Footer"
+      data-theme={currentTheme}
     >
       {/* Main Footer Content */}
       <div className="nex-footer-content">
@@ -128,12 +163,14 @@ const NexFooter: React.FC<NexFooterProps> = ({
                 <img src={logoSrc} alt={displayName} />
               </div>
             ) : (
-              <div className="nex-footer-name">
-                <span>{displayName}</span>
-              </div>
+              showLogoText && (
+                <div className="nex-footer-name">
+                  <span>{displayName}</span>
+                </div>
+              )
             )}
             
-            {tagline && (
+            {tagline && showLogoText && (
               <p className="nex-footer-tagline">{tagline}</p>
             )}
 

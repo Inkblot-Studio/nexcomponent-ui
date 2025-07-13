@@ -27,6 +27,7 @@ export interface NexFooterProps {
   logoSrc?: string;
   displayName: string;
   tagline?: string;
+  showLogoText?: boolean; // New prop to control logo text visibility
   
   // Footer Sections
   sections?: FooterSection[];

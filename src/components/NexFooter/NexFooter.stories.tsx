@@ -2,6 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import NexFooter from './NexFooter';
 import storyBackground from '../../assets/img/story_background.jpg';
+import nexLogo from '../../assets/img/nex_logo.svg';
 
 const meta: Meta<typeof NexFooter> = {
   title: 'NexComponent/NexFooter',
@@ -36,6 +37,10 @@ const meta: Meta<typeof NexFooter> = {
     logoSrc: {
       control: { type: 'text' },
       description: 'URL to company logo image'
+    },
+    showLogoText: {
+      control: { type: 'boolean' },
+      description: 'Whether to show the logo text (displayName)'
     }
   },
   decorators: [
@@ -208,7 +213,7 @@ export const Enterprise: Story = {
   args: {
     displayName: 'NexComponent Enterprise',
     tagline: 'Enterprise-grade component library for large-scale applications.',
-    logoSrc: '/nex_logo.svg',
+    logoSrc: nexLogo,
     sections: [
       {
         title: 'Platform',
@@ -269,6 +274,16 @@ export const Enterprise: Story = {
   }
 };
 
+// Logo only footer (no text)
+export const LogoOnly: Story = {
+  args: {
+    ...Default.args,
+    logoSrc: nexLogo,
+    showLogoText: false,
+    tagline: undefined
+  }
+};
+
 // Dark theme example
 export const DarkTheme: Story = {
   args: {
@@ -308,6 +323,6 @@ export const DarkTheme: Story = {
 export const WithLogo: Story = {
   args: {
     ...Default.args,
-    logoSrc: '/nex_logo.svg'
+    logoSrc: nexLogo
   }
 };

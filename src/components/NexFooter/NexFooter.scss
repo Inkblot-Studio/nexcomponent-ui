@@ -4,17 +4,18 @@
    🏢 NEX FOOTER - 2025 Design System
    ================================
    
-   Modern, scalable footer with clean animations and glassmorphic styling
+   Modern, scalable footer with amazing glassmorphic styling
    that perfectly complements the NexNav design system.
    
    Features:
    - 2025 design trends with subtle gradients and clean typography
-   - Scalable component architecture with proper spacing
-   - Clean hover animations matching navbar patterns
+   - Amazing glassmorphic buttons matching navbar patterns
+   - Cool background animations with shimmer effects
    - Contact form with modern styling
    - Properly sized social icons with consistent spacing
    - Responsive design with mobile-first approach
    - Accessibility compliant with reduced motion support
+   - Perfect theme handling with data-theme attribute
  */
 
 .nex-footer {
@@ -25,7 +26,7 @@
   color: var(--nex-font-color);
   will-change: transform, opacity, backdrop-filter;
   
-  /* Modern glassmorphic background */
+  /* Modern glassmorphic background with navbar-style elevation */
   &::before {
     content: '';
     position: absolute;
@@ -34,14 +35,39 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.06) 0%, 
-      rgba(255, 255, 255, 0.03) 50%, 
+      rgba(255, 255, 255, 0.08) 0%, 
+      rgba(255, 255, 255, 0.04) 30%, 
+      rgba(255, 255, 255, 0.02) 60%,
       rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     pointer-events: none;
     z-index: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Subtle shimmer effect for premium feel - matching navbar */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    transition: left 8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover::after {
+    left: 100%;
   }
 
   /* ================================
@@ -52,6 +78,7 @@
     position: relative;
     z-index: 1;
     padding: var(--nex-spacing-2xl) 0 var(--nex-spacing-xl);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     @include mobile {
       padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
@@ -66,6 +93,7 @@
     grid-template-columns: 1fr 2fr 1fr;
     gap: var(--nex-spacing-2xl);
     align-items: start;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     @media (max-width: 1024px) {
       grid-template-columns: 1fr 1fr;
@@ -87,22 +115,29 @@
     display: flex;
     flex-direction: column;
     gap: var(--nex-spacing-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-logo {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
       img {
         max-height: 40px;
         width: auto;
         height: auto;
         object-fit: contain;
         transition: all var(--nex-transition-base);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
       }
       
       &:hover img {
         transform: translateY(-1px);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
       }
     }
     
     .nex-footer-name {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
       span {
         font-family: var(--nex-font-family-logo);
         font-weight: var(--nex-logo-font-weight);
@@ -111,10 +146,12 @@
         color: var(--nex-font-color);
         line-height: var(--nex-line-height-tight);
         transition: all var(--nex-transition-base);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       }
       
       &:hover span {
         color: var(--nex-signature);
+        transform: translateX(2px);
       }
     }
     
@@ -128,12 +165,13 @@
       
       &:hover {
         color: var(--nex-font-color);
+        transform: translateX(2px);
       }
     }
   }
 
   /* ================================
-     📧 NEWSLETTER SIGNUP
+     📧 NEWSLETTER SIGNUP - NAVBAR STYLE
      ================================ */
   
   .nex-footer-newsletter {
@@ -141,11 +179,13 @@
     flex-direction: column;
     gap: var(--nex-spacing-sm);
     margin-top: var(--nex-spacing-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-newsletter-input {
       position: relative;
       display: flex;
       align-items: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       
       svg {
         position: absolute;
@@ -160,25 +200,30 @@
         padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
         border: 1px solid var(--nex-border-color);
         border-radius: var(--nex-radius-md);
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(12px) saturate(160%);
-        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
         color: var(--nex-font-color);
         font-size: var(--nex-font-size-sm);
         font-family: var(--nex-font-family-primary);
         transition: all var(--nex-transition-base);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         
         &::placeholder {
           color: var(--nex-muted-font-color);
+          transition: all var(--nex-transition-base);
         }
         
         &:focus {
           outline: none;
           border-color: var(--nex-signature);
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(16px) saturate(180%);
-          -webkit-backdrop-filter: blur(16px) saturate(180%);
-          box-shadow: 0 0 0 3px rgba(255, 24, 1, 0.1);
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(16px) saturate(200%);
+          -webkit-backdrop-filter: blur(16px) saturate(200%);
+          box-shadow: 
+            0 0 0 3px rgba(255, 24, 1, 0.1),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+          transform: translateY(-1px);
         }
         
         &:focus + svg {
@@ -189,7 +234,7 @@
     
     .nex-footer-newsletter-button {
       padding: var(--nex-spacing-sm) var(--nex-spacing-md);
-      background: var(--nex-signature);
+      background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-dark) 100%);
       color: var(--nex-signature-contrast);
       border: none;
       border-radius: var(--nex-radius-md);
@@ -198,25 +243,46 @@
       font-family: var(--nex-font-family-primary);
       cursor: pointer;
       transition: all var(--nex-transition-base);
+      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+      }
       
       &:hover:not(:disabled) {
-        background: var(--nex-signature-dark);
-        transform: translateY(-1px);
+        background: linear-gradient(135deg, var(--nex-signature-dark) 0%, var(--nex-signature) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(255, 24, 1, 0.3);
+        
+        &::before {
+          left: 100%;
+        }
       }
       
       &:active:not(:disabled) {
         transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
       }
       
       &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
+        transform: none;
       }
     }
   }
 
   /* ================================
-     📞 CONTACT FORM
+     📞 CONTACT FORM - NAVBAR STYLE
      ================================ */
   
   .nex-footer-contact-form {
@@ -264,15 +330,16 @@
         padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
         border: 1px solid var(--nex-border-color);
         border-radius: var(--nex-radius-md);
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(12px) saturate(160%);
-        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
         color: var(--nex-font-color);
         font-size: var(--nex-font-size-sm);
         font-family: var(--nex-font-family-primary);
         transition: all var(--nex-transition-base);
         resize: vertical;
         min-height: 44px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         
         &::placeholder {
           color: var(--nex-muted-font-color);
@@ -281,10 +348,13 @@
         &:focus {
           outline: none;
           border-color: var(--nex-signature);
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(16px) saturate(180%);
-          -webkit-backdrop-filter: blur(16px) saturate(180%);
-          box-shadow: 0 0 0 3px rgba(255, 24, 1, 0.1);
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(16px) saturate(200%);
+          -webkit-backdrop-filter: blur(16px) saturate(200%);
+          box-shadow: 
+            0 0 0 3px rgba(255, 24, 1, 0.1),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+          transform: translateY(-1px);
         }
         
         &:focus + svg {
@@ -304,7 +374,7 @@
       justify-content: center;
       gap: var(--nex-spacing-xs);
       padding: var(--nex-spacing-sm) var(--nex-spacing-md);
-      background: var(--nex-signature);
+      background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-dark) 100%);
       color: var(--nex-signature-contrast);
       border: none;
       border-radius: var(--nex-radius-md);
@@ -313,19 +383,40 @@
       font-family: var(--nex-font-family-primary);
       cursor: pointer;
       transition: all var(--nex-transition-base);
+      box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+      }
       
       &:hover:not(:disabled) {
-        background: var(--nex-signature-dark);
-        transform: translateY(-1px);
+        background: linear-gradient(135deg, var(--nex-signature-dark) 0%, var(--nex-signature) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(255, 24, 1, 0.3);
+        
+        &::before {
+          left: 100%;
+        }
       }
       
       &:active:not(:disabled) {
         transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
       }
       
       &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
+        transform: none;
       }
       
       svg {
@@ -342,6 +433,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--nex-spacing-xl);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     @include mobile {
       grid-template-columns: 1fr;
@@ -353,6 +445,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--nex-spacing-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-section-title {
       font-size: var(--nex-font-size-md);
@@ -361,6 +454,22 @@
       margin: 0;
       line-height: var(--nex-line-height-tight);
       transition: all var(--nex-transition-base);
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--nex-signature), transparent);
+        transition: width var(--nex-transition-base);
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
     }
     
     .nex-footer-section-links {
@@ -370,9 +479,11 @@
       display: flex;
       flex-direction: column;
       gap: var(--nex-spacing-sm);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       
       li {
         margin: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
     
@@ -384,11 +495,12 @@
       transition: all var(--nex-transition-base);
       display: inline-block;
       position: relative;
+      padding: var(--nex-spacing-xs) 0;
       
-      &::after {
+      &::before {
         content: '';
         position: absolute;
-        bottom: -2px;
+        bottom: 0;
         left: 0;
         width: 0;
         height: 1px;
@@ -398,8 +510,9 @@
       
       &:hover {
         color: var(--nex-font-color);
+        transform: translateX(4px);
         
-        &::after {
+        &::before {
           width: 100%;
         }
       }
@@ -413,31 +526,37 @@
   }
 
   /* ================================
-     🛠️ DEVELOPER TOOLS
+     🛠️ DEVELOPER TOOLS - NAVBAR STYLE
      ================================ */
   
   .nex-footer-developer-tools {
     display: flex;
     flex-direction: column;
     gap: var(--nex-spacing-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-dev-tool {
       display: flex;
       align-items: center;
       gap: var(--nex-spacing-sm);
       padding: var(--nex-spacing-sm);
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(12px) saturate(160%);
-      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
       border: 1px solid var(--nex-border-color);
       border-radius: var(--nex-radius-md);
-      transition: all var(--nex-transition-base);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       
       &:hover {
         border-color: var(--nex-signature);
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(16px) saturate(180%);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
+        box-shadow: 
+          0 4px 16px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(255, 24, 1, 0.1);
+        transform: translateY(-1px);
       }
       
       svg {
@@ -448,6 +567,7 @@
       
       &:hover svg {
         color: var(--nex-signature);
+        transform: scale(1.1);
       }
       
       .nex-footer-command {
@@ -475,21 +595,41 @@
         justify-content: center;
         width: 32px;
         height: 32px;
-        background: var(--nex-signature);
+        background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-dark) 100%);
         color: var(--nex-signature-contrast);
         border: none;
         border-radius: var(--nex-radius-sm);
         cursor: pointer;
         transition: all var(--nex-transition-base);
         flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.4s ease;
+        }
         
         &:hover {
-          background: var(--nex-signature-dark);
+          background: linear-gradient(135deg, var(--nex-signature-dark) 0%, var(--nex-signature) 100%);
           transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(255, 24, 1, 0.3);
+          
+          &::before {
+            left: 100%;
+          }
         }
         
         &:active {
           transform: scale(1);
+          box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
         }
       }
     }
@@ -503,18 +643,20 @@
       font-size: var(--nex-font-size-sm);
       padding: var(--nex-spacing-sm);
       border-radius: var(--nex-radius-md);
-      transition: all var(--nex-transition-base);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(8px) saturate(160%);
-      -webkit-backdrop-filter: blur(8px) saturate(160%);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
       border: 1px solid transparent;
       
       &:hover {
         color: var(--nex-font-color);
         background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(12px) saturate(180%);
-        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        backdrop-filter: blur(12px) saturate(200%);
+        -webkit-backdrop-filter: blur(12px) saturate(200%);
         border-color: var(--nex-signature);
+        transform: translateX(4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
       
       &:focus-visible {
@@ -528,7 +670,7 @@
       }
       
       &:hover svg {
-        color: var(--nex-signature);
+        transform: scale(1.1);
       }
     }
   }
@@ -540,10 +682,11 @@
   .nex-footer-bottom {
     position: relative;
     z-index: 1;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-bottom-container {
       max-width: 1440px;
@@ -553,6 +696,7 @@
       justify-content: space-between;
       align-items: center;
       gap: var(--nex-spacing-lg);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       
       @include mobile {
         flex-direction: column;
@@ -575,13 +719,14 @@
   }
 
   /* ================================
-     🌐 SOCIAL MEDIA LINKS - FIXED SIZING
+     🌐 SOCIAL MEDIA LINKS - NAVBAR STYLE
      ================================ */
   
   .nex-footer-socials {
     display: flex;
     gap: var(--nex-spacing-sm);
     align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .nex-footer-social-link {
       display: flex;
@@ -590,13 +735,15 @@
       width: 40px;
       height: 40px;
       color: var(--nex-muted-font-color);
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(12px) saturate(160%);
-      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
       border: 1px solid var(--nex-border-color);
       border-radius: var(--nex-radius-md);
       text-decoration: none;
-      transition: all var(--nex-transition-base);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
       
       /* Fixed icon sizing */
       svg {
@@ -606,13 +753,30 @@
         transition: all var(--nex-transition-base);
       }
       
+      /* Shimmer effect - matching navbar */
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.4s ease;
+      }
+      
       &:hover {
         color: var(--nex-font-color);
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(16px) saturate(180%);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
         border-color: var(--nex-signature);
-        transform: translateY(-1px);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        &::before {
+          left: 100%;
+        }
       }
       
       &:focus-visible {
@@ -716,6 +880,7 @@
       
       .nex-footer-link {
         font-size: var(--nex-font-size-xs);
+        padding: calc(var(--nex-spacing-xs) / 2) 0;
       }
     }
     
@@ -845,8 +1010,9 @@
 [data-theme="dark"] .nex-footer {
   &::before {
     background: linear-gradient(135deg, 
-      rgba(26, 26, 26, 0.06) 0%, 
-      rgba(26, 26, 26, 0.03) 50%, 
+      rgba(26, 26, 26, 0.08) 0%, 
+      rgba(26, 26, 26, 0.04) 30%, 
+      rgba(26, 26, 26, 0.02) 60%,
       rgba(26, 26, 26, 0.01) 100%);
     border-top-color: rgba(255, 255, 255, 0.05);
   }
@@ -856,23 +1022,24 @@
     .nex-footer-newsletter-input input,
     .nex-footer-contact-input input,
     .nex-footer-contact-textarea textarea {
-      background: rgba(26, 26, 26, 0.5);
+      background: rgba(26, 26, 26, 0.6);
       border-color: var(--nex-border-color);
       
       &:focus {
-        background: rgba(26, 26, 26, 0.7);
+        background: rgba(26, 26, 26, 0.8);
         border-color: var(--nex-signature);
+        box-shadow: 0 0 0 3px rgba(255, 24, 1, 0.2);
       }
     }
   }
   
   .nex-footer-developer-tools {
     .nex-footer-dev-tool {
-      background: rgba(26, 26, 26, 0.5);
+      background: rgba(26, 26, 26, 0.6);
       border-color: var(--nex-border-color);
       
       &:hover {
-        background: rgba(26, 26, 26, 0.7);
+        background: rgba(26, 26, 26, 0.8);
       }
       
       .nex-footer-command {
@@ -894,16 +1061,16 @@
   }
   
   .nex-footer-bottom {
-    background: rgba(26, 26, 26, 0.3);
+    background: rgba(26, 26, 26, 0.4);
     border-top-color: rgba(255, 255, 255, 0.05);
   }
   
   .nex-footer-socials .nex-footer-social-link {
-    background: rgba(26, 26, 26, 0.5);
+    background: rgba(26, 26, 26, 0.6);
     border-color: var(--nex-border-color);
     
     &:hover {
-      background: rgba(26, 26, 26, 0.7);
+      background: rgba(26, 26, 26, 0.8);
     }
   }
 }
@@ -918,6 +1085,10 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    
+    &::after {
+      display: none;
     }
   }
 }
