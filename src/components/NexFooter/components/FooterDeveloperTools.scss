@@ -1,17 +1,18 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   🛠️ FOOTER DEVELOPER TOOLS - Premium Tools
+   🛠️ FOOTER DEVELOPER TOOLS - Consistent Sizing
    ================================
    
-   Premium developer tools section with clean styling,
-   featuring npm package info and GitHub links.
+   Footer developer tools with consistent sizing across all devices
+   and no ridiculous mobile scaling.
    
    Design Philosophy:
+   - Consistent sizing across all devices
+   - No ridiculous mobile scaling
    - Clean, technical aesthetic
-   - Smooth copy interactions
-   - Consistent with NexNav design
-   - Theme-aware color transitions
+   - Premium glassmorphic styling
+   - Better accessibility
  */
 
 .nex-footer-developer-tools {
@@ -180,7 +181,7 @@
     }
     
     &__command {
-      font-size: 0.7rem;
+      font-size: var(--nex-font-size-xs);
       padding: var(--nex-spacing-xs);
     }
     
@@ -309,30 +310,31 @@
   }
 
   /* ================================
-     📱 RESPONSIVE BEHAVIOR
+     📱 RESPONSIVE BEHAVIOR - CONSISTENT SIZING
      ================================ */
   
-  @media (max-width: 768px) {
+  /* Mobile: Maintain consistent sizing, no ridiculous scaling */
+  @include mobile {
     gap: var(--nex-spacing-sm);
     
     &__tool {
-      padding: var(--nex-spacing-xs);
-      gap: var(--nex-spacing-xs);
+      padding: var(--nex-spacing-sm); /* Keep readable padding */
+      gap: var(--nex-spacing-sm);
     }
     
     &__command {
-      font-size: 0.7rem;
-      padding: var(--nex-spacing-xs);
+      font-size: var(--nex-font-size-xs); /* Keep readable size */
+      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
     }
     
     &__copy-button {
-      width: 28px;
-      height: 28px;
+      width: 32px; /* Keep readable size */
+      height: 32px;
     }
     
     &__github-link {
-      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-      font-size: var(--nex-font-size-xs);
+      padding: var(--nex-spacing-sm) var(--nex-spacing-md); /* Keep readable padding */
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
     }
   }
 

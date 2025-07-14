@@ -1,18 +1,18 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   FOOTER BRANDING - Premium Branding
+   FOOTER BRANDING - Consistent Sizing
    ================================
    
-   Premium branding section with clean styling,
-   featuring logo, name, tagline, and newsletter signup.
+   Footer branding with consistent sizing across all devices
+   and no ridiculous mobile scaling.
    
    Design Philosophy:
-   - Clean interactions with subtle hover effects
-   - Premium glassmorphic input styling
-   - Consistent spacing and typography
-   - Elegant newsletter integration
-   - Theme-aware color transitions
+   - Consistent sizing across all devices
+   - No ridiculous mobile scaling
+   - Clean, readable typography
+   - Premium glassmorphic styling
+   - Better accessibility
  */
 
 .nex-footer-branding {
@@ -432,37 +432,38 @@
   }
 
   /* ================================
-     RESPONSIVE BEHAVIOR
+     RESPONSIVE BEHAVIOR - CONSISTENT SIZING
      ================================ */
   
-  @media (max-width: 768px) {
-    gap: var(--nex-spacing-sm);
+  /* Mobile: Maintain consistent sizing, no ridiculous scaling */
+  @include mobile {
+    gap: var(--nex-spacing-md);
     
     &__logo img {
-      max-height: 32px;
+      max-height: 36px; /* Slightly smaller but still readable */
     }
     
     &__name span {
-      font-size: var(--nex-font-size-lg);
+      font-size: var(--nex-font-size-lg); /* Keep readable size */
     }
     
     &__tagline {
-      font-size: var(--nex-font-size-xs);
-      max-width: 240px;
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
+      max-width: 100%; /* Allow full width on mobile */
     }
     
     &__newsletter {
-      gap: var(--nex-spacing-xs);
-      margin-top: var(--nex-spacing-sm);
+      gap: var(--nex-spacing-sm);
+      margin-top: var(--nex-spacing-md);
       
       &-input input {
-        padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 16px);
-        font-size: var(--nex-font-size-xs);
+        padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+        font-size: var(--nex-font-size-sm); /* Keep readable size */
       }
       
       &-button {
-        padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-        font-size: var(--nex-font-size-xs);
+        padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+        font-size: var(--nex-font-size-sm); /* Keep readable size */
       }
     }
   }

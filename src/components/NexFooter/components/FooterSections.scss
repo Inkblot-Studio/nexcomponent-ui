@@ -1,42 +1,56 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   📋 FOOTER SECTIONS - Premium Navigation
+   FOOTER SECTIONS - Simplified Grid System
    ================================
    
-   Clean navigation sections with premium styling,
-   featuring subtle hover effects and smooth transitions.
+   Simplified footer sections with clean, consistent layout
+   that works reliably across all device sizes.
    
    Design Philosophy:
-   - Clean typography with subtle hover effects
-   - Consistent spacing and visual rhythm
-   - Premium link interactions matching NexNav
-   - Theme-aware color transitions
+   - Simple, predictable grid layouts
+   - Consistent spacing and sizing
+   - No ridiculous mobile scaling
+   - Clean responsive breakpoints
+   - Maintainable and readable code
  */
 
 .nex-footer-sections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--nex-spacing-xl);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
   
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* ================================
+     SIMPLIFIED GRID TEMPLATES
+     ================================ */
+  
+  /* Mobile: Single column layout */
+  @include mobile {
+    grid-template-columns: 1fr;
     gap: var(--nex-spacing-lg);
   }
   
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--nex-spacing-md);
+  /* Tablet: Two column layout */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--nex-spacing-lg);
   }
   
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: var(--nex-spacing-sm);
+  /* Desktop: Three column layout */
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--nex-spacing-xl);
+  }
+  
+  /* Large Desktop: Four column layout */
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--nex-spacing-xl);
   }
 
   /* ================================
-     📄 SECTION STYLING
+     SECTION STYLING
      ================================ */
   
   &__section {
@@ -44,10 +58,16 @@
     flex-direction: column;
     gap: var(--nex-spacing-md);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0; /* Allow shrinking */
+    align-self: start;
+    
+    @include mobile {
+      gap: var(--nex-spacing-sm);
+    }
   }
 
   /* ================================
-     🏷️ SECTION TITLE STYLING
+     SECTION TITLE STYLING
      ================================ */
   
   &__title {
@@ -58,10 +78,16 @@
     margin: 0;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+    @include mobile {
+      font-size: var(--nex-font-size-md); /* Keep readable size */
+    }
   }
 
   /* ================================
-     🔗 LINK LIST STYLING
+     LINK LIST STYLING
      ================================ */
   
   &__links {
@@ -72,10 +98,14 @@
     flex-direction: column;
     gap: var(--nex-spacing-sm);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    @include mobile {
+      gap: var(--nex-spacing-sm);
+    }
   }
 
   /* ================================
-     🔗 INDIVIDUAL LINK STYLING
+     INDIVIDUAL LINK STYLING
      ================================ */
   
   &__link {
@@ -88,12 +118,18 @@
     display: inline-block;
     max-width: 100%;
     word-wrap: break-word;
+    overflow-wrap: break-word;
     padding: 2px 4px;
     border-radius: var(--nex-radius-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     
     &:hover {
       color: var(--nex-font-color);
       background: rgba(255, 255, 255, 0.05);
+      white-space: normal;
+      overflow: visible;
     }
     
     /* Focus states for accessibility */
@@ -101,23 +137,28 @@
       outline: none;
       color: var(--nex-font-color);
       background: rgba(255, 255, 255, 0.08);
+      white-space: normal;
+      overflow: visible;
+    }
+    
+    @include mobile {
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
+      white-space: normal;
+      overflow: visible;
+      padding: 2px 4px;
     }
   }
 
   /* ================================
-     🎨 VARIANT MODIFICATIONS
+     VARIANT MODIFICATIONS
      ================================ */
   
   /* Compact Variant */
   &--compact {
     gap: var(--nex-spacing-lg);
     
-    @media (max-width: 768px) {
-      gap: var(--nex-spacing-md);
-    }
-    
     @include mobile {
-      gap: var(--nex-spacing-sm);
+      gap: var(--nex-spacing-md);
     }
     
     &__section {
@@ -133,7 +174,8 @@
     }
     
     &__link {
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm);
+      padding: 2px 4px;
     }
   }
 
@@ -142,7 +184,7 @@
     display: none; /* Hide sections in contact variant */
   }
 
-  /* Black Glass Theme - Improved contrast and cleaner design */
+  /* Black Glass Theme */
   &--black-glass {
     &__title {
       color: #ffffff;
@@ -164,7 +206,7 @@
   }
 
   /* ================================
-     🌒 DARK MODE ADAPTATIONS
+     DARK MODE ADAPTATIONS
      ================================ */
   
   [data-theme="dark"] & {
@@ -182,34 +224,36 @@
   }
 
   /* ================================
-     📱 RESPONSIVE BEHAVIOR
-     ================================ */
-  
-  @media (max-width: 768px) {
-    &__section {
-      gap: var(--nex-spacing-sm);
-    }
-    
-    &__title {
-      font-size: var(--nex-font-size-sm);
-    }
-    
-    &__links {
-      gap: var(--nex-spacing-xs);
-    }
-    
-    &__link {
-      font-size: var(--nex-font-size-xs);
-    }
-  }
-
-  /* ================================
-     ♿ ACCESSIBILITY ENHANCEMENTS
+     ACCESSIBILITY ENHANCEMENTS
      ================================ */
   
   @media (prefers-reduced-motion: reduce) {
     &__link {
       transition: none;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    &__link {
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid currentColor;
+      }
+    }
+  }
+  
+  /* ================================
+     MINIMUM WIDTH ENSURANCE
+     ================================ */
+  
+  /* Ensure minimum readable width for sections */
+  &__section {
+    min-width: 200px;
+    
+    @include mobile {
+      min-width: 180px;
     }
   }
 } 

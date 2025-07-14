@@ -1,18 +1,18 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   📦 FOOTER CONTAINER - Premium Glass System
+   FOOTER CONTAINER - Simplified Grid System
    ================================
    
-   Main container component for the footer with premium glass styling
-   and responsive layout management.
+   Simplified footer container with clean, consistent layout
+   that works reliably across all device sizes.
    
    Design Philosophy:
-   - Premium glass background effects
-   - Responsive grid layouts
-   - Consistent spacing and typography
-   - Smooth theme transitions
-   - Enhanced visual depth
+   - Simple, predictable grid layouts
+   - Consistent spacing and sizing
+   - No ridiculous mobile scaling
+   - Clean responsive breakpoints
+   - Maintainable and readable code
  */
 
 .nex-footer-container {
@@ -25,7 +25,7 @@
   overflow: hidden;
   
   /* ================================
-     📦 MAIN CONTENT AREA
+     MAIN CONTENT AREA
      ================================ */
   
   .nex-footer-content {
@@ -39,32 +39,92 @@
     }
   }
 
+  /* ================================
+     SIMPLIFIED GRID LAYOUT SYSTEM
+     ================================ */
+  
   .nex-footer-inner {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 var(--nex-spacing-lg);
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
     gap: var(--nex-spacing-2xl);
     align-items: start;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     box-sizing: border-box;
     
-    @media (max-width: 1024px) {
+    /* ================================
+       RESPONSIVE GRID TEMPLATES
+       ================================ */
+    
+    /* Mobile: Single column layout */
+    @include mobile {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "branding"
+        "sections"
+        "contact"
+        "tools";
+      gap: var(--nex-spacing-xl);
+      padding: 0 var(--nex-spacing-lg);
+    }
+    
+    /* Tablet: Two column layout */
+    @media (min-width: 769px) and (max-width: 1024px) {
       grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        "branding sections"
+        "contact contact"
+        "tools tools";
       gap: var(--nex-spacing-xl);
     }
     
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: var(--nex-spacing-lg);
-      padding: 0 var(--nex-spacing-md);
+    /* Desktop: Three column layout */
+    @media (min-width: 1025px) {
+      grid-template-columns: minmax(280px, 1fr) minmax(400px, 2fr) minmax(320px, 1fr);
+      grid-template-areas: 
+        "branding sections contact"
+        "tools tools tools";
+      gap: var(--nex-spacing-2xl) var(--nex-spacing-xl);
+    }
+    
+    /* Large Desktop: Optimized spacing */
+    @media (min-width: 1440px) {
+      gap: var(--nex-spacing-3xl) var(--nex-spacing-2xl);
     }
   }
 
   /* ================================
-     🎨 VARIANT MODIFICATIONS
+     COMPONENT AREA ASSIGNMENTS
+     ================================ */
+  
+  /* Branding area */
+  .nex-footer-branding {
+    grid-area: branding;
+    align-self: start;
+  }
+  
+  /* Sections area */
+  .nex-footer-sections {
+    grid-area: sections;
+    align-self: start;
+  }
+  
+  /* Contact area */
+  .nex-footer-contact-side {
+    grid-area: contact;
+    align-self: start;
+  }
+  
+  /* Developer tools area */
+  .nex-footer-developer-tools {
+    grid-area: tools;
+    align-self: start;
+  }
+
+  /* ================================
+     VARIANT MODIFICATIONS
      ================================ */
   
   /* Compact Variant */
@@ -80,17 +140,17 @@
     .nex-footer-inner {
       gap: var(--nex-spacing-lg);
       
-      @media (max-width: 1024px) {
-        gap: var(--nex-spacing-md);
+      @media (min-width: 1025px) {
+        gap: var(--nex-spacing-lg) var(--nex-spacing-md);
       }
       
       @include mobile {
-        gap: var(--nex-spacing-sm);
+        gap: var(--nex-spacing-md);
       }
     }
   }
 
-  /* Contact Variant - Side Layout */
+  /* Contact Variant - Full-width contact */
   &--contact {
     .nex-footer-content {
       padding: var(--nex-spacing-3xl) 0 var(--nex-spacing-2xl);
@@ -102,6 +162,10 @@
     
     .nex-footer-inner {
       grid-template-columns: 1fr;
+      grid-template-areas: 
+        "branding"
+        "contact"
+        "tools";
       max-width: 1200px;
       gap: var(--nex-spacing-2xl);
       
@@ -117,7 +181,7 @@
     }
   }
 
-  /* Sections Only Variant - New Layout */
+  /* Sections Only Variant */
   &--sections-only {
     .nex-footer-content {
       padding: var(--nex-spacing-2xl) 0 var(--nex-spacing-xl);
@@ -129,6 +193,9 @@
     
     .nex-footer-inner {
       grid-template-columns: 1fr;
+      grid-template-areas: 
+        "sections"
+        "tools";
       max-width: 1200px;
       gap: var(--nex-spacing-xl);
       
@@ -145,88 +212,7 @@
   }
 
   /* ================================
-     📧 SIDE CONTACT LAYOUT
-     ================================ */
-  
-  /* Side contact positioning for desktop */
-  .nex-footer-contact-side {
-    position: relative;
-    
-    /* Desktop: Position on the right side */
-    @media (min-width: 1025px) {
-      grid-column: 3;
-      grid-row: 1;
-      justify-self: end;
-      max-width: 320px;
-      margin-top: 0;
-    }
-    
-    /* Tablet: Full width but smaller */
-    @media (max-width: 1024px) and (min-width: 769px) {
-      grid-column: 1 / -1;
-      max-width: 400px;
-      justify-self: center;
-      margin-top: var(--nex-spacing-lg);
-    }
-    
-    /* Mobile: Full width */
-    @include mobile {
-      grid-column: 1 / -1;
-      max-width: 100%;
-      margin-top: var(--nex-spacing-md);
-    }
-  }
-
-  /* Adjust grid layout when contact is present */
-  .nex-footer-inner:has(.nex-footer-contact-side) {
-    @media (min-width: 1025px) {
-      grid-template-columns: 1fr 2fr 320px;
-      gap: var(--nex-spacing-2xl) var(--nex-spacing-xl);
-    }
-    
-    @media (max-width: 1024px) and (min-width: 769px) {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--nex-spacing-xl);
-    }
-    
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: var(--nex-spacing-lg);
-    }
-  }
-
-  /* ================================
-     🌒 DARK MODE ADAPTATIONS
-     ================================ */
-  
-  &--dark {
-    .nex-footer-background {
-      background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.08) 0%, 
-        rgba(0, 0, 0, 0.04) 30%, 
-        rgba(0, 0, 0, 0.02) 60%,
-        rgba(0, 0, 0, 0.01) 100%);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .nex-footer-shimmer {
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.02),
-        transparent
-      );
-    }
-    
-    .nex-footer-gradient-overlay {
-      background: radial-gradient(circle at 20% 40%, rgba(255,24,1,0.08) 0%, rgba(255,24,1,0.04) 40%, transparent 70%),
-        radial-gradient(circle at 80% 60%, rgba(0,184,255,0.06) 0%, rgba(0,184,255,0.04) 40%, transparent 70%),
-        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 80%);
-    }
-  }
-
-  /* ================================
-     🌑 BLACK GLASS PREMIUM THEME
+     BLACK GLASS PREMIUM THEME
      ================================ */
   
   &--black-glass {
@@ -285,36 +271,25 @@
   }
 
   /* ================================
-     📱 RESPONSIVE ENHANCEMENTS
+     ACCESSIBILITY & PERFORMANCE
      ================================ */
   
-  @media (max-width: 768px) {
-    .nex-footer-content {
-      padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
-    }
-    
+  /* Ensure proper focus management */
+  &:focus-within {
+    outline: none;
+  }
+  
+  /* Optimize for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
     .nex-footer-inner {
-      padding: 0 var(--nex-spacing-md);
-      gap: var(--nex-spacing-lg);
-    }
-    
-    .nex-footer-contact-side {
-      margin-top: var(--nex-spacing-md);
+      transition: none;
     }
   }
-
-  @media (max-width: 480px) {
-    .nex-footer-content {
-      padding: var(--nex-spacing-lg) 0 var(--nex-spacing-md);
-    }
-    
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
     .nex-footer-inner {
-      padding: 0 var(--nex-spacing-sm);
-      gap: var(--nex-spacing-md);
-    }
-    
-    .nex-footer-contact-side {
-      margin-top: var(--nex-spacing-sm);
+      gap: var(--nex-spacing-lg);
     }
   }
 } 

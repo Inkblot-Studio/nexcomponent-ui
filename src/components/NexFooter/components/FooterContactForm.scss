@@ -1,19 +1,18 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   📧 FOOTER CONTACT FORM - Compact Side Layout
+   FOOTER CONTACT FORM - Consistent Sizing
    ================================
    
-   Compact contact form optimized for side positioning in footer,
-   featuring email and message inputs with elegant interactions.
+   Footer contact form with consistent sizing across all devices
+   and no ridiculous mobile scaling.
    
    Design Philosophy:
-   - Compact, practical form design
-   - Smooth input interactions
-   - Consistent with overall design
-   - Premium button interactions
-   - Enhanced visual feedback
-   - Optimized for side layout
+   - Consistent sizing across all devices
+   - No ridiculous mobile scaling
+   - Clean, readable form elements
+   - Premium glassmorphic styling
+   - Better accessibility
  */
 
 .nex-footer-contact-form {
@@ -33,7 +32,7 @@
   -webkit-backdrop-filter: blur(12px) saturate(180%);
 
   /* ================================
-     🏷️ TITLE STYLING
+     TITLE STYLING
      ================================ */
   
   &__title {
@@ -64,7 +63,7 @@
   }
 
   /* ================================
-     📝 DESCRIPTION STYLING
+     DESCRIPTION STYLING
      ================================ */
   
   &__description {
@@ -82,7 +81,7 @@
   }
 
   /* ================================
-     📨 MESSAGE STYLING
+     MESSAGE STYLING
      ================================ */
   
   &__message {
@@ -113,7 +112,7 @@
   }
 
   /* ================================
-     📋 FORM STYLING
+     FORM STYLING
      ================================ */
   
   &__form {
@@ -124,7 +123,7 @@
   }
 
   /* ================================
-     📧 INPUT STYLING
+     INPUT STYLING
      ================================ */
   
   &__input {
@@ -200,7 +199,7 @@
   }
 
   /* ================================
-     💬 TEXTAREA STYLING
+     TEXTAREA STYLING
      ================================ */
   
   &__textarea {
@@ -281,7 +280,7 @@
   }
 
   /* ================================
-     🔘 BUTTON STYLING
+     BUTTON STYLING
      ================================ */
   
   &__button {
@@ -342,7 +341,7 @@
   }
 
   /* ================================
-     🔄 BUTTON CONTENT STYLING
+     BUTTON CONTENT STYLING
      ================================ */
   
   &__button-content {
@@ -353,7 +352,7 @@
   }
 
   /* ================================
-     ⏳ SPINNER STYLING
+     SPINNER STYLING
      ================================ */
   
   &__button-spinner {
@@ -372,7 +371,7 @@
   }
 
   /* ================================
-     🎨 VARIANT MODIFICATIONS
+     VARIANT MODIFICATIONS
      ================================ */
   
   /* Compact Variant */
@@ -396,12 +395,12 @@
     &__input input,
     &__textarea textarea {
       padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 18px);
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm);
     }
     
     &__button {
       padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm);
       min-height: 36px;
     }
   }
@@ -414,7 +413,7 @@
   }
 
   /* ================================
-     🌑 BLACK GLASS THEME
+     BLACK GLASS THEME
      ================================ */
   
   &--black-glass {
@@ -469,48 +468,50 @@
   }
 
   /* ================================
-     📱 RESPONSIVE DESIGN
+     RESPONSIVE DESIGN - CONSISTENT SIZING
      ================================ */
   
+  /* Tablet: Maintain consistent sizing */
   @media (max-width: 1024px) {
     max-width: 400px;
     padding: var(--nex-spacing-lg);
     gap: var(--nex-spacing-md);
   }
   
+  /* Mobile: Maintain consistent sizing, no ridiculous scaling */
   @include mobile {
     max-width: 100%;
-    padding: var(--nex-spacing-md);
-    gap: var(--nex-spacing-sm);
+    padding: var(--nex-spacing-lg);
+    gap: var(--nex-spacing-md);
     
     &__title {
-      font-size: var(--nex-font-size-md);
+      font-size: var(--nex-font-size-lg); /* Keep readable size */
     }
     
     &__description {
-      font-size: var(--nex-font-size-xs);
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
     }
     
     &__form {
-      gap: var(--nex-spacing-xs);
+      gap: var(--nex-spacing-sm);
     }
     
     &__input input,
     &__textarea textarea {
-      padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 18px);
-      font-size: var(--nex-font-size-xs);
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
     }
     
     &__button {
-      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-      font-size: var(--nex-font-size-xs);
-      min-height: 36px;
+      padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+      font-size: var(--nex-font-size-sm); /* Keep readable size */
+      min-height: 40px;
     }
   }
 }
 
 /* ================================
-   🔄 ANIMATIONS
+   ANIMATIONS
    ================================ */
 
 @keyframes spin {

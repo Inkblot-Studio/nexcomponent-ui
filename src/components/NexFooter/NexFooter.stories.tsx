@@ -12,7 +12,7 @@ const meta: Meta<typeof NexFooter> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A premium footer component with glassmorphic design, featuring branding, navigation sections, developer tools, and contact forms. Supports multiple variants and themes with smooth animations and responsive design. Now includes compact side contact layout for desktop.'
+        component: 'A premium footer component with glassmorphic design, featuring branding, navigation sections, developer tools, and contact forms. Supports multiple variants and themes with smooth animations and responsive design. Now includes enterprise-grade layout management that handles any number of components with intelligent grid distribution.'
       }
     }
   },
@@ -108,6 +108,94 @@ const sampleNavItems = [
   }
 ];
 
+// Enterprise-grade navigation with many sections
+const enterpriseNavItems = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Features', url: '#features' },
+      { label: 'Pricing', url: '#pricing' },
+      { label: 'Documentation', url: '#docs' },
+      { label: 'API Reference', url: '#api' },
+      { label: 'Integrations', url: '#integrations' },
+      { label: 'Changelog', url: '#changelog' }
+    ]
+  },
+  {
+    title: 'Solutions',
+    links: [
+      { label: 'Enterprise', url: '#enterprise' },
+      { label: 'Startups', url: '#startups' },
+      { label: 'Agencies', url: '#agencies' },
+      { label: 'Developers', url: '#developers' },
+      { label: 'Designers', url: '#designers' }
+    ]
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About Us', url: '#about' },
+      { label: 'Careers', url: '#careers' },
+      { label: 'Blog', url: '#blog' },
+      { label: 'Press', url: '#press' },
+      { label: 'Partners', url: '#partners' },
+      { label: 'Investors', url: '#investors' }
+    ]
+  },
+  {
+    title: 'Support',
+    links: [
+      { label: 'Help Center', url: '#help' },
+      { label: 'Contact Us', url: '#contact' },
+      { label: 'Status', url: '#status' },
+      { label: 'Community', url: '#community' },
+      { label: 'Training', url: '#training' },
+      { label: 'Certification', url: '#certification' }
+    ]
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Tutorials', url: '#tutorials' },
+      { label: 'Webinars', url: '#webinars' },
+      { label: 'Case Studies', url: '#case-studies' },
+      { label: 'White Papers', url: '#white-papers' },
+      { label: 'Events', url: '#events' }
+    ]
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', url: '#privacy' },
+      { label: 'Terms of Service', url: '#terms' },
+      { label: 'Cookie Policy', url: '#cookies' },
+      { label: 'GDPR', url: '#gdpr' },
+      { label: 'CCPA', url: '#ccpa' },
+      { label: 'Security', url: '#security' }
+    ]
+  },
+  {
+    title: 'Social',
+    links: [
+      { label: 'Twitter', url: '#twitter' },
+      { label: 'LinkedIn', url: '#linkedin' },
+      { label: 'GitHub', url: '#github' },
+      { label: 'Discord', url: '#discord' },
+      { label: 'YouTube', url: '#youtube' }
+    ]
+  },
+  {
+    title: 'Developers',
+    links: [
+      { label: 'SDK', url: '#sdk' },
+      { label: 'CLI', url: '#cli' },
+      { label: 'Plugins', url: '#plugins' },
+      { label: 'Examples', url: '#examples' },
+      { label: 'Contributing', url: '#contributing' }
+    ]
+  }
+];
+
 const sampleSocialLinks = [
   { type: 'github', url: 'https://github.com' },
   { type: 'twitter', url: 'https://twitter.com' },
@@ -189,6 +277,57 @@ export const SideContactBlackGlass: Story = {
   }
 };
 
+export const Enterprise: Story = {
+  args: {
+    ...Default.args,
+    variant: 'default',
+    displayName: 'EnterpriseCorp',
+    tagline: 'Enterprise-grade solutions for modern businesses with scalable architecture and robust performance.',
+    sections: enterpriseNavItems,
+    contact: {
+      enabled: true,
+      title: 'Enterprise Support',
+      description: 'Get dedicated support for your enterprise deployment.',
+      placeholder: 'Describe your enterprise needs...',
+      buttonText: 'Contact Sales',
+      onSubmit: (data: { email: string; message: string }) => console.log('Enterprise contact:', data)
+    }
+  }
+};
+
+export const EnterpriseBlackGlass: Story = {
+  args: {
+    ...Enterprise.args,
+    theme: 'black-glass'
+  }
+};
+
+export const ManySections: Story = {
+  args: {
+    ...Default.args,
+    variant: 'default',
+    displayName: 'MultiSection',
+    tagline: 'Testing the limits of our enterprise layout system with many navigation sections.',
+    sections: enterpriseNavItems,
+    newsletter: undefined,
+    developerTools: undefined
+  }
+};
+
+export const ManySectionsWithContact: Story = {
+  args: {
+    ...ManySections.args,
+    contact: {
+      enabled: true,
+      title: 'Quick Contact',
+      description: 'Need help with our extensive navigation?',
+      placeholder: 'Tell us what you need...',
+      buttonText: 'Send Message',
+      onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
+    }
+  }
+};
+
 export const Minimal: Story = {
   args: {
     ...Default.args,
@@ -221,23 +360,9 @@ export const SectionsOnly: Story = {
   }
 };
 
-export const ContactOnly: Story = {
+export const CompactEnterprise: Story = {
   args: {
-    ...Default.args,
-    logoSrc: undefined,
-    displayName: '',
-    tagline: undefined,
-    sections: undefined,
-    newsletter: undefined,
-    developerTools: undefined,
-    variant: 'contact',
-    contact: {
-      enabled: true,
-      title: 'Get in Touch',
-      description: 'Have questions about our components or need help with implementation? We\'d love to hear from you.',
-      placeholder: 'Tell us about your project...',
-      buttonText: 'Send Message',
-      onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
-    }
+    ...Enterprise.args,
+    variant: 'compact'
   }
 };

@@ -2,18 +2,18 @@
 @import './tokens.scss';
 
 /* ================================
-   🏢 NEX FOOTER - Premium Glass System
+   🏢 NEX FOOTER - Simplified Premium Layout
    ================================
    
-   Main footer SCSS file - optimized for performance and consistency
-   with NexNav styling approach.
+   Simplified footer layout system with better responsive behavior
+   and consistent sizing across all device sizes.
    
    Design Philosophy:
-   - Clean, premium, and effortless interactions
-   - Consistent with NexNav design patterns
-   - Subtle animations and visual feedback
-   - Responsive and accessible design
-   - Compact side contact layout
+   - Clean, consistent layout across all devices
+   - No ridiculous mobile scaling
+   - Simple, maintainable grid system
+   - Better spacing and readability
+   - Premium glass effects maintained
  */
 
 /* Import all component styles */
@@ -28,7 +28,6 @@
    🎯 GLOBAL FOOTER STYLES
    ================================ */
 
-/* Ensure proper stacking context */
 .nex-footer {
   position: relative;
   z-index: 1;
@@ -37,7 +36,7 @@
   will-change: transform, opacity;
   overflow: hidden;
   
-  /* Premium glass background matching NexNav */
+  /* Premium glass background */
   &::before {
     content: '';
     position: absolute;
@@ -84,41 +83,34 @@
 }
 
 /* ================================
-   📧 SIDE CONTACT LAYOUT STYLES
+   📧 SIMPLIFIED CONTACT LAYOUT
    ================================ */
 
-/* Side contact positioning and styling */
 .nex-footer-contact-side {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 100%;
   
-  /* Desktop: Position on the right side */
+  /* Desktop: Side positioning */
   @media (min-width: 1025px) {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
     max-width: 320px;
-    margin-top: 0;
-    align-self: start;
+    justify-self: end;
   }
   
-  /* Tablet: Full width but smaller */
+  /* Tablet: Centered with reasonable width */
   @media (max-width: 1024px) and (min-width: 769px) {
-    grid-column: 1 / -1;
     max-width: 400px;
     justify-self: center;
-    margin-top: var(--nex-spacing-lg);
   }
   
   /* Mobile: Full width */
   @include mobile {
-    grid-column: 1 / -1;
     max-width: 100%;
-    margin-top: var(--nex-spacing-md);
   }
 }
 
-/* Black glass theme for side contact */
+/* Black glass theme for contact */
 .nex-footer-contact-side--black-glass {
   .nex-footer-contact-form {
     background: rgba(0, 0, 0, 0.3);
@@ -129,59 +121,6 @@
       0 8px 32px rgba(0, 0, 0, 0.3),
       0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
-}
-
-/* ================================
-   📱 RESPONSIVE UTILITIES
-   ================================ */
-
-/* Ensure footer doesn't interfere with other elements */
-@media (max-width: 768px) {
-  .nex-footer {
-    z-index: 1;
-    
-    &::before {
-      backdrop-filter: blur(16px) saturate(140%);
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-    }
-  }
-  
-  .nex-footer-contact-side {
-    margin-top: var(--nex-spacing-md);
-  }
-}
-
-@media (max-width: 480px) {
-  .nex-footer {
-    &::before {
-      backdrop-filter: blur(12px) saturate(120%);
-      -webkit-backdrop-filter: blur(12px) saturate(120%);
-    }
-  }
-  
-  .nex-footer-contact-side {
-    margin-top: var(--nex-spacing-sm);
-  }
-}
-
-/* ================================
-   ♿ ACCESSIBILITY ENHANCEMENTS
-   ================================ */
-
-/* Ensure proper focus management */
-.nex-footer:focus-within {
-  outline: none;
-}
-
-/* ================================
-   🎨 THEME TRANSITIONS
-   ================================ */
-
-/* Smooth theme transitions */
-.nex-footer * {
-  transition: background-color 0.3s ease, 
-              border-color 0.3s ease, 
-              color 0.3s ease;
 }
 
 /* ================================
@@ -214,7 +153,7 @@
     );
   }
 
-  /* Enhanced content styling for black glass with better contrast */
+  /* Enhanced content styling for black glass */
   .nex-footer-content {
     color: #ffffff;
   }
@@ -256,26 +195,30 @@
       color: #ffffff;
     }
   }
+}
 
-  /* Side contact styling for black glass */
-  .nex-footer-contact-side--black-glass {
-    .nex-footer-contact-form {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-    }
-  }
+/* ================================
+   ♿ ACCESSIBILITY ENHANCEMENTS
+   ================================ */
+
+.nex-footer:focus-within {
+  outline: none;
+}
+
+/* ================================
+   🎨 THEME TRANSITIONS
+   ================================ */
+
+.nex-footer * {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease;
 }
 
 /* ================================
    🔄 ANIMATION CONSISTENCY
    ================================ */
 
-/* Ensure all animations use consistent timing */
 .nex-footer * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
