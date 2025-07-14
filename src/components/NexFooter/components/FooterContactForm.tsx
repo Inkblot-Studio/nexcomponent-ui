@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { useAnimationConfig } from '../../../utils/animationConfig';
+import { useFooterAnimations } from '../animations';
 import { ContactForm } from '../NexFooter.types';
 import './FooterContactForm.scss';
 
@@ -23,7 +23,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
   const [error, setError] = useState('');
   const [focusedField, setFocusedField] = useState<'email' | 'message' | null>(null);
   
-  const { timing, shouldReduceMotion, spring } = useAnimationConfig();
+  const animations = useFooterAnimations();
 
   // Contact form submission handler
   const handleContactSubmit = useCallback(async (e: React.FormEvent) => {
@@ -51,75 +51,24 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
     }
   }, [email, message, contact]);
 
-  // Form variants for liquid glass entrance
-  const formVariants = {
-    initial: { opacity: 0, y: 20, scale: 0.95 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.5,
-        ease: [0.4, 0, 0.2, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.1
-      }
-    }
-  };
-
-  // Input field variants
-  const inputVariants = {
-    initial: { opacity: 0, x: -10 },
-    animate: { 
-      opacity: 1, 
-      x: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
-
-  // Success/Error message variants
-  const messageVariants = {
-    initial: { opacity: 0, y: -10, scale: 0.9 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 30
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      y: -10,
-      scale: 0.9,
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
-
   const formClass = `nex-footer-contact-form ${variant === 'compact' ? 'nex-footer-contact-form--compact' : ''} ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}`;
 
   return (
     <motion.div 
       className={formClass}
-      variants={formVariants}
+      variants={animations.formField}
       initial="initial"
       animate="animate"
     >
       {/* Title */}
       <motion.h3 
         className="nex-footer-contact-form__title"
-        variants={inputVariants}
+        variants={animations.link}
         whileHover={{ 
-          x: shouldReduceMotion ? 0 : 1,
+          x: 1,
           color: theme === 'black-glass' ? '#ff6b35' : undefined
         }}
-        transition={timing.fast}
+        transition={animations.hover}
       >
         {contact.title || 'Get in Touch'}
       </motion.h3>
@@ -128,12 +77,12 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
       {contact.description && (
         <motion.p 
           className="nex-footer-contact-form__description"
-          variants={inputVariants}
+          variants={animations.link}
           whileHover={{ 
-            x: shouldReduceMotion ? 0 : 1,
+            x: 1,
             color: theme === 'black-glass' ? '#ffffff' : undefined
           }}
-          transition={timing.fast}
+          transition={animations.hover}
         >
           {contact.description}
         </motion.p>
@@ -144,7 +93,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         {isSubmitted && (
           <motion.div
             className="nex-footer-contact-form__message nex-footer-contact-form__message--success"
-            variants={messageVariants}
+            variants={animations.message}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -157,7 +106,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         {error && (
           <motion.div
             className="nex-footer-contact-form__message nex-footer-contact-form__message--error"
-            variants={messageVariants}
+            variants={animations.message}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -172,16 +121,16 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
       <motion.form 
         onSubmit={handleContactSubmit}
         className="nex-footer-contact-form__form"
-        variants={inputVariants}
+        variants={animations.formField}
       >
         {/* Email Input */}
         <motion.div 
           className={`nex-footer-contact-form__input ${focusedField === 'email' ? 'nex-footer-contact-form__input--focused' : ''}`}
-          variants={inputVariants}
+          variants={animations.formField}
           whileHover={{ 
-            y: shouldReduceMotion ? 0 : -1
+            y: -1
           }}
-          transition={timing.fast}
+          transition={animations.hover}
         >
           <Mail size={16} />
           <input
@@ -199,11 +148,11 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         {/* Message Textarea */}
         <motion.div 
           className={`nex-footer-contact-form__textarea ${focusedField === 'message' ? 'nex-footer-contact-form__textarea--focused' : ''}`}
-          variants={inputVariants}
+          variants={animations.formField}
           whileHover={{ 
-            y: shouldReduceMotion ? 0 : -1
+            y: -1
           }}
-          transition={timing.fast}
+          transition={animations.hover}
         >
           <MessageCircle size={16} />
           <textarea
@@ -214,7 +163,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
             onBlur={() => setFocusedField(null)}
             required
             disabled={isSubmitting}
-            rows={4}
+            rows={3}
           />
         </motion.div>
         
@@ -223,14 +172,15 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           type="submit" 
           disabled={isSubmitting || !email.trim() || !message.trim()}
           className="nex-footer-contact-form__button"
-          variants={inputVariants}
+          variants={animations.button}
           whileHover={{ 
-            y: shouldReduceMotion ? 0 : -1
+            y: -1
           }}
           whileTap={{ 
-            y: 0
+            y: 0,
+            scale: 0.98
           }}
-          transition={spring.responsive}
+          transition={animations.spring?.responsive || animations.hover}
         >
           <AnimatePresence mode="wait">
             {isSubmitting ? (
@@ -239,7 +189,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
                 initial={{ opacity: 0, rotate: -90 }}
                 animate={{ opacity: 1, rotate: 0 }}
                 exit={{ opacity: 0, rotate: 90 }}
-                transition={timing.fast}
+                transition={animations.hover}
                 className="nex-footer-contact-form__button-spinner"
               >
                 <div className="spinner" />
@@ -250,11 +200,11 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={timing.fast}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                transition={animations.hover}
+                className="nex-footer-contact-form__button-content"
               >
                 <Send size={16} />
-                <span>{contact.buttonText || 'Send Message'}</span>
+                <span>Send Message</span>
               </motion.div>
             )}
           </AnimatePresence>

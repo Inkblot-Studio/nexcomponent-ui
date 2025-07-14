@@ -1,18 +1,18 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   🏢 FOOTER CONTAINER - Liquid Glass Foundation
+   📦 FOOTER CONTAINER - Premium Glass System
    ================================
    
-   The foundation component that provides the liquid glass aesthetic
-   with ambient depth, subtle translucency, and light flow across surfaces.
+   Main container component for the footer with premium glass styling
+   and responsive layout management.
    
    Design Philosophy:
-   - Fluid, premium, and effortless
-   - Subtle translucency with ambient depth
-   - Light flow across surfaces
-   - Whitespace and rhythm guide the eye
-   - Consistent with NexNav styling
+   - Premium glass background effects
+   - Responsive grid layouts
+   - Consistent spacing and typography
+   - Smooth theme transitions
+   - Enhanced visual depth
  */
 
 .nex-footer-container {
@@ -90,7 +90,7 @@
     }
   }
 
-  /* Contact Variant - Improved Layout */
+  /* Contact Variant - Side Layout */
   &--contact {
     .nex-footer-content {
       padding: var(--nex-spacing-3xl) 0 var(--nex-spacing-2xl);
@@ -141,6 +141,57 @@
         max-width: 100%;
         gap: var(--nex-spacing-md);
       }
+    }
+  }
+
+  /* ================================
+     📧 SIDE CONTACT LAYOUT
+     ================================ */
+  
+  /* Side contact positioning for desktop */
+  .nex-footer-contact-side {
+    position: relative;
+    
+    /* Desktop: Position on the right side */
+    @media (min-width: 1025px) {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+      max-width: 320px;
+      margin-top: 0;
+    }
+    
+    /* Tablet: Full width but smaller */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      grid-column: 1 / -1;
+      max-width: 400px;
+      justify-self: center;
+      margin-top: var(--nex-spacing-lg);
+    }
+    
+    /* Mobile: Full width */
+    @include mobile {
+      grid-column: 1 / -1;
+      max-width: 100%;
+      margin-top: var(--nex-spacing-md);
+    }
+  }
+
+  /* Adjust grid layout when contact is present */
+  .nex-footer-inner:has(.nex-footer-contact-side) {
+    @media (min-width: 1025px) {
+      grid-template-columns: 1fr 2fr 320px;
+      gap: var(--nex-spacing-2xl) var(--nex-spacing-xl);
+    }
+    
+    @media (max-width: 1024px) and (min-width: 769px) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--nex-spacing-xl);
+    }
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--nex-spacing-lg);
     }
   }
 
@@ -221,49 +272,49 @@
     .nex-footer-inner {
       color: #ffffff;
     }
+
+    /* Side contact styling for black glass */
+    .nex-footer-contact-side--black-glass {
+      .nex-footer-contact-form {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+      }
+    }
   }
 
   /* ================================
-     📱 RESPONSIVE BEHAVIOR
+     📱 RESPONSIVE ENHANCEMENTS
      ================================ */
   
   @media (max-width: 768px) {
-    .nex-footer-background {
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    .nex-footer-content {
+      padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
     }
     
-    .nex-footer-gradient-overlay {
-      filter: blur(6px);
+    .nex-footer-inner {
+      padding: 0 var(--nex-spacing-md);
+      gap: var(--nex-spacing-lg);
+    }
+    
+    .nex-footer-contact-side {
+      margin-top: var(--nex-spacing-md);
     }
   }
 
   @media (max-width: 480px) {
-    .nex-footer-background {
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
+    .nex-footer-content {
+      padding: var(--nex-spacing-lg) 0 var(--nex-spacing-md);
     }
     
-    .nex-footer-gradient-overlay {
-      filter: blur(4px);
-    }
-  }
-
-  /* ================================
-     ♿ ACCESSIBILITY ENHANCEMENTS
-     ================================ */
-  
-  @media (prefers-reduced-motion: reduce) {
-    .nex-footer-shimmer {
-      transition: none;
+    .nex-footer-inner {
+      padding: 0 var(--nex-spacing-sm);
+      gap: var(--nex-spacing-md);
     }
     
-    .nex-footer-gradient-overlay {
-      animation: none;
-    }
-    
-    * {
-      transition: none !important;
+    .nex-footer-contact-side {
+      margin-top: var(--nex-spacing-sm);
     }
   }
 } 

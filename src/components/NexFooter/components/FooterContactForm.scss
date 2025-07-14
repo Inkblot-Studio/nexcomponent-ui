@@ -1,60 +1,65 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   📧 FOOTER CONTACT FORM - Liquid Glass Contact
+   📧 FOOTER CONTACT FORM - Compact Side Layout
    ================================
    
-   Premium contact form with liquid glass styling,
+   Compact contact form optimized for side positioning in footer,
    featuring email and message inputs with elegant interactions.
    
    Design Philosophy:
-   - Clean, professional form design
+   - Compact, practical form design
    - Smooth input interactions
    - Consistent with overall design
    - Premium button interactions
    - Enhanced visual feedback
-   - Premium black glass dark theme
+   - Optimized for side layout
  */
 
 .nex-footer-contact-form {
   display: flex;
   flex-direction: column;
-  gap: var(--nex-spacing-lg);
-  max-width: 600px;
+  gap: var(--nex-spacing-md);
+  max-width: 320px;
   margin: 0 auto;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   width: 100%;
+  padding: var(--nex-spacing-lg);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--nex-radius-xl);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
 
   /* ================================
      🏷️ TITLE STYLING
      ================================ */
   
   &__title {
-    font-size: var(--nex-font-size-xl);
+    font-size: var(--nex-font-size-lg);
     font-weight: var(--nex-font-weight-bold);
     color: var(--nex-font-color);
     line-height: var(--nex-line-height-tight);
     margin: 0;
-    text-align: center;
+    text-align: left;
     transition: all var(--nex-transition-base);
     position: relative;
     
     &::after {
       content: '';
       position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: -4px;
+      left: 0;
       width: 0;
-      height: 3px;
+      height: 2px;
       background: linear-gradient(90deg, var(--nex-signature), var(--nex-signature-light));
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 2px;
+      border-radius: 1px;
     }
     
     &:hover::after {
-      width: 60px;
+      width: 40px;
     }
   }
 
@@ -67,9 +72,8 @@
     color: var(--nex-muted-font-color);
     line-height: var(--nex-line-height-base);
     margin: 0;
-    text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
+    text-align: left;
+    max-width: 100%;
     transition: all var(--nex-transition-base);
     
     &:hover {
@@ -85,9 +89,9 @@
     display: flex;
     align-items: center;
     gap: var(--nex-spacing-sm);
-    padding: var(--nex-spacing-md);
-    border-radius: var(--nex-radius-lg);
-    font-size: var(--nex-font-size-sm);
+    padding: var(--nex-spacing-sm);
+    border-radius: var(--nex-radius-md);
+    font-size: var(--nex-font-size-xs);
     font-weight: var(--nex-font-weight-medium);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -115,7 +119,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -133,7 +137,7 @@
     
     svg {
       position: absolute;
-      left: var(--nex-spacing-md);
+      left: var(--nex-spacing-sm);
       color: var(--nex-muted-font-color);
       z-index: 1;
       transition: all var(--nex-transition-base);
@@ -141,14 +145,14 @@
     
     input {
       width: 100%;
-      padding: var(--nex-spacing-md) var(--nex-spacing-md) var(--nex-spacing-md) calc(var(--nex-spacing-md) + 24px);
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
       border: 1px solid var(--nex-border-color);
-      border-radius: var(--nex-radius-lg);
+      border-radius: var(--nex-radius-md);
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(12px) saturate(180%);
       -webkit-backdrop-filter: blur(12px) saturate(180%);
       color: var(--nex-font-color);
-      font-size: var(--nex-font-size-md);
+      font-size: var(--nex-font-size-sm);
       font-family: var(--nex-font-family-primary);
       transition: all var(--nex-transition-base);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -209,8 +213,8 @@
     
     svg {
       position: absolute;
-      left: var(--nex-spacing-md);
-      top: var(--nex-spacing-md);
+      left: var(--nex-spacing-sm);
+      top: var(--nex-spacing-sm);
       color: var(--nex-muted-font-color);
       z-index: 1;
       transition: all var(--nex-transition-base);
@@ -218,18 +222,19 @@
     
     textarea {
       width: 100%;
-      padding: var(--nex-spacing-md) var(--nex-spacing-md) var(--nex-spacing-md) calc(var(--nex-spacing-md) + 24px);
+      padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
       border: 1px solid var(--nex-border-color);
-      border-radius: var(--nex-radius-lg);
+      border-radius: var(--nex-radius-md);
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(12px) saturate(180%);
       -webkit-backdrop-filter: blur(12px) saturate(180%);
       color: var(--nex-font-color);
-      font-size: var(--nex-font-size-md);
+      font-size: var(--nex-font-size-sm);
       font-family: var(--nex-font-family-primary);
       line-height: var(--nex-line-height-base);
       resize: vertical;
-      min-height: 100px;
+      min-height: 80px;
+      max-height: 120px;
       transition: all var(--nex-transition-base);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       
@@ -276,7 +281,7 @@
   }
 
   /* ================================
-     📤 SUBMIT BUTTON STYLING
+     🔘 BUTTON STYLING
      ================================ */
   
   &__button {
@@ -284,21 +289,20 @@
     align-items: center;
     justify-content: center;
     gap: var(--nex-spacing-sm);
-    padding: var(--nex-spacing-md) var(--nex-spacing-xl);
-    background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-dark) 100%);
-    color: var(--nex-signature-contrast);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    background: linear-gradient(135deg, var(--nex-signature) 0%, var(--nex-signature-light) 100%);
     border: none;
-    border-radius: var(--nex-radius-lg);
-    font-size: var(--nex-font-size-md);
-    font-weight: var(--nex-font-weight-semibold);
+    border-radius: var(--nex-radius-md);
+    color: #ffffff;
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-medium);
     font-family: var(--nex-font-family-primary);
     cursor: pointer;
-    transition: all var(--nex-transition-base);
-    box-shadow: 0 4px 12px rgba(255, 24, 1, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(255, 24, 1, 0.2);
     position: relative;
     overflow: hidden;
-    max-width: 100%;
-    min-height: 48px;
+    min-height: 40px;
     
     &::before {
       content: '';
@@ -307,18 +311,13 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-      );
-      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
     }
     
     &:hover {
-      box-shadow: 0 6px 20px rgba(255, 24, 1, 0.3);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(255, 24, 1, 0.3);
       
       &::before {
         left: 100%;
@@ -336,67 +335,39 @@
       transform: none;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       
-      &:hover {
-        transform: none;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-      
       &::before {
-        left: -100%;
-      }
-    }
-    
-    /* Spinner styling */
-    &-spinner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      .spinner {
-        width: 20px;
-        height: 20px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top: 2px solid white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+        display: none;
       }
     }
   }
 
   /* ================================
-     🎨 COMPACT VARIANT
+     🔄 BUTTON CONTENT STYLING
      ================================ */
   
-  &--compact {
-    gap: var(--nex-spacing-md);
-    max-width: 400px;
+  &__button-content {
+    display: flex;
+    align-items: center;
+    gap: var(--nex-spacing-sm);
+    transition: all var(--nex-transition-base);
+  }
+
+  /* ================================
+     ⏳ SPINNER STYLING
+     ================================ */
+  
+  &__button-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
-    &__title {
-      font-size: var(--nex-font-size-lg);
-    }
-    
-    &__description {
-      font-size: var(--nex-font-size-xs);
-    }
-    
-    &__input,
-    &__textarea {
-      input,
-      textarea {
-        padding: var(--nex-spacing-sm) var(--nex-spacing-sm) var(--nex-spacing-sm) calc(var(--nex-spacing-sm) + 20px);
-        font-size: var(--nex-font-size-sm);
-      }
-      
-      svg {
-        left: var(--nex-spacing-sm);
-        top: var(--nex-spacing-sm);
-      }
-    }
-    
-    &__button {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
-      font-size: var(--nex-font-size-sm);
-      min-height: 40px;
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
   }
 
@@ -404,234 +375,95 @@
      🎨 VARIANT MODIFICATIONS
      ================================ */
   
-  /* Contact Variant - Improved Layout */
-  &--contact {
-    max-width: 700px;
-    
-    @media (max-width: 1024px) {
-      max-width: 600px;
-    }
-    
-    @include mobile {
-      max-width: 100%;
-      gap: var(--nex-spacing-md);
-    }
+  /* Compact Variant */
+  &--compact {
+    max-width: 280px;
+    padding: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
     
     &__title {
-      font-size: var(--nex-font-size-2xl);
-      
-      @include mobile {
-        font-size: var(--nex-font-size-xl);
-      }
+      font-size: var(--nex-font-size-md);
     }
     
     &__description {
-      font-size: var(--nex-font-size-md);
-      
-      @include mobile {
-        font-size: var(--nex-font-size-sm);
-      }
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &__form {
+      gap: var(--nex-spacing-xs);
+    }
+    
+    &__input input,
+    &__textarea textarea {
+      padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 18px);
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &__button {
+      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+      font-size: var(--nex-font-size-xs);
+      min-height: 36px;
     }
   }
 
+  /* Contact Variant */
+  &--contact {
+    max-width: 320px;
+    padding: var(--nex-spacing-lg);
+    gap: var(--nex-spacing-md);
+  }
+
   /* ================================
-     🌑 BLACK GLASS DARK THEME
+     🌑 BLACK GLASS THEME
      ================================ */
   
   &--black-glass {
-    .nex-footer-contact-form__title {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+    &__title {
       color: #ffffff;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       
       &::after {
         background: linear-gradient(90deg, #ff6b35, #f7931e);
       }
-      
-      &:hover {
-        color: #ff6b35;
-        transform: translateX(2px);
-      }
     }
     
-    .nex-footer-contact-form__description {
-      color: rgba(255, 255, 255, 0.7);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    &__description {
+      color: rgba(255, 255, 255, 0.8);
       
       &:hover {
         color: #ffffff;
-        transform: translateX(2px);
       }
     }
     
-    .nex-footer-contact-form__input {
-      input {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-        backdrop-filter: blur(20px) saturate(200%);
-        -webkit-backdrop-filter: blur(20px) saturate(200%);
-        box-shadow: 
-          0 4px 16px rgba(0, 0, 0, 0.3),
-          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.5);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        &:focus {
-          border-color: #ff6b35;
-          background: rgba(0, 0, 0, 0.5);
-          box-shadow: 
-            0 0 0 3px rgba(255, 107, 53, 0.2),
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-          transform: translateY(-1px);
-        }
-        
-        &:hover {
-          border-color: rgba(255, 107, 53, 0.5);
-          background: rgba(0, 0, 0, 0.4);
-          box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-        }
-      }
-      
-      svg {
-        color: rgba(255, 255, 255, 0.6);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      &--focused {
-        input {
-          border-color: #ff6b35;
-          background: rgba(0, 0, 0, 0.5);
-          box-shadow: 
-            0 0 0 3px rgba(255, 107, 53, 0.2),
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        }
-        
-        svg {
-          color: #ff6b35;
-        }
-      }
-    }
-    
-    .nex-footer-contact-form__textarea {
-      textarea {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-        backdrop-filter: blur(20px) saturate(200%);
-        -webkit-backdrop-filter: blur(20px) saturate(200%);
-        box-shadow: 
-          0 4px 16px rgba(0, 0, 0, 0.3),
-          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.5);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        &:focus {
-          border-color: #ff6b35;
-          background: rgba(0, 0, 0, 0.5);
-          box-shadow: 
-            0 0 0 3px rgba(255, 107, 53, 0.2),
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-          transform: translateY(-1px);
-        }
-        
-        &:hover {
-          border-color: rgba(255, 107, 53, 0.5);
-          background: rgba(0, 0, 0, 0.4);
-          box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-        }
-      }
-      
-      svg {
-        color: rgba(255, 255, 255, 0.6);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      &--focused {
-        textarea {
-          border-color: #ff6b35;
-          background: rgba(0, 0, 0, 0.5);
-          box-shadow: 
-            0 0 0 3px rgba(255, 107, 53, 0.2),
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        }
-        
-        svg {
-          color: #ff6b35;
-        }
-      }
-    }
-    
-    .nex-footer-contact-form__button {
-      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    &__input input,
+    &__textarea textarea {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
       color: #ffffff;
-      box-shadow: 
-        0 4px 16px rgba(255, 107, 53, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       
-      &:hover {
-        box-shadow: 
-          0 8px 32px rgba(255, 107, 53, 0.4),
-          0 0 0 1px rgba(255, 255, 255, 0.15) inset;
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #ff7a42 0%, #f89b2e 100%);
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
       }
       
-      &:active {
+      &:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: #ff6b35;
         box-shadow: 
-          0 2px 8px rgba(255, 107, 53, 0.3),
-          0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        transform: translateY(0);
-      }
-      
-      &:disabled {
-        background: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.5);
-        box-shadow: 
-          0 2px 8px rgba(0, 0, 0, 0.2),
-          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-        transform: none;
-        
-        &:hover {
-          transform: none;
-          box-shadow: 
-            0 2px 8px rgba(0, 0, 0, 0.2),
-            0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-        }
+          0 0 0 3px rgba(255, 107, 53, 0.2),
+          0 4px 12px rgba(0, 0, 0, 0.2);
       }
     }
     
-    .nex-footer-contact-form__message {
-      &--success {
-        background: rgba(34, 197, 94, 0.15);
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        color: #4ade80;
-        backdrop-filter: blur(20px) saturate(200%);
-        -webkit-backdrop-filter: blur(20px) saturate(200%);
-      }
+    &__button {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
       
-      &--error {
-        background: rgba(239, 68, 68, 0.15);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        color: #f87171;
-        backdrop-filter: blur(20px) saturate(200%);
-        -webkit-backdrop-filter: blur(20px) saturate(200%);
+      &:hover {
+        box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
       }
     }
   }
@@ -640,73 +472,45 @@
      📱 RESPONSIVE DESIGN
      ================================ */
   
-  @media (max-width: 768px) {
-    max-width: 100%;
+  @media (max-width: 1024px) {
+    max-width: 400px;
+    padding: var(--nex-spacing-lg);
     gap: var(--nex-spacing-md);
-    
-    &__title {
-      font-size: var(--nex-font-size-lg);
-    }
-    
-    &__description {
-      font-size: var(--nex-font-size-sm);
-      max-width: 100%;
-    }
-    
-    &__input,
-    &__textarea {
-      input,
-      textarea {
-        font-size: var(--nex-font-size-sm);
-      }
-    }
-    
-    &__button {
-      padding: var(--nex-spacing-sm) var(--nex-spacing-lg);
-      font-size: var(--nex-font-size-sm);
-    }
   }
-
-  @media (max-width: 480px) {
+  
+  @include mobile {
+    max-width: 100%;
+    padding: var(--nex-spacing-md);
     gap: var(--nex-spacing-sm);
     
     &__title {
       font-size: var(--nex-font-size-md);
     }
     
-    &__input,
-    &__textarea {
-      input,
-      textarea {
-        padding: var(--nex-spacing-sm);
-        font-size: var(--nex-font-size-sm);
-      }
-      
-      svg {
-        left: var(--nex-spacing-sm);
-        top: var(--nex-spacing-sm);
-      }
-    }
-  }
-
-  /* ================================
-     ♿ ACCESSIBILITY
-     ================================ */
-  
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      animation: none !important;
+    &__description {
+      font-size: var(--nex-font-size-xs);
     }
     
-    &__button::before {
-      display: none;
+    &__form {
+      gap: var(--nex-spacing-xs);
+    }
+    
+    &__input input,
+    &__textarea textarea {
+      padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 18px);
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &__button {
+      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+      font-size: var(--nex-font-size-xs);
+      min-height: 36px;
     }
   }
 }
 
 /* ================================
-   🔄 SPINNER ANIMATION
+   🔄 ANIMATIONS
    ================================ */
 
 @keyframes spin {

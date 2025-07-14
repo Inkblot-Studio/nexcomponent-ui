@@ -12,7 +12,7 @@ const meta: Meta<typeof NexFooter> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A premium footer component with glassmorphic design, featuring branding, navigation sections, developer tools, and contact forms. Supports multiple variants and themes with smooth animations and responsive design.'
+        component: 'A premium footer component with glassmorphic design, featuring branding, navigation sections, developer tools, and contact forms. Supports multiple variants and themes with smooth animations and responsive design. Now includes compact side contact layout for desktop.'
       }
     }
   },
@@ -164,6 +164,28 @@ export const Contact: Story = {
       buttonText: 'Send Message',
       onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
     }
+  }
+};
+
+export const SideContact: Story = {
+  args: {
+    ...Default.args,
+    variant: 'default',
+    contact: {
+      enabled: true,
+      title: 'Quick Contact',
+      description: 'Need help? Send us a message and we\'ll get back to you.',
+      placeholder: 'Tell us about your project...',
+      buttonText: 'Send Message',
+      onSubmit: (data: { email: string; message: string }) => console.log('Contact form submitted:', data)
+    }
+  }
+};
+
+export const SideContactBlackGlass: Story = {
+  args: {
+    ...SideContact.args,
+    theme: 'black-glass'
   }
 };
 

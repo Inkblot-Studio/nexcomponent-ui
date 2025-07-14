@@ -7,7 +7,7 @@ import FooterSections from './components/FooterSections';
 import FooterDeveloperTools from './components/FooterDeveloperTools';
 import FooterBottom from './components/FooterBottom';
 import FooterContactForm from './components/FooterContactForm';
-import { useAnimationConfig } from '../../utils/animationConfig';
+import { useFooterAnimations } from './animations';
 import './NexFooter.scss';
 
 const NexFooter: React.FC<NexFooterProps> = ({
@@ -24,38 +24,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
   theme = 'auto',
   className = ''
 }) => {
-  const { timing, shouldReduceMotion } = useAnimationConfig();
-
-  // Simplified footer container variants matching NexNav approach
-  const footerVariants = {
-    initial: {
-      opacity: 0,
-      y: 20
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0.3 : 0.5,
-        ease: [0.4, 0, 0.2, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.06,
-        delayChildren: shouldReduceMotion ? 0 : 0.1
-      }
-    }
-  };
-
-  // Simplified content variants for clean animations
-  const contentVariants = {
-    initial: { opacity: 0, y: 8 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
+  const animations = useFooterAnimations();
 
   // Determine theme class
   const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : '';
@@ -70,7 +39,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
       className={`nex-footer ${className}`}
       initial="initial"
       animate="animate"
-      variants={footerVariants}
+      variants={animations.container}
       style={{
         position: 'relative',
         width: '100%',
@@ -84,33 +53,35 @@ const NexFooter: React.FC<NexFooterProps> = ({
       >
         <motion.div 
           className="nex-footer-content"
-          variants={contentVariants}
+          variants={animations.section}
         >
           <motion.div 
             className="nex-footer-inner"
-            variants={contentVariants}
+            variants={animations.stagger.container}
           >
             
             {/* Branding Section */}
-            <FooterBranding
-              logoSrc={logoSrc}
-              displayName={displayName}
-              tagline={tagline}
-              showLogoText={showLogoText}
-              newsletter={newsletter}
-              variant={variant}
-              theme={theme}
-            />
+            <motion.div variants={animations.stagger.item}>
+              <FooterBranding
+                logoSrc={logoSrc}
+                displayName={displayName}
+                tagline={tagline}
+                showLogoText={showLogoText}
+                newsletter={newsletter}
+                variant={variant}
+                theme={theme}
+              />
+            </motion.div>
 
             {/* Footer Sections - Only show if not contact variant */}
             <AnimatePresence>
               {sections.length > 0 && variant !== 'contact' && (
                 <motion.div
                   key="footer-sections"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={timing.medium}
+                  variants={animations.stagger.item}
+                  initial="initial"
+                  animate="animate"
+                  exit="initial"
                 >
                   <FooterSections
                     sections={sections}
@@ -121,16 +92,16 @@ const NexFooter: React.FC<NexFooterProps> = ({
               )}
             </AnimatePresence>
 
-            {/* Contact Form - Only show in contact variant */}
+            {/* Contact Form - Side positioned for desktop */}
             <AnimatePresence>
-              {contact?.enabled && variant === 'contact' && (
+              {contact?.enabled && (
                 <motion.div
                   key="footer-contact"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={timing.medium}
-                  className={theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}
+                  variants={animations.stagger.item}
+                  initial="initial"
+                  animate="animate"
+                  exit="initial"
+                  className={`nex-footer-contact-side ${theme === 'black-glass' ? 'nex-footer-contact-side--black-glass' : ''}`}
                 >
                   <FooterContactForm
                     contact={contact}
@@ -146,10 +117,10 @@ const NexFooter: React.FC<NexFooterProps> = ({
               {developerTools && variant !== 'contact' && (
                 <motion.div
                   key="footer-developer-tools"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={timing.medium}
+                  variants={animations.stagger.item}
+                  initial="initial"
+                  animate="animate"
+                  exit="initial"
                 >
                   <FooterDeveloperTools
                     developerTools={developerTools}
@@ -164,8 +135,8 @@ const NexFooter: React.FC<NexFooterProps> = ({
 
         {/* Footer Bottom */}
         <motion.div
-          variants={contentVariants}
-          transition={{ delay: shouldReduceMotion ? 0 : 0.15 }}
+          variants={animations.section}
+          transition={{ delay: 0.15 }}
         >
           <FooterBottom
             displayName={displayName}
