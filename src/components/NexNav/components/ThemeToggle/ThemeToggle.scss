@@ -22,16 +22,13 @@
   will-change: transform, background-color, border-color, box-shadow;
   
   /* Single Glassmorphic Plate */
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.08),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   
-  /* Transitions */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Transitions - Fast Animation */
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
   
 
   
@@ -60,33 +57,23 @@
     width: 16px;
     height: 16px;
     color: var(--nex-font-color);
-    transition: color 0.3s ease;
+    transition: color 0.12s ease;
     
     /* Sun Icon */
     &--sun {
       color: #fbbf24;
-      filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.4));
-      
-      svg {
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-      }
     }
     
     /* Moon Icon */
     &--moon {
       color: #8b5cf6;
-      filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.4));
-      
-      svg {
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-      }
     }
     
     svg {
       width: 16px;
       height: 16px;
       stroke-width: 2;
-      transition: all 0.3s ease;
+      transition: all 0.12s ease;
     }
   }
   
@@ -115,24 +102,18 @@
      ================================ */
   
   &:hover {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.15);
     
     .nex-theme-toggle__icon {
       &--sun {
         color: #f59e0b;
-        filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
       }
       
       &--moon {
         color: #7c3aed;
-        filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.6));
       }
     }
   }
@@ -145,12 +126,9 @@
     outline: 2px solid var(--nex-signature);
     outline-offset: 2px;
     background: rgba(255, 24, 1, 0.1);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     border-color: rgba(255, 24, 1, 0.2);
-    box-shadow: 
-      0 4px 20px rgba(255, 24, 1, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   
   /* ================================
@@ -159,12 +137,9 @@
   
   &:active {
     background: rgba(255, 24, 1, 0.15);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    backdrop-filter: blur(20px) saturate(220%);
+    -webkit-backdrop-filter: blur(20px) saturate(220%);
     border-color: rgba(255, 24, 1, 0.25);
-    transform: translateY(0);
-    box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.15);
   }
   
   /* ================================
@@ -175,13 +150,6 @@
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
-    
-    &:hover {
-      transform: none;
-      box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.06);
-    }
   }
   
   /* ================================
@@ -225,53 +193,20 @@
   [data-theme="dark"] & {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.3),
-      0 1px 3px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    
-    &__background {
-      background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        rgba(255, 255, 255, 0.03) 50%, 
-        rgba(255, 255, 255, 0.08) 100%);
-      border-color: rgba(255, 255, 255, 0.15);
-      box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    }
     
     &:hover {
       background: rgba(255, 255, 255, 0.12);
       border-color: rgba(255, 255, 255, 0.15);
-      box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.4),
-        0 2px 8px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      
-      .nex-theme-toggle__background {
-        background: linear-gradient(135deg, 
-          rgba(255, 255, 255, 0.15) 0%, 
-          rgba(255, 255, 255, 0.06) 50%, 
-          rgba(255, 255, 255, 0.12) 100%);
-        border-color: rgba(255, 255, 255, 0.2);
-      }
     }
     
     &:focus-visible {
       background: rgba(255, 24, 1, 0.15);
       border-color: rgba(255, 24, 1, 0.25);
-      box-shadow: 
-        0 4px 20px rgba(255, 24, 1, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
     
     &:active {
       background: rgba(255, 24, 1, 0.2);
       border-color: rgba(255, 24, 1, 0.3);
-      box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
   }
   
@@ -293,33 +228,5 @@
     }
   }
   
-  /* ================================
-     ANIMATION KEYFRAMES
-     ================================ */
-  
-  @keyframes theme-toggle-glow {
-    0%, 100% {
-      box-shadow: 
-        0 0 4px rgba(251, 191, 36, 0.4),
-        0 0 8px rgba(251, 191, 36, 0.2);
-    }
-    50% {
-      box-shadow: 
-        0 0 6px rgba(251, 191, 36, 0.6),
-        0 0 12px rgba(251, 191, 36, 0.3);
-    }
-  }
-  
-  @keyframes theme-toggle-moon-glow {
-    0%, 100% {
-      box-shadow: 
-        0 0 4px rgba(139, 92, 246, 0.4),
-        0 0 8px rgba(139, 92, 246, 0.2);
-    }
-    50% {
-      box-shadow: 
-        0 0 6px rgba(139, 92, 246, 0.6),
-        0 0 12px rgba(139, 92, 246, 0.3);
-    }
-  }
+
 } 

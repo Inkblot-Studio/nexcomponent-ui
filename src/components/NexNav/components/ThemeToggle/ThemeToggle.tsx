@@ -66,17 +66,15 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{
-        scale: 1.05,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
       }}
       whileTap={{
-        scale: 0.95,
-        transition: { duration: 0.1 }
+        transition: { duration: 0.08, ease: [0.4, 0, 0.2, 1] }
       }}
       whileFocus={{
         outline: "2px solid var(--nex-signature)",
         outlineOffset: "2px",
-        transition: { duration: 0.2 }
+        transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
       }}
     >
       {/* Icon container */}
@@ -86,8 +84,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
           rotate: isDark ? 180 : 0
         }}
         transition={{
-          duration: 0.6,
-          ease: [0.4, 0, 0.2, 1]
+          type: "spring",
+          stiffness: 600,
+          damping: 25,
+          mass: 0.6,
+          restDelta: 0.001
         }}
       >
         {/* Sun icon */}
@@ -96,11 +97,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
             <motion.div
               key="sun"
               className="nex-theme-toggle__icon nex-theme-toggle__icon--sun"
-              initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
               transition={{
-                duration: 0.4,
+                duration: 0.12,
                 ease: [0.4, 0, 0.2, 1]
               }}
             >
@@ -110,11 +111,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
             <motion.div
               key="moon"
               className="nex-theme-toggle__icon nex-theme-toggle__icon--moon"
-              initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
               transition={{
-                duration: 0.4,
+                duration: 0.12,
                 ease: [0.4, 0, 0.2, 1]
               }}
             >
@@ -129,10 +130,10 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
         {isAnimating && (
           <motion.div
             className="nex-theme-toggle__ripple"
-            initial={{ scale: 0, opacity: 0.8 }}
-            animate={{ scale: 2, opacity: 0 }}
-            exit={{ scale: 2, opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            initial={{ opacity: 0.8 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.12, ease: [0.4, 0, 0.2, 1] }}
           />
         )}
       </AnimatePresence>
