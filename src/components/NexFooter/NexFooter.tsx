@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NexFooterProps } from './NexFooter.types';
-import FooterContainer from './components/FooterContainer';
-import FooterBranding from './components/FooterBranding';
-import FooterSections from './components/FooterSections';
-import FooterBottom from './components/FooterBottom';
-import FooterContactForm from './components/FooterContactForm';
+import FooterContainer from './components/FooterContainer/index';
+import FooterBranding from './components/FooterBranding/index';
+import FooterSections from './components/FooterSections/index';
+import FooterBottom from './components/FooterBottom/index';
+import FooterContactForm from './components/FooterContactForm/index';
 import { useFooterAnimations } from './animations';
 import './NexFooter.scss';
 
@@ -28,8 +28,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
   const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : '';
 
   // Determine variant class
-  const variantClass = variant === 'compact' ? 'nex-footer-container--compact' :
-                      variant === 'contact' ? 'nex-footer-container--contact' :
+  const variantClass = variant === 'contact' ? 'nex-footer-container--contact' :
                       (!logoSrc && !displayName && sections.length > 0) ? 'nex-footer-container--sections-only' : '';
 
   return (

@@ -1,4 +1,4 @@
-@import '../../../utils/mixin.scss';
+@import '../../../../utils/mixin.scss';
 
 /* ================================
    FOOTER CONTACT FORM - Consistent Sizing
@@ -374,36 +374,7 @@
      VARIANT MODIFICATIONS
      ================================ */
   
-  /* Compact Variant */
-  &--compact {
-    max-width: 280px;
-    padding: var(--nex-spacing-md);
-    gap: var(--nex-spacing-sm);
-    
-    &__title {
-      font-size: var(--nex-font-size-md);
-    }
-    
-    &__description {
-      font-size: var(--nex-font-size-xs);
-    }
-    
-    &__form {
-      gap: var(--nex-spacing-xs);
-    }
-    
-    &__input input,
-    &__textarea textarea {
-      padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 18px);
-      font-size: var(--nex-font-size-sm);
-    }
-    
-    &__button {
-      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-      font-size: var(--nex-font-size-sm);
-      min-height: 36px;
-    }
-  }
+
 
   /* Contact Variant */
   &--contact {

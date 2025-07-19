@@ -1,4 +1,4 @@
-@import '../../../utils/mixin.scss';
+@import '../../../../utils/mixin.scss';
 
 /* ================================
    FOOTER BRANDING - Consistent Sizing
@@ -294,38 +294,7 @@
      VARIANT MODIFICATIONS
      ================================ */
   
-  /* Compact Variant */
-  &--compact {
-    gap: var(--nex-spacing-sm);
-    
-    &__logo img {
-      max-height: 32px;
-    }
-    
-    &__name span {
-      font-size: var(--nex-font-size-lg);
-    }
-    
-    &__tagline {
-      font-size: var(--nex-font-size-xs);
-      max-width: 240px;
-    }
-    
-    &__newsletter {
-      gap: var(--nex-spacing-xs);
-      margin-top: var(--nex-spacing-sm);
-      
-      &-input input {
-        padding: var(--nex-spacing-xs) var(--nex-spacing-xs) var(--nex-spacing-xs) calc(var(--nex-spacing-xs) + 16px);
-        font-size: var(--nex-font-size-xs);
-      }
-      
-      &-button {
-        padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-        font-size: var(--nex-font-size-xs);
-      }
-    }
-  }
+
 
   /* Contact Variant */
   &--contact {

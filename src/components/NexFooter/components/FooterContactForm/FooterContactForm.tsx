@@ -1,15 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { useFooterAnimations } from '../animations';
-import { ContactForm } from '../NexFooter.types';
+import { useFooterAnimations } from '../../animations';
+import { FooterContactFormProps } from './FooterContactForm.types';
 import './FooterContactForm.scss';
-
-interface FooterContactFormProps {
-  contact: ContactForm;
-  variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
-}
 
 const FooterContactForm: React.FC<FooterContactFormProps> = ({
   contact,
@@ -51,7 +45,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
     }
   }, [email, message, contact]);
 
-  const formClass = `nex-footer-contact-form ${variant === 'compact' ? 'nex-footer-contact-form--compact' : ''} ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}`;
+  const formClass = `nex-footer-contact-form ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}`;
 
   return (
     <motion.div 

@@ -1,14 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useAnimationConfig } from '../../../utils/animationConfig';
+import { useAnimationConfig } from '../../../../utils/animationConfig';
+import { FooterContainerProps } from './FooterContainer.types';
 import './FooterContainer.scss';
-
-interface FooterContainerProps {
-  children: React.ReactNode;
-  variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'black-glass';
-  className?: string;
-}
 
 const FooterContainer: React.FC<FooterContainerProps> = ({
   children,

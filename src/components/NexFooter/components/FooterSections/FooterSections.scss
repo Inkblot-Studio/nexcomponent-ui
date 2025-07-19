@@ -1,4 +1,4 @@
-@import '../../../utils/mixin.scss';
+@import '../../../../utils/mixin.scss';
 
 /* ================================
    FOOTER SECTIONS - Enterprise Grid System
@@ -156,31 +156,7 @@
      VARIANT MODIFICATIONS
      ================================ */
   
-  /* Compact Variant */
-  &--compact {
-    gap: var(--nex-spacing-lg);
-    
-    @include mobile {
-      gap: var(--nex-spacing-md);
-    }
-    
-    &__section {
-      gap: var(--nex-spacing-sm);
-    }
-    
-    &__title {
-      font-size: var(--nex-font-size-sm);
-    }
-    
-    &__links {
-      gap: var(--nex-spacing-xs);
-    }
-    
-    &__link {
-      font-size: var(--nex-font-size-sm);
-      padding: 3px 5px;
-    }
-  }
+
 
   /* Contact Variant */
   &--contact {

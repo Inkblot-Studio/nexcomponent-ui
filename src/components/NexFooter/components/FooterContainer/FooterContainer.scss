@@ -1,4 +1,4 @@
-@import '../../../utils/mixin.scss';
+@import '../../../../utils/mixin.scss';
 
 /* ================================
    FOOTER CONTAINER - Enterprise Grid System
@@ -119,28 +119,7 @@
      VARIANT MODIFICATIONS
      ================================ */
   
-  /* Compact Variant */
-  &--compact {
-    .nex-footer-content {
-      padding: var(--nex-spacing-xl) 0 var(--nex-spacing-lg);
-      
-      @include mobile {
-        padding: var(--nex-spacing-lg) 0 var(--nex-spacing-md);
-      }
-    }
-    
-    .nex-footer-inner {
-      gap: var(--nex-spacing-lg);
-      
-      @media (min-width: 1025px) {
-        gap: var(--nex-spacing-lg) var(--nex-spacing-md);
-      }
-      
-      @include mobile {
-        gap: var(--nex-spacing-md);
-      }
-    }
-  }
+
 
   /* Contact Variant - Full-width contact */
   &--contact {

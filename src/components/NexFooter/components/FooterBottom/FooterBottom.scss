@@ -1,4 +1,4 @@
-@import '../../../utils/mixin.scss';
+@import '../../../../utils/mixin.scss';
 
 /* ================================
    🔽 FOOTER BOTTOM - Premium Foundation
@@ -133,30 +133,7 @@
      🎨 VARIANT MODIFICATIONS
      ================================ */
   
-  /* Compact Variant */
-  &--compact {
-    &__container {
-      padding: var(--nex-spacing-md) var(--nex-spacing-lg);
-      
-      @include mobile {
-        padding: var(--nex-spacing-sm) var(--nex-spacing-md);
-      }
-    }
-    
-    &__copyright {
-      font-size: var(--nex-font-size-xs);
-    }
-    
-    &__social-link {
-      width: 32px;
-      height: 32px;
-      
-      svg {
-        width: 14px;
-        height: 14px;
-      }
-    }
-  }
+
 
   /* Contact Variant */
   &--contact {

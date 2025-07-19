@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
 import * as NexFooterStories from './NexFooter.stories';
 
 <Meta of={NexFooterStories} />
@@ -11,10 +11,9 @@ A modern, scalable footer component with glassmorphic styling that perfectly com
 
 - **2025 Design Trends**: Modern glassmorphic styling with subtle gradients and clean typography
 - **Contact Form Integration**: Built-in contact form for lead generation and customer support
-- **Developer Tools**: Copy-to-clipboard functionality for npm commands and GitHub links
 - **Newsletter Signup**: Email subscription with validation and loading states
 - **Social Media Integration**: Properly sized social icons with platform-specific styling
-- **Multiple Variants**: Default, compact, and contact-focused layouts
+- **Multiple Variants**: Default, contact, and black glass layouts
 - **Responsive Design**: Mobile-first approach with adaptive grid layouts
 - **Accessibility**: WCAG compliant with reduced motion support
 - **Theme Support**: Light, dark, and auto theme variants
@@ -49,10 +48,6 @@ function App() {
         { type: 'github', url: 'https://github.com/yourcompany' },
         { type: 'twitter', url: 'https://twitter.com/yourcompany' }
       ]}
-      developerTools={{
-        npmPackage: '@yourcompany/ui',
-        githubUrl: 'https://github.com/yourcompany/ui'
-      }}
     />
   );
 }
@@ -65,34 +60,34 @@ The standard footer with all features enabled.
 
 <Canvas of={NexFooterStories.Default} />
 
-### Compact
-Space-optimized variant for layouts with limited vertical space.
-
-<Canvas of={NexFooterStories.Compact} />
-
 ### Contact
 Contact-focused variant with prominent contact form for lead generation.
 
 <Canvas of={NexFooterStories.Contact} />
+
+### Black Glass
+Premium black glassmorphic variant for dark themes.
+
+<Canvas of={NexFooterStories.BlackGlass} />
 
 ### Minimal
 Clean, minimal footer with just branding and social links.
 
 <Canvas of={NexFooterStories.Minimal} />
 
-### Developer
-Developer-focused footer with documentation links and tools.
-
-<Canvas of={NexFooterStories.Developer} />
-
 ### Enterprise
 Comprehensive enterprise footer with multiple sections and features.
 
 <Canvas of={NexFooterStories.Enterprise} />
 
+### Sections Only
+Footer with only navigation sections, no branding.
+
+<Canvas of={NexFooterStories.SectionsOnly} />
+
 ## Props
 
-<ArgsTable of={NexFooterStories} />
+
 
 ## Design System Integration
 
@@ -175,7 +170,7 @@ contact={{
 
 - `variant` prop now supports `'contact'` option
 - `contact` prop added for contact form functionality
-- Social icons now have fixed sizing (16px default, 14px compact)
+- Social icons now have fixed sizing (16px default)
 - Improved hover animations matching navbar patterns
 - Enhanced glassmorphic styling with 2025 design trends
 
@@ -247,10 +242,6 @@ contact={{
     }
   ]}
   newsletter={{ enabled: true, onSubmit: handleNewsletter }}
-  developerTools={{
-    npmPackage: "@myapp/enterprise",
-    githubUrl: "https://github.com/myapp/enterprise"
-  }}
   socials={[
     { type: 'github', url: 'https://github.com/myapp' },
     { type: 'linkedin', url: 'https://linkedin.com/company/myapp' }

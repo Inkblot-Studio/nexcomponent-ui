@@ -18,11 +18,11 @@
  */
 
 /* Import all component styles */
-@import './components/FooterContainer.scss';
-@import './components/FooterBranding.scss';
-@import './components/FooterSections.scss';
-@import './components/FooterBottom.scss';
-@import './components/FooterContactForm.scss';
+@import './components/FooterContainer/FooterContainer.scss';
+@import './components/FooterBranding/FooterBranding.scss';
+@import './components/FooterSections/FooterSections.scss';
+@import './components/FooterBottom/FooterBottom.scss';
+@import './components/FooterContactForm/FooterContactForm.scss';
 
 /* ================================
    🎯 GLOBAL FOOTER STYLES

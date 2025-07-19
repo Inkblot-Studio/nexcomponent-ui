@@ -1,22 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
-import { useAnimationConfig } from '../../../utils/animationConfig';
+import { useAnimationConfig } from '../../../../utils/animationConfig';
+import { FooterBrandingProps } from './FooterBranding.types';
 import './FooterBranding.scss';
-
-interface FooterBrandingProps {
-  logoSrc?: string;
-  displayName: string;
-  tagline?: string;
-  showLogoText?: boolean;
-  newsletter?: {
-    enabled?: boolean;
-    placeholder?: string;
-    onSubmit?: (email: string) => void;
-  };
-  variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
-}
 
 const FooterBranding: React.FC<FooterBrandingProps> = ({
   logoSrc,
@@ -105,7 +92,7 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
     }
   };
 
-  const brandingClass = `nex-footer-branding ${variant === 'compact' ? 'nex-footer-branding--compact' : ''} ${variant === 'contact' ? 'nex-footer-branding--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-branding--black-glass' : ''}`;
+  const brandingClass = `nex-footer-branding ${variant === 'contact' ? 'nex-footer-branding--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-branding--black-glass' : ''}`;
 
   return (
     <motion.div 
@@ -206,7 +193,7 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
               }}
               transition={timing.fast}
             >
-              <Mail size={variant === 'compact' ? 14 : 16} />
+              <Mail size={16} />
               <input
                 type="email"
                 placeholder={newsletter.placeholder || "Stay updated"}

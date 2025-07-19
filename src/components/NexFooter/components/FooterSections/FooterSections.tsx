@@ -1,14 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useFooterAnimations } from '../animations';
-import { FooterSection } from '../NexFooter.types';
+import { useFooterAnimations } from '../../animations';
+import { FooterSectionsProps } from './FooterSections.types';
 import './FooterSections.scss';
-
-interface FooterSectionsProps {
-  sections: FooterSection[];
-  variant?: 'default' | 'compact' | 'contact';
-  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
-}
 
 const FooterSections: React.FC<FooterSectionsProps> = ({
   sections,
@@ -23,7 +17,7 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
   // Determine if we have many sections for class-based styling
   const hasManySections = limitedSections.length >= 3;
 
-  const sectionsClass = `nex-footer-sections ${variant === 'compact' ? 'nex-footer-sections--compact' : ''} ${variant === 'contact' ? 'nex-footer-sections--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-sections--black-glass' : ''} ${hasManySections ? 'nex-footer-sections--many-sections' : ''}`;
+  const sectionsClass = `nex-footer-sections ${variant === 'contact' ? 'nex-footer-sections--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-sections--black-glass' : ''} ${hasManySections ? 'nex-footer-sections--many-sections' : ''}`;
 
   // Optimize animation delays based on number of sections
   const getStaggerDelay = (index: number) => {

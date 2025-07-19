@@ -1,26 +1,8 @@
-export interface SocialLink {
-  type: string;
-  url: string;
-}
+import { SocialLink } from './components/FooterBottom/FooterBottom.types';
+import { FooterSection, FooterLink } from './components/FooterSections/FooterSections.types';
+import { ContactForm } from './components/FooterContactForm/FooterContactForm.types';
 
-export interface FooterLink {
-  label: string;
-  url: string;
-}
-
-export interface FooterSection {
-  title: string;
-  links: FooterLink[];
-}
-
-export interface ContactForm {
-  enabled?: boolean;
-  title?: string;
-  description?: string;
-  placeholder?: string;
-  buttonText?: string;
-  onSubmit?: (data: { email: string; message: string }) => void;
-}
+export type { SocialLink, FooterSection, FooterLink, ContactForm };
 
 export interface NexFooterProps {
   // Branding
@@ -46,7 +28,7 @@ export interface NexFooterProps {
   socials?: SocialLink[];
   
   // Variants
-  variant?: 'default' | 'compact' | 'contact';
+  variant?: 'default' | 'contact';
   
   // Customization
   theme?: 'light' | 'auto' | 'black-glass';
