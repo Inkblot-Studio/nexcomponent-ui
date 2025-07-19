@@ -10,3 +10,4 @@ import { NexModalProps } from "./NexModal.types";
  */
 declare const NexModal: React.FC<NexModalProps>;
 export default NexModal;
+//# sourceMappingURL=NexModal.d.ts.map

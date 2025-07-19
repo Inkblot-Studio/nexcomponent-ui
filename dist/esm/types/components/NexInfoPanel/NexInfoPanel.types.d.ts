@@ -4,3 +4,4 @@ export interface NexInfoPanelProps {
     content: string;
     imageUrl: string;
 }
+//# sourceMappingURL=NexInfoPanel.types.d.ts.map

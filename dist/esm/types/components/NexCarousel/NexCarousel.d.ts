@@ -1,17 +1,19 @@
 import React from 'react';
-import { NexCarouselProps } from './NexCarousel.types';
+import type { NexCarouselProps } from './NexCarousel.types';
 import './NexCarousel.scss';
 /**
- * NexCarousel component
+ * NexCarousel - Enterprise Grade Carousel Component
  *
- * A carousel component to display slides with optional navigation buttons, dots, and automatic slide transition.
+ * A clean, simple carousel component designed for compelling visual presentations.
+ * Features smooth animations, professional styling, and intuitive navigation.
  *
- * @param {React.ReactNode[]} children - The slides to display in the carousel.
- * @param {string} className - Additional class names to apply to the carousel.
- * @param {boolean} [navButtons=false] - Whether to display navigation buttons.
- * @param {'top' | 'bottom' | 'left' | 'right'} [navigationPosition='bottom'] - The position of the navigation dots.
- * @param {boolean} [line] - Whether to display a progress line indicating the current slide.
- * @param {number} [interval] - The time in seconds between automatic slide transitions.
+ * @param {Array} slides - Array of slide data with imageUrl, title, and content
+ * @param {boolean} autoPlay - Whether to automatically advance slides
+ * @param {number} autoPlayInterval - Interval between auto-advance (in milliseconds)
+ * @param {boolean} showControls - Whether to show navigation controls
+ * @param {boolean} showIndicators - Whether to show slide indicators
+ * @param {string} className - Additional CSS classes
  */
 declare const NexCarousel: React.FC<NexCarouselProps>;
 export default NexCarousel;
+//# sourceMappingURL=NexCarousel.d.ts.map

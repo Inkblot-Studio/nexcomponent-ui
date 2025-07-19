@@ -1,6 +1,6 @@
-import { FC, ReactNode } from 'react';
 import './NexAlert.scss';
-import { NexAlertProps } from './NexAlert.types';
+import type { FC, ReactNode } from 'react';
+import type { NexAlertProps } from './NexAlert.types';
 /**
  * NexAlert component
  *
@@ -24,3 +24,4 @@ interface NexAlertsWrapperProps {
  */
 declare const NexAlertsWrapper: FC<NexAlertsWrapperProps>;
 export { NexAlert, NexAlertsWrapper };
+//# sourceMappingURL=NexAlert.d.ts.map

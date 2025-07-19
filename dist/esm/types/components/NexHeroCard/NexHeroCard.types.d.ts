@@ -7,3 +7,4 @@ export interface NexHeroCardProps {
     backgroundUrl?: string;
     className?: string;
 }
+//# sourceMappingURL=NexHeroCard.types.d.ts.map

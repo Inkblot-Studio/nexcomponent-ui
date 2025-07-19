@@ -4,3 +4,4 @@ export interface NexCopyToClipboardProps {
     type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger') | string;
     textToCopy: string;
 }
+//# sourceMappingURL=NexCopyToClipboard.types.d.ts.map

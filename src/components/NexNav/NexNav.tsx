@@ -11,7 +11,7 @@ import {
   ThemeToggle
 } from './components';
 
-import { NexNavProps } from './NexNav.types';
+import type { NexNavProps } from './NexNav.types';
 import { Menu, X } from 'lucide-react';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../utils/animationConfig';
 import { ThemeProvider } from './ThemeContext';

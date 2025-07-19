@@ -1,44 +1,9 @@
-import * as React from 'react';
-import React__default, { useState, useEffect, useRef, useContext, createContext, useId, useInsertionEffect, useCallback, useMemo, Children, isValidElement, useLayoutEffect, forwardRef, Fragment, createElement as createElement$1, Component } from 'react';
+import React, { useState, useEffect, useRef, useContext, createContext, useCallback, useMemo } from 'react';
+import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
+import { useReducedMotion, motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ChevronDown, Sun, Moon, LogIn, User, Fingerprint, Zap, Settings, Activity, Shield, Globe, Crown, LogOut, Menu, X, CheckCircle, AlertCircle, Mail, MessageCircle, Send } from 'lucide-react';
+import classNames from 'classnames';
 
-function styleInject(css, ref) {
-  if (ref === void 0) ref = {};
-  var insertAt = ref.insertAt;
-  if (!css || typeof document === 'undefined') {
-    return;
-  }
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css_248z$i = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-alert {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 2.2222222222rem;\n  min-height: 2.6666666667rem;\n  max-width: calc(100vw - 4.4444444444rem);\n  padding: 0.4444444444rem 0.8888888889rem;\n  background: var(--nex-info);\n  font-size: 0.7111111111rem;\n  color: var(--nex-info);\n  box-shadow: 0 0.1777777778rem 0.3555555556rem rgba(0, 0, 0, 0.1);\n  border-radius: 0.3555555556rem;\n  border: 0.0444444444rem solid color-mix(in srgb, var(--nex-info), #fff 80%);\n  transition: opacity 0.3s ease-in-out;\n  opacity: 0;\n  z-index: 999;\n}\n.nex-alert.visible {\n  opacity: 1;\n}\n.nex-alert .nex-alert__message {\n  flex-grow: 1;\n  text-align: center;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: break-word;\n}\n.nex-alert.nex-alert--error {\n  background: color-mix(in srgb, var(--nex-danger), #fff 80%);\n  border-color: var(--nex-danger);\n  color: var(--nex-danger);\n}\n.nex-alert.nex-alert--error .nex-alert__dismiss-button {\n  color: var(--nex-danger);\n}\n.nex-alert.nex-alert--success {\n  background: color-mix(in srgb, var(--nex-success), #fff 80%);\n  border-color: var(--nex-success);\n  color: var(--nex-success);\n}\n.nex-alert.nex-alert--success .nex-alert__dismiss-button {\n  color: var(--nex-success);\n}\n.nex-alert.nex-alert--info {\n  background: color-mix(in srgb, var(--nex-info), #fff 80%);\n  border-color: var(--nex-info);\n  color: var(--nex-info);\n}\n.nex-alert.nex-alert--info .nex-alert__dismiss-button {\n  color: var(--nex-info);\n}\n.nex-alert.nex-alert--warning {\n  background: color-mix(in srgb, var(--nex-warning), #fff 80%);\n  border-color: var(--nex-warning);\n  color: var(--nex-warning);\n}\n.nex-alert.nex-alert--warning .nex-alert__dismiss-button {\n  color: var(--nex-warning);\n}\n.nex-alert .nex-alert__dismiss-button {\n  background: none;\n  border: none;\n  margin: 0;\n  padding: 0;\n  cursor: pointer;\n}\n\n.nex-alerts-wrapper {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  gap: 0.8888888889rem;\n  padding-top: 1.3333333333rem;\n  z-index: 999;\n}";
-styleInject(css_248z$i);
-
-/**
- * NexAlert component
- *
- * A component to display alert messages with various types and an optional auto-dismiss feature.
- *
- * @param {string} message - The message to display in the alert.
- * @param {'error' | 'success' | 'info' | 'warning'} type - The type of the alert which determines its style. Default is 'info'.
- * @param {number} [timeout=0] - The time in seconds before the alert automatically dismisses itself. Default is 0 (no auto-dismiss).
- * @param {function} [handleDismiss=null] - The function to call when the alert is dismissed.
- */
 const NexAlert = ({
   message = '',
   type = 'info',
@@ -62,6 +27,7 @@ const NexAlert = ({
       }, timeout * 1000);
       return () => clearTimeout(dismissTimer);
     }
+    return undefined; // Explicit return for when condition is false
   }, [timeout, handleDismiss]);
   const dismissAlert = e => {
     e.preventDefault();
@@ -87,14 +53,17 @@ const NexAlert = ({
     }
   };
   const alertClass = `nex-alert ${getAlertClass(type)} ${isVisible ? 'visible' : 'hidden'}`;
-  return message?.length ? /*#__PURE__*/React__default.createElement("div", {
-    className: alertClass
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-alert__message"
-  }, message), handleDismiss && /*#__PURE__*/React__default.createElement("button", {
-    className: "nex-alert__dismiss-button",
-    onClick: dismissAlert
-  }, "Dismiss")) : null;
+  return message?.length ? /*#__PURE__*/jsxs("div", {
+    className: alertClass,
+    children: [/*#__PURE__*/jsx("div", {
+      className: "nex-alert__message",
+      children: message
+    }), handleDismiss && /*#__PURE__*/jsx("button", {
+      className: "nex-alert__dismiss-button",
+      onClick: dismissAlert,
+      children: "Dismiss"
+    })]
+  }) : null;
 };
 /**
  * NexAlertsWrapper component
@@ -106,20 +75,11 @@ const NexAlert = ({
 const NexAlertsWrapper = ({
   children
 }) => {
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-alerts-wrapper"
-  }, children);
+  return /*#__PURE__*/jsx("div", {
+    className: "nex-alerts-wrapper",
+    children: children
+  });
 };
-
-function _extends() {
-  return _extends = Object.assign ? Object.assign.bind() : function (n) {
-    for (var e = 1; e < arguments.length; e++) {
-      var t = arguments[e];
-      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
-    }
-    return n;
-  }, _extends.apply(null, arguments);
-}
 
 const NexAlertsContext = /*#__PURE__*/createContext(undefined);
 const NexAlertsProvider = ({
@@ -129,7 +89,10 @@ const NexAlertsProvider = ({
   const addAlert = alert => {
     const id = Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
     if (alerts.length >= 4) {
-      dismissAlert(alerts[alerts.length - 1].id);
+      const lastAlert = alerts[alerts.length - 1];
+      if (lastAlert) {
+        dismissAlert(lastAlert.id);
+      }
     }
     setAlerts(prev => [{
       ...alert,
@@ -140,17 +103,19 @@ const NexAlertsProvider = ({
   const dismissAlert = id => {
     setAlerts(prev => prev.filter(alert => alert.id !== id));
   };
-  return /*#__PURE__*/React__default.createElement(NexAlertsContext.Provider, {
+  return /*#__PURE__*/jsxs(NexAlertsContext.Provider, {
     value: {
       alerts,
       addAlert,
       dismissAlert
-    }
-  }, /*#__PURE__*/React__default.createElement(NexAlertsWrapper, null, alerts.map(alert => /*#__PURE__*/React__default.createElement(NexAlert, _extends({
-    key: alert.id
-  }, alert, {
-    handleDismiss: () => dismissAlert(alert.id)
-  })))), children);
+    },
+    children: [/*#__PURE__*/jsx(NexAlertsWrapper, {
+      children: alerts.map(alert => /*#__PURE__*/jsx(NexAlert, {
+        ...alert,
+        handleDismiss: () => dismissAlert(alert.id)
+      }, alert.id))
+    }), children]
+  });
 };
 const useAlerts = () => {
   const [alertIds, setAlertIds] = useState([]);
@@ -179,116 +144,1210 @@ const useAlerts = () => {
   };
 };
 
-var css_248z$h = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-button {\n  min-height: 1.7777777778rem;\n  padding: 0.5333333333rem 0.7111111111rem;\n  border: none;\n  border-radius: 0.8888888889rem;\n  background-color: #F0F0F0;\n  font-size: 0.8rem;\n  font-weight: 500;\n  line-height: 0.92rem;\n  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n  cursor: pointer;\n}\n.nex-button:hover {\n  background-color: #d7d7d7;\n}\n.nex-button--small {\n  font-size: 0.7111111111rem;\n  line-height: 0.8177777778rem;\n  font-weight: 700;\n}\n.nex-button--large {\n  font-size: 1.4222222222rem;\n  line-height: 2.3111111111rem;\n}\n.nex-button--primary {\n  background-color: var(--nex-primary-color);\n  color: var(--nex-primary-contrast-color);\n}\n.nex-button--primary:hover {\n  background-color: rgba(var(--nex-primary-color-rgb), 0.85);\n}\n.nex-button--secondary {\n  background-color: var(--nex-secondary-color);\n  color: var(--nex-secondary-contrast-color);\n}\n.nex-button--secondary:hover {\n  background-color: rgba(var(--nex-secondary-color-rgb), 0.85);\n}\n.nex-button--tertiary {\n  background-color: var(--nex-tertiary-color);\n  color: var(--nex-tertiary-contrast-color);\n}\n.nex-button--tertiary:hover {\n  background-color: rgba(var(--nex-tertiary-color-rgb), 0.85);\n}\n.nex-button--quaternary {\n  background-color: var(--nex-quaternary-color);\n  color: var(--nex-quaternary-contrast-color);\n}\n.nex-button--quaternary:hover {\n  background-color: rgba(var(--nex-quaternary-color-rgb), 0.85);\n}\n.nex-button--success {\n  background-color: var(--nex-success);\n  color: #fff;\n}\n.nex-button--success:hover {\n  background-color: rgba(var(--nex-success-rgb), 0.85);\n}\n.nex-button--info {\n  background-color: var(--nex-info);\n  color: #fff;\n}\n.nex-button--info:hover {\n  background-color: rgba(var(--nex-info-rgb), 0.85);\n}\n.nex-button--warning {\n  background-color: var(--nex-warning);\n  color: #fff;\n}\n.nex-button--warning:hover {\n  background-color: rgba(var(--nex-warning-rgb), 0.85);\n}\n.nex-button--danger {\n  background-color: var(--nex-danger);\n  color: #fff;\n}\n.nex-button--danger:hover {\n  background-color: rgba(var(--nex-danger-rgb), 0.85);\n}\n.nex-button.inverted {\n  border: 0.1333333333rem solid transparent;\n  background-color: transparent;\n}\n.nex-button.inverted.nex-button--primary {\n  border-color: var(--nex-primary-color);\n  color: var(--nex-primary-color);\n}\n.nex-button.inverted.nex-button--primary:hover {\n  background-color: var(--nex-primary-color);\n  color: var(--nex-primary-contrast-color);\n}\n.nex-button.inverted.nex-button--secondary {\n  border-color: var(--nex-secondary-color);\n  color: var(--nex-secondary-color);\n}\n.nex-button.inverted.nex-button--secondary:hover {\n  background-color: var(--nex-secondary-color);\n  color: var(--nex-secondary-contrast-color);\n}\n.nex-button.inverted.nex-button--tertiary {\n  border-color: var(--nex-tertiary-color);\n  color: var(--nex-tertiary-color);\n}\n.nex-button.inverted.nex-button--tertiary:hover {\n  background-color: var(--nex-tertiary-color);\n  color: var(--nex-tertiary-contrast-color);\n}\n.nex-button.inverted.nex-button--quaternary {\n  border-color: var(--nex-quaternary-color);\n  color: var(--nex-quaternary-color);\n}\n.nex-button.inverted.nex-button--quaternary:hover {\n  background-color: var(--nex-quaternary-color);\n  color: var(--nex-quaternary-contrast-color);\n}\n.nex-button.inverted.nex-button--success {\n  border-color: var(--nex-success);\n  color: var(--nex-success);\n}\n.nex-button.inverted.nex-button--success:hover {\n  background-color: var(--nex-success);\n  color: #fff;\n}\n.nex-button.inverted.nex-button--info {\n  border-color: var(--nex-info);\n  color: var(--nex-info);\n}\n.nex-button.inverted.nex-button--info:hover {\n  background-color: var(--nex-info);\n  color: #fff;\n}\n.nex-button.inverted.nex-button--warning {\n  border-color: var(--nex-warning);\n  color: var(--nex-warning);\n}\n.nex-button.inverted.nex-button--warning:hover {\n  background-color: var(--nex-warning);\n  color: #fff;\n}\n.nex-button.inverted.nex-button--danger {\n  border-color: var(--nex-danger);\n  color: var(--nex-danger);\n}\n.nex-button.inverted.nex-button--danger:hover {\n  background-color: var(--nex-danger);\n  color: #fff;\n}\n.nex-button.inverted-default {\n  border: none;\n  background-color: var(--nex-font-color);\n  color: #fff;\n}\n.nex-button.inverted-default:hover {\n  background-color: rgba(var(--nex-font-color-rgb), 0.85);\n}\n.nex-button--glass {\n  border: 0.0444444444rem solid rgba(0, 0, 0, 0.05);\n  background-color: transparent;\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px);\n  color: #fff;\n}\n.nex-button--glass:hover {\n  border-color: rgba(0, 0, 0, 0.25);\n  background-color: transparent;\n}";
-styleInject(css_248z$h);
+// Enterprise Animation System - Comprehensive Configuration
+const ANIMATION_CONFIG = {
+  // Core timing presets with cubic-bezier easing
+  timing: {
+    instant: {
+      duration: 0.05,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    fast: {
+      duration: 0.12,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    medium: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    slow: {
+      duration: 0.35,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    slower: {
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    slowest: {
+      duration: 0.7,
+      ease: [0.4, 0, 0.2, 1]
+    }
+  },
+  // Advanced spring configurations
+  spring: {
+    // Responsive spring for interactive elements
+    responsive: {
+      type: "spring",
+      stiffness: 450,
+      damping: 28,
+      mass: 0.8,
+      restDelta: 0.001
+    },
+    // Fast spring for immediate feedback
+    fast: {
+      type: "spring",
+      stiffness: 600,
+      damping: 25,
+      mass: 0.6,
+      restDelta: 0.001
+    },
+    // Smooth spring for elegant animations
+    smooth: {
+      type: "spring",
+      stiffness: 300,
+      damping: 35,
+      mass: 1.0,
+      restDelta: 0.001
+    },
+    // Heavy spring for substantial elements
+    heavy: {
+      type: "spring",
+      stiffness: 200,
+      damping: 40,
+      mass: 1.4,
+      restDelta: 0.001
+    }
+  },
+  // Enterprise stagger configurations
+  stagger: {
+    // Main container stagger
+    container: {
+      animate: {
+        transition: {
+          delayChildren: 0.08,
+          staggerChildren: 0.04,
+          staggerDirection: 1
+        }
+      }
+    },
+    // Fast stagger for immediate feedback
+    fast: {
+      animate: {
+        transition: {
+          delayChildren: 0.02,
+          staggerChildren: 0.02,
+          staggerDirection: 1
+        }
+      }
+    },
+    // Slow stagger for dramatic reveals
+    slow: {
+      animate: {
+        transition: {
+          delayChildren: 0.15,
+          staggerChildren: 0.08,
+          staggerDirection: 1
+        }
+      }
+    },
+    // Dropdown stagger for menu items
+    dropdown: {
+      animate: {
+        transition: {
+          delayChildren: 0.04,
+          staggerChildren: 0.03,
+          staggerDirection: 1
+        }
+      }
+    },
+    // Grid stagger for card layouts
+    grid: {
+      animate: {
+        transition: {
+          delayChildren: 0.06,
+          staggerChildren: 0.05,
+          staggerDirection: 1
+        }
+      }
+    }
+  }
+};
+// Enterprise Animation Variants
+const ANIMATION_VARIANTS = {
+  // Core fade animations
+  fade: {
+    in: {
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      exit: {
+        opacity: 0
+      }
+    },
+    inUp: {
+      initial: {
+        opacity: 0,
+        y: 20
+      },
+      animate: {
+        opacity: 1,
+        y: 0
+      },
+      exit: {
+        opacity: 0,
+        y: -20
+      }
+    },
+    inDown: {
+      initial: {
+        opacity: 0,
+        y: -20
+      },
+      animate: {
+        opacity: 1,
+        y: 0
+      },
+      exit: {
+        opacity: 0,
+        y: 20
+      }
+    },
+    inLeft: {
+      initial: {
+        opacity: 0,
+        x: 20
+      },
+      animate: {
+        opacity: 1,
+        x: 0
+      },
+      exit: {
+        opacity: 0,
+        x: -20
+      }
+    },
+    inRight: {
+      initial: {
+        opacity: 0,
+        x: -20
+      },
+      animate: {
+        opacity: 1,
+        x: 0
+      },
+      exit: {
+        opacity: 0,
+        x: 20
+      }
+    }
+  },
+  // Scale animations
+  scale: {
+    in: {
+      initial: {
+        scale: 0.8,
+        opacity: 0
+      },
+      animate: {
+        scale: 1,
+        opacity: 1
+      },
+      exit: {
+        scale: 0.8,
+        opacity: 0
+      }
+    },
+    inUp: {
+      initial: {
+        scale: 0.8,
+        y: 20,
+        opacity: 0
+      },
+      animate: {
+        scale: 1,
+        y: 0,
+        opacity: 1
+      },
+      exit: {
+        scale: 0.8,
+        y: -20,
+        opacity: 0
+      }
+    },
+    inDown: {
+      initial: {
+        scale: 0.8,
+        y: -20,
+        opacity: 0
+      },
+      animate: {
+        scale: 1,
+        y: 0,
+        opacity: 1
+      },
+      exit: {
+        scale: 0.8,
+        y: 20,
+        opacity: 0
+      }
+    }
+  },
+  // Mobile Navigation System
+  mobileNav: {
+    // Main container animation
+    container: {
+      initial: {
+        y: '-100%',
+        opacity: 0,
+        backdropFilter: 'blur(0px) saturate(100%)'
+      },
+      animate: {
+        y: 0,
+        opacity: 1,
+        backdropFilter: 'blur(24px) saturate(180%)',
+        transition: {
+          type: "spring",
+          stiffness: 300,
+          damping: 35,
+          mass: 1.0
+        }
+      },
+      exit: {
+        y: '-100%',
+        opacity: 0,
+        backdropFilter: 'blur(0px) saturate(100%)',
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 30,
+          mass: 0.8
+        }
+      }
+    },
+    // Header section
+    header: {
+      initial: {
+        opacity: 0,
+        y: -10
+      },
+      animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 30
+        }
+      },
+      exit: {
+        opacity: 0,
+        y: -10
+      }
+    },
+    // Navigation items
+    navItem: {
+      initial: {
+        opacity: 0,
+        y: -8,
+        scale: 0.95
+      },
+      animate: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+          type: "spring",
+          stiffness: 450,
+          damping: 28
+        }
+      },
+      exit: {
+        opacity: 0,
+        y: -8,
+        scale: 0.95
+      }
+    },
+    // Section titles
+    sectionTitle: {
+      initial: {
+        opacity: 0,
+        x: -10
+      },
+      animate: {
+        opacity: 1,
+        x: 0,
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 30
+        }
+      },
+      exit: {
+        opacity: 0,
+        x: -10
+      }
+    },
+    // Dropdown containers
+    dropdownContainer: {
+      initial: {
+        opacity: 0,
+        height: 0,
+        scale: 0.95
+      },
+      animate: {
+        opacity: 1,
+        height: 'auto',
+        scale: 1,
+        transition: {
+          height: {
+            duration: 0.25,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          opacity: {
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          scale: {
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1]
+          }
+        }
+      },
+      exit: {
+        opacity: 0,
+        height: 0,
+        scale: 0.95,
+        transition: {
+          height: {
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          opacity: {
+            duration: 0.15,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          scale: {
+            duration: 0.15,
+            ease: [0.4, 0, 0.2, 1]
+          }
+        }
+      }
+    },
+    // Dropdown items
+    dropdownItem: {
+      initial: {
+        opacity: 0,
+        y: -6,
+        scale: 0.95,
+        x: -5
+      },
+      animate: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        x: 0,
+        transition: {
+          type: "spring",
+          stiffness: 500,
+          damping: 25
+        }
+      },
+      exit: {
+        opacity: 0,
+        y: -6,
+        scale: 0.95,
+        x: -5
+      }
+    },
+    // User avatar
+    avatar: {
+      initial: {
+        opacity: 0,
+        scale: 0.8,
+        rotate: -10
+      },
+      animate: {
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 30
+        }
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.8,
+        rotate: -10
+      }
+    },
+    // Badge animations
+    badge: {
+      initial: {
+        opacity: 0,
+        scale: 0.5
+      },
+      animate: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          type: "spring",
+          stiffness: 600,
+          damping: 25
+        }
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.5
+      }
+    },
+    // Icon rotations
+    iconRotate: {
+      closed: {
+        rotate: 0
+      },
+      open: {
+        rotate: 180
+      }
+    }
+  },
+  // Interactive elements
+  interactive: {
+    // Button states
+    button: {
+      idle: {
+        scale: 1,
+        backgroundColor: "rgba(255, 255, 255, 0.08)",
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)"
+      },
+      hover: {
+        scale: 1.02,
+        backgroundColor: "rgba(255, 255, 255, 0.12)",
+        borderColor: "rgba(255, 255, 255, 0.18)",
+        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)"
+      },
+      tap: {
+        scale: 0.98,
+        backgroundColor: "rgba(255, 24, 1, 0.15)",
+        borderColor: "rgba(255, 24, 1, 0.25)",
+        boxShadow: "0 2px 8px rgba(255, 24, 1, 0.2)"
+      },
+      focus: {
+        outline: "2px solid var(--nex-signature)",
+        outlineOffset: "2px",
+        boxShadow: "0 0 0 4px rgba(255, 24, 1, 0.1)"
+      }
+    },
+    // Nav item states (removed translateX for mobile nav)
+    navItem: {
+      idle: {
+        backgroundColor: "transparent"
+      },
+      hover: {
+        backgroundColor: "rgba(255, 255, 255, 0.06)"
+      },
+      active: {
+        backgroundColor: "rgba(255, 255, 255, 0.1)"
+      }
+    },
+    // Enterprise hamburger button animations
+    hamburger: {
+      // Container rotation
+      container: {
+        closed: {
+          rotate: 0,
+          scale: 1,
+          transition: {
+            type: "spring",
+            stiffness: 400,
+            damping: 30
+          }
+        },
+        open: {
+          rotate: 180,
+          scale: 1.05,
+          transition: {
+            type: "spring",
+            stiffness: 400,
+            damping: 30
+          }
+        }
+      },
+      // Menu icon (hamburger lines)
+      menuIcon: {
+        closed: {
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          transition: {
+            type: "spring",
+            stiffness: 500,
+            damping: 25
+          }
+        },
+        open: {
+          opacity: 0,
+          scale: 0.8,
+          rotate: -45,
+          transition: {
+            type: "spring",
+            stiffness: 500,
+            damping: 25
+          }
+        }
+      },
+      // Close icon (X)
+      closeIcon: {
+        closed: {
+          opacity: 0,
+          scale: 0.8,
+          rotate: 45,
+          transition: {
+            type: "spring",
+            stiffness: 500,
+            damping: 25
+          }
+        },
+        open: {
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          transition: {
+            type: "spring",
+            stiffness: 500,
+            damping: 25
+          }
+        }
+      }
+    }
+  },
+  // Background transitions
+  background: {
+    transparent: {
+      background: 'rgba(255,255,255,0)',
+      backdropFilter: 'blur(0px) saturate(100%)',
+      WebkitBackdropFilter: 'blur(0px) saturate(100%)',
+      borderBottom: 'none',
+      boxShadow: 'none'
+    },
+    light: {
+      background: 'rgba(255,255,255,0.7)',
+      backdropFilter: 'blur(24px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+      borderBottom: '1.5px solid rgba(255,255,255,0.22)',
+      boxShadow: '0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset'
+    },
+    medium: {
+      background: 'rgba(255,255,255,0.85)',
+      backdropFilter: 'blur(32px) saturate(200%)',
+      WebkitBackdropFilter: 'blur(32px) saturate(200%)',
+      borderBottom: '1.5px solid rgba(255,255,255,0.3)',
+      boxShadow: '0 12px 40px -12px rgba(0,0,0,0.15), 0 0 0 1.5px rgba(255,255,255,0.2) inset'
+    },
+    dark: {
+      background: 'rgba(255,255,255,0.95)',
+      backdropFilter: 'blur(40px) saturate(220%)',
+      WebkitBackdropFilter: 'blur(40px) saturate(220%)',
+      borderBottom: '1.5px solid rgba(255,255,255,0.4)',
+      boxShadow: '0 16px 48px -16px rgba(0,0,0,0.18), 0 0 0 1.5px rgba(255,255,255,0.25) inset'
+    }
+  }
+};
+// Performance optimization system
+const PERFORMANCE_CONFIG = {
+  // Hardware acceleration presets
+  hardwareAcceleration: {
+    transform: 'translateZ(0)',
+    backfaceVisibility: 'hidden',
+    perspective: '1000px',
+    willChange: 'transform, opacity'
+  },
+  // Will-change hints for different animation types
+  willChange: {
+    transform: 'transform',
+    opacity: 'opacity',
+    background: 'background-color',
+    backdrop: 'backdrop-filter',
+    all: 'transform, opacity, background-color, border-color, box-shadow, backdrop-filter'
+  },
+  // Animation performance modes
+  performance: {
+    high: {
+      willChange: 'transform, opacity, backdrop-filter',
+      transform: 'translateZ(0)',
+      backfaceVisibility: 'hidden'
+    },
+    medium: {
+      willChange: 'transform, opacity',
+      transform: 'translateZ(0)'
+    },
+    low: {
+      willChange: 'opacity'
+    }
+  }
+};
+// Enterprise color schemes
+const COLOR_SCHEMES = {
+  // Mobile navigation system
+  mobileNav: {
+    background: {
+      primary: 'linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%), linear-gradient(90deg, rgba(255,24,1,0.08) 0%, rgba(0,184,255,0.08) 100%)',
+      secondary: 'linear-gradient(120deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%)',
+      dark: 'linear-gradient(120deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%)'
+    },
+    backdrop: {
+      light: 'blur(24px) saturate(180%)',
+      medium: 'blur(32px) saturate(200%)',
+      heavy: 'blur(40px) saturate(220%)'
+    },
+    border: {
+      light: '1.5px solid rgba(255, 255, 255, 0.22)',
+      medium: '1.5px solid rgba(255, 255, 255, 0.3)',
+      heavy: '1.5px solid rgba(255, 255, 255, 0.4)'
+    },
+    shadow: {
+      light: '0 8px 32px -8px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(255,255,255,0.13) inset',
+      medium: '0 12px 40px -12px rgba(0,0,0,0.15), 0 0 0 1.5px rgba(255,255,255,0.2) inset',
+      heavy: '0 16px 48px -16px rgba(0,0,0,0.18), 0 0 0 1.5px rgba(255,255,255,0.25) inset'
+    }
+  },
+  // Interactive elements
+  interactive: {
+    navItem: {
+      idle: 'rgba(255, 255, 255, 0.02)',
+      hover: 'rgba(255, 255, 255, 0.06)',
+      active: 'rgba(255, 255, 255, 0.1)',
+      selected: 'rgba(255, 24, 1, 0.08)'
+    },
+    button: {
+      primary: {
+        idle: 'rgba(255, 255, 255, 0.08)',
+        hover: 'rgba(255, 255, 255, 0.12)',
+        active: 'rgba(255, 24, 1, 0.15)'
+      },
+      secondary: {
+        idle: 'rgba(255, 255, 255, 0.06)',
+        hover: 'rgba(255, 255, 255, 0.1)',
+        active: 'rgba(255, 24, 1, 0.12)'
+      }
+    }
+  }
+};
+// Enterprise hook with comprehensive configuration
+const useAnimationConfig = () => {
+  const shouldReduceMotion = useReducedMotion();
+  // Reduced motion overrides
+  const reducedMotionConfig = {
+    timing: {
+      instant: {
+        duration: 0.02,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      fast: {
+        duration: 0.08,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      medium: {
+        duration: 0.12,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      slow: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      slower: {
+        duration: 0.25,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      slowest: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    stagger: {
+      container: {
+        animate: {
+          transition: {
+            delayChildren: 0.02,
+            staggerChildren: 0.01,
+            staggerDirection: 1
+          }
+        }
+      },
+      fast: {
+        animate: {
+          transition: {
+            delayChildren: 0.01,
+            staggerChildren: 0.005,
+            staggerDirection: 1
+          }
+        }
+      },
+      slow: {
+        animate: {
+          transition: {
+            delayChildren: 0.05,
+            staggerChildren: 0.02,
+            staggerDirection: 1
+          }
+        }
+      },
+      dropdown: {
+        animate: {
+          transition: {
+            delayChildren: 0.01,
+            staggerChildren: 0.01,
+            staggerDirection: 1
+          }
+        }
+      },
+      grid: {
+        animate: {
+          transition: {
+            delayChildren: 0.02,
+            staggerChildren: 0.01,
+            staggerDirection: 1
+          }
+        }
+      }
+    }
+  };
+  return {
+    ...ANIMATION_CONFIG,
+    ...(shouldReduceMotion && reducedMotionConfig),
+    shouldReduceMotion,
+    performance: PERFORMANCE_CONFIG,
+    variants: ANIMATION_VARIANTS,
+    colors: COLOR_SCHEMES
+  };
+};
+// Legacy exports for backward compatibility
+ANIMATION_CONFIG.timing.fast;
+ANIMATION_CONFIG.timing.medium;
+ANIMATION_CONFIG.timing.slow;
+ANIMATION_CONFIG.timing.slower;
+ANIMATION_CONFIG.spring.responsive;
+ANIMATION_CONFIG.stagger.container;
 
-/**
- * NexButton component
- *
- * A versatile button component with customizable styles and behavior.
- *
- * @param {function} onClick - The function to call when the button is clicked.
- * @param {string} className - Additional class names to apply to the button.
- * @param {'small' | 'normal' | 'large'} size - The size of the button. Default is 'normal'.
- * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the button which determines its color and style.
- * @param {boolean} inverted - Whether to apply an inverted style to the button.
- * @param {string} text - The text to display inside the button.
- */
 const NexButton = ({
   onClick,
   className,
   size = 'normal',
   inverted,
   type,
-  text
+  text,
+  disabled = false,
+  loading = false,
+  icon,
+  iconPosition = 'left',
+  ...rest
 }) => {
+  const {
+    timing,
+    spring,
+    shouldReduceMotion
+  } = useAnimationConfig();
   const getTypeClass = type => {
     if (!type) return '';
-    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger', 'glass'];
+    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger', 'glass', 'enterprise'];
     return colorNames.includes(type) ? `nex-button--${type}` : '';
   };
   const getSizeClass = size => {
     return size ? `nex-button--${size}` : '';
   };
-  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getTypeClass(type)} ${inverted ? 'inverted' : ''} ${!type && inverted ? 'inverted-default' : ''}`;
-  return /*#__PURE__*/React__default.createElement("button", {
+  const buttonClasses = `nex-button ${className || ''} ${getSizeClass(size)} ${getTypeClass(type)} ${inverted ? 'inverted' : ''} ${!type && inverted ? 'inverted-default' : ''} ${disabled ? 'disabled' : ''} ${loading ? 'loading' : ''}`;
+  const handleClick = e => {
+    if (disabled || loading) return;
+    onClick?.(e);
+  };
+  const handleKeyDown = e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!disabled && !loading) {
+        onClick?.(e);
+      }
+    }
+  };
+  // Animation variants - no scale animations
+  const buttonVariants = {
+    initial: {
+      opacity: 0,
+      y: 10
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    hover: {
+      y: shouldReduceMotion ? 0 : -2,
+      transition: timing.fast
+    },
+    tap: {
+      y: shouldReduceMotion ? 0 : 1,
+      transition: timing.fast
+    }
+  };
+  const iconVariants = {
+    initial: {
+      opacity: 0,
+      x: iconPosition === 'left' ? -10 : 10
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  const loadingVariants = {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  // Animated dots for loading
+  const LoadingDots = () => /*#__PURE__*/jsxs(motion.div, {
+    className: "nex-button-loading-dots",
+    variants: loadingVariants,
+    initial: "initial",
+    animate: "animate",
+    children: [/*#__PURE__*/jsx(motion.span, {
+      animate: {
+        opacity: [0.3, 1, 0.3]
+      },
+      transition: {
+        duration: 1.4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      },
+      children: "."
+    }), /*#__PURE__*/jsx(motion.span, {
+      animate: {
+        opacity: [0.3, 1, 0.3]
+      },
+      transition: {
+        duration: 1.4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: 0.2
+      },
+      children: "."
+    }), /*#__PURE__*/jsx(motion.span, {
+      animate: {
+        opacity: [0.3, 1, 0.3]
+      },
+      transition: {
+        duration: 1.4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: 0.4
+      },
+      children: "."
+    })]
+  });
+  return /*#__PURE__*/jsxs(motion.button, {
     className: buttonClasses,
-    onClick: onClick
-  }, text);
+    onClick: handleClick,
+    onKeyDown: handleKeyDown,
+    disabled: disabled || loading,
+    role: "button",
+    tabIndex: disabled ? -1 : 0,
+    "aria-disabled": disabled || loading,
+    "aria-label": text,
+    variants: buttonVariants,
+    initial: "initial",
+    animate: "animate",
+    whileHover: disabled || loading ? {} : "hover",
+    whileTap: disabled || loading ? {} : "tap",
+    whileFocus: {
+      outline: "2px solid var(--nex-signature)",
+      outlineOffset: "2px",
+      transition: timing.fast
+    },
+    ...rest,
+    children: [loading && /*#__PURE__*/jsx(LoadingDots, {}), /*#__PURE__*/jsxs("div", {
+      className: "nex-button-content",
+      children: [icon && !loading && /*#__PURE__*/jsx(motion.div, {
+        className: `nex-button-icon nex-button-icon--${iconPosition}`,
+        variants: iconVariants,
+        initial: "initial",
+        animate: "animate",
+        children: icon
+      }), text && !loading && /*#__PURE__*/jsx(motion.span, {
+        className: "nex-button-text",
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1
+        },
+        transition: {
+          delay: shouldReduceMotion ? 0 : 0.1
+        },
+        children: text
+      })]
+    }), /*#__PURE__*/jsx(motion.div, {
+      className: "nex-button-ripple",
+      initial: {
+        scale: 0,
+        opacity: 0
+      },
+      whileTap: {
+        scale: 2,
+        opacity: [0, 0.3, 0],
+        transition: {
+          duration: 0.6,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      }
+    })]
+  });
 };
 
-var css_248z$g = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-card-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 19.5555555556rem;\n  min-height: 20.1777777778rem;\n  border: 0.0444444444rem solid transparent;\n  border-radius: 1.5333333333rem;\n  position: relative;\n  overflow: hidden;\n}\n.nex-card-wrapper.border {\n  border-color: rgba(0, 0, 0, 0.05);\n}\n.nex-card-wrapper:hover .background-blob {\n  -webkit-transform: scale(7);\n  -ms-transform: scale(7);\n  transform: scale(7);\n}\n.nex-card-wrapper:hover .nex-card-inner-wrapper .nex-card-image:before {\n  transform: scale(1.2);\n}\n.nex-card-wrapper:not(.has-image) {\n  justify-content: flex-end;\n  min-height: 9.7777777778rem;\n}\n.nex-card-wrapper:hover:not(.has-image) .nex-card-inner-wrapper {\n  color: #fff;\n}\n@media (max-width: 768px) {\n  .nex-card-wrapper {\n    width: 100%;\n  }\n}\n.nex-card-wrapper .nex-card-inner-wrapper {\n  z-index: 1;\n  display: flex;\n  align-items: flex-start;\n  justify-content: center;\n  flex-direction: column;\n  width: 18.6666666667rem;\n  padding: 0.6444444444rem;\n  color: var(--nex-font-color);\n  transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-card-wrapper .nex-card-inner-wrapper .nex-card-image {\n  position: relative;\n  width: 100%;\n  height: 12.1777777778rem;\n  border-radius: 0.8888888889rem;\n  overflow: hidden;\n}\n.nex-card-wrapper .nex-card-inner-wrapper .nex-card-image:before {\n  z-index: 0;\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-image: var(--background-url);\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat;\n  border-radius: 0.8888888889rem;\n  transition: transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-card-wrapper .nex-card-inner-wrapper .nex-card-title {\n  margin-top: 2.2222222222rem;\n  font-size: 1.0222222222rem;\n  font-weight: 800;\n}\n@media (max-width: 768px) {\n  .nex-card-wrapper .nex-card-inner-wrapper .nex-card-title {\n    font-size: 2.2222222222rem;\n  }\n}\n.nex-card-wrapper .nex-card-inner-wrapper .nex-card-text {\n  font-size: 0.7111111111rem;\n  margin: 0.3555555556rem 0;\n}\n@media (max-width: 768px) {\n  .nex-card-wrapper .nex-card-inner-wrapper .nex-card-text {\n    font-size: 0.9777777778rem;\n  }\n}\n.nex-card-wrapper .nex-card-inner-wrapper .nex-card-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.8888888889rem;\n  margin-top: 0.4444444444rem;\n  width: 18.6666666667rem;\n}\n.nex-card-wrapper .background-blob {\n  height: 7.1111111111rem;\n  width: 7.1111111111rem;\n  background-color: var(--nex-primary-color);\n  z-index: 1;\n  position: absolute;\n  top: -4.4444444444rem;\n  right: -4.4444444444rem;\n  border-radius: 50%;\n  -webkit-transition: all 0.5s ease;\n  -o-transition: all 0.5s ease;\n  transition: all 0.5s ease;\n}\n.nex-card-wrapper--primary .background-blob {\n  background-color: var(--nex-primary-color);\n}\n.nex-card-wrapper--secondary .background-blob {\n  background-color: var(--nex-secondary-color);\n}\n.nex-card-wrapper--tertiary .background-blob {\n  background-color: var(--nex-tertiary-color);\n}\n.nex-card-wrapper--quaternary .background-blob {\n  background-color: var(--nex-quaternary-color);\n}\n.nex-card-wrapper--success .background-blob {\n  background-color: var(--nex-success);\n}\n.nex-card-wrapper--info .background-blob {\n  background-color: var(--nex-info);\n}\n.nex-card-wrapper--warning .background-blob {\n  background-color: var(--nex-warning);\n}\n.nex-card-wrapper--danger .background-blob {\n  background-color: var(--nex-danger);\n}";
-styleInject(css_248z$g);
+const CardHeader = ({
+  title,
+  badge,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  if (!title && !badge) return null;
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: `nex-card-header ${className || ''}`,
+    initial: {
+      opacity: 0,
+      y: -10
+    },
+    animate: {
+      opacity: 1,
+      y: 0
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: [title && /*#__PURE__*/jsx(motion.h3, {
+      className: "nex-card-title",
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      transition: {
+        delay: shouldReduceMotion ? 0 : 0.1
+      },
+      children: title
+    }), badge && /*#__PURE__*/jsx(motion.div, {
+      className: "nex-card-badge",
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      transition: {
+        delay: shouldReduceMotion ? 0 : 0.2
+      },
+      children: badge
+    })]
+  });
+};
 
-/**
- * NexCard component
- *
- * A versatile card component that can display a title, content, image, and actions.
- *
- * @param {string} title - The title of the card.
- * @param {string} content - The content or body text of the card.
- * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the card which determines its style.
- * @param {string} imageUrl - The URL of the image to display in the card.
- * @param {React.ReactNode} actions - The actions or buttons to display in the card.
- * @param {boolean} [border=true] - Whether to display a border around the card
- * @param {string} className -  Additional class names to apply to the button.
- */
+const CardImage = ({
+  src,
+  alt,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  if (!src) return null;
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-card-image ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.2 : 0.5,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: /*#__PURE__*/jsx("img", {
+      src: src,
+      alt: alt || 'Card image',
+      className: "nex-card-image-element"
+    })
+  });
+};
+
+const CardContent = ({
+  children,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  if (!children) return null;
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-card-content ${className || ''}`,
+    initial: {
+      opacity: 0,
+      y: 10
+    },
+    animate: {
+      opacity: 1,
+      y: 0
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      delay: shouldReduceMotion ? 0 : 0.1,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: children
+  });
+};
+
+const CardActions = ({
+  children,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  if (!children) return null;
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-card-actions ${className || ''}`,
+    initial: {
+      opacity: 0,
+      y: 10
+    },
+    animate: {
+      opacity: 1,
+      y: 0
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      delay: shouldReduceMotion ? 0 : 0.2,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: children
+  });
+};
+
 const NexCard = ({
   title,
   content,
-  type,
   imageUrl,
   actions,
-  border = true,
-  className
+  badge,
+  type = 'primary',
+  interactive = false,
+  onClick,
+  elevated = false,
+  className,
+  ...rest
 }) => {
-  const getTypeClass = type => {
-    if (imageUrl) {
-      return '';
-    } else if (!type) {
-      return 'nex-card-wrapper--primary';
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const cardClasses = `nex-card nex-card--${type} ${elevated ? 'elevated' : ''} ${interactive ? 'interactive' : ''} ${className || ''}`;
+  const handleClick = () => {
+    if (interactive && onClick) {
+      onClick();
     }
-    const colorNames = ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'info', 'warning', 'danger', 'glass'];
-    return colorNames.includes(type) ? `nex-card-wrapper--${type}` : '';
   };
-  const cardClasses = `nex-card-wrapper ${getTypeClass(type)} ${imageUrl ? 'has-image' : ''} ${border ? 'border' : ''} ${className ? className : ''}`;
-  const backgroundStyle = imageUrl ? {
-    '--background-url': `url(${imageUrl})`
-  } : {};
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: cardClasses
-  }, !imageUrl && /*#__PURE__*/React__default.createElement("div", {
-    className: "background-blob"
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-card-inner-wrapper"
-  }, imageUrl && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-card-image",
-    style: backgroundStyle
-  }), title && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-card-title"
-  }, title), content && /*#__PURE__*/React__default.createElement("p", {
-    className: "nex-card-text"
-  }, content), actions && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-card-actions"
-  }, actions)));
+  const handleKeyDown = e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (interactive && onClick) {
+        onClick();
+      }
+    }
+  };
+  // Animation variants - clean and simple
+  const cardVariants = {
+    initial: {
+      opacity: 0,
+      y: 20
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    hover: interactive ? {
+      y: shouldReduceMotion ? 0 : -8,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    } : {},
+    tap: interactive ? {
+      y: shouldReduceMotion ? 0 : -4,
+      transition: {
+        duration: 0.1,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    } : {}
+  };
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: cardClasses,
+    variants: cardVariants,
+    initial: "initial",
+    animate: "animate",
+    whileHover: interactive ? "hover" : {},
+    whileTap: interactive ? "tap" : {},
+    onClick: handleClick,
+    onKeyDown: handleKeyDown,
+    role: interactive ? "button" : undefined,
+    tabIndex: interactive ? 0 : undefined,
+    "aria-label": interactive ? title : undefined,
+    ...rest,
+    children: [/*#__PURE__*/jsx(CardImage, {
+      src: imageUrl,
+      alt: title
+    }), /*#__PURE__*/jsxs("div", {
+      className: "nex-card-body",
+      children: [/*#__PURE__*/jsx(CardHeader, {
+        title: title,
+        badge: badge
+      }), /*#__PURE__*/jsx(CardContent, {
+        children: content
+      }), /*#__PURE__*/jsx(CardActions, {
+        children: actions
+      })]
+    }), interactive && /*#__PURE__*/jsx(motion.div, {
+      className: "nex-card-ripple",
+      initial: {
+        scale: 0,
+        opacity: 0
+      },
+      whileTap: {
+        scale: 2,
+        opacity: [0, 0.2, 0],
+        transition: {
+          duration: 0.6,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      }
+    })]
+  });
 };
 
-var css_248z$f = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-hero-card-wrapper {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  align-items: center;\n  min-height: 28.4444444444rem;\n  padding: 2.8444444444rem;\n  border: 0.0444444444rem solid rgba(0, 0, 0, 0.05);\n  border-radius: 2.2222222222rem;\n  position: relative;\n  overflow: hidden;\n  transition: min-height 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-hero-card-wrapper:before {\n  z-index: 0;\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat;\n  transition: transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-hero-card-wrapper:hover:before {\n  transform: scale(1.2);\n}\n.nex-hero-card-wrapper:not(.has-background) {\n  background-color: #fff;\n}\n.nex-hero-card-wrapper.has-background:before {\n  background-image: var(--background-url);\n}\n.nex-hero-card-wrapper .content {\n  z-index: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  gap: 2.6666666667rem;\n  color: var(--nex-font-color);\n  transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-hero-card-wrapper .content .title {\n  font-size: 2.8444444444rem;\n  font-weight: 900;\n}\n.nex-hero-card-wrapper .content .subtitle {\n  font-size: 0.8888888889rem;\n}\n.nex-hero-card-wrapper .content .hero-button {\n  width: 19.3333333333rem;\n}\n.nex-hero-card-wrapper.has-background .content {\n  color: #fff;\n}\n.nex-hero-card-wrapper:hover .content {\n  color: #fff;\n}\n.nex-hero-card-wrapper:hover .background-blob {\n  -webkit-transform: scale(7);\n  -ms-transform: scale(7);\n  transform: scale(7);\n}\n@media (max-width: 768px) {\n  .nex-hero-card-wrapper {\n    grid-template-columns: 1fr;\n    min-height: 34.6222222222rem;\n    text-align: left;\n    padding: 1.4222222222rem;\n  }\n}\n.nex-hero-card-wrapper .background-blob {\n  height: 22.7555555556rem;\n  width: 22.7555555556rem;\n  background-color: var(--nex-primary-color);\n  z-index: 1;\n  position: absolute;\n  top: -13.3333333333rem;\n  right: -13.3333333333rem;\n  border-radius: 50%;\n  -webkit-transition: all 0.5s ease;\n  -o-transition: all 0.5s ease;\n  transition: all 0.5s ease;\n}\n.nex-hero-card-wrapper--primary .background-blob {\n  background-color: var(--nex-primary-color);\n}\n.nex-hero-card-wrapper--secondary .background-blob {\n  background-color: var(--nex-secondary-color);\n}\n.nex-hero-card-wrapper--tertiary .background-blob {\n  background-color: var(--nex-tertiary-color);\n}\n.nex-hero-card-wrapper--quaternary .background-blob {\n  background-color: var(--nex-quaternary-color);\n}\n.nex-hero-card-wrapper--success .background-blob {\n  background-color: var(--nex-success);\n}\n.nex-hero-card-wrapper--info .background-blob {\n  background-color: var(--nex-info);\n}\n.nex-hero-card-wrapper--warning .background-blob {\n  background-color: var(--nex-warning);\n}\n.nex-hero-card-wrapper--danger .background-blob {\n  background-color: var(--nex-danger);\n}";
-styleInject(css_248z$f);
-
-/**
- * NexHeroCard component
- *
- * A hero card component that displays a title, subtitle, and an optional button with customizable background and type styles.
- *
- * @param {string} title - The main title text to be displayed on the hero card.
- * @param {string} subtitle - The subtitle text to be displayed below the title.
- * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} [type] - The type of the hero card which determines its color style.
- * @param {string} [buttonLabel] - The label text for the button.
- * @param {() => void} [buttonHandle] - The click handler function for the button.
- * @param {string} [backgroundUrl] - The URL for the background image of the hero card.
- * @param {string} className - Additional class names to apply to the hero card.
- */
 const NexHeroCard = ({
   title,
   subtitle,
@@ -311,58 +1370,50 @@ const NexHeroCard = ({
   const backgroundStyle = backgroundUrl ? {
     '--background-url': `url(${backgroundUrl})`
   } : {};
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     className: heroCardClasses,
-    style: backgroundStyle
-  }, !backgroundUrl && /*#__PURE__*/React__default.createElement("div", {
-    className: "background-blob"
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "content"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "title"
-  }, title), /*#__PURE__*/React__default.createElement("div", {
-    className: "subtitle"
-  }, subtitle), buttonLabel && buttonHandle && /*#__PURE__*/React__default.createElement(NexButton, {
-    type: backgroundUrl ? 'glass' : '',
-    size: "large",
-    text: buttonLabel,
-    onClick: buttonHandle,
-    className: "hero-button"
-  })));
+    style: backgroundStyle,
+    children: [!backgroundUrl && /*#__PURE__*/jsx("div", {
+      className: "background-blob"
+    }), /*#__PURE__*/jsxs("div", {
+      className: "content",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "title",
+        children: title
+      }), /*#__PURE__*/jsx("div", {
+        className: "subtitle",
+        children: subtitle
+      }), buttonLabel && buttonHandle && /*#__PURE__*/jsx(NexButton, {
+        type: backgroundUrl ? 'glass' : '',
+        size: "large",
+        text: buttonLabel,
+        onClick: buttonHandle,
+        className: "hero-button"
+      })]
+    })]
+  });
 };
 
-var css_248z$e = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-simple-text-card-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  gap: 0.3555555556rem;\n  width: 19.5555555556rem;\n  min-height: 5.1555555556rem;\n  padding: 0 0.4444444444rem;\n  border: 0.0444444444rem solid transparent;\n  border-radius: 0.8888888889rem;\n  color: var(--nex-font-color);\n}\n@media (max-width: 768px) {\n  .nex-simple-text-card-wrapper {\n    align-items: center;\n    width: 100%;\n  }\n}\n.nex-simple-text-card-wrapper.border {\n  border-color: rgba(0, 0, 0, 0.05);\n}\n.nex-simple-text-card-wrapper .nex-simple-text-card-inner-wrapper {\n  display: flex;\n  flex-direction: column;\n}\n.nex-simple-text-card-wrapper .nex-simple-text-card-inner-wrapper .title {\n  line-height: 2.0057777778rem;\n  font-size: 1.4222222222rem;\n  font-weight: 900;\n  text-align: justify;\n}\n.nex-simple-text-card-wrapper .nex-simple-text-card-inner-wrapper .subtitle {\n  line-height: 1.0222222222rem;\n  font-size: 0.8888888889rem;\n  text-align: justify;\n}";
-styleInject(css_248z$e);
-
-/**
- * NexSimpleTextCard component
- *
- * Component to display a simple text card with title and subtitle.
- *
- * @param {string} title - Title of the card
- * @param {string} subtitle - Subtitle of the card
- * @param {boolean} [border=true] - Whether to display a border around the card
- * @param {string} className -  Additional class names to apply to the button.
- */
 const NexSimpleTextCard = ({
   title,
   subtitle,
   border = true,
   className
 }) => {
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-simple-text-card-wrapper ${border ? 'border' : ''} ${className ? className : ''}`
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-simple-text-card-inner-wrapper"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "title"
-  }, title), /*#__PURE__*/React__default.createElement("div", {
-    className: "subtitle"
-  }, subtitle)));
+  return /*#__PURE__*/jsx("div", {
+    className: `nex-simple-text-card-wrapper ${border ? 'border' : ''} ${className ? className : ''}`,
+    children: /*#__PURE__*/jsxs("div", {
+      className: "nex-simple-text-card-inner-wrapper",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "title",
+        children: title
+      }), /*#__PURE__*/jsx("div", {
+        className: "subtitle",
+        children: subtitle
+      })]
+    })
+  });
 };
-
-var css_248z$d = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-info-panel {\n  display: grid;\n  grid-template-columns: 2fr 1fr;\n  gap: 3.5555555556rem;\n  margin: 0 auto;\n  padding: 0.6444444444rem;\n  border-radius: 1.5333333333rem;\n  border: 0.0444444444rem solid rgba(0, 0, 0, 0.05);\n}\n.nex-info-panel .nex-info-panel-content {\n  display: flex;\n  flex-direction: column;\n  gap: 0.8888888889rem;\n  padding: 0 0.6444444444rem;\n}\n@media (max-width: 768px) {\n  .nex-info-panel .nex-info-panel-content {\n    gap: 1.7777777778rem;\n  }\n}\n.nex-info-panel .nex-info-panel-title {\n  z-index: 1;\n  font-size: 2.8444444444rem;\n  font-weight: 900;\n  color: var(--nex-font-color);\n}\n@media (max-width: 768px) {\n  .nex-info-panel .nex-info-panel-title {\n    text-align: center;\n  }\n}\n.nex-info-panel .nex-info-panel-description {\n  z-index: 1;\n  font-size: 0.8888888889rem;\n  line-height: 1.0222222222rem;\n  color: var(--nex-font-color);\n  text-align: justify;\n}\n.nex-info-panel:hover .nex-info-panel-image:before {\n  transform: scale(1.2);\n}\n.nex-info-panel .nex-info-panel-image {\n  position: relative;\n  width: 100%;\n  height: 12.1777777778rem;\n  border-radius: 0.8888888889rem;\n  overflow: hidden;\n}\n.nex-info-panel .nex-info-panel-image.mobile {\n  display: none;\n}\n.nex-info-panel .nex-info-panel-image:before {\n  z-index: 0;\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-image: var(--background-url);\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat;\n  border-radius: 0.8888888889rem;\n  transition: transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n@media (max-width: 768px) {\n  .nex-info-panel {\n    grid-template-columns: 1fr;\n  }\n  .nex-info-panel .nex-info-panel-title, .nex-info-panel .nex-info-panel-description, .nex-info-panel .nex-info-panel-image {\n    grid-column: 1/-1;\n  }\n  .nex-info-panel .nex-info-panel-image.desktop {\n    display: none;\n  }\n  .nex-info-panel .nex-info-panel-image.mobile {\n    display: flex;\n  }\n}";
-styleInject(css_248z$d);
 
 /**
  * NexInfoPanel component
@@ -382,21 +1433,482 @@ const NexInfoPanel = ({
   const backgroundStyle = imageUrl ? {
     '--background-url': `url(${imageUrl})`
   } : {};
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-info-panel ${className || ''}`
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-info-panel-content"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-info-panel-title"
-  }, title), imageUrl && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-info-panel-image mobile",
-    style: backgroundStyle
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-info-panel-description"
-  }, content)), imageUrl && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-info-panel-image desktop",
-    style: backgroundStyle
-  }));
+  return /*#__PURE__*/jsxs("div", {
+    className: `nex-info-panel ${className || ''}`,
+    children: [/*#__PURE__*/jsxs("div", {
+      className: "nex-info-panel-content",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "nex-info-panel-title",
+        children: title
+      }), imageUrl && /*#__PURE__*/jsx("div", {
+        className: "nex-info-panel-image mobile",
+        style: backgroundStyle
+      }), /*#__PURE__*/jsx("div", {
+        className: "nex-info-panel-description",
+        children: content
+      })]
+    }), imageUrl && /*#__PURE__*/jsx("div", {
+      className: "nex-info-panel-image desktop",
+      style: backgroundStyle
+    })]
+  });
+};
+
+const CarouselContainer = ({
+  children,
+  currentSlide,
+  direction,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  // Enhanced slide variants for better UX
+  const slideVariants = {
+    enter: direction => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.95,
+      filter: 'blur(4px)'
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.6,
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          duration: shouldReduceMotion ? 0.1 : 0.4
+        },
+        scale: {
+          duration: shouldReduceMotion ? 0.1 : 0.5
+        },
+        filter: {
+          duration: shouldReduceMotion ? 0.1 : 0.3
+        }
+      }
+    },
+    exit: direction => ({
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.95,
+      filter: 'blur(4px)',
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    })
+  };
+  // Background blur effect for depth
+  const backgroundVariants = {
+    enter: {
+      opacity: 0,
+      scale: 1.1
+    },
+    center: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 1.1,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-carousel-container ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.4,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: /*#__PURE__*/jsx(AnimatePresence, {
+      initial: false,
+      custom: direction,
+      mode: "wait",
+      children: /*#__PURE__*/jsxs(motion.div, {
+        custom: direction,
+        variants: slideVariants,
+        initial: "enter",
+        animate: "center",
+        exit: "exit",
+        className: "nex-carousel-slide-wrapper",
+        children: [/*#__PURE__*/jsx(motion.div, {
+          className: "nex-carousel-background",
+          variants: backgroundVariants,
+          initial: "enter",
+          animate: "center",
+          exit: "exit"
+        }), /*#__PURE__*/jsx(motion.div, {
+          className: "nex-carousel-content",
+          initial: {
+            opacity: 0,
+            y: 20
+          },
+          animate: {
+            opacity: 1,
+            y: 0
+          },
+          transition: {
+            duration: shouldReduceMotion ? 0.1 : 0.5,
+            delay: shouldReduceMotion ? 0 : 0.2,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          children: children
+        })]
+      }, currentSlide)
+    })
+  });
+};
+
+const CarouselSlide = ({
+  imageUrl,
+  title,
+  content,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: `nex-carousel-slide ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.5,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: [imageUrl && /*#__PURE__*/jsx(motion.div, {
+      className: "nex-carousel-slide-image",
+      initial: {
+        scale: 1.1
+      },
+      animate: {
+        scale: 1
+      },
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      children: /*#__PURE__*/jsx("img", {
+        src: imageUrl,
+        alt: title || 'Carousel slide'
+      })
+    }), (title || content) && /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-carousel-slide-content",
+      initial: {
+        opacity: 0,
+        y: 20
+      },
+      animate: {
+        opacity: 1,
+        y: 0
+      },
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.5,
+        delay: shouldReduceMotion ? 0 : 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      children: [title && /*#__PURE__*/jsx(motion.h2, {
+        className: "nex-carousel-slide-title",
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1
+        },
+        transition: {
+          delay: shouldReduceMotion ? 0 : 0.4
+        },
+        children: title
+      }), content && /*#__PURE__*/jsx(motion.p, {
+        className: "nex-carousel-slide-text",
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1
+        },
+        transition: {
+          delay: shouldReduceMotion ? 0 : 0.5
+        },
+        children: content
+      })]
+    })]
+  });
+};
+
+const CarouselControls = ({
+  onPrevious,
+  onNext,
+  hasPrevious,
+  hasNext,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const buttonVariants = {
+    initial: {
+      opacity: 0,
+      scale: 0.8
+    },
+    animate: {
+      opacity: 1,
+      scale: 1
+    },
+    hover: {
+      scale: shouldReduceMotion ? 1 : 1.1,
+      transition: {
+        duration: 0.2
+      }
+    },
+    tap: {
+      scale: shouldReduceMotion ? 1 : 0.95,
+      transition: {
+        duration: 0.1
+      }
+    }
+  };
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: `nex-carousel-controls ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      delay: shouldReduceMotion ? 0 : 0.5,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: [/*#__PURE__*/jsx(motion.button, {
+      className: "nex-carousel-control nex-carousel-control--prev",
+      onClick: onPrevious,
+      disabled: !hasPrevious,
+      variants: buttonVariants,
+      initial: "initial",
+      animate: "animate",
+      whileHover: "hover",
+      whileTap: "tap",
+      "aria-label": "Previous slide",
+      children: /*#__PURE__*/jsx(ChevronLeft, {
+        size: 24
+      })
+    }), /*#__PURE__*/jsx(motion.button, {
+      className: "nex-carousel-control nex-carousel-control--next",
+      onClick: onNext,
+      disabled: !hasNext,
+      variants: buttonVariants,
+      initial: "initial",
+      animate: "animate",
+      whileHover: "hover",
+      whileTap: "tap",
+      "aria-label": "Next slide",
+      children: /*#__PURE__*/jsx(ChevronRight, {
+        size: 24
+      })
+    })]
+  });
+};
+
+const CarouselIndicators = ({
+  totalSlides,
+  currentSlide,
+  onSlideChange,
+  className
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  if (totalSlides <= 1) return null;
+  const indicatorVariants = {
+    initial: {
+      opacity: 0,
+      scale: 0.8
+    },
+    animate: {
+      opacity: 1,
+      scale: 1
+    },
+    hover: {
+      scale: shouldReduceMotion ? 1 : 1.2,
+      transition: {
+        duration: 0.2
+      }
+    },
+    tap: {
+      scale: shouldReduceMotion ? 1 : 0.9,
+      transition: {
+        duration: 0.1
+      }
+    }
+  };
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-carousel-indicators ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      delay: shouldReduceMotion ? 0 : 0.6,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    children: Array.from({
+      length: totalSlides
+    }, (_, index) => /*#__PURE__*/jsx(motion.button, {
+      className: `nex-carousel-indicator ${index === currentSlide ? 'active' : ''}`,
+      onClick: () => onSlideChange(index),
+      variants: indicatorVariants,
+      initial: "initial",
+      animate: "animate",
+      whileHover: "hover",
+      whileTap: "tap",
+      "aria-label": `Go to slide ${index + 1}`,
+      "aria-current": index === currentSlide ? 'true' : 'false'
+    }, index))
+  });
+};
+
+const NexCarousel = ({
+  slides = [],
+  autoPlay = false,
+  autoPlayInterval = 5000,
+  showControls = true,
+  showIndicators = true,
+  className,
+  ...rest
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const totalSlides = slides.length;
+  const hasPrevious = currentSlide > 0;
+  const hasNext = currentSlide < totalSlides - 1;
+  const goToSlide = useCallback(index => {
+    if (index >= 0 && index < totalSlides) {
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
+    }
+  }, [currentSlide, totalSlides]);
+  const goToPrevious = useCallback(() => {
+    if (hasPrevious) {
+      setDirection(-1);
+      setCurrentSlide(currentSlide - 1);
+    }
+  }, [currentSlide, hasPrevious]);
+  const goToNext = useCallback(() => {
+    if (hasNext) {
+      setDirection(1);
+      setCurrentSlide(currentSlide + 1);
+    }
+  }, [currentSlide, hasNext]);
+  // Auto-play functionality
+  useEffect(() => {
+    if (!autoPlay || totalSlides <= 1) return;
+    const interval = setInterval(() => {
+      if (hasNext) {
+        goToNext();
+      } else {
+        goToSlide(0);
+      }
+    }, autoPlayInterval);
+    return () => clearInterval(interval);
+  }, [autoPlay, autoPlayInterval, hasNext, goToNext, goToSlide, totalSlides]);
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPrevious();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToNext();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [goToPrevious, goToNext]);
+  if (totalSlides === 0) {
+    return null;
+  }
+  const currentSlideData = slides[currentSlide];
+  // Safety check for currentSlideData
+  if (!currentSlideData) {
+    return null;
+  }
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: `nex-carousel ${className || ''}`,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    transition: {
+      duration: shouldReduceMotion ? 0.1 : 0.3,
+      ease: [0.4, 0, 0.2, 1]
+    },
+    role: "region",
+    "aria-label": "Carousel",
+    "aria-roledescription": "carousel",
+    "aria-live": "polite",
+    ...rest,
+    children: [/*#__PURE__*/jsx(CarouselContainer, {
+      currentSlide: currentSlide,
+      direction: direction,
+      children: /*#__PURE__*/jsx(CarouselSlide, {
+        imageUrl: currentSlideData.imageUrl,
+        title: currentSlideData.title,
+        content: currentSlideData.content
+      })
+    }), showControls && /*#__PURE__*/jsx(CarouselControls, {
+      onPrevious: goToPrevious,
+      onNext: goToNext,
+      hasPrevious: hasPrevious,
+      hasNext: hasNext
+    }), showIndicators && /*#__PURE__*/jsx(CarouselIndicators, {
+      totalSlides: totalSlides,
+      currentSlide: currentSlide,
+      onSlideChange: goToSlide
+    }), /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-carousel-counter",
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      transition: {
+        delay: shouldReduceMotion ? 0 : 0.7
+      },
+      children: [currentSlide + 1, " / ", totalSlides]
+    })]
+  });
 };
 
 function ownKeys$1(object, enumerableOnly) {
@@ -549,14 +2061,14 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-var noop$1 = function noop() {};
+var noop = function noop() {};
 
 var _WINDOW = {};
 var _DOCUMENT = {};
 var _MUTATION_OBSERVER = null;
 var _PERFORMANCE = {
-  mark: noop$1,
-  measure: noop$1
+  mark: noop,
+  measure: noop
 };
 
 try {
@@ -2019,11 +3531,11 @@ function findIcon(iconName, prefix) {
   });
 }
 
-var noop$1$1 = function noop() {};
+var noop$1 = function noop() {};
 
 var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : {
-  mark: noop$1$1,
-  measure: noop$1$1
+  mark: noop$1,
+  measure: noop$1
 };
 var preamble = "FA \"6.5.2\"";
 
@@ -3399,117 +4911,19 @@ var reactIs_production_min = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var hasRequiredReactIs_production_min;
-function requireReactIs_production_min() {
-  if (hasRequiredReactIs_production_min) return reactIs_production_min;
-  hasRequiredReactIs_production_min = 1;
-  var b = "function" === typeof Symbol && Symbol.for,
-    c = b ? Symbol.for("react.element") : 60103,
-    d = b ? Symbol.for("react.portal") : 60106,
-    e = b ? Symbol.for("react.fragment") : 60107,
-    f = b ? Symbol.for("react.strict_mode") : 60108,
-    g = b ? Symbol.for("react.profiler") : 60114,
-    h = b ? Symbol.for("react.provider") : 60109,
-    k = b ? Symbol.for("react.context") : 60110,
-    l = b ? Symbol.for("react.async_mode") : 60111,
-    m = b ? Symbol.for("react.concurrent_mode") : 60111,
-    n = b ? Symbol.for("react.forward_ref") : 60112,
-    p = b ? Symbol.for("react.suspense") : 60113,
-    q = b ? Symbol.for("react.suspense_list") : 60120,
-    r = b ? Symbol.for("react.memo") : 60115,
-    t = b ? Symbol.for("react.lazy") : 60116,
-    v = b ? Symbol.for("react.block") : 60121,
-    w = b ? Symbol.for("react.fundamental") : 60117,
-    x = b ? Symbol.for("react.responder") : 60118,
-    y = b ? Symbol.for("react.scope") : 60119;
-  function z(a) {
-    if ("object" === typeof a && null !== a) {
-      var u = a.$$typeof;
-      switch (u) {
-        case c:
-          switch (a = a.type, a) {
-            case l:
-            case m:
-            case e:
-            case g:
-            case f:
-            case p:
-              return a;
-            default:
-              switch (a = a && a.$$typeof, a) {
-                case k:
-                case n:
-                case t:
-                case r:
-                case h:
-                  return a;
-                default:
-                  return u;
-              }
-          }
-        case d:
-          return u;
-      }
-    }
-  }
-  function A(a) {
-    return z(a) === m;
-  }
-  reactIs_production_min.AsyncMode = l;
-  reactIs_production_min.ConcurrentMode = m;
-  reactIs_production_min.ContextConsumer = k;
-  reactIs_production_min.ContextProvider = h;
-  reactIs_production_min.Element = c;
-  reactIs_production_min.ForwardRef = n;
-  reactIs_production_min.Fragment = e;
-  reactIs_production_min.Lazy = t;
-  reactIs_production_min.Memo = r;
-  reactIs_production_min.Portal = d;
-  reactIs_production_min.Profiler = g;
-  reactIs_production_min.StrictMode = f;
-  reactIs_production_min.Suspense = p;
-  reactIs_production_min.isAsyncMode = function (a) {
-    return A(a) || z(a) === l;
-  };
-  reactIs_production_min.isConcurrentMode = A;
-  reactIs_production_min.isContextConsumer = function (a) {
-    return z(a) === k;
-  };
-  reactIs_production_min.isContextProvider = function (a) {
-    return z(a) === h;
-  };
-  reactIs_production_min.isElement = function (a) {
-    return "object" === typeof a && null !== a && a.$$typeof === c;
-  };
-  reactIs_production_min.isForwardRef = function (a) {
-    return z(a) === n;
-  };
-  reactIs_production_min.isFragment = function (a) {
-    return z(a) === e;
-  };
-  reactIs_production_min.isLazy = function (a) {
-    return z(a) === t;
-  };
-  reactIs_production_min.isMemo = function (a) {
-    return z(a) === r;
-  };
-  reactIs_production_min.isPortal = function (a) {
-    return z(a) === d;
-  };
-  reactIs_production_min.isProfiler = function (a) {
-    return z(a) === g;
-  };
-  reactIs_production_min.isStrictMode = function (a) {
-    return z(a) === f;
-  };
-  reactIs_production_min.isSuspense = function (a) {
-    return z(a) === p;
-  };
-  reactIs_production_min.isValidElementType = function (a) {
-    return "string" === typeof a || "function" === typeof a || a === e || a === m || a === g || a === f || a === p || a === q || "object" === typeof a && null !== a && (a.$$typeof === t || a.$$typeof === r || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === w || a.$$typeof === x || a.$$typeof === y || a.$$typeof === v);
-  };
-  reactIs_production_min.typeOf = z;
-  return reactIs_production_min;
+
+function requireReactIs_production_min () {
+	if (hasRequiredReactIs_production_min) return reactIs_production_min;
+	hasRequiredReactIs_production_min = 1;
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+	Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+	function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min.AsyncMode=l;reactIs_production_min.ConcurrentMode=m;reactIs_production_min.ContextConsumer=k;reactIs_production_min.ContextProvider=h;reactIs_production_min.Element=c;reactIs_production_min.ForwardRef=n;reactIs_production_min.Fragment=e;reactIs_production_min.Lazy=t;reactIs_production_min.Memo=r;reactIs_production_min.Portal=d;
+	reactIs_production_min.Profiler=g;reactIs_production_min.StrictMode=f;reactIs_production_min.Suspense=p;reactIs_production_min.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min.isConcurrentMode=A;reactIs_production_min.isContextConsumer=function(a){return z(a)===k};reactIs_production_min.isContextProvider=function(a){return z(a)===h};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min.isForwardRef=function(a){return z(a)===n};reactIs_production_min.isFragment=function(a){return z(a)===e};reactIs_production_min.isLazy=function(a){return z(a)===t};
+	reactIs_production_min.isMemo=function(a){return z(a)===r};reactIs_production_min.isPortal=function(a){return z(a)===d};reactIs_production_min.isProfiler=function(a){return z(a)===g};reactIs_production_min.isStrictMode=function(a){return z(a)===f};reactIs_production_min.isSuspense=function(a){return z(a)===p};
+	reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min.typeOf=z;
+	return reactIs_production_min;
 }
 
 var reactIs_development = {};
@@ -3522,179 +4936,197 @@ var reactIs_development = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var hasRequiredReactIs_development;
-function requireReactIs_development() {
-  if (hasRequiredReactIs_development) return reactIs_development;
-  hasRequiredReactIs_development = 1;
-  if (process.env.NODE_ENV !== "production") {
-    (function () {
 
-      // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-      // nor polyfill, then a plain number is used for performance.
-      var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-      var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-      var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-      var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-      var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-      var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-      var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-      var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-      // (unstable) APIs that have been removed. Can we remove the symbols?
+function requireReactIs_development () {
+	if (hasRequiredReactIs_development) return reactIs_development;
+	hasRequiredReactIs_development = 1;
 
-      var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-      var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-      var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-      var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-      var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-      var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-      var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-      var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-      var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-      var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-      var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-      function isValidElementType(type) {
-        return typeof type === 'string' || typeof type === 'function' ||
-        // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-        type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-      }
-      function typeOf(object) {
-        if (typeof object === 'object' && object !== null) {
-          var $$typeof = object.$$typeof;
-          switch ($$typeof) {
-            case REACT_ELEMENT_TYPE:
-              var type = object.type;
-              switch (type) {
-                case REACT_ASYNC_MODE_TYPE:
-                case REACT_CONCURRENT_MODE_TYPE:
-                case REACT_FRAGMENT_TYPE:
-                case REACT_PROFILER_TYPE:
-                case REACT_STRICT_MODE_TYPE:
-                case REACT_SUSPENSE_TYPE:
-                  return type;
-                default:
-                  var $$typeofType = type && type.$$typeof;
-                  switch ($$typeofType) {
-                    case REACT_CONTEXT_TYPE:
-                    case REACT_FORWARD_REF_TYPE:
-                    case REACT_LAZY_TYPE:
-                    case REACT_MEMO_TYPE:
-                    case REACT_PROVIDER_TYPE:
-                      return $$typeofType;
-                    default:
-                      return $$typeof;
-                  }
-              }
-            case REACT_PORTAL_TYPE:
-              return $$typeof;
-          }
-        }
-        return undefined;
-      } // AsyncMode is deprecated along with isAsyncMode
 
-      var AsyncMode = REACT_ASYNC_MODE_TYPE;
-      var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-      var ContextConsumer = REACT_CONTEXT_TYPE;
-      var ContextProvider = REACT_PROVIDER_TYPE;
-      var Element = REACT_ELEMENT_TYPE;
-      var ForwardRef = REACT_FORWARD_REF_TYPE;
-      var Fragment = REACT_FRAGMENT_TYPE;
-      var Lazy = REACT_LAZY_TYPE;
-      var Memo = REACT_MEMO_TYPE;
-      var Portal = REACT_PORTAL_TYPE;
-      var Profiler = REACT_PROFILER_TYPE;
-      var StrictMode = REACT_STRICT_MODE_TYPE;
-      var Suspense = REACT_SUSPENSE_TYPE;
-      var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
 
-      function isAsyncMode(object) {
-        {
-          if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-            hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+	if (process.env.NODE_ENV !== "production") {
+	  (function() {
 
-            console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-          }
-        }
-        return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-      }
-      function isConcurrentMode(object) {
-        return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-      }
-      function isContextConsumer(object) {
-        return typeOf(object) === REACT_CONTEXT_TYPE;
-      }
-      function isContextProvider(object) {
-        return typeOf(object) === REACT_PROVIDER_TYPE;
-      }
-      function isElement(object) {
-        return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-      }
-      function isForwardRef(object) {
-        return typeOf(object) === REACT_FORWARD_REF_TYPE;
-      }
-      function isFragment(object) {
-        return typeOf(object) === REACT_FRAGMENT_TYPE;
-      }
-      function isLazy(object) {
-        return typeOf(object) === REACT_LAZY_TYPE;
-      }
-      function isMemo(object) {
-        return typeOf(object) === REACT_MEMO_TYPE;
-      }
-      function isPortal(object) {
-        return typeOf(object) === REACT_PORTAL_TYPE;
-      }
-      function isProfiler(object) {
-        return typeOf(object) === REACT_PROFILER_TYPE;
-      }
-      function isStrictMode(object) {
-        return typeOf(object) === REACT_STRICT_MODE_TYPE;
-      }
-      function isSuspense(object) {
-        return typeOf(object) === REACT_SUSPENSE_TYPE;
-      }
-      reactIs_development.AsyncMode = AsyncMode;
-      reactIs_development.ConcurrentMode = ConcurrentMode;
-      reactIs_development.ContextConsumer = ContextConsumer;
-      reactIs_development.ContextProvider = ContextProvider;
-      reactIs_development.Element = Element;
-      reactIs_development.ForwardRef = ForwardRef;
-      reactIs_development.Fragment = Fragment;
-      reactIs_development.Lazy = Lazy;
-      reactIs_development.Memo = Memo;
-      reactIs_development.Portal = Portal;
-      reactIs_development.Profiler = Profiler;
-      reactIs_development.StrictMode = StrictMode;
-      reactIs_development.Suspense = Suspense;
-      reactIs_development.isAsyncMode = isAsyncMode;
-      reactIs_development.isConcurrentMode = isConcurrentMode;
-      reactIs_development.isContextConsumer = isContextConsumer;
-      reactIs_development.isContextProvider = isContextProvider;
-      reactIs_development.isElement = isElement;
-      reactIs_development.isForwardRef = isForwardRef;
-      reactIs_development.isFragment = isFragment;
-      reactIs_development.isLazy = isLazy;
-      reactIs_development.isMemo = isMemo;
-      reactIs_development.isPortal = isPortal;
-      reactIs_development.isProfiler = isProfiler;
-      reactIs_development.isStrictMode = isStrictMode;
-      reactIs_development.isSuspense = isSuspense;
-      reactIs_development.isValidElementType = isValidElementType;
-      reactIs_development.typeOf = typeOf;
-    })();
-  }
-  return reactIs_development;
+	// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+	// nor polyfill, then a plain number is used for performance.
+	var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+	var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+	var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+	var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+	var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+	var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+	var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+	var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+	// (unstable) APIs that have been removed. Can we remove the symbols?
+
+	var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+	var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+	var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+	var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+	var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+	var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+	var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+	var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+	var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+	var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+	var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+	function isValidElementType(type) {
+	  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+	  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+	}
+
+	function typeOf(object) {
+	  if (typeof object === 'object' && object !== null) {
+	    var $$typeof = object.$$typeof;
+
+	    switch ($$typeof) {
+	      case REACT_ELEMENT_TYPE:
+	        var type = object.type;
+
+	        switch (type) {
+	          case REACT_ASYNC_MODE_TYPE:
+	          case REACT_CONCURRENT_MODE_TYPE:
+	          case REACT_FRAGMENT_TYPE:
+	          case REACT_PROFILER_TYPE:
+	          case REACT_STRICT_MODE_TYPE:
+	          case REACT_SUSPENSE_TYPE:
+	            return type;
+
+	          default:
+	            var $$typeofType = type && type.$$typeof;
+
+	            switch ($$typeofType) {
+	              case REACT_CONTEXT_TYPE:
+	              case REACT_FORWARD_REF_TYPE:
+	              case REACT_LAZY_TYPE:
+	              case REACT_MEMO_TYPE:
+	              case REACT_PROVIDER_TYPE:
+	                return $$typeofType;
+
+	              default:
+	                return $$typeof;
+	            }
+
+	        }
+
+	      case REACT_PORTAL_TYPE:
+	        return $$typeof;
+	    }
+	  }
+
+	  return undefined;
+	} // AsyncMode is deprecated along with isAsyncMode
+
+	var AsyncMode = REACT_ASYNC_MODE_TYPE;
+	var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+	var ContextConsumer = REACT_CONTEXT_TYPE;
+	var ContextProvider = REACT_PROVIDER_TYPE;
+	var Element = REACT_ELEMENT_TYPE;
+	var ForwardRef = REACT_FORWARD_REF_TYPE;
+	var Fragment = REACT_FRAGMENT_TYPE;
+	var Lazy = REACT_LAZY_TYPE;
+	var Memo = REACT_MEMO_TYPE;
+	var Portal = REACT_PORTAL_TYPE;
+	var Profiler = REACT_PROFILER_TYPE;
+	var StrictMode = REACT_STRICT_MODE_TYPE;
+	var Suspense = REACT_SUSPENSE_TYPE;
+	var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+	function isAsyncMode(object) {
+	  {
+	    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+	      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+	      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+	    }
+	  }
+
+	  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+	}
+	function isConcurrentMode(object) {
+	  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+	}
+	function isContextConsumer(object) {
+	  return typeOf(object) === REACT_CONTEXT_TYPE;
+	}
+	function isContextProvider(object) {
+	  return typeOf(object) === REACT_PROVIDER_TYPE;
+	}
+	function isElement(object) {
+	  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+	}
+	function isForwardRef(object) {
+	  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+	}
+	function isFragment(object) {
+	  return typeOf(object) === REACT_FRAGMENT_TYPE;
+	}
+	function isLazy(object) {
+	  return typeOf(object) === REACT_LAZY_TYPE;
+	}
+	function isMemo(object) {
+	  return typeOf(object) === REACT_MEMO_TYPE;
+	}
+	function isPortal(object) {
+	  return typeOf(object) === REACT_PORTAL_TYPE;
+	}
+	function isProfiler(object) {
+	  return typeOf(object) === REACT_PROFILER_TYPE;
+	}
+	function isStrictMode(object) {
+	  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+	}
+	function isSuspense(object) {
+	  return typeOf(object) === REACT_SUSPENSE_TYPE;
+	}
+
+	reactIs_development.AsyncMode = AsyncMode;
+	reactIs_development.ConcurrentMode = ConcurrentMode;
+	reactIs_development.ContextConsumer = ContextConsumer;
+	reactIs_development.ContextProvider = ContextProvider;
+	reactIs_development.Element = Element;
+	reactIs_development.ForwardRef = ForwardRef;
+	reactIs_development.Fragment = Fragment;
+	reactIs_development.Lazy = Lazy;
+	reactIs_development.Memo = Memo;
+	reactIs_development.Portal = Portal;
+	reactIs_development.Profiler = Profiler;
+	reactIs_development.StrictMode = StrictMode;
+	reactIs_development.Suspense = Suspense;
+	reactIs_development.isAsyncMode = isAsyncMode;
+	reactIs_development.isConcurrentMode = isConcurrentMode;
+	reactIs_development.isContextConsumer = isContextConsumer;
+	reactIs_development.isContextProvider = isContextProvider;
+	reactIs_development.isElement = isElement;
+	reactIs_development.isForwardRef = isForwardRef;
+	reactIs_development.isFragment = isFragment;
+	reactIs_development.isLazy = isLazy;
+	reactIs_development.isMemo = isMemo;
+	reactIs_development.isPortal = isPortal;
+	reactIs_development.isProfiler = isProfiler;
+	reactIs_development.isStrictMode = isStrictMode;
+	reactIs_development.isSuspense = isSuspense;
+	reactIs_development.isValidElementType = isValidElementType;
+	reactIs_development.typeOf = typeOf;
+	  })();
+	}
+	return reactIs_development;
 }
 
 var hasRequiredReactIs;
-function requireReactIs() {
-  if (hasRequiredReactIs) return reactIs.exports;
-  hasRequiredReactIs = 1;
-  if (process.env.NODE_ENV === 'production') {
-    reactIs.exports = requireReactIs_production_min();
-  } else {
-    reactIs.exports = requireReactIs_development();
-  }
-  return reactIs.exports;
+
+function requireReactIs () {
+	if (hasRequiredReactIs) return reactIs.exports;
+	hasRequiredReactIs = 1;
+
+	if (process.env.NODE_ENV === 'production') {
+	  reactIs.exports = requireReactIs_production_min();
+	} else {
+	  reactIs.exports = requireReactIs_development();
+	}
+	return reactIs.exports;
 }
 
 /*
@@ -3702,85 +5134,97 @@ object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+
 var objectAssign;
 var hasRequiredObjectAssign;
-function requireObjectAssign() {
-  if (hasRequiredObjectAssign) return objectAssign;
-  hasRequiredObjectAssign = 1;
-  /* eslint-disable no-unused-vars */
-  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-  function toObject(val) {
-    if (val === null || val === undefined) {
-      throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-    return Object(val);
-  }
-  function shouldUseNative() {
-    try {
-      if (!Object.assign) {
-        return false;
-      }
 
-      // Detect buggy property enumeration order in older V8 versions.
+function requireObjectAssign () {
+	if (hasRequiredObjectAssign) return objectAssign;
+	hasRequiredObjectAssign = 1;
+	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
-      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
-      test1[5] = 'de';
-      if (Object.getOwnPropertyNames(test1)[0] === '5') {
-        return false;
-      }
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
 
-      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-      var test2 = {};
-      for (var i = 0; i < 10; i++) {
-        test2['_' + String.fromCharCode(i)] = i;
-      }
-      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-        return test2[n];
-      });
-      if (order2.join('') !== '0123456789') {
-        return false;
-      }
+		return Object(val);
+	}
 
-      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-      var test3 = {};
-      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-        test3[letter] = letter;
-      });
-      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
-        return false;
-      }
-      return true;
-    } catch (err) {
-      // We don't expect any of the above to throw, but better to be safe.
-      return false;
-    }
-  }
-  objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-    var from;
-    var to = toObject(target);
-    var symbols;
-    for (var s = 1; s < arguments.length; s++) {
-      from = Object(arguments[s]);
-      for (var key in from) {
-        if (hasOwnProperty.call(from, key)) {
-          to[key] = from[key];
-        }
-      }
-      if (getOwnPropertySymbols) {
-        symbols = getOwnPropertySymbols(from);
-        for (var i = 0; i < symbols.length; i++) {
-          if (propIsEnumerable.call(from, symbols[i])) {
-            to[symbols[i]] = from[symbols[i]];
-          }
-        }
-      }
-    }
-    return to;
-  };
-  return objectAssign;
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (err) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+	return objectAssign;
 }
 
 /**
@@ -3789,23 +5233,28 @@ function requireObjectAssign() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var ReactPropTypesSecret_1;
 var hasRequiredReactPropTypesSecret;
-function requireReactPropTypesSecret() {
-  if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
-  hasRequiredReactPropTypesSecret = 1;
-  var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-  ReactPropTypesSecret_1 = ReactPropTypesSecret;
-  return ReactPropTypesSecret_1;
+
+function requireReactPropTypesSecret () {
+	if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
+	hasRequiredReactPropTypesSecret = 1;
+
+	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+	ReactPropTypesSecret_1 = ReactPropTypesSecret;
+	return ReactPropTypesSecret_1;
 }
 
 var has;
 var hasRequiredHas;
-function requireHas() {
-  if (hasRequiredHas) return has;
-  hasRequiredHas = 1;
-  has = Function.call.bind(Object.prototype.hasOwnProperty);
-  return has;
+
+function requireHas () {
+	if (hasRequiredHas) return has;
+	hasRequiredHas = 1;
+	has = Function.call.bind(Object.prototype.hasOwnProperty);
+	return has;
 }
 
 /**
@@ -3814,88 +5263,109 @@ function requireHas() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var checkPropTypes_1;
 var hasRequiredCheckPropTypes;
-function requireCheckPropTypes() {
-  if (hasRequiredCheckPropTypes) return checkPropTypes_1;
-  hasRequiredCheckPropTypes = 1;
-  var printWarning = function () {};
-  if (process.env.NODE_ENV !== 'production') {
-    var ReactPropTypesSecret = requireReactPropTypesSecret();
-    var loggedTypeFailures = {};
-    var has = requireHas();
-    printWarning = function (text) {
-      var message = 'Warning: ' + text;
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {/**/}
-    };
-  }
 
-  /**
-   * Assert that the values match with the type specs.
-   * Error messages are memorized and will only be shown once.
-   *
-   * @param {object} typeSpecs Map of name to a ReactPropType
-   * @param {object} values Runtime values that need to be type-checked
-   * @param {string} location e.g. "prop", "context", "child context"
-   * @param {string} componentName Name of the component for error messages.
-   * @param {?Function} getStack Returns the component stack.
-   * @private
-   */
-  function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-    if (process.env.NODE_ENV !== 'production') {
-      for (var typeSpecName in typeSpecs) {
-        if (has(typeSpecs, typeSpecName)) {
-          var error;
-          // Prop type validation may throw. In case they do, we don't want to
-          // fail the render phase where it didn't fail before. So we log it.
-          // After these have been cleaned up, we'll let them throw.
-          try {
-            // This is intentionally an invariant that gets caught. It's the same
-            // behavior as without this statement except with a better message.
-            if (typeof typeSpecs[typeSpecName] !== 'function') {
-              var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
-              err.name = 'Invariant Violation';
-              throw err;
-            }
-            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-          } catch (ex) {
-            error = ex;
-          }
-          if (error && !(error instanceof Error)) {
-            printWarning((componentName || 'React class') + ': type specification of ' + location + ' `' + typeSpecName + '` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a ' + typeof error + '. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).');
-          }
-          if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-            // Only monitor this failure once because there tends to be a lot of the
-            // same error.
-            loggedTypeFailures[error.message] = true;
-            var stack = getStack ? getStack() : '';
-            printWarning('Failed ' + location + ' type: ' + error.message + (stack != null ? stack : ''));
-          }
-        }
-      }
-    }
-  }
+function requireCheckPropTypes () {
+	if (hasRequiredCheckPropTypes) return checkPropTypes_1;
+	hasRequiredCheckPropTypes = 1;
 
-  /**
-   * Resets warning cache when testing.
-   *
-   * @private
-   */
-  checkPropTypes.resetWarningCache = function () {
-    if (process.env.NODE_ENV !== 'production') {
-      loggedTypeFailures = {};
-    }
-  };
-  checkPropTypes_1 = checkPropTypes;
-  return checkPropTypes_1;
+	var printWarning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var ReactPropTypesSecret = requireReactPropTypesSecret();
+	  var loggedTypeFailures = {};
+	  var has = requireHas();
+
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) { /**/ }
+	  };
+	}
+
+	/**
+	 * Assert that the values match with the type specs.
+	 * Error messages are memorized and will only be shown once.
+	 *
+	 * @param {object} typeSpecs Map of name to a ReactPropType
+	 * @param {object} values Runtime values that need to be type-checked
+	 * @param {string} location e.g. "prop", "context", "child context"
+	 * @param {string} componentName Name of the component for error messages.
+	 * @param {?Function} getStack Returns the component stack.
+	 * @private
+	 */
+	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    for (var typeSpecName in typeSpecs) {
+	      if (has(typeSpecs, typeSpecName)) {
+	        var error;
+	        // Prop type validation may throw. In case they do, we don't want to
+	        // fail the render phase where it didn't fail before. So we log it.
+	        // After these have been cleaned up, we'll let them throw.
+	        try {
+	          // This is intentionally an invariant that gets caught. It's the same
+	          // behavior as without this statement except with a better message.
+	          if (typeof typeSpecs[typeSpecName] !== 'function') {
+	            var err = Error(
+	              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+	              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' +
+	              'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.'
+	            );
+	            err.name = 'Invariant Violation';
+	            throw err;
+	          }
+	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+	        } catch (ex) {
+	          error = ex;
+	        }
+	        if (error && !(error instanceof Error)) {
+	          printWarning(
+	            (componentName || 'React class') + ': type specification of ' +
+	            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+	            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+	            'You may have forgotten to pass an argument to the type checker ' +
+	            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+	            'shape all require an argument).'
+	          );
+	        }
+	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+	          // Only monitor this failure once because there tends to be a lot of the
+	          // same error.
+	          loggedTypeFailures[error.message] = true;
+
+	          var stack = getStack ? getStack() : '';
+
+	          printWarning(
+	            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+	          );
+	        }
+	      }
+	    }
+	  }
+	}
+
+	/**
+	 * Resets warning cache when testing.
+	 *
+	 * @private
+	 */
+	checkPropTypes.resetWarningCache = function() {
+	  if (process.env.NODE_ENV !== 'production') {
+	    loggedTypeFailures = {};
+	  }
+	};
+
+	checkPropTypes_1 = checkPropTypes;
+	return checkPropTypes_1;
 }
 
 /**
@@ -3904,551 +5374,616 @@ function requireCheckPropTypes() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var factoryWithTypeCheckers;
 var hasRequiredFactoryWithTypeCheckers;
-function requireFactoryWithTypeCheckers() {
-  if (hasRequiredFactoryWithTypeCheckers) return factoryWithTypeCheckers;
-  hasRequiredFactoryWithTypeCheckers = 1;
-  var ReactIs = requireReactIs();
-  var assign = requireObjectAssign();
-  var ReactPropTypesSecret = requireReactPropTypesSecret();
-  var has = requireHas();
-  var checkPropTypes = requireCheckPropTypes();
-  var printWarning = function () {};
-  if (process.env.NODE_ENV !== 'production') {
-    printWarning = function (text) {
-      var message = 'Warning: ' + text;
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    };
-  }
-  function emptyFunctionThatReturnsNull() {
-    return null;
-  }
-  factoryWithTypeCheckers = function (isValidElement, throwOnDirectAccess) {
-    /* global Symbol */
-    var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-    var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
 
-    /**
-     * Returns the iterator method function contained on the iterable object.
-     *
-     * Be sure to invoke the function with the iterable as context:
-     *
-     *     var iteratorFn = getIteratorFn(myIterable);
-     *     if (iteratorFn) {
-     *       var iterator = iteratorFn.call(myIterable);
-     *       ...
-     *     }
-     *
-     * @param {?object} maybeIterable
-     * @return {?function}
-     */
-    function getIteratorFn(maybeIterable) {
-      var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-      if (typeof iteratorFn === 'function') {
-        return iteratorFn;
-      }
-    }
+function requireFactoryWithTypeCheckers () {
+	if (hasRequiredFactoryWithTypeCheckers) return factoryWithTypeCheckers;
+	hasRequiredFactoryWithTypeCheckers = 1;
 
-    /**
-     * Collection of methods that allow declaration and validation of props that are
-     * supplied to React components. Example usage:
-     *
-     *   var Props = require('ReactPropTypes');
-     *   var MyArticle = React.createClass({
-     *     propTypes: {
-     *       // An optional string prop named "description".
-     *       description: Props.string,
-     *
-     *       // A required enum prop named "category".
-     *       category: Props.oneOf(['News','Photos']).isRequired,
-     *
-     *       // A prop named "dialog" that requires an instance of Dialog.
-     *       dialog: Props.instanceOf(Dialog).isRequired
-     *     },
-     *     render: function() { ... }
-     *   });
-     *
-     * A more formal specification of how these methods are used:
-     *
-     *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-     *   decl := ReactPropTypes.{type}(.isRequired)?
-     *
-     * Each and every declaration produces a function with the same signature. This
-     * allows the creation of custom validation functions. For example:
-     *
-     *  var MyLink = React.createClass({
-     *    propTypes: {
-     *      // An optional string or URI prop named "href".
-     *      href: function(props, propName, componentName) {
-     *        var propValue = props[propName];
-     *        if (propValue != null && typeof propValue !== 'string' &&
-     *            !(propValue instanceof URI)) {
-     *          return new Error(
-     *            'Expected a string or an URI for ' + propName + ' in ' +
-     *            componentName
-     *          );
-     *        }
-     *      }
-     *    },
-     *    render: function() {...}
-     *  });
-     *
-     * @internal
-     */
+	var ReactIs = requireReactIs();
+	var assign = requireObjectAssign();
 
-    var ANONYMOUS = '<<anonymous>>';
+	var ReactPropTypesSecret = requireReactPropTypesSecret();
+	var has = requireHas();
+	var checkPropTypes = requireCheckPropTypes();
 
-    // Important!
-    // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-    var ReactPropTypes = {
-      array: createPrimitiveTypeChecker('array'),
-      bigint: createPrimitiveTypeChecker('bigint'),
-      bool: createPrimitiveTypeChecker('boolean'),
-      func: createPrimitiveTypeChecker('function'),
-      number: createPrimitiveTypeChecker('number'),
-      object: createPrimitiveTypeChecker('object'),
-      string: createPrimitiveTypeChecker('string'),
-      symbol: createPrimitiveTypeChecker('symbol'),
-      any: createAnyTypeChecker(),
-      arrayOf: createArrayOfTypeChecker,
-      element: createElementTypeChecker(),
-      elementType: createElementTypeTypeChecker(),
-      instanceOf: createInstanceTypeChecker,
-      node: createNodeChecker(),
-      objectOf: createObjectOfTypeChecker,
-      oneOf: createEnumTypeChecker,
-      oneOfType: createUnionTypeChecker,
-      shape: createShapeTypeChecker,
-      exact: createStrictShapeTypeChecker
-    };
+	var printWarning = function() {};
 
-    /**
-     * inlined Object.is polyfill to avoid requiring consumers ship their own
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-     */
-    /*eslint-disable no-self-compare*/
-    function is(x, y) {
-      // SameValue algorithm
-      if (x === y) {
-        // Steps 1-5, 7-10
-        // Steps 6.b-6.e: +0 != -0
-        return x !== 0 || 1 / x === 1 / y;
-      } else {
-        // Step 6.a: NaN == NaN
-        return x !== x && y !== y;
-      }
-    }
-    /*eslint-enable no-self-compare*/
+	if (process.env.NODE_ENV !== 'production') {
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+	}
 
-    /**
-     * We use an Error-like object for backward compatibility as people may call
-     * PropTypes directly and inspect their output. However, we don't use real
-     * Errors anymore. We don't inspect their stack anyway, and creating them
-     * is prohibitively expensive if they are created too often, such as what
-     * happens in oneOfType() for any type before the one that matched.
-     */
-    function PropTypeError(message, data) {
-      this.message = message;
-      this.data = data && typeof data === 'object' ? data : {};
-      this.stack = '';
-    }
-    // Make `instanceof Error` still work for returned errors.
-    PropTypeError.prototype = Error.prototype;
-    function createChainableTypeChecker(validate) {
-      if (process.env.NODE_ENV !== 'production') {
-        var manualPropTypeCallCache = {};
-        var manualPropTypeWarningCount = 0;
-      }
-      function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-        componentName = componentName || ANONYMOUS;
-        propFullName = propFullName || propName;
-        if (secret !== ReactPropTypesSecret) {
-          if (throwOnDirectAccess) {
-            // New behavior only for users of `prop-types` package
-            var err = new Error('Calling PropTypes validators directly is not supported by the `prop-types` package. ' + 'Use `PropTypes.checkPropTypes()` to call them. ' + 'Read more at http://fb.me/use-check-prop-types');
-            err.name = 'Invariant Violation';
-            throw err;
-          } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-            // Old behavior for people using React.PropTypes
-            var cacheKey = componentName + ':' + propName;
-            if (!manualPropTypeCallCache[cacheKey] &&
-            // Avoid spamming the console because they are often not actionable except for lib authors
-            manualPropTypeWarningCount < 3) {
-              printWarning('You are manually calling a React.PropTypes validation ' + 'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' + 'and will throw in the standalone `prop-types` package. ' + 'You may be seeing this warning due to a third-party PropTypes ' + 'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.');
-              manualPropTypeCallCache[cacheKey] = true;
-              manualPropTypeWarningCount++;
-            }
-          }
-        }
-        if (props[propName] == null) {
-          if (isRequired) {
-            if (props[propName] === null) {
-              return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-            }
-            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-          }
-          return null;
-        } else {
-          return validate(props, propName, componentName, location, propFullName);
-        }
-      }
-      var chainedCheckType = checkType.bind(null, false);
-      chainedCheckType.isRequired = checkType.bind(null, true);
-      return chainedCheckType;
-    }
-    function createPrimitiveTypeChecker(expectedType) {
-      function validate(props, propName, componentName, location, propFullName, secret) {
-        var propValue = props[propName];
-        var propType = getPropType(propValue);
-        if (propType !== expectedType) {
-          // `propValue` being instance of, say, date/regexp, pass the 'object'
-          // check, but we can offer a more precise error message here rather than
-          // 'of type `object`'.
-          var preciseType = getPreciseType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'), {
-            expectedType: expectedType
-          });
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createAnyTypeChecker() {
-      return createChainableTypeChecker(emptyFunctionThatReturnsNull);
-    }
-    function createArrayOfTypeChecker(typeChecker) {
-      function validate(props, propName, componentName, location, propFullName) {
-        if (typeof typeChecker !== 'function') {
-          return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-        }
-        var propValue = props[propName];
-        if (!Array.isArray(propValue)) {
-          var propType = getPropType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-        }
-        for (var i = 0; i < propValue.length; i++) {
-          var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-          if (error instanceof Error) {
-            return error;
-          }
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createElementTypeChecker() {
-      function validate(props, propName, componentName, location, propFullName) {
-        var propValue = props[propName];
-        if (!isValidElement(propValue)) {
-          var propType = getPropType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createElementTypeTypeChecker() {
-      function validate(props, propName, componentName, location, propFullName) {
-        var propValue = props[propName];
-        if (!ReactIs.isValidElementType(propValue)) {
-          var propType = getPropType(propValue);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createInstanceTypeChecker(expectedClass) {
-      function validate(props, propName, componentName, location, propFullName) {
-        if (!(props[propName] instanceof expectedClass)) {
-          var expectedClassName = expectedClass.name || ANONYMOUS;
-          var actualClassName = getClassName(props[propName]);
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createEnumTypeChecker(expectedValues) {
-      if (!Array.isArray(expectedValues)) {
-        if (process.env.NODE_ENV !== 'production') {
-          if (arguments.length > 1) {
-            printWarning('Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' + 'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).');
-          } else {
-            printWarning('Invalid argument supplied to oneOf, expected an array.');
-          }
-        }
-        return emptyFunctionThatReturnsNull;
-      }
-      function validate(props, propName, componentName, location, propFullName) {
-        var propValue = props[propName];
-        for (var i = 0; i < expectedValues.length; i++) {
-          if (is(propValue, expectedValues[i])) {
-            return null;
-          }
-        }
-        var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-          var type = getPreciseType(value);
-          if (type === 'symbol') {
-            return String(value);
-          }
-          return value;
-        });
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createObjectOfTypeChecker(typeChecker) {
-      function validate(props, propName, componentName, location, propFullName) {
-        if (typeof typeChecker !== 'function') {
-          return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-        }
-        var propValue = props[propName];
-        var propType = getPropType(propValue);
-        if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-        }
-        for (var key in propValue) {
-          if (has(propValue, key)) {
-            var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-            if (error instanceof Error) {
-              return error;
-            }
-          }
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createUnionTypeChecker(arrayOfTypeCheckers) {
-      if (!Array.isArray(arrayOfTypeCheckers)) {
-        process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-        return emptyFunctionThatReturnsNull;
-      }
-      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-        var checker = arrayOfTypeCheckers[i];
-        if (typeof checker !== 'function') {
-          printWarning('Invalid argument supplied to oneOfType. Expected an array of check functions, but ' + 'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.');
-          return emptyFunctionThatReturnsNull;
-        }
-      }
-      function validate(props, propName, componentName, location, propFullName) {
-        var expectedTypes = [];
-        for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-          var checker = arrayOfTypeCheckers[i];
-          var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
-          if (checkerResult == null) {
-            return null;
-          }
-          if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
-            expectedTypes.push(checkerResult.data.expectedType);
-          }
-        }
-        var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createNodeChecker() {
-      function validate(props, propName, componentName, location, propFullName) {
-        if (!isNode(props[propName])) {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function invalidValidatorError(componentName, location, propFullName, key, type) {
-      return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
-    }
-    function createShapeTypeChecker(shapeTypes) {
-      function validate(props, propName, componentName, location, propFullName) {
-        var propValue = props[propName];
-        var propType = getPropType(propValue);
-        if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-        }
-        for (var key in shapeTypes) {
-          var checker = shapeTypes[key];
-          if (typeof checker !== 'function') {
-            return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-          }
-          var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-          if (error) {
-            return error;
-          }
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function createStrictShapeTypeChecker(shapeTypes) {
-      function validate(props, propName, componentName, location, propFullName) {
-        var propValue = props[propName];
-        var propType = getPropType(propValue);
-        if (propType !== 'object') {
-          return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-        }
-        // We need to check all keys in case some are required but missing from props.
-        var allKeys = assign({}, props[propName], shapeTypes);
-        for (var key in allKeys) {
-          var checker = shapeTypes[key];
-          if (has(shapeTypes, key) && typeof checker !== 'function') {
-            return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-          }
-          if (!checker) {
-            return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
-          }
-          var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-          if (error) {
-            return error;
-          }
-        }
-        return null;
-      }
-      return createChainableTypeChecker(validate);
-    }
-    function isNode(propValue) {
-      switch (typeof propValue) {
-        case 'number':
-        case 'string':
-        case 'undefined':
-          return true;
-        case 'boolean':
-          return !propValue;
-        case 'object':
-          if (Array.isArray(propValue)) {
-            return propValue.every(isNode);
-          }
-          if (propValue === null || isValidElement(propValue)) {
-            return true;
-          }
-          var iteratorFn = getIteratorFn(propValue);
-          if (iteratorFn) {
-            var iterator = iteratorFn.call(propValue);
-            var step;
-            if (iteratorFn !== propValue.entries) {
-              while (!(step = iterator.next()).done) {
-                if (!isNode(step.value)) {
-                  return false;
-                }
-              }
-            } else {
-              // Iterator will provide entry [k,v] tuples rather than values.
-              while (!(step = iterator.next()).done) {
-                var entry = step.value;
-                if (entry) {
-                  if (!isNode(entry[1])) {
-                    return false;
-                  }
-                }
-              }
-            }
-          } else {
-            return false;
-          }
-          return true;
-        default:
-          return false;
-      }
-    }
-    function isSymbol(propType, propValue) {
-      // Native Symbol.
-      if (propType === 'symbol') {
-        return true;
-      }
+	function emptyFunctionThatReturnsNull() {
+	  return null;
+	}
 
-      // falsy value can't be a Symbol
-      if (!propValue) {
-        return false;
-      }
+	factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+	  /* global Symbol */
+	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
 
-      // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-      if (propValue['@@toStringTag'] === 'Symbol') {
-        return true;
-      }
+	  /**
+	   * Returns the iterator method function contained on the iterable object.
+	   *
+	   * Be sure to invoke the function with the iterable as context:
+	   *
+	   *     var iteratorFn = getIteratorFn(myIterable);
+	   *     if (iteratorFn) {
+	   *       var iterator = iteratorFn.call(myIterable);
+	   *       ...
+	   *     }
+	   *
+	   * @param {?object} maybeIterable
+	   * @return {?function}
+	   */
+	  function getIteratorFn(maybeIterable) {
+	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+	    if (typeof iteratorFn === 'function') {
+	      return iteratorFn;
+	    }
+	  }
 
-      // Fallback for non-spec compliant Symbols which are polyfilled.
-      if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-        return true;
-      }
-      return false;
-    }
+	  /**
+	   * Collection of methods that allow declaration and validation of props that are
+	   * supplied to React components. Example usage:
+	   *
+	   *   var Props = require('ReactPropTypes');
+	   *   var MyArticle = React.createClass({
+	   *     propTypes: {
+	   *       // An optional string prop named "description".
+	   *       description: Props.string,
+	   *
+	   *       // A required enum prop named "category".
+	   *       category: Props.oneOf(['News','Photos']).isRequired,
+	   *
+	   *       // A prop named "dialog" that requires an instance of Dialog.
+	   *       dialog: Props.instanceOf(Dialog).isRequired
+	   *     },
+	   *     render: function() { ... }
+	   *   });
+	   *
+	   * A more formal specification of how these methods are used:
+	   *
+	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+	   *   decl := ReactPropTypes.{type}(.isRequired)?
+	   *
+	   * Each and every declaration produces a function with the same signature. This
+	   * allows the creation of custom validation functions. For example:
+	   *
+	   *  var MyLink = React.createClass({
+	   *    propTypes: {
+	   *      // An optional string or URI prop named "href".
+	   *      href: function(props, propName, componentName) {
+	   *        var propValue = props[propName];
+	   *        if (propValue != null && typeof propValue !== 'string' &&
+	   *            !(propValue instanceof URI)) {
+	   *          return new Error(
+	   *            'Expected a string or an URI for ' + propName + ' in ' +
+	   *            componentName
+	   *          );
+	   *        }
+	   *      }
+	   *    },
+	   *    render: function() {...}
+	   *  });
+	   *
+	   * @internal
+	   */
 
-    // Equivalent of `typeof` but with special handling for array and regexp.
-    function getPropType(propValue) {
-      var propType = typeof propValue;
-      if (Array.isArray(propValue)) {
-        return 'array';
-      }
-      if (propValue instanceof RegExp) {
-        // Old webkits (at least until Android 4.0) return 'function' rather than
-        // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-        // passes PropTypes.object.
-        return 'object';
-      }
-      if (isSymbol(propType, propValue)) {
-        return 'symbol';
-      }
-      return propType;
-    }
+	  var ANONYMOUS = '<<anonymous>>';
 
-    // This handles more types than `getPropType`. Only used for error messages.
-    // See `createPrimitiveTypeChecker`.
-    function getPreciseType(propValue) {
-      if (typeof propValue === 'undefined' || propValue === null) {
-        return '' + propValue;
-      }
-      var propType = getPropType(propValue);
-      if (propType === 'object') {
-        if (propValue instanceof Date) {
-          return 'date';
-        } else if (propValue instanceof RegExp) {
-          return 'regexp';
-        }
-      }
-      return propType;
-    }
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+	  var ReactPropTypes = {
+	    array: createPrimitiveTypeChecker('array'),
+	    bigint: createPrimitiveTypeChecker('bigint'),
+	    bool: createPrimitiveTypeChecker('boolean'),
+	    func: createPrimitiveTypeChecker('function'),
+	    number: createPrimitiveTypeChecker('number'),
+	    object: createPrimitiveTypeChecker('object'),
+	    string: createPrimitiveTypeChecker('string'),
+	    symbol: createPrimitiveTypeChecker('symbol'),
 
-    // Returns a string that is postfixed to a warning about an invalid type.
-    // For example, "undefined" or "of type array"
-    function getPostfixForTypeWarning(value) {
-      var type = getPreciseType(value);
-      switch (type) {
-        case 'array':
-        case 'object':
-          return 'an ' + type;
-        case 'boolean':
-        case 'date':
-        case 'regexp':
-          return 'a ' + type;
-        default:
-          return type;
-      }
-    }
+	    any: createAnyTypeChecker(),
+	    arrayOf: createArrayOfTypeChecker,
+	    element: createElementTypeChecker(),
+	    elementType: createElementTypeTypeChecker(),
+	    instanceOf: createInstanceTypeChecker,
+	    node: createNodeChecker(),
+	    objectOf: createObjectOfTypeChecker,
+	    oneOf: createEnumTypeChecker,
+	    oneOfType: createUnionTypeChecker,
+	    shape: createShapeTypeChecker,
+	    exact: createStrictShapeTypeChecker,
+	  };
 
-    // Returns class name of the object, if any.
-    function getClassName(propValue) {
-      if (!propValue.constructor || !propValue.constructor.name) {
-        return ANONYMOUS;
-      }
-      return propValue.constructor.name;
-    }
-    ReactPropTypes.checkPropTypes = checkPropTypes;
-    ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
-    ReactPropTypes.PropTypes = ReactPropTypes;
-    return ReactPropTypes;
-  };
-  return factoryWithTypeCheckers;
+	  /**
+	   * inlined Object.is polyfill to avoid requiring consumers ship their own
+	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	   */
+	  /*eslint-disable no-self-compare*/
+	  function is(x, y) {
+	    // SameValue algorithm
+	    if (x === y) {
+	      // Steps 1-5, 7-10
+	      // Steps 6.b-6.e: +0 != -0
+	      return x !== 0 || 1 / x === 1 / y;
+	    } else {
+	      // Step 6.a: NaN == NaN
+	      return x !== x && y !== y;
+	    }
+	  }
+	  /*eslint-enable no-self-compare*/
+
+	  /**
+	   * We use an Error-like object for backward compatibility as people may call
+	   * PropTypes directly and inspect their output. However, we don't use real
+	   * Errors anymore. We don't inspect their stack anyway, and creating them
+	   * is prohibitively expensive if they are created too often, such as what
+	   * happens in oneOfType() for any type before the one that matched.
+	   */
+	  function PropTypeError(message, data) {
+	    this.message = message;
+	    this.data = data && typeof data === 'object' ? data: {};
+	    this.stack = '';
+	  }
+	  // Make `instanceof Error` still work for returned errors.
+	  PropTypeError.prototype = Error.prototype;
+
+	  function createChainableTypeChecker(validate) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      var manualPropTypeCallCache = {};
+	      var manualPropTypeWarningCount = 0;
+	    }
+	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+	      componentName = componentName || ANONYMOUS;
+	      propFullName = propFullName || propName;
+
+	      if (secret !== ReactPropTypesSecret) {
+	        if (throwOnDirectAccess) {
+	          // New behavior only for users of `prop-types` package
+	          var err = new Error(
+	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	            'Use `PropTypes.checkPropTypes()` to call them. ' +
+	            'Read more at http://fb.me/use-check-prop-types'
+	          );
+	          err.name = 'Invariant Violation';
+	          throw err;
+	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+	          // Old behavior for people using React.PropTypes
+	          var cacheKey = componentName + ':' + propName;
+	          if (
+	            !manualPropTypeCallCache[cacheKey] &&
+	            // Avoid spamming the console because they are often not actionable except for lib authors
+	            manualPropTypeWarningCount < 3
+	          ) {
+	            printWarning(
+	              'You are manually calling a React.PropTypes validation ' +
+	              'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' +
+	              'and will throw in the standalone `prop-types` package. ' +
+	              'You may be seeing this warning due to a third-party PropTypes ' +
+	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+	            );
+	            manualPropTypeCallCache[cacheKey] = true;
+	            manualPropTypeWarningCount++;
+	          }
+	        }
+	      }
+	      if (props[propName] == null) {
+	        if (isRequired) {
+	          if (props[propName] === null) {
+	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+	          }
+	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+	        }
+	        return null;
+	      } else {
+	        return validate(props, propName, componentName, location, propFullName);
+	      }
+	    }
+
+	    var chainedCheckType = checkType.bind(null, false);
+	    chainedCheckType.isRequired = checkType.bind(null, true);
+
+	    return chainedCheckType;
+	  }
+
+	  function createPrimitiveTypeChecker(expectedType) {
+	    function validate(props, propName, componentName, location, propFullName, secret) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== expectedType) {
+	        // `propValue` being instance of, say, date/regexp, pass the 'object'
+	        // check, but we can offer a more precise error message here rather than
+	        // 'of type `object`'.
+	        var preciseType = getPreciseType(propValue);
+
+	        return new PropTypeError(
+	          'Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'),
+	          {expectedType: expectedType}
+	        );
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createAnyTypeChecker() {
+	    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+	  }
+
+	  function createArrayOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+	      }
+	      var propValue = props[propName];
+	      if (!Array.isArray(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+	      }
+	      for (var i = 0; i < propValue.length; i++) {
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+	        if (error instanceof Error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createElementTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!isValidElement(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createElementTypeTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!ReactIs.isValidElementType(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createInstanceTypeChecker(expectedClass) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!(props[propName] instanceof expectedClass)) {
+	        var expectedClassName = expectedClass.name || ANONYMOUS;
+	        var actualClassName = getClassName(props[propName]);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createEnumTypeChecker(expectedValues) {
+	    if (!Array.isArray(expectedValues)) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        if (arguments.length > 1) {
+	          printWarning(
+	            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
+	            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
+	          );
+	        } else {
+	          printWarning('Invalid argument supplied to oneOf, expected an array.');
+	        }
+	      }
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      for (var i = 0; i < expectedValues.length; i++) {
+	        if (is(propValue, expectedValues[i])) {
+	          return null;
+	        }
+	      }
+
+	      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+	        var type = getPreciseType(value);
+	        if (type === 'symbol') {
+	          return String(value);
+	        }
+	        return value;
+	      });
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createObjectOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+	      }
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+	      }
+	      for (var key in propValue) {
+	        if (has(propValue, key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	          if (error instanceof Error) {
+	            return error;
+	          }
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createUnionTypeChecker(arrayOfTypeCheckers) {
+	    if (!Array.isArray(arrayOfTypeCheckers)) {
+	      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	      var checker = arrayOfTypeCheckers[i];
+	      if (typeof checker !== 'function') {
+	        printWarning(
+	          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+	          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+	        );
+	        return emptyFunctionThatReturnsNull;
+	      }
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var expectedTypes = [];
+	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	        var checker = arrayOfTypeCheckers[i];
+	        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+	        if (checkerResult == null) {
+	          return null;
+	        }
+	        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
+	          expectedTypes.push(checkerResult.data.expectedType);
+	        }
+	      }
+	      var expectedTypesMessage = (expectedTypes.length > 0) ? ', expected one of type [' + expectedTypes.join(', ') + ']': '';
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createNodeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!isNode(props[propName])) {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function invalidValidatorError(componentName, location, propFullName, key, type) {
+	    return new PropTypeError(
+	      (componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' +
+	      'it must be a function, usually from the `prop-types` package, but received `' + type + '`.'
+	    );
+	  }
+
+	  function createShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      for (var key in shapeTypes) {
+	        var checker = shapeTypes[key];
+	        if (typeof checker !== 'function') {
+	          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createStrictShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      // We need to check all keys in case some are required but missing from props.
+	      var allKeys = assign({}, props[propName], shapeTypes);
+	      for (var key in allKeys) {
+	        var checker = shapeTypes[key];
+	        if (has(shapeTypes, key) && typeof checker !== 'function') {
+	          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+	        }
+	        if (!checker) {
+	          return new PropTypeError(
+	            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+	            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+	            '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  ')
+	          );
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function isNode(propValue) {
+	    switch (typeof propValue) {
+	      case 'number':
+	      case 'string':
+	      case 'undefined':
+	        return true;
+	      case 'boolean':
+	        return !propValue;
+	      case 'object':
+	        if (Array.isArray(propValue)) {
+	          return propValue.every(isNode);
+	        }
+	        if (propValue === null || isValidElement(propValue)) {
+	          return true;
+	        }
+
+	        var iteratorFn = getIteratorFn(propValue);
+	        if (iteratorFn) {
+	          var iterator = iteratorFn.call(propValue);
+	          var step;
+	          if (iteratorFn !== propValue.entries) {
+	            while (!(step = iterator.next()).done) {
+	              if (!isNode(step.value)) {
+	                return false;
+	              }
+	            }
+	          } else {
+	            // Iterator will provide entry [k,v] tuples rather than values.
+	            while (!(step = iterator.next()).done) {
+	              var entry = step.value;
+	              if (entry) {
+	                if (!isNode(entry[1])) {
+	                  return false;
+	                }
+	              }
+	            }
+	          }
+	        } else {
+	          return false;
+	        }
+
+	        return true;
+	      default:
+	        return false;
+	    }
+	  }
+
+	  function isSymbol(propType, propValue) {
+	    // Native Symbol.
+	    if (propType === 'symbol') {
+	      return true;
+	    }
+
+	    // falsy value can't be a Symbol
+	    if (!propValue) {
+	      return false;
+	    }
+
+	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+	    if (propValue['@@toStringTag'] === 'Symbol') {
+	      return true;
+	    }
+
+	    // Fallback for non-spec compliant Symbols which are polyfilled.
+	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+	      return true;
+	    }
+
+	    return false;
+	  }
+
+	  // Equivalent of `typeof` but with special handling for array and regexp.
+	  function getPropType(propValue) {
+	    var propType = typeof propValue;
+	    if (Array.isArray(propValue)) {
+	      return 'array';
+	    }
+	    if (propValue instanceof RegExp) {
+	      // Old webkits (at least until Android 4.0) return 'function' rather than
+	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+	      // passes PropTypes.object.
+	      return 'object';
+	    }
+	    if (isSymbol(propType, propValue)) {
+	      return 'symbol';
+	    }
+	    return propType;
+	  }
+
+	  // This handles more types than `getPropType`. Only used for error messages.
+	  // See `createPrimitiveTypeChecker`.
+	  function getPreciseType(propValue) {
+	    if (typeof propValue === 'undefined' || propValue === null) {
+	      return '' + propValue;
+	    }
+	    var propType = getPropType(propValue);
+	    if (propType === 'object') {
+	      if (propValue instanceof Date) {
+	        return 'date';
+	      } else if (propValue instanceof RegExp) {
+	        return 'regexp';
+	      }
+	    }
+	    return propType;
+	  }
+
+	  // Returns a string that is postfixed to a warning about an invalid type.
+	  // For example, "undefined" or "of type array"
+	  function getPostfixForTypeWarning(value) {
+	    var type = getPreciseType(value);
+	    switch (type) {
+	      case 'array':
+	      case 'object':
+	        return 'an ' + type;
+	      case 'boolean':
+	      case 'date':
+	      case 'regexp':
+	        return 'a ' + type;
+	      default:
+	        return type;
+	    }
+	  }
+
+	  // Returns class name of the object, if any.
+	  function getClassName(propValue) {
+	    if (!propValue.constructor || !propValue.constructor.name) {
+	      return ANONYMOUS;
+	    }
+	    return propValue.constructor.name;
+	  }
+
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+	return factoryWithTypeCheckers;
 }
 
 /**
@@ -4457,58 +5992,69 @@ function requireFactoryWithTypeCheckers() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 var factoryWithThrowingShims;
 var hasRequiredFactoryWithThrowingShims;
-function requireFactoryWithThrowingShims() {
-  if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
-  hasRequiredFactoryWithThrowingShims = 1;
-  var ReactPropTypesSecret = requireReactPropTypesSecret();
-  function emptyFunction() {}
-  function emptyFunctionWithReset() {}
-  emptyFunctionWithReset.resetWarningCache = emptyFunction;
-  factoryWithThrowingShims = function () {
-    function shim(props, propName, componentName, location, propFullName, secret) {
-      if (secret === ReactPropTypesSecret) {
-        // It is still safe when called from React.
-        return;
-      }
-      var err = new Error('Calling PropTypes validators directly is not supported by the `prop-types` package. ' + 'Use PropTypes.checkPropTypes() to call them. ' + 'Read more at http://fb.me/use-check-prop-types');
-      err.name = 'Invariant Violation';
-      throw err;
-    }
-    shim.isRequired = shim;
-    function getShim() {
-      return shim;
-    }
-    // Important!
-    // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-    var ReactPropTypes = {
-      array: shim,
-      bigint: shim,
-      bool: shim,
-      func: shim,
-      number: shim,
-      object: shim,
-      string: shim,
-      symbol: shim,
-      any: shim,
-      arrayOf: getShim,
-      element: shim,
-      elementType: shim,
-      instanceOf: getShim,
-      node: shim,
-      objectOf: getShim,
-      oneOf: getShim,
-      oneOfType: getShim,
-      shape: getShim,
-      exact: getShim,
-      checkPropTypes: emptyFunctionWithReset,
-      resetWarningCache: emptyFunction
-    };
-    ReactPropTypes.PropTypes = ReactPropTypes;
-    return ReactPropTypes;
-  };
-  return factoryWithThrowingShims;
+
+function requireFactoryWithThrowingShims () {
+	if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
+	hasRequiredFactoryWithThrowingShims = 1;
+
+	var ReactPropTypesSecret = requireReactPropTypesSecret();
+
+	function emptyFunction() {}
+	function emptyFunctionWithReset() {}
+	emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+	factoryWithThrowingShims = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    var err = new Error(
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	    err.name = 'Invariant Violation';
+	    throw err;
+	  }	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  }	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bigint: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    elementType: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim,
+	    exact: getShim,
+
+	    checkPropTypes: emptyFunctionWithReset,
+	    resetWarningCache: emptyFunction
+	  };
+
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+	return factoryWithThrowingShims;
 }
 
 /**
@@ -4517,6 +6063,7 @@ function requireFactoryWithThrowingShims() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 if (process.env.NODE_ENV !== 'production') {
   var ReactIs = requireReactIs();
 
@@ -4529,19 +6076,23 @@ if (process.env.NODE_ENV !== 'production') {
   // http://fb.me/prop-types-in-prod
   propTypes.exports = requireFactoryWithThrowingShims()();
 }
+
 var propTypesExports = propTypes.exports;
 var PropTypes = /*@__PURE__*/getDefaultExportFromCjs(propTypesExports);
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
+
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
     enumerableOnly && (symbols = symbols.filter(function (sym) {
       return Object.getOwnPropertyDescriptor(object, sym).enumerable;
     })), keys.push.apply(keys, symbols);
   }
+
   return keys;
 }
+
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
@@ -4551,8 +6102,10 @@ function _objectSpread2(target) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
+
   return target;
 }
+
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -4562,6 +6115,7 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -4573,26 +6127,35 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
+
   return obj;
 }
+
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
+
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
+
   return target;
 }
+
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
+
   var target = _objectWithoutPropertiesLoose(source, excluded);
+
   var key, i;
+
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -4600,17 +6163,22 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
+
   return target;
 }
+
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
+
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
+
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
+
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -4619,11 +6187,15 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
+
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
+
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
   return arr2;
 }
+
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
@@ -4631,24 +6203,25 @@ function _nonIterableSpread() {
 // Get CSS class list from a props object
 function classList(props) {
   var _classes;
+
   var beat = props.beat,
-    fade = props.fade,
-    beatFade = props.beatFade,
-    bounce = props.bounce,
-    shake = props.shake,
-    flash = props.flash,
-    spin = props.spin,
-    spinPulse = props.spinPulse,
-    spinReverse = props.spinReverse,
-    pulse = props.pulse,
-    fixedWidth = props.fixedWidth,
-    inverse = props.inverse,
-    border = props.border,
-    listItem = props.listItem,
-    flip = props.flip,
-    size = props.size,
-    rotation = props.rotation,
-    pull = props.pull; // map of CSS class names to properties
+      fade = props.fade,
+      beatFade = props.beatFade,
+      bounce = props.bounce,
+      shake = props.shake,
+      flash = props.flash,
+      spin = props.spin,
+      spinPulse = props.spinPulse,
+      spinReverse = props.spinReverse,
+      pulse = props.pulse,
+      fixedWidth = props.fixedWidth,
+      inverse = props.inverse,
+      border = props.border,
+      listItem = props.listItem,
+      flip = props.flip,
+      size = props.size,
+      rotation = props.rotation,
+      pull = props.pull; // map of CSS class names to properties
 
   var classes = (_classes = {
     'fa-beat': beat,
@@ -4687,10 +6260,12 @@ function _isNumerical(obj) {
 
   return obj === obj;
 }
+
 function camelize(string) {
   if (_isNumerical(string)) {
     return string;
   } // eslint-disable-next-line no-useless-escape
+
 
   string = string.replace(/[\-_\s]+(.)?/g, function (match, chr) {
     return chr ? chr.toUpperCase() : '';
@@ -4698,10 +6273,13 @@ function camelize(string) {
 
   return string.substr(0, 1).toLowerCase() + string.substr(1);
 }
+
 var _excluded = ["style"];
+
 function capitalize(val) {
   return val.charAt(0).toUpperCase() + val.slice(1);
 }
+
 function styleToObject(style) {
   return style.split(';').map(function (s) {
     return s.trim();
@@ -4715,11 +6293,14 @@ function styleToObject(style) {
     return acc;
   }, {});
 }
+
 function convert(createElement, element) {
   var extraProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
   if (typeof element === 'string') {
     return element;
   }
+
   var children = (element.children || []).map(function (child) {
     return convert(createElement, child);
   });
@@ -4727,60 +6308,76 @@ function convert(createElement, element) {
 
   var mixins = Object.keys(element.attributes || {}).reduce(function (acc, key) {
     var val = element.attributes[key];
+
     switch (key) {
       case 'class':
         acc.attrs['className'] = val;
         delete element.attributes['class'];
         break;
+
       case 'style':
         acc.attrs['style'] = styleToObject(val);
         break;
+
       default:
         if (key.indexOf('aria-') === 0 || key.indexOf('data-') === 0) {
           acc.attrs[key.toLowerCase()] = val;
         } else {
           acc.attrs[camelize(key)] = val;
         }
+
     }
+
     return acc;
   }, {
     attrs: {}
   });
+
   var _extraProps$style = extraProps.style,
-    existingStyle = _extraProps$style === void 0 ? {} : _extraProps$style,
-    remaining = _objectWithoutProperties(extraProps, _excluded);
+      existingStyle = _extraProps$style === void 0 ? {} : _extraProps$style,
+      remaining = _objectWithoutProperties(extraProps, _excluded);
+
   mixins.attrs['style'] = _objectSpread2(_objectSpread2({}, mixins.attrs['style']), existingStyle);
   /* eslint-enable */
 
   return createElement.apply(void 0, [element.tag, _objectSpread2(_objectSpread2({}, mixins.attrs), remaining)].concat(_toConsumableArray(children)));
 }
+
 var PRODUCTION = false;
+
 try {
   PRODUCTION = process.env.NODE_ENV === 'production';
 } catch (e) {}
-function log() {
+
+function log () {
   if (!PRODUCTION && console && typeof console.error === 'function') {
     var _console;
+
     (_console = console).error.apply(_console, arguments);
   }
 }
+
 function normalizeIconArgs(icon) {
   // this has everything that it needs to be rendered which means it was probably imported
   // directly from an icon svg package
   if (icon && _typeof(icon) === 'object' && icon.prefix && icon.iconName && icon.icon) {
     return icon;
   }
+
   if (parse$1.icon) {
     return parse$1.icon(icon);
   } // if the icon is null, there's nothing to do
+
 
   if (icon === null) {
     return null;
   } // if the icon is an object and has a prefix and an icon name, return it
 
+
   if (icon && _typeof(icon) === 'object' && icon.prefix && icon.iconName) {
     return icon;
   } // if it's an array with length of two
+
 
   if (Array.isArray(icon) && icon.length === 2) {
     // use the first item as prefix, second as icon name
@@ -4789,6 +6386,7 @@ function normalizeIconArgs(icon) {
       iconName: icon[1]
     };
   } // if it's a string, use it as the icon name
+
 
   if (typeof icon === 'string') {
     return {
@@ -4808,6 +6406,7 @@ function objectWithKey(key, value) {
   // if not, return an empty array
   return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty({}, key, value) : {};
 }
+
 var defaultProps = {
   border: false,
   className: '',
@@ -4836,15 +6435,16 @@ var defaultProps = {
   transform: null,
   swapOpacity: false
 };
-var FontAwesomeIcon = /*#__PURE__*/React__default.forwardRef(function (props, ref) {
+var FontAwesomeIcon = /*#__PURE__*/React.forwardRef(function (props, ref) {
   var allProps = _objectSpread2(_objectSpread2({}, defaultProps), props);
+
   var iconArgs = allProps.icon,
-    maskArgs = allProps.mask,
-    symbol = allProps.symbol,
-    className = allProps.className,
-    title = allProps.title,
-    titleId = allProps.titleId,
-    maskId = allProps.maskId;
+      maskArgs = allProps.mask,
+      symbol = allProps.symbol,
+      className = allProps.className,
+      title = allProps.title,
+      titleId = allProps.titleId,
+      maskId = allProps.maskId;
   var iconLookup = normalizeIconArgs(iconArgs);
   var classes = objectWithKey('classes', [].concat(_toConsumableArray(classList(allProps)), _toConsumableArray((className || '').split(' '))));
   var transform = objectWithKey('transform', typeof allProps.transform === 'string' ? parse$1.transform(allProps.transform) : allProps.transform);
@@ -4855,10 +6455,12 @@ var FontAwesomeIcon = /*#__PURE__*/React__default.forwardRef(function (props, re
     titleId: titleId,
     maskId: maskId
   }));
+
   if (!renderedIcon) {
     log('Could not find icon', iconLookup);
     return null;
   }
+
   var abstract = renderedIcon.abstract;
   var extraProps = {
     ref: ref
@@ -4901,7 +6503,7 @@ FontAwesomeIcon.propTypes = {
   transform: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   swapOpacity: PropTypes.bool
 };
-var convertCurry = convert.bind(null, React__default.createElement);
+var convertCurry = convert.bind(null, React.createElement);
 
 var faArrowRight = {
   prefix: 'fas',
@@ -4913,103 +6515,6 @@ var faCopy = {
   iconName: 'copy',
   icon: [448, 512, [], "f0c5", "M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"]
 };
-var faChevronLeft = {
-  prefix: 'fas',
-  iconName: 'chevron-left',
-  icon: [320, 512, [9001], "f053", "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"]
-};
-var faChevronRight = {
-  prefix: 'fas',
-  iconName: 'chevron-right',
-  icon: [320, 512, [9002], "f054", "M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"]
-};
-
-var css_248z$c = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-carousel {\n  position: relative;\n  overflow: hidden;\n  padding: 0.8888888889rem 0;\n}\n.nex-carousel.nex-carousel-dots-top {\n  margin-top: 0.8888888889rem;\n}\n.nex-carousel.nex-carousel-dots-bottom {\n  margin-bottom: 0.8888888889rem;\n}\n.nex-carousel .nex-slides {\n  display: flex;\n  gap: 0.8888888889rem;\n  transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-carousel .nex-slide {\n  flex: 0 0 calc(100% - 0.8888888889rem);\n}\n.nex-carousel .nex-carousel-line {\n  position: relative;\n  top: 100%;\n  left: 0;\n  height: 0.2666666667rem;\n  border-radius: 0.3555555556rem;\n  background-color: var(--nex-primary-color);\n  transition: width 0.5s ease;\n}\n.nex-carousel .nex-carousel-nav-button {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 1.1111111111rem;\n  padding: 0.3555555556rem;\n  border: none;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.25);\n  backdrop-filter: blur(4px);\n  -webkit-backdrop-filter: blur(4px);\n  border-radius: 0.3555555556rem;\n  border: 0.0444444444rem solid rgba(255, 255, 255, 0.18);\n  color: var(--nex-font-color);\n  cursor: pointer;\n  transition: color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-carousel .nex-carousel-nav-button:hover {\n  color: var(--nex-primary-color);\n}\n.nex-carousel .nex-prev {\n  left: 0;\n}\n.nex-carousel .nex-next {\n  right: 0;\n}\n.nex-carousel .nex-carousel-dots {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n}\n.nex-carousel .nex-carousel-dots.top {\n  top: 0;\n}\n.nex-carousel .nex-carousel-dots.bottom {\n  bottom: 0;\n}\n.nex-carousel .nex-carousel-dot {\n  width: 0.5333333333rem;\n  height: 0.5333333333rem;\n  border-radius: 50%;\n  background-color: var(--nex-complimentary-color);\n  margin: 0 1.0222222222rem;\n  cursor: pointer;\n}\n.nex-carousel .nex-carousel-dot.active {\n  background-color: var(--nex-primary-color);\n}";
-styleInject(css_248z$c);
-
-/**
- * NexCarousel component
- *
- * A carousel component to display slides with optional navigation buttons, dots, and automatic slide transition.
- *
- * @param {React.ReactNode[]} children - The slides to display in the carousel.
- * @param {string} className - Additional class names to apply to the carousel.
- * @param {boolean} [navButtons=false] - Whether to display navigation buttons.
- * @param {'top' | 'bottom' | 'left' | 'right'} [navigationPosition='bottom'] - The position of the navigation dots.
- * @param {boolean} [line] - Whether to display a progress line indicating the current slide.
- * @param {number} [interval] - The time in seconds between automatic slide transitions.
- */
-const NexCarousel = ({
-  children,
-  className,
-  navButtons = false,
-  navigationPosition = 'bottom',
-  line,
-  interval
-}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // Function to handle next slide
-  const handleNext = () => {
-    setCurrentIndex(prevIndex => prevIndex === children.length - 1 ? 0 : prevIndex + 1);
-  };
-  // Function to handle previous slide
-  const handlePrev = () => {
-    setCurrentIndex(prevIndex => prevIndex === 0 ? children.length - 1 : prevIndex - 1);
-  };
-  // Function to jump to a specific slide
-  const handleJumpToSlide = index => {
-    setCurrentIndex(index);
-  };
-  // Effect to handle automatic carousel movement
-  useEffect(() => {
-    let intervalId = null;
-    // Start automatic carousel movement if interval is provided
-    if (interval && interval > 0) {
-      intervalId = setInterval(() => {
-        handleNext();
-      }, interval * 1000);
-    }
-    // Clean up interval when component unmounts or interval changes
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [interval]);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-carousel nex-carousel-dots-${navigationPosition} ${className ? className : ''}`
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-slides",
-    style: {
-      transform: `translateX(-${currentIndex * 100}%)`
-    }
-  }, children.map((child, index) => /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-slide",
-    key: index
-  }, child))), line && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-carousel-line",
-    style: {
-      width: `${(currentIndex + 1) / children.length * 100}%`
-    }
-  }), navButtons && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement(FontAwesomeIcon, {
-    icon: faChevronLeft,
-    className: "nex-carousel-nav-button nex-prev",
-    onClick: handlePrev
-  }), /*#__PURE__*/React__default.createElement(FontAwesomeIcon, {
-    icon: faChevronRight,
-    className: "nex-carousel-nav-button nex-next",
-    onClick: handleNext
-  })), /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-carousel-dots ${navigationPosition}`
-  }, children.map((_, index) => /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-carousel-dot ${index === currentIndex ? 'active' : ''}`,
-    key: index,
-    onClick: () => handleJumpToSlide(index)
-  }))));
-};
-
-var css_248z$b = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-copy-to-clipboard {\n  padding: 0.5333333333rem 0.6222222222rem;\n  border: none;\n  border-radius: 0.3555555556rem;\n  background-color: var(--nex-font-color);\n  color: #fff;\n  cursor: pointer;\n  transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n  cursor: pointer;\n}\n.nex-copy-to-clipboard .fa-copy {\n  font-size: 0.8rem;\n  font-weight: 500;\n  line-height: 0.92rem;\n}\n.nex-copy-to-clipboard:hover {\n  opacity: 0.8;\n}\n.nex-copy-to-clipboard--small .fa-copy {\n  font-size: 0.7111111111rem;\n}\n.nex-copy-to-clipboard--large {\n  padding: 0.8888888889rem 0.9777777778rem;\n  border-radius: 0.8888888889rem;\n}\n.nex-copy-to-clipboard--large .fa-copy {\n  font-size: 1.5111111111rem;\n}\n.nex-copy-to-clipboard--primary {\n  background-color: var(--nex-primary-color);\n  color: var(--nex-primary-contrast-color);\n}\n.nex-copy-to-clipboard--secondary {\n  background-color: var(--nex-secondary-color);\n  color: var(--nex-secondary-contrast-color);\n}\n.nex-copy-to-clipboard--tertiary {\n  background-color: var(--nex-tertiary-color);\n  color: var(--nex-tertiary-contrast-color);\n}\n.nex-copy-to-clipboard--quaternary {\n  background-color: var(--nex-quaternary-color);\n  color: var(--nex-quaternary-contrast-color);\n}\n.nex-copy-to-clipboard--success {\n  background-color: var(--nex-success);\n  color: #fff;\n}\n.nex-copy-to-clipboard--info {\n  background-color: var(--nex-info);\n  color: #fff;\n}\n.nex-copy-to-clipboard--warning {\n  background-color: var(--nex-warning);\n  color: #fff;\n}\n.nex-copy-to-clipboard--danger {\n  background-color: var(--nex-danger);\n  color: #fff;\n}";
-styleInject(css_248z$b);
 
 /**
  * NexCopyToClipboard component
@@ -5039,29 +6544,15 @@ const NexCopyToClipboard = ({
     navigator.clipboard.writeText(textToCopy);
   };
   const buttonClasses = `nex-copy-to-clipboard ${className || ''} ${getColorClass(type)} ${getSizeClass(size)}`;
-  return /*#__PURE__*/React__default.createElement("button", {
+  return /*#__PURE__*/jsx("button", {
     className: buttonClasses,
-    onClick: handleCopy
-  }, /*#__PURE__*/React__default.createElement(FontAwesomeIcon, {
-    icon: faCopy
-  }));
+    onClick: handleCopy,
+    children: /*#__PURE__*/jsx(FontAwesomeIcon, {
+      icon: faCopy
+    })
+  });
 };
 
-var css_248z$a = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-input {\n  display: flex;\n  align-items: center;\n}\n.nex-input input {\n  flex: 1;\n  width: 100%;\n  border: 0.0444444444rem solid #ddd;\n  border-radius: 0.3555555556rem;\n  background-color: #fff;\n  transition: border-color 0.3s ease-in-out;\n  outline: none;\n  color: var(--nex-font-color);\n  padding: 0.8888888889rem;\n}\n.nex-input input:focus {\n  border-color: var(--nex-primary-color);\n}\n.nex-input--small input {\n  padding: 0.5777777778rem;\n}\n.nex-input--large input {\n  padding: 1.1111111111rem;\n  font-size: 0.8888888889rem;\n}\n.nex-input .peek-button {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  right: 0.8888888889rem;\n  border: none;\n  background: none;\n  font-size: 0.6666666667rem;\n  color: var(--nex-primary-color);\n  transform: translateY(-50%);\n  cursor: pointer;\n}\n\n.password-wrapper {\n  position: relative;\n}\n.password-wrapper input:not(:last-child) {\n  padding-right: 3.5555555556rem;\n}";
-styleInject(css_248z$a);
-
-/**
- * NexInput component
- *
- * A customizable input component with support for different types, sizes, and an optional peek button for password fields.
- *
- * @param {string} type - The type of the input field (e.g., 'text', 'password', 'email').
- * @param {boolean} [peekButton] - Whether to show a button to toggle password visibility.
- * @param {string} [className] - Additional class names to apply to the input field.
- * @param {number} [width] - The width of the input field in pixels.
- * @param {'small' | 'normal' | 'large'} [fieldSize='normal'] - The size of the input field.
- * @param {object} rest - Additional props to pass to the input element.
- */
 const NexInput = ({
   type,
   peekButton,
@@ -5086,11734 +6577,814 @@ const NexInput = ({
   const inputStyle = width ? {
     width: `${width}px`
   } : {};
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     className: `nex-input ${inputClasses} ${getSizeClass(fieldSize)}`,
-    style: inputStyle
-  }, /*#__PURE__*/React__default.createElement("input", _extends({}, rest, {
-    type: type === 'password' && showPassword ? 'text' : type
-  })), peekButton && type === 'password' && /*#__PURE__*/React__default.createElement("button", {
-    type: "button",
-    className: "peek-button",
-    onClick: togglePasswordVisibility
-  }, showPassword ? 'Hide' : 'Show'));
+    style: inputStyle,
+    children: [/*#__PURE__*/jsx("input", {
+      ...rest,
+      type: type === 'password' && showPassword ? 'text' : type
+    }), peekButton && type === 'password' && /*#__PURE__*/jsx("button", {
+      type: "button",
+      className: "peek-button",
+      onClick: togglePasswordVisibility,
+      children: showPassword ? 'Hide' : 'Show'
+    })]
+  });
 };
 
-var css_248z$9 = ".nex-loader {\n  animation: rotate 2s linear infinite;\n  z-index: 2;\n  position: absolute;\n  top: 51.5%;\n  left: 48%;\n  width: 50px;\n  height: 50px;\n}\n.nex-loader .path {\n  fill: none;\n  stroke: #7d7d7d;\n  stroke-width: 6;\n  stroke-linecap: round;\n  animation: dash 1.5s ease-in-out infinite;\n}\n\n@keyframes rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes dash {\n  0% {\n    stroke-dasharray: 1, 150;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 90, 150;\n    stroke-dashoffset: -35;\n  }\n  100% {\n    stroke-dasharray: 90, 150;\n    stroke-dashoffset: -124;\n  }\n}";
-styleInject(css_248z$9);
-
-/**
- * NexLoader component
- *
- * A customizable loader component that displays a spinning circle.
- *
- * @param {number} [size] - The size of the loader in pixels.
- * @param {string} [color] - The color of the loader circle.
- */
 const NexLoader = ({
   size,
   color
 }) => {
-  return /*#__PURE__*/React__default.createElement("svg", {
+  const style = {};
+  if (size) {
+    style['--nex-loader-size'] = typeof size === "number" ? `${size}px` : size;
+  }
+  if (color) {
+    style['--nex-loader-color'] = color;
+  }
+  return /*#__PURE__*/jsx("svg", {
     className: "nex-loader",
-    viewBox: "0 0 50 50"
-  }, /*#__PURE__*/React__default.createElement("circle", {
-    className: "path",
-    cx: "25",
-    cy: "25",
-    r: "20"
-  }));
+    viewBox: "0 0 50 50",
+    style: style,
+    children: /*#__PURE__*/jsx("circle", {
+      className: "path",
+      cx: "25",
+      cy: "25",
+      r: "20"
+    })
+  });
 };
 
-var jsxRuntime = {exports: {}};
-
-var reactJsxRuntime_production_min = {};
-
-/**
- * @license React
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var hasRequiredReactJsxRuntime_production_min;
-function requireReactJsxRuntime_production_min() {
-  if (hasRequiredReactJsxRuntime_production_min) return reactJsxRuntime_production_min;
-  hasRequiredReactJsxRuntime_production_min = 1;
-  var f = React__default,
-    k = Symbol.for("react.element"),
-    l = Symbol.for("react.fragment"),
-    m = Object.prototype.hasOwnProperty,
-    n = f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,
-    p = {
-      key: !0,
-      ref: !0,
-      __self: !0,
-      __source: !0
-    };
-  function q(c, a, g) {
-    var b,
-      d = {},
-      e = null,
-      h = null;
-    void 0 !== g && (e = "" + g);
-    void 0 !== a.key && (e = "" + a.key);
-    void 0 !== a.ref && (h = a.ref);
-    for (b in a) m.call(a, b) && !p.hasOwnProperty(b) && (d[b] = a[b]);
-    if (c && c.defaultProps) for (b in a = c.defaultProps, a) void 0 === d[b] && (d[b] = a[b]);
-    return {
-      $$typeof: k,
-      type: c,
-      key: e,
-      ref: h,
-      props: d,
-      _owner: n.current
-    };
-  }
-  reactJsxRuntime_production_min.Fragment = l;
-  reactJsxRuntime_production_min.jsx = q;
-  reactJsxRuntime_production_min.jsxs = q;
-  return reactJsxRuntime_production_min;
-}
-
-var reactJsxRuntime_development = {};
-
-/**
- * @license React
- * react-jsx-runtime.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var hasRequiredReactJsxRuntime_development;
-function requireReactJsxRuntime_development() {
-  if (hasRequiredReactJsxRuntime_development) return reactJsxRuntime_development;
-  hasRequiredReactJsxRuntime_development = 1;
-  if (process.env.NODE_ENV !== "production") {
-    (function () {
-
-      var React = React__default;
-
-      // ATTENTION
-      // When adding new symbols to this file,
-      // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-      // The Symbol used to tag the ReactElement-like types.
-      var REACT_ELEMENT_TYPE = Symbol.for('react.element');
-      var REACT_PORTAL_TYPE = Symbol.for('react.portal');
-      var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
-      var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
-      var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
-      var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
-      var REACT_CONTEXT_TYPE = Symbol.for('react.context');
-      var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
-      var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
-      var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
-      var REACT_MEMO_TYPE = Symbol.for('react.memo');
-      var REACT_LAZY_TYPE = Symbol.for('react.lazy');
-      var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
-      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
-      var FAUX_ITERATOR_SYMBOL = '@@iterator';
-      function getIteratorFn(maybeIterable) {
-        if (maybeIterable === null || typeof maybeIterable !== 'object') {
-          return null;
-        }
-        var maybeIterator = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL];
-        if (typeof maybeIterator === 'function') {
-          return maybeIterator;
-        }
-        return null;
-      }
-      var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-      function error(format) {
-        {
-          {
-            for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-              args[_key2 - 1] = arguments[_key2];
-            }
-            printWarning('error', format, args);
-          }
-        }
-      }
-      function printWarning(level, format, args) {
-        // When changing this logic, you might want to also
-        // update consoleWithStackDev.www.js as well.
-        {
-          var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-          var stack = ReactDebugCurrentFrame.getStackAddendum();
-          if (stack !== '') {
-            format += '%s';
-            args = args.concat([stack]);
-          } // eslint-disable-next-line react-internal/safe-string-coercion
-
-          var argsWithFormat = args.map(function (item) {
-            return String(item);
-          }); // Careful: RN currently depends on this prefix
-
-          argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
-          // breaks IE9: https://github.com/facebook/react/issues/13610
-          // eslint-disable-next-line react-internal/no-production-logging
-
-          Function.prototype.apply.call(console[level], console, argsWithFormat);
-        }
-      }
-
-      // -----------------------------------------------------------------------------
-
-      var enableScopeAPI = false; // Experimental Create Event Handle API.
-      var enableCacheElement = false;
-      var enableTransitionTracing = false; // No known bugs, but needs performance testing
-
-      var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-      // stuff. Intended to enable React core members to more easily debug scheduling
-      // issues in DEV builds.
-
-      var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
-
-      var REACT_MODULE_REFERENCE;
-      {
-        REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
-      }
-      function isValidElementType(type) {
-        if (typeof type === 'string' || typeof type === 'function') {
-          return true;
-        } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
-
-        if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
-          return true;
-        }
-        if (typeof type === 'object' && type !== null) {
-          if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE ||
-          // This needs to include all possible module reference object
-          // types supported by any Flight configuration anywhere since
-          // we don't know which Flight build this will end up being used
-          // with.
-          type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== undefined) {
-            return true;
-          }
-        }
-        return false;
-      }
-      function getWrappedName(outerType, innerType, wrapperName) {
-        var displayName = outerType.displayName;
-        if (displayName) {
-          return displayName;
-        }
-        var functionName = innerType.displayName || innerType.name || '';
-        return functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName;
-      } // Keep in sync with react-reconciler/getComponentNameFromFiber
-
-      function getContextName(type) {
-        return type.displayName || 'Context';
-      } // Note that the reconciler package should generally prefer to use getComponentNameFromFiber() instead.
-
-      function getComponentNameFromType(type) {
-        if (type == null) {
-          // Host root, text node or just invalid type.
-          return null;
-        }
-        {
-          if (typeof type.tag === 'number') {
-            error('Received an unexpected object in getComponentNameFromType(). ' + 'This is likely a bug in React. Please file an issue.');
-          }
-        }
-        if (typeof type === 'function') {
-          return type.displayName || type.name || null;
-        }
-        if (typeof type === 'string') {
-          return type;
-        }
-        switch (type) {
-          case REACT_FRAGMENT_TYPE:
-            return 'Fragment';
-          case REACT_PORTAL_TYPE:
-            return 'Portal';
-          case REACT_PROFILER_TYPE:
-            return 'Profiler';
-          case REACT_STRICT_MODE_TYPE:
-            return 'StrictMode';
-          case REACT_SUSPENSE_TYPE:
-            return 'Suspense';
-          case REACT_SUSPENSE_LIST_TYPE:
-            return 'SuspenseList';
-        }
-        if (typeof type === 'object') {
-          switch (type.$$typeof) {
-            case REACT_CONTEXT_TYPE:
-              var context = type;
-              return getContextName(context) + '.Consumer';
-            case REACT_PROVIDER_TYPE:
-              var provider = type;
-              return getContextName(provider._context) + '.Provider';
-            case REACT_FORWARD_REF_TYPE:
-              return getWrappedName(type, type.render, 'ForwardRef');
-            case REACT_MEMO_TYPE:
-              var outerName = type.displayName || null;
-              if (outerName !== null) {
-                return outerName;
-              }
-              return getComponentNameFromType(type.type) || 'Memo';
-            case REACT_LAZY_TYPE:
-              {
-                var lazyComponent = type;
-                var payload = lazyComponent._payload;
-                var init = lazyComponent._init;
-                try {
-                  return getComponentNameFromType(init(payload));
-                } catch (x) {
-                  return null;
-                }
-              }
-
-            // eslint-disable-next-line no-fallthrough
-          }
-        }
-        return null;
-      }
-      var assign = Object.assign;
-
-      // Helpers to patch console.logs to avoid logging during side-effect free
-      // replaying on render function. This currently only patches the object
-      // lazily which won't cover if the log function was extracted eagerly.
-      // We could also eagerly patch the method.
-      var disabledDepth = 0;
-      var prevLog;
-      var prevInfo;
-      var prevWarn;
-      var prevError;
-      var prevGroup;
-      var prevGroupCollapsed;
-      var prevGroupEnd;
-      function disabledLog() {}
-      disabledLog.__reactDisabledLog = true;
-      function disableLogs() {
-        {
-          if (disabledDepth === 0) {
-            /* eslint-disable react-internal/no-production-logging */
-            prevLog = console.log;
-            prevInfo = console.info;
-            prevWarn = console.warn;
-            prevError = console.error;
-            prevGroup = console.group;
-            prevGroupCollapsed = console.groupCollapsed;
-            prevGroupEnd = console.groupEnd; // https://github.com/facebook/react/issues/19099
-
-            var props = {
-              configurable: true,
-              enumerable: true,
-              value: disabledLog,
-              writable: true
-            }; // $FlowFixMe Flow thinks console is immutable.
-
-            Object.defineProperties(console, {
-              info: props,
-              log: props,
-              warn: props,
-              error: props,
-              group: props,
-              groupCollapsed: props,
-              groupEnd: props
-            });
-            /* eslint-enable react-internal/no-production-logging */
-          }
-          disabledDepth++;
-        }
-      }
-      function reenableLogs() {
-        {
-          disabledDepth--;
-          if (disabledDepth === 0) {
-            /* eslint-disable react-internal/no-production-logging */
-            var props = {
-              configurable: true,
-              enumerable: true,
-              writable: true
-            }; // $FlowFixMe Flow thinks console is immutable.
-
-            Object.defineProperties(console, {
-              log: assign({}, props, {
-                value: prevLog
-              }),
-              info: assign({}, props, {
-                value: prevInfo
-              }),
-              warn: assign({}, props, {
-                value: prevWarn
-              }),
-              error: assign({}, props, {
-                value: prevError
-              }),
-              group: assign({}, props, {
-                value: prevGroup
-              }),
-              groupCollapsed: assign({}, props, {
-                value: prevGroupCollapsed
-              }),
-              groupEnd: assign({}, props, {
-                value: prevGroupEnd
-              })
-            });
-            /* eslint-enable react-internal/no-production-logging */
-          }
-          if (disabledDepth < 0) {
-            error('disabledDepth fell below zero. ' + 'This is a bug in React. Please file an issue.');
-          }
-        }
-      }
-      var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
-      var prefix;
-      function describeBuiltInComponentFrame(name, source, ownerFn) {
-        {
-          if (prefix === undefined) {
-            // Extract the VM specific prefix used by each line.
-            try {
-              throw Error();
-            } catch (x) {
-              var match = x.stack.trim().match(/\n( *(at )?)/);
-              prefix = match && match[1] || '';
-            }
-          } // We use the prefix to ensure our stacks line up with native stack frames.
-
-          return '\n' + prefix + name;
-        }
-      }
-      var reentry = false;
-      var componentFrameCache;
-      {
-        var PossiblyWeakMap = typeof WeakMap === 'function' ? WeakMap : Map;
-        componentFrameCache = new PossiblyWeakMap();
-      }
-      function describeNativeComponentFrame(fn, construct) {
-        // If something asked for a stack inside a fake render, it should get ignored.
-        if (!fn || reentry) {
-          return '';
-        }
-        {
-          var frame = componentFrameCache.get(fn);
-          if (frame !== undefined) {
-            return frame;
-          }
-        }
-        var control;
-        reentry = true;
-        var previousPrepareStackTrace = Error.prepareStackTrace; // $FlowFixMe It does accept undefined.
-
-        Error.prepareStackTrace = undefined;
-        var previousDispatcher;
-        {
-          previousDispatcher = ReactCurrentDispatcher.current; // Set the dispatcher in DEV because this might be call in the render function
-          // for warnings.
-
-          ReactCurrentDispatcher.current = null;
-          disableLogs();
-        }
-        try {
-          // This should throw.
-          if (construct) {
-            // Something should be setting the props in the constructor.
-            var Fake = function () {
-              throw Error();
-            }; // $FlowFixMe
-
-            Object.defineProperty(Fake.prototype, 'props', {
-              set: function () {
-                // We use a throwing setter instead of frozen or non-writable props
-                // because that won't throw in a non-strict mode function.
-                throw Error();
-              }
-            });
-            if (typeof Reflect === 'object' && Reflect.construct) {
-              // We construct a different control for this case to include any extra
-              // frames added by the construct call.
-              try {
-                Reflect.construct(Fake, []);
-              } catch (x) {
-                control = x;
-              }
-              Reflect.construct(fn, [], Fake);
-            } else {
-              try {
-                Fake.call();
-              } catch (x) {
-                control = x;
-              }
-              fn.call(Fake.prototype);
-            }
-          } else {
-            try {
-              throw Error();
-            } catch (x) {
-              control = x;
-            }
-            fn();
-          }
-        } catch (sample) {
-          // This is inlined manually because closure doesn't do it for us.
-          if (sample && control && typeof sample.stack === 'string') {
-            // This extracts the first frame from the sample that isn't also in the control.
-            // Skipping one frame that we assume is the frame that calls the two.
-            var sampleLines = sample.stack.split('\n');
-            var controlLines = control.stack.split('\n');
-            var s = sampleLines.length - 1;
-            var c = controlLines.length - 1;
-            while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-              // We expect at least one stack frame to be shared.
-              // Typically this will be the root most one. However, stack frames may be
-              // cut off due to maximum stack limits. In this case, one maybe cut off
-              // earlier than the other. We assume that the sample is longer or the same
-              // and there for cut off earlier. So we should find the root most frame in
-              // the sample somewhere in the control.
-              c--;
-            }
-            for (; s >= 1 && c >= 0; s--, c--) {
-              // Next we find the first one that isn't the same which should be the
-              // frame that called our sample function and the control.
-              if (sampleLines[s] !== controlLines[c]) {
-                // In V8, the first line is describing the message but other VMs don't.
-                // If we're about to return the first line, and the control is also on the same
-                // line, that's a pretty good indicator that our sample threw at same line as
-                // the control. I.e. before we entered the sample frame. So we ignore this result.
-                // This can happen if you passed a class to function component, or non-function.
-                if (s !== 1 || c !== 1) {
-                  do {
-                    s--;
-                    c--; // We may still have similar intermediate frames from the construct call.
-                    // The next one that isn't the same should be our match though.
-
-                    if (c < 0 || sampleLines[s] !== controlLines[c]) {
-                      // V8 adds a "new" prefix for native classes. Let's remove it to make it prettier.
-                      var _frame = '\n' + sampleLines[s].replace(' at new ', ' at '); // If our component frame is labeled "<anonymous>"
-                      // but we have a user-provided "displayName"
-                      // splice it in to make the stack more readable.
-
-                      if (fn.displayName && _frame.includes('<anonymous>')) {
-                        _frame = _frame.replace('<anonymous>', fn.displayName);
-                      }
-                      {
-                        if (typeof fn === 'function') {
-                          componentFrameCache.set(fn, _frame);
-                        }
-                      } // Return the line we found.
-
-                      return _frame;
-                    }
-                  } while (s >= 1 && c >= 0);
-                }
-                break;
-              }
-            }
-          }
-        } finally {
-          reentry = false;
-          {
-            ReactCurrentDispatcher.current = previousDispatcher;
-            reenableLogs();
-          }
-          Error.prepareStackTrace = previousPrepareStackTrace;
-        } // Fallback to just using the name if we couldn't make it throw.
-
-        var name = fn ? fn.displayName || fn.name : '';
-        var syntheticFrame = name ? describeBuiltInComponentFrame(name) : '';
-        {
-          if (typeof fn === 'function') {
-            componentFrameCache.set(fn, syntheticFrame);
-          }
-        }
-        return syntheticFrame;
-      }
-      function describeFunctionComponentFrame(fn, source, ownerFn) {
-        {
-          return describeNativeComponentFrame(fn, false);
-        }
-      }
-      function shouldConstruct(Component) {
-        var prototype = Component.prototype;
-        return !!(prototype && prototype.isReactComponent);
-      }
-      function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-        if (type == null) {
-          return '';
-        }
-        if (typeof type === 'function') {
-          {
-            return describeNativeComponentFrame(type, shouldConstruct(type));
-          }
-        }
-        if (typeof type === 'string') {
-          return describeBuiltInComponentFrame(type);
-        }
-        switch (type) {
-          case REACT_SUSPENSE_TYPE:
-            return describeBuiltInComponentFrame('Suspense');
-          case REACT_SUSPENSE_LIST_TYPE:
-            return describeBuiltInComponentFrame('SuspenseList');
-        }
-        if (typeof type === 'object') {
-          switch (type.$$typeof) {
-            case REACT_FORWARD_REF_TYPE:
-              return describeFunctionComponentFrame(type.render);
-            case REACT_MEMO_TYPE:
-              // Memo may contain any component type so we recursively resolve it.
-              return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
-            case REACT_LAZY_TYPE:
-              {
-                var lazyComponent = type;
-                var payload = lazyComponent._payload;
-                var init = lazyComponent._init;
-                try {
-                  // Lazy may contain any component type so we recursively resolve it.
-                  return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-                } catch (x) {}
-              }
-          }
-        }
-        return '';
-      }
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
-      var loggedTypeFailures = {};
-      var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-      function setCurrentlyValidatingElement(element) {
-        {
-          if (element) {
-            var owner = element._owner;
-            var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-            ReactDebugCurrentFrame.setExtraStackFrame(stack);
-          } else {
-            ReactDebugCurrentFrame.setExtraStackFrame(null);
-          }
-        }
-      }
-      function checkPropTypes(typeSpecs, values, location, componentName, element) {
-        {
-          // $FlowFixMe This is okay but Flow doesn't know it.
-          var has = Function.call.bind(hasOwnProperty);
-          for (var typeSpecName in typeSpecs) {
-            if (has(typeSpecs, typeSpecName)) {
-              var error$1 = void 0; // Prop type validation may throw. In case they do, we don't want to
-              // fail the render phase where it didn't fail before. So we log it.
-              // After these have been cleaned up, we'll let them throw.
-
-              try {
-                // This is intentionally an invariant that gets caught. It's the same
-                // behavior as without this statement except with a better message.
-                if (typeof typeSpecs[typeSpecName] !== 'function') {
-                  // eslint-disable-next-line react-internal/prod-error-codes
-                  var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
-                  err.name = 'Invariant Violation';
-                  throw err;
-                }
-                error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED');
-              } catch (ex) {
-                error$1 = ex;
-              }
-              if (error$1 && !(error$1 instanceof Error)) {
-                setCurrentlyValidatingElement(element);
-                error('%s: type specification of %s' + ' `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error$1);
-                setCurrentlyValidatingElement(null);
-              }
-              if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
-                // Only monitor this failure once because there tends to be a lot of the
-                // same error.
-                loggedTypeFailures[error$1.message] = true;
-                setCurrentlyValidatingElement(element);
-                error('Failed %s type: %s', location, error$1.message);
-                setCurrentlyValidatingElement(null);
-              }
-            }
-          }
-        }
-      }
-      var isArrayImpl = Array.isArray; // eslint-disable-next-line no-redeclare
-
-      function isArray(a) {
-        return isArrayImpl(a);
-      }
-
-      /*
-       * The `'' + value` pattern (used in in perf-sensitive code) throws for Symbol
-       * and Temporal.* types. See https://github.com/facebook/react/pull/22064.
-       *
-       * The functions in this module will throw an easier-to-understand,
-       * easier-to-debug exception with a clear errors message message explaining the
-       * problem. (Instead of a confusing exception thrown inside the implementation
-       * of the `value` object).
-       */
-      // $FlowFixMe only called in DEV, so void return is not possible.
-      function typeName(value) {
-        {
-          // toStringTag is needed for namespaced types like Temporal.Instant
-          var hasToStringTag = typeof Symbol === 'function' && Symbol.toStringTag;
-          var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || 'Object';
-          return type;
-        }
-      } // $FlowFixMe only called in DEV, so void return is not possible.
-
-      function willCoercionThrow(value) {
-        {
-          try {
-            testStringCoercion(value);
-            return false;
-          } catch (e) {
-            return true;
-          }
-        }
-      }
-      function testStringCoercion(value) {
-        // If you ended up here by following an exception call stack, here's what's
-        // happened: you supplied an object or symbol value to React (as a prop, key,
-        // DOM attribute, CSS property, string ref, etc.) and when React tried to
-        // coerce it to a string using `'' + value`, an exception was thrown.
-        //
-        // The most common types that will cause this exception are `Symbol` instances
-        // and Temporal objects like `Temporal.Instant`. But any object that has a
-        // `valueOf` or `[Symbol.toPrimitive]` method that throws will also cause this
-        // exception. (Library authors do this to prevent users from using built-in
-        // numeric operators like `+` or comparison operators like `>=` because custom
-        // methods are needed to perform accurate arithmetic or comparison.)
-        //
-        // To fix the problem, coerce this object or symbol value to a string before
-        // passing it to React. The most reliable way is usually `String(value)`.
-        //
-        // To find which value is throwing, check the browser or debugger console.
-        // Before this exception was thrown, there should be `console.error` output
-        // that shows the type (Symbol, Temporal.PlainDate, etc.) that caused the
-        // problem and how that type was used: key, atrribute, input value prop, etc.
-        // In most cases, this console output also shows the component and its
-        // ancestor components where the exception happened.
-        //
-        // eslint-disable-next-line react-internal/safe-string-coercion
-        return '' + value;
-      }
-      function checkKeyStringCoercion(value) {
-        {
-          if (willCoercionThrow(value)) {
-            error('The provided key is an unsupported type %s.' + ' This value must be coerced to a string before before using it here.', typeName(value));
-            return testStringCoercion(value); // throw (to help callers find troubleshooting comments)
-          }
-        }
-      }
-      var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-      var RESERVED_PROPS = {
-        key: true,
-        ref: true,
-        __self: true,
-        __source: true
-      };
-      var specialPropKeyWarningShown;
-      var specialPropRefWarningShown;
-      var didWarnAboutStringRefs;
-      {
-        didWarnAboutStringRefs = {};
-      }
-      function hasValidRef(config) {
-        {
-          if (hasOwnProperty.call(config, 'ref')) {
-            var getter = Object.getOwnPropertyDescriptor(config, 'ref').get;
-            if (getter && getter.isReactWarning) {
-              return false;
-            }
-          }
-        }
-        return config.ref !== undefined;
-      }
-      function hasValidKey(config) {
-        {
-          if (hasOwnProperty.call(config, 'key')) {
-            var getter = Object.getOwnPropertyDescriptor(config, 'key').get;
-            if (getter && getter.isReactWarning) {
-              return false;
-            }
-          }
-        }
-        return config.key !== undefined;
-      }
-      function warnIfStringRefCannotBeAutoConverted(config, self) {
-        {
-          if (typeof config.ref === 'string' && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
-            var componentName = getComponentNameFromType(ReactCurrentOwner.current.type);
-            if (!didWarnAboutStringRefs[componentName]) {
-              error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', getComponentNameFromType(ReactCurrentOwner.current.type), config.ref);
-              didWarnAboutStringRefs[componentName] = true;
-            }
-          }
-        }
-      }
-      function defineKeyPropWarningGetter(props, displayName) {
-        {
-          var warnAboutAccessingKey = function () {
-            if (!specialPropKeyWarningShown) {
-              specialPropKeyWarningShown = true;
-              error('%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-            }
-          };
-          warnAboutAccessingKey.isReactWarning = true;
-          Object.defineProperty(props, 'key', {
-            get: warnAboutAccessingKey,
-            configurable: true
-          });
-        }
-      }
-      function defineRefPropWarningGetter(props, displayName) {
-        {
-          var warnAboutAccessingRef = function () {
-            if (!specialPropRefWarningShown) {
-              specialPropRefWarningShown = true;
-              error('%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-            }
-          };
-          warnAboutAccessingRef.isReactWarning = true;
-          Object.defineProperty(props, 'ref', {
-            get: warnAboutAccessingRef,
-            configurable: true
-          });
-        }
-      }
-      /**
-       * Factory method to create a new React element. This no longer adheres to
-       * the class pattern, so do not use new to call it. Also, instanceof check
-       * will not work. Instead test $$typeof field against Symbol.for('react.element') to check
-       * if something is a React Element.
-       *
-       * @param {*} type
-       * @param {*} props
-       * @param {*} key
-       * @param {string|object} ref
-       * @param {*} owner
-       * @param {*} self A *temporary* helper to detect places where `this` is
-       * different from the `owner` when React.createElement is called, so that we
-       * can warn. We want to get rid of owner and replace string `ref`s with arrow
-       * functions, and as long as `this` and owner are the same, there will be no
-       * change in behavior.
-       * @param {*} source An annotation object (added by a transpiler or otherwise)
-       * indicating filename, line number, and/or other information.
-       * @internal
-       */
-
-      var ReactElement = function (type, key, ref, self, source, owner, props) {
-        var element = {
-          // This tag allows us to uniquely identify this as a React Element
-          $$typeof: REACT_ELEMENT_TYPE,
-          // Built-in properties that belong on the element
-          type: type,
-          key: key,
-          ref: ref,
-          props: props,
-          // Record the component responsible for creating this element.
-          _owner: owner
-        };
-        {
-          // The validation flag is currently mutative. We put it on
-          // an external backing store so that we can freeze the whole object.
-          // This can be replaced with a WeakMap once they are implemented in
-          // commonly used development environments.
-          element._store = {}; // To make comparing ReactElements easier for testing purposes, we make
-          // the validation flag non-enumerable (where possible, which should
-          // include every environment we run tests in), so the test framework
-          // ignores it.
-
-          Object.defineProperty(element._store, 'validated', {
-            configurable: false,
-            enumerable: false,
-            writable: true,
-            value: false
-          }); // self and source are DEV only properties.
-
-          Object.defineProperty(element, '_self', {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: self
-          }); // Two elements created in two different places should be considered
-          // equal for testing purposes and therefore we hide it from enumeration.
-
-          Object.defineProperty(element, '_source', {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: source
-          });
-          if (Object.freeze) {
-            Object.freeze(element.props);
-            Object.freeze(element);
-          }
-        }
-        return element;
-      };
-      /**
-       * https://github.com/reactjs/rfcs/pull/107
-       * @param {*} type
-       * @param {object} props
-       * @param {string} key
-       */
-
-      function jsxDEV(type, config, maybeKey, source, self) {
-        {
-          var propName; // Reserved names are extracted
-
-          var props = {};
-          var key = null;
-          var ref = null; // Currently, key can be spread in as a prop. This causes a potential
-          // issue if key is also explicitly declared (ie. <div {...props} key="Hi" />
-          // or <div key="Hi" {...props} /> ). We want to deprecate key spread,
-          // but as an intermediary step, we will use jsxDEV for everything except
-          // <div {...props} key="Hi" />, because we aren't currently able to tell if
-          // key is explicitly declared to be undefined or not.
-
-          if (maybeKey !== undefined) {
-            {
-              checkKeyStringCoercion(maybeKey);
-            }
-            key = '' + maybeKey;
-          }
-          if (hasValidKey(config)) {
-            {
-              checkKeyStringCoercion(config.key);
-            }
-            key = '' + config.key;
-          }
-          if (hasValidRef(config)) {
-            ref = config.ref;
-            warnIfStringRefCannotBeAutoConverted(config, self);
-          } // Remaining properties are added to a new props object
-
-          for (propName in config) {
-            if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-              props[propName] = config[propName];
-            }
-          } // Resolve default props
-
-          if (type && type.defaultProps) {
-            var defaultProps = type.defaultProps;
-            for (propName in defaultProps) {
-              if (props[propName] === undefined) {
-                props[propName] = defaultProps[propName];
-              }
-            }
-          }
-          if (key || ref) {
-            var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
-            if (key) {
-              defineKeyPropWarningGetter(props, displayName);
-            }
-            if (ref) {
-              defineRefPropWarningGetter(props, displayName);
-            }
-          }
-          return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-        }
-      }
-      var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
-      var ReactDebugCurrentFrame$1 = ReactSharedInternals.ReactDebugCurrentFrame;
-      function setCurrentlyValidatingElement$1(element) {
-        {
-          if (element) {
-            var owner = element._owner;
-            var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-            ReactDebugCurrentFrame$1.setExtraStackFrame(stack);
-          } else {
-            ReactDebugCurrentFrame$1.setExtraStackFrame(null);
-          }
-        }
-      }
-      var propTypesMisspellWarningShown;
-      {
-        propTypesMisspellWarningShown = false;
-      }
-      /**
-       * Verifies the object is a ReactElement.
-       * See https://reactjs.org/docs/react-api.html#isvalidelement
-       * @param {?object} object
-       * @return {boolean} True if `object` is a ReactElement.
-       * @final
-       */
-
-      function isValidElement(object) {
-        {
-          return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-        }
-      }
-      function getDeclarationErrorAddendum() {
-        {
-          if (ReactCurrentOwner$1.current) {
-            var name = getComponentNameFromType(ReactCurrentOwner$1.current.type);
-            if (name) {
-              return '\n\nCheck the render method of `' + name + '`.';
-            }
-          }
-          return '';
-        }
-      }
-      function getSourceInfoErrorAddendum(source) {
-        {
-          return '';
-        }
-      }
-      /**
-       * Warn if there's no key explicitly set on dynamic arrays of children or
-       * object keys are not valid. This allows us to keep track of children between
-       * updates.
-       */
-
-      var ownerHasKeyUseWarning = {};
-      function getCurrentComponentErrorInfo(parentType) {
-        {
-          var info = getDeclarationErrorAddendum();
-          if (!info) {
-            var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
-            if (parentName) {
-              info = "\n\nCheck the top-level render call using <" + parentName + ">.";
-            }
-          }
-          return info;
-        }
-      }
-      /**
-       * Warn if the element doesn't have an explicit key assigned to it.
-       * This element is in an array. The array could grow and shrink or be
-       * reordered. All children that haven't already been validated are required to
-       * have a "key" property assigned to it. Error statuses are cached so a warning
-       * will only be shown once.
-       *
-       * @internal
-       * @param {ReactElement} element Element that requires a key.
-       * @param {*} parentType element's parent's type.
-       */
-
-      function validateExplicitKey(element, parentType) {
-        {
-          if (!element._store || element._store.validated || element.key != null) {
-            return;
-          }
-          element._store.validated = true;
-          var currentComponentErrorInfo = getCurrentComponentErrorInfo(parentType);
-          if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
-            return;
-          }
-          ownerHasKeyUseWarning[currentComponentErrorInfo] = true; // Usually the current owner is the offender, but if it accepts children as a
-          // property, it may be the creator of the child that's responsible for
-          // assigning it a key.
-
-          var childOwner = '';
-          if (element && element._owner && element._owner !== ReactCurrentOwner$1.current) {
-            // Give the component that originally created this child.
-            childOwner = " It was passed a child from " + getComponentNameFromType(element._owner.type) + ".";
-          }
-          setCurrentlyValidatingElement$1(element);
-          error('Each child in a list should have a unique "key" prop.' + '%s%s See https://reactjs.org/link/warning-keys for more information.', currentComponentErrorInfo, childOwner);
-          setCurrentlyValidatingElement$1(null);
-        }
-      }
-      /**
-       * Ensure that every element either is passed in a static location, in an
-       * array with an explicit keys property defined, or in an object literal
-       * with valid key property.
-       *
-       * @internal
-       * @param {ReactNode} node Statically passed child of any type.
-       * @param {*} parentType node's parent's type.
-       */
-
-      function validateChildKeys(node, parentType) {
-        {
-          if (typeof node !== 'object') {
-            return;
-          }
-          if (isArray(node)) {
-            for (var i = 0; i < node.length; i++) {
-              var child = node[i];
-              if (isValidElement(child)) {
-                validateExplicitKey(child, parentType);
-              }
-            }
-          } else if (isValidElement(node)) {
-            // This element was passed in a valid location.
-            if (node._store) {
-              node._store.validated = true;
-            }
-          } else if (node) {
-            var iteratorFn = getIteratorFn(node);
-            if (typeof iteratorFn === 'function') {
-              // Entry iterators used to provide implicit keys,
-              // but now we print a separate warning for them later.
-              if (iteratorFn !== node.entries) {
-                var iterator = iteratorFn.call(node);
-                var step;
-                while (!(step = iterator.next()).done) {
-                  if (isValidElement(step.value)) {
-                    validateExplicitKey(step.value, parentType);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      /**
-       * Given an element, validate that its props follow the propTypes definition,
-       * provided by the type.
-       *
-       * @param {ReactElement} element
-       */
-
-      function validatePropTypes(element) {
-        {
-          var type = element.type;
-          if (type === null || type === undefined || typeof type === 'string') {
-            return;
-          }
-          var propTypes;
-          if (typeof type === 'function') {
-            propTypes = type.propTypes;
-          } else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE ||
-          // Note: Memo only checks outer props here.
-          // Inner props are checked in the reconciler.
-          type.$$typeof === REACT_MEMO_TYPE)) {
-            propTypes = type.propTypes;
-          } else {
-            return;
-          }
-          if (propTypes) {
-            // Intentionally inside to avoid triggering lazy initializers:
-            var name = getComponentNameFromType(type);
-            checkPropTypes(propTypes, element.props, 'prop', name, element);
-          } else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
-            propTypesMisspellWarningShown = true; // Intentionally inside to avoid triggering lazy initializers:
-
-            var _name = getComponentNameFromType(type);
-            error('Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', _name || 'Unknown');
-          }
-          if (typeof type.getDefaultProps === 'function' && !type.getDefaultProps.isReactClassApproved) {
-            error('getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
-          }
-        }
-      }
-      /**
-       * Given a fragment, validate that it can only be provided with fragment props
-       * @param {ReactElement} fragment
-       */
-
-      function validateFragmentProps(fragment) {
-        {
-          var keys = Object.keys(fragment.props);
-          for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            if (key !== 'children' && key !== 'key') {
-              setCurrentlyValidatingElement$1(fragment);
-              error('Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
-              setCurrentlyValidatingElement$1(null);
-              break;
-            }
-          }
-          if (fragment.ref !== null) {
-            setCurrentlyValidatingElement$1(fragment);
-            error('Invalid attribute `ref` supplied to `React.Fragment`.');
-            setCurrentlyValidatingElement$1(null);
-          }
-        }
-      }
-      var didWarnAboutKeySpread = {};
-      function jsxWithValidation(type, props, key, isStaticChildren, source, self) {
-        {
-          var validType = isValidElementType(type); // We warn in this case but don't throw. We expect the element creation to
-          // succeed and there will likely be errors in render.
-
-          if (!validType) {
-            var info = '';
-            if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
-              info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
-            }
-            var sourceInfo = getSourceInfoErrorAddendum();
-            if (sourceInfo) {
-              info += sourceInfo;
-            } else {
-              info += getDeclarationErrorAddendum();
-            }
-            var typeString;
-            if (type === null) {
-              typeString = 'null';
-            } else if (isArray(type)) {
-              typeString = 'array';
-            } else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-              typeString = "<" + (getComponentNameFromType(type.type) || 'Unknown') + " />";
-              info = ' Did you accidentally export a JSX literal instead of a component?';
-            } else {
-              typeString = typeof type;
-            }
-            error('React.jsx: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
-          }
-          var element = jsxDEV(type, props, key, source, self); // The result can be nullish if a mock or a custom function is used.
-          // TODO: Drop this when these are no longer allowed as the type argument.
-
-          if (element == null) {
-            return element;
-          } // Skip key warning if the type isn't valid since our key validation logic
-          // doesn't expect a non-string/function type and can throw confusing errors.
-          // We don't want exception behavior to differ between dev and prod.
-          // (Rendering will throw with a helpful message and as soon as the type is
-          // fixed, the key warnings will appear.)
-
-          if (validType) {
-            var children = props.children;
-            if (children !== undefined) {
-              if (isStaticChildren) {
-                if (isArray(children)) {
-                  for (var i = 0; i < children.length; i++) {
-                    validateChildKeys(children[i], type);
-                  }
-                  if (Object.freeze) {
-                    Object.freeze(children);
-                  }
-                } else {
-                  error('React.jsx: Static children should always be an array. ' + 'You are likely explicitly calling React.jsxs or React.jsxDEV. ' + 'Use the Babel transform instead.');
-                }
-              } else {
-                validateChildKeys(children, type);
-              }
-            }
-          }
-          {
-            if (hasOwnProperty.call(props, 'key')) {
-              var componentName = getComponentNameFromType(type);
-              var keys = Object.keys(props).filter(function (k) {
-                return k !== 'key';
-              });
-              var beforeExample = keys.length > 0 ? '{key: someKey, ' + keys.join(': ..., ') + ': ...}' : '{key: someKey}';
-              if (!didWarnAboutKeySpread[componentName + beforeExample]) {
-                var afterExample = keys.length > 0 ? '{' + keys.join(': ..., ') + ': ...}' : '{}';
-                error('A props object containing a "key" prop is being spread into JSX:\n' + '  let props = %s;\n' + '  <%s {...props} />\n' + 'React keys must be passed directly to JSX without using spread:\n' + '  let props = %s;\n' + '  <%s key={someKey} {...props} />', beforeExample, componentName, afterExample, componentName);
-                didWarnAboutKeySpread[componentName + beforeExample] = true;
-              }
-            }
-          }
-          if (type === REACT_FRAGMENT_TYPE) {
-            validateFragmentProps(element);
-          } else {
-            validatePropTypes(element);
-          }
-          return element;
-        }
-      } // These two functions exist to still get child warnings in dev
-      // even with the prod transform. This means that jsxDEV is purely
-      // opt-in behavior for better messages but that we won't stop
-      // giving you warnings if you use production apis.
-
-      function jsxWithValidationStatic(type, props, key) {
-        {
-          return jsxWithValidation(type, props, key, true);
-        }
-      }
-      function jsxWithValidationDynamic(type, props, key) {
-        {
-          return jsxWithValidation(type, props, key, false);
-        }
-      }
-      var jsx = jsxWithValidationDynamic; // we may want to special case jsxs internally to take advantage of static children.
-      // for now we can ship identical prod functions
-
-      var jsxs = jsxWithValidationStatic;
-      reactJsxRuntime_development.Fragment = REACT_FRAGMENT_TYPE;
-      reactJsxRuntime_development.jsx = jsx;
-      reactJsxRuntime_development.jsxs = jsxs;
-    })();
-  }
-  return reactJsxRuntime_development;
-}
-
-if (process.env.NODE_ENV === 'production') {
-  jsxRuntime.exports = requireReactJsxRuntime_production_min();
-} else {
-  jsxRuntime.exports = requireReactJsxRuntime_development();
-}
-var jsxRuntimeExports = jsxRuntime.exports;
-
-const LayoutGroupContext = createContext({});
-
-/**
- * Creates a constant value over the lifecycle of a component.
- *
- * Even if `useMemo` is provided an empty array as its final argument, it doesn't offer
- * a guarantee that it won't re-run for performance reasons later on. By using `useConstant`
- * you can ensure that initialisers don't execute twice or more.
- */
-function useConstant(init) {
-    const ref = useRef(null);
-    if (ref.current === null) {
-        ref.current = init();
-    }
-    return ref.current;
-}
-
-/**
- * @public
- */
-const PresenceContext = createContext(null);
-
-/**
- * @public
- */
-const MotionConfigContext = createContext({
-    transformPagePoint: (p) => p,
-    isStatic: false,
-    reducedMotion: "never",
-});
-
-/**
- * Measurement functionality has to be within a separate component
- * to leverage snapshot lifecycle.
- */
-class PopChildMeasure extends React.Component {
-    getSnapshotBeforeUpdate(prevProps) {
-        const element = this.props.childRef.current;
-        if (element && prevProps.isPresent && !this.props.isPresent) {
-            const size = this.props.sizeRef.current;
-            size.height = element.offsetHeight || 0;
-            size.width = element.offsetWidth || 0;
-            size.top = element.offsetTop;
-            size.left = element.offsetLeft;
-        }
-        return null;
-    }
-    /**
-     * Required with getSnapshotBeforeUpdate to stop React complaining.
-     */
-    componentDidUpdate() { }
-    render() {
-        return this.props.children;
-    }
-}
-function PopChild({ children, isPresent }) {
-    const id = useId();
-    const ref = useRef(null);
-    const size = useRef({
-        width: 0,
-        height: 0,
-        top: 0,
-        left: 0,
-    });
-    const { nonce } = useContext(MotionConfigContext);
-    /**
-     * We create and inject a style block so we can apply this explicit
-     * sizing in a non-destructive manner by just deleting the style block.
-     *
-     * We can't apply size via render as the measurement happens
-     * in getSnapshotBeforeUpdate (post-render), likewise if we apply the
-     * styles directly on the DOM node, we might be overwriting
-     * styles set via the style prop.
-     */
-    useInsertionEffect(() => {
-        const { width, height, top, left } = size.current;
-        if (isPresent || !ref.current || !width || !height)
-            return;
-        ref.current.dataset.motionPopId = id;
-        const style = document.createElement("style");
-        if (nonce)
-            style.nonce = nonce;
-        document.head.appendChild(style);
-        if (style.sheet) {
-            style.sheet.insertRule(`
-          [data-motion-pop-id="${id}"] {
-            position: absolute !important;
-            width: ${width}px !important;
-            height: ${height}px !important;
-            top: ${top}px !important;
-            left: ${left}px !important;
-          }
-        `);
-        }
-        return () => {
-            document.head.removeChild(style);
-        };
-    }, [isPresent]);
-    return (jsxRuntimeExports.jsx(PopChildMeasure, { isPresent: isPresent, childRef: ref, sizeRef: size, children: React.cloneElement(children, { ref }) }));
-}
-
-const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, }) => {
-    const presenceChildren = useConstant(newChildrenMap);
-    const id = useId();
-    const memoizedOnExitComplete = useCallback((childId) => {
-        presenceChildren.set(childId, true);
-        for (const isComplete of presenceChildren.values()) {
-            if (!isComplete)
-                return; // can stop searching when any is incomplete
-        }
-        onExitComplete && onExitComplete();
-    }, [presenceChildren, onExitComplete]);
-    const context = useMemo(() => ({
-        id,
-        initial,
-        isPresent,
-        custom,
-        onExitComplete: memoizedOnExitComplete,
-        register: (childId) => {
-            presenceChildren.set(childId, false);
-            return () => presenceChildren.delete(childId);
-        },
-    }), 
-    /**
-     * If the presence of a child affects the layout of the components around it,
-     * we want to make a new context value to ensure they get re-rendered
-     * so they can detect that layout change.
-     */
-    presenceAffectsLayout
-        ? [Math.random(), memoizedOnExitComplete]
-        : [isPresent, memoizedOnExitComplete]);
-    useMemo(() => {
-        presenceChildren.forEach((_, key) => presenceChildren.set(key, false));
-    }, [isPresent]);
-    /**
-     * If there's no `motion` components to fire exit animations, we want to remove this
-     * component immediately.
-     */
-    React.useEffect(() => {
-        !isPresent &&
-            !presenceChildren.size &&
-            onExitComplete &&
-            onExitComplete();
-    }, [isPresent]);
-    if (mode === "popLayout") {
-        children = jsxRuntimeExports.jsx(PopChild, { isPresent: isPresent, children: children });
-    }
-    return (jsxRuntimeExports.jsx(PresenceContext.Provider, { value: context, children: children }));
-};
-function newChildrenMap() {
-    return new Map();
-}
-
-/**
- * When a component is the child of `AnimatePresence`, it can use `usePresence`
- * to access information about whether it's still present in the React tree.
- *
- * ```jsx
- * import { usePresence } from "framer-motion"
- *
- * export const Component = () => {
- *   const [isPresent, safeToRemove] = usePresence()
- *
- *   useEffect(() => {
- *     !isPresent && setTimeout(safeToRemove, 1000)
- *   }, [isPresent])
- *
- *   return <div />
- * }
- * ```
- *
- * If `isPresent` is `false`, it means that a component has been removed the tree, but
- * `AnimatePresence` won't really remove it until `safeToRemove` has been called.
- *
- * @public
- */
-function usePresence(subscribe = true) {
-    const context = useContext(PresenceContext);
-    if (context === null)
-        return [true, null];
-    const { isPresent, onExitComplete, register } = context;
-    // It's safe to call the following hooks conditionally (after an early return) because the context will always
-    // either be null or non-null for the lifespan of the component.
-    const id = useId();
-    useEffect(() => {
-        if (subscribe)
-            register(id);
-    }, [subscribe]);
-    const safeToRemove = useCallback(() => subscribe && onExitComplete && onExitComplete(id), [id, onExitComplete, subscribe]);
-    return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
-}
-
-const getChildKey = (child) => child.key || "";
-function onlyElements(children) {
-    const filtered = [];
-    // We use forEach here instead of map as map mutates the component key by preprending `.$`
-    Children.forEach(children, (child) => {
-        if (isValidElement(child))
-            filtered.push(child);
-    });
-    return filtered;
-}
-
-const isBrowser = typeof window !== "undefined";
-
-const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
-
-/**
- * `AnimatePresence` enables the animation of components that have been removed from the tree.
- *
- * When adding/removing more than a single child, every child **must** be given a unique `key` prop.
- *
- * Any `motion` components that have an `exit` property defined will animate out when removed from
- * the tree.
- *
- * ```jsx
- * import { motion, AnimatePresence } from 'framer-motion'
- *
- * export const Items = ({ items }) => (
- *   <AnimatePresence>
- *     {items.map(item => (
- *       <motion.div
- *         key={item.id}
- *         initial={{ opacity: 0 }}
- *         animate={{ opacity: 1 }}
- *         exit={{ opacity: 0 }}
- *       />
- *     ))}
- *   </AnimatePresence>
- * )
- * ```
- *
- * You can sequence exit animations throughout a tree using variants.
- *
- * If a child contains multiple `motion` components with `exit` props, it will only unmount the child
- * once all `motion` components have finished animating out. Likewise, any components using
- * `usePresence` all need to call `safeToRemove`.
- *
- * @public
- */
-const AnimatePresence = ({ children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate = false, }) => {
-    const [isParentPresent, safeToRemove] = usePresence(propagate);
-    /**
-     * Filter any children that aren't ReactElements. We can only track components
-     * between renders with a props.key.
-     */
-    const presentChildren = useMemo(() => onlyElements(children), [children]);
-    /**
-     * Track the keys of the currently rendered children. This is used to
-     * determine which children are exiting.
-     */
-    const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey);
-    /**
-     * If `initial={false}` we only want to pass this to components in the first render.
-     */
-    const isInitialRender = useRef(true);
-    /**
-     * A ref containing the currently present children. When all exit animations
-     * are complete, we use this to re-render the component with the latest children
-     * *committed* rather than the latest children *rendered*.
-     */
-    const pendingPresentChildren = useRef(presentChildren);
-    /**
-     * Track which exiting children have finished animating out.
-     */
-    const exitComplete = useConstant(() => new Map());
-    /**
-     * Save children to render as React state. To ensure this component is concurrent-safe,
-     * we check for exiting children via an effect.
-     */
-    const [diffedChildren, setDiffedChildren] = useState(presentChildren);
-    const [renderedChildren, setRenderedChildren] = useState(presentChildren);
-    useIsomorphicLayoutEffect(() => {
-        isInitialRender.current = false;
-        pendingPresentChildren.current = presentChildren;
-        /**
-         * Update complete status of exiting children.
-         */
-        for (let i = 0; i < renderedChildren.length; i++) {
-            const key = getChildKey(renderedChildren[i]);
-            if (!presentKeys.includes(key)) {
-                if (exitComplete.get(key) !== true) {
-                    exitComplete.set(key, false);
-                }
-            }
-            else {
-                exitComplete.delete(key);
-            }
-        }
-    }, [renderedChildren, presentKeys.length, presentKeys.join("-")]);
-    const exitingChildren = [];
-    if (presentChildren !== diffedChildren) {
-        let nextChildren = [...presentChildren];
-        /**
-         * Loop through all the currently rendered components and decide which
-         * are exiting.
-         */
-        for (let i = 0; i < renderedChildren.length; i++) {
-            const child = renderedChildren[i];
-            const key = getChildKey(child);
-            if (!presentKeys.includes(key)) {
-                nextChildren.splice(i, 0, child);
-                exitingChildren.push(child);
-            }
-        }
-        /**
-         * If we're in "wait" mode, and we have exiting children, we want to
-         * only render these until they've all exited.
-         */
-        if (mode === "wait" && exitingChildren.length) {
-            nextChildren = exitingChildren;
-        }
-        setRenderedChildren(onlyElements(nextChildren));
-        setDiffedChildren(presentChildren);
-        /**
-         * Early return to ensure once we've set state with the latest diffed
-         * children, we can immediately re-render.
-         */
-        return;
-    }
-    if (process.env.NODE_ENV !== "production" &&
-        mode === "wait" &&
-        renderedChildren.length > 1) {
-        console.warn(`You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`);
-    }
-    /**
-     * If we've been provided a forceRender function by the LayoutGroupContext,
-     * we can use it to force a re-render amongst all surrounding components once
-     * all components have finished animating out.
-     */
-    const { forceRender } = useContext(LayoutGroupContext);
-    return (jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: renderedChildren.map((child) => {
-            const key = getChildKey(child);
-            const isPresent = propagate && !isParentPresent
-                ? false
-                : presentChildren === renderedChildren ||
-                    presentKeys.includes(key);
-            const onExit = () => {
-                if (exitComplete.has(key)) {
-                    exitComplete.set(key, true);
-                }
-                else {
-                    return;
-                }
-                let isEveryExitComplete = true;
-                exitComplete.forEach((isExitComplete) => {
-                    if (!isExitComplete)
-                        isEveryExitComplete = false;
-                });
-                if (isEveryExitComplete) {
-                    forceRender === null || forceRender === void 0 ? void 0 : forceRender();
-                    setRenderedChildren(pendingPresentChildren.current);
-                    propagate && (safeToRemove === null || safeToRemove === void 0 ? void 0 : safeToRemove());
-                    onExitComplete && onExitComplete();
-                }
-            };
-            return (jsxRuntimeExports.jsx(PresenceChild, { isPresent: isPresent, initial: !isInitialRender.current || initial
-                    ? undefined
-                    : false, custom: isPresent ? undefined : custom, presenceAffectsLayout: presenceAffectsLayout, mode: mode, onExitComplete: isPresent ? undefined : onExit, children: child }, key));
-        }) }));
-};
-
-/*#__NO_SIDE_EFFECTS__*/
-const noop = (any) => any;
-
-let warning = noop;
-let invariant = noop;
-if (process.env.NODE_ENV !== "production") {
-    warning = (check, message) => {
-        if (!check && typeof console !== "undefined") {
-            console.warn(message);
-        }
-    };
-    invariant = (check, message) => {
-        if (!check) {
-            throw new Error(message);
-        }
-    };
-}
-
-/*#__NO_SIDE_EFFECTS__*/
-function memo(callback) {
-    let result;
-    return () => {
-        if (result === undefined)
-            result = callback();
-        return result;
-    };
-}
-
-/*
-  Progress within given range
-
-  Given a lower limit and an upper limit, we return the progress
-  (expressed as a number 0-1) represented by the given value, and
-  limit that progress to within 0-1.
-
-  @param [number]: Lower limit
-  @param [number]: Upper limit
-  @param [number]: Value to find progress within given range
-  @return [number]: Progress of value within range as expressed 0-1
-*/
-/*#__NO_SIDE_EFFECTS__*/
-const progress = (from, to, value) => {
-    const toFromDifference = to - from;
-    return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
-};
-
-/**
- * Converts seconds to milliseconds
- *
- * @param seconds - Time in seconds.
- * @return milliseconds - Converted time in milliseconds.
- */
-/*#__NO_SIDE_EFFECTS__*/
-const secondsToMilliseconds = (seconds) => seconds * 1000;
-/*#__NO_SIDE_EFFECTS__*/
-const millisecondsToSeconds = (milliseconds) => milliseconds / 1000;
-
-const MotionGlobalConfig = {
-    skipAnimations: false,
-    useManualTiming: false,
-};
-
-function createRenderStep(runNextFrame) {
-    /**
-     * We create and reuse two queues, one to queue jobs for the current frame
-     * and one for the next. We reuse to avoid triggering GC after x frames.
-     */
-    let thisFrame = new Set();
-    let nextFrame = new Set();
-    /**
-     * Track whether we're currently processing jobs in this step. This way
-     * we can decide whether to schedule new jobs for this frame or next.
-     */
-    let isProcessing = false;
-    let flushNextFrame = false;
-    /**
-     * A set of processes which were marked keepAlive when scheduled.
-     */
-    const toKeepAlive = new WeakSet();
-    let latestFrameData = {
-        delta: 0.0,
-        timestamp: 0.0,
-        isProcessing: false,
-    };
-    function triggerCallback(callback) {
-        if (toKeepAlive.has(callback)) {
-            step.schedule(callback);
-            runNextFrame();
-        }
-        callback(latestFrameData);
-    }
-    const step = {
-        /**
-         * Schedule a process to run on the next frame.
-         */
-        schedule: (callback, keepAlive = false, immediate = false) => {
-            const addToCurrentFrame = immediate && isProcessing;
-            const queue = addToCurrentFrame ? thisFrame : nextFrame;
-            if (keepAlive)
-                toKeepAlive.add(callback);
-            if (!queue.has(callback))
-                queue.add(callback);
-            return callback;
-        },
-        /**
-         * Cancel the provided callback from running on the next frame.
-         */
-        cancel: (callback) => {
-            nextFrame.delete(callback);
-            toKeepAlive.delete(callback);
-        },
-        /**
-         * Execute all schedule callbacks.
-         */
-        process: (frameData) => {
-            latestFrameData = frameData;
-            /**
-             * If we're already processing we've probably been triggered by a flushSync
-             * inside an existing process. Instead of executing, mark flushNextFrame
-             * as true and ensure we flush the following frame at the end of this one.
-             */
-            if (isProcessing) {
-                flushNextFrame = true;
-                return;
-            }
-            isProcessing = true;
-            [thisFrame, nextFrame] = [nextFrame, thisFrame];
-            // Execute this frame
-            thisFrame.forEach(triggerCallback);
-            // Clear the frame so no callbacks remain. This is to avoid
-            // memory leaks should this render step not run for a while.
-            thisFrame.clear();
-            isProcessing = false;
-            if (flushNextFrame) {
-                flushNextFrame = false;
-                step.process(frameData);
-            }
-        },
-    };
-    return step;
-}
-
-const stepsOrder = [
-    "read", // Read
-    "resolveKeyframes", // Write/Read/Write/Read
-    "update", // Compute
-    "preRender", // Compute
-    "render", // Write
-    "postRender", // Compute
-];
-const maxElapsed = 40;
-function createRenderBatcher(scheduleNextBatch, allowKeepAlive) {
-    let runNextFrame = false;
-    let useDefaultElapsed = true;
-    const state = {
-        delta: 0.0,
-        timestamp: 0.0,
-        isProcessing: false,
-    };
-    const flagRunNextFrame = () => (runNextFrame = true);
-    const steps = stepsOrder.reduce((acc, key) => {
-        acc[key] = createRenderStep(flagRunNextFrame);
-        return acc;
-    }, {});
-    const { read, resolveKeyframes, update, preRender, render, postRender } = steps;
-    const processBatch = () => {
-        const timestamp = performance.now();
-        runNextFrame = false;
-        state.delta = useDefaultElapsed
-            ? 1000 / 60
-            : Math.max(Math.min(timestamp - state.timestamp, maxElapsed), 1);
-        state.timestamp = timestamp;
-        state.isProcessing = true;
-        // Unrolled render loop for better per-frame performance
-        read.process(state);
-        resolveKeyframes.process(state);
-        update.process(state);
-        preRender.process(state);
-        render.process(state);
-        postRender.process(state);
-        state.isProcessing = false;
-        if (runNextFrame && allowKeepAlive) {
-            useDefaultElapsed = false;
-            scheduleNextBatch(processBatch);
-        }
-    };
-    const wake = () => {
-        runNextFrame = true;
-        useDefaultElapsed = true;
-        if (!state.isProcessing) {
-            scheduleNextBatch(processBatch);
-        }
-    };
-    const schedule = stepsOrder.reduce((acc, key) => {
-        const step = steps[key];
-        acc[key] = (process, keepAlive = false, immediate = false) => {
-            if (!runNextFrame)
-                wake();
-            return step.schedule(process, keepAlive, immediate);
-        };
-        return acc;
-    }, {});
-    const cancel = (process) => {
-        for (let i = 0; i < stepsOrder.length; i++) {
-            steps[stepsOrder[i]].cancel(process);
-        }
-    };
-    return { schedule, cancel, state, steps };
-}
-
-const { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps, } = createRenderBatcher(typeof requestAnimationFrame !== "undefined" ? requestAnimationFrame : noop, true);
-
-const LazyContext = createContext({ strict: false });
-
-const featureProps = {
-    animation: [
-        "animate",
-        "variants",
-        "whileHover",
-        "whileTap",
-        "exit",
-        "whileInView",
-        "whileFocus",
-        "whileDrag",
-    ],
-    exit: ["exit"],
-    drag: ["drag", "dragControls"],
-    focus: ["whileFocus"],
-    hover: ["whileHover", "onHoverStart", "onHoverEnd"],
-    tap: ["whileTap", "onTap", "onTapStart", "onTapCancel"],
-    pan: ["onPan", "onPanStart", "onPanSessionStart", "onPanEnd"],
-    inView: ["whileInView", "onViewportEnter", "onViewportLeave"],
-    layout: ["layout", "layoutId"],
-};
-const featureDefinitions = {};
-for (const key in featureProps) {
-    featureDefinitions[key] = {
-        isEnabled: (props) => featureProps[key].some((name) => !!props[name]),
-    };
-}
-
-function loadFeatures(features) {
-    for (const key in features) {
-        featureDefinitions[key] = {
-            ...featureDefinitions[key],
-            ...features[key],
-        };
-    }
-}
-
-/**
- * A list of all valid MotionProps.
- *
- * @privateRemarks
- * This doesn't throw if a `MotionProp` name is missing - it should.
- */
-const validMotionProps = new Set([
-    "animate",
-    "exit",
-    "variants",
-    "initial",
-    "style",
-    "values",
-    "variants",
-    "transition",
-    "transformTemplate",
-    "custom",
-    "inherit",
-    "onBeforeLayoutMeasure",
-    "onAnimationStart",
-    "onAnimationComplete",
-    "onUpdate",
-    "onDragStart",
-    "onDrag",
-    "onDragEnd",
-    "onMeasureDragConstraints",
-    "onDirectionLock",
-    "onDragTransitionEnd",
-    "_dragX",
-    "_dragY",
-    "onHoverStart",
-    "onHoverEnd",
-    "onViewportEnter",
-    "onViewportLeave",
-    "globalTapTarget",
-    "ignoreStrict",
-    "viewport",
-]);
-/**
- * Check whether a prop name is a valid `MotionProp` key.
- *
- * @param key - Name of the property to check
- * @returns `true` is key is a valid `MotionProp`.
- *
- * @public
- */
-function isValidMotionProp(key) {
-    return (key.startsWith("while") ||
-        (key.startsWith("drag") && key !== "draggable") ||
-        key.startsWith("layout") ||
-        key.startsWith("onTap") ||
-        key.startsWith("onPan") ||
-        key.startsWith("onLayout") ||
-        validMotionProps.has(key));
-}
-
-let shouldForward = (key) => !isValidMotionProp(key);
-function loadExternalIsValidProp(isValidProp) {
-    if (!isValidProp)
-        return;
-    // Explicitly filter our events
-    shouldForward = (key) => key.startsWith("on") ? !isValidMotionProp(key) : isValidProp(key);
-}
-/**
- * Emotion and Styled Components both allow users to pass through arbitrary props to their components
- * to dynamically generate CSS. They both use the `@emotion/is-prop-valid` package to determine which
- * of these should be passed to the underlying DOM node.
- *
- * However, when styling a Motion component `styled(motion.div)`, both packages pass through *all* props
- * as it's seen as an arbitrary component rather than a DOM node. Motion only allows arbitrary props
- * passed through the `custom` prop so it doesn't *need* the payload or computational overhead of
- * `@emotion/is-prop-valid`, however to fix this problem we need to use it.
- *
- * By making it an optionalDependency we can offer this functionality only in the situations where it's
- * actually required.
- */
-try {
-    /**
-     * We attempt to import this package but require won't be defined in esm environments, in that case
-     * isPropValid will have to be provided via `MotionContext`. In a 6.0.0 this should probably be removed
-     * in favour of explicit injection.
-     */
-    loadExternalIsValidProp(require("@emotion/is-prop-valid").default);
-}
-catch (_a) {
-    // We don't need to actually do anything here - the fallback is the existing `isPropValid`.
-}
-function filterProps(props, isDom, forwardMotionProps) {
-    const filteredProps = {};
-    for (const key in props) {
-        /**
-         * values is considered a valid prop by Emotion, so if it's present
-         * this will be rendered out to the DOM unless explicitly filtered.
-         *
-         * We check the type as it could be used with the `feColorMatrix`
-         * element, which we support.
-         */
-        if (key === "values" && typeof props.values === "object")
-            continue;
-        if (shouldForward(key) ||
-            (forwardMotionProps === true && isValidMotionProp(key)) ||
-            (!isDom && !isValidMotionProp(key)) ||
-            // If trying to use native HTML drag events, forward drag listeners
-            (props["draggable"] &&
-                key.startsWith("onDrag"))) {
-            filteredProps[key] =
-                props[key];
-        }
-    }
-    return filteredProps;
-}
-
-const warned = new Set();
-function warnOnce(condition, message, element) {
-    if (condition || warned.has(message))
-        return;
-    console.warn(message);
-    warned.add(message);
-}
-
-function createDOMMotionComponentProxy(componentFactory) {
-    if (typeof Proxy === "undefined") {
-        return componentFactory;
-    }
-    /**
-     * A cache of generated `motion` components, e.g `motion.div`, `motion.input` etc.
-     * Rather than generating them anew every render.
-     */
-    const componentCache = new Map();
-    const deprecatedFactoryFunction = (...args) => {
-        if (process.env.NODE_ENV !== "production") {
-            warnOnce(false, "motion() is deprecated. Use motion.create() instead.");
-        }
-        return componentFactory(...args);
-    };
-    return new Proxy(deprecatedFactoryFunction, {
-        /**
-         * Called when `motion` is referenced with a prop: `motion.div`, `motion.input` etc.
-         * The prop name is passed through as `key` and we can use that to generate a `motion`
-         * DOM component with that name.
-         */
-        get: (_target, key) => {
-            if (key === "create")
-                return componentFactory;
-            /**
-             * If this element doesn't exist in the component cache, create it and cache.
-             */
-            if (!componentCache.has(key)) {
-                componentCache.set(key, componentFactory(key));
-            }
-            return componentCache.get(key);
-        },
-    });
-}
-
-const MotionContext = createContext({});
-
-/**
- * Decides if the supplied variable is variant label
- */
-function isVariantLabel(v) {
-    return typeof v === "string" || Array.isArray(v);
-}
-
-function isAnimationControls(v) {
-    return (v !== null &&
-        typeof v === "object" &&
-        typeof v.start === "function");
-}
-
-const variantPriorityOrder = [
-    "animate",
-    "whileInView",
-    "whileFocus",
-    "whileHover",
-    "whileTap",
-    "whileDrag",
-    "exit",
-];
-const variantProps = ["initial", ...variantPriorityOrder];
-
-function isControllingVariants(props) {
-    return (isAnimationControls(props.animate) ||
-        variantProps.some((name) => isVariantLabel(props[name])));
-}
-function isVariantNode(props) {
-    return Boolean(isControllingVariants(props) || props.variants);
-}
-
-function getCurrentTreeVariants(props, context) {
-    if (isControllingVariants(props)) {
-        const { initial, animate } = props;
-        return {
-            initial: initial === false || isVariantLabel(initial)
-                ? initial
-                : undefined,
-            animate: isVariantLabel(animate) ? animate : undefined,
-        };
-    }
-    return props.inherit !== false ? context : {};
-}
-
-function useCreateMotionContext(props) {
-    const { initial, animate } = getCurrentTreeVariants(props, useContext(MotionContext));
-    return useMemo(() => ({ initial, animate }), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
-}
-function variantLabelsAsDependency(prop) {
-    return Array.isArray(prop) ? prop.join(" ") : prop;
-}
-
-const motionComponentSymbol = Symbol.for("motionComponentSymbol");
-
-function isRefObject(ref) {
-    return (ref &&
-        typeof ref === "object" &&
-        Object.prototype.hasOwnProperty.call(ref, "current"));
-}
-
-/**
- * Creates a ref function that, when called, hydrates the provided
- * external ref and VisualElement.
- */
-function useMotionRef(visualState, visualElement, externalRef) {
-    return useCallback((instance) => {
-        if (instance) {
-            visualState.onMount && visualState.onMount(instance);
-        }
-        if (visualElement) {
-            if (instance) {
-                visualElement.mount(instance);
-            }
-            else {
-                visualElement.unmount();
-            }
-        }
-        if (externalRef) {
-            if (typeof externalRef === "function") {
-                externalRef(instance);
-            }
-            else if (isRefObject(externalRef)) {
-                externalRef.current = instance;
-            }
-        }
-    }, 
-    /**
-     * Only pass a new ref callback to React if we've received a visual element
-     * factory. Otherwise we'll be mounting/remounting every time externalRef
-     * or other dependencies change.
-     */
-    [visualElement]);
-}
-
-/**
- * Convert camelCase to dash-case properties.
- */
-const camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, "$1-$2").toLowerCase();
-
-const optimizedAppearDataId = "framerAppearId";
-const optimizedAppearDataAttribute = "data-" + camelToDash(optimizedAppearDataId);
-
-const { schedule: microtask, cancel: cancelMicrotask } = createRenderBatcher(queueMicrotask, false);
-
-/**
- * Internal, exported only for usage in Framer
- */
-const SwitchLayoutGroupContext = createContext({});
-
-function useVisualElement(Component, visualState, props, createVisualElement, ProjectionNodeConstructor) {
-    var _a, _b;
-    const { visualElement: parent } = useContext(MotionContext);
-    const lazyContext = useContext(LazyContext);
-    const presenceContext = useContext(PresenceContext);
-    const reducedMotionConfig = useContext(MotionConfigContext).reducedMotion;
-    const visualElementRef = useRef(null);
-    /**
-     * If we haven't preloaded a renderer, check to see if we have one lazy-loaded
-     */
-    createVisualElement = createVisualElement || lazyContext.renderer;
-    if (!visualElementRef.current && createVisualElement) {
-        visualElementRef.current = createVisualElement(Component, {
-            visualState,
-            parent,
-            props,
-            presenceContext,
-            blockInitialAnimation: presenceContext
-                ? presenceContext.initial === false
-                : false,
-            reducedMotionConfig,
-        });
-    }
-    const visualElement = visualElementRef.current;
-    /**
-     * Load Motion gesture and animation features. These are rendered as renderless
-     * components so each feature can optionally make use of React lifecycle methods.
-     */
-    const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext);
-    if (visualElement &&
-        !visualElement.projection &&
-        ProjectionNodeConstructor &&
-        (visualElement.type === "html" || visualElement.type === "svg")) {
-        createProjectionNode$1(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig);
-    }
-    const isMounted = useRef(false);
-    useInsertionEffect(() => {
-        /**
-         * Check the component has already mounted before calling
-         * `update` unnecessarily. This ensures we skip the initial update.
-         */
-        if (visualElement && isMounted.current) {
-            visualElement.update(props, presenceContext);
-        }
-    });
-    /**
-     * Cache this value as we want to know whether HandoffAppearAnimations
-     * was present on initial render - it will be deleted after this.
-     */
-    const optimisedAppearId = props[optimizedAppearDataAttribute];
-    const wantsHandoff = useRef(Boolean(optimisedAppearId) &&
-        !((_a = window.MotionHandoffIsComplete) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId)) &&
-        ((_b = window.MotionHasOptimisedAnimation) === null || _b === void 0 ? void 0 : _b.call(window, optimisedAppearId)));
-    useIsomorphicLayoutEffect(() => {
-        if (!visualElement)
-            return;
-        isMounted.current = true;
-        window.MotionIsMounted = true;
-        visualElement.updateFeatures();
-        microtask.render(visualElement.render);
-        /**
-         * Ideally this function would always run in a useEffect.
-         *
-         * However, if we have optimised appear animations to handoff from,
-         * it needs to happen synchronously to ensure there's no flash of
-         * incorrect styles in the event of a hydration error.
-         *
-         * So if we detect a situtation where optimised appear animations
-         * are running, we use useLayoutEffect to trigger animations.
-         */
-        if (wantsHandoff.current && visualElement.animationState) {
-            visualElement.animationState.animateChanges();
-        }
-    });
-    useEffect(() => {
-        if (!visualElement)
-            return;
-        if (!wantsHandoff.current && visualElement.animationState) {
-            visualElement.animationState.animateChanges();
-        }
-        if (wantsHandoff.current) {
-            // This ensures all future calls to animateChanges() in this component will run in useEffect
-            queueMicrotask(() => {
-                var _a;
-                (_a = window.MotionHandoffMarkAsComplete) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId);
-            });
-            wantsHandoff.current = false;
-        }
-    });
-    return visualElement;
-}
-function createProjectionNode$1(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig) {
-    const { layoutId, layout, drag, dragConstraints, layoutScroll, layoutRoot, } = props;
-    visualElement.projection = new ProjectionNodeConstructor(visualElement.latestValues, props["data-framer-portal-id"]
-        ? undefined
-        : getClosestProjectingNode(visualElement.parent));
-    visualElement.projection.setOptions({
-        layoutId,
-        layout,
-        alwaysMeasureLayout: Boolean(drag) || (dragConstraints && isRefObject(dragConstraints)),
-        visualElement,
-        /**
-         * TODO: Update options in an effect. This could be tricky as it'll be too late
-         * to update by the time layout animations run.
-         * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
-         * ensuring it gets called if there's no potential layout animations.
-         *
-         */
-        animationType: typeof layout === "string" ? layout : "both",
-        initialPromotionConfig,
-        layoutScroll,
-        layoutRoot,
-    });
-}
-function getClosestProjectingNode(visualElement) {
-    if (!visualElement)
-        return undefined;
-    return visualElement.options.allowProjection !== false
-        ? visualElement.projection
-        : getClosestProjectingNode(visualElement.parent);
-}
-
-/**
- * Create a `motion` component.
- *
- * This function accepts a Component argument, which can be either a string (ie "div"
- * for `motion.div`), or an actual React component.
- *
- * Alongside this is a config option which provides a way of rendering the provided
- * component "offline", or outside the React render cycle.
- */
-function createRendererMotionComponent({ preloadedFeatures, createVisualElement, useRender, useVisualState, Component, }) {
-    var _a, _b;
-    preloadedFeatures && loadFeatures(preloadedFeatures);
-    function MotionComponent(props, externalRef) {
-        /**
-         * If we need to measure the element we load this functionality in a
-         * separate class component in order to gain access to getSnapshotBeforeUpdate.
-         */
-        let MeasureLayout;
-        const configAndProps = {
-            ...useContext(MotionConfigContext),
-            ...props,
-            layoutId: useLayoutId(props),
-        };
-        const { isStatic } = configAndProps;
-        const context = useCreateMotionContext(props);
-        const visualState = useVisualState(props, isStatic);
-        if (!isStatic && isBrowser) {
-            useStrictMode(configAndProps, preloadedFeatures);
-            const layoutProjection = getProjectionFunctionality(configAndProps);
-            MeasureLayout = layoutProjection.MeasureLayout;
-            /**
-             * Create a VisualElement for this component. A VisualElement provides a common
-             * interface to renderer-specific APIs (ie DOM/Three.js etc) as well as
-             * providing a way of rendering to these APIs outside of the React render loop
-             * for more performant animations and interactions
-             */
-            context.visualElement = useVisualElement(Component, visualState, configAndProps, createVisualElement, layoutProjection.ProjectionNode);
-        }
-        /**
-         * The mount order and hierarchy is specific to ensure our element ref
-         * is hydrated by the time features fire their effects.
-         */
-        return (jsxRuntimeExports.jsxs(MotionContext.Provider, { value: context, children: [MeasureLayout && context.visualElement ? (jsxRuntimeExports.jsx(MeasureLayout, { visualElement: context.visualElement, ...configAndProps })) : null, useRender(Component, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, context.visualElement)] }));
-    }
-    MotionComponent.displayName = `motion.${typeof Component === "string"
-        ? Component
-        : `create(${(_b = (_a = Component.displayName) !== null && _a !== void 0 ? _a : Component.name) !== null && _b !== void 0 ? _b : ""})`}`;
-    const ForwardRefMotionComponent = forwardRef(MotionComponent);
-    ForwardRefMotionComponent[motionComponentSymbol] = Component;
-    return ForwardRefMotionComponent;
-}
-function useLayoutId({ layoutId }) {
-    const layoutGroupId = useContext(LayoutGroupContext).id;
-    return layoutGroupId && layoutId !== undefined
-        ? layoutGroupId + "-" + layoutId
-        : layoutId;
-}
-function useStrictMode(configAndProps, preloadedFeatures) {
-    const isStrict = useContext(LazyContext).strict;
-    /**
-     * If we're in development mode, check to make sure we're not rendering a motion component
-     * as a child of LazyMotion, as this will break the file-size benefits of using it.
-     */
-    if (process.env.NODE_ENV !== "production" &&
-        preloadedFeatures &&
-        isStrict) {
-        const strictMessage = "You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.";
-        configAndProps.ignoreStrict
-            ? warning(false, strictMessage)
-            : invariant(false, strictMessage);
-    }
-}
-function getProjectionFunctionality(props) {
-    const { drag, layout } = featureDefinitions;
-    if (!drag && !layout)
-        return {};
-    const combined = { ...drag, ...layout };
-    return {
-        MeasureLayout: (drag === null || drag === void 0 ? void 0 : drag.isEnabled(props)) || (layout === null || layout === void 0 ? void 0 : layout.isEnabled(props))
-            ? combined.MeasureLayout
-            : undefined,
-        ProjectionNode: combined.ProjectionNode,
-    };
-}
-
-/**
- * We keep these listed separately as we use the lowercase tag names as part
- * of the runtime bundle to detect SVG components
- */
-const lowercaseSVGElements = [
-    "animate",
-    "circle",
-    "defs",
-    "desc",
-    "ellipse",
-    "g",
-    "image",
-    "line",
-    "filter",
-    "marker",
-    "mask",
-    "metadata",
-    "path",
-    "pattern",
-    "polygon",
-    "polyline",
-    "rect",
-    "stop",
-    "switch",
-    "symbol",
-    "svg",
-    "text",
-    "tspan",
-    "use",
-    "view",
-];
-
-function isSVGComponent(Component) {
-    if (
-    /**
-     * If it's not a string, it's a custom React component. Currently we only support
-     * HTML custom React components.
-     */
-    typeof Component !== "string" ||
-        /**
-         * If it contains a dash, the element is a custom HTML webcomponent.
-         */
-        Component.includes("-")) {
-        return false;
-    }
-    else if (
-    /**
-     * If it's in our list of lowercase SVG tags, it's an SVG component
-     */
-    lowercaseSVGElements.indexOf(Component) > -1 ||
-        /**
-         * If it contains a capital letter, it's an SVG component
-         */
-        /[A-Z]/u.test(Component)) {
-        return true;
-    }
-    return false;
-}
-
-function getValueState(visualElement) {
-    const state = [{}, {}];
-    visualElement === null || visualElement === void 0 ? void 0 : visualElement.values.forEach((value, key) => {
-        state[0][key] = value.get();
-        state[1][key] = value.getVelocity();
-    });
-    return state;
-}
-function resolveVariantFromProps(props, definition, custom, visualElement) {
-    /**
-     * If the variant definition is a function, resolve.
-     */
-    if (typeof definition === "function") {
-        const [current, velocity] = getValueState(visualElement);
-        definition = definition(custom !== undefined ? custom : props.custom, current, velocity);
-    }
-    /**
-     * If the variant definition is a variant label, or
-     * the function returned a variant label, resolve.
-     */
-    if (typeof definition === "string") {
-        definition = props.variants && props.variants[definition];
-    }
-    /**
-     * At this point we've resolved both functions and variant labels,
-     * but the resolved variant label might itself have been a function.
-     * If so, resolve. This can only have returned a valid target object.
-     */
-    if (typeof definition === "function") {
-        const [current, velocity] = getValueState(visualElement);
-        definition = definition(custom !== undefined ? custom : props.custom, current, velocity);
-    }
-    return definition;
-}
-
-const isKeyframesTarget = (v) => {
-    return Array.isArray(v);
-};
-
-const isCustomValue = (v) => {
-    return Boolean(v && typeof v === "object" && v.mix && v.toValue);
-};
-const resolveFinalValueInKeyframes = (v) => {
-    // TODO maybe throw if v.length - 1 is placeholder token?
-    return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v;
-};
-
-const isMotionValue = (value) => Boolean(value && value.getVelocity);
-
-/**
- * If the provided value is a MotionValue, this returns the actual value, otherwise just the value itself
- *
- * TODO: Remove and move to library
- */
-function resolveMotionValue(value) {
-    const unwrappedValue = isMotionValue(value) ? value.get() : value;
-    return isCustomValue(unwrappedValue)
-        ? unwrappedValue.toValue()
-        : unwrappedValue;
-}
-
-function makeState({ scrapeMotionValuesFromProps, createRenderState, onUpdate, }, props, context, presenceContext) {
-    const state = {
-        latestValues: makeLatestValues(props, context, presenceContext, scrapeMotionValuesFromProps),
-        renderState: createRenderState(),
-    };
-    if (onUpdate) {
-        /**
-         * onMount works without the VisualElement because it could be
-         * called before the VisualElement payload has been hydrated.
-         * (e.g. if someone is using m components <m.circle />)
-         */
-        state.onMount = (instance) => onUpdate({ props, current: instance, ...state });
-        state.onUpdate = (visualElement) => onUpdate(visualElement);
-    }
-    return state;
-}
-const makeUseVisualState = (config) => (props, isStatic) => {
-    const context = useContext(MotionContext);
-    const presenceContext = useContext(PresenceContext);
-    const make = () => makeState(config, props, context, presenceContext);
-    return isStatic ? make() : useConstant(make);
-};
-function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
-    const values = {};
-    const motionValues = scrapeMotionValues(props, {});
-    for (const key in motionValues) {
-        values[key] = resolveMotionValue(motionValues[key]);
-    }
-    let { initial, animate } = props;
-    const isControllingVariants$1 = isControllingVariants(props);
-    const isVariantNode$1 = isVariantNode(props);
-    if (context &&
-        isVariantNode$1 &&
-        !isControllingVariants$1 &&
-        props.inherit !== false) {
-        if (initial === undefined)
-            initial = context.initial;
-        if (animate === undefined)
-            animate = context.animate;
-    }
-    let isInitialAnimationBlocked = presenceContext
-        ? presenceContext.initial === false
-        : false;
-    isInitialAnimationBlocked = isInitialAnimationBlocked || initial === false;
-    const variantToSet = isInitialAnimationBlocked ? animate : initial;
-    if (variantToSet &&
-        typeof variantToSet !== "boolean" &&
-        !isAnimationControls(variantToSet)) {
-        const list = Array.isArray(variantToSet) ? variantToSet : [variantToSet];
-        for (let i = 0; i < list.length; i++) {
-            const resolved = resolveVariantFromProps(props, list[i]);
-            if (resolved) {
-                const { transitionEnd, transition, ...target } = resolved;
-                for (const key in target) {
-                    let valueTarget = target[key];
-                    if (Array.isArray(valueTarget)) {
-                        /**
-                         * Take final keyframe if the initial animation is blocked because
-                         * we want to initialise at the end of that blocked animation.
-                         */
-                        const index = isInitialAnimationBlocked
-                            ? valueTarget.length - 1
-                            : 0;
-                        valueTarget = valueTarget[index];
-                    }
-                    if (valueTarget !== null) {
-                        values[key] = valueTarget;
-                    }
-                }
-                for (const key in transitionEnd) {
-                    values[key] = transitionEnd[key];
-                }
-            }
-        }
-    }
-    return values;
-}
-
-/**
- * Generate a list of every possible transform key.
- */
-const transformPropOrder = [
-    "transformPerspective",
-    "x",
-    "y",
-    "z",
-    "translateX",
-    "translateY",
-    "translateZ",
-    "scale",
-    "scaleX",
-    "scaleY",
-    "rotate",
-    "rotateX",
-    "rotateY",
-    "rotateZ",
-    "skew",
-    "skewX",
-    "skewY",
-];
-/**
- * A quick lookup for transform props.
- */
-const transformProps = new Set(transformPropOrder);
-
-const checkStringStartsWith = (token) => (key) => typeof key === "string" && key.startsWith(token);
-const isCSSVariableName = 
-/*@__PURE__*/ checkStringStartsWith("--");
-const startsAsVariableToken = 
-/*@__PURE__*/ checkStringStartsWith("var(--");
-const isCSSVariableToken = (value) => {
-    const startsWithToken = startsAsVariableToken(value);
-    if (!startsWithToken)
-        return false;
-    // Ensure any comments are stripped from the value as this can harm performance of the regex.
-    return singleCssVariableRegex.test(value.split("/*")[0].trim());
-};
-const singleCssVariableRegex = /var\(--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)$/iu;
-
-/**
- * Provided a value and a ValueType, returns the value as that value type.
- */
-const getValueAsType = (value, type) => {
-    return type && typeof value === "number"
-        ? type.transform(value)
-        : value;
-};
-
-const clamp = (min, max, v) => {
-    if (v > max)
-        return max;
-    if (v < min)
-        return min;
-    return v;
-};
-
-const number = {
-    test: (v) => typeof v === "number",
-    parse: parseFloat,
-    transform: (v) => v,
-};
-const alpha = {
-    ...number,
-    transform: (v) => clamp(0, 1, v),
-};
-const scale = {
-    ...number,
-    default: 1,
-};
-
-const createUnitType = (unit) => ({
-    test: (v) => typeof v === "string" && v.endsWith(unit) && v.split(" ").length === 1,
-    parse: parseFloat,
-    transform: (v) => `${v}${unit}`,
-});
-const degrees = /*@__PURE__*/ createUnitType("deg");
-const percent = /*@__PURE__*/ createUnitType("%");
-const px = /*@__PURE__*/ createUnitType("px");
-const vh = /*@__PURE__*/ createUnitType("vh");
-const vw = /*@__PURE__*/ createUnitType("vw");
-const progressPercentage = {
-    ...percent,
-    parse: (v) => percent.parse(v) / 100,
-    transform: (v) => percent.transform(v * 100),
-};
-
-const browserNumberValueTypes = {
-    // Border props
-    borderWidth: px,
-    borderTopWidth: px,
-    borderRightWidth: px,
-    borderBottomWidth: px,
-    borderLeftWidth: px,
-    borderRadius: px,
-    radius: px,
-    borderTopLeftRadius: px,
-    borderTopRightRadius: px,
-    borderBottomRightRadius: px,
-    borderBottomLeftRadius: px,
-    // Positioning props
-    width: px,
-    maxWidth: px,
-    height: px,
-    maxHeight: px,
-    top: px,
-    right: px,
-    bottom: px,
-    left: px,
-    // Spacing props
-    padding: px,
-    paddingTop: px,
-    paddingRight: px,
-    paddingBottom: px,
-    paddingLeft: px,
-    margin: px,
-    marginTop: px,
-    marginRight: px,
-    marginBottom: px,
-    marginLeft: px,
-    // Misc
-    backgroundPositionX: px,
-    backgroundPositionY: px,
-};
-
-const transformValueTypes = {
-    rotate: degrees,
-    rotateX: degrees,
-    rotateY: degrees,
-    rotateZ: degrees,
-    scale,
-    scaleX: scale,
-    scaleY: scale,
-    scaleZ: scale,
-    skew: degrees,
-    skewX: degrees,
-    skewY: degrees,
-    distance: px,
-    translateX: px,
-    translateY: px,
-    translateZ: px,
-    x: px,
-    y: px,
-    z: px,
-    perspective: px,
-    transformPerspective: px,
-    opacity: alpha,
-    originX: progressPercentage,
-    originY: progressPercentage,
-    originZ: px,
-};
-
-const int = {
-    ...number,
-    transform: Math.round,
-};
-
-const numberValueTypes = {
-    ...browserNumberValueTypes,
-    ...transformValueTypes,
-    zIndex: int,
-    size: px,
-    // SVG
-    fillOpacity: alpha,
-    strokeOpacity: alpha,
-    numOctaves: int,
-};
-
-const translateAlias = {
-    x: "translateX",
-    y: "translateY",
-    z: "translateZ",
-    transformPerspective: "perspective",
-};
-const numTransforms = transformPropOrder.length;
-/**
- * Build a CSS transform style from individual x/y/scale etc properties.
- *
- * This outputs with a default order of transforms/scales/rotations, this can be customised by
- * providing a transformTemplate function.
- */
-function buildTransform(latestValues, transform, transformTemplate) {
-    // The transform string we're going to build into.
-    let transformString = "";
-    let transformIsDefault = true;
-    /**
-     * Loop over all possible transforms in order, adding the ones that
-     * are present to the transform string.
-     */
-    for (let i = 0; i < numTransforms; i++) {
-        const key = transformPropOrder[i];
-        const value = latestValues[key];
-        if (value === undefined)
-            continue;
-        let valueIsDefault = true;
-        if (typeof value === "number") {
-            valueIsDefault = value === (key.startsWith("scale") ? 1 : 0);
-        }
-        else {
-            valueIsDefault = parseFloat(value) === 0;
-        }
-        if (!valueIsDefault || transformTemplate) {
-            const valueAsType = getValueAsType(value, numberValueTypes[key]);
-            if (!valueIsDefault) {
-                transformIsDefault = false;
-                const transformName = translateAlias[key] || key;
-                transformString += `${transformName}(${valueAsType}) `;
-            }
-            if (transformTemplate) {
-                transform[key] = valueAsType;
-            }
-        }
-    }
-    transformString = transformString.trim();
-    // If we have a custom `transform` template, pass our transform values and
-    // generated transformString to that before returning
-    if (transformTemplate) {
-        transformString = transformTemplate(transform, transformIsDefault ? "" : transformString);
-    }
-    else if (transformIsDefault) {
-        transformString = "none";
-    }
-    return transformString;
-}
-
-function buildHTMLStyles(state, latestValues, transformTemplate) {
-    const { style, vars, transformOrigin } = state;
-    // Track whether we encounter any transform or transformOrigin values.
-    let hasTransform = false;
-    let hasTransformOrigin = false;
-    /**
-     * Loop over all our latest animated values and decide whether to handle them
-     * as a style or CSS variable.
-     *
-     * Transforms and transform origins are kept separately for further processing.
-     */
-    for (const key in latestValues) {
-        const value = latestValues[key];
-        if (transformProps.has(key)) {
-            // If this is a transform, flag to enable further transform processing
-            hasTransform = true;
-            continue;
-        }
-        else if (isCSSVariableName(key)) {
-            vars[key] = value;
-            continue;
-        }
-        else {
-            // Convert the value to its default value type, ie 0 -> "0px"
-            const valueAsType = getValueAsType(value, numberValueTypes[key]);
-            if (key.startsWith("origin")) {
-                // If this is a transform origin, flag and enable further transform-origin processing
-                hasTransformOrigin = true;
-                transformOrigin[key] =
-                    valueAsType;
-            }
-            else {
-                style[key] = valueAsType;
-            }
-        }
-    }
-    if (!latestValues.transform) {
-        if (hasTransform || transformTemplate) {
-            style.transform = buildTransform(latestValues, state.transform, transformTemplate);
-        }
-        else if (style.transform) {
-            /**
-             * If we have previously created a transform but currently don't have any,
-             * reset transform style to none.
-             */
-            style.transform = "none";
-        }
-    }
-    /**
-     * Build a transformOrigin style. Uses the same defaults as the browser for
-     * undefined origins.
-     */
-    if (hasTransformOrigin) {
-        const { originX = "50%", originY = "50%", originZ = 0, } = transformOrigin;
-        style.transformOrigin = `${originX} ${originY} ${originZ}`;
-    }
-}
-
-const dashKeys = {
-    offset: "stroke-dashoffset",
-    array: "stroke-dasharray",
-};
-const camelKeys = {
-    offset: "strokeDashoffset",
-    array: "strokeDasharray",
-};
-/**
- * Build SVG path properties. Uses the path's measured length to convert
- * our custom pathLength, pathSpacing and pathOffset into stroke-dashoffset
- * and stroke-dasharray attributes.
- *
- * This function is mutative to reduce per-frame GC.
- */
-function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true) {
-    // Normalise path length by setting SVG attribute pathLength to 1
-    attrs.pathLength = 1;
-    // We use dash case when setting attributes directly to the DOM node and camel case
-    // when defining props on a React component.
-    const keys = useDashCase ? dashKeys : camelKeys;
-    // Build the dash offset
-    attrs[keys.offset] = px.transform(-offset);
-    // Build the dash array
-    const pathLength = px.transform(length);
-    const pathSpacing = px.transform(spacing);
-    attrs[keys.array] = `${pathLength} ${pathSpacing}`;
-}
-
-function calcOrigin$1(origin, offset, size) {
-    return typeof origin === "string"
-        ? origin
-        : px.transform(offset + size * origin);
-}
-/**
- * The SVG transform origin defaults are different to CSS and is less intuitive,
- * so we use the measured dimensions of the SVG to reconcile these.
- */
-function calcSVGTransformOrigin(dimensions, originX, originY) {
-    const pxOriginX = calcOrigin$1(originX, dimensions.x, dimensions.width);
-    const pxOriginY = calcOrigin$1(originY, dimensions.y, dimensions.height);
-    return `${pxOriginX} ${pxOriginY}`;
-}
-
-/**
- * Build SVG visual attrbutes, like cx and style.transform
- */
-function buildSVGAttrs(state, { attrX, attrY, attrScale, originX, originY, pathLength, pathSpacing = 1, pathOffset = 0, 
-// This is object creation, which we try to avoid per-frame.
-...latest }, isSVGTag, transformTemplate) {
-    buildHTMLStyles(state, latest, transformTemplate);
-    /**
-     * For svg tags we just want to make sure viewBox is animatable and treat all the styles
-     * as normal HTML tags.
-     */
-    if (isSVGTag) {
-        if (state.style.viewBox) {
-            state.attrs.viewBox = state.style.viewBox;
-        }
-        return;
-    }
-    state.attrs = state.style;
-    state.style = {};
-    const { attrs, style, dimensions } = state;
-    /**
-     * However, we apply transforms as CSS transforms. So if we detect a transform we take it from attrs
-     * and copy it into style.
-     */
-    if (attrs.transform) {
-        if (dimensions)
-            style.transform = attrs.transform;
-        delete attrs.transform;
-    }
-    // Parse transformOrigin
-    if (dimensions &&
-        (originX !== undefined || originY !== undefined || style.transform)) {
-        style.transformOrigin = calcSVGTransformOrigin(dimensions, originX !== undefined ? originX : 0.5, originY !== undefined ? originY : 0.5);
-    }
-    // Render attrX/attrY/attrScale as attributes
-    if (attrX !== undefined)
-        attrs.x = attrX;
-    if (attrY !== undefined)
-        attrs.y = attrY;
-    if (attrScale !== undefined)
-        attrs.scale = attrScale;
-    // Build SVG path if one has been defined
-    if (pathLength !== undefined) {
-        buildSVGPath(attrs, pathLength, pathSpacing, pathOffset, false);
-    }
-}
-
-const createHtmlRenderState = () => ({
-    style: {},
-    transform: {},
-    transformOrigin: {},
-    vars: {},
-});
-
-const createSvgRenderState = () => ({
-    ...createHtmlRenderState(),
-    attrs: {},
-});
-
-const isSVGTag = (tag) => typeof tag === "string" && tag.toLowerCase() === "svg";
-
-function renderHTML(element, { style, vars }, styleProp, projection) {
-    Object.assign(element.style, style, projection && projection.getProjectionStyles(styleProp));
-    // Loop over any CSS variables and assign those.
-    for (const key in vars) {
-        element.style.setProperty(key, vars[key]);
-    }
-}
-
-/**
- * A set of attribute names that are always read/written as camel case.
- */
-const camelCaseAttributes = new Set([
-    "baseFrequency",
-    "diffuseConstant",
-    "kernelMatrix",
-    "kernelUnitLength",
-    "keySplines",
-    "keyTimes",
-    "limitingConeAngle",
-    "markerHeight",
-    "markerWidth",
-    "numOctaves",
-    "targetX",
-    "targetY",
-    "surfaceScale",
-    "specularConstant",
-    "specularExponent",
-    "stdDeviation",
-    "tableValues",
-    "viewBox",
-    "gradientTransform",
-    "pathLength",
-    "startOffset",
-    "textLength",
-    "lengthAdjust",
-]);
-
-function renderSVG(element, renderState, _styleProp, projection) {
-    renderHTML(element, renderState, undefined, projection);
-    for (const key in renderState.attrs) {
-        element.setAttribute(!camelCaseAttributes.has(key) ? camelToDash(key) : key, renderState.attrs[key]);
-    }
-}
-
-const scaleCorrectors = {};
-function addScaleCorrector(correctors) {
-    Object.assign(scaleCorrectors, correctors);
-}
-
-function isForcedMotionValue(key, { layout, layoutId }) {
-    return (transformProps.has(key) ||
-        key.startsWith("origin") ||
-        ((layout || layoutId !== undefined) &&
-            (!!scaleCorrectors[key] || key === "opacity")));
-}
-
-function scrapeMotionValuesFromProps$1(props, prevProps, visualElement) {
-    var _a;
-    const { style } = props;
-    const newValues = {};
-    for (const key in style) {
-        if (isMotionValue(style[key]) ||
-            (prevProps.style &&
-                isMotionValue(prevProps.style[key])) ||
-            isForcedMotionValue(key, props) ||
-            ((_a = visualElement === null || visualElement === void 0 ? void 0 : visualElement.getValue(key)) === null || _a === void 0 ? void 0 : _a.liveStyle) !== undefined) {
-            newValues[key] = style[key];
-        }
-    }
-    return newValues;
-}
-
-function scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-    const newValues = scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
-    for (const key in props) {
-        if (isMotionValue(props[key]) ||
-            isMotionValue(prevProps[key])) {
-            const targetKey = transformPropOrder.indexOf(key) !== -1
-                ? "attr" + key.charAt(0).toUpperCase() + key.substring(1)
-                : key;
-            newValues[targetKey] = props[key];
-        }
-    }
-    return newValues;
-}
-
-function updateSVGDimensions(instance, renderState) {
-    try {
-        renderState.dimensions =
-            typeof instance.getBBox === "function"
-                ? instance.getBBox()
-                : instance.getBoundingClientRect();
-    }
-    catch (e) {
-        // Most likely trying to measure an unrendered element under Firefox
-        renderState.dimensions = {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0,
-        };
-    }
-}
-const layoutProps = ["x", "y", "width", "height", "cx", "cy", "r"];
-const svgMotionConfig = {
-    useVisualState: makeUseVisualState({
-        scrapeMotionValuesFromProps: scrapeMotionValuesFromProps,
-        createRenderState: createSvgRenderState,
-        onUpdate: ({ props, prevProps, current, renderState, latestValues, }) => {
-            if (!current)
-                return;
-            let hasTransform = !!props.drag;
-            if (!hasTransform) {
-                for (const key in latestValues) {
-                    if (transformProps.has(key)) {
-                        hasTransform = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasTransform)
-                return;
-            let needsMeasure = !prevProps;
-            if (prevProps) {
-                /**
-                 * Check the layout props for changes, if any are found we need to
-                 * measure the element again.
-                 */
-                for (let i = 0; i < layoutProps.length; i++) {
-                    const key = layoutProps[i];
-                    if (props[key] !==
-                        prevProps[key]) {
-                        needsMeasure = true;
-                    }
-                }
-            }
-            if (!needsMeasure)
-                return;
-            frame.read(() => {
-                updateSVGDimensions(current, renderState);
-                frame.render(() => {
-                    buildSVGAttrs(renderState, latestValues, isSVGTag(current.tagName), props.transformTemplate);
-                    renderSVG(current, renderState);
-                });
-            });
-        },
-    }),
-};
-
-const htmlMotionConfig = {
-    useVisualState: makeUseVisualState({
-        scrapeMotionValuesFromProps: scrapeMotionValuesFromProps$1,
-        createRenderState: createHtmlRenderState,
-    }),
-};
-
-function copyRawValuesOnly(target, source, props) {
-    for (const key in source) {
-        if (!isMotionValue(source[key]) && !isForcedMotionValue(key, props)) {
-            target[key] = source[key];
-        }
-    }
-}
-function useInitialMotionValues({ transformTemplate }, visualState) {
-    return useMemo(() => {
-        const state = createHtmlRenderState();
-        buildHTMLStyles(state, visualState, transformTemplate);
-        return Object.assign({}, state.vars, state.style);
-    }, [visualState]);
-}
-function useStyle(props, visualState) {
-    const styleProp = props.style || {};
-    const style = {};
-    /**
-     * Copy non-Motion Values straight into style
-     */
-    copyRawValuesOnly(style, styleProp, props);
-    Object.assign(style, useInitialMotionValues(props, visualState));
-    return style;
-}
-function useHTMLProps(props, visualState) {
-    // The `any` isn't ideal but it is the type of createElement props argument
-    const htmlProps = {};
-    const style = useStyle(props, visualState);
-    if (props.drag && props.dragListener !== false) {
-        // Disable the ghost element when a user drags
-        htmlProps.draggable = false;
-        // Disable text selection
-        style.userSelect =
-            style.WebkitUserSelect =
-                style.WebkitTouchCallout =
-                    "none";
-        // Disable scrolling on the draggable direction
-        style.touchAction =
-            props.drag === true
-                ? "none"
-                : `pan-${props.drag === "x" ? "y" : "x"}`;
-    }
-    if (props.tabIndex === undefined &&
-        (props.onTap || props.onTapStart || props.whileTap)) {
-        htmlProps.tabIndex = 0;
-    }
-    htmlProps.style = style;
-    return htmlProps;
-}
-
-function useSVGProps(props, visualState, _isStatic, Component) {
-    const visualProps = useMemo(() => {
-        const state = createSvgRenderState();
-        buildSVGAttrs(state, visualState, isSVGTag(Component), props.transformTemplate);
-        return {
-            ...state.attrs,
-            style: { ...state.style },
-        };
-    }, [visualState]);
-    if (props.style) {
-        const rawStyles = {};
-        copyRawValuesOnly(rawStyles, props.style, props);
-        visualProps.style = { ...rawStyles, ...visualProps.style };
-    }
-    return visualProps;
-}
-
-function createUseRender(forwardMotionProps = false) {
-    const useRender = (Component, props, ref, { latestValues }, isStatic) => {
-        const useVisualProps = isSVGComponent(Component)
-            ? useSVGProps
-            : useHTMLProps;
-        const visualProps = useVisualProps(props, latestValues, isStatic, Component);
-        const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps);
-        const elementProps = Component !== Fragment
-            ? { ...filteredProps, ...visualProps, ref }
-            : {};
-        /**
-         * If component has been handed a motion value as its child,
-         * memoise its initial value and render that. Subsequent updates
-         * will be handled by the onChange handler
-         */
-        const { children } = props;
-        const renderedChildren = useMemo(() => (isMotionValue(children) ? children.get() : children), [children]);
-        return createElement$1(Component, {
-            ...elementProps,
-            children: renderedChildren,
-        });
-    };
-    return useRender;
-}
-
-function createMotionComponentFactory(preloadedFeatures, createVisualElement) {
-    return function createMotionComponent(Component, { forwardMotionProps } = { forwardMotionProps: false }) {
-        const baseConfig = isSVGComponent(Component)
-            ? svgMotionConfig
-            : htmlMotionConfig;
-        const config = {
-            ...baseConfig,
-            preloadedFeatures,
-            useRender: createUseRender(forwardMotionProps),
-            createVisualElement,
-            Component,
-        };
-        return createRendererMotionComponent(config);
-    };
-}
-
-function shallowCompare(next, prev) {
-    if (!Array.isArray(prev))
-        return false;
-    const prevLength = prev.length;
-    if (prevLength !== next.length)
-        return false;
-    for (let i = 0; i < prevLength; i++) {
-        if (prev[i] !== next[i])
-            return false;
-    }
-    return true;
-}
-
-function resolveVariant(visualElement, definition, custom) {
-    const props = visualElement.getProps();
-    return resolveVariantFromProps(props, definition, custom !== undefined ? custom : props.custom, visualElement);
-}
-
-const supportsScrollTimeline = memo(() => window.ScrollTimeline !== undefined);
-
-class BaseGroupPlaybackControls {
-    constructor(animations) {
-        // Bound to accomodate common `return animation.stop` pattern
-        this.stop = () => this.runAll("stop");
-        this.animations = animations.filter(Boolean);
-    }
-    get finished() {
-        // Support for new finished Promise and legacy thennable API
-        return Promise.all(this.animations.map((animation) => "finished" in animation ? animation.finished : animation));
-    }
-    /**
-     * TODO: Filter out cancelled or stopped animations before returning
-     */
-    getAll(propName) {
-        return this.animations[0][propName];
-    }
-    setAll(propName, newValue) {
-        for (let i = 0; i < this.animations.length; i++) {
-            this.animations[i][propName] = newValue;
-        }
-    }
-    attachTimeline(timeline, fallback) {
-        const subscriptions = this.animations.map((animation) => {
-            if (supportsScrollTimeline() && animation.attachTimeline) {
-                return animation.attachTimeline(timeline);
-            }
-            else if (typeof fallback === "function") {
-                return fallback(animation);
-            }
-        });
-        return () => {
-            subscriptions.forEach((cancel, i) => {
-                cancel && cancel();
-                this.animations[i].stop();
-            });
-        };
-    }
-    get time() {
-        return this.getAll("time");
-    }
-    set time(time) {
-        this.setAll("time", time);
-    }
-    get speed() {
-        return this.getAll("speed");
-    }
-    set speed(speed) {
-        this.setAll("speed", speed);
-    }
-    get startTime() {
-        return this.getAll("startTime");
-    }
-    get duration() {
-        let max = 0;
-        for (let i = 0; i < this.animations.length; i++) {
-            max = Math.max(max, this.animations[i].duration);
-        }
-        return max;
-    }
-    runAll(methodName) {
-        this.animations.forEach((controls) => controls[methodName]());
-    }
-    flatten() {
-        this.runAll("flatten");
-    }
-    play() {
-        this.runAll("play");
-    }
-    pause() {
-        this.runAll("pause");
-    }
-    cancel() {
-        this.runAll("cancel");
-    }
-    complete() {
-        this.runAll("complete");
-    }
-}
-
-/**
- * TODO: This is a temporary class to support the legacy
- * thennable API
- */
-class GroupPlaybackControls extends BaseGroupPlaybackControls {
-    then(onResolve, onReject) {
-        return Promise.all(this.animations).then(onResolve).catch(onReject);
-    }
-}
-
-function getValueTransition(transition, key) {
-    return transition
-        ? transition[key] ||
-            transition["default"] ||
-            transition
-        : undefined;
-}
-
-/**
- * Implement a practical max duration for keyframe generation
- * to prevent infinite loops
- */
-const maxGeneratorDuration = 20000;
-function calcGeneratorDuration(generator) {
-    let duration = 0;
-    const timeStep = 50;
-    let state = generator.next(duration);
-    while (!state.done && duration < maxGeneratorDuration) {
-        duration += timeStep;
-        state = generator.next(duration);
-    }
-    return duration >= maxGeneratorDuration ? Infinity : duration;
-}
-
-function isGenerator(type) {
-    return typeof type === "function";
-}
-
-function attachTimeline(animation, timeline) {
-    animation.timeline = timeline;
-    animation.onfinish = null;
-}
-
-const isBezierDefinition = (easing) => Array.isArray(easing) && typeof easing[0] === "number";
-
-/**
- * Add the ability for test suites to manually set support flags
- * to better test more environments.
- */
-const supportsFlags = {
-    linearEasing: undefined,
-};
-
-function memoSupports(callback, supportsFlag) {
-    const memoized = memo(callback);
-    return () => { var _a; return (_a = supportsFlags[supportsFlag]) !== null && _a !== void 0 ? _a : memoized(); };
-}
-
-const supportsLinearEasing = /*@__PURE__*/ memoSupports(() => {
-    try {
-        document
-            .createElement("div")
-            .animate({ opacity: 0 }, { easing: "linear(0, 1)" });
-    }
-    catch (e) {
-        return false;
-    }
-    return true;
-}, "linearEasing");
-
-const generateLinearEasing = (easing, duration, // as milliseconds
-resolution = 10 // as milliseconds
-) => {
-    let points = "";
-    const numPoints = Math.max(Math.round(duration / resolution), 2);
-    for (let i = 0; i < numPoints; i++) {
-        points += easing(progress(0, numPoints - 1, i)) + ", ";
-    }
-    return `linear(${points.substring(0, points.length - 2)})`;
-};
-
-function isWaapiSupportedEasing(easing) {
-    return Boolean((typeof easing === "function" && supportsLinearEasing()) ||
-        !easing ||
-        (typeof easing === "string" &&
-            (easing in supportedWaapiEasing || supportsLinearEasing())) ||
-        isBezierDefinition(easing) ||
-        (Array.isArray(easing) && easing.every(isWaapiSupportedEasing)));
-}
-const cubicBezierAsString = ([a, b, c, d]) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
-const supportedWaapiEasing = {
-    linear: "linear",
-    ease: "ease",
-    easeIn: "ease-in",
-    easeOut: "ease-out",
-    easeInOut: "ease-in-out",
-    circIn: /*@__PURE__*/ cubicBezierAsString([0, 0.65, 0.55, 1]),
-    circOut: /*@__PURE__*/ cubicBezierAsString([0.55, 0, 1, 0.45]),
-    backIn: /*@__PURE__*/ cubicBezierAsString([0.31, 0.01, 0.66, -0.59]),
-    backOut: /*@__PURE__*/ cubicBezierAsString([0.33, 1.53, 0.69, 0.99]),
-};
-function mapEasingToNativeEasing(easing, duration) {
-    if (!easing) {
-        return undefined;
-    }
-    else if (typeof easing === "function" && supportsLinearEasing()) {
-        return generateLinearEasing(easing, duration);
-    }
-    else if (isBezierDefinition(easing)) {
-        return cubicBezierAsString(easing);
-    }
-    else if (Array.isArray(easing)) {
-        return easing.map((segmentEasing) => mapEasingToNativeEasing(segmentEasing, duration) ||
-            supportedWaapiEasing.easeOut);
-    }
-    else {
-        return supportedWaapiEasing[easing];
-    }
-}
-
-const isDragging = {
-    x: false,
-    y: false,
-};
-function isDragActive() {
-    return isDragging.x || isDragging.y;
-}
-
-function resolveElements(elementOrSelector, scope, selectorCache) {
-    var _a;
-    if (elementOrSelector instanceof Element) {
-        return [elementOrSelector];
-    }
-    else if (typeof elementOrSelector === "string") {
-        let root = document;
-        const elements = (_a = void 0 ) !== null && _a !== void 0 ? _a : root.querySelectorAll(elementOrSelector);
-        return elements ? Array.from(elements) : [];
-    }
-    return Array.from(elementOrSelector);
-}
-
-function setupGesture(elementOrSelector, options) {
-    const elements = resolveElements(elementOrSelector);
-    const gestureAbortController = new AbortController();
-    const eventOptions = {
-        passive: true,
-        ...options,
-        signal: gestureAbortController.signal,
-    };
-    const cancel = () => gestureAbortController.abort();
-    return [elements, eventOptions, cancel];
-}
-
-/**
- * Filter out events that are not pointer events, or are triggering
- * while a Motion gesture is active.
- */
-function filterEvents$1(callback) {
-    return (event) => {
-        if (event.pointerType === "touch" || isDragActive())
-            return;
-        callback(event);
-    };
-}
-/**
- * Create a hover gesture. hover() is different to .addEventListener("pointerenter")
- * in that it has an easier syntax, filters out polyfilled touch events, interoperates
- * with drag gestures, and automatically removes the "pointerennd" event listener when the hover ends.
- *
- * @public
- */
-function hover(elementOrSelector, onHoverStart, options = {}) {
-    const [elements, eventOptions, cancel] = setupGesture(elementOrSelector, options);
-    const onPointerEnter = filterEvents$1((enterEvent) => {
-        const { target } = enterEvent;
-        const onHoverEnd = onHoverStart(enterEvent);
-        if (typeof onHoverEnd !== "function" || !target)
-            return;
-        const onPointerLeave = filterEvents$1((leaveEvent) => {
-            onHoverEnd(leaveEvent);
-            target.removeEventListener("pointerleave", onPointerLeave);
-        });
-        target.addEventListener("pointerleave", onPointerLeave, eventOptions);
-    });
-    elements.forEach((element) => {
-        element.addEventListener("pointerenter", onPointerEnter, eventOptions);
-    });
-    return cancel;
-}
-
-/**
- * Recursively traverse up the tree to check whether the provided child node
- * is the parent or a descendant of it.
- *
- * @param parent - Element to find
- * @param child - Element to test against parent
- */
-const isNodeOrChild = (parent, child) => {
-    if (!child) {
-        return false;
-    }
-    else if (parent === child) {
-        return true;
-    }
-    else {
-        return isNodeOrChild(parent, child.parentElement);
-    }
-};
-
-const isPrimaryPointer = (event) => {
-    if (event.pointerType === "mouse") {
-        return typeof event.button !== "number" || event.button <= 0;
-    }
-    else {
-        /**
-         * isPrimary is true for all mice buttons, whereas every touch point
-         * is regarded as its own input. So subsequent concurrent touch points
-         * will be false.
-         *
-         * Specifically match against false here as incomplete versions of
-         * PointerEvents in very old browser might have it set as undefined.
-         */
-        return event.isPrimary !== false;
-    }
-};
-
-const focusableElements = new Set([
-    "BUTTON",
-    "INPUT",
-    "SELECT",
-    "TEXTAREA",
-    "A",
-]);
-function isElementKeyboardAccessible(element) {
-    return (focusableElements.has(element.tagName) ||
-        element.tabIndex !== -1);
-}
-
-const isPressing = new WeakSet();
-
-/**
- * Filter out events that are not "Enter" keys.
- */
-function filterEvents(callback) {
-    return (event) => {
-        if (event.key !== "Enter")
-            return;
-        callback(event);
-    };
-}
-function firePointerEvent(target, type) {
-    target.dispatchEvent(new PointerEvent("pointer" + type, { isPrimary: true, bubbles: true }));
-}
-const enableKeyboardPress = (focusEvent, eventOptions) => {
-    const element = focusEvent.currentTarget;
-    if (!element)
-        return;
-    const handleKeydown = filterEvents(() => {
-        if (isPressing.has(element))
-            return;
-        firePointerEvent(element, "down");
-        const handleKeyup = filterEvents(() => {
-            firePointerEvent(element, "up");
-        });
-        const handleBlur = () => firePointerEvent(element, "cancel");
-        element.addEventListener("keyup", handleKeyup, eventOptions);
-        element.addEventListener("blur", handleBlur, eventOptions);
-    });
-    element.addEventListener("keydown", handleKeydown, eventOptions);
-    /**
-     * Add an event listener that fires on blur to remove the keydown events.
-     */
-    element.addEventListener("blur", () => element.removeEventListener("keydown", handleKeydown), eventOptions);
-};
-
-/**
- * Filter out events that are not primary pointer events, or are triggering
- * while a Motion gesture is active.
- */
-function isValidPressEvent(event) {
-    return isPrimaryPointer(event) && !isDragActive();
-}
-/**
- * Create a press gesture.
- *
- * Press is different to `"pointerdown"`, `"pointerup"` in that it
- * automatically filters out secondary pointer events like right
- * click and multitouch.
- *
- * It also adds accessibility support for keyboards, where
- * an element with a press gesture will receive focus and
- *  trigger on Enter `"keydown"` and `"keyup"` events.
- *
- * This is different to a browser's `"click"` event, which does
- * respond to keyboards but only for the `"click"` itself, rather
- * than the press start and end/cancel. The element also needs
- * to be focusable for this to work, whereas a press gesture will
- * make an element focusable by default.
- *
- * @public
- */
-function press(elementOrSelector, onPressStart, options = {}) {
-    const [elements, eventOptions, cancelEvents] = setupGesture(elementOrSelector, options);
-    const startPress = (startEvent) => {
-        const element = startEvent.currentTarget;
-        if (!isValidPressEvent(startEvent) || isPressing.has(element))
-            return;
-        isPressing.add(element);
-        const onPressEnd = onPressStart(startEvent);
-        const onPointerEnd = (endEvent, success) => {
-            window.removeEventListener("pointerup", onPointerUp);
-            window.removeEventListener("pointercancel", onPointerCancel);
-            if (!isValidPressEvent(endEvent) || !isPressing.has(element)) {
-                return;
-            }
-            isPressing.delete(element);
-            if (typeof onPressEnd === "function") {
-                onPressEnd(endEvent, { success });
-            }
-        };
-        const onPointerUp = (upEvent) => {
-            onPointerEnd(upEvent, options.useGlobalTarget ||
-                isNodeOrChild(element, upEvent.target));
-        };
-        const onPointerCancel = (cancelEvent) => {
-            onPointerEnd(cancelEvent, false);
-        };
-        window.addEventListener("pointerup", onPointerUp, eventOptions);
-        window.addEventListener("pointercancel", onPointerCancel, eventOptions);
-    };
-    elements.forEach((element) => {
-        if (!isElementKeyboardAccessible(element) &&
-            element.getAttribute("tabindex") === null) {
-            element.tabIndex = 0;
-        }
-        const target = options.useGlobalTarget ? window : element;
-        target.addEventListener("pointerdown", startPress, eventOptions);
-        element.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions), eventOptions);
-    });
-    return cancelEvents;
-}
-
-function setDragLock(axis) {
-    if (axis === "x" || axis === "y") {
-        if (isDragging[axis]) {
-            return null;
-        }
-        else {
-            isDragging[axis] = true;
-            return () => {
-                isDragging[axis] = false;
-            };
-        }
-    }
-    else {
-        if (isDragging.x || isDragging.y) {
-            return null;
-        }
-        else {
-            isDragging.x = isDragging.y = true;
-            return () => {
-                isDragging.x = isDragging.y = false;
-            };
-        }
-    }
-}
-
-const positionalKeys = new Set([
-    "width",
-    "height",
-    "top",
-    "left",
-    "right",
-    "bottom",
-    ...transformPropOrder,
-]);
-
-let now;
-function clearTime() {
-    now = undefined;
-}
-/**
- * An eventloop-synchronous alternative to performance.now().
- *
- * Ensures that time measurements remain consistent within a synchronous context.
- * Usually calling performance.now() twice within the same synchronous context
- * will return different values which isn't useful for animations when we're usually
- * trying to sync animations to the same frame.
- */
-const time = {
-    now: () => {
-        if (now === undefined) {
-            time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming
-                ? frameData.timestamp
-                : performance.now());
-        }
-        return now;
-    },
-    set: (newTime) => {
-        now = newTime;
-        queueMicrotask(clearTime);
-    },
-};
-
-function addUniqueItem(arr, item) {
-    if (arr.indexOf(item) === -1)
-        arr.push(item);
-}
-function removeItem(arr, item) {
-    const index = arr.indexOf(item);
-    if (index > -1)
-        arr.splice(index, 1);
-}
-
-class SubscriptionManager {
-    constructor() {
-        this.subscriptions = [];
-    }
-    add(handler) {
-        addUniqueItem(this.subscriptions, handler);
-        return () => removeItem(this.subscriptions, handler);
-    }
-    notify(a, b, c) {
-        const numSubscriptions = this.subscriptions.length;
-        if (!numSubscriptions)
-            return;
-        if (numSubscriptions === 1) {
-            /**
-             * If there's only a single handler we can just call it without invoking a loop.
-             */
-            this.subscriptions[0](a, b, c);
-        }
-        else {
-            for (let i = 0; i < numSubscriptions; i++) {
-                /**
-                 * Check whether the handler exists before firing as it's possible
-                 * the subscriptions were modified during this loop running.
-                 */
-                const handler = this.subscriptions[i];
-                handler && handler(a, b, c);
-            }
-        }
-    }
-    getSize() {
-        return this.subscriptions.length;
-    }
-    clear() {
-        this.subscriptions.length = 0;
-    }
-}
-
-/*
-  Convert velocity into velocity per second
-
-  @param [number]: Unit per frame
-  @param [number]: Frame duration in ms
-*/
-function velocityPerSecond(velocity, frameDuration) {
-    return frameDuration ? velocity * (1000 / frameDuration) : 0;
-}
-
-/**
- * Maximum time between the value of two frames, beyond which we
- * assume the velocity has since been 0.
- */
-const MAX_VELOCITY_DELTA = 30;
-const isFloat = (value) => {
-    return !isNaN(parseFloat(value));
-};
-/**
- * `MotionValue` is used to track the state and velocity of motion values.
- *
- * @public
- */
-class MotionValue {
-    /**
-     * @param init - The initiating value
-     * @param config - Optional configuration options
-     *
-     * -  `transformer`: A function to transform incoming values with.
-     *
-     * @internal
-     */
-    constructor(init, options = {}) {
-        /**
-         * This will be replaced by the build step with the latest version number.
-         * When MotionValues are provided to motion components, warn if versions are mixed.
-         */
-        this.version = "11.18.2";
-        /**
-         * Tracks whether this value can output a velocity. Currently this is only true
-         * if the value is numerical, but we might be able to widen the scope here and support
-         * other value types.
-         *
-         * @internal
-         */
-        this.canTrackVelocity = null;
-        /**
-         * An object containing a SubscriptionManager for each active event.
-         */
-        this.events = {};
-        this.updateAndNotify = (v, render = true) => {
-            const currentTime = time.now();
-            /**
-             * If we're updating the value during another frame or eventloop
-             * than the previous frame, then the we set the previous frame value
-             * to current.
-             */
-            if (this.updatedAt !== currentTime) {
-                this.setPrevFrameValue();
-            }
-            this.prev = this.current;
-            this.setCurrent(v);
-            // Update update subscribers
-            if (this.current !== this.prev && this.events.change) {
-                this.events.change.notify(this.current);
-            }
-            // Update render subscribers
-            if (render && this.events.renderRequest) {
-                this.events.renderRequest.notify(this.current);
-            }
-        };
-        this.hasAnimated = false;
-        this.setCurrent(init);
-        this.owner = options.owner;
-    }
-    setCurrent(current) {
-        this.current = current;
-        this.updatedAt = time.now();
-        if (this.canTrackVelocity === null && current !== undefined) {
-            this.canTrackVelocity = isFloat(this.current);
-        }
-    }
-    setPrevFrameValue(prevFrameValue = this.current) {
-        this.prevFrameValue = prevFrameValue;
-        this.prevUpdatedAt = this.updatedAt;
-    }
-    /**
-     * Adds a function that will be notified when the `MotionValue` is updated.
-     *
-     * It returns a function that, when called, will cancel the subscription.
-     *
-     * When calling `onChange` inside a React component, it should be wrapped with the
-     * `useEffect` hook. As it returns an unsubscribe function, this should be returned
-     * from the `useEffect` function to ensure you don't add duplicate subscribers..
-     *
-     * ```jsx
-     * export const MyComponent = () => {
-     *   const x = useMotionValue(0)
-     *   const y = useMotionValue(0)
-     *   const opacity = useMotionValue(1)
-     *
-     *   useEffect(() => {
-     *     function updateOpacity() {
-     *       const maxXY = Math.max(x.get(), y.get())
-     *       const newOpacity = transform(maxXY, [0, 100], [1, 0])
-     *       opacity.set(newOpacity)
-     *     }
-     *
-     *     const unsubscribeX = x.on("change", updateOpacity)
-     *     const unsubscribeY = y.on("change", updateOpacity)
-     *
-     *     return () => {
-     *       unsubscribeX()
-     *       unsubscribeY()
-     *     }
-     *   }, [])
-     *
-     *   return <motion.div style={{ x }} />
-     * }
-     * ```
-     *
-     * @param subscriber - A function that receives the latest value.
-     * @returns A function that, when called, will cancel this subscription.
-     *
-     * @deprecated
-     */
-    onChange(subscription) {
-        if (process.env.NODE_ENV !== "production") {
-            warnOnce(false, `value.onChange(callback) is deprecated. Switch to value.on("change", callback).`);
-        }
-        return this.on("change", subscription);
-    }
-    on(eventName, callback) {
-        if (!this.events[eventName]) {
-            this.events[eventName] = new SubscriptionManager();
-        }
-        const unsubscribe = this.events[eventName].add(callback);
-        if (eventName === "change") {
-            return () => {
-                unsubscribe();
-                /**
-                 * If we have no more change listeners by the start
-                 * of the next frame, stop active animations.
-                 */
-                frame.read(() => {
-                    if (!this.events.change.getSize()) {
-                        this.stop();
-                    }
-                });
-            };
-        }
-        return unsubscribe;
-    }
-    clearListeners() {
-        for (const eventManagers in this.events) {
-            this.events[eventManagers].clear();
-        }
-    }
-    /**
-     * Attaches a passive effect to the `MotionValue`.
-     *
-     * @internal
-     */
-    attach(passiveEffect, stopPassiveEffect) {
-        this.passiveEffect = passiveEffect;
-        this.stopPassiveEffect = stopPassiveEffect;
-    }
-    /**
-     * Sets the state of the `MotionValue`.
-     *
-     * @remarks
-     *
-     * ```jsx
-     * const x = useMotionValue(0)
-     * x.set(10)
-     * ```
-     *
-     * @param latest - Latest value to set.
-     * @param render - Whether to notify render subscribers. Defaults to `true`
-     *
-     * @public
-     */
-    set(v, render = true) {
-        if (!render || !this.passiveEffect) {
-            this.updateAndNotify(v, render);
-        }
-        else {
-            this.passiveEffect(v, this.updateAndNotify);
-        }
-    }
-    setWithVelocity(prev, current, delta) {
-        this.set(current);
-        this.prev = undefined;
-        this.prevFrameValue = prev;
-        this.prevUpdatedAt = this.updatedAt - delta;
-    }
-    /**
-     * Set the state of the `MotionValue`, stopping any active animations,
-     * effects, and resets velocity to `0`.
-     */
-    jump(v, endAnimation = true) {
-        this.updateAndNotify(v);
-        this.prev = v;
-        this.prevUpdatedAt = this.prevFrameValue = undefined;
-        endAnimation && this.stop();
-        if (this.stopPassiveEffect)
-            this.stopPassiveEffect();
-    }
-    /**
-     * Returns the latest state of `MotionValue`
-     *
-     * @returns - The latest state of `MotionValue`
-     *
-     * @public
-     */
-    get() {
-        return this.current;
-    }
-    /**
-     * @public
-     */
-    getPrevious() {
-        return this.prev;
-    }
-    /**
-     * Returns the latest velocity of `MotionValue`
-     *
-     * @returns - The latest velocity of `MotionValue`. Returns `0` if the state is non-numerical.
-     *
-     * @public
-     */
-    getVelocity() {
-        const currentTime = time.now();
-        if (!this.canTrackVelocity ||
-            this.prevFrameValue === undefined ||
-            currentTime - this.updatedAt > MAX_VELOCITY_DELTA) {
-            return 0;
-        }
-        const delta = Math.min(this.updatedAt - this.prevUpdatedAt, MAX_VELOCITY_DELTA);
-        // Casts because of parseFloat's poor typing
-        return velocityPerSecond(parseFloat(this.current) -
-            parseFloat(this.prevFrameValue), delta);
-    }
-    /**
-     * Registers a new animation to control this `MotionValue`. Only one
-     * animation can drive a `MotionValue` at one time.
-     *
-     * ```jsx
-     * value.start()
-     * ```
-     *
-     * @param animation - A function that starts the provided animation
-     *
-     * @internal
-     */
-    start(startAnimation) {
-        this.stop();
-        return new Promise((resolve) => {
-            this.hasAnimated = true;
-            this.animation = startAnimation(resolve);
-            if (this.events.animationStart) {
-                this.events.animationStart.notify();
-            }
-        }).then(() => {
-            if (this.events.animationComplete) {
-                this.events.animationComplete.notify();
-            }
-            this.clearAnimation();
-        });
-    }
-    /**
-     * Stop the currently active animation.
-     *
-     * @public
-     */
-    stop() {
-        if (this.animation) {
-            this.animation.stop();
-            if (this.events.animationCancel) {
-                this.events.animationCancel.notify();
-            }
-        }
-        this.clearAnimation();
-    }
-    /**
-     * Returns `true` if this value is currently animating.
-     *
-     * @public
-     */
-    isAnimating() {
-        return !!this.animation;
-    }
-    clearAnimation() {
-        delete this.animation;
-    }
-    /**
-     * Destroy and clean up subscribers to this `MotionValue`.
-     *
-     * The `MotionValue` hooks like `useMotionValue` and `useTransform` automatically
-     * handle the lifecycle of the returned `MotionValue`, so this method is only necessary if you've manually
-     * created a `MotionValue` via the `motionValue` function.
-     *
-     * @public
-     */
-    destroy() {
-        this.clearListeners();
-        this.stop();
-        if (this.stopPassiveEffect) {
-            this.stopPassiveEffect();
-        }
-    }
-}
-function motionValue(init, options) {
-    return new MotionValue(init, options);
-}
-
-/**
- * Set VisualElement's MotionValue, creating a new MotionValue for it if
- * it doesn't exist.
- */
-function setMotionValue(visualElement, key, value) {
-    if (visualElement.hasValue(key)) {
-        visualElement.getValue(key).set(value);
-    }
-    else {
-        visualElement.addValue(key, motionValue(value));
-    }
-}
-function setTarget(visualElement, definition) {
-    const resolved = resolveVariant(visualElement, definition);
-    let { transitionEnd = {}, transition = {}, ...target } = resolved || {};
-    target = { ...target, ...transitionEnd };
-    for (const key in target) {
-        const value = resolveFinalValueInKeyframes(target[key]);
-        setMotionValue(visualElement, key, value);
-    }
-}
-
-function isWillChangeMotionValue(value) {
-    return Boolean(isMotionValue(value) && value.add);
-}
-
-function addValueToWillChange(visualElement, key) {
-    const willChange = visualElement.getValue("willChange");
-    /**
-     * It could be that a user has set willChange to a regular MotionValue,
-     * in which case we can't add the value to it.
-     */
-    if (isWillChangeMotionValue(willChange)) {
-        return willChange.add(key);
-    }
-}
-
-function getOptimisedAppearId(visualElement) {
-    return visualElement.props[optimizedAppearDataAttribute];
-}
-
-/*
-  Bezier function generator
-  This has been modified from Gaëtan Renaudeau's BezierEasing
-  https://github.com/gre/bezier-easing/blob/master/src/index.js
-  https://github.com/gre/bezier-easing/blob/master/LICENSE
-  
-  I've removed the newtonRaphsonIterate algo because in benchmarking it
-  wasn't noticiably faster than binarySubdivision, indeed removing it
-  usually improved times, depending on the curve.
-  I also removed the lookup table, as for the added bundle size and loop we're
-  only cutting ~4 or so subdivision iterations. I bumped the max iterations up
-  to 12 to compensate and this still tended to be faster for no perceivable
-  loss in accuracy.
-  Usage
-    const easeOut = cubicBezier(.17,.67,.83,.67);
-    const x = easeOut(0.5); // returns 0.627...
-*/
-// Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
-const calcBezier = (t, a1, a2) => (((1.0 - 3.0 * a2 + 3.0 * a1) * t + (3.0 * a2 - 6.0 * a1)) * t + 3.0 * a1) *
-    t;
-const subdivisionPrecision = 0.0000001;
-const subdivisionMaxIterations = 12;
-function binarySubdivide(x, lowerBound, upperBound, mX1, mX2) {
-    let currentX;
-    let currentT;
-    let i = 0;
-    do {
-        currentT = lowerBound + (upperBound - lowerBound) / 2.0;
-        currentX = calcBezier(currentT, mX1, mX2) - x;
-        if (currentX > 0.0) {
-            upperBound = currentT;
-        }
-        else {
-            lowerBound = currentT;
-        }
-    } while (Math.abs(currentX) > subdivisionPrecision &&
-        ++i < subdivisionMaxIterations);
-    return currentT;
-}
-function cubicBezier(mX1, mY1, mX2, mY2) {
-    // If this is a linear gradient, return linear easing
-    if (mX1 === mY1 && mX2 === mY2)
-        return noop;
-    const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
-    // If animation is at start/end, return t without easing
-    return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t), mY1, mY2);
-}
-
-// Accepts an easing function and returns a new one that outputs mirrored values for
-// the second half of the animation. Turns easeIn into easeInOut.
-const mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p) / 2 : (2 - easing(2 * (1 - p))) / 2;
-
-// Accepts an easing function and returns a new one that outputs reversed values.
-// Turns easeIn into easeOut.
-const reverseEasing = (easing) => (p) => 1 - easing(1 - p);
-
-const backOut = /*@__PURE__*/ cubicBezier(0.33, 1.53, 0.69, 0.99);
-const backIn = /*@__PURE__*/ reverseEasing(backOut);
-const backInOut = /*@__PURE__*/ mirrorEasing(backIn);
-
-const anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p) : 0.5 * (2 - Math.pow(2, -10 * (p - 1)));
-
-const circIn = (p) => 1 - Math.sin(Math.acos(p));
-const circOut = reverseEasing(circIn);
-const circInOut = mirrorEasing(circIn);
-
-/**
- * Check if the value is a zero value string like "0px" or "0%"
- */
-const isZeroValueString = (v) => /^0[^.\s]+$/u.test(v);
-
-function isNone(value) {
-    if (typeof value === "number") {
-        return value === 0;
-    }
-    else if (value !== null) {
-        return value === "none" || value === "0" || isZeroValueString(value);
-    }
-    else {
-        return true;
-    }
-}
-
-// If this number is a decimal, make it just five decimal places
-// to avoid exponents
-const sanitize = (v) => Math.round(v * 100000) / 100000;
-
-const floatRegex = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
-
-function isNullish(v) {
-    return v == null;
-}
-
-const singleColorRegex = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu;
-
-/**
- * Returns true if the provided string is a color, ie rgba(0,0,0,0) or #000,
- * but false if a number or multiple colors
- */
-const isColorString = (type, testProp) => (v) => {
-    return Boolean((typeof v === "string" &&
-        singleColorRegex.test(v) &&
-        v.startsWith(type)) ||
-        (testProp &&
-            !isNullish(v) &&
-            Object.prototype.hasOwnProperty.call(v, testProp)));
-};
-const splitColor = (aName, bName, cName) => (v) => {
-    if (typeof v !== "string")
-        return v;
-    const [a, b, c, alpha] = v.match(floatRegex);
-    return {
-        [aName]: parseFloat(a),
-        [bName]: parseFloat(b),
-        [cName]: parseFloat(c),
-        alpha: alpha !== undefined ? parseFloat(alpha) : 1,
-    };
-};
-
-const clampRgbUnit = (v) => clamp(0, 255, v);
-const rgbUnit = {
-    ...number,
-    transform: (v) => Math.round(clampRgbUnit(v)),
-};
-const rgba = {
-    test: /*@__PURE__*/ isColorString("rgb", "red"),
-    parse: /*@__PURE__*/ splitColor("red", "green", "blue"),
-    transform: ({ red, green, blue, alpha: alpha$1 = 1 }) => "rgba(" +
-        rgbUnit.transform(red) +
-        ", " +
-        rgbUnit.transform(green) +
-        ", " +
-        rgbUnit.transform(blue) +
-        ", " +
-        sanitize(alpha.transform(alpha$1)) +
-        ")",
-};
-
-function parseHex(v) {
-    let r = "";
-    let g = "";
-    let b = "";
-    let a = "";
-    // If we have 6 characters, ie #FF0000
-    if (v.length > 5) {
-        r = v.substring(1, 3);
-        g = v.substring(3, 5);
-        b = v.substring(5, 7);
-        a = v.substring(7, 9);
-        // Or we have 3 characters, ie #F00
-    }
-    else {
-        r = v.substring(1, 2);
-        g = v.substring(2, 3);
-        b = v.substring(3, 4);
-        a = v.substring(4, 5);
-        r += r;
-        g += g;
-        b += b;
-        a += a;
-    }
-    return {
-        red: parseInt(r, 16),
-        green: parseInt(g, 16),
-        blue: parseInt(b, 16),
-        alpha: a ? parseInt(a, 16) / 255 : 1,
-    };
-}
-const hex = {
-    test: /*@__PURE__*/ isColorString("#"),
-    parse: parseHex,
-    transform: rgba.transform,
-};
-
-const hsla = {
-    test: /*@__PURE__*/ isColorString("hsl", "hue"),
-    parse: /*@__PURE__*/ splitColor("hue", "saturation", "lightness"),
-    transform: ({ hue, saturation, lightness, alpha: alpha$1 = 1 }) => {
-        return ("hsla(" +
-            Math.round(hue) +
-            ", " +
-            percent.transform(sanitize(saturation)) +
-            ", " +
-            percent.transform(sanitize(lightness)) +
-            ", " +
-            sanitize(alpha.transform(alpha$1)) +
-            ")");
-    },
-};
-
-const color = {
-    test: (v) => rgba.test(v) || hex.test(v) || hsla.test(v),
-    parse: (v) => {
-        if (rgba.test(v)) {
-            return rgba.parse(v);
-        }
-        else if (hsla.test(v)) {
-            return hsla.parse(v);
-        }
-        else {
-            return hex.parse(v);
-        }
-    },
-    transform: (v) => {
-        return typeof v === "string"
-            ? v
-            : v.hasOwnProperty("red")
-                ? rgba.transform(v)
-                : hsla.transform(v);
-    },
-};
-
-const colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
-
-function test(v) {
-    var _a, _b;
-    return (isNaN(v) &&
-        typeof v === "string" &&
-        (((_a = v.match(floatRegex)) === null || _a === void 0 ? void 0 : _a.length) || 0) +
-            (((_b = v.match(colorRegex)) === null || _b === void 0 ? void 0 : _b.length) || 0) >
-            0);
-}
-const NUMBER_TOKEN = "number";
-const COLOR_TOKEN = "color";
-const VAR_TOKEN = "var";
-const VAR_FUNCTION_TOKEN = "var(";
-const SPLIT_TOKEN = "${}";
-// this regex consists of the `singleCssVariableRegex|rgbHSLValueRegex|digitRegex`
-const complexRegex = /var\s*\(\s*--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)|#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\)|-?(?:\d+(?:\.\d+)?|\.\d+)/giu;
-function analyseComplexValue(value) {
-    const originalValue = value.toString();
-    const values = [];
-    const indexes = {
-        color: [],
-        number: [],
-        var: [],
-    };
-    const types = [];
-    let i = 0;
-    const tokenised = originalValue.replace(complexRegex, (parsedValue) => {
-        if (color.test(parsedValue)) {
-            indexes.color.push(i);
-            types.push(COLOR_TOKEN);
-            values.push(color.parse(parsedValue));
-        }
-        else if (parsedValue.startsWith(VAR_FUNCTION_TOKEN)) {
-            indexes.var.push(i);
-            types.push(VAR_TOKEN);
-            values.push(parsedValue);
-        }
-        else {
-            indexes.number.push(i);
-            types.push(NUMBER_TOKEN);
-            values.push(parseFloat(parsedValue));
-        }
-        ++i;
-        return SPLIT_TOKEN;
-    });
-    const split = tokenised.split(SPLIT_TOKEN);
-    return { values, split, indexes, types };
-}
-function parseComplexValue(v) {
-    return analyseComplexValue(v).values;
-}
-function createTransformer(source) {
-    const { split, types } = analyseComplexValue(source);
-    const numSections = split.length;
-    return (v) => {
-        let output = "";
-        for (let i = 0; i < numSections; i++) {
-            output += split[i];
-            if (v[i] !== undefined) {
-                const type = types[i];
-                if (type === NUMBER_TOKEN) {
-                    output += sanitize(v[i]);
-                }
-                else if (type === COLOR_TOKEN) {
-                    output += color.transform(v[i]);
-                }
-                else {
-                    output += v[i];
-                }
-            }
-        }
-        return output;
-    };
-}
-const convertNumbersToZero = (v) => typeof v === "number" ? 0 : v;
-function getAnimatableNone$1(v) {
-    const parsed = parseComplexValue(v);
-    const transformer = createTransformer(v);
-    return transformer(parsed.map(convertNumbersToZero));
-}
-const complex = {
-    test,
-    parse: parseComplexValue,
-    createTransformer,
-    getAnimatableNone: getAnimatableNone$1,
-};
-
-/**
- * Properties that should default to 1 or 100%
- */
-const maxDefaults = new Set(["brightness", "contrast", "saturate", "opacity"]);
-function applyDefaultFilter(v) {
-    const [name, value] = v.slice(0, -1).split("(");
-    if (name === "drop-shadow")
-        return v;
-    const [number] = value.match(floatRegex) || [];
-    if (!number)
-        return v;
-    const unit = value.replace(number, "");
-    let defaultValue = maxDefaults.has(name) ? 1 : 0;
-    if (number !== value)
-        defaultValue *= 100;
-    return name + "(" + defaultValue + unit + ")";
-}
-const functionRegex = /\b([a-z-]*)\(.*?\)/gu;
-const filter = {
-    ...complex,
-    getAnimatableNone: (v) => {
-        const functions = v.match(functionRegex);
-        return functions ? functions.map(applyDefaultFilter).join(" ") : v;
-    },
-};
-
-/**
- * A map of default value types for common values
- */
-const defaultValueTypes = {
-    ...numberValueTypes,
-    // Color props
-    color,
-    backgroundColor: color,
-    outlineColor: color,
-    fill: color,
-    stroke: color,
-    // Border props
-    borderColor: color,
-    borderTopColor: color,
-    borderRightColor: color,
-    borderBottomColor: color,
-    borderLeftColor: color,
-    filter,
-    WebkitFilter: filter,
-};
-/**
- * Gets the default ValueType for the provided value key
- */
-const getDefaultValueType = (key) => defaultValueTypes[key];
-
-function getAnimatableNone(key, value) {
-    let defaultValueType = getDefaultValueType(key);
-    if (defaultValueType !== filter)
-        defaultValueType = complex;
-    // If value is not recognised as animatable, ie "none", create an animatable version origin based on the target
-    return defaultValueType.getAnimatableNone
-        ? defaultValueType.getAnimatableNone(value)
-        : undefined;
-}
-
-/**
- * If we encounter keyframes like "none" or "0" and we also have keyframes like
- * "#fff" or "200px 200px" we want to find a keyframe to serve as a template for
- * the "none" keyframes. In this case "#fff" or "200px 200px" - then these get turned into
- * zero equivalents, i.e. "#fff0" or "0px 0px".
- */
-const invalidTemplates = new Set(["auto", "none", "0"]);
-function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name) {
-    let i = 0;
-    let animatableTemplate = undefined;
-    while (i < unresolvedKeyframes.length && !animatableTemplate) {
-        const keyframe = unresolvedKeyframes[i];
-        if (typeof keyframe === "string" &&
-            !invalidTemplates.has(keyframe) &&
-            analyseComplexValue(keyframe).values.length) {
-            animatableTemplate = unresolvedKeyframes[i];
-        }
-        i++;
-    }
-    if (animatableTemplate && name) {
-        for (const noneIndex of noneKeyframeIndexes) {
-            unresolvedKeyframes[noneIndex] = getAnimatableNone(name, animatableTemplate);
-        }
-    }
-}
-
-const isNumOrPxType = (v) => v === number || v === px;
-const getPosFromMatrix = (matrix, pos) => parseFloat(matrix.split(", ")[pos]);
-const getTranslateFromMatrix = (pos2, pos3) => (_bbox, { transform }) => {
-    if (transform === "none" || !transform)
-        return 0;
-    const matrix3d = transform.match(/^matrix3d\((.+)\)$/u);
-    if (matrix3d) {
-        return getPosFromMatrix(matrix3d[1], pos3);
-    }
-    else {
-        const matrix = transform.match(/^matrix\((.+)\)$/u);
-        if (matrix) {
-            return getPosFromMatrix(matrix[1], pos2);
-        }
-        else {
-            return 0;
-        }
-    }
-};
-const transformKeys = new Set(["x", "y", "z"]);
-const nonTranslationalTransformKeys = transformPropOrder.filter((key) => !transformKeys.has(key));
-function removeNonTranslationalTransform(visualElement) {
-    const removedTransforms = [];
-    nonTranslationalTransformKeys.forEach((key) => {
-        const value = visualElement.getValue(key);
-        if (value !== undefined) {
-            removedTransforms.push([key, value.get()]);
-            value.set(key.startsWith("scale") ? 1 : 0);
-        }
-    });
-    return removedTransforms;
-}
-const positionalValues = {
-    // Dimensions
-    width: ({ x }, { paddingLeft = "0", paddingRight = "0" }) => x.max - x.min - parseFloat(paddingLeft) - parseFloat(paddingRight),
-    height: ({ y }, { paddingTop = "0", paddingBottom = "0" }) => y.max - y.min - parseFloat(paddingTop) - parseFloat(paddingBottom),
-    top: (_bbox, { top }) => parseFloat(top),
-    left: (_bbox, { left }) => parseFloat(left),
-    bottom: ({ y }, { top }) => parseFloat(top) + (y.max - y.min),
-    right: ({ x }, { left }) => parseFloat(left) + (x.max - x.min),
-    // Transform
-    x: getTranslateFromMatrix(4, 13),
-    y: getTranslateFromMatrix(5, 14),
-};
-// Alias translate longform names
-positionalValues.translateX = positionalValues.x;
-positionalValues.translateY = positionalValues.y;
-
-const toResolve = new Set();
-let isScheduled = false;
-let anyNeedsMeasurement = false;
-function measureAllKeyframes() {
-    if (anyNeedsMeasurement) {
-        const resolversToMeasure = Array.from(toResolve).filter((resolver) => resolver.needsMeasurement);
-        const elementsToMeasure = new Set(resolversToMeasure.map((resolver) => resolver.element));
-        const transformsToRestore = new Map();
-        /**
-         * Write pass
-         * If we're measuring elements we want to remove bounding box-changing transforms.
-         */
-        elementsToMeasure.forEach((element) => {
-            const removedTransforms = removeNonTranslationalTransform(element);
-            if (!removedTransforms.length)
-                return;
-            transformsToRestore.set(element, removedTransforms);
-            element.render();
-        });
-        // Read
-        resolversToMeasure.forEach((resolver) => resolver.measureInitialState());
-        // Write
-        elementsToMeasure.forEach((element) => {
-            element.render();
-            const restore = transformsToRestore.get(element);
-            if (restore) {
-                restore.forEach(([key, value]) => {
-                    var _a;
-                    (_a = element.getValue(key)) === null || _a === void 0 ? void 0 : _a.set(value);
-                });
-            }
-        });
-        // Read
-        resolversToMeasure.forEach((resolver) => resolver.measureEndState());
-        // Write
-        resolversToMeasure.forEach((resolver) => {
-            if (resolver.suspendedScrollY !== undefined) {
-                window.scrollTo(0, resolver.suspendedScrollY);
-            }
-        });
-    }
-    anyNeedsMeasurement = false;
-    isScheduled = false;
-    toResolve.forEach((resolver) => resolver.complete());
-    toResolve.clear();
-}
-function readAllKeyframes() {
-    toResolve.forEach((resolver) => {
-        resolver.readKeyframes();
-        if (resolver.needsMeasurement) {
-            anyNeedsMeasurement = true;
-        }
-    });
-}
-function flushKeyframeResolvers() {
-    readAllKeyframes();
-    measureAllKeyframes();
-}
-class KeyframeResolver {
-    constructor(unresolvedKeyframes, onComplete, name, motionValue, element, isAsync = false) {
-        /**
-         * Track whether this resolver has completed. Once complete, it never
-         * needs to attempt keyframe resolution again.
-         */
-        this.isComplete = false;
-        /**
-         * Track whether this resolver is async. If it is, it'll be added to the
-         * resolver queue and flushed in the next frame. Resolvers that aren't going
-         * to trigger read/write thrashing don't need to be async.
-         */
-        this.isAsync = false;
-        /**
-         * Track whether this resolver needs to perform a measurement
-         * to resolve its keyframes.
-         */
-        this.needsMeasurement = false;
-        /**
-         * Track whether this resolver is currently scheduled to resolve
-         * to allow it to be cancelled and resumed externally.
-         */
-        this.isScheduled = false;
-        this.unresolvedKeyframes = [...unresolvedKeyframes];
-        this.onComplete = onComplete;
-        this.name = name;
-        this.motionValue = motionValue;
-        this.element = element;
-        this.isAsync = isAsync;
-    }
-    scheduleResolve() {
-        this.isScheduled = true;
-        if (this.isAsync) {
-            toResolve.add(this);
-            if (!isScheduled) {
-                isScheduled = true;
-                frame.read(readAllKeyframes);
-                frame.resolveKeyframes(measureAllKeyframes);
-            }
-        }
-        else {
-            this.readKeyframes();
-            this.complete();
-        }
-    }
-    readKeyframes() {
-        const { unresolvedKeyframes, name, element, motionValue } = this;
-        /**
-         * If a keyframe is null, we hydrate it either by reading it from
-         * the instance, or propagating from previous keyframes.
-         */
-        for (let i = 0; i < unresolvedKeyframes.length; i++) {
-            if (unresolvedKeyframes[i] === null) {
-                /**
-                 * If the first keyframe is null, we need to find its value by sampling the element
-                 */
-                if (i === 0) {
-                    const currentValue = motionValue === null || motionValue === void 0 ? void 0 : motionValue.get();
-                    const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
-                    if (currentValue !== undefined) {
-                        unresolvedKeyframes[0] = currentValue;
-                    }
-                    else if (element && name) {
-                        const valueAsRead = element.readValue(name, finalKeyframe);
-                        if (valueAsRead !== undefined && valueAsRead !== null) {
-                            unresolvedKeyframes[0] = valueAsRead;
-                        }
-                    }
-                    if (unresolvedKeyframes[0] === undefined) {
-                        unresolvedKeyframes[0] = finalKeyframe;
-                    }
-                    if (motionValue && currentValue === undefined) {
-                        motionValue.set(unresolvedKeyframes[0]);
-                    }
-                }
-                else {
-                    unresolvedKeyframes[i] = unresolvedKeyframes[i - 1];
-                }
-            }
-        }
-    }
-    setFinalKeyframe() { }
-    measureInitialState() { }
-    renderEndStyles() { }
-    measureEndState() { }
-    complete() {
-        this.isComplete = true;
-        this.onComplete(this.unresolvedKeyframes, this.finalKeyframe);
-        toResolve.delete(this);
-    }
-    cancel() {
-        if (!this.isComplete) {
-            this.isScheduled = false;
-            toResolve.delete(this);
-        }
-    }
-    resume() {
-        if (!this.isComplete)
-            this.scheduleResolve();
-    }
-}
-
-/**
- * Check if value is a numerical string, ie a string that is purely a number eg "100" or "-100.1"
- */
-const isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v);
-
-/**
- * Parse Framer's special CSS variable format into a CSS token and a fallback.
- *
- * ```
- * `var(--foo, #fff)` => [`--foo`, '#fff']
- * ```
- *
- * @param current
- */
-const splitCSSVariableRegex = 
-// eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
-/^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
-function parseCSSVariable(current) {
-    const match = splitCSSVariableRegex.exec(current);
-    if (!match)
-        return [,];
-    const [, token1, token2, fallback] = match;
-    return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback];
-}
-const maxDepth = 4;
-function getVariableValue(current, element, depth = 1) {
-    invariant(depth <= maxDepth, `Max CSS variable fallback depth detected in property "${current}". This may indicate a circular fallback dependency.`);
-    const [token, fallback] = parseCSSVariable(current);
-    // No CSS variable detected
-    if (!token)
-        return;
-    // Attempt to read this CSS variable off the element
-    const resolved = window.getComputedStyle(element).getPropertyValue(token);
-    if (resolved) {
-        const trimmed = resolved.trim();
-        return isNumericalString(trimmed) ? parseFloat(trimmed) : trimmed;
-    }
-    return isCSSVariableToken(fallback)
-        ? getVariableValue(fallback, element, depth + 1)
-        : fallback;
-}
-
-/**
- * Tests a provided value against a ValueType
- */
-const testValueType = (v) => (type) => type.test(v);
-
-/**
- * ValueType for "auto"
- */
-const auto = {
-    test: (v) => v === "auto",
-    parse: (v) => v,
-};
-
-/**
- * A list of value types commonly used for dimensions
- */
-const dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto];
-/**
- * Tests a dimensional value against the list of dimension ValueTypes
- */
-const findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v));
-
-class DOMKeyframesResolver extends KeyframeResolver {
-    constructor(unresolvedKeyframes, onComplete, name, motionValue, element) {
-        super(unresolvedKeyframes, onComplete, name, motionValue, element, true);
-    }
-    readKeyframes() {
-        const { unresolvedKeyframes, element, name } = this;
-        if (!element || !element.current)
-            return;
-        super.readKeyframes();
-        /**
-         * If any keyframe is a CSS variable, we need to find its value by sampling the element
-         */
-        for (let i = 0; i < unresolvedKeyframes.length; i++) {
-            let keyframe = unresolvedKeyframes[i];
-            if (typeof keyframe === "string") {
-                keyframe = keyframe.trim();
-                if (isCSSVariableToken(keyframe)) {
-                    const resolved = getVariableValue(keyframe, element.current);
-                    if (resolved !== undefined) {
-                        unresolvedKeyframes[i] = resolved;
-                    }
-                    if (i === unresolvedKeyframes.length - 1) {
-                        this.finalKeyframe = keyframe;
-                    }
-                }
-            }
-        }
-        /**
-         * Resolve "none" values. We do this potentially twice - once before and once after measuring keyframes.
-         * This could be seen as inefficient but it's a trade-off to avoid measurements in more situations, which
-         * have a far bigger performance impact.
-         */
-        this.resolveNoneKeyframes();
-        /**
-         * Check to see if unit type has changed. If so schedule jobs that will
-         * temporarily set styles to the destination keyframes.
-         * Skip if we have more than two keyframes or this isn't a positional value.
-         * TODO: We can throw if there are multiple keyframes and the value type changes.
-         */
-        if (!positionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
-            return;
-        }
-        const [origin, target] = unresolvedKeyframes;
-        const originType = findDimensionValueType(origin);
-        const targetType = findDimensionValueType(target);
-        /**
-         * Either we don't recognise these value types or we can animate between them.
-         */
-        if (originType === targetType)
-            return;
-        /**
-         * If both values are numbers or pixels, we can animate between them by
-         * converting them to numbers.
-         */
-        if (isNumOrPxType(originType) && isNumOrPxType(targetType)) {
-            for (let i = 0; i < unresolvedKeyframes.length; i++) {
-                const value = unresolvedKeyframes[i];
-                if (typeof value === "string") {
-                    unresolvedKeyframes[i] = parseFloat(value);
-                }
-            }
-        }
-        else {
-            /**
-             * Else, the only way to resolve this is by measuring the element.
-             */
-            this.needsMeasurement = true;
-        }
-    }
-    resolveNoneKeyframes() {
-        const { unresolvedKeyframes, name } = this;
-        const noneKeyframeIndexes = [];
-        for (let i = 0; i < unresolvedKeyframes.length; i++) {
-            if (isNone(unresolvedKeyframes[i])) {
-                noneKeyframeIndexes.push(i);
-            }
-        }
-        if (noneKeyframeIndexes.length) {
-            makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name);
-        }
-    }
-    measureInitialState() {
-        const { element, unresolvedKeyframes, name } = this;
-        if (!element || !element.current)
-            return;
-        if (name === "height") {
-            this.suspendedScrollY = window.pageYOffset;
-        }
-        this.measuredOrigin = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
-        unresolvedKeyframes[0] = this.measuredOrigin;
-        // Set final key frame to measure after next render
-        const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
-        if (measureKeyframe !== undefined) {
-            element.getValue(name, measureKeyframe).jump(measureKeyframe, false);
-        }
-    }
-    measureEndState() {
-        var _a;
-        const { element, name, unresolvedKeyframes } = this;
-        if (!element || !element.current)
-            return;
-        const value = element.getValue(name);
-        value && value.jump(this.measuredOrigin, false);
-        const finalKeyframeIndex = unresolvedKeyframes.length - 1;
-        const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
-        unresolvedKeyframes[finalKeyframeIndex] = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
-        if (finalKeyframe !== null && this.finalKeyframe === undefined) {
-            this.finalKeyframe = finalKeyframe;
-        }
-        // If we removed transform values, reapply them before the next render
-        if ((_a = this.removedTransforms) === null || _a === void 0 ? void 0 : _a.length) {
-            this.removedTransforms.forEach(([unsetTransformName, unsetTransformValue]) => {
-                element
-                    .getValue(unsetTransformName)
-                    .set(unsetTransformValue);
-            });
-        }
-        this.resolveNoneKeyframes();
-    }
-}
-
-/**
- * Check if a value is animatable. Examples:
- *
- * ✅: 100, "100px", "#fff"
- * ❌: "block", "url(2.jpg)"
- * @param value
- *
- * @internal
- */
-const isAnimatable = (value, name) => {
-    // If the list of keys tat might be non-animatable grows, replace with Set
-    if (name === "zIndex")
-        return false;
-    // If it's a number or a keyframes array, we can animate it. We might at some point
-    // need to do a deep isAnimatable check of keyframes, or let Popmotion handle this,
-    // but for now lets leave it like this for performance reasons
-    if (typeof value === "number" || Array.isArray(value))
-        return true;
-    if (typeof value === "string" && // It's animatable if we have a string
-        (complex.test(value) || value === "0") && // And it contains numbers and/or colors
-        !value.startsWith("url(") // Unless it starts with "url("
-    ) {
-        return true;
-    }
-    return false;
-};
-
-function hasKeyframesChanged(keyframes) {
-    const current = keyframes[0];
-    if (keyframes.length === 1)
-        return true;
-    for (let i = 0; i < keyframes.length; i++) {
-        if (keyframes[i] !== current)
-            return true;
-    }
-}
-function canAnimate(keyframes, name, type, velocity) {
-    /**
-     * Check if we're able to animate between the start and end keyframes,
-     * and throw a warning if we're attempting to animate between one that's
-     * animatable and another that isn't.
-     */
-    const originKeyframe = keyframes[0];
-    if (originKeyframe === null)
-        return false;
-    /**
-     * These aren't traditionally animatable but we do support them.
-     * In future we could look into making this more generic or replacing
-     * this function with mix() === mixImmediate
-     */
-    if (name === "display" || name === "visibility")
-        return true;
-    const targetKeyframe = keyframes[keyframes.length - 1];
-    const isOriginAnimatable = isAnimatable(originKeyframe, name);
-    const isTargetAnimatable = isAnimatable(targetKeyframe, name);
-    warning(isOriginAnimatable === isTargetAnimatable, `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`);
-    // Always skip if any of these are true
-    if (!isOriginAnimatable || !isTargetAnimatable) {
-        return false;
-    }
-    return (hasKeyframesChanged(keyframes) ||
-        ((type === "spring" || isGenerator(type)) && velocity));
-}
-
-const isNotNull = (value) => value !== null;
-function getFinalKeyframe(keyframes, { repeat, repeatType = "loop" }, finalKeyframe) {
-    const resolvedKeyframes = keyframes.filter(isNotNull);
-    const index = repeat && repeatType !== "loop" && repeat % 2 === 1
-        ? 0
-        : resolvedKeyframes.length - 1;
-    return !index || finalKeyframe === undefined
-        ? resolvedKeyframes[index]
-        : finalKeyframe;
-}
-
-/**
- * Maximum time allowed between an animation being created and it being
- * resolved for us to use the latter as the start time.
- *
- * This is to ensure that while we prefer to "start" an animation as soon
- * as it's triggered, we also want to avoid a visual jump if there's a big delay
- * between these two moments.
- */
-const MAX_RESOLVE_DELAY = 40;
-class BaseAnimation {
-    constructor({ autoplay = true, delay = 0, type = "keyframes", repeat = 0, repeatDelay = 0, repeatType = "loop", ...options }) {
-        // Track whether the animation has been stopped. Stopped animations won't restart.
-        this.isStopped = false;
-        this.hasAttemptedResolve = false;
-        this.createdAt = time.now();
-        this.options = {
-            autoplay,
-            delay,
-            type,
-            repeat,
-            repeatDelay,
-            repeatType,
-            ...options,
-        };
-        this.updateFinishedPromise();
-    }
-    /**
-     * This method uses the createdAt and resolvedAt to calculate the
-     * animation startTime. *Ideally*, we would use the createdAt time as t=0
-     * as the following frame would then be the first frame of the animation in
-     * progress, which would feel snappier.
-     *
-     * However, if there's a delay (main thread work) between the creation of
-     * the animation and the first commited frame, we prefer to use resolvedAt
-     * to avoid a sudden jump into the animation.
-     */
-    calcStartTime() {
-        if (!this.resolvedAt)
-            return this.createdAt;
-        return this.resolvedAt - this.createdAt > MAX_RESOLVE_DELAY
-            ? this.resolvedAt
-            : this.createdAt;
-    }
-    /**
-     * A getter for resolved data. If keyframes are not yet resolved, accessing
-     * this.resolved will synchronously flush all pending keyframe resolvers.
-     * This is a deoptimisation, but at its worst still batches read/writes.
-     */
-    get resolved() {
-        if (!this._resolved && !this.hasAttemptedResolve) {
-            flushKeyframeResolvers();
-        }
-        return this._resolved;
-    }
-    /**
-     * A method to be called when the keyframes resolver completes. This method
-     * will check if its possible to run the animation and, if not, skip it.
-     * Otherwise, it will call initPlayback on the implementing class.
-     */
-    onKeyframesResolved(keyframes, finalKeyframe) {
-        this.resolvedAt = time.now();
-        this.hasAttemptedResolve = true;
-        const { name, type, velocity, delay, onComplete, onUpdate, isGenerator, } = this.options;
-        /**
-         * If we can't animate this value with the resolved keyframes
-         * then we should complete it immediately.
-         */
-        if (!isGenerator && !canAnimate(keyframes, name, type, velocity)) {
-            // Finish immediately
-            if (!delay) {
-                onUpdate &&
-                    onUpdate(getFinalKeyframe(keyframes, this.options, finalKeyframe));
-                onComplete && onComplete();
-                this.resolveFinishedPromise();
-                return;
-            }
-            // Finish after a delay
-            else {
-                this.options.duration = 0;
-            }
-        }
-        const resolvedAnimation = this.initPlayback(keyframes, finalKeyframe);
-        if (resolvedAnimation === false)
-            return;
-        this._resolved = {
-            keyframes,
-            finalKeyframe,
-            ...resolvedAnimation,
-        };
-        this.onPostResolved();
-    }
-    onPostResolved() { }
-    /**
-     * Allows the returned animation to be awaited or promise-chained. Currently
-     * resolves when the animation finishes at all but in a future update could/should
-     * reject if its cancels.
-     */
-    then(resolve, reject) {
-        return this.currentFinishedPromise.then(resolve, reject);
-    }
-    flatten() {
-        this.options.type = "keyframes";
-        this.options.ease = "linear";
-    }
-    updateFinishedPromise() {
-        this.currentFinishedPromise = new Promise((resolve) => {
-            this.resolveFinishedPromise = resolve;
-        });
-    }
-}
-
-/*
-  Value in range from progress
-
-  Given a lower limit and an upper limit, we return the value within
-  that range as expressed by progress (usually a number from 0 to 1)
-
-  So progress = 0.5 would change
-
-  from -------- to
-
-  to
-
-  from ---- to
-
-  E.g. from = 10, to = 20, progress = 0.5 => 15
-
-  @param [number]: Lower limit of range
-  @param [number]: Upper limit of range
-  @param [number]: The progress between lower and upper limits expressed 0-1
-  @return [number]: Value as calculated from progress within range (not limited within range)
-*/
-const mixNumber$1 = (from, to, progress) => {
-    return from + (to - from) * progress;
-};
-
-// Adapted from https://gist.github.com/mjackson/5311256
-function hueToRgb(p, q, t) {
-    if (t < 0)
-        t += 1;
-    if (t > 1)
-        t -= 1;
-    if (t < 1 / 6)
-        return p + (q - p) * 6 * t;
-    if (t < 1 / 2)
-        return q;
-    if (t < 2 / 3)
-        return p + (q - p) * (2 / 3 - t) * 6;
-    return p;
-}
-function hslaToRgba({ hue, saturation, lightness, alpha }) {
-    hue /= 360;
-    saturation /= 100;
-    lightness /= 100;
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-    if (!saturation) {
-        red = green = blue = lightness;
-    }
-    else {
-        const q = lightness < 0.5
-            ? lightness * (1 + saturation)
-            : lightness + saturation - lightness * saturation;
-        const p = 2 * lightness - q;
-        red = hueToRgb(p, q, hue + 1 / 3);
-        green = hueToRgb(p, q, hue);
-        blue = hueToRgb(p, q, hue - 1 / 3);
-    }
-    return {
-        red: Math.round(red * 255),
-        green: Math.round(green * 255),
-        blue: Math.round(blue * 255),
-        alpha,
-    };
-}
-
-function mixImmediate(a, b) {
-    return (p) => (p > 0 ? b : a);
-}
-
-// Linear color space blending
-// Explained https://www.youtube.com/watch?v=LKnqECcg6Gw
-// Demonstrated http://codepen.io/osublake/pen/xGVVaN
-const mixLinearColor = (from, to, v) => {
-    const fromExpo = from * from;
-    const expo = v * (to * to - fromExpo) + fromExpo;
-    return expo < 0 ? 0 : Math.sqrt(expo);
-};
-const colorTypes = [hex, rgba, hsla];
-const getColorType = (v) => colorTypes.find((type) => type.test(v));
-function asRGBA(color) {
-    const type = getColorType(color);
-    warning(Boolean(type), `'${color}' is not an animatable color. Use the equivalent color code instead.`);
-    if (!Boolean(type))
-        return false;
-    let model = type.parse(color);
-    if (type === hsla) {
-        // TODO Remove this cast - needed since Motion's stricter typing
-        model = hslaToRgba(model);
-    }
-    return model;
-}
-const mixColor = (from, to) => {
-    const fromRGBA = asRGBA(from);
-    const toRGBA = asRGBA(to);
-    if (!fromRGBA || !toRGBA) {
-        return mixImmediate(from, to);
-    }
-    const blended = { ...fromRGBA };
-    return (v) => {
-        blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v);
-        blended.green = mixLinearColor(fromRGBA.green, toRGBA.green, v);
-        blended.blue = mixLinearColor(fromRGBA.blue, toRGBA.blue, v);
-        blended.alpha = mixNumber$1(fromRGBA.alpha, toRGBA.alpha, v);
-        return rgba.transform(blended);
-    };
-};
-
-/**
- * Pipe
- * Compose other transformers to run linearily
- * pipe(min(20), max(40))
- * @param  {...functions} transformers
- * @return {function}
- */
-const combineFunctions = (a, b) => (v) => b(a(v));
-const pipe = (...transformers) => transformers.reduce(combineFunctions);
-
-const invisibleValues = new Set(["none", "hidden"]);
-/**
- * Returns a function that, when provided a progress value between 0 and 1,
- * will return the "none" or "hidden" string only when the progress is that of
- * the origin or target.
- */
-function mixVisibility(origin, target) {
-    if (invisibleValues.has(origin)) {
-        return (p) => (p <= 0 ? origin : target);
-    }
-    else {
-        return (p) => (p >= 1 ? target : origin);
-    }
-}
-
-function mixNumber(a, b) {
-    return (p) => mixNumber$1(a, b, p);
-}
-function getMixer(a) {
-    if (typeof a === "number") {
-        return mixNumber;
-    }
-    else if (typeof a === "string") {
-        return isCSSVariableToken(a)
-            ? mixImmediate
-            : color.test(a)
-                ? mixColor
-                : mixComplex;
-    }
-    else if (Array.isArray(a)) {
-        return mixArray;
-    }
-    else if (typeof a === "object") {
-        return color.test(a) ? mixColor : mixObject;
-    }
-    return mixImmediate;
-}
-function mixArray(a, b) {
-    const output = [...a];
-    const numValues = output.length;
-    const blendValue = a.map((v, i) => getMixer(v)(v, b[i]));
-    return (p) => {
-        for (let i = 0; i < numValues; i++) {
-            output[i] = blendValue[i](p);
-        }
-        return output;
-    };
-}
-function mixObject(a, b) {
-    const output = { ...a, ...b };
-    const blendValue = {};
-    for (const key in output) {
-        if (a[key] !== undefined && b[key] !== undefined) {
-            blendValue[key] = getMixer(a[key])(a[key], b[key]);
-        }
-    }
-    return (v) => {
-        for (const key in blendValue) {
-            output[key] = blendValue[key](v);
-        }
-        return output;
-    };
-}
-function matchOrder(origin, target) {
-    var _a;
-    const orderedOrigin = [];
-    const pointers = { color: 0, var: 0, number: 0 };
-    for (let i = 0; i < target.values.length; i++) {
-        const type = target.types[i];
-        const originIndex = origin.indexes[type][pointers[type]];
-        const originValue = (_a = origin.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
-        orderedOrigin[i] = originValue;
-        pointers[type]++;
-    }
-    return orderedOrigin;
-}
-const mixComplex = (origin, target) => {
-    const template = complex.createTransformer(target);
-    const originStats = analyseComplexValue(origin);
-    const targetStats = analyseComplexValue(target);
-    const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length &&
-        originStats.indexes.color.length === targetStats.indexes.color.length &&
-        originStats.indexes.number.length >= targetStats.indexes.number.length;
-    if (canInterpolate) {
-        if ((invisibleValues.has(origin) &&
-            !targetStats.values.length) ||
-            (invisibleValues.has(target) &&
-                !originStats.values.length)) {
-            return mixVisibility(origin, target);
-        }
-        return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
-    }
-    else {
-        warning(true, `Complex values '${origin}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`);
-        return mixImmediate(origin, target);
-    }
-};
-
-function mix(from, to, p) {
-    if (typeof from === "number" &&
-        typeof to === "number" &&
-        typeof p === "number") {
-        return mixNumber$1(from, to, p);
-    }
-    const mixer = getMixer(from);
-    return mixer(from, to);
-}
-
-const velocitySampleDuration = 5; // ms
-function calcGeneratorVelocity(resolveValue, t, current) {
-    const prevT = Math.max(t - velocitySampleDuration, 0);
-    return velocityPerSecond(current - resolveValue(prevT), t - prevT);
-}
-
-const springDefaults = {
-    // Default spring physics
-    stiffness: 100,
-    damping: 10,
-    mass: 1.0,
-    velocity: 0.0,
-    // Default duration/bounce-based options
-    duration: 800, // in ms
-    bounce: 0.3,
-    visualDuration: 0.3, // in seconds
-    // Rest thresholds
-    restSpeed: {
-        granular: 0.01,
-        default: 2,
-    },
-    restDelta: {
-        granular: 0.005,
-        default: 0.5,
-    },
-    // Limits
-    minDuration: 0.01, // in seconds
-    maxDuration: 10.0, // in seconds
-    minDamping: 0.05,
-    maxDamping: 1,
-};
-
-const safeMin = 0.001;
-function findSpring({ duration = springDefaults.duration, bounce = springDefaults.bounce, velocity = springDefaults.velocity, mass = springDefaults.mass, }) {
-    let envelope;
-    let derivative;
-    warning(duration <= secondsToMilliseconds(springDefaults.maxDuration), "Spring duration must be 10 seconds or less");
-    let dampingRatio = 1 - bounce;
-    /**
-     * Restrict dampingRatio and duration to within acceptable ranges.
-     */
-    dampingRatio = clamp(springDefaults.minDamping, springDefaults.maxDamping, dampingRatio);
-    duration = clamp(springDefaults.minDuration, springDefaults.maxDuration, millisecondsToSeconds(duration));
-    if (dampingRatio < 1) {
-        /**
-         * Underdamped spring
-         */
-        envelope = (undampedFreq) => {
-            const exponentialDecay = undampedFreq * dampingRatio;
-            const delta = exponentialDecay * duration;
-            const a = exponentialDecay - velocity;
-            const b = calcAngularFreq(undampedFreq, dampingRatio);
-            const c = Math.exp(-delta);
-            return safeMin - (a / b) * c;
-        };
-        derivative = (undampedFreq) => {
-            const exponentialDecay = undampedFreq * dampingRatio;
-            const delta = exponentialDecay * duration;
-            const d = delta * velocity + velocity;
-            const e = Math.pow(dampingRatio, 2) * Math.pow(undampedFreq, 2) * duration;
-            const f = Math.exp(-delta);
-            const g = calcAngularFreq(Math.pow(undampedFreq, 2), dampingRatio);
-            const factor = -envelope(undampedFreq) + safeMin > 0 ? -1 : 1;
-            return (factor * ((d - e) * f)) / g;
-        };
-    }
-    else {
-        /**
-         * Critically-damped spring
-         */
-        envelope = (undampedFreq) => {
-            const a = Math.exp(-undampedFreq * duration);
-            const b = (undampedFreq - velocity) * duration + 1;
-            return -safeMin + a * b;
-        };
-        derivative = (undampedFreq) => {
-            const a = Math.exp(-undampedFreq * duration);
-            const b = (velocity - undampedFreq) * (duration * duration);
-            return a * b;
-        };
-    }
-    const initialGuess = 5 / duration;
-    const undampedFreq = approximateRoot(envelope, derivative, initialGuess);
-    duration = secondsToMilliseconds(duration);
-    if (isNaN(undampedFreq)) {
-        return {
-            stiffness: springDefaults.stiffness,
-            damping: springDefaults.damping,
-            duration,
-        };
-    }
-    else {
-        const stiffness = Math.pow(undampedFreq, 2) * mass;
-        return {
-            stiffness,
-            damping: dampingRatio * 2 * Math.sqrt(mass * stiffness),
-            duration,
-        };
-    }
-}
-const rootIterations = 12;
-function approximateRoot(envelope, derivative, initialGuess) {
-    let result = initialGuess;
-    for (let i = 1; i < rootIterations; i++) {
-        result = result - envelope(result) / derivative(result);
-    }
-    return result;
-}
-function calcAngularFreq(undampedFreq, dampingRatio) {
-    return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio);
-}
-
-const durationKeys = ["duration", "bounce"];
-const physicsKeys = ["stiffness", "damping", "mass"];
-function isSpringType(options, keys) {
-    return keys.some((key) => options[key] !== undefined);
-}
-function getSpringOptions(options) {
-    let springOptions = {
-        velocity: springDefaults.velocity,
-        stiffness: springDefaults.stiffness,
-        damping: springDefaults.damping,
-        mass: springDefaults.mass,
-        isResolvedFromDuration: false,
-        ...options,
-    };
-    // stiffness/damping/mass overrides duration/bounce
-    if (!isSpringType(options, physicsKeys) &&
-        isSpringType(options, durationKeys)) {
-        if (options.visualDuration) {
-            const visualDuration = options.visualDuration;
-            const root = (2 * Math.PI) / (visualDuration * 1.2);
-            const stiffness = root * root;
-            const damping = 2 *
-                clamp(0.05, 1, 1 - (options.bounce || 0)) *
-                Math.sqrt(stiffness);
-            springOptions = {
-                ...springOptions,
-                mass: springDefaults.mass,
-                stiffness,
-                damping,
-            };
-        }
-        else {
-            const derived = findSpring(options);
-            springOptions = {
-                ...springOptions,
-                ...derived,
-                mass: springDefaults.mass,
-            };
-            springOptions.isResolvedFromDuration = true;
-        }
-    }
-    return springOptions;
-}
-function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce = springDefaults.bounce) {
-    const options = typeof optionsOrVisualDuration !== "object"
-        ? {
-            visualDuration: optionsOrVisualDuration,
-            keyframes: [0, 1],
-            bounce,
-        }
-        : optionsOrVisualDuration;
-    let { restSpeed, restDelta } = options;
-    const origin = options.keyframes[0];
-    const target = options.keyframes[options.keyframes.length - 1];
-    /**
-     * This is the Iterator-spec return value. We ensure it's mutable rather than using a generator
-     * to reduce GC during animation.
-     */
-    const state = { done: false, value: origin };
-    const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration, } = getSpringOptions({
-        ...options,
-        velocity: -millisecondsToSeconds(options.velocity || 0),
-    });
-    const initialVelocity = velocity || 0.0;
-    const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
-    const initialDelta = target - origin;
-    const undampedAngularFreq = millisecondsToSeconds(Math.sqrt(stiffness / mass));
-    /**
-     * If we're working on a granular scale, use smaller defaults for determining
-     * when the spring is finished.
-     *
-     * These defaults have been selected emprically based on what strikes a good
-     * ratio between feeling good and finishing as soon as changes are imperceptible.
-     */
-    const isGranularScale = Math.abs(initialDelta) < 5;
-    restSpeed || (restSpeed = isGranularScale
-        ? springDefaults.restSpeed.granular
-        : springDefaults.restSpeed.default);
-    restDelta || (restDelta = isGranularScale
-        ? springDefaults.restDelta.granular
-        : springDefaults.restDelta.default);
-    let resolveSpring;
-    if (dampingRatio < 1) {
-        const angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio);
-        // Underdamped spring
-        resolveSpring = (t) => {
-            const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
-            return (target -
-                envelope *
-                    (((initialVelocity +
-                        dampingRatio * undampedAngularFreq * initialDelta) /
-                        angularFreq) *
-                        Math.sin(angularFreq * t) +
-                        initialDelta * Math.cos(angularFreq * t)));
-        };
-    }
-    else if (dampingRatio === 1) {
-        // Critically damped spring
-        resolveSpring = (t) => target -
-            Math.exp(-undampedAngularFreq * t) *
-                (initialDelta +
-                    (initialVelocity + undampedAngularFreq * initialDelta) * t);
-    }
-    else {
-        // Overdamped spring
-        const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1);
-        resolveSpring = (t) => {
-            const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
-            // When performing sinh or cosh values can hit Infinity so we cap them here
-            const freqForT = Math.min(dampedAngularFreq * t, 300);
-            return (target -
-                (envelope *
-                    ((initialVelocity +
-                        dampingRatio * undampedAngularFreq * initialDelta) *
-                        Math.sinh(freqForT) +
-                        dampedAngularFreq *
-                            initialDelta *
-                            Math.cosh(freqForT))) /
-                    dampedAngularFreq);
-        };
-    }
-    const generator = {
-        calculatedDuration: isResolvedFromDuration ? duration || null : null,
-        next: (t) => {
-            const current = resolveSpring(t);
-            if (!isResolvedFromDuration) {
-                let currentVelocity = 0.0;
-                /**
-                 * We only need to calculate velocity for under-damped springs
-                 * as over- and critically-damped springs can't overshoot, so
-                 * checking only for displacement is enough.
-                 */
-                if (dampingRatio < 1) {
-                    currentVelocity =
-                        t === 0
-                            ? secondsToMilliseconds(initialVelocity)
-                            : calcGeneratorVelocity(resolveSpring, t, current);
-                }
-                const isBelowVelocityThreshold = Math.abs(currentVelocity) <= restSpeed;
-                const isBelowDisplacementThreshold = Math.abs(target - current) <= restDelta;
-                state.done =
-                    isBelowVelocityThreshold && isBelowDisplacementThreshold;
-            }
-            else {
-                state.done = t >= duration;
-            }
-            state.value = state.done ? target : current;
-            return state;
-        },
-        toString: () => {
-            const calculatedDuration = Math.min(calcGeneratorDuration(generator), maxGeneratorDuration);
-            const easing = generateLinearEasing((progress) => generator.next(calculatedDuration * progress).value, calculatedDuration, 30);
-            return calculatedDuration + "ms " + easing;
-        },
-    };
-    return generator;
-}
-
-function inertia({ keyframes, velocity = 0.0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed, }) {
-    const origin = keyframes[0];
-    const state = {
-        done: false,
-        value: origin,
-    };
-    const isOutOfBounds = (v) => (min !== undefined && v < min) || (max !== undefined && v > max);
-    const nearestBoundary = (v) => {
-        if (min === undefined)
-            return max;
-        if (max === undefined)
-            return min;
-        return Math.abs(min - v) < Math.abs(max - v) ? min : max;
-    };
-    let amplitude = power * velocity;
-    const ideal = origin + amplitude;
-    const target = modifyTarget === undefined ? ideal : modifyTarget(ideal);
-    /**
-     * If the target has changed we need to re-calculate the amplitude, otherwise
-     * the animation will start from the wrong position.
-     */
-    if (target !== ideal)
-        amplitude = target - origin;
-    const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant);
-    const calcLatest = (t) => target + calcDelta(t);
-    const applyFriction = (t) => {
-        const delta = calcDelta(t);
-        const latest = calcLatest(t);
-        state.done = Math.abs(delta) <= restDelta;
-        state.value = state.done ? target : latest;
-    };
-    /**
-     * Ideally this would resolve for t in a stateless way, we could
-     * do that by always precalculating the animation but as we know
-     * this will be done anyway we can assume that spring will
-     * be discovered during that.
-     */
-    let timeReachedBoundary;
-    let spring$1;
-    const checkCatchBoundary = (t) => {
-        if (!isOutOfBounds(state.value))
-            return;
-        timeReachedBoundary = t;
-        spring$1 = spring({
-            keyframes: [state.value, nearestBoundary(state.value)],
-            velocity: calcGeneratorVelocity(calcLatest, t, state.value), // TODO: This should be passing * 1000
-            damping: bounceDamping,
-            stiffness: bounceStiffness,
-            restDelta,
-            restSpeed,
-        });
-    };
-    checkCatchBoundary(0);
-    return {
-        calculatedDuration: null,
-        next: (t) => {
-            /**
-             * We need to resolve the friction to figure out if we need a
-             * spring but we don't want to do this twice per frame. So here
-             * we flag if we updated for this frame and later if we did
-             * we can skip doing it again.
-             */
-            let hasUpdatedFrame = false;
-            if (!spring$1 && timeReachedBoundary === undefined) {
-                hasUpdatedFrame = true;
-                applyFriction(t);
-                checkCatchBoundary(t);
-            }
-            /**
-             * If we have a spring and the provided t is beyond the moment the friction
-             * animation crossed the min/max boundary, use the spring.
-             */
-            if (timeReachedBoundary !== undefined && t >= timeReachedBoundary) {
-                return spring$1.next(t - timeReachedBoundary);
-            }
-            else {
-                !hasUpdatedFrame && applyFriction(t);
-                return state;
-            }
-        },
-    };
-}
-
-const easeIn = /*@__PURE__*/ cubicBezier(0.42, 0, 1, 1);
-const easeOut = /*@__PURE__*/ cubicBezier(0, 0, 0.58, 1);
-const easeInOut = /*@__PURE__*/ cubicBezier(0.42, 0, 0.58, 1);
-
-const isEasingArray = (ease) => {
-    return Array.isArray(ease) && typeof ease[0] !== "number";
-};
-
-const easingLookup = {
-    linear: noop,
-    easeIn,
-    easeInOut,
-    easeOut,
-    circIn,
-    circInOut,
-    circOut,
-    backIn,
-    backInOut,
-    backOut,
-    anticipate,
-};
-const easingDefinitionToFunction = (definition) => {
-    if (isBezierDefinition(definition)) {
-        // If cubic bezier definition, create bezier curve
-        invariant(definition.length === 4, `Cubic bezier arrays must contain four numerical values.`);
-        const [x1, y1, x2, y2] = definition;
-        return cubicBezier(x1, y1, x2, y2);
-    }
-    else if (typeof definition === "string") {
-        // Else lookup from table
-        invariant(easingLookup[definition] !== undefined, `Invalid easing type '${definition}'`);
-        return easingLookup[definition];
-    }
-    return definition;
-};
-
-function createMixers(output, ease, customMixer) {
-    const mixers = [];
-    const mixerFactory = customMixer || mix;
-    const numMixers = output.length - 1;
-    for (let i = 0; i < numMixers; i++) {
-        let mixer = mixerFactory(output[i], output[i + 1]);
-        if (ease) {
-            const easingFunction = Array.isArray(ease) ? ease[i] || noop : ease;
-            mixer = pipe(easingFunction, mixer);
-        }
-        mixers.push(mixer);
-    }
-    return mixers;
-}
-/**
- * Create a function that maps from a numerical input array to a generic output array.
- *
- * Accepts:
- *   - Numbers
- *   - Colors (hex, hsl, hsla, rgb, rgba)
- *   - Complex (combinations of one or more numbers or strings)
- *
- * ```jsx
- * const mixColor = interpolate([0, 1], ['#fff', '#000'])
- *
- * mixColor(0.5) // 'rgba(128, 128, 128, 1)'
- * ```
- *
- * TODO Revist this approach once we've moved to data models for values,
- * probably not needed to pregenerate mixer functions.
- *
- * @public
- */
-function interpolate(input, output, { clamp: isClamp = true, ease, mixer } = {}) {
-    const inputLength = input.length;
-    invariant(inputLength === output.length, "Both input and output ranges must be the same length");
-    /**
-     * If we're only provided a single input, we can just make a function
-     * that returns the output.
-     */
-    if (inputLength === 1)
-        return () => output[0];
-    if (inputLength === 2 && output[0] === output[1])
-        return () => output[1];
-    const isZeroDeltaRange = input[0] === input[1];
-    // If input runs highest -> lowest, reverse both arrays
-    if (input[0] > input[inputLength - 1]) {
-        input = [...input].reverse();
-        output = [...output].reverse();
-    }
-    const mixers = createMixers(output, ease, mixer);
-    const numMixers = mixers.length;
-    const interpolator = (v) => {
-        if (isZeroDeltaRange && v < input[0])
-            return output[0];
-        let i = 0;
-        if (numMixers > 1) {
-            for (; i < input.length - 2; i++) {
-                if (v < input[i + 1])
-                    break;
-            }
-        }
-        const progressInRange = progress(input[i], input[i + 1], v);
-        return mixers[i](progressInRange);
-    };
-    return isClamp
-        ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v))
-        : interpolator;
-}
-
-function fillOffset(offset, remaining) {
-    const min = offset[offset.length - 1];
-    for (let i = 1; i <= remaining; i++) {
-        const offsetProgress = progress(0, remaining, i);
-        offset.push(mixNumber$1(min, 1, offsetProgress));
-    }
-}
-
-function defaultOffset(arr) {
-    const offset = [0];
-    fillOffset(offset, arr.length - 1);
-    return offset;
-}
-
-function convertOffsetToTimes(offset, duration) {
-    return offset.map((o) => o * duration);
-}
-
-function defaultEasing(values, easing) {
-    return values.map(() => easing || easeInOut).splice(0, values.length - 1);
-}
-function keyframes({ duration = 300, keyframes: keyframeValues, times, ease = "easeInOut", }) {
-    /**
-     * Easing functions can be externally defined as strings. Here we convert them
-     * into actual functions.
-     */
-    const easingFunctions = isEasingArray(ease)
-        ? ease.map(easingDefinitionToFunction)
-        : easingDefinitionToFunction(ease);
-    /**
-     * This is the Iterator-spec return value. We ensure it's mutable rather than using a generator
-     * to reduce GC during animation.
-     */
-    const state = {
-        done: false,
-        value: keyframeValues[0],
-    };
-    /**
-     * Create a times array based on the provided 0-1 offsets
-     */
-    const absoluteTimes = convertOffsetToTimes(
-    // Only use the provided offsets if they're the correct length
-    // TODO Maybe we should warn here if there's a length mismatch
-    times && times.length === keyframeValues.length
-        ? times
-        : defaultOffset(keyframeValues), duration);
-    const mapTimeToKeyframe = interpolate(absoluteTimes, keyframeValues, {
-        ease: Array.isArray(easingFunctions)
-            ? easingFunctions
-            : defaultEasing(keyframeValues, easingFunctions),
-    });
-    return {
-        calculatedDuration: duration,
-        next: (t) => {
-            state.value = mapTimeToKeyframe(t);
-            state.done = t >= duration;
-            return state;
-        },
-    };
-}
-
-const frameloopDriver = (update) => {
-    const passTimestamp = ({ timestamp }) => update(timestamp);
-    return {
-        start: () => frame.update(passTimestamp, true),
-        stop: () => cancelFrame(passTimestamp),
-        /**
-         * If we're processing this frame we can use the
-         * framelocked timestamp to keep things in sync.
-         */
-        now: () => (frameData.isProcessing ? frameData.timestamp : time.now()),
-    };
-};
-
-const generators = {
-    decay: inertia,
-    inertia,
-    tween: keyframes,
-    keyframes: keyframes,
-    spring,
-};
-const percentToProgress = (percent) => percent / 100;
-/**
- * Animation that runs on the main thread. Designed to be WAAPI-spec in the subset of
- * features we expose publically. Mostly the compatibility is to ensure visual identity
- * between both WAAPI and main thread animations.
- */
-class MainThreadAnimation extends BaseAnimation {
-    constructor(options) {
-        super(options);
-        /**
-         * The time at which the animation was paused.
-         */
-        this.holdTime = null;
-        /**
-         * The time at which the animation was cancelled.
-         */
-        this.cancelTime = null;
-        /**
-         * The current time of the animation.
-         */
-        this.currentTime = 0;
-        /**
-         * Playback speed as a factor. 0 would be stopped, -1 reverse and 2 double speed.
-         */
-        this.playbackSpeed = 1;
-        /**
-         * The state of the animation to apply when the animation is resolved. This
-         * allows calls to the public API to control the animation before it is resolved,
-         * without us having to resolve it first.
-         */
-        this.pendingPlayState = "running";
-        /**
-         * The time at which the animation was started.
-         */
-        this.startTime = null;
-        this.state = "idle";
-        /**
-         * This method is bound to the instance to fix a pattern where
-         * animation.stop is returned as a reference from a useEffect.
-         */
-        this.stop = () => {
-            this.resolver.cancel();
-            this.isStopped = true;
-            if (this.state === "idle")
-                return;
-            this.teardown();
-            const { onStop } = this.options;
-            onStop && onStop();
-        };
-        const { name, motionValue, element, keyframes } = this.options;
-        const KeyframeResolver$1 = (element === null || element === void 0 ? void 0 : element.KeyframeResolver) || KeyframeResolver;
-        const onResolved = (resolvedKeyframes, finalKeyframe) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe);
-        this.resolver = new KeyframeResolver$1(keyframes, onResolved, name, motionValue, element);
-        this.resolver.scheduleResolve();
-    }
-    flatten() {
-        super.flatten();
-        // If we've already resolved the animation, re-initialise it
-        if (this._resolved) {
-            Object.assign(this._resolved, this.initPlayback(this._resolved.keyframes));
-        }
-    }
-    initPlayback(keyframes$1) {
-        const { type = "keyframes", repeat = 0, repeatDelay = 0, repeatType, velocity = 0, } = this.options;
-        const generatorFactory = isGenerator(type)
-            ? type
-            : generators[type] || keyframes;
-        /**
-         * If our generator doesn't support mixing numbers, we need to replace keyframes with
-         * [0, 100] and then make a function that maps that to the actual keyframes.
-         *
-         * 100 is chosen instead of 1 as it works nicer with spring animations.
-         */
-        let mapPercentToKeyframes;
-        let mirroredGenerator;
-        if (generatorFactory !== keyframes &&
-            typeof keyframes$1[0] !== "number") {
-            if (process.env.NODE_ENV !== "production") {
-                invariant(keyframes$1.length === 2, `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`);
-            }
-            mapPercentToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1]));
-            keyframes$1 = [0, 100];
-        }
-        const generator = generatorFactory({ ...this.options, keyframes: keyframes$1 });
-        /**
-         * If we have a mirror repeat type we need to create a second generator that outputs the
-         * mirrored (not reversed) animation and later ping pong between the two generators.
-         */
-        if (repeatType === "mirror") {
-            mirroredGenerator = generatorFactory({
-                ...this.options,
-                keyframes: [...keyframes$1].reverse(),
-                velocity: -velocity,
-            });
-        }
-        /**
-         * If duration is undefined and we have repeat options,
-         * we need to calculate a duration from the generator.
-         *
-         * We set it to the generator itself to cache the duration.
-         * Any timeline resolver will need to have already precalculated
-         * the duration by this step.
-         */
-        if (generator.calculatedDuration === null) {
-            generator.calculatedDuration = calcGeneratorDuration(generator);
-        }
-        const { calculatedDuration } = generator;
-        const resolvedDuration = calculatedDuration + repeatDelay;
-        const totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
-        return {
-            generator,
-            mirroredGenerator,
-            mapPercentToKeyframes,
-            calculatedDuration,
-            resolvedDuration,
-            totalDuration,
-        };
-    }
-    onPostResolved() {
-        const { autoplay = true } = this.options;
-        this.play();
-        if (this.pendingPlayState === "paused" || !autoplay) {
-            this.pause();
-        }
-        else {
-            this.state = this.pendingPlayState;
-        }
-    }
-    tick(timestamp, sample = false) {
-        const { resolved } = this;
-        // If the animations has failed to resolve, return the final keyframe.
-        if (!resolved) {
-            const { keyframes } = this.options;
-            return { done: true, value: keyframes[keyframes.length - 1] };
-        }
-        const { finalKeyframe, generator, mirroredGenerator, mapPercentToKeyframes, keyframes, calculatedDuration, totalDuration, resolvedDuration, } = resolved;
-        if (this.startTime === null)
-            return generator.next(0);
-        const { delay, repeat, repeatType, repeatDelay, onUpdate } = this.options;
-        /**
-         * requestAnimationFrame timestamps can come through as lower than
-         * the startTime as set by performance.now(). Here we prevent this,
-         * though in the future it could be possible to make setting startTime
-         * a pending operation that gets resolved here.
-         */
-        if (this.speed > 0) {
-            this.startTime = Math.min(this.startTime, timestamp);
-        }
-        else if (this.speed < 0) {
-            this.startTime = Math.min(timestamp - totalDuration / this.speed, this.startTime);
-        }
-        // Update currentTime
-        if (sample) {
-            this.currentTime = timestamp;
-        }
-        else if (this.holdTime !== null) {
-            this.currentTime = this.holdTime;
-        }
-        else {
-            // Rounding the time because floating point arithmetic is not always accurate, e.g. 3000.367 - 1000.367 =
-            // 2000.0000000000002. This is a problem when we are comparing the currentTime with the duration, for
-            // example.
-            this.currentTime =
-                Math.round(timestamp - this.startTime) * this.speed;
-        }
-        // Rebase on delay
-        const timeWithoutDelay = this.currentTime - delay * (this.speed >= 0 ? 1 : -1);
-        const isInDelayPhase = this.speed >= 0
-            ? timeWithoutDelay < 0
-            : timeWithoutDelay > totalDuration;
-        this.currentTime = Math.max(timeWithoutDelay, 0);
-        // If this animation has finished, set the current time  to the total duration.
-        if (this.state === "finished" && this.holdTime === null) {
-            this.currentTime = totalDuration;
-        }
-        let elapsed = this.currentTime;
-        let frameGenerator = generator;
-        if (repeat) {
-            /**
-             * Get the current progress (0-1) of the animation. If t is >
-             * than duration we'll get values like 2.5 (midway through the
-             * third iteration)
-             */
-            const progress = Math.min(this.currentTime, totalDuration) / resolvedDuration;
-            /**
-             * Get the current iteration (0 indexed). For instance the floor of
-             * 2.5 is 2.
-             */
-            let currentIteration = Math.floor(progress);
-            /**
-             * Get the current progress of the iteration by taking the remainder
-             * so 2.5 is 0.5 through iteration 2
-             */
-            let iterationProgress = progress % 1.0;
-            /**
-             * If iteration progress is 1 we count that as the end
-             * of the previous iteration.
-             */
-            if (!iterationProgress && progress >= 1) {
-                iterationProgress = 1;
-            }
-            iterationProgress === 1 && currentIteration--;
-            currentIteration = Math.min(currentIteration, repeat + 1);
-            /**
-             * Reverse progress if we're not running in "normal" direction
-             */
-            const isOddIteration = Boolean(currentIteration % 2);
-            if (isOddIteration) {
-                if (repeatType === "reverse") {
-                    iterationProgress = 1 - iterationProgress;
-                    if (repeatDelay) {
-                        iterationProgress -= repeatDelay / resolvedDuration;
-                    }
-                }
-                else if (repeatType === "mirror") {
-                    frameGenerator = mirroredGenerator;
-                }
-            }
-            elapsed = clamp(0, 1, iterationProgress) * resolvedDuration;
-        }
-        /**
-         * If we're in negative time, set state as the initial keyframe.
-         * This prevents delay: x, duration: 0 animations from finishing
-         * instantly.
-         */
-        const state = isInDelayPhase
-            ? { done: false, value: keyframes[0] }
-            : frameGenerator.next(elapsed);
-        if (mapPercentToKeyframes) {
-            state.value = mapPercentToKeyframes(state.value);
-        }
-        let { done } = state;
-        if (!isInDelayPhase && calculatedDuration !== null) {
-            done =
-                this.speed >= 0
-                    ? this.currentTime >= totalDuration
-                    : this.currentTime <= 0;
-        }
-        const isAnimationFinished = this.holdTime === null &&
-            (this.state === "finished" || (this.state === "running" && done));
-        if (isAnimationFinished && finalKeyframe !== undefined) {
-            state.value = getFinalKeyframe(keyframes, this.options, finalKeyframe);
-        }
-        if (onUpdate) {
-            onUpdate(state.value);
-        }
-        if (isAnimationFinished) {
-            this.finish();
-        }
-        return state;
-    }
-    get duration() {
-        const { resolved } = this;
-        return resolved ? millisecondsToSeconds(resolved.calculatedDuration) : 0;
-    }
-    get time() {
-        return millisecondsToSeconds(this.currentTime);
-    }
-    set time(newTime) {
-        newTime = secondsToMilliseconds(newTime);
-        this.currentTime = newTime;
-        if (this.holdTime !== null || this.speed === 0) {
-            this.holdTime = newTime;
-        }
-        else if (this.driver) {
-            this.startTime = this.driver.now() - newTime / this.speed;
-        }
-    }
-    get speed() {
-        return this.playbackSpeed;
-    }
-    set speed(newSpeed) {
-        const hasChanged = this.playbackSpeed !== newSpeed;
-        this.playbackSpeed = newSpeed;
-        if (hasChanged) {
-            this.time = millisecondsToSeconds(this.currentTime);
-        }
-    }
-    play() {
-        if (!this.resolver.isScheduled) {
-            this.resolver.resume();
-        }
-        if (!this._resolved) {
-            this.pendingPlayState = "running";
-            return;
-        }
-        if (this.isStopped)
-            return;
-        const { driver = frameloopDriver, onPlay, startTime } = this.options;
-        if (!this.driver) {
-            this.driver = driver((timestamp) => this.tick(timestamp));
-        }
-        onPlay && onPlay();
-        const now = this.driver.now();
-        if (this.holdTime !== null) {
-            this.startTime = now - this.holdTime;
-        }
-        else if (!this.startTime) {
-            this.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
-        }
-        else if (this.state === "finished") {
-            this.startTime = now;
-        }
-        if (this.state === "finished") {
-            this.updateFinishedPromise();
-        }
-        this.cancelTime = this.startTime;
-        this.holdTime = null;
-        /**
-         * Set playState to running only after we've used it in
-         * the previous logic.
-         */
-        this.state = "running";
-        this.driver.start();
-    }
-    pause() {
-        var _a;
-        if (!this._resolved) {
-            this.pendingPlayState = "paused";
-            return;
-        }
-        this.state = "paused";
-        this.holdTime = (_a = this.currentTime) !== null && _a !== void 0 ? _a : 0;
-    }
-    complete() {
-        if (this.state !== "running") {
-            this.play();
-        }
-        this.pendingPlayState = this.state = "finished";
-        this.holdTime = null;
-    }
-    finish() {
-        this.teardown();
-        this.state = "finished";
-        const { onComplete } = this.options;
-        onComplete && onComplete();
-    }
-    cancel() {
-        if (this.cancelTime !== null) {
-            this.tick(this.cancelTime);
-        }
-        this.teardown();
-        this.updateFinishedPromise();
-    }
-    teardown() {
-        this.state = "idle";
-        this.stopDriver();
-        this.resolveFinishedPromise();
-        this.updateFinishedPromise();
-        this.startTime = this.cancelTime = null;
-        this.resolver.cancel();
-    }
-    stopDriver() {
-        if (!this.driver)
-            return;
-        this.driver.stop();
-        this.driver = undefined;
-    }
-    sample(time) {
-        this.startTime = 0;
-        return this.tick(time, true);
-    }
-}
-
-/**
- * A list of values that can be hardware-accelerated.
- */
-const acceleratedValues = new Set([
-    "opacity",
-    "clipPath",
-    "filter",
-    "transform",
-    // TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-    // or until we implement support for linear() easing.
-    // "background-color"
-]);
-
-function startWaapiAnimation(element, valueName, keyframes, { delay = 0, duration = 300, repeat = 0, repeatType = "loop", ease = "easeInOut", times, } = {}) {
-    const keyframeOptions = { [valueName]: keyframes };
-    if (times)
-        keyframeOptions.offset = times;
-    const easing = mapEasingToNativeEasing(ease, duration);
-    /**
-     * If this is an easing array, apply to keyframes, not animation as a whole
-     */
-    if (Array.isArray(easing))
-        keyframeOptions.easing = easing;
-    return element.animate(keyframeOptions, {
-        delay,
-        duration,
-        easing: !Array.isArray(easing) ? easing : "linear",
-        fill: "both",
-        iterations: repeat + 1,
-        direction: repeatType === "reverse" ? "alternate" : "normal",
-    });
-}
-
-const supportsWaapi = /*@__PURE__*/ memo(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
-
-/**
- * 10ms is chosen here as it strikes a balance between smooth
- * results (more than one keyframe per frame at 60fps) and
- * keyframe quantity.
- */
-const sampleDelta = 10; //ms
-/**
- * Implement a practical max duration for keyframe generation
- * to prevent infinite loops
- */
-const maxDuration = 20000;
-/**
- * Check if an animation can run natively via WAAPI or requires pregenerated keyframes.
- * WAAPI doesn't support spring or function easings so we run these as JS animation before
- * handing off.
- */
-function requiresPregeneratedKeyframes(options) {
-    return (isGenerator(options.type) ||
-        options.type === "spring" ||
-        !isWaapiSupportedEasing(options.ease));
-}
-function pregenerateKeyframes(keyframes, options) {
-    /**
-     * Create a main-thread animation to pregenerate keyframes.
-     * We sample this at regular intervals to generate keyframes that we then
-     * linearly interpolate between.
-     */
-    const sampleAnimation = new MainThreadAnimation({
-        ...options,
-        keyframes,
-        repeat: 0,
-        delay: 0,
-        isGenerator: true,
-    });
-    let state = { done: false, value: keyframes[0] };
-    const pregeneratedKeyframes = [];
-    /**
-     * Bail after 20 seconds of pre-generated keyframes as it's likely
-     * we're heading for an infinite loop.
-     */
-    let t = 0;
-    while (!state.done && t < maxDuration) {
-        state = sampleAnimation.sample(t);
-        pregeneratedKeyframes.push(state.value);
-        t += sampleDelta;
-    }
-    return {
-        times: undefined,
-        keyframes: pregeneratedKeyframes,
-        duration: t - sampleDelta,
-        ease: "linear",
-    };
-}
-const unsupportedEasingFunctions = {
-    anticipate,
-    backInOut,
-    circInOut,
-};
-function isUnsupportedEase(key) {
-    return key in unsupportedEasingFunctions;
-}
-class AcceleratedAnimation extends BaseAnimation {
-    constructor(options) {
-        super(options);
-        const { name, motionValue, element, keyframes } = this.options;
-        this.resolver = new DOMKeyframesResolver(keyframes, (resolvedKeyframes, finalKeyframe) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe), name, motionValue, element);
-        this.resolver.scheduleResolve();
-    }
-    initPlayback(keyframes, finalKeyframe) {
-        let { duration = 300, times, ease, type, motionValue, name, startTime, } = this.options;
-        /**
-         * If element has since been unmounted, return false to indicate
-         * the animation failed to initialised.
-         */
-        if (!motionValue.owner || !motionValue.owner.current) {
-            return false;
-        }
-        /**
-         * If the user has provided an easing function name that isn't supported
-         * by WAAPI (like "anticipate"), we need to provide the corressponding
-         * function. This will later get converted to a linear() easing function.
-         */
-        if (typeof ease === "string" &&
-            supportsLinearEasing() &&
-            isUnsupportedEase(ease)) {
-            ease = unsupportedEasingFunctions[ease];
-        }
-        /**
-         * If this animation needs pre-generated keyframes then generate.
-         */
-        if (requiresPregeneratedKeyframes(this.options)) {
-            const { onComplete, onUpdate, motionValue, element, ...options } = this.options;
-            const pregeneratedAnimation = pregenerateKeyframes(keyframes, options);
-            keyframes = pregeneratedAnimation.keyframes;
-            // If this is a very short animation, ensure we have
-            // at least two keyframes to animate between as older browsers
-            // can't animate between a single keyframe.
-            if (keyframes.length === 1) {
-                keyframes[1] = keyframes[0];
-            }
-            duration = pregeneratedAnimation.duration;
-            times = pregeneratedAnimation.times;
-            ease = pregeneratedAnimation.ease;
-            type = "keyframes";
-        }
-        const animation = startWaapiAnimation(motionValue.owner.current, name, keyframes, { ...this.options, duration, times, ease });
-        // Override the browser calculated startTime with one synchronised to other JS
-        // and WAAPI animations starting this event loop.
-        animation.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
-        if (this.pendingTimeline) {
-            attachTimeline(animation, this.pendingTimeline);
-            this.pendingTimeline = undefined;
-        }
-        else {
-            /**
-             * Prefer the `onfinish` prop as it's more widely supported than
-             * the `finished` promise.
-             *
-             * Here, we synchronously set the provided MotionValue to the end
-             * keyframe. If we didn't, when the WAAPI animation is finished it would
-             * be removed from the element which would then revert to its old styles.
-             */
-            animation.onfinish = () => {
-                const { onComplete } = this.options;
-                motionValue.set(getFinalKeyframe(keyframes, this.options, finalKeyframe));
-                onComplete && onComplete();
-                this.cancel();
-                this.resolveFinishedPromise();
-            };
-        }
-        return {
-            animation,
-            duration,
-            times,
-            type,
-            ease,
-            keyframes: keyframes,
-        };
-    }
-    get duration() {
-        const { resolved } = this;
-        if (!resolved)
-            return 0;
-        const { duration } = resolved;
-        return millisecondsToSeconds(duration);
-    }
-    get time() {
-        const { resolved } = this;
-        if (!resolved)
-            return 0;
-        const { animation } = resolved;
-        return millisecondsToSeconds(animation.currentTime || 0);
-    }
-    set time(newTime) {
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        const { animation } = resolved;
-        animation.currentTime = secondsToMilliseconds(newTime);
-    }
-    get speed() {
-        const { resolved } = this;
-        if (!resolved)
-            return 1;
-        const { animation } = resolved;
-        return animation.playbackRate;
-    }
-    set speed(newSpeed) {
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        const { animation } = resolved;
-        animation.playbackRate = newSpeed;
-    }
-    get state() {
-        const { resolved } = this;
-        if (!resolved)
-            return "idle";
-        const { animation } = resolved;
-        return animation.playState;
-    }
-    get startTime() {
-        const { resolved } = this;
-        if (!resolved)
-            return null;
-        const { animation } = resolved;
-        // Coerce to number as TypeScript incorrectly types this
-        // as CSSNumberish
-        return animation.startTime;
-    }
-    /**
-     * Replace the default DocumentTimeline with another AnimationTimeline.
-     * Currently used for scroll animations.
-     */
-    attachTimeline(timeline) {
-        if (!this._resolved) {
-            this.pendingTimeline = timeline;
-        }
-        else {
-            const { resolved } = this;
-            if (!resolved)
-                return noop;
-            const { animation } = resolved;
-            attachTimeline(animation, timeline);
-        }
-        return noop;
-    }
-    play() {
-        if (this.isStopped)
-            return;
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        const { animation } = resolved;
-        if (animation.playState === "finished") {
-            this.updateFinishedPromise();
-        }
-        animation.play();
-    }
-    pause() {
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        const { animation } = resolved;
-        animation.pause();
-    }
-    stop() {
-        this.resolver.cancel();
-        this.isStopped = true;
-        if (this.state === "idle")
-            return;
-        this.resolveFinishedPromise();
-        this.updateFinishedPromise();
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        const { animation, keyframes, duration, type, ease, times } = resolved;
-        if (animation.playState === "idle" ||
-            animation.playState === "finished") {
-            return;
-        }
-        /**
-         * WAAPI doesn't natively have any interruption capabilities.
-         *
-         * Rather than read commited styles back out of the DOM, we can
-         * create a renderless JS animation and sample it twice to calculate
-         * its current value, "previous" value, and therefore allow
-         * Motion to calculate velocity for any subsequent animation.
-         */
-        if (this.time) {
-            const { motionValue, onUpdate, onComplete, element, ...options } = this.options;
-            const sampleAnimation = new MainThreadAnimation({
-                ...options,
-                keyframes,
-                duration,
-                type,
-                ease,
-                times,
-                isGenerator: true,
-            });
-            const sampleTime = secondsToMilliseconds(this.time);
-            motionValue.setWithVelocity(sampleAnimation.sample(sampleTime - sampleDelta).value, sampleAnimation.sample(sampleTime).value, sampleDelta);
-        }
-        const { onStop } = this.options;
-        onStop && onStop();
-        this.cancel();
-    }
-    complete() {
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        resolved.animation.finish();
-    }
-    cancel() {
-        const { resolved } = this;
-        if (!resolved)
-            return;
-        resolved.animation.cancel();
-    }
-    static supports(options) {
-        const { motionValue, name, repeatDelay, repeatType, damping, type } = options;
-        if (!motionValue ||
-            !motionValue.owner ||
-            !(motionValue.owner.current instanceof HTMLElement)) {
-            return false;
-        }
-        const { onUpdate, transformTemplate } = motionValue.owner.getProps();
-        return (supportsWaapi() &&
-            name &&
-            acceleratedValues.has(name) &&
-            /**
-             * If we're outputting values to onUpdate then we can't use WAAPI as there's
-             * no way to read the value from WAAPI every frame.
-             */
-            !onUpdate &&
-            !transformTemplate &&
-            !repeatDelay &&
-            repeatType !== "mirror" &&
-            damping !== 0 &&
-            type !== "inertia");
-    }
-}
-
-const underDampedSpring = {
-    type: "spring",
-    stiffness: 500,
-    damping: 25,
-    restSpeed: 10,
-};
-const criticallyDampedSpring = (target) => ({
-    type: "spring",
-    stiffness: 550,
-    damping: target === 0 ? 2 * Math.sqrt(550) : 30,
-    restSpeed: 10,
-});
-const keyframesTransition = {
-    type: "keyframes",
-    duration: 0.8,
-};
-/**
- * Default easing curve is a slightly shallower version of
- * the default browser easing curve.
- */
-const ease = {
-    type: "keyframes",
-    ease: [0.25, 0.1, 0.35, 1],
-    duration: 0.3,
-};
-const getDefaultTransition = (valueKey, { keyframes }) => {
-    if (keyframes.length > 2) {
-        return keyframesTransition;
-    }
-    else if (transformProps.has(valueKey)) {
-        return valueKey.startsWith("scale")
-            ? criticallyDampedSpring(keyframes[1])
-            : underDampedSpring;
-    }
-    return ease;
-};
-
-/**
- * Decide whether a transition is defined on a given Transition.
- * This filters out orchestration options and returns true
- * if any options are left.
- */
-function isTransitionDefined({ when, delay: _delay, delayChildren, staggerChildren, staggerDirection, repeat, repeatType, repeatDelay, from, elapsed, ...transition }) {
-    return !!Object.keys(transition).length;
-}
-
-const animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
-    const valueTransition = getValueTransition(transition, name) || {};
-    /**
-     * Most transition values are currently completely overwritten by value-specific
-     * transitions. In the future it'd be nicer to blend these transitions. But for now
-     * delay actually does inherit from the root transition if not value-specific.
-     */
-    const delay = valueTransition.delay || transition.delay || 0;
-    /**
-     * Elapsed isn't a public transition option but can be passed through from
-     * optimized appear effects in milliseconds.
-     */
-    let { elapsed = 0 } = transition;
-    elapsed = elapsed - secondsToMilliseconds(delay);
-    let options = {
-        keyframes: Array.isArray(target) ? target : [null, target],
-        ease: "easeOut",
-        velocity: value.getVelocity(),
-        ...valueTransition,
-        delay: -elapsed,
-        onUpdate: (v) => {
-            value.set(v);
-            valueTransition.onUpdate && valueTransition.onUpdate(v);
-        },
-        onComplete: () => {
-            onComplete();
-            valueTransition.onComplete && valueTransition.onComplete();
-        },
-        name,
-        motionValue: value,
-        element: isHandoff ? undefined : element,
-    };
-    /**
-     * If there's no transition defined for this value, we can generate
-     * unqiue transition settings for this value.
-     */
-    if (!isTransitionDefined(valueTransition)) {
-        options = {
-            ...options,
-            ...getDefaultTransition(name, options),
-        };
-    }
-    /**
-     * Both WAAPI and our internal animation functions use durations
-     * as defined by milliseconds, while our external API defines them
-     * as seconds.
-     */
-    if (options.duration) {
-        options.duration = secondsToMilliseconds(options.duration);
-    }
-    if (options.repeatDelay) {
-        options.repeatDelay = secondsToMilliseconds(options.repeatDelay);
-    }
-    if (options.from !== undefined) {
-        options.keyframes[0] = options.from;
-    }
-    let shouldSkip = false;
-    if (options.type === false ||
-        (options.duration === 0 && !options.repeatDelay)) {
-        options.duration = 0;
-        if (options.delay === 0) {
-            shouldSkip = true;
-        }
-    }
-    /**
-     * If we can or must skip creating the animation, and apply only
-     * the final keyframe, do so. We also check once keyframes are resolved but
-     * this early check prevents the need to create an animation at all.
-     */
-    if (shouldSkip && !isHandoff && value.get() !== undefined) {
-        const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition);
-        if (finalKeyframe !== undefined) {
-            frame.update(() => {
-                options.onUpdate(finalKeyframe);
-                options.onComplete();
-            });
-            // We still want to return some animation controls here rather
-            // than returning undefined
-            return new GroupPlaybackControls([]);
-        }
-    }
-    /**
-     * Animate via WAAPI if possible. If this is a handoff animation, the optimised animation will be running via
-     * WAAPI. Therefore, this animation must be JS to ensure it runs "under" the
-     * optimised animation.
-     */
-    if (!isHandoff && AcceleratedAnimation.supports(options)) {
-        return new AcceleratedAnimation(options);
-    }
-    else {
-        return new MainThreadAnimation(options);
-    }
-};
-
-/**
- * Decide whether we should block this animation. Previously, we achieved this
- * just by checking whether the key was listed in protectedKeys, but this
- * posed problems if an animation was triggered by afterChildren and protectedKeys
- * had been set to true in the meantime.
- */
-function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
-    const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
-    needsAnimating[key] = false;
-    return shouldBlock;
-}
-function animateTarget(visualElement, targetAndTransition, { delay = 0, transitionOverride, type } = {}) {
-    var _a;
-    let { transition = visualElement.getDefaultTransition(), transitionEnd, ...target } = targetAndTransition;
-    if (transitionOverride)
-        transition = transitionOverride;
-    const animations = [];
-    const animationTypeState = type &&
-        visualElement.animationState &&
-        visualElement.animationState.getState()[type];
-    for (const key in target) {
-        const value = visualElement.getValue(key, (_a = visualElement.latestValues[key]) !== null && _a !== void 0 ? _a : null);
-        const valueTarget = target[key];
-        if (valueTarget === undefined ||
-            (animationTypeState &&
-                shouldBlockAnimation(animationTypeState, key))) {
-            continue;
-        }
-        const valueTransition = {
-            delay,
-            ...getValueTransition(transition || {}, key),
-        };
-        /**
-         * If this is the first time a value is being animated, check
-         * to see if we're handling off from an existing animation.
-         */
-        let isHandoff = false;
-        if (window.MotionHandoffAnimation) {
-            const appearId = getOptimisedAppearId(visualElement);
-            if (appearId) {
-                const startTime = window.MotionHandoffAnimation(appearId, key, frame);
-                if (startTime !== null) {
-                    valueTransition.startTime = startTime;
-                    isHandoff = true;
-                }
-            }
-        }
-        addValueToWillChange(visualElement, key);
-        value.start(animateMotionValue(key, value, valueTarget, visualElement.shouldReduceMotion && positionalKeys.has(key)
-            ? { type: false }
-            : valueTransition, visualElement, isHandoff));
-        const animation = value.animation;
-        if (animation) {
-            animations.push(animation);
-        }
-    }
-    if (transitionEnd) {
-        Promise.all(animations).then(() => {
-            frame.update(() => {
-                transitionEnd && setTarget(visualElement, transitionEnd);
-            });
-        });
-    }
-    return animations;
-}
-
-function animateVariant(visualElement, variant, options = {}) {
-    var _a;
-    const resolved = resolveVariant(visualElement, variant, options.type === "exit"
-        ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom
-        : undefined);
-    let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
-    if (options.transitionOverride) {
-        transition = options.transitionOverride;
-    }
-    /**
-     * If we have a variant, create a callback that runs it as an animation.
-     * Otherwise, we resolve a Promise immediately for a composable no-op.
-     */
-    const getAnimation = resolved
-        ? () => Promise.all(animateTarget(visualElement, resolved, options))
-        : () => Promise.resolve();
-    /**
-     * If we have children, create a callback that runs all their animations.
-     * Otherwise, we resolve a Promise immediately for a composable no-op.
-     */
-    const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size
-        ? (forwardDelay = 0) => {
-            const { delayChildren = 0, staggerChildren, staggerDirection, } = transition;
-            return animateChildren(visualElement, variant, delayChildren + forwardDelay, staggerChildren, staggerDirection, options);
-        }
-        : () => Promise.resolve();
-    /**
-     * If the transition explicitly defines a "when" option, we need to resolve either
-     * this animation or all children animations before playing the other.
-     */
-    const { when } = transition;
-    if (when) {
-        const [first, last] = when === "beforeChildren"
-            ? [getAnimation, getChildAnimations]
-            : [getChildAnimations, getAnimation];
-        return first().then(() => last());
-    }
-    else {
-        return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
-    }
-}
-function animateChildren(visualElement, variant, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
-    const animations = [];
-    const maxStaggerDuration = (visualElement.variantChildren.size - 1) * staggerChildren;
-    const generateStaggerDuration = staggerDirection === 1
-        ? (i = 0) => i * staggerChildren
-        : (i = 0) => maxStaggerDuration - i * staggerChildren;
-    Array.from(visualElement.variantChildren)
-        .sort(sortByTreeOrder)
-        .forEach((child, i) => {
-        child.notify("AnimationStart", variant);
-        animations.push(animateVariant(child, variant, {
-            ...options,
-            delay: delayChildren + generateStaggerDuration(i),
-        }).then(() => child.notify("AnimationComplete", variant)));
-    });
-    return Promise.all(animations);
-}
-function sortByTreeOrder(a, b) {
-    return a.sortNodePosition(b);
-}
-
-function animateVisualElement(visualElement, definition, options = {}) {
-    visualElement.notify("AnimationStart", definition);
-    let animation;
-    if (Array.isArray(definition)) {
-        const animations = definition.map((variant) => animateVariant(visualElement, variant, options));
-        animation = Promise.all(animations);
-    }
-    else if (typeof definition === "string") {
-        animation = animateVariant(visualElement, definition, options);
-    }
-    else {
-        const resolvedDefinition = typeof definition === "function"
-            ? resolveVariant(visualElement, definition, options.custom)
-            : definition;
-        animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options));
-    }
-    return animation.then(() => {
-        visualElement.notify("AnimationComplete", definition);
-    });
-}
-
-const numVariantProps = variantProps.length;
-function getVariantContext(visualElement) {
-    if (!visualElement)
-        return undefined;
-    if (!visualElement.isControllingVariants) {
-        const context = visualElement.parent
-            ? getVariantContext(visualElement.parent) || {}
-            : {};
-        if (visualElement.props.initial !== undefined) {
-            context.initial = visualElement.props.initial;
-        }
-        return context;
-    }
-    const context = {};
-    for (let i = 0; i < numVariantProps; i++) {
-        const name = variantProps[i];
-        const prop = visualElement.props[name];
-        if (isVariantLabel(prop) || prop === false) {
-            context[name] = prop;
-        }
-    }
-    return context;
-}
-
-const reversePriorityOrder = [...variantPriorityOrder].reverse();
-const numAnimationTypes = variantPriorityOrder.length;
-function animateList(visualElement) {
-    return (animations) => Promise.all(animations.map(({ animation, options }) => animateVisualElement(visualElement, animation, options)));
-}
-function createAnimationState(visualElement) {
-    let animate = animateList(visualElement);
-    let state = createState();
-    let isInitialRender = true;
-    /**
-     * This function will be used to reduce the animation definitions for
-     * each active animation type into an object of resolved values for it.
-     */
-    const buildResolvedTypeValues = (type) => (acc, definition) => {
-        var _a;
-        const resolved = resolveVariant(visualElement, definition, type === "exit"
-            ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom
-            : undefined);
-        if (resolved) {
-            const { transition, transitionEnd, ...target } = resolved;
-            acc = { ...acc, ...target, ...transitionEnd };
-        }
-        return acc;
-    };
-    /**
-     * This just allows us to inject mocked animation functions
-     * @internal
-     */
-    function setAnimateFunction(makeAnimator) {
-        animate = makeAnimator(visualElement);
-    }
-    /**
-     * When we receive new props, we need to:
-     * 1. Create a list of protected keys for each type. This is a directory of
-     *    value keys that are currently being "handled" by types of a higher priority
-     *    so that whenever an animation is played of a given type, these values are
-     *    protected from being animated.
-     * 2. Determine if an animation type needs animating.
-     * 3. Determine if any values have been removed from a type and figure out
-     *    what to animate those to.
-     */
-    function animateChanges(changedActiveType) {
-        const { props } = visualElement;
-        const context = getVariantContext(visualElement.parent) || {};
-        /**
-         * A list of animations that we'll build into as we iterate through the animation
-         * types. This will get executed at the end of the function.
-         */
-        const animations = [];
-        /**
-         * Keep track of which values have been removed. Then, as we hit lower priority
-         * animation types, we can check if they contain removed values and animate to that.
-         */
-        const removedKeys = new Set();
-        /**
-         * A dictionary of all encountered keys. This is an object to let us build into and
-         * copy it without iteration. Each time we hit an animation type we set its protected
-         * keys - the keys its not allowed to animate - to the latest version of this object.
-         */
-        let encounteredKeys = {};
-        /**
-         * If a variant has been removed at a given index, and this component is controlling
-         * variant animations, we want to ensure lower-priority variants are forced to animate.
-         */
-        let removedVariantIndex = Infinity;
-        /**
-         * Iterate through all animation types in reverse priority order. For each, we want to
-         * detect which values it's handling and whether or not they've changed (and therefore
-         * need to be animated). If any values have been removed, we want to detect those in
-         * lower priority props and flag for animation.
-         */
-        for (let i = 0; i < numAnimationTypes; i++) {
-            const type = reversePriorityOrder[i];
-            const typeState = state[type];
-            const prop = props[type] !== undefined
-                ? props[type]
-                : context[type];
-            const propIsVariant = isVariantLabel(prop);
-            /**
-             * If this type has *just* changed isActive status, set activeDelta
-             * to that status. Otherwise set to null.
-             */
-            const activeDelta = type === changedActiveType ? typeState.isActive : null;
-            if (activeDelta === false)
-                removedVariantIndex = i;
-            /**
-             * If this prop is an inherited variant, rather than been set directly on the
-             * component itself, we want to make sure we allow the parent to trigger animations.
-             *
-             * TODO: Can probably change this to a !isControllingVariants check
-             */
-            let isInherited = prop === context[type] &&
-                prop !== props[type] &&
-                propIsVariant;
-            /**
-             *
-             */
-            if (isInherited &&
-                isInitialRender &&
-                visualElement.manuallyAnimateOnMount) {
-                isInherited = false;
-            }
-            /**
-             * Set all encountered keys so far as the protected keys for this type. This will
-             * be any key that has been animated or otherwise handled by active, higher-priortiy types.
-             */
-            typeState.protectedKeys = { ...encounteredKeys };
-            // Check if we can skip analysing this prop early
-            if (
-            // If it isn't active and hasn't *just* been set as inactive
-            (!typeState.isActive && activeDelta === null) ||
-                // If we didn't and don't have any defined prop for this animation type
-                (!prop && !typeState.prevProp) ||
-                // Or if the prop doesn't define an animation
-                isAnimationControls(prop) ||
-                typeof prop === "boolean") {
-                continue;
-            }
-            /**
-             * As we go look through the values defined on this type, if we detect
-             * a changed value or a value that was removed in a higher priority, we set
-             * this to true and add this prop to the animation list.
-             */
-            const variantDidChange = checkVariantsDidChange(typeState.prevProp, prop);
-            let shouldAnimateType = variantDidChange ||
-                // If we're making this variant active, we want to always make it active
-                (type === changedActiveType &&
-                    typeState.isActive &&
-                    !isInherited &&
-                    propIsVariant) ||
-                // If we removed a higher-priority variant (i is in reverse order)
-                (i > removedVariantIndex && propIsVariant);
-            let handledRemovedValues = false;
-            /**
-             * As animations can be set as variant lists, variants or target objects, we
-             * coerce everything to an array if it isn't one already
-             */
-            const definitionList = Array.isArray(prop) ? prop : [prop];
-            /**
-             * Build an object of all the resolved values. We'll use this in the subsequent
-             * animateChanges calls to determine whether a value has changed.
-             */
-            let resolvedValues = definitionList.reduce(buildResolvedTypeValues(type), {});
-            if (activeDelta === false)
-                resolvedValues = {};
-            /**
-             * Now we need to loop through all the keys in the prev prop and this prop,
-             * and decide:
-             * 1. If the value has changed, and needs animating
-             * 2. If it has been removed, and needs adding to the removedKeys set
-             * 3. If it has been removed in a higher priority type and needs animating
-             * 4. If it hasn't been removed in a higher priority but hasn't changed, and
-             *    needs adding to the type's protectedKeys list.
-             */
-            const { prevResolvedValues = {} } = typeState;
-            const allKeys = {
-                ...prevResolvedValues,
-                ...resolvedValues,
-            };
-            const markToAnimate = (key) => {
-                shouldAnimateType = true;
-                if (removedKeys.has(key)) {
-                    handledRemovedValues = true;
-                    removedKeys.delete(key);
-                }
-                typeState.needsAnimating[key] = true;
-                const motionValue = visualElement.getValue(key);
-                if (motionValue)
-                    motionValue.liveStyle = false;
-            };
-            for (const key in allKeys) {
-                const next = resolvedValues[key];
-                const prev = prevResolvedValues[key];
-                // If we've already handled this we can just skip ahead
-                if (encounteredKeys.hasOwnProperty(key))
-                    continue;
-                /**
-                 * If the value has changed, we probably want to animate it.
-                 */
-                let valueHasChanged = false;
-                if (isKeyframesTarget(next) && isKeyframesTarget(prev)) {
-                    valueHasChanged = !shallowCompare(next, prev);
-                }
-                else {
-                    valueHasChanged = next !== prev;
-                }
-                if (valueHasChanged) {
-                    if (next !== undefined && next !== null) {
-                        // If next is defined and doesn't equal prev, it needs animating
-                        markToAnimate(key);
-                    }
-                    else {
-                        // If it's undefined, it's been removed.
-                        removedKeys.add(key);
-                    }
-                }
-                else if (next !== undefined && removedKeys.has(key)) {
-                    /**
-                     * If next hasn't changed and it isn't undefined, we want to check if it's
-                     * been removed by a higher priority
-                     */
-                    markToAnimate(key);
-                }
-                else {
-                    /**
-                     * If it hasn't changed, we add it to the list of protected values
-                     * to ensure it doesn't get animated.
-                     */
-                    typeState.protectedKeys[key] = true;
-                }
-            }
-            /**
-             * Update the typeState so next time animateChanges is called we can compare the
-             * latest prop and resolvedValues to these.
-             */
-            typeState.prevProp = prop;
-            typeState.prevResolvedValues = resolvedValues;
-            /**
-             *
-             */
-            if (typeState.isActive) {
-                encounteredKeys = { ...encounteredKeys, ...resolvedValues };
-            }
-            if (isInitialRender && visualElement.blockInitialAnimation) {
-                shouldAnimateType = false;
-            }
-            /**
-             * If this is an inherited prop we want to skip this animation
-             * unless the inherited variants haven't changed on this render.
-             */
-            const willAnimateViaParent = isInherited && variantDidChange;
-            const needsAnimating = !willAnimateViaParent || handledRemovedValues;
-            if (shouldAnimateType && needsAnimating) {
-                animations.push(...definitionList.map((animation) => ({
-                    animation: animation,
-                    options: { type },
-                })));
-            }
-        }
-        /**
-         * If there are some removed value that haven't been dealt with,
-         * we need to create a new animation that falls back either to the value
-         * defined in the style prop, or the last read value.
-         */
-        if (removedKeys.size) {
-            const fallbackAnimation = {};
-            removedKeys.forEach((key) => {
-                const fallbackTarget = visualElement.getBaseTarget(key);
-                const motionValue = visualElement.getValue(key);
-                if (motionValue)
-                    motionValue.liveStyle = true;
-                // @ts-expect-error - @mattgperry to figure if we should do something here
-                fallbackAnimation[key] = fallbackTarget !== null && fallbackTarget !== void 0 ? fallbackTarget : null;
-            });
-            animations.push({ animation: fallbackAnimation });
-        }
-        let shouldAnimate = Boolean(animations.length);
-        if (isInitialRender &&
-            (props.initial === false || props.initial === props.animate) &&
-            !visualElement.manuallyAnimateOnMount) {
-            shouldAnimate = false;
-        }
-        isInitialRender = false;
-        return shouldAnimate ? animate(animations) : Promise.resolve();
-    }
-    /**
-     * Change whether a certain animation type is active.
-     */
-    function setActive(type, isActive) {
-        var _a;
-        // If the active state hasn't changed, we can safely do nothing here
-        if (state[type].isActive === isActive)
-            return Promise.resolve();
-        // Propagate active change to children
-        (_a = visualElement.variantChildren) === null || _a === void 0 ? void 0 : _a.forEach((child) => { var _a; return (_a = child.animationState) === null || _a === void 0 ? void 0 : _a.setActive(type, isActive); });
-        state[type].isActive = isActive;
-        const animations = animateChanges(type);
-        for (const key in state) {
-            state[key].protectedKeys = {};
-        }
-        return animations;
-    }
-    return {
-        animateChanges,
-        setActive,
-        setAnimateFunction,
-        getState: () => state,
-        reset: () => {
-            state = createState();
-            isInitialRender = true;
-        },
-    };
-}
-function checkVariantsDidChange(prev, next) {
-    if (typeof next === "string") {
-        return next !== prev;
-    }
-    else if (Array.isArray(next)) {
-        return !shallowCompare(next, prev);
-    }
-    return false;
-}
-function createTypeState(isActive = false) {
-    return {
-        isActive,
-        protectedKeys: {},
-        needsAnimating: {},
-        prevResolvedValues: {},
-    };
-}
-function createState() {
-    return {
-        animate: createTypeState(true),
-        whileInView: createTypeState(),
-        whileHover: createTypeState(),
-        whileTap: createTypeState(),
-        whileDrag: createTypeState(),
-        whileFocus: createTypeState(),
-        exit: createTypeState(),
-    };
-}
-
-class Feature {
-    constructor(node) {
-        this.isMounted = false;
-        this.node = node;
-    }
-    update() { }
-}
-
-class AnimationFeature extends Feature {
-    /**
-     * We dynamically generate the AnimationState manager as it contains a reference
-     * to the underlying animation library. We only want to load that if we load this,
-     * so people can optionally code split it out using the `m` component.
-     */
-    constructor(node) {
-        super(node);
-        node.animationState || (node.animationState = createAnimationState(node));
-    }
-    updateAnimationControlsSubscription() {
-        const { animate } = this.node.getProps();
-        if (isAnimationControls(animate)) {
-            this.unmountControls = animate.subscribe(this.node);
-        }
-    }
-    /**
-     * Subscribe any provided AnimationControls to the component's VisualElement
-     */
-    mount() {
-        this.updateAnimationControlsSubscription();
-    }
-    update() {
-        const { animate } = this.node.getProps();
-        const { animate: prevAnimate } = this.node.prevProps || {};
-        if (animate !== prevAnimate) {
-            this.updateAnimationControlsSubscription();
-        }
-    }
-    unmount() {
-        var _a;
-        this.node.animationState.reset();
-        (_a = this.unmountControls) === null || _a === void 0 ? void 0 : _a.call(this);
-    }
-}
-
-let id$1 = 0;
-class ExitAnimationFeature extends Feature {
-    constructor() {
-        super(...arguments);
-        this.id = id$1++;
-    }
-    update() {
-        if (!this.node.presenceContext)
-            return;
-        const { isPresent, onExitComplete } = this.node.presenceContext;
-        const { isPresent: prevIsPresent } = this.node.prevPresenceContext || {};
-        if (!this.node.animationState || isPresent === prevIsPresent) {
-            return;
-        }
-        const exitAnimation = this.node.animationState.setActive("exit", !isPresent);
-        if (onExitComplete && !isPresent) {
-            exitAnimation.then(() => onExitComplete(this.id));
-        }
-    }
-    mount() {
-        const { register } = this.node.presenceContext || {};
-        if (register) {
-            this.unmount = register(this.id);
-        }
-    }
-    unmount() { }
-}
-
-const animations = {
-    animation: {
-        Feature: AnimationFeature,
-    },
-    exit: {
-        Feature: ExitAnimationFeature,
-    },
-};
-
-function addDomEvent(target, eventName, handler, options = { passive: true }) {
-    target.addEventListener(eventName, handler, options);
-    return () => target.removeEventListener(eventName, handler);
-}
-
-function extractEventInfo(event) {
-    return {
-        point: {
-            x: event.pageX,
-            y: event.pageY,
-        },
-    };
-}
-const addPointerInfo = (handler) => {
-    return (event) => isPrimaryPointer(event) && handler(event, extractEventInfo(event));
-};
-
-function addPointerEvent(target, eventName, handler, options) {
-    return addDomEvent(target, eventName, addPointerInfo(handler), options);
-}
-
-const distance = (a, b) => Math.abs(a - b);
-function distance2D(a, b) {
-    // Multi-dimensional
-    const xDelta = distance(a.x, b.x);
-    const yDelta = distance(a.y, b.y);
-    return Math.sqrt(xDelta ** 2 + yDelta ** 2);
-}
-
-/**
- * @internal
- */
-class PanSession {
-    constructor(event, handlers, { transformPagePoint, contextWindow, dragSnapToOrigin = false, } = {}) {
-        /**
-         * @internal
-         */
-        this.startEvent = null;
-        /**
-         * @internal
-         */
-        this.lastMoveEvent = null;
-        /**
-         * @internal
-         */
-        this.lastMoveEventInfo = null;
-        /**
-         * @internal
-         */
-        this.handlers = {};
-        /**
-         * @internal
-         */
-        this.contextWindow = window;
-        this.updatePoint = () => {
-            if (!(this.lastMoveEvent && this.lastMoveEventInfo))
-                return;
-            const info = getPanInfo(this.lastMoveEventInfo, this.history);
-            const isPanStarted = this.startEvent !== null;
-            // Only start panning if the offset is larger than 3 pixels. If we make it
-            // any larger than this we'll want to reset the pointer history
-            // on the first update to avoid visual snapping to the cursoe.
-            const isDistancePastThreshold = distance2D(info.offset, { x: 0, y: 0 }) >= 3;
-            if (!isPanStarted && !isDistancePastThreshold)
-                return;
-            const { point } = info;
-            const { timestamp } = frameData;
-            this.history.push({ ...point, timestamp });
-            const { onStart, onMove } = this.handlers;
-            if (!isPanStarted) {
-                onStart && onStart(this.lastMoveEvent, info);
-                this.startEvent = this.lastMoveEvent;
-            }
-            onMove && onMove(this.lastMoveEvent, info);
-        };
-        this.handlePointerMove = (event, info) => {
-            this.lastMoveEvent = event;
-            this.lastMoveEventInfo = transformPoint(info, this.transformPagePoint);
-            // Throttle mouse move event to once per frame
-            frame.update(this.updatePoint, true);
-        };
-        this.handlePointerUp = (event, info) => {
-            this.end();
-            const { onEnd, onSessionEnd, resumeAnimation } = this.handlers;
-            if (this.dragSnapToOrigin)
-                resumeAnimation && resumeAnimation();
-            if (!(this.lastMoveEvent && this.lastMoveEventInfo))
-                return;
-            const panInfo = getPanInfo(event.type === "pointercancel"
-                ? this.lastMoveEventInfo
-                : transformPoint(info, this.transformPagePoint), this.history);
-            if (this.startEvent && onEnd) {
-                onEnd(event, panInfo);
-            }
-            onSessionEnd && onSessionEnd(event, panInfo);
-        };
-        // If we have more than one touch, don't start detecting this gesture
-        if (!isPrimaryPointer(event))
-            return;
-        this.dragSnapToOrigin = dragSnapToOrigin;
-        this.handlers = handlers;
-        this.transformPagePoint = transformPagePoint;
-        this.contextWindow = contextWindow || window;
-        const info = extractEventInfo(event);
-        const initialInfo = transformPoint(info, this.transformPagePoint);
-        const { point } = initialInfo;
-        const { timestamp } = frameData;
-        this.history = [{ ...point, timestamp }];
-        const { onSessionStart } = handlers;
-        onSessionStart &&
-            onSessionStart(event, getPanInfo(initialInfo, this.history));
-        this.removeListeners = pipe(addPointerEvent(this.contextWindow, "pointermove", this.handlePointerMove), addPointerEvent(this.contextWindow, "pointerup", this.handlePointerUp), addPointerEvent(this.contextWindow, "pointercancel", this.handlePointerUp));
-    }
-    updateHandlers(handlers) {
-        this.handlers = handlers;
-    }
-    end() {
-        this.removeListeners && this.removeListeners();
-        cancelFrame(this.updatePoint);
-    }
-}
-function transformPoint(info, transformPagePoint) {
-    return transformPagePoint ? { point: transformPagePoint(info.point) } : info;
-}
-function subtractPoint(a, b) {
-    return { x: a.x - b.x, y: a.y - b.y };
-}
-function getPanInfo({ point }, history) {
-    return {
-        point,
-        delta: subtractPoint(point, lastDevicePoint(history)),
-        offset: subtractPoint(point, startDevicePoint(history)),
-        velocity: getVelocity(history, 0.1),
-    };
-}
-function startDevicePoint(history) {
-    return history[0];
-}
-function lastDevicePoint(history) {
-    return history[history.length - 1];
-}
-function getVelocity(history, timeDelta) {
-    if (history.length < 2) {
-        return { x: 0, y: 0 };
-    }
-    let i = history.length - 1;
-    let timestampedPoint = null;
-    const lastPoint = lastDevicePoint(history);
-    while (i >= 0) {
-        timestampedPoint = history[i];
-        if (lastPoint.timestamp - timestampedPoint.timestamp >
-            secondsToMilliseconds(timeDelta)) {
-            break;
-        }
-        i--;
-    }
-    if (!timestampedPoint) {
-        return { x: 0, y: 0 };
-    }
-    const time = millisecondsToSeconds(lastPoint.timestamp - timestampedPoint.timestamp);
-    if (time === 0) {
-        return { x: 0, y: 0 };
-    }
-    const currentVelocity = {
-        x: (lastPoint.x - timestampedPoint.x) / time,
-        y: (lastPoint.y - timestampedPoint.y) / time,
-    };
-    if (currentVelocity.x === Infinity) {
-        currentVelocity.x = 0;
-    }
-    if (currentVelocity.y === Infinity) {
-        currentVelocity.y = 0;
-    }
-    return currentVelocity;
-}
-
-const SCALE_PRECISION = 0.0001;
-const SCALE_MIN = 1 - SCALE_PRECISION;
-const SCALE_MAX = 1 + SCALE_PRECISION;
-const TRANSLATE_PRECISION = 0.01;
-const TRANSLATE_MIN = 0 - TRANSLATE_PRECISION;
-const TRANSLATE_MAX = 0 + TRANSLATE_PRECISION;
-function calcLength(axis) {
-    return axis.max - axis.min;
-}
-function isNear(value, target, maxDistance) {
-    return Math.abs(value - target) <= maxDistance;
-}
-function calcAxisDelta(delta, source, target, origin = 0.5) {
-    delta.origin = origin;
-    delta.originPoint = mixNumber$1(source.min, source.max, delta.origin);
-    delta.scale = calcLength(target) / calcLength(source);
-    delta.translate =
-        mixNumber$1(target.min, target.max, delta.origin) - delta.originPoint;
-    if ((delta.scale >= SCALE_MIN && delta.scale <= SCALE_MAX) ||
-        isNaN(delta.scale)) {
-        delta.scale = 1.0;
-    }
-    if ((delta.translate >= TRANSLATE_MIN &&
-        delta.translate <= TRANSLATE_MAX) ||
-        isNaN(delta.translate)) {
-        delta.translate = 0.0;
-    }
-}
-function calcBoxDelta(delta, source, target, origin) {
-    calcAxisDelta(delta.x, source.x, target.x, origin ? origin.originX : undefined);
-    calcAxisDelta(delta.y, source.y, target.y, origin ? origin.originY : undefined);
-}
-function calcRelativeAxis(target, relative, parent) {
-    target.min = parent.min + relative.min;
-    target.max = target.min + calcLength(relative);
-}
-function calcRelativeBox(target, relative, parent) {
-    calcRelativeAxis(target.x, relative.x, parent.x);
-    calcRelativeAxis(target.y, relative.y, parent.y);
-}
-function calcRelativeAxisPosition(target, layout, parent) {
-    target.min = layout.min - parent.min;
-    target.max = target.min + calcLength(layout);
-}
-function calcRelativePosition(target, layout, parent) {
-    calcRelativeAxisPosition(target.x, layout.x, parent.x);
-    calcRelativeAxisPosition(target.y, layout.y, parent.y);
-}
-
-/**
- * Apply constraints to a point. These constraints are both physical along an
- * axis, and an elastic factor that determines how much to constrain the point
- * by if it does lie outside the defined parameters.
- */
-function applyConstraints(point, { min, max }, elastic) {
-    if (min !== undefined && point < min) {
-        // If we have a min point defined, and this is outside of that, constrain
-        point = elastic
-            ? mixNumber$1(min, point, elastic.min)
-            : Math.max(point, min);
-    }
-    else if (max !== undefined && point > max) {
-        // If we have a max point defined, and this is outside of that, constrain
-        point = elastic
-            ? mixNumber$1(max, point, elastic.max)
-            : Math.min(point, max);
-    }
-    return point;
-}
-/**
- * Calculate constraints in terms of the viewport when defined relatively to the
- * measured axis. This is measured from the nearest edge, so a max constraint of 200
- * on an axis with a max value of 300 would return a constraint of 500 - axis length
- */
-function calcRelativeAxisConstraints(axis, min, max) {
-    return {
-        min: min !== undefined ? axis.min + min : undefined,
-        max: max !== undefined
-            ? axis.max + max - (axis.max - axis.min)
-            : undefined,
-    };
-}
-/**
- * Calculate constraints in terms of the viewport when
- * defined relatively to the measured bounding box.
- */
-function calcRelativeConstraints(layoutBox, { top, left, bottom, right }) {
-    return {
-        x: calcRelativeAxisConstraints(layoutBox.x, left, right),
-        y: calcRelativeAxisConstraints(layoutBox.y, top, bottom),
-    };
-}
-/**
- * Calculate viewport constraints when defined as another viewport-relative axis
- */
-function calcViewportAxisConstraints(layoutAxis, constraintsAxis) {
-    let min = constraintsAxis.min - layoutAxis.min;
-    let max = constraintsAxis.max - layoutAxis.max;
-    // If the constraints axis is actually smaller than the layout axis then we can
-    // flip the constraints
-    if (constraintsAxis.max - constraintsAxis.min <
-        layoutAxis.max - layoutAxis.min) {
-        [min, max] = [max, min];
-    }
-    return { min, max };
-}
-/**
- * Calculate viewport constraints when defined as another viewport-relative box
- */
-function calcViewportConstraints(layoutBox, constraintsBox) {
-    return {
-        x: calcViewportAxisConstraints(layoutBox.x, constraintsBox.x),
-        y: calcViewportAxisConstraints(layoutBox.y, constraintsBox.y),
-    };
-}
-/**
- * Calculate a transform origin relative to the source axis, between 0-1, that results
- * in an asthetically pleasing scale/transform needed to project from source to target.
- */
-function calcOrigin(source, target) {
-    let origin = 0.5;
-    const sourceLength = calcLength(source);
-    const targetLength = calcLength(target);
-    if (targetLength > sourceLength) {
-        origin = progress(target.min, target.max - sourceLength, source.min);
-    }
-    else if (sourceLength > targetLength) {
-        origin = progress(source.min, source.max - targetLength, target.min);
-    }
-    return clamp(0, 1, origin);
-}
-/**
- * Rebase the calculated viewport constraints relative to the layout.min point.
- */
-function rebaseAxisConstraints(layout, constraints) {
-    const relativeConstraints = {};
-    if (constraints.min !== undefined) {
-        relativeConstraints.min = constraints.min - layout.min;
-    }
-    if (constraints.max !== undefined) {
-        relativeConstraints.max = constraints.max - layout.min;
-    }
-    return relativeConstraints;
-}
-const defaultElastic = 0.35;
-/**
- * Accepts a dragElastic prop and returns resolved elastic values for each axis.
- */
-function resolveDragElastic(dragElastic = defaultElastic) {
-    if (dragElastic === false) {
-        dragElastic = 0;
-    }
-    else if (dragElastic === true) {
-        dragElastic = defaultElastic;
-    }
-    return {
-        x: resolveAxisElastic(dragElastic, "left", "right"),
-        y: resolveAxisElastic(dragElastic, "top", "bottom"),
-    };
-}
-function resolveAxisElastic(dragElastic, minLabel, maxLabel) {
-    return {
-        min: resolvePointElastic(dragElastic, minLabel),
-        max: resolvePointElastic(dragElastic, maxLabel),
-    };
-}
-function resolvePointElastic(dragElastic, label) {
-    return typeof dragElastic === "number"
-        ? dragElastic
-        : dragElastic[label] || 0;
-}
-
-const createAxisDelta = () => ({
-    translate: 0,
-    scale: 1,
-    origin: 0,
-    originPoint: 0,
-});
-const createDelta = () => ({
-    x: createAxisDelta(),
-    y: createAxisDelta(),
-});
-const createAxis = () => ({ min: 0, max: 0 });
-const createBox = () => ({
-    x: createAxis(),
-    y: createAxis(),
-});
-
-function eachAxis(callback) {
-    return [callback("x"), callback("y")];
-}
-
-/**
- * Bounding boxes tend to be defined as top, left, right, bottom. For various operations
- * it's easier to consider each axis individually. This function returns a bounding box
- * as a map of single-axis min/max values.
- */
-function convertBoundingBoxToBox({ top, left, right, bottom, }) {
-    return {
-        x: { min: left, max: right },
-        y: { min: top, max: bottom },
-    };
-}
-function convertBoxToBoundingBox({ x, y }) {
-    return { top: y.min, right: x.max, bottom: y.max, left: x.min };
-}
-/**
- * Applies a TransformPoint function to a bounding box. TransformPoint is usually a function
- * provided by Framer to allow measured points to be corrected for device scaling. This is used
- * when measuring DOM elements and DOM event points.
- */
-function transformBoxPoints(point, transformPoint) {
-    if (!transformPoint)
-        return point;
-    const topLeft = transformPoint({ x: point.left, y: point.top });
-    const bottomRight = transformPoint({ x: point.right, y: point.bottom });
-    return {
-        top: topLeft.y,
-        left: topLeft.x,
-        bottom: bottomRight.y,
-        right: bottomRight.x,
-    };
-}
-
-function isIdentityScale(scale) {
-    return scale === undefined || scale === 1;
-}
-function hasScale({ scale, scaleX, scaleY }) {
-    return (!isIdentityScale(scale) ||
-        !isIdentityScale(scaleX) ||
-        !isIdentityScale(scaleY));
-}
-function hasTransform(values) {
-    return (hasScale(values) ||
-        has2DTranslate(values) ||
-        values.z ||
-        values.rotate ||
-        values.rotateX ||
-        values.rotateY ||
-        values.skewX ||
-        values.skewY);
-}
-function has2DTranslate(values) {
-    return is2DTranslate(values.x) || is2DTranslate(values.y);
-}
-function is2DTranslate(value) {
-    return value && value !== "0%";
-}
-
-/**
- * Scales a point based on a factor and an originPoint
- */
-function scalePoint(point, scale, originPoint) {
-    const distanceFromOrigin = point - originPoint;
-    const scaled = scale * distanceFromOrigin;
-    return originPoint + scaled;
-}
-/**
- * Applies a translate/scale delta to a point
- */
-function applyPointDelta(point, translate, scale, originPoint, boxScale) {
-    if (boxScale !== undefined) {
-        point = scalePoint(point, boxScale, originPoint);
-    }
-    return scalePoint(point, scale, originPoint) + translate;
-}
-/**
- * Applies a translate/scale delta to an axis
- */
-function applyAxisDelta(axis, translate = 0, scale = 1, originPoint, boxScale) {
-    axis.min = applyPointDelta(axis.min, translate, scale, originPoint, boxScale);
-    axis.max = applyPointDelta(axis.max, translate, scale, originPoint, boxScale);
-}
-/**
- * Applies a translate/scale delta to a box
- */
-function applyBoxDelta(box, { x, y }) {
-    applyAxisDelta(box.x, x.translate, x.scale, x.originPoint);
-    applyAxisDelta(box.y, y.translate, y.scale, y.originPoint);
-}
-const TREE_SCALE_SNAP_MIN = 0.999999999999;
-const TREE_SCALE_SNAP_MAX = 1.0000000000001;
-/**
- * Apply a tree of deltas to a box. We do this to calculate the effect of all the transforms
- * in a tree upon our box before then calculating how to project it into our desired viewport-relative box
- *
- * This is the final nested loop within updateLayoutDelta for future refactoring
- */
-function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false) {
-    const treeLength = treePath.length;
-    if (!treeLength)
-        return;
-    // Reset the treeScale
-    treeScale.x = treeScale.y = 1;
-    let node;
-    let delta;
-    for (let i = 0; i < treeLength; i++) {
-        node = treePath[i];
-        delta = node.projectionDelta;
-        /**
-         * TODO: Prefer to remove this, but currently we have motion components with
-         * display: contents in Framer.
-         */
-        const { visualElement } = node.options;
-        if (visualElement &&
-            visualElement.props.style &&
-            visualElement.props.style.display === "contents") {
-            continue;
-        }
-        if (isSharedTransition &&
-            node.options.layoutScroll &&
-            node.scroll &&
-            node !== node.root) {
-            transformBox(box, {
-                x: -node.scroll.offset.x,
-                y: -node.scroll.offset.y,
-            });
-        }
-        if (delta) {
-            // Incoporate each ancestor's scale into a culmulative treeScale for this component
-            treeScale.x *= delta.x.scale;
-            treeScale.y *= delta.y.scale;
-            // Apply each ancestor's calculated delta into this component's recorded layout box
-            applyBoxDelta(box, delta);
-        }
-        if (isSharedTransition && hasTransform(node.latestValues)) {
-            transformBox(box, node.latestValues);
-        }
-    }
-    /**
-     * Snap tree scale back to 1 if it's within a non-perceivable threshold.
-     * This will help reduce useless scales getting rendered.
-     */
-    if (treeScale.x < TREE_SCALE_SNAP_MAX &&
-        treeScale.x > TREE_SCALE_SNAP_MIN) {
-        treeScale.x = 1.0;
-    }
-    if (treeScale.y < TREE_SCALE_SNAP_MAX &&
-        treeScale.y > TREE_SCALE_SNAP_MIN) {
-        treeScale.y = 1.0;
-    }
-}
-function translateAxis(axis, distance) {
-    axis.min = axis.min + distance;
-    axis.max = axis.max + distance;
-}
-/**
- * Apply a transform to an axis from the latest resolved motion values.
- * This function basically acts as a bridge between a flat motion value map
- * and applyAxisDelta
- */
-function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5) {
-    const originPoint = mixNumber$1(axis.min, axis.max, axisOrigin);
-    // Apply the axis delta to the final axis
-    applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale);
-}
-/**
- * Apply a transform to a box from the latest resolved motion values.
- */
-function transformBox(box, transform) {
-    transformAxis(box.x, transform.x, transform.scaleX, transform.scale, transform.originX);
-    transformAxis(box.y, transform.y, transform.scaleY, transform.scale, transform.originY);
-}
-
-function measureViewportBox(instance, transformPoint) {
-    return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint));
-}
-function measurePageBox(element, rootProjectionNode, transformPagePoint) {
-    const viewportBox = measureViewportBox(element, transformPagePoint);
-    const { scroll } = rootProjectionNode;
-    if (scroll) {
-        translateAxis(viewportBox.x, scroll.offset.x);
-        translateAxis(viewportBox.y, scroll.offset.y);
-    }
-    return viewportBox;
-}
-
-// Fixes https://github.com/motiondivision/motion/issues/2270
-const getContextWindow = ({ current }) => {
-    return current ? current.ownerDocument.defaultView : null;
-};
-
-const elementDragControls = new WeakMap();
-/**
- *
- */
-// let latestPointerEvent: PointerEvent
-class VisualElementDragControls {
-    constructor(visualElement) {
-        this.openDragLock = null;
-        this.isDragging = false;
-        this.currentDirection = null;
-        this.originPoint = { x: 0, y: 0 };
-        /**
-         * The permitted boundaries of travel, in pixels.
-         */
-        this.constraints = false;
-        this.hasMutatedConstraints = false;
-        /**
-         * The per-axis resolved elastic values.
-         */
-        this.elastic = createBox();
-        this.visualElement = visualElement;
-    }
-    start(originEvent, { snapToCursor = false } = {}) {
-        /**
-         * Don't start dragging if this component is exiting
-         */
-        const { presenceContext } = this.visualElement;
-        if (presenceContext && presenceContext.isPresent === false)
-            return;
-        const onSessionStart = (event) => {
-            const { dragSnapToOrigin } = this.getProps();
-            // Stop or pause any animations on both axis values immediately. This allows the user to throw and catch
-            // the component.
-            dragSnapToOrigin ? this.pauseAnimation() : this.stopAnimation();
-            if (snapToCursor) {
-                this.snapToCursor(extractEventInfo(event).point);
-            }
-        };
-        const onStart = (event, info) => {
-            // Attempt to grab the global drag gesture lock - maybe make this part of PanSession
-            const { drag, dragPropagation, onDragStart } = this.getProps();
-            if (drag && !dragPropagation) {
-                if (this.openDragLock)
-                    this.openDragLock();
-                this.openDragLock = setDragLock(drag);
-                // If we don 't have the lock, don't start dragging
-                if (!this.openDragLock)
-                    return;
-            }
-            this.isDragging = true;
-            this.currentDirection = null;
-            this.resolveConstraints();
-            if (this.visualElement.projection) {
-                this.visualElement.projection.isAnimationBlocked = true;
-                this.visualElement.projection.target = undefined;
-            }
-            /**
-             * Record gesture origin
-             */
-            eachAxis((axis) => {
-                let current = this.getAxisMotionValue(axis).get() || 0;
-                /**
-                 * If the MotionValue is a percentage value convert to px
-                 */
-                if (percent.test(current)) {
-                    const { projection } = this.visualElement;
-                    if (projection && projection.layout) {
-                        const measuredAxis = projection.layout.layoutBox[axis];
-                        if (measuredAxis) {
-                            const length = calcLength(measuredAxis);
-                            current = length * (parseFloat(current) / 100);
-                        }
-                    }
-                }
-                this.originPoint[axis] = current;
-            });
-            // Fire onDragStart event
-            if (onDragStart) {
-                frame.postRender(() => onDragStart(event, info));
-            }
-            addValueToWillChange(this.visualElement, "transform");
-            const { animationState } = this.visualElement;
-            animationState && animationState.setActive("whileDrag", true);
-        };
-        const onMove = (event, info) => {
-            // latestPointerEvent = event
-            const { dragPropagation, dragDirectionLock, onDirectionLock, onDrag, } = this.getProps();
-            // If we didn't successfully receive the gesture lock, early return.
-            if (!dragPropagation && !this.openDragLock)
-                return;
-            const { offset } = info;
-            // Attempt to detect drag direction if directionLock is true
-            if (dragDirectionLock && this.currentDirection === null) {
-                this.currentDirection = getCurrentDirection(offset);
-                // If we've successfully set a direction, notify listener
-                if (this.currentDirection !== null) {
-                    onDirectionLock && onDirectionLock(this.currentDirection);
-                }
-                return;
-            }
-            // Update each point with the latest position
-            this.updateAxis("x", info.point, offset);
-            this.updateAxis("y", info.point, offset);
-            /**
-             * Ideally we would leave the renderer to fire naturally at the end of
-             * this frame but if the element is about to change layout as the result
-             * of a re-render we want to ensure the browser can read the latest
-             * bounding box to ensure the pointer and element don't fall out of sync.
-             */
-            this.visualElement.render();
-            /**
-             * This must fire after the render call as it might trigger a state
-             * change which itself might trigger a layout update.
-             */
-            onDrag && onDrag(event, info);
-        };
-        const onSessionEnd = (event, info) => this.stop(event, info);
-        const resumeAnimation = () => eachAxis((axis) => {
-            var _a;
-            return this.getAnimationState(axis) === "paused" &&
-                ((_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.play());
-        });
-        const { dragSnapToOrigin } = this.getProps();
-        this.panSession = new PanSession(originEvent, {
-            onSessionStart,
-            onStart,
-            onMove,
-            onSessionEnd,
-            resumeAnimation,
-        }, {
-            transformPagePoint: this.visualElement.getTransformPagePoint(),
-            dragSnapToOrigin,
-            contextWindow: getContextWindow(this.visualElement),
-        });
-    }
-    stop(event, info) {
-        const isDragging = this.isDragging;
-        this.cancel();
-        if (!isDragging)
-            return;
-        const { velocity } = info;
-        this.startAnimation(velocity);
-        const { onDragEnd } = this.getProps();
-        if (onDragEnd) {
-            frame.postRender(() => onDragEnd(event, info));
-        }
-    }
-    cancel() {
-        this.isDragging = false;
-        const { projection, animationState } = this.visualElement;
-        if (projection) {
-            projection.isAnimationBlocked = false;
-        }
-        this.panSession && this.panSession.end();
-        this.panSession = undefined;
-        const { dragPropagation } = this.getProps();
-        if (!dragPropagation && this.openDragLock) {
-            this.openDragLock();
-            this.openDragLock = null;
-        }
-        animationState && animationState.setActive("whileDrag", false);
-    }
-    updateAxis(axis, _point, offset) {
-        const { drag } = this.getProps();
-        // If we're not dragging this axis, do an early return.
-        if (!offset || !shouldDrag(axis, drag, this.currentDirection))
-            return;
-        const axisValue = this.getAxisMotionValue(axis);
-        let next = this.originPoint[axis] + offset[axis];
-        // Apply constraints
-        if (this.constraints && this.constraints[axis]) {
-            next = applyConstraints(next, this.constraints[axis], this.elastic[axis]);
-        }
-        axisValue.set(next);
-    }
-    resolveConstraints() {
-        var _a;
-        const { dragConstraints, dragElastic } = this.getProps();
-        const layout = this.visualElement.projection &&
-            !this.visualElement.projection.layout
-            ? this.visualElement.projection.measure(false)
-            : (_a = this.visualElement.projection) === null || _a === void 0 ? void 0 : _a.layout;
-        const prevConstraints = this.constraints;
-        if (dragConstraints && isRefObject(dragConstraints)) {
-            if (!this.constraints) {
-                this.constraints = this.resolveRefConstraints();
-            }
-        }
-        else {
-            if (dragConstraints && layout) {
-                this.constraints = calcRelativeConstraints(layout.layoutBox, dragConstraints);
-            }
-            else {
-                this.constraints = false;
-            }
-        }
-        this.elastic = resolveDragElastic(dragElastic);
-        /**
-         * If we're outputting to external MotionValues, we want to rebase the measured constraints
-         * from viewport-relative to component-relative.
-         */
-        if (prevConstraints !== this.constraints &&
-            layout &&
-            this.constraints &&
-            !this.hasMutatedConstraints) {
-            eachAxis((axis) => {
-                if (this.constraints !== false &&
-                    this.getAxisMotionValue(axis)) {
-                    this.constraints[axis] = rebaseAxisConstraints(layout.layoutBox[axis], this.constraints[axis]);
-                }
-            });
-        }
-    }
-    resolveRefConstraints() {
-        const { dragConstraints: constraints, onMeasureDragConstraints } = this.getProps();
-        if (!constraints || !isRefObject(constraints))
-            return false;
-        const constraintsElement = constraints.current;
-        invariant(constraintsElement !== null, "If `dragConstraints` is set as a React ref, that ref must be passed to another component's `ref` prop.");
-        const { projection } = this.visualElement;
-        // TODO
-        if (!projection || !projection.layout)
-            return false;
-        const constraintsBox = measurePageBox(constraintsElement, projection.root, this.visualElement.getTransformPagePoint());
-        let measuredConstraints = calcViewportConstraints(projection.layout.layoutBox, constraintsBox);
-        /**
-         * If there's an onMeasureDragConstraints listener we call it and
-         * if different constraints are returned, set constraints to that
-         */
-        if (onMeasureDragConstraints) {
-            const userConstraints = onMeasureDragConstraints(convertBoxToBoundingBox(measuredConstraints));
-            this.hasMutatedConstraints = !!userConstraints;
-            if (userConstraints) {
-                measuredConstraints = convertBoundingBoxToBox(userConstraints);
-            }
-        }
-        return measuredConstraints;
-    }
-    startAnimation(velocity) {
-        const { drag, dragMomentum, dragElastic, dragTransition, dragSnapToOrigin, onDragTransitionEnd, } = this.getProps();
-        const constraints = this.constraints || {};
-        const momentumAnimations = eachAxis((axis) => {
-            if (!shouldDrag(axis, drag, this.currentDirection)) {
-                return;
-            }
-            let transition = (constraints && constraints[axis]) || {};
-            if (dragSnapToOrigin)
-                transition = { min: 0, max: 0 };
-            /**
-             * Overdamp the boundary spring if `dragElastic` is disabled. There's still a frame
-             * of spring animations so we should look into adding a disable spring option to `inertia`.
-             * We could do something here where we affect the `bounceStiffness` and `bounceDamping`
-             * using the value of `dragElastic`.
-             */
-            const bounceStiffness = dragElastic ? 200 : 1000000;
-            const bounceDamping = dragElastic ? 40 : 10000000;
-            const inertia = {
-                type: "inertia",
-                velocity: dragMomentum ? velocity[axis] : 0,
-                bounceStiffness,
-                bounceDamping,
-                timeConstant: 750,
-                restDelta: 1,
-                restSpeed: 10,
-                ...dragTransition,
-                ...transition,
-            };
-            // If we're not animating on an externally-provided `MotionValue` we can use the
-            // component's animation controls which will handle interactions with whileHover (etc),
-            // otherwise we just have to animate the `MotionValue` itself.
-            return this.startAxisValueAnimation(axis, inertia);
-        });
-        // Run all animations and then resolve the new drag constraints.
-        return Promise.all(momentumAnimations).then(onDragTransitionEnd);
-    }
-    startAxisValueAnimation(axis, transition) {
-        const axisValue = this.getAxisMotionValue(axis);
-        addValueToWillChange(this.visualElement, axis);
-        return axisValue.start(animateMotionValue(axis, axisValue, 0, transition, this.visualElement, false));
-    }
-    stopAnimation() {
-        eachAxis((axis) => this.getAxisMotionValue(axis).stop());
-    }
-    pauseAnimation() {
-        eachAxis((axis) => { var _a; return (_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.pause(); });
-    }
-    getAnimationState(axis) {
-        var _a;
-        return (_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.state;
-    }
-    /**
-     * Drag works differently depending on which props are provided.
-     *
-     * - If _dragX and _dragY are provided, we output the gesture delta directly to those motion values.
-     * - Otherwise, we apply the delta to the x/y motion values.
-     */
-    getAxisMotionValue(axis) {
-        const dragKey = `_drag${axis.toUpperCase()}`;
-        const props = this.visualElement.getProps();
-        const externalMotionValue = props[dragKey];
-        return externalMotionValue
-            ? externalMotionValue
-            : this.visualElement.getValue(axis, (props.initial
-                ? props.initial[axis]
-                : undefined) || 0);
-    }
-    snapToCursor(point) {
-        eachAxis((axis) => {
-            const { drag } = this.getProps();
-            // If we're not dragging this axis, do an early return.
-            if (!shouldDrag(axis, drag, this.currentDirection))
-                return;
-            const { projection } = this.visualElement;
-            const axisValue = this.getAxisMotionValue(axis);
-            if (projection && projection.layout) {
-                const { min, max } = projection.layout.layoutBox[axis];
-                axisValue.set(point[axis] - mixNumber$1(min, max, 0.5));
-            }
-        });
-    }
-    /**
-     * When the viewport resizes we want to check if the measured constraints
-     * have changed and, if so, reposition the element within those new constraints
-     * relative to where it was before the resize.
-     */
-    scalePositionWithinConstraints() {
-        if (!this.visualElement.current)
-            return;
-        const { drag, dragConstraints } = this.getProps();
-        const { projection } = this.visualElement;
-        if (!isRefObject(dragConstraints) || !projection || !this.constraints)
-            return;
-        /**
-         * Stop current animations as there can be visual glitching if we try to do
-         * this mid-animation
-         */
-        this.stopAnimation();
-        /**
-         * Record the relative position of the dragged element relative to the
-         * constraints box and save as a progress value.
-         */
-        const boxProgress = { x: 0, y: 0 };
-        eachAxis((axis) => {
-            const axisValue = this.getAxisMotionValue(axis);
-            if (axisValue && this.constraints !== false) {
-                const latest = axisValue.get();
-                boxProgress[axis] = calcOrigin({ min: latest, max: latest }, this.constraints[axis]);
-            }
-        });
-        /**
-         * Update the layout of this element and resolve the latest drag constraints
-         */
-        const { transformTemplate } = this.visualElement.getProps();
-        this.visualElement.current.style.transform = transformTemplate
-            ? transformTemplate({}, "")
-            : "none";
-        projection.root && projection.root.updateScroll();
-        projection.updateLayout();
-        this.resolveConstraints();
-        /**
-         * For each axis, calculate the current progress of the layout axis
-         * within the new constraints.
-         */
-        eachAxis((axis) => {
-            if (!shouldDrag(axis, drag, null))
-                return;
-            /**
-             * Calculate a new transform based on the previous box progress
-             */
-            const axisValue = this.getAxisMotionValue(axis);
-            const { min, max } = this.constraints[axis];
-            axisValue.set(mixNumber$1(min, max, boxProgress[axis]));
-        });
-    }
-    addListeners() {
-        if (!this.visualElement.current)
-            return;
-        elementDragControls.set(this.visualElement, this);
-        const element = this.visualElement.current;
-        /**
-         * Attach a pointerdown event listener on this DOM element to initiate drag tracking.
-         */
-        const stopPointerListener = addPointerEvent(element, "pointerdown", (event) => {
-            const { drag, dragListener = true } = this.getProps();
-            drag && dragListener && this.start(event);
-        });
-        const measureDragConstraints = () => {
-            const { dragConstraints } = this.getProps();
-            if (isRefObject(dragConstraints) && dragConstraints.current) {
-                this.constraints = this.resolveRefConstraints();
-            }
-        };
-        const { projection } = this.visualElement;
-        const stopMeasureLayoutListener = projection.addEventListener("measure", measureDragConstraints);
-        if (projection && !projection.layout) {
-            projection.root && projection.root.updateScroll();
-            projection.updateLayout();
-        }
-        frame.read(measureDragConstraints);
-        /**
-         * Attach a window resize listener to scale the draggable target within its defined
-         * constraints as the window resizes.
-         */
-        const stopResizeListener = addDomEvent(window, "resize", () => this.scalePositionWithinConstraints());
-        /**
-         * If the element's layout changes, calculate the delta and apply that to
-         * the drag gesture's origin point.
-         */
-        const stopLayoutUpdateListener = projection.addEventListener("didUpdate", (({ delta, hasLayoutChanged }) => {
-            if (this.isDragging && hasLayoutChanged) {
-                eachAxis((axis) => {
-                    const motionValue = this.getAxisMotionValue(axis);
-                    if (!motionValue)
-                        return;
-                    this.originPoint[axis] += delta[axis].translate;
-                    motionValue.set(motionValue.get() + delta[axis].translate);
-                });
-                this.visualElement.render();
-            }
-        }));
-        return () => {
-            stopResizeListener();
-            stopPointerListener();
-            stopMeasureLayoutListener();
-            stopLayoutUpdateListener && stopLayoutUpdateListener();
-        };
-    }
-    getProps() {
-        const props = this.visualElement.getProps();
-        const { drag = false, dragDirectionLock = false, dragPropagation = false, dragConstraints = false, dragElastic = defaultElastic, dragMomentum = true, } = props;
-        return {
-            ...props,
-            drag,
-            dragDirectionLock,
-            dragPropagation,
-            dragConstraints,
-            dragElastic,
-            dragMomentum,
-        };
-    }
-}
-function shouldDrag(direction, drag, currentDirection) {
-    return ((drag === true || drag === direction) &&
-        (currentDirection === null || currentDirection === direction));
-}
-/**
- * Based on an x/y offset determine the current drag direction. If both axis' offsets are lower
- * than the provided threshold, return `null`.
- *
- * @param offset - The x/y offset from origin.
- * @param lockThreshold - (Optional) - the minimum absolute offset before we can determine a drag direction.
- */
-function getCurrentDirection(offset, lockThreshold = 10) {
-    let direction = null;
-    if (Math.abs(offset.y) > lockThreshold) {
-        direction = "y";
-    }
-    else if (Math.abs(offset.x) > lockThreshold) {
-        direction = "x";
-    }
-    return direction;
-}
-
-class DragGesture extends Feature {
-    constructor(node) {
-        super(node);
-        this.removeGroupControls = noop;
-        this.removeListeners = noop;
-        this.controls = new VisualElementDragControls(node);
-    }
-    mount() {
-        // If we've been provided a DragControls for manual control over the drag gesture,
-        // subscribe this component to it on mount.
-        const { dragControls } = this.node.getProps();
-        if (dragControls) {
-            this.removeGroupControls = dragControls.subscribe(this.controls);
-        }
-        this.removeListeners = this.controls.addListeners() || noop;
-    }
-    unmount() {
-        this.removeGroupControls();
-        this.removeListeners();
-    }
-}
-
-const asyncHandler = (handler) => (event, info) => {
-    if (handler) {
-        frame.postRender(() => handler(event, info));
-    }
-};
-class PanGesture extends Feature {
-    constructor() {
-        super(...arguments);
-        this.removePointerDownListener = noop;
-    }
-    onPointerDown(pointerDownEvent) {
-        this.session = new PanSession(pointerDownEvent, this.createPanHandlers(), {
-            transformPagePoint: this.node.getTransformPagePoint(),
-            contextWindow: getContextWindow(this.node),
-        });
-    }
-    createPanHandlers() {
-        const { onPanSessionStart, onPanStart, onPan, onPanEnd } = this.node.getProps();
-        return {
-            onSessionStart: asyncHandler(onPanSessionStart),
-            onStart: asyncHandler(onPanStart),
-            onMove: onPan,
-            onEnd: (event, info) => {
-                delete this.session;
-                if (onPanEnd) {
-                    frame.postRender(() => onPanEnd(event, info));
-                }
-            },
-        };
-    }
-    mount() {
-        this.removePointerDownListener = addPointerEvent(this.node.current, "pointerdown", (event) => this.onPointerDown(event));
-    }
-    update() {
-        this.session && this.session.updateHandlers(this.createPanHandlers());
-    }
-    unmount() {
-        this.removePointerDownListener();
-        this.session && this.session.end();
-    }
-}
-
-/**
- * This should only ever be modified on the client otherwise it'll
- * persist through server requests. If we need instanced states we
- * could lazy-init via root.
- */
-const globalProjectionState = {
-    /**
-     * Global flag as to whether the tree has animated since the last time
-     * we resized the window
-     */
-    hasAnimatedSinceResize: true,
-    /**
-     * We set this to true once, on the first update. Any nodes added to the tree beyond that
-     * update will be given a `data-projection-id` attribute.
-     */
-    hasEverUpdated: false,
-};
-
-function pixelsToPercent(pixels, axis) {
-    if (axis.max === axis.min)
-        return 0;
-    return (pixels / (axis.max - axis.min)) * 100;
-}
-/**
- * We always correct borderRadius as a percentage rather than pixels to reduce paints.
- * For example, if you are projecting a box that is 100px wide with a 10px borderRadius
- * into a box that is 200px wide with a 20px borderRadius, that is actually a 10%
- * borderRadius in both states. If we animate between the two in pixels that will trigger
- * a paint each time. If we animate between the two in percentage we'll avoid a paint.
- */
-const correctBorderRadius = {
-    correct: (latest, node) => {
-        if (!node.target)
-            return latest;
-        /**
-         * If latest is a string, if it's a percentage we can return immediately as it's
-         * going to be stretched appropriately. Otherwise, if it's a pixel, convert it to a number.
-         */
-        if (typeof latest === "string") {
-            if (px.test(latest)) {
-                latest = parseFloat(latest);
-            }
-            else {
-                return latest;
-            }
-        }
-        /**
-         * If latest is a number, it's a pixel value. We use the current viewportBox to calculate that
-         * pixel value as a percentage of each axis
-         */
-        const x = pixelsToPercent(latest, node.target.x);
-        const y = pixelsToPercent(latest, node.target.y);
-        return `${x}% ${y}%`;
-    },
-};
-
-const correctBoxShadow = {
-    correct: (latest, { treeScale, projectionDelta }) => {
-        const original = latest;
-        const shadow = complex.parse(latest);
-        // TODO: Doesn't support multiple shadows
-        if (shadow.length > 5)
-            return original;
-        const template = complex.createTransformer(latest);
-        const offset = typeof shadow[0] !== "number" ? 1 : 0;
-        // Calculate the overall context scale
-        const xScale = projectionDelta.x.scale * treeScale.x;
-        const yScale = projectionDelta.y.scale * treeScale.y;
-        shadow[0 + offset] /= xScale;
-        shadow[1 + offset] /= yScale;
-        /**
-         * Ideally we'd correct x and y scales individually, but because blur and
-         * spread apply to both we have to take a scale average and apply that instead.
-         * We could potentially improve the outcome of this by incorporating the ratio between
-         * the two scales.
-         */
-        const averageScale = mixNumber$1(xScale, yScale, 0.5);
-        // Blur
-        if (typeof shadow[2 + offset] === "number")
-            shadow[2 + offset] /= averageScale;
-        // Spread
-        if (typeof shadow[3 + offset] === "number")
-            shadow[3 + offset] /= averageScale;
-        return template(shadow);
-    },
-};
-
-class MeasureLayoutWithContext extends Component {
-    /**
-     * This only mounts projection nodes for components that
-     * need measuring, we might want to do it for all components
-     * in order to incorporate transforms
-     */
-    componentDidMount() {
-        const { visualElement, layoutGroup, switchLayoutGroup, layoutId } = this.props;
-        const { projection } = visualElement;
-        addScaleCorrector(defaultScaleCorrectors);
-        if (projection) {
-            if (layoutGroup.group)
-                layoutGroup.group.add(projection);
-            if (switchLayoutGroup && switchLayoutGroup.register && layoutId) {
-                switchLayoutGroup.register(projection);
-            }
-            projection.root.didUpdate();
-            projection.addEventListener("animationComplete", () => {
-                this.safeToRemove();
-            });
-            projection.setOptions({
-                ...projection.options,
-                onExitComplete: () => this.safeToRemove(),
-            });
-        }
-        globalProjectionState.hasEverUpdated = true;
-    }
-    getSnapshotBeforeUpdate(prevProps) {
-        const { layoutDependency, visualElement, drag, isPresent } = this.props;
-        const projection = visualElement.projection;
-        if (!projection)
-            return null;
-        /**
-         * TODO: We use this data in relegate to determine whether to
-         * promote a previous element. There's no guarantee its presence data
-         * will have updated by this point - if a bug like this arises it will
-         * have to be that we markForRelegation and then find a new lead some other way,
-         * perhaps in didUpdate
-         */
-        projection.isPresent = isPresent;
-        if (drag ||
-            prevProps.layoutDependency !== layoutDependency ||
-            layoutDependency === undefined) {
-            projection.willUpdate();
-        }
-        else {
-            this.safeToRemove();
-        }
-        if (prevProps.isPresent !== isPresent) {
-            if (isPresent) {
-                projection.promote();
-            }
-            else if (!projection.relegate()) {
-                /**
-                 * If there's another stack member taking over from this one,
-                 * it's in charge of the exit animation and therefore should
-                 * be in charge of the safe to remove. Otherwise we call it here.
-                 */
-                frame.postRender(() => {
-                    const stack = projection.getStack();
-                    if (!stack || !stack.members.length) {
-                        this.safeToRemove();
-                    }
-                });
-            }
-        }
-        return null;
-    }
-    componentDidUpdate() {
-        const { projection } = this.props.visualElement;
-        if (projection) {
-            projection.root.didUpdate();
-            microtask.postRender(() => {
-                if (!projection.currentAnimation && projection.isLead()) {
-                    this.safeToRemove();
-                }
-            });
-        }
-    }
-    componentWillUnmount() {
-        const { visualElement, layoutGroup, switchLayoutGroup: promoteContext, } = this.props;
-        const { projection } = visualElement;
-        if (projection) {
-            projection.scheduleCheckAfterUnmount();
-            if (layoutGroup && layoutGroup.group)
-                layoutGroup.group.remove(projection);
-            if (promoteContext && promoteContext.deregister)
-                promoteContext.deregister(projection);
-        }
-    }
-    safeToRemove() {
-        const { safeToRemove } = this.props;
-        safeToRemove && safeToRemove();
-    }
-    render() {
-        return null;
-    }
-}
-function MeasureLayout(props) {
-    const [isPresent, safeToRemove] = usePresence();
-    const layoutGroup = useContext(LayoutGroupContext);
-    return (jsxRuntimeExports.jsx(MeasureLayoutWithContext, { ...props, layoutGroup: layoutGroup, switchLayoutGroup: useContext(SwitchLayoutGroupContext), isPresent: isPresent, safeToRemove: safeToRemove }));
-}
-const defaultScaleCorrectors = {
-    borderRadius: {
-        ...correctBorderRadius,
-        applyTo: [
-            "borderTopLeftRadius",
-            "borderTopRightRadius",
-            "borderBottomLeftRadius",
-            "borderBottomRightRadius",
-        ],
-    },
-    borderTopLeftRadius: correctBorderRadius,
-    borderTopRightRadius: correctBorderRadius,
-    borderBottomLeftRadius: correctBorderRadius,
-    borderBottomRightRadius: correctBorderRadius,
-    boxShadow: correctBoxShadow,
-};
-
-function animateSingleValue(value, keyframes, options) {
-    const motionValue$1 = isMotionValue(value) ? value : motionValue(value);
-    motionValue$1.start(animateMotionValue("", motionValue$1, keyframes, options));
-    return motionValue$1.animation;
-}
-
-function isSVGElement(element) {
-    return element instanceof SVGElement && element.tagName !== "svg";
-}
-
-const compareByDepth = (a, b) => a.depth - b.depth;
-
-class FlatTree {
-    constructor() {
-        this.children = [];
-        this.isDirty = false;
-    }
-    add(child) {
-        addUniqueItem(this.children, child);
-        this.isDirty = true;
-    }
-    remove(child) {
-        removeItem(this.children, child);
-        this.isDirty = true;
-    }
-    forEach(callback) {
-        this.isDirty && this.children.sort(compareByDepth);
-        this.isDirty = false;
-        this.children.forEach(callback);
-    }
-}
-
-/**
- * Timeout defined in ms
- */
-function delay(callback, timeout) {
-    const start = time.now();
-    const checkElapsed = ({ timestamp }) => {
-        const elapsed = timestamp - start;
-        if (elapsed >= timeout) {
-            cancelFrame(checkElapsed);
-            callback(elapsed - timeout);
-        }
-    };
-    frame.read(checkElapsed, true);
-    return () => cancelFrame(checkElapsed);
-}
-
-const borders = ["TopLeft", "TopRight", "BottomLeft", "BottomRight"];
-const numBorders = borders.length;
-const asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
-const isPx = (value) => typeof value === "number" || px.test(value);
-function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
-    if (shouldCrossfadeOpacity) {
-        target.opacity = mixNumber$1(0, 
-        // TODO Reinstate this if only child
-        lead.opacity !== undefined ? lead.opacity : 1, easeCrossfadeIn(progress));
-        target.opacityExit = mixNumber$1(follow.opacity !== undefined ? follow.opacity : 1, 0, easeCrossfadeOut(progress));
-    }
-    else if (isOnlyMember) {
-        target.opacity = mixNumber$1(follow.opacity !== undefined ? follow.opacity : 1, lead.opacity !== undefined ? lead.opacity : 1, progress);
-    }
-    /**
-     * Mix border radius
-     */
-    for (let i = 0; i < numBorders; i++) {
-        const borderLabel = `border${borders[i]}Radius`;
-        let followRadius = getRadius(follow, borderLabel);
-        let leadRadius = getRadius(lead, borderLabel);
-        if (followRadius === undefined && leadRadius === undefined)
-            continue;
-        followRadius || (followRadius = 0);
-        leadRadius || (leadRadius = 0);
-        const canMix = followRadius === 0 ||
-            leadRadius === 0 ||
-            isPx(followRadius) === isPx(leadRadius);
-        if (canMix) {
-            target[borderLabel] = Math.max(mixNumber$1(asNumber(followRadius), asNumber(leadRadius), progress), 0);
-            if (percent.test(leadRadius) || percent.test(followRadius)) {
-                target[borderLabel] += "%";
-            }
-        }
-        else {
-            target[borderLabel] = leadRadius;
-        }
-    }
-    /**
-     * Mix rotation
-     */
-    if (follow.rotate || lead.rotate) {
-        target.rotate = mixNumber$1(follow.rotate || 0, lead.rotate || 0, progress);
-    }
-}
-function getRadius(values, radiusName) {
-    return values[radiusName] !== undefined
-        ? values[radiusName]
-        : values.borderRadius;
-}
-// /**
-//  * We only want to mix the background color if there's a follow element
-//  * that we're not crossfading opacity between. For instance with switch
-//  * AnimateSharedLayout animations, this helps the illusion of a continuous
-//  * element being animated but also cuts down on the number of paints triggered
-//  * for elements where opacity is doing that work for us.
-//  */
-// if (
-//     !hasFollowElement &&
-//     latestLeadValues.backgroundColor &&
-//     latestFollowValues.backgroundColor
-// ) {
-//     /**
-//      * This isn't ideal performance-wise as mixColor is creating a new function every frame.
-//      * We could probably create a mixer that runs at the start of the animation but
-//      * the idea behind the crossfader is that it runs dynamically between two potentially
-//      * changing targets (ie opacity or borderRadius may be animating independently via variants)
-//      */
-//     leadState.backgroundColor = followState.backgroundColor = mixColor(
-//         latestFollowValues.backgroundColor as string,
-//         latestLeadValues.backgroundColor as string
-//     )(p)
-// }
-const easeCrossfadeIn = /*@__PURE__*/ compress(0, 0.5, circOut);
-const easeCrossfadeOut = /*@__PURE__*/ compress(0.5, 0.95, noop);
-function compress(min, max, easing) {
-    return (p) => {
-        // Could replace ifs with clamp
-        if (p < min)
-            return 0;
-        if (p > max)
-            return 1;
-        return easing(progress(min, max, p));
-    };
-}
-
-/**
- * Reset an axis to the provided origin box.
- *
- * This is a mutative operation.
- */
-function copyAxisInto(axis, originAxis) {
-    axis.min = originAxis.min;
-    axis.max = originAxis.max;
-}
-/**
- * Reset a box to the provided origin box.
- *
- * This is a mutative operation.
- */
-function copyBoxInto(box, originBox) {
-    copyAxisInto(box.x, originBox.x);
-    copyAxisInto(box.y, originBox.y);
-}
-/**
- * Reset a delta to the provided origin box.
- *
- * This is a mutative operation.
- */
-function copyAxisDeltaInto(delta, originDelta) {
-    delta.translate = originDelta.translate;
-    delta.scale = originDelta.scale;
-    delta.originPoint = originDelta.originPoint;
-    delta.origin = originDelta.origin;
-}
-
-/**
- * Remove a delta from a point. This is essentially the steps of applyPointDelta in reverse
- */
-function removePointDelta(point, translate, scale, originPoint, boxScale) {
-    point -= translate;
-    point = scalePoint(point, 1 / scale, originPoint);
-    if (boxScale !== undefined) {
-        point = scalePoint(point, 1 / boxScale, originPoint);
-    }
-    return point;
-}
-/**
- * Remove a delta from an axis. This is essentially the steps of applyAxisDelta in reverse
- */
-function removeAxisDelta(axis, translate = 0, scale = 1, origin = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
-    if (percent.test(translate)) {
-        translate = parseFloat(translate);
-        const relativeProgress = mixNumber$1(sourceAxis.min, sourceAxis.max, translate / 100);
-        translate = relativeProgress - sourceAxis.min;
-    }
-    if (typeof translate !== "number")
-        return;
-    let originPoint = mixNumber$1(originAxis.min, originAxis.max, origin);
-    if (axis === originAxis)
-        originPoint -= translate;
-    axis.min = removePointDelta(axis.min, translate, scale, originPoint, boxScale);
-    axis.max = removePointDelta(axis.max, translate, scale, originPoint, boxScale);
-}
-/**
- * Remove a transforms from an axis. This is essentially the steps of applyAxisTransforms in reverse
- * and acts as a bridge between motion values and removeAxisDelta
- */
-function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin, sourceAxis) {
-    removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin, sourceAxis);
-}
-/**
- * The names of the motion values we want to apply as translation, scale and origin.
- */
-const xKeys = ["x", "scaleX", "originX"];
-const yKeys = ["y", "scaleY", "originY"];
-/**
- * Remove a transforms from an box. This is essentially the steps of applyAxisBox in reverse
- * and acts as a bridge between motion values and removeAxisDelta
- */
-function removeBoxTransforms(box, transforms, originBox, sourceBox) {
-    removeAxisTransforms(box.x, transforms, xKeys, originBox ? originBox.x : undefined, sourceBox ? sourceBox.x : undefined);
-    removeAxisTransforms(box.y, transforms, yKeys, originBox ? originBox.y : undefined, sourceBox ? sourceBox.y : undefined);
-}
-
-function isAxisDeltaZero(delta) {
-    return delta.translate === 0 && delta.scale === 1;
-}
-function isDeltaZero(delta) {
-    return isAxisDeltaZero(delta.x) && isAxisDeltaZero(delta.y);
-}
-function axisEquals(a, b) {
-    return a.min === b.min && a.max === b.max;
-}
-function boxEquals(a, b) {
-    return axisEquals(a.x, b.x) && axisEquals(a.y, b.y);
-}
-function axisEqualsRounded(a, b) {
-    return (Math.round(a.min) === Math.round(b.min) &&
-        Math.round(a.max) === Math.round(b.max));
-}
-function boxEqualsRounded(a, b) {
-    return axisEqualsRounded(a.x, b.x) && axisEqualsRounded(a.y, b.y);
-}
-function aspectRatio(box) {
-    return calcLength(box.x) / calcLength(box.y);
-}
-function axisDeltaEquals(a, b) {
-    return (a.translate === b.translate &&
-        a.scale === b.scale &&
-        a.originPoint === b.originPoint);
-}
-
-class NodeStack {
-    constructor() {
-        this.members = [];
-    }
-    add(node) {
-        addUniqueItem(this.members, node);
-        node.scheduleRender();
-    }
-    remove(node) {
-        removeItem(this.members, node);
-        if (node === this.prevLead) {
-            this.prevLead = undefined;
-        }
-        if (node === this.lead) {
-            const prevLead = this.members[this.members.length - 1];
-            if (prevLead) {
-                this.promote(prevLead);
-            }
-        }
-    }
-    relegate(node) {
-        const indexOfNode = this.members.findIndex((member) => node === member);
-        if (indexOfNode === 0)
-            return false;
-        /**
-         * Find the next projection node that is present
-         */
-        let prevLead;
-        for (let i = indexOfNode; i >= 0; i--) {
-            const member = this.members[i];
-            if (member.isPresent !== false) {
-                prevLead = member;
-                break;
-            }
-        }
-        if (prevLead) {
-            this.promote(prevLead);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    promote(node, preserveFollowOpacity) {
-        const prevLead = this.lead;
-        if (node === prevLead)
-            return;
-        this.prevLead = prevLead;
-        this.lead = node;
-        node.show();
-        if (prevLead) {
-            prevLead.instance && prevLead.scheduleRender();
-            node.scheduleRender();
-            node.resumeFrom = prevLead;
-            if (preserveFollowOpacity) {
-                node.resumeFrom.preserveOpacity = true;
-            }
-            if (prevLead.snapshot) {
-                node.snapshot = prevLead.snapshot;
-                node.snapshot.latestValues =
-                    prevLead.animationValues || prevLead.latestValues;
-            }
-            if (node.root && node.root.isUpdating) {
-                node.isLayoutDirty = true;
-            }
-            const { crossfade } = node.options;
-            if (crossfade === false) {
-                prevLead.hide();
-            }
-            /**
-             * TODO:
-             *   - Test border radius when previous node was deleted
-             *   - boxShadow mixing
-             *   - Shared between element A in scrolled container and element B (scroll stays the same or changes)
-             *   - Shared between element A in transformed container and element B (transform stays the same or changes)
-             *   - Shared between element A in scrolled page and element B (scroll stays the same or changes)
-             * ---
-             *   - Crossfade opacity of root nodes
-             *   - layoutId changes after animation
-             *   - layoutId changes mid animation
-             */
-        }
-    }
-    exitAnimationComplete() {
-        this.members.forEach((node) => {
-            const { options, resumingFrom } = node;
-            options.onExitComplete && options.onExitComplete();
-            if (resumingFrom) {
-                resumingFrom.options.onExitComplete &&
-                    resumingFrom.options.onExitComplete();
-            }
-        });
-    }
-    scheduleRender() {
-        this.members.forEach((node) => {
-            node.instance && node.scheduleRender(false);
-        });
-    }
-    /**
-     * Clear any leads that have been removed this render to prevent them from being
-     * used in future animations and to prevent memory leaks
-     */
-    removeLeadSnapshot() {
-        if (this.lead && this.lead.snapshot) {
-            this.lead.snapshot = undefined;
-        }
-    }
-}
-
-function buildProjectionTransform(delta, treeScale, latestTransform) {
-    let transform = "";
-    /**
-     * The translations we use to calculate are always relative to the viewport coordinate space.
-     * But when we apply scales, we also scale the coordinate space of an element and its children.
-     * For instance if we have a treeScale (the culmination of all parent scales) of 0.5 and we need
-     * to move an element 100 pixels, we actually need to move it 200 in within that scaled space.
-     */
-    const xTranslate = delta.x.translate / treeScale.x;
-    const yTranslate = delta.y.translate / treeScale.y;
-    const zTranslate = (latestTransform === null || latestTransform === void 0 ? void 0 : latestTransform.z) || 0;
-    if (xTranslate || yTranslate || zTranslate) {
-        transform = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
-    }
-    /**
-     * Apply scale correction for the tree transform.
-     * This will apply scale to the screen-orientated axes.
-     */
-    if (treeScale.x !== 1 || treeScale.y !== 1) {
-        transform += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
-    }
-    if (latestTransform) {
-        const { transformPerspective, rotate, rotateX, rotateY, skewX, skewY } = latestTransform;
-        if (transformPerspective)
-            transform = `perspective(${transformPerspective}px) ${transform}`;
-        if (rotate)
-            transform += `rotate(${rotate}deg) `;
-        if (rotateX)
-            transform += `rotateX(${rotateX}deg) `;
-        if (rotateY)
-            transform += `rotateY(${rotateY}deg) `;
-        if (skewX)
-            transform += `skewX(${skewX}deg) `;
-        if (skewY)
-            transform += `skewY(${skewY}deg) `;
-    }
-    /**
-     * Apply scale to match the size of the element to the size we want it.
-     * This will apply scale to the element-orientated axes.
-     */
-    const elementScaleX = delta.x.scale * treeScale.x;
-    const elementScaleY = delta.y.scale * treeScale.y;
-    if (elementScaleX !== 1 || elementScaleY !== 1) {
-        transform += `scale(${elementScaleX}, ${elementScaleY})`;
-    }
-    return transform || "none";
-}
-
-const metrics = {
-    type: "projectionFrame",
-    totalNodes: 0,
-    resolvedTargetDeltas: 0,
-    recalculatedProjection: 0,
-};
-const isDebug = typeof window !== "undefined" && window.MotionDebug !== undefined;
-const transformAxes = ["", "X", "Y", "Z"];
-const hiddenVisibility = { visibility: "hidden" };
-/**
- * We use 1000 as the animation target as 0-1000 maps better to pixels than 0-1
- * which has a noticeable difference in spring animations
- */
-const animationTarget = 1000;
-let id = 0;
-function resetDistortingTransform(key, visualElement, values, sharedAnimationValues) {
-    const { latestValues } = visualElement;
-    // Record the distorting transform and then temporarily set it to 0
-    if (latestValues[key]) {
-        values[key] = latestValues[key];
-        visualElement.setStaticValue(key, 0);
-        if (sharedAnimationValues) {
-            sharedAnimationValues[key] = 0;
-        }
-    }
-}
-function cancelTreeOptimisedTransformAnimations(projectionNode) {
-    projectionNode.hasCheckedOptimisedAppear = true;
-    if (projectionNode.root === projectionNode)
-        return;
-    const { visualElement } = projectionNode.options;
-    if (!visualElement)
-        return;
-    const appearId = getOptimisedAppearId(visualElement);
-    if (window.MotionHasOptimisedAnimation(appearId, "transform")) {
-        const { layout, layoutId } = projectionNode.options;
-        window.MotionCancelOptimisedAnimation(appearId, "transform", frame, !(layout || layoutId));
-    }
-    const { parent } = projectionNode;
-    if (parent && !parent.hasCheckedOptimisedAppear) {
-        cancelTreeOptimisedTransformAnimations(parent);
-    }
-}
-function createProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }) {
-    return class ProjectionNode {
-        constructor(latestValues = {}, parent = defaultParent === null || defaultParent === void 0 ? void 0 : defaultParent()) {
-            /**
-             * A unique ID generated for every projection node.
-             */
-            this.id = id++;
-            /**
-             * An id that represents a unique session instigated by startUpdate.
-             */
-            this.animationId = 0;
-            /**
-             * A Set containing all this component's children. This is used to iterate
-             * through the children.
-             *
-             * TODO: This could be faster to iterate as a flat array stored on the root node.
-             */
-            this.children = new Set();
-            /**
-             * Options for the node. We use this to configure what kind of layout animations
-             * we should perform (if any).
-             */
-            this.options = {};
-            /**
-             * We use this to detect when its safe to shut down part of a projection tree.
-             * We have to keep projecting children for scale correction and relative projection
-             * until all their parents stop performing layout animations.
-             */
-            this.isTreeAnimating = false;
-            this.isAnimationBlocked = false;
-            /**
-             * Flag to true if we think this layout has been changed. We can't always know this,
-             * currently we set it to true every time a component renders, or if it has a layoutDependency
-             * if that has changed between renders. Additionally, components can be grouped by LayoutGroup
-             * and if one node is dirtied, they all are.
-             */
-            this.isLayoutDirty = false;
-            /**
-             * Flag to true if we think the projection calculations for this node needs
-             * recalculating as a result of an updated transform or layout animation.
-             */
-            this.isProjectionDirty = false;
-            /**
-             * Flag to true if the layout *or* transform has changed. This then gets propagated
-             * throughout the projection tree, forcing any element below to recalculate on the next frame.
-             */
-            this.isSharedProjectionDirty = false;
-            /**
-             * Flag transform dirty. This gets propagated throughout the whole tree but is only
-             * respected by shared nodes.
-             */
-            this.isTransformDirty = false;
-            /**
-             * Block layout updates for instant layout transitions throughout the tree.
-             */
-            this.updateManuallyBlocked = false;
-            this.updateBlockedByResize = false;
-            /**
-             * Set to true between the start of the first `willUpdate` call and the end of the `didUpdate`
-             * call.
-             */
-            this.isUpdating = false;
-            /**
-             * If this is an SVG element we currently disable projection transforms
-             */
-            this.isSVG = false;
-            /**
-             * Flag to true (during promotion) if a node doing an instant layout transition needs to reset
-             * its projection styles.
-             */
-            this.needsReset = false;
-            /**
-             * Flags whether this node should have its transform reset prior to measuring.
-             */
-            this.shouldResetTransform = false;
-            /**
-             * Store whether this node has been checked for optimised appear animations. As
-             * effects fire bottom-up, and we want to look up the tree for appear animations,
-             * this makes sure we only check each path once, stopping at nodes that
-             * have already been checked.
-             */
-            this.hasCheckedOptimisedAppear = false;
-            /**
-             * An object representing the calculated contextual/accumulated/tree scale.
-             * This will be used to scale calculcated projection transforms, as these are
-             * calculated in screen-space but need to be scaled for elements to layoutly
-             * make it to their calculated destinations.
-             *
-             * TODO: Lazy-init
-             */
-            this.treeScale = { x: 1, y: 1 };
-            /**
-             *
-             */
-            this.eventHandlers = new Map();
-            this.hasTreeAnimated = false;
-            // Note: Currently only running on root node
-            this.updateScheduled = false;
-            this.scheduleUpdate = () => this.update();
-            this.projectionUpdateScheduled = false;
-            this.checkUpdateFailed = () => {
-                if (this.isUpdating) {
-                    this.isUpdating = false;
-                    this.clearAllSnapshots();
-                }
-            };
-            /**
-             * This is a multi-step process as shared nodes might be of different depths. Nodes
-             * are sorted by depth order, so we need to resolve the entire tree before moving to
-             * the next step.
-             */
-            this.updateProjection = () => {
-                this.projectionUpdateScheduled = false;
-                /**
-                 * Reset debug counts. Manually resetting rather than creating a new
-                 * object each frame.
-                 */
-                if (isDebug) {
-                    metrics.totalNodes =
-                        metrics.resolvedTargetDeltas =
-                            metrics.recalculatedProjection =
-                                0;
-                }
-                this.nodes.forEach(propagateDirtyNodes);
-                this.nodes.forEach(resolveTargetDelta);
-                this.nodes.forEach(calcProjection);
-                this.nodes.forEach(cleanDirtyNodes);
-                if (isDebug) {
-                    window.MotionDebug.record(metrics);
-                }
-            };
-            /**
-             * Frame calculations
-             */
-            this.resolvedRelativeTargetAt = 0.0;
-            this.hasProjected = false;
-            this.isVisible = true;
-            this.animationProgress = 0;
-            /**
-             * Shared layout
-             */
-            // TODO Only running on root node
-            this.sharedNodes = new Map();
-            this.latestValues = latestValues;
-            this.root = parent ? parent.root || parent : this;
-            this.path = parent ? [...parent.path, parent] : [];
-            this.parent = parent;
-            this.depth = parent ? parent.depth + 1 : 0;
-            for (let i = 0; i < this.path.length; i++) {
-                this.path[i].shouldResetTransform = true;
-            }
-            if (this.root === this)
-                this.nodes = new FlatTree();
-        }
-        addEventListener(name, handler) {
-            if (!this.eventHandlers.has(name)) {
-                this.eventHandlers.set(name, new SubscriptionManager());
-            }
-            return this.eventHandlers.get(name).add(handler);
-        }
-        notifyListeners(name, ...args) {
-            const subscriptionManager = this.eventHandlers.get(name);
-            subscriptionManager && subscriptionManager.notify(...args);
-        }
-        hasListeners(name) {
-            return this.eventHandlers.has(name);
-        }
-        /**
-         * Lifecycles
-         */
-        mount(instance, isLayoutDirty = this.root.hasTreeAnimated) {
-            if (this.instance)
-                return;
-            this.isSVG = isSVGElement(instance);
-            this.instance = instance;
-            const { layoutId, layout, visualElement } = this.options;
-            if (visualElement && !visualElement.current) {
-                visualElement.mount(instance);
-            }
-            this.root.nodes.add(this);
-            this.parent && this.parent.children.add(this);
-            if (isLayoutDirty && (layout || layoutId)) {
-                this.isLayoutDirty = true;
-            }
-            if (attachResizeListener) {
-                let cancelDelay;
-                const resizeUnblockUpdate = () => (this.root.updateBlockedByResize = false);
-                attachResizeListener(instance, () => {
-                    this.root.updateBlockedByResize = true;
-                    cancelDelay && cancelDelay();
-                    cancelDelay = delay(resizeUnblockUpdate, 250);
-                    if (globalProjectionState.hasAnimatedSinceResize) {
-                        globalProjectionState.hasAnimatedSinceResize = false;
-                        this.nodes.forEach(finishAnimation);
-                    }
-                });
-            }
-            if (layoutId) {
-                this.root.registerSharedNode(layoutId, this);
-            }
-            // Only register the handler if it requires layout animation
-            if (this.options.animate !== false &&
-                visualElement &&
-                (layoutId || layout)) {
-                this.addEventListener("didUpdate", ({ delta, hasLayoutChanged, hasRelativeTargetChanged, layout: newLayout, }) => {
-                    if (this.isTreeAnimationBlocked()) {
-                        this.target = undefined;
-                        this.relativeTarget = undefined;
-                        return;
-                    }
-                    // TODO: Check here if an animation exists
-                    const layoutTransition = this.options.transition ||
-                        visualElement.getDefaultTransition() ||
-                        defaultLayoutTransition;
-                    const { onLayoutAnimationStart, onLayoutAnimationComplete, } = visualElement.getProps();
-                    /**
-                     * The target layout of the element might stay the same,
-                     * but its position relative to its parent has changed.
-                     */
-                    const targetChanged = !this.targetLayout ||
-                        !boxEqualsRounded(this.targetLayout, newLayout) ||
-                        hasRelativeTargetChanged;
-                    /**
-                     * If the layout hasn't seemed to have changed, it might be that the
-                     * element is visually in the same place in the document but its position
-                     * relative to its parent has indeed changed. So here we check for that.
-                     */
-                    const hasOnlyRelativeTargetChanged = !hasLayoutChanged && hasRelativeTargetChanged;
-                    if (this.options.layoutRoot ||
-                        (this.resumeFrom && this.resumeFrom.instance) ||
-                        hasOnlyRelativeTargetChanged ||
-                        (hasLayoutChanged &&
-                            (targetChanged || !this.currentAnimation))) {
-                        if (this.resumeFrom) {
-                            this.resumingFrom = this.resumeFrom;
-                            this.resumingFrom.resumingFrom = undefined;
-                        }
-                        this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged);
-                        const animationOptions = {
-                            ...getValueTransition(layoutTransition, "layout"),
-                            onPlay: onLayoutAnimationStart,
-                            onComplete: onLayoutAnimationComplete,
-                        };
-                        if (visualElement.shouldReduceMotion ||
-                            this.options.layoutRoot) {
-                            animationOptions.delay = 0;
-                            animationOptions.type = false;
-                        }
-                        this.startAnimation(animationOptions);
-                    }
-                    else {
-                        /**
-                         * If the layout hasn't changed and we have an animation that hasn't started yet,
-                         * finish it immediately. Otherwise it will be animating from a location
-                         * that was probably never commited to screen and look like a jumpy box.
-                         */
-                        if (!hasLayoutChanged) {
-                            finishAnimation(this);
-                        }
-                        if (this.isLead() && this.options.onExitComplete) {
-                            this.options.onExitComplete();
-                        }
-                    }
-                    this.targetLayout = newLayout;
-                });
-            }
-        }
-        unmount() {
-            this.options.layoutId && this.willUpdate();
-            this.root.nodes.remove(this);
-            const stack = this.getStack();
-            stack && stack.remove(this);
-            this.parent && this.parent.children.delete(this);
-            this.instance = undefined;
-            cancelFrame(this.updateProjection);
-        }
-        // only on the root
-        blockUpdate() {
-            this.updateManuallyBlocked = true;
-        }
-        unblockUpdate() {
-            this.updateManuallyBlocked = false;
-        }
-        isUpdateBlocked() {
-            return this.updateManuallyBlocked || this.updateBlockedByResize;
-        }
-        isTreeAnimationBlocked() {
-            return (this.isAnimationBlocked ||
-                (this.parent && this.parent.isTreeAnimationBlocked()) ||
-                false);
-        }
-        // Note: currently only running on root node
-        startUpdate() {
-            if (this.isUpdateBlocked())
-                return;
-            this.isUpdating = true;
-            this.nodes && this.nodes.forEach(resetSkewAndRotation);
-            this.animationId++;
-        }
-        getTransformTemplate() {
-            const { visualElement } = this.options;
-            return visualElement && visualElement.getProps().transformTemplate;
-        }
-        willUpdate(shouldNotifyListeners = true) {
-            this.root.hasTreeAnimated = true;
-            if (this.root.isUpdateBlocked()) {
-                this.options.onExitComplete && this.options.onExitComplete();
-                return;
-            }
-            /**
-             * If we're running optimised appear animations then these must be
-             * cancelled before measuring the DOM. This is so we can measure
-             * the true layout of the element rather than the WAAPI animation
-             * which will be unaffected by the resetSkewAndRotate step.
-             *
-             * Note: This is a DOM write. Worst case scenario is this is sandwiched
-             * between other snapshot reads which will cause unnecessary style recalculations.
-             * This has to happen here though, as we don't yet know which nodes will need
-             * snapshots in startUpdate(), but we only want to cancel optimised animations
-             * if a layout animation measurement is actually going to be affected by them.
-             */
-            if (window.MotionCancelOptimisedAnimation &&
-                !this.hasCheckedOptimisedAppear) {
-                cancelTreeOptimisedTransformAnimations(this);
-            }
-            !this.root.isUpdating && this.root.startUpdate();
-            if (this.isLayoutDirty)
-                return;
-            this.isLayoutDirty = true;
-            for (let i = 0; i < this.path.length; i++) {
-                const node = this.path[i];
-                node.shouldResetTransform = true;
-                node.updateScroll("snapshot");
-                if (node.options.layoutRoot) {
-                    node.willUpdate(false);
-                }
-            }
-            const { layoutId, layout } = this.options;
-            if (layoutId === undefined && !layout)
-                return;
-            const transformTemplate = this.getTransformTemplate();
-            this.prevTransformTemplateValue = transformTemplate
-                ? transformTemplate(this.latestValues, "")
-                : undefined;
-            this.updateSnapshot();
-            shouldNotifyListeners && this.notifyListeners("willUpdate");
-        }
-        update() {
-            this.updateScheduled = false;
-            const updateWasBlocked = this.isUpdateBlocked();
-            // When doing an instant transition, we skip the layout update,
-            // but should still clean up the measurements so that the next
-            // snapshot could be taken correctly.
-            if (updateWasBlocked) {
-                this.unblockUpdate();
-                this.clearAllSnapshots();
-                this.nodes.forEach(clearMeasurements);
-                return;
-            }
-            if (!this.isUpdating) {
-                this.nodes.forEach(clearIsLayoutDirty);
-            }
-            this.isUpdating = false;
-            /**
-             * Write
-             */
-            this.nodes.forEach(resetTransformStyle);
-            /**
-             * Read ==================
-             */
-            // Update layout measurements of updated children
-            this.nodes.forEach(updateLayout);
-            /**
-             * Write
-             */
-            // Notify listeners that the layout is updated
-            this.nodes.forEach(notifyLayoutUpdate);
-            this.clearAllSnapshots();
-            /**
-             * Manually flush any pending updates. Ideally
-             * we could leave this to the following requestAnimationFrame but this seems
-             * to leave a flash of incorrectly styled content.
-             */
-            const now = time.now();
-            frameData.delta = clamp(0, 1000 / 60, now - frameData.timestamp);
-            frameData.timestamp = now;
-            frameData.isProcessing = true;
-            frameSteps.update.process(frameData);
-            frameSteps.preRender.process(frameData);
-            frameSteps.render.process(frameData);
-            frameData.isProcessing = false;
-        }
-        didUpdate() {
-            if (!this.updateScheduled) {
-                this.updateScheduled = true;
-                microtask.read(this.scheduleUpdate);
-            }
-        }
-        clearAllSnapshots() {
-            this.nodes.forEach(clearSnapshot);
-            this.sharedNodes.forEach(removeLeadSnapshots);
-        }
-        scheduleUpdateProjection() {
-            if (!this.projectionUpdateScheduled) {
-                this.projectionUpdateScheduled = true;
-                frame.preRender(this.updateProjection, false, true);
-            }
-        }
-        scheduleCheckAfterUnmount() {
-            /**
-             * If the unmounting node is in a layoutGroup and did trigger a willUpdate,
-             * we manually call didUpdate to give a chance to the siblings to animate.
-             * Otherwise, cleanup all snapshots to prevents future nodes from reusing them.
-             */
-            frame.postRender(() => {
-                if (this.isLayoutDirty) {
-                    this.root.didUpdate();
-                }
-                else {
-                    this.root.checkUpdateFailed();
-                }
-            });
-        }
-        /**
-         * Update measurements
-         */
-        updateSnapshot() {
-            if (this.snapshot || !this.instance)
-                return;
-            this.snapshot = this.measure();
-        }
-        updateLayout() {
-            if (!this.instance)
-                return;
-            // TODO: Incorporate into a forwarded scroll offset
-            this.updateScroll();
-            if (!(this.options.alwaysMeasureLayout && this.isLead()) &&
-                !this.isLayoutDirty) {
-                return;
-            }
-            /**
-             * When a node is mounted, it simply resumes from the prevLead's
-             * snapshot instead of taking a new one, but the ancestors scroll
-             * might have updated while the prevLead is unmounted. We need to
-             * update the scroll again to make sure the layout we measure is
-             * up to date.
-             */
-            if (this.resumeFrom && !this.resumeFrom.instance) {
-                for (let i = 0; i < this.path.length; i++) {
-                    const node = this.path[i];
-                    node.updateScroll();
-                }
-            }
-            const prevLayout = this.layout;
-            this.layout = this.measure(false);
-            this.layoutCorrected = createBox();
-            this.isLayoutDirty = false;
-            this.projectionDelta = undefined;
-            this.notifyListeners("measure", this.layout.layoutBox);
-            const { visualElement } = this.options;
-            visualElement &&
-                visualElement.notify("LayoutMeasure", this.layout.layoutBox, prevLayout ? prevLayout.layoutBox : undefined);
-        }
-        updateScroll(phase = "measure") {
-            let needsMeasurement = Boolean(this.options.layoutScroll && this.instance);
-            if (this.scroll &&
-                this.scroll.animationId === this.root.animationId &&
-                this.scroll.phase === phase) {
-                needsMeasurement = false;
-            }
-            if (needsMeasurement) {
-                const isRoot = checkIsScrollRoot(this.instance);
-                this.scroll = {
-                    animationId: this.root.animationId,
-                    phase,
-                    isRoot,
-                    offset: measureScroll(this.instance),
-                    wasRoot: this.scroll ? this.scroll.isRoot : isRoot,
-                };
-            }
-        }
-        resetTransform() {
-            if (!resetTransform)
-                return;
-            const isResetRequested = this.isLayoutDirty ||
-                this.shouldResetTransform ||
-                this.options.alwaysMeasureLayout;
-            const hasProjection = this.projectionDelta && !isDeltaZero(this.projectionDelta);
-            const transformTemplate = this.getTransformTemplate();
-            const transformTemplateValue = transformTemplate
-                ? transformTemplate(this.latestValues, "")
-                : undefined;
-            const transformTemplateHasChanged = transformTemplateValue !== this.prevTransformTemplateValue;
-            if (isResetRequested &&
-                (hasProjection ||
-                    hasTransform(this.latestValues) ||
-                    transformTemplateHasChanged)) {
-                resetTransform(this.instance, transformTemplateValue);
-                this.shouldResetTransform = false;
-                this.scheduleRender();
-            }
-        }
-        measure(removeTransform = true) {
-            const pageBox = this.measurePageBox();
-            let layoutBox = this.removeElementScroll(pageBox);
-            /**
-             * Measurements taken during the pre-render stage
-             * still have transforms applied so we remove them
-             * via calculation.
-             */
-            if (removeTransform) {
-                layoutBox = this.removeTransform(layoutBox);
-            }
-            roundBox(layoutBox);
-            return {
-                animationId: this.root.animationId,
-                measuredBox: pageBox,
-                layoutBox,
-                latestValues: {},
-                source: this.id,
-            };
-        }
-        measurePageBox() {
-            var _a;
-            const { visualElement } = this.options;
-            if (!visualElement)
-                return createBox();
-            const box = visualElement.measureViewportBox();
-            const wasInScrollRoot = ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) || this.path.some(checkNodeWasScrollRoot);
-            if (!wasInScrollRoot) {
-                // Remove viewport scroll to give page-relative coordinates
-                const { scroll } = this.root;
-                if (scroll) {
-                    translateAxis(box.x, scroll.offset.x);
-                    translateAxis(box.y, scroll.offset.y);
-                }
-            }
-            return box;
-        }
-        removeElementScroll(box) {
-            var _a;
-            const boxWithoutScroll = createBox();
-            copyBoxInto(boxWithoutScroll, box);
-            if ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) {
-                return boxWithoutScroll;
-            }
-            /**
-             * Performance TODO: Keep a cumulative scroll offset down the tree
-             * rather than loop back up the path.
-             */
-            for (let i = 0; i < this.path.length; i++) {
-                const node = this.path[i];
-                const { scroll, options } = node;
-                if (node !== this.root && scroll && options.layoutScroll) {
-                    /**
-                     * If this is a new scroll root, we want to remove all previous scrolls
-                     * from the viewport box.
-                     */
-                    if (scroll.wasRoot) {
-                        copyBoxInto(boxWithoutScroll, box);
-                    }
-                    translateAxis(boxWithoutScroll.x, scroll.offset.x);
-                    translateAxis(boxWithoutScroll.y, scroll.offset.y);
-                }
-            }
-            return boxWithoutScroll;
-        }
-        applyTransform(box, transformOnly = false) {
-            const withTransforms = createBox();
-            copyBoxInto(withTransforms, box);
-            for (let i = 0; i < this.path.length; i++) {
-                const node = this.path[i];
-                if (!transformOnly &&
-                    node.options.layoutScroll &&
-                    node.scroll &&
-                    node !== node.root) {
-                    transformBox(withTransforms, {
-                        x: -node.scroll.offset.x,
-                        y: -node.scroll.offset.y,
-                    });
-                }
-                if (!hasTransform(node.latestValues))
-                    continue;
-                transformBox(withTransforms, node.latestValues);
-            }
-            if (hasTransform(this.latestValues)) {
-                transformBox(withTransforms, this.latestValues);
-            }
-            return withTransforms;
-        }
-        removeTransform(box) {
-            const boxWithoutTransform = createBox();
-            copyBoxInto(boxWithoutTransform, box);
-            for (let i = 0; i < this.path.length; i++) {
-                const node = this.path[i];
-                if (!node.instance)
-                    continue;
-                if (!hasTransform(node.latestValues))
-                    continue;
-                hasScale(node.latestValues) && node.updateSnapshot();
-                const sourceBox = createBox();
-                const nodeBox = node.measurePageBox();
-                copyBoxInto(sourceBox, nodeBox);
-                removeBoxTransforms(boxWithoutTransform, node.latestValues, node.snapshot ? node.snapshot.layoutBox : undefined, sourceBox);
-            }
-            if (hasTransform(this.latestValues)) {
-                removeBoxTransforms(boxWithoutTransform, this.latestValues);
-            }
-            return boxWithoutTransform;
-        }
-        setTargetDelta(delta) {
-            this.targetDelta = delta;
-            this.root.scheduleUpdateProjection();
-            this.isProjectionDirty = true;
-        }
-        setOptions(options) {
-            this.options = {
-                ...this.options,
-                ...options,
-                crossfade: options.crossfade !== undefined ? options.crossfade : true,
-            };
-        }
-        clearMeasurements() {
-            this.scroll = undefined;
-            this.layout = undefined;
-            this.snapshot = undefined;
-            this.prevTransformTemplateValue = undefined;
-            this.targetDelta = undefined;
-            this.target = undefined;
-            this.isLayoutDirty = false;
-        }
-        forceRelativeParentToResolveTarget() {
-            if (!this.relativeParent)
-                return;
-            /**
-             * If the parent target isn't up-to-date, force it to update.
-             * This is an unfortunate de-optimisation as it means any updating relative
-             * projection will cause all the relative parents to recalculate back
-             * up the tree.
-             */
-            if (this.relativeParent.resolvedRelativeTargetAt !==
-                frameData.timestamp) {
-                this.relativeParent.resolveTargetDelta(true);
-            }
-        }
-        resolveTargetDelta(forceRecalculation = false) {
-            var _a;
-            /**
-             * Once the dirty status of nodes has been spread through the tree, we also
-             * need to check if we have a shared node of a different depth that has itself
-             * been dirtied.
-             */
-            const lead = this.getLead();
-            this.isProjectionDirty || (this.isProjectionDirty = lead.isProjectionDirty);
-            this.isTransformDirty || (this.isTransformDirty = lead.isTransformDirty);
-            this.isSharedProjectionDirty || (this.isSharedProjectionDirty = lead.isSharedProjectionDirty);
-            const isShared = Boolean(this.resumingFrom) || this !== lead;
-            /**
-             * We don't use transform for this step of processing so we don't
-             * need to check whether any nodes have changed transform.
-             */
-            const canSkip = !(forceRecalculation ||
-                (isShared && this.isSharedProjectionDirty) ||
-                this.isProjectionDirty ||
-                ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty) ||
-                this.attemptToResolveRelativeTarget ||
-                this.root.updateBlockedByResize);
-            if (canSkip)
-                return;
-            const { layout, layoutId } = this.options;
-            /**
-             * If we have no layout, we can't perform projection, so early return
-             */
-            if (!this.layout || !(layout || layoutId))
-                return;
-            this.resolvedRelativeTargetAt = frameData.timestamp;
-            /**
-             * If we don't have a targetDelta but do have a layout, we can attempt to resolve
-             * a relativeParent. This will allow a component to perform scale correction
-             * even if no animation has started.
-             */
-            if (!this.targetDelta && !this.relativeTarget) {
-                const relativeParent = this.getClosestProjectingParent();
-                if (relativeParent &&
-                    relativeParent.layout &&
-                    this.animationProgress !== 1) {
-                    this.relativeParent = relativeParent;
-                    this.forceRelativeParentToResolveTarget();
-                    this.relativeTarget = createBox();
-                    this.relativeTargetOrigin = createBox();
-                    calcRelativePosition(this.relativeTargetOrigin, this.layout.layoutBox, relativeParent.layout.layoutBox);
-                    copyBoxInto(this.relativeTarget, this.relativeTargetOrigin);
-                }
-                else {
-                    this.relativeParent = this.relativeTarget = undefined;
-                }
-            }
-            /**
-             * If we have no relative target or no target delta our target isn't valid
-             * for this frame.
-             */
-            if (!this.relativeTarget && !this.targetDelta)
-                return;
-            /**
-             * Lazy-init target data structure
-             */
-            if (!this.target) {
-                this.target = createBox();
-                this.targetWithTransforms = createBox();
-            }
-            /**
-             * If we've got a relative box for this component, resolve it into a target relative to the parent.
-             */
-            if (this.relativeTarget &&
-                this.relativeTargetOrigin &&
-                this.relativeParent &&
-                this.relativeParent.target) {
-                this.forceRelativeParentToResolveTarget();
-                calcRelativeBox(this.target, this.relativeTarget, this.relativeParent.target);
-                /**
-                 * If we've only got a targetDelta, resolve it into a target
-                 */
-            }
-            else if (this.targetDelta) {
-                if (Boolean(this.resumingFrom)) {
-                    // TODO: This is creating a new object every frame
-                    this.target = this.applyTransform(this.layout.layoutBox);
-                }
-                else {
-                    copyBoxInto(this.target, this.layout.layoutBox);
-                }
-                applyBoxDelta(this.target, this.targetDelta);
-            }
-            else {
-                /**
-                 * If no target, use own layout as target
-                 */
-                copyBoxInto(this.target, this.layout.layoutBox);
-            }
-            /**
-             * If we've been told to attempt to resolve a relative target, do so.
-             */
-            if (this.attemptToResolveRelativeTarget) {
-                this.attemptToResolveRelativeTarget = false;
-                const relativeParent = this.getClosestProjectingParent();
-                if (relativeParent &&
-                    Boolean(relativeParent.resumingFrom) ===
-                        Boolean(this.resumingFrom) &&
-                    !relativeParent.options.layoutScroll &&
-                    relativeParent.target &&
-                    this.animationProgress !== 1) {
-                    this.relativeParent = relativeParent;
-                    this.forceRelativeParentToResolveTarget();
-                    this.relativeTarget = createBox();
-                    this.relativeTargetOrigin = createBox();
-                    calcRelativePosition(this.relativeTargetOrigin, this.target, relativeParent.target);
-                    copyBoxInto(this.relativeTarget, this.relativeTargetOrigin);
-                }
-                else {
-                    this.relativeParent = this.relativeTarget = undefined;
-                }
-            }
-            /**
-             * Increase debug counter for resolved target deltas
-             */
-            if (isDebug) {
-                metrics.resolvedTargetDeltas++;
-            }
-        }
-        getClosestProjectingParent() {
-            if (!this.parent ||
-                hasScale(this.parent.latestValues) ||
-                has2DTranslate(this.parent.latestValues)) {
-                return undefined;
-            }
-            if (this.parent.isProjecting()) {
-                return this.parent;
-            }
-            else {
-                return this.parent.getClosestProjectingParent();
-            }
-        }
-        isProjecting() {
-            return Boolean((this.relativeTarget ||
-                this.targetDelta ||
-                this.options.layoutRoot) &&
-                this.layout);
-        }
-        calcProjection() {
-            var _a;
-            const lead = this.getLead();
-            const isShared = Boolean(this.resumingFrom) || this !== lead;
-            let canSkip = true;
-            /**
-             * If this is a normal layout animation and neither this node nor its nearest projecting
-             * is dirty then we can't skip.
-             */
-            if (this.isProjectionDirty || ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty)) {
-                canSkip = false;
-            }
-            /**
-             * If this is a shared layout animation and this node's shared projection is dirty then
-             * we can't skip.
-             */
-            if (isShared &&
-                (this.isSharedProjectionDirty || this.isTransformDirty)) {
-                canSkip = false;
-            }
-            /**
-             * If we have resolved the target this frame we must recalculate the
-             * projection to ensure it visually represents the internal calculations.
-             */
-            if (this.resolvedRelativeTargetAt === frameData.timestamp) {
-                canSkip = false;
-            }
-            if (canSkip)
-                return;
-            const { layout, layoutId } = this.options;
-            /**
-             * If this section of the tree isn't animating we can
-             * delete our target sources for the following frame.
-             */
-            this.isTreeAnimating = Boolean((this.parent && this.parent.isTreeAnimating) ||
-                this.currentAnimation ||
-                this.pendingAnimation);
-            if (!this.isTreeAnimating) {
-                this.targetDelta = this.relativeTarget = undefined;
-            }
-            if (!this.layout || !(layout || layoutId))
-                return;
-            /**
-             * Reset the corrected box with the latest values from box, as we're then going
-             * to perform mutative operations on it.
-             */
-            copyBoxInto(this.layoutCorrected, this.layout.layoutBox);
-            /**
-             * Record previous tree scales before updating.
-             */
-            const prevTreeScaleX = this.treeScale.x;
-            const prevTreeScaleY = this.treeScale.y;
-            /**
-             * Apply all the parent deltas to this box to produce the corrected box. This
-             * is the layout box, as it will appear on screen as a result of the transforms of its parents.
-             */
-            applyTreeDeltas(this.layoutCorrected, this.treeScale, this.path, isShared);
-            /**
-             * If this layer needs to perform scale correction but doesn't have a target,
-             * use the layout as the target.
-             */
-            if (lead.layout &&
-                !lead.target &&
-                (this.treeScale.x !== 1 || this.treeScale.y !== 1)) {
-                lead.target = lead.layout.layoutBox;
-                lead.targetWithTransforms = createBox();
-            }
-            const { target } = lead;
-            if (!target) {
-                /**
-                 * If we don't have a target to project into, but we were previously
-                 * projecting, we want to remove the stored transform and schedule
-                 * a render to ensure the elements reflect the removed transform.
-                 */
-                if (this.prevProjectionDelta) {
-                    this.createProjectionDeltas();
-                    this.scheduleRender();
-                }
-                return;
-            }
-            if (!this.projectionDelta || !this.prevProjectionDelta) {
-                this.createProjectionDeltas();
-            }
-            else {
-                copyAxisDeltaInto(this.prevProjectionDelta.x, this.projectionDelta.x);
-                copyAxisDeltaInto(this.prevProjectionDelta.y, this.projectionDelta.y);
-            }
-            /**
-             * Update the delta between the corrected box and the target box before user-set transforms were applied.
-             * This will allow us to calculate the corrected borderRadius and boxShadow to compensate
-             * for our layout reprojection, but still allow them to be scaled correctly by the user.
-             * It might be that to simplify this we may want to accept that user-set scale is also corrected
-             * and we wouldn't have to keep and calc both deltas, OR we could support a user setting
-             * to allow people to choose whether these styles are corrected based on just the
-             * layout reprojection or the final bounding box.
-             */
-            calcBoxDelta(this.projectionDelta, this.layoutCorrected, target, this.latestValues);
-            if (this.treeScale.x !== prevTreeScaleX ||
-                this.treeScale.y !== prevTreeScaleY ||
-                !axisDeltaEquals(this.projectionDelta.x, this.prevProjectionDelta.x) ||
-                !axisDeltaEquals(this.projectionDelta.y, this.prevProjectionDelta.y)) {
-                this.hasProjected = true;
-                this.scheduleRender();
-                this.notifyListeners("projectionUpdate", target);
-            }
-            /**
-             * Increase debug counter for recalculated projections
-             */
-            if (isDebug) {
-                metrics.recalculatedProjection++;
-            }
-        }
-        hide() {
-            this.isVisible = false;
-            // TODO: Schedule render
-        }
-        show() {
-            this.isVisible = true;
-            // TODO: Schedule render
-        }
-        scheduleRender(notifyAll = true) {
-            var _a;
-            (_a = this.options.visualElement) === null || _a === void 0 ? void 0 : _a.scheduleRender();
-            if (notifyAll) {
-                const stack = this.getStack();
-                stack && stack.scheduleRender();
-            }
-            if (this.resumingFrom && !this.resumingFrom.instance) {
-                this.resumingFrom = undefined;
-            }
-        }
-        createProjectionDeltas() {
-            this.prevProjectionDelta = createDelta();
-            this.projectionDelta = createDelta();
-            this.projectionDeltaWithTransform = createDelta();
-        }
-        setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false) {
-            const snapshot = this.snapshot;
-            const snapshotLatestValues = snapshot
-                ? snapshot.latestValues
-                : {};
-            const mixedValues = { ...this.latestValues };
-            const targetDelta = createDelta();
-            if (!this.relativeParent ||
-                !this.relativeParent.options.layoutRoot) {
-                this.relativeTarget = this.relativeTargetOrigin = undefined;
-            }
-            this.attemptToResolveRelativeTarget = !hasOnlyRelativeTargetChanged;
-            const relativeLayout = createBox();
-            const snapshotSource = snapshot ? snapshot.source : undefined;
-            const layoutSource = this.layout ? this.layout.source : undefined;
-            const isSharedLayoutAnimation = snapshotSource !== layoutSource;
-            const stack = this.getStack();
-            const isOnlyMember = !stack || stack.members.length <= 1;
-            const shouldCrossfadeOpacity = Boolean(isSharedLayoutAnimation &&
-                !isOnlyMember &&
-                this.options.crossfade === true &&
-                !this.path.some(hasOpacityCrossfade));
-            this.animationProgress = 0;
-            let prevRelativeTarget;
-            this.mixTargetDelta = (latest) => {
-                const progress = latest / 1000;
-                mixAxisDelta(targetDelta.x, delta.x, progress);
-                mixAxisDelta(targetDelta.y, delta.y, progress);
-                this.setTargetDelta(targetDelta);
-                if (this.relativeTarget &&
-                    this.relativeTargetOrigin &&
-                    this.layout &&
-                    this.relativeParent &&
-                    this.relativeParent.layout) {
-                    calcRelativePosition(relativeLayout, this.layout.layoutBox, this.relativeParent.layout.layoutBox);
-                    mixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress);
-                    /**
-                     * If this is an unchanged relative target we can consider the
-                     * projection not dirty.
-                     */
-                    if (prevRelativeTarget &&
-                        boxEquals(this.relativeTarget, prevRelativeTarget)) {
-                        this.isProjectionDirty = false;
-                    }
-                    if (!prevRelativeTarget)
-                        prevRelativeTarget = createBox();
-                    copyBoxInto(prevRelativeTarget, this.relativeTarget);
-                }
-                if (isSharedLayoutAnimation) {
-                    this.animationValues = mixedValues;
-                    mixValues(mixedValues, snapshotLatestValues, this.latestValues, progress, shouldCrossfadeOpacity, isOnlyMember);
-                }
-                this.root.scheduleUpdateProjection();
-                this.scheduleRender();
-                this.animationProgress = progress;
-            };
-            this.mixTargetDelta(this.options.layoutRoot ? 1000 : 0);
-        }
-        startAnimation(options) {
-            this.notifyListeners("animationStart");
-            this.currentAnimation && this.currentAnimation.stop();
-            if (this.resumingFrom && this.resumingFrom.currentAnimation) {
-                this.resumingFrom.currentAnimation.stop();
-            }
-            if (this.pendingAnimation) {
-                cancelFrame(this.pendingAnimation);
-                this.pendingAnimation = undefined;
-            }
-            /**
-             * Start the animation in the next frame to have a frame with progress 0,
-             * where the target is the same as when the animation started, so we can
-             * calculate the relative positions correctly for instant transitions.
-             */
-            this.pendingAnimation = frame.update(() => {
-                globalProjectionState.hasAnimatedSinceResize = true;
-                this.currentAnimation = animateSingleValue(0, animationTarget, {
-                    ...options,
-                    onUpdate: (latest) => {
-                        this.mixTargetDelta(latest);
-                        options.onUpdate && options.onUpdate(latest);
-                    },
-                    onComplete: () => {
-                        options.onComplete && options.onComplete();
-                        this.completeAnimation();
-                    },
-                });
-                if (this.resumingFrom) {
-                    this.resumingFrom.currentAnimation = this.currentAnimation;
-                }
-                this.pendingAnimation = undefined;
-            });
-        }
-        completeAnimation() {
-            if (this.resumingFrom) {
-                this.resumingFrom.currentAnimation = undefined;
-                this.resumingFrom.preserveOpacity = undefined;
-            }
-            const stack = this.getStack();
-            stack && stack.exitAnimationComplete();
-            this.resumingFrom =
-                this.currentAnimation =
-                    this.animationValues =
-                        undefined;
-            this.notifyListeners("animationComplete");
-        }
-        finishAnimation() {
-            if (this.currentAnimation) {
-                this.mixTargetDelta && this.mixTargetDelta(animationTarget);
-                this.currentAnimation.stop();
-            }
-            this.completeAnimation();
-        }
-        applyTransformsToTarget() {
-            const lead = this.getLead();
-            let { targetWithTransforms, target, layout, latestValues } = lead;
-            if (!targetWithTransforms || !target || !layout)
-                return;
-            /**
-             * If we're only animating position, and this element isn't the lead element,
-             * then instead of projecting into the lead box we instead want to calculate
-             * a new target that aligns the two boxes but maintains the layout shape.
-             */
-            if (this !== lead &&
-                this.layout &&
-                layout &&
-                shouldAnimatePositionOnly(this.options.animationType, this.layout.layoutBox, layout.layoutBox)) {
-                target = this.target || createBox();
-                const xLength = calcLength(this.layout.layoutBox.x);
-                target.x.min = lead.target.x.min;
-                target.x.max = target.x.min + xLength;
-                const yLength = calcLength(this.layout.layoutBox.y);
-                target.y.min = lead.target.y.min;
-                target.y.max = target.y.min + yLength;
-            }
-            copyBoxInto(targetWithTransforms, target);
-            /**
-             * Apply the latest user-set transforms to the targetBox to produce the targetBoxFinal.
-             * This is the final box that we will then project into by calculating a transform delta and
-             * applying it to the corrected box.
-             */
-            transformBox(targetWithTransforms, latestValues);
-            /**
-             * Update the delta between the corrected box and the final target box, after
-             * user-set transforms are applied to it. This will be used by the renderer to
-             * create a transform style that will reproject the element from its layout layout
-             * into the desired bounding box.
-             */
-            calcBoxDelta(this.projectionDeltaWithTransform, this.layoutCorrected, targetWithTransforms, latestValues);
-        }
-        registerSharedNode(layoutId, node) {
-            if (!this.sharedNodes.has(layoutId)) {
-                this.sharedNodes.set(layoutId, new NodeStack());
-            }
-            const stack = this.sharedNodes.get(layoutId);
-            stack.add(node);
-            const config = node.options.initialPromotionConfig;
-            node.promote({
-                transition: config ? config.transition : undefined,
-                preserveFollowOpacity: config && config.shouldPreserveFollowOpacity
-                    ? config.shouldPreserveFollowOpacity(node)
-                    : undefined,
-            });
-        }
-        isLead() {
-            const stack = this.getStack();
-            return stack ? stack.lead === this : true;
-        }
-        getLead() {
-            var _a;
-            const { layoutId } = this.options;
-            return layoutId ? ((_a = this.getStack()) === null || _a === void 0 ? void 0 : _a.lead) || this : this;
-        }
-        getPrevLead() {
-            var _a;
-            const { layoutId } = this.options;
-            return layoutId ? (_a = this.getStack()) === null || _a === void 0 ? void 0 : _a.prevLead : undefined;
-        }
-        getStack() {
-            const { layoutId } = this.options;
-            if (layoutId)
-                return this.root.sharedNodes.get(layoutId);
-        }
-        promote({ needsReset, transition, preserveFollowOpacity, } = {}) {
-            const stack = this.getStack();
-            if (stack)
-                stack.promote(this, preserveFollowOpacity);
-            if (needsReset) {
-                this.projectionDelta = undefined;
-                this.needsReset = true;
-            }
-            if (transition)
-                this.setOptions({ transition });
-        }
-        relegate() {
-            const stack = this.getStack();
-            if (stack) {
-                return stack.relegate(this);
-            }
-            else {
-                return false;
-            }
-        }
-        resetSkewAndRotation() {
-            const { visualElement } = this.options;
-            if (!visualElement)
-                return;
-            // If there's no detected skew or rotation values, we can early return without a forced render.
-            let hasDistortingTransform = false;
-            /**
-             * An unrolled check for rotation values. Most elements don't have any rotation and
-             * skipping the nested loop and new object creation is 50% faster.
-             */
-            const { latestValues } = visualElement;
-            if (latestValues.z ||
-                latestValues.rotate ||
-                latestValues.rotateX ||
-                latestValues.rotateY ||
-                latestValues.rotateZ ||
-                latestValues.skewX ||
-                latestValues.skewY) {
-                hasDistortingTransform = true;
-            }
-            // If there's no distorting values, we don't need to do any more.
-            if (!hasDistortingTransform)
-                return;
-            const resetValues = {};
-            if (latestValues.z) {
-                resetDistortingTransform("z", visualElement, resetValues, this.animationValues);
-            }
-            // Check the skew and rotate value of all axes and reset to 0
-            for (let i = 0; i < transformAxes.length; i++) {
-                resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
-                resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
-            }
-            // Force a render of this element to apply the transform with all skews and rotations
-            // set to 0.
-            visualElement.render();
-            // Put back all the values we reset
-            for (const key in resetValues) {
-                visualElement.setStaticValue(key, resetValues[key]);
-                if (this.animationValues) {
-                    this.animationValues[key] = resetValues[key];
-                }
-            }
-            // Schedule a render for the next frame. This ensures we won't visually
-            // see the element with the reset rotate value applied.
-            visualElement.scheduleRender();
-        }
-        getProjectionStyles(styleProp) {
-            var _a, _b;
-            if (!this.instance || this.isSVG)
-                return undefined;
-            if (!this.isVisible) {
-                return hiddenVisibility;
-            }
-            const styles = {
-                visibility: "",
-            };
-            const transformTemplate = this.getTransformTemplate();
-            if (this.needsReset) {
-                this.needsReset = false;
-                styles.opacity = "";
-                styles.pointerEvents =
-                    resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
-                styles.transform = transformTemplate
-                    ? transformTemplate(this.latestValues, "")
-                    : "none";
-                return styles;
-            }
-            const lead = this.getLead();
-            if (!this.projectionDelta || !this.layout || !lead.target) {
-                const emptyStyles = {};
-                if (this.options.layoutId) {
-                    emptyStyles.opacity =
-                        this.latestValues.opacity !== undefined
-                            ? this.latestValues.opacity
-                            : 1;
-                    emptyStyles.pointerEvents =
-                        resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
-                }
-                if (this.hasProjected && !hasTransform(this.latestValues)) {
-                    emptyStyles.transform = transformTemplate
-                        ? transformTemplate({}, "")
-                        : "none";
-                    this.hasProjected = false;
-                }
-                return emptyStyles;
-            }
-            const valuesToRender = lead.animationValues || lead.latestValues;
-            this.applyTransformsToTarget();
-            styles.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
-            if (transformTemplate) {
-                styles.transform = transformTemplate(valuesToRender, styles.transform);
-            }
-            const { x, y } = this.projectionDelta;
-            styles.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
-            if (lead.animationValues) {
-                /**
-                 * If the lead component is animating, assign this either the entering/leaving
-                 * opacity
-                 */
-                styles.opacity =
-                    lead === this
-                        ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0 ? _b : 1
-                        : this.preserveOpacity
-                            ? this.latestValues.opacity
-                            : valuesToRender.opacityExit;
-            }
-            else {
-                /**
-                 * Or we're not animating at all, set the lead component to its layout
-                 * opacity and other components to hidden.
-                 */
-                styles.opacity =
-                    lead === this
-                        ? valuesToRender.opacity !== undefined
-                            ? valuesToRender.opacity
-                            : ""
-                        : valuesToRender.opacityExit !== undefined
-                            ? valuesToRender.opacityExit
-                            : 0;
-            }
-            /**
-             * Apply scale correction
-             */
-            for (const key in scaleCorrectors) {
-                if (valuesToRender[key] === undefined)
-                    continue;
-                const { correct, applyTo } = scaleCorrectors[key];
-                /**
-                 * Only apply scale correction to the value if we have an
-                 * active projection transform. Otherwise these values become
-                 * vulnerable to distortion if the element changes size without
-                 * a corresponding layout animation.
-                 */
-                const corrected = styles.transform === "none"
-                    ? valuesToRender[key]
-                    : correct(valuesToRender[key], lead);
-                if (applyTo) {
-                    const num = applyTo.length;
-                    for (let i = 0; i < num; i++) {
-                        styles[applyTo[i]] = corrected;
-                    }
-                }
-                else {
-                    styles[key] = corrected;
-                }
-            }
-            /**
-             * Disable pointer events on follow components. This is to ensure
-             * that if a follow component covers a lead component it doesn't block
-             * pointer events on the lead.
-             */
-            if (this.options.layoutId) {
-                styles.pointerEvents =
-                    lead === this
-                        ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || ""
-                        : "none";
-            }
-            return styles;
-        }
-        clearSnapshot() {
-            this.resumeFrom = this.snapshot = undefined;
-        }
-        // Only run on root
-        resetTree() {
-            this.root.nodes.forEach((node) => { var _a; return (_a = node.currentAnimation) === null || _a === void 0 ? void 0 : _a.stop(); });
-            this.root.nodes.forEach(clearMeasurements);
-            this.root.sharedNodes.clear();
-        }
-    };
-}
-function updateLayout(node) {
-    node.updateLayout();
-}
-function notifyLayoutUpdate(node) {
-    var _a;
-    const snapshot = ((_a = node.resumeFrom) === null || _a === void 0 ? void 0 : _a.snapshot) || node.snapshot;
-    if (node.isLead() &&
-        node.layout &&
-        snapshot &&
-        node.hasListeners("didUpdate")) {
-        const { layoutBox: layout, measuredBox: measuredLayout } = node.layout;
-        const { animationType } = node.options;
-        const isShared = snapshot.source !== node.layout.source;
-        // TODO Maybe we want to also resize the layout snapshot so we don't trigger
-        // animations for instance if layout="size" and an element has only changed position
-        if (animationType === "size") {
-            eachAxis((axis) => {
-                const axisSnapshot = isShared
-                    ? snapshot.measuredBox[axis]
-                    : snapshot.layoutBox[axis];
-                const length = calcLength(axisSnapshot);
-                axisSnapshot.min = layout[axis].min;
-                axisSnapshot.max = axisSnapshot.min + length;
-            });
-        }
-        else if (shouldAnimatePositionOnly(animationType, snapshot.layoutBox, layout)) {
-            eachAxis((axis) => {
-                const axisSnapshot = isShared
-                    ? snapshot.measuredBox[axis]
-                    : snapshot.layoutBox[axis];
-                const length = calcLength(layout[axis]);
-                axisSnapshot.max = axisSnapshot.min + length;
-                /**
-                 * Ensure relative target gets resized and rerendererd
-                 */
-                if (node.relativeTarget && !node.currentAnimation) {
-                    node.isProjectionDirty = true;
-                    node.relativeTarget[axis].max =
-                        node.relativeTarget[axis].min + length;
-                }
-            });
-        }
-        const layoutDelta = createDelta();
-        calcBoxDelta(layoutDelta, layout, snapshot.layoutBox);
-        const visualDelta = createDelta();
-        if (isShared) {
-            calcBoxDelta(visualDelta, node.applyTransform(measuredLayout, true), snapshot.measuredBox);
-        }
-        else {
-            calcBoxDelta(visualDelta, layout, snapshot.layoutBox);
-        }
-        const hasLayoutChanged = !isDeltaZero(layoutDelta);
-        let hasRelativeTargetChanged = false;
-        if (!node.resumeFrom) {
-            const relativeParent = node.getClosestProjectingParent();
-            /**
-             * If the relativeParent is itself resuming from a different element then
-             * the relative snapshot is not relavent
-             */
-            if (relativeParent && !relativeParent.resumeFrom) {
-                const { snapshot: parentSnapshot, layout: parentLayout } = relativeParent;
-                if (parentSnapshot && parentLayout) {
-                    const relativeSnapshot = createBox();
-                    calcRelativePosition(relativeSnapshot, snapshot.layoutBox, parentSnapshot.layoutBox);
-                    const relativeLayout = createBox();
-                    calcRelativePosition(relativeLayout, layout, parentLayout.layoutBox);
-                    if (!boxEqualsRounded(relativeSnapshot, relativeLayout)) {
-                        hasRelativeTargetChanged = true;
-                    }
-                    if (relativeParent.options.layoutRoot) {
-                        node.relativeTarget = relativeLayout;
-                        node.relativeTargetOrigin = relativeSnapshot;
-                        node.relativeParent = relativeParent;
-                    }
-                }
-            }
-        }
-        node.notifyListeners("didUpdate", {
-            layout,
-            snapshot,
-            delta: visualDelta,
-            layoutDelta,
-            hasLayoutChanged,
-            hasRelativeTargetChanged,
-        });
-    }
-    else if (node.isLead()) {
-        const { onExitComplete } = node.options;
-        onExitComplete && onExitComplete();
-    }
-    /**
-     * Clearing transition
-     * TODO: Investigate why this transition is being passed in as {type: false } from Framer
-     * and why we need it at all
-     */
-    node.options.transition = undefined;
-}
-function propagateDirtyNodes(node) {
-    /**
-     * Increase debug counter for nodes encountered this frame
-     */
-    if (isDebug) {
-        metrics.totalNodes++;
-    }
-    if (!node.parent)
-        return;
-    /**
-     * If this node isn't projecting, propagate isProjectionDirty. It will have
-     * no performance impact but it will allow the next child that *is* projecting
-     * but *isn't* dirty to just check its parent to see if *any* ancestor needs
-     * correcting.
-     */
-    if (!node.isProjecting()) {
-        node.isProjectionDirty = node.parent.isProjectionDirty;
-    }
-    /**
-     * Propagate isSharedProjectionDirty and isTransformDirty
-     * throughout the whole tree. A future revision can take another look at
-     * this but for safety we still recalcualte shared nodes.
-     */
-    node.isSharedProjectionDirty || (node.isSharedProjectionDirty = Boolean(node.isProjectionDirty ||
-        node.parent.isProjectionDirty ||
-        node.parent.isSharedProjectionDirty));
-    node.isTransformDirty || (node.isTransformDirty = node.parent.isTransformDirty);
-}
-function cleanDirtyNodes(node) {
-    node.isProjectionDirty =
-        node.isSharedProjectionDirty =
-            node.isTransformDirty =
-                false;
-}
-function clearSnapshot(node) {
-    node.clearSnapshot();
-}
-function clearMeasurements(node) {
-    node.clearMeasurements();
-}
-function clearIsLayoutDirty(node) {
-    node.isLayoutDirty = false;
-}
-function resetTransformStyle(node) {
-    const { visualElement } = node.options;
-    if (visualElement && visualElement.getProps().onBeforeLayoutMeasure) {
-        visualElement.notify("BeforeLayoutMeasure");
-    }
-    node.resetTransform();
-}
-function finishAnimation(node) {
-    node.finishAnimation();
-    node.targetDelta = node.relativeTarget = node.target = undefined;
-    node.isProjectionDirty = true;
-}
-function resolveTargetDelta(node) {
-    node.resolveTargetDelta();
-}
-function calcProjection(node) {
-    node.calcProjection();
-}
-function resetSkewAndRotation(node) {
-    node.resetSkewAndRotation();
-}
-function removeLeadSnapshots(stack) {
-    stack.removeLeadSnapshot();
-}
-function mixAxisDelta(output, delta, p) {
-    output.translate = mixNumber$1(delta.translate, 0, p);
-    output.scale = mixNumber$1(delta.scale, 1, p);
-    output.origin = delta.origin;
-    output.originPoint = delta.originPoint;
-}
-function mixAxis(output, from, to, p) {
-    output.min = mixNumber$1(from.min, to.min, p);
-    output.max = mixNumber$1(from.max, to.max, p);
-}
-function mixBox(output, from, to, p) {
-    mixAxis(output.x, from.x, to.x, p);
-    mixAxis(output.y, from.y, to.y, p);
-}
-function hasOpacityCrossfade(node) {
-    return (node.animationValues && node.animationValues.opacityExit !== undefined);
-}
-const defaultLayoutTransition = {
-    duration: 0.45,
-    ease: [0.4, 0, 0.1, 1],
-};
-const userAgentContains = (string) => typeof navigator !== "undefined" &&
-    navigator.userAgent &&
-    navigator.userAgent.toLowerCase().includes(string);
-/**
- * Measured bounding boxes must be rounded in Safari and
- * left untouched in Chrome, otherwise non-integer layouts within scaled-up elements
- * can appear to jump.
- */
-const roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/")
-    ? Math.round
-    : noop;
-function roundAxis(axis) {
-    // Round to the nearest .5 pixels to support subpixel layouts
-    axis.min = roundPoint(axis.min);
-    axis.max = roundPoint(axis.max);
-}
-function roundBox(box) {
-    roundAxis(box.x);
-    roundAxis(box.y);
-}
-function shouldAnimatePositionOnly(animationType, snapshot, layout) {
-    return (animationType === "position" ||
-        (animationType === "preserve-aspect" &&
-            !isNear(aspectRatio(snapshot), aspectRatio(layout), 0.2)));
-}
-function checkNodeWasScrollRoot(node) {
-    var _a;
-    return node !== node.root && ((_a = node.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot);
-}
-
-const DocumentProjectionNode = createProjectionNode({
-    attachResizeListener: (ref, notify) => addDomEvent(ref, "resize", notify),
-    measureScroll: () => ({
-        x: document.documentElement.scrollLeft || document.body.scrollLeft,
-        y: document.documentElement.scrollTop || document.body.scrollTop,
-    }),
-    checkIsScrollRoot: () => true,
-});
-
-const rootProjectionNode = {
-    current: undefined,
-};
-const HTMLProjectionNode = createProjectionNode({
-    measureScroll: (instance) => ({
-        x: instance.scrollLeft,
-        y: instance.scrollTop,
-    }),
-    defaultParent: () => {
-        if (!rootProjectionNode.current) {
-            const documentNode = new DocumentProjectionNode({});
-            documentNode.mount(window);
-            documentNode.setOptions({ layoutScroll: true });
-            rootProjectionNode.current = documentNode;
-        }
-        return rootProjectionNode.current;
-    },
-    resetTransform: (instance, value) => {
-        instance.style.transform = value !== undefined ? value : "none";
-    },
-    checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance).position === "fixed"),
-});
-
-const drag = {
-    pan: {
-        Feature: PanGesture,
-    },
-    drag: {
-        Feature: DragGesture,
-        ProjectionNode: HTMLProjectionNode,
-        MeasureLayout,
-    },
-};
-
-function handleHoverEvent(node, event, lifecycle) {
-    const { props } = node;
-    if (node.animationState && props.whileHover) {
-        node.animationState.setActive("whileHover", lifecycle === "Start");
-    }
-    const eventName = ("onHover" + lifecycle);
-    const callback = props[eventName];
-    if (callback) {
-        frame.postRender(() => callback(event, extractEventInfo(event)));
-    }
-}
-class HoverGesture extends Feature {
-    mount() {
-        const { current } = this.node;
-        if (!current)
-            return;
-        this.unmount = hover(current, (startEvent) => {
-            handleHoverEvent(this.node, startEvent, "Start");
-            return (endEvent) => handleHoverEvent(this.node, endEvent, "End");
-        });
-    }
-    unmount() { }
-}
-
-class FocusGesture extends Feature {
-    constructor() {
-        super(...arguments);
-        this.isActive = false;
-    }
-    onFocus() {
-        let isFocusVisible = false;
-        /**
-         * If this element doesn't match focus-visible then don't
-         * apply whileHover. But, if matches throws that focus-visible
-         * is not a valid selector then in that browser outline styles will be applied
-         * to the element by default and we want to match that behaviour with whileFocus.
-         */
-        try {
-            isFocusVisible = this.node.current.matches(":focus-visible");
-        }
-        catch (e) {
-            isFocusVisible = true;
-        }
-        if (!isFocusVisible || !this.node.animationState)
-            return;
-        this.node.animationState.setActive("whileFocus", true);
-        this.isActive = true;
-    }
-    onBlur() {
-        if (!this.isActive || !this.node.animationState)
-            return;
-        this.node.animationState.setActive("whileFocus", false);
-        this.isActive = false;
-    }
-    mount() {
-        this.unmount = pipe(addDomEvent(this.node.current, "focus", () => this.onFocus()), addDomEvent(this.node.current, "blur", () => this.onBlur()));
-    }
-    unmount() { }
-}
-
-function handlePressEvent(node, event, lifecycle) {
-    const { props } = node;
-    if (node.animationState && props.whileTap) {
-        node.animationState.setActive("whileTap", lifecycle === "Start");
-    }
-    const eventName = ("onTap" + (lifecycle === "End" ? "" : lifecycle));
-    const callback = props[eventName];
-    if (callback) {
-        frame.postRender(() => callback(event, extractEventInfo(event)));
-    }
-}
-class PressGesture extends Feature {
-    mount() {
-        const { current } = this.node;
-        if (!current)
-            return;
-        this.unmount = press(current, (startEvent) => {
-            handlePressEvent(this.node, startEvent, "Start");
-            return (endEvent, { success }) => handlePressEvent(this.node, endEvent, success ? "End" : "Cancel");
-        }, { useGlobalTarget: this.node.props.globalTapTarget });
-    }
-    unmount() { }
-}
-
-/**
- * Map an IntersectionHandler callback to an element. We only ever make one handler for one
- * element, so even though these handlers might all be triggered by different
- * observers, we can keep them in the same map.
- */
-const observerCallbacks = new WeakMap();
-/**
- * Multiple observers can be created for multiple element/document roots. Each with
- * different settings. So here we store dictionaries of observers to each root,
- * using serialised settings (threshold/margin) as lookup keys.
- */
-const observers = new WeakMap();
-const fireObserverCallback = (entry) => {
-    const callback = observerCallbacks.get(entry.target);
-    callback && callback(entry);
-};
-const fireAllObserverCallbacks = (entries) => {
-    entries.forEach(fireObserverCallback);
-};
-function initIntersectionObserver({ root, ...options }) {
-    const lookupRoot = root || document;
-    /**
-     * If we don't have an observer lookup map for this root, create one.
-     */
-    if (!observers.has(lookupRoot)) {
-        observers.set(lookupRoot, {});
-    }
-    const rootObservers = observers.get(lookupRoot);
-    const key = JSON.stringify(options);
-    /**
-     * If we don't have an observer for this combination of root and settings,
-     * create one.
-     */
-    if (!rootObservers[key]) {
-        rootObservers[key] = new IntersectionObserver(fireAllObserverCallbacks, { root, ...options });
-    }
-    return rootObservers[key];
-}
-function observeIntersection(element, options, callback) {
-    const rootInteresectionObserver = initIntersectionObserver(options);
-    observerCallbacks.set(element, callback);
-    rootInteresectionObserver.observe(element);
-    return () => {
-        observerCallbacks.delete(element);
-        rootInteresectionObserver.unobserve(element);
-    };
-}
-
-const thresholdNames = {
-    some: 0,
-    all: 1,
-};
-class InViewFeature extends Feature {
-    constructor() {
-        super(...arguments);
-        this.hasEnteredView = false;
-        this.isInView = false;
-    }
-    startObserver() {
-        this.unmount();
-        const { viewport = {} } = this.node.getProps();
-        const { root, margin: rootMargin, amount = "some", once } = viewport;
-        const options = {
-            root: root ? root.current : undefined,
-            rootMargin,
-            threshold: typeof amount === "number" ? amount : thresholdNames[amount],
-        };
-        const onIntersectionUpdate = (entry) => {
-            const { isIntersecting } = entry;
-            /**
-             * If there's been no change in the viewport state, early return.
-             */
-            if (this.isInView === isIntersecting)
-                return;
-            this.isInView = isIntersecting;
-            /**
-             * Handle hasEnteredView. If this is only meant to run once, and
-             * element isn't visible, early return. Otherwise set hasEnteredView to true.
-             */
-            if (once && !isIntersecting && this.hasEnteredView) {
-                return;
-            }
-            else if (isIntersecting) {
-                this.hasEnteredView = true;
-            }
-            if (this.node.animationState) {
-                this.node.animationState.setActive("whileInView", isIntersecting);
-            }
-            /**
-             * Use the latest committed props rather than the ones in scope
-             * when this observer is created
-             */
-            const { onViewportEnter, onViewportLeave } = this.node.getProps();
-            const callback = isIntersecting ? onViewportEnter : onViewportLeave;
-            callback && callback(entry);
-        };
-        return observeIntersection(this.node.current, options, onIntersectionUpdate);
-    }
-    mount() {
-        this.startObserver();
-    }
-    update() {
-        if (typeof IntersectionObserver === "undefined")
-            return;
-        const { props, prevProps } = this.node;
-        const hasOptionsChanged = ["amount", "margin", "root"].some(hasViewportOptionChanged(props, prevProps));
-        if (hasOptionsChanged) {
-            this.startObserver();
-        }
-    }
-    unmount() { }
-}
-function hasViewportOptionChanged({ viewport = {} }, { viewport: prevViewport = {} } = {}) {
-    return (name) => viewport[name] !== prevViewport[name];
-}
-
-const gestureAnimations = {
-    inView: {
-        Feature: InViewFeature,
-    },
-    tap: {
-        Feature: PressGesture,
-    },
-    focus: {
-        Feature: FocusGesture,
-    },
-    hover: {
-        Feature: HoverGesture,
-    },
-};
-
-const layout = {
-    layout: {
-        ProjectionNode: HTMLProjectionNode,
-        MeasureLayout,
-    },
-};
-
-// Does this device prefer reduced motion? Returns `null` server-side.
-const prefersReducedMotion = { current: null };
-const hasReducedMotionListener = { current: false };
-
-function initPrefersReducedMotion() {
-    hasReducedMotionListener.current = true;
-    if (!isBrowser)
-        return;
-    if (window.matchMedia) {
-        const motionMediaQuery = window.matchMedia("(prefers-reduced-motion)");
-        const setReducedMotionPreferences = () => (prefersReducedMotion.current = motionMediaQuery.matches);
-        motionMediaQuery.addListener(setReducedMotionPreferences);
-        setReducedMotionPreferences();
-    }
-    else {
-        prefersReducedMotion.current = false;
-    }
-}
-
-/**
- * A list of all ValueTypes
- */
-const valueTypes = [...dimensionValueTypes, color, complex];
-/**
- * Tests a value against the list of ValueTypes
- */
-const findValueType = (v) => valueTypes.find(testValueType(v));
-
-const visualElementStore = new WeakMap();
-
-function updateMotionValuesFromProps(element, next, prev) {
-    for (const key in next) {
-        const nextValue = next[key];
-        const prevValue = prev[key];
-        if (isMotionValue(nextValue)) {
-            /**
-             * If this is a motion value found in props or style, we want to add it
-             * to our visual element's motion value map.
-             */
-            element.addValue(key, nextValue);
-            /**
-             * Check the version of the incoming motion value with this version
-             * and warn against mismatches.
-             */
-            if (process.env.NODE_ENV === "development") {
-                warnOnce(nextValue.version === "11.18.2", `Attempting to mix Motion versions ${nextValue.version} with 11.18.2 may not work as expected.`);
-            }
-        }
-        else if (isMotionValue(prevValue)) {
-            /**
-             * If we're swapping from a motion value to a static value,
-             * create a new motion value from that
-             */
-            element.addValue(key, motionValue(nextValue, { owner: element }));
-        }
-        else if (prevValue !== nextValue) {
-            /**
-             * If this is a flat value that has changed, update the motion value
-             * or create one if it doesn't exist. We only want to do this if we're
-             * not handling the value with our animation state.
-             */
-            if (element.hasValue(key)) {
-                const existingValue = element.getValue(key);
-                if (existingValue.liveStyle === true) {
-                    existingValue.jump(nextValue);
-                }
-                else if (!existingValue.hasAnimated) {
-                    existingValue.set(nextValue);
-                }
-            }
-            else {
-                const latestValue = element.getStaticValue(key);
-                element.addValue(key, motionValue(latestValue !== undefined ? latestValue : nextValue, { owner: element }));
-            }
-        }
-    }
-    // Handle removed values
-    for (const key in prev) {
-        if (next[key] === undefined)
-            element.removeValue(key);
-    }
-    return next;
-}
-
-const propEventHandlers = [
-    "AnimationStart",
-    "AnimationComplete",
-    "Update",
-    "BeforeLayoutMeasure",
-    "LayoutMeasure",
-    "LayoutAnimationStart",
-    "LayoutAnimationComplete",
-];
-/**
- * A VisualElement is an imperative abstraction around UI elements such as
- * HTMLElement, SVGElement, Three.Object3D etc.
- */
-class VisualElement {
-    /**
-     * This method takes React props and returns found MotionValues. For example, HTML
-     * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-     *
-     * This isn't an abstract method as it needs calling in the constructor, but it is
-     * intended to be one.
-     */
-    scrapeMotionValuesFromProps(_props, _prevProps, _visualElement) {
-        return {};
-    }
-    constructor({ parent, props, presenceContext, reducedMotionConfig, blockInitialAnimation, visualState, }, options = {}) {
-        /**
-         * A reference to the current underlying Instance, e.g. a HTMLElement
-         * or Three.Mesh etc.
-         */
-        this.current = null;
-        /**
-         * A set containing references to this VisualElement's children.
-         */
-        this.children = new Set();
-        /**
-         * Determine what role this visual element should take in the variant tree.
-         */
-        this.isVariantNode = false;
-        this.isControllingVariants = false;
-        /**
-         * Decides whether this VisualElement should animate in reduced motion
-         * mode.
-         *
-         * TODO: This is currently set on every individual VisualElement but feels
-         * like it could be set globally.
-         */
-        this.shouldReduceMotion = null;
-        /**
-         * A map of all motion values attached to this visual element. Motion
-         * values are source of truth for any given animated value. A motion
-         * value might be provided externally by the component via props.
-         */
-        this.values = new Map();
-        this.KeyframeResolver = KeyframeResolver;
-        /**
-         * Cleanup functions for active features (hover/tap/exit etc)
-         */
-        this.features = {};
-        /**
-         * A map of every subscription that binds the provided or generated
-         * motion values onChange listeners to this visual element.
-         */
-        this.valueSubscriptions = new Map();
-        /**
-         * A reference to the previously-provided motion values as returned
-         * from scrapeMotionValuesFromProps. We use the keys in here to determine
-         * if any motion values need to be removed after props are updated.
-         */
-        this.prevMotionValues = {};
-        /**
-         * An object containing a SubscriptionManager for each active event.
-         */
-        this.events = {};
-        /**
-         * An object containing an unsubscribe function for each prop event subscription.
-         * For example, every "Update" event can have multiple subscribers via
-         * VisualElement.on(), but only one of those can be defined via the onUpdate prop.
-         */
-        this.propEventSubscriptions = {};
-        this.notifyUpdate = () => this.notify("Update", this.latestValues);
-        this.render = () => {
-            if (!this.current)
-                return;
-            this.triggerBuild();
-            this.renderInstance(this.current, this.renderState, this.props.style, this.projection);
-        };
-        this.renderScheduledAt = 0.0;
-        this.scheduleRender = () => {
-            const now = time.now();
-            if (this.renderScheduledAt < now) {
-                this.renderScheduledAt = now;
-                frame.render(this.render, false, true);
-            }
-        };
-        const { latestValues, renderState, onUpdate } = visualState;
-        this.onUpdate = onUpdate;
-        this.latestValues = latestValues;
-        this.baseTarget = { ...latestValues };
-        this.initialValues = props.initial ? { ...latestValues } : {};
-        this.renderState = renderState;
-        this.parent = parent;
-        this.props = props;
-        this.presenceContext = presenceContext;
-        this.depth = parent ? parent.depth + 1 : 0;
-        this.reducedMotionConfig = reducedMotionConfig;
-        this.options = options;
-        this.blockInitialAnimation = Boolean(blockInitialAnimation);
-        this.isControllingVariants = isControllingVariants(props);
-        this.isVariantNode = isVariantNode(props);
-        if (this.isVariantNode) {
-            this.variantChildren = new Set();
-        }
-        this.manuallyAnimateOnMount = Boolean(parent && parent.current);
-        /**
-         * Any motion values that are provided to the element when created
-         * aren't yet bound to the element, as this would technically be impure.
-         * However, we iterate through the motion values and set them to the
-         * initial values for this component.
-         *
-         * TODO: This is impure and we should look at changing this to run on mount.
-         * Doing so will break some tests but this isn't necessarily a breaking change,
-         * more a reflection of the test.
-         */
-        const { willChange, ...initialMotionValues } = this.scrapeMotionValuesFromProps(props, {}, this);
-        for (const key in initialMotionValues) {
-            const value = initialMotionValues[key];
-            if (latestValues[key] !== undefined && isMotionValue(value)) {
-                value.set(latestValues[key], false);
-            }
-        }
-    }
-    mount(instance) {
-        this.current = instance;
-        visualElementStore.set(instance, this);
-        if (this.projection && !this.projection.instance) {
-            this.projection.mount(instance);
-        }
-        if (this.parent && this.isVariantNode && !this.isControllingVariants) {
-            this.removeFromVariantTree = this.parent.addVariantChild(this);
-        }
-        this.values.forEach((value, key) => this.bindToMotionValue(key, value));
-        if (!hasReducedMotionListener.current) {
-            initPrefersReducedMotion();
-        }
-        this.shouldReduceMotion =
-            this.reducedMotionConfig === "never"
-                ? false
-                : this.reducedMotionConfig === "always"
-                    ? true
-                    : prefersReducedMotion.current;
-        if (process.env.NODE_ENV !== "production") {
-            warnOnce(this.shouldReduceMotion !== true, "You have Reduced Motion enabled on your device. Animations may not appear as expected.");
-        }
-        if (this.parent)
-            this.parent.children.add(this);
-        this.update(this.props, this.presenceContext);
-    }
-    unmount() {
-        visualElementStore.delete(this.current);
-        this.projection && this.projection.unmount();
-        cancelFrame(this.notifyUpdate);
-        cancelFrame(this.render);
-        this.valueSubscriptions.forEach((remove) => remove());
-        this.valueSubscriptions.clear();
-        this.removeFromVariantTree && this.removeFromVariantTree();
-        this.parent && this.parent.children.delete(this);
-        for (const key in this.events) {
-            this.events[key].clear();
-        }
-        for (const key in this.features) {
-            const feature = this.features[key];
-            if (feature) {
-                feature.unmount();
-                feature.isMounted = false;
-            }
-        }
-        this.current = null;
-    }
-    bindToMotionValue(key, value) {
-        if (this.valueSubscriptions.has(key)) {
-            this.valueSubscriptions.get(key)();
-        }
-        const valueIsTransform = transformProps.has(key);
-        const removeOnChange = value.on("change", (latestValue) => {
-            this.latestValues[key] = latestValue;
-            this.props.onUpdate && frame.preRender(this.notifyUpdate);
-            if (valueIsTransform && this.projection) {
-                this.projection.isTransformDirty = true;
-            }
-        });
-        const removeOnRenderRequest = value.on("renderRequest", this.scheduleRender);
-        let removeSyncCheck;
-        if (window.MotionCheckAppearSync) {
-            removeSyncCheck = window.MotionCheckAppearSync(this, key, value);
-        }
-        this.valueSubscriptions.set(key, () => {
-            removeOnChange();
-            removeOnRenderRequest();
-            if (removeSyncCheck)
-                removeSyncCheck();
-            if (value.owner)
-                value.stop();
-        });
-    }
-    sortNodePosition(other) {
-        /**
-         * If these nodes aren't even of the same type we can't compare their depth.
-         */
-        if (!this.current ||
-            !this.sortInstanceNodePosition ||
-            this.type !== other.type) {
-            return 0;
-        }
-        return this.sortInstanceNodePosition(this.current, other.current);
-    }
-    updateFeatures() {
-        let key = "animation";
-        for (key in featureDefinitions) {
-            const featureDefinition = featureDefinitions[key];
-            if (!featureDefinition)
-                continue;
-            const { isEnabled, Feature: FeatureConstructor } = featureDefinition;
-            /**
-             * If this feature is enabled but not active, make a new instance.
-             */
-            if (!this.features[key] &&
-                FeatureConstructor &&
-                isEnabled(this.props)) {
-                this.features[key] = new FeatureConstructor(this);
-            }
-            /**
-             * If we have a feature, mount or update it.
-             */
-            if (this.features[key]) {
-                const feature = this.features[key];
-                if (feature.isMounted) {
-                    feature.update();
-                }
-                else {
-                    feature.mount();
-                    feature.isMounted = true;
-                }
-            }
-        }
-    }
-    triggerBuild() {
-        this.build(this.renderState, this.latestValues, this.props);
-    }
-    /**
-     * Measure the current viewport box with or without transforms.
-     * Only measures axis-aligned boxes, rotate and skew must be manually
-     * removed with a re-render to work.
-     */
-    measureViewportBox() {
-        return this.current
-            ? this.measureInstanceViewportBox(this.current, this.props)
-            : createBox();
-    }
-    getStaticValue(key) {
-        return this.latestValues[key];
-    }
-    setStaticValue(key, value) {
-        this.latestValues[key] = value;
-    }
-    /**
-     * Update the provided props. Ensure any newly-added motion values are
-     * added to our map, old ones removed, and listeners updated.
-     */
-    update(props, presenceContext) {
-        if (props.transformTemplate || this.props.transformTemplate) {
-            this.scheduleRender();
-        }
-        this.prevProps = this.props;
-        this.props = props;
-        this.prevPresenceContext = this.presenceContext;
-        this.presenceContext = presenceContext;
-        /**
-         * Update prop event handlers ie onAnimationStart, onAnimationComplete
-         */
-        for (let i = 0; i < propEventHandlers.length; i++) {
-            const key = propEventHandlers[i];
-            if (this.propEventSubscriptions[key]) {
-                this.propEventSubscriptions[key]();
-                delete this.propEventSubscriptions[key];
-            }
-            const listenerName = ("on" + key);
-            const listener = props[listenerName];
-            if (listener) {
-                this.propEventSubscriptions[key] = this.on(key, listener);
-            }
-        }
-        this.prevMotionValues = updateMotionValuesFromProps(this, this.scrapeMotionValuesFromProps(props, this.prevProps, this), this.prevMotionValues);
-        if (this.handleChildMotionValue) {
-            this.handleChildMotionValue();
-        }
-        this.onUpdate && this.onUpdate(this);
-    }
-    getProps() {
-        return this.props;
-    }
-    /**
-     * Returns the variant definition with a given name.
-     */
-    getVariant(name) {
-        return this.props.variants ? this.props.variants[name] : undefined;
-    }
-    /**
-     * Returns the defined default transition on this component.
-     */
-    getDefaultTransition() {
-        return this.props.transition;
-    }
-    getTransformPagePoint() {
-        return this.props.transformPagePoint;
-    }
-    getClosestVariantNode() {
-        return this.isVariantNode
-            ? this
-            : this.parent
-                ? this.parent.getClosestVariantNode()
-                : undefined;
-    }
-    /**
-     * Add a child visual element to our set of children.
-     */
-    addVariantChild(child) {
-        const closestVariantNode = this.getClosestVariantNode();
-        if (closestVariantNode) {
-            closestVariantNode.variantChildren &&
-                closestVariantNode.variantChildren.add(child);
-            return () => closestVariantNode.variantChildren.delete(child);
-        }
-    }
-    /**
-     * Add a motion value and bind it to this visual element.
-     */
-    addValue(key, value) {
-        // Remove existing value if it exists
-        const existingValue = this.values.get(key);
-        if (value !== existingValue) {
-            if (existingValue)
-                this.removeValue(key);
-            this.bindToMotionValue(key, value);
-            this.values.set(key, value);
-            this.latestValues[key] = value.get();
-        }
-    }
-    /**
-     * Remove a motion value and unbind any active subscriptions.
-     */
-    removeValue(key) {
-        this.values.delete(key);
-        const unsubscribe = this.valueSubscriptions.get(key);
-        if (unsubscribe) {
-            unsubscribe();
-            this.valueSubscriptions.delete(key);
-        }
-        delete this.latestValues[key];
-        this.removeValueFromRenderState(key, this.renderState);
-    }
-    /**
-     * Check whether we have a motion value for this key
-     */
-    hasValue(key) {
-        return this.values.has(key);
-    }
-    getValue(key, defaultValue) {
-        if (this.props.values && this.props.values[key]) {
-            return this.props.values[key];
-        }
-        let value = this.values.get(key);
-        if (value === undefined && defaultValue !== undefined) {
-            value = motionValue(defaultValue === null ? undefined : defaultValue, { owner: this });
-            this.addValue(key, value);
-        }
-        return value;
-    }
-    /**
-     * If we're trying to animate to a previously unencountered value,
-     * we need to check for it in our state and as a last resort read it
-     * directly from the instance (which might have performance implications).
-     */
-    readValue(key, target) {
-        var _a;
-        let value = this.latestValues[key] !== undefined || !this.current
-            ? this.latestValues[key]
-            : (_a = this.getBaseTargetFromProps(this.props, key)) !== null && _a !== void 0 ? _a : this.readValueFromInstance(this.current, key, this.options);
-        if (value !== undefined && value !== null) {
-            if (typeof value === "string" &&
-                (isNumericalString(value) || isZeroValueString(value))) {
-                // If this is a number read as a string, ie "0" or "200", convert it to a number
-                value = parseFloat(value);
-            }
-            else if (!findValueType(value) && complex.test(target)) {
-                value = getAnimatableNone(key, target);
-            }
-            this.setBaseTarget(key, isMotionValue(value) ? value.get() : value);
-        }
-        return isMotionValue(value) ? value.get() : value;
-    }
-    /**
-     * Set the base target to later animate back to. This is currently
-     * only hydrated on creation and when we first read a value.
-     */
-    setBaseTarget(key, value) {
-        this.baseTarget[key] = value;
-    }
-    /**
-     * Find the base target for a value thats been removed from all animation
-     * props.
-     */
-    getBaseTarget(key) {
-        var _a;
-        const { initial } = this.props;
-        let valueFromInitial;
-        if (typeof initial === "string" || typeof initial === "object") {
-            const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) === null || _a === void 0 ? void 0 : _a.custom);
-            if (variant) {
-                valueFromInitial = variant[key];
-            }
-        }
-        /**
-         * If this value still exists in the current initial variant, read that.
-         */
-        if (initial && valueFromInitial !== undefined) {
-            return valueFromInitial;
-        }
-        /**
-         * Alternatively, if this VisualElement config has defined a getBaseTarget
-         * so we can read the value from an alternative source, try that.
-         */
-        const target = this.getBaseTargetFromProps(this.props, key);
-        if (target !== undefined && !isMotionValue(target))
-            return target;
-        /**
-         * If the value was initially defined on initial, but it doesn't any more,
-         * return undefined. Otherwise return the value as initially read from the DOM.
-         */
-        return this.initialValues[key] !== undefined &&
-            valueFromInitial === undefined
-            ? undefined
-            : this.baseTarget[key];
-    }
-    on(eventName, callback) {
-        if (!this.events[eventName]) {
-            this.events[eventName] = new SubscriptionManager();
-        }
-        return this.events[eventName].add(callback);
-    }
-    notify(eventName, ...args) {
-        if (this.events[eventName]) {
-            this.events[eventName].notify(...args);
-        }
-    }
-}
-
-class DOMVisualElement extends VisualElement {
-    constructor() {
-        super(...arguments);
-        this.KeyframeResolver = DOMKeyframesResolver;
-    }
-    sortInstanceNodePosition(a, b) {
-        /**
-         * compareDocumentPosition returns a bitmask, by using the bitwise &
-         * we're returning true if 2 in that bitmask is set to true. 2 is set
-         * to true if b preceeds a.
-         */
-        return a.compareDocumentPosition(b) & 2 ? 1 : -1;
-    }
-    getBaseTargetFromProps(props, key) {
-        return props.style
-            ? props.style[key]
-            : undefined;
-    }
-    removeValueFromRenderState(key, { vars, style }) {
-        delete vars[key];
-        delete style[key];
-    }
-    handleChildMotionValue() {
-        if (this.childSubscription) {
-            this.childSubscription();
-            delete this.childSubscription;
-        }
-        const { children } = this.props;
-        if (isMotionValue(children)) {
-            this.childSubscription = children.on("change", (latest) => {
-                if (this.current) {
-                    this.current.textContent = `${latest}`;
-                }
-            });
-        }
-    }
-}
-
-function getComputedStyle$1(element) {
-    return window.getComputedStyle(element);
-}
-class HTMLVisualElement extends DOMVisualElement {
-    constructor() {
-        super(...arguments);
-        this.type = "html";
-        this.renderInstance = renderHTML;
-    }
-    readValueFromInstance(instance, key) {
-        if (transformProps.has(key)) {
-            const defaultType = getDefaultValueType(key);
-            return defaultType ? defaultType.default || 0 : 0;
-        }
-        else {
-            const computedStyle = getComputedStyle$1(instance);
-            const value = (isCSSVariableName(key)
-                ? computedStyle.getPropertyValue(key)
-                : computedStyle[key]) || 0;
-            return typeof value === "string" ? value.trim() : value;
-        }
-    }
-    measureInstanceViewportBox(instance, { transformPagePoint }) {
-        return measureViewportBox(instance, transformPagePoint);
-    }
-    build(renderState, latestValues, props) {
-        buildHTMLStyles(renderState, latestValues, props.transformTemplate);
-    }
-    scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-        return scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
-    }
-}
-
-class SVGVisualElement extends DOMVisualElement {
-    constructor() {
-        super(...arguments);
-        this.type = "svg";
-        this.isSVGTag = false;
-        this.measureInstanceViewportBox = createBox;
-    }
-    getBaseTargetFromProps(props, key) {
-        return props[key];
-    }
-    readValueFromInstance(instance, key) {
-        if (transformProps.has(key)) {
-            const defaultType = getDefaultValueType(key);
-            return defaultType ? defaultType.default || 0 : 0;
-        }
-        key = !camelCaseAttributes.has(key) ? camelToDash(key) : key;
-        return instance.getAttribute(key);
-    }
-    scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-        return scrapeMotionValuesFromProps(props, prevProps, visualElement);
-    }
-    build(renderState, latestValues, props) {
-        buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate);
-    }
-    renderInstance(instance, renderState, styleProp, projection) {
-        renderSVG(instance, renderState, styleProp, projection);
-    }
-    mount(instance) {
-        this.isSVGTag = isSVGTag(instance.tagName);
-        super.mount(instance);
-    }
-}
-
-const createDomVisualElement = (Component, options) => {
-    return isSVGComponent(Component)
-        ? new SVGVisualElement(options)
-        : new HTMLVisualElement(options, {
-            allowProjection: Component !== Fragment,
-        });
-};
-
-const createMotionComponent = /*@__PURE__*/ createMotionComponentFactory({
-    ...animations,
-    ...gestureAnimations,
-    ...drag,
-    ...layout,
-}, createDomVisualElement);
-
-const motion = /*@__PURE__*/ createDOMMotionComponentProxy(createMotionComponent);
-
-var css_248z$8 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-modal-wrapper {\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.25);\n  backdrop-filter: blur(4px);\n  -webkit-backdrop-filter: blur(4px);\n}\n.nex-modal-wrapper .nex-modal-inner-wrapper {\n  opacity: 0;\n  display: flex;\n  flex-direction: column;\n  width: 22.2222222222rem;\n  min-height: 8.8888888889rem;\n  margin-top: 0.8888888889rem;\n  padding: 0.8888888889rem;\n  border-radius: 0.3555555556rem;\n  border: 0.0444444444rem solid rgba(255, 255, 255, 0.18);\n  background-color: var(--nex-background-color);\n  box-shadow: 0 0.1777777778rem 0.3555555556rem rgba(0, 0, 0, 0.1);\n  transition: opacity 200ms ease-in-out;\n}\n.nex-modal-wrapper .nex-modal-inner-wrapper .nex-modal-body {\n  flex: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: var(--nex-font-color);\n}\n.nex-modal-wrapper .nex-modal-inner-wrapper .nex-modal-footer {\n  flex: 20%;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}";
-styleInject(css_248z$8);
-
-/**
- * NexModal component
- *
- * A modal component that displays a message and buttons for user interaction.
- *
- * @param {function} setOpenModal - Function to close the modal.
- */
 const NexModal = ({
   setOpenModal
 }) => {
   const handleContinue = () => {
     setOpenModal(false);
   };
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-modal-wrapper"
-  }, /*#__PURE__*/React__default.createElement(motion.div, {
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: 0.3
-    },
-    className: "nex-modal-inner-wrapper"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-modal-body"
-  }, /*#__PURE__*/React__default.createElement("p", null, "The next page looks amazing. Hope you want to go there!")), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-modal-footer"
-  }, /*#__PURE__*/React__default.createElement(NexButton, {
-    onClick: () => {
-      setOpenModal(false);
-    },
-    text: "Cancel",
-    type: "danger"
-  }), /*#__PURE__*/React__default.createElement(NexButton, {
-    onClick: handleContinue,
-    text: "Continue",
-    type: "primary"
-  }))));
+  return /*#__PURE__*/jsx("div", {
+    className: "nex-modal-wrapper",
+    children: /*#__PURE__*/jsxs(motion.div, {
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      transition: {
+        duration: 0.3
+      },
+      className: "nex-modal-inner-wrapper",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "nex-modal-body",
+        children: /*#__PURE__*/jsx("p", {
+          children: "The next page looks amazing. Hope you want to go there!"
+        })
+      }), /*#__PURE__*/jsxs("div", {
+        className: "nex-modal-footer",
+        children: [/*#__PURE__*/jsx(NexButton, {
+          onClick: () => {
+            setOpenModal(false);
+          },
+          text: "Cancel",
+          type: "danger"
+        }), /*#__PURE__*/jsx(NexButton, {
+          onClick: handleContinue,
+          text: "Continue",
+          type: "primary"
+        })]
+      })]
+    })
+  });
 };
 
 function on(obj) {
-  var args = [];
-  for (var _i = 1; _i < arguments.length; _i++) {
-    args[_i - 1] = arguments[_i];
-  }
-  if (obj && obj.addEventListener) {
-    obj.addEventListener.apply(obj, args);
-  }
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+    }
+    if (obj && obj.addEventListener) {
+        obj.addEventListener.apply(obj, args);
+    }
 }
 function off(obj) {
-  var args = [];
-  for (var _i = 1; _i < arguments.length; _i++) {
-    args[_i - 1] = arguments[_i];
-  }
-  if (obj && obj.removeEventListener) {
-    obj.removeEventListener.apply(obj, args);
-  }
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+    }
+    if (obj && obj.removeEventListener) {
+        obj.removeEventListener.apply(obj, args);
+    }
 }
 
 var defaultEvents = ['mousedown', 'touchstart'];
 var useClickAway = function (ref, onClickAway, events) {
-  if (events === void 0) {
-    events = defaultEvents;
-  }
-  var savedCallback = useRef(onClickAway);
-  useEffect(function () {
-    savedCallback.current = onClickAway;
-  }, [onClickAway]);
-  useEffect(function () {
-    var handler = function (event) {
-      var el = ref.current;
-      el && !el.contains(event.target) && savedCallback.current(event);
-    };
-    for (var _i = 0, events_1 = events; _i < events_1.length; _i++) {
-      var eventName = events_1[_i];
-      on(document, eventName, handler);
-    }
-    return function () {
-      for (var _i = 0, events_2 = events; _i < events_2.length; _i++) {
-        var eventName = events_2[_i];
-        off(document, eventName, handler);
-      }
-    };
-  }, [events, ref]);
+    if (events === void 0) { events = defaultEvents; }
+    var savedCallback = useRef(onClickAway);
+    useEffect(function () {
+        savedCallback.current = onClickAway;
+    }, [onClickAway]);
+    useEffect(function () {
+        var handler = function (event) {
+            var el = ref.current;
+            el && !el.contains(event.target) && savedCallback.current(event);
+        };
+        for (var _i = 0, events_1 = events; _i < events_1.length; _i++) {
+            var eventName = events_1[_i];
+            on(document, eventName, handler);
+        }
+        return function () {
+            for (var _i = 0, events_2 = events; _i < events_2.length; _i++) {
+                var eventName = events_2[_i];
+                off(document, eventName, handler);
+            }
+        };
+    }, [events, ref]);
 };
-
-var css_248z$7 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-nav {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: var(--nex-z-index-sticky);\n  width: 100%;\n  transition: background-color var(--nex-transition-base), border-color var(--nex-transition-base);\n  background-color: transparent;\n}\n.nex-nav.not-at-top {\n  background-color: var(--nex-background-color);\n  border-bottom: 1px solid var(--nex-border-color);\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px);\n}\n.nex-nav .nex-nav-inner-wrapper {\n  max-width: 1440px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: var(--nex-spacing-md) var(--nex-spacing-lg);\n}\n.nex-nav .nex-nav-client-logo img,\n.nex-nav .nex-nav-client-name .client-name {\n  max-height: var(--nex-spacing-xl);\n  font-size: var(--nex-font-size-xl);\n  font-weight: var(--nex-font-weight-bold);\n  cursor: pointer;\n  border-radius: var(--nex-radius-md);\n  padding: var(--nex-spacing-sm);\n  transition: background-color var(--nex-transition-fast);\n}\n.nex-nav .nex-nav-client-logo img:hover,\n.nex-nav .nex-nav-client-name .client-name:hover {\n  background-color: var(--nex-hover-surface, rgba(0, 0, 0, 0.05));\n}\n.nex-nav .nex-nav-list {\n  display: flex;\n  list-style: none;\n  gap: var(--nex-spacing-lg);\n  margin: 0;\n  padding: 0;\n}\n@media (max-width: 768px) {\n  .nex-nav .nex-nav-list {\n    display: none;\n  }\n}\n.nex-nav .nex-nav-right {\n  display: flex;\n  align-items: center;\n  gap: var(--nex-spacing-md);\n}\n.nex-nav .nex-nav-login-button {\n  font-weight: var(--nex-font-weight-medium);\n  cursor: pointer;\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  border-radius: var(--nex-radius-sm);\n  transition: background-color var(--nex-transition-fast);\n}\n.nex-nav .nex-nav-login-button:hover {\n  background-color: var(--nex-hover-surface, rgba(0, 0, 0, 0.05));\n}\n\n.nex-nav-burger {\n  position: fixed;\n  top: var(--nex-spacing-md);\n  right: var(--nex-spacing-md);\n  display: none;\n  flex-direction: column;\n  justify-content: space-between;\n  width: var(--nex-spacing-lg);\n  height: var(--nex-spacing-base);\n  cursor: pointer;\n  z-index: var(--nex-z-index-fixed);\n}\n.nex-nav-burger div {\n  width: 100%;\n  height: var(--nex-spacing-xs);\n  background-color: var(--nex-font-color);\n  border-radius: var(--nex-radius-xs);\n  transition: all var(--nex-transition-fast);\n}\n.nex-nav-burger.menu-open div:nth-child(1) {\n  transform: rotate(45deg) translate(5px, 5px);\n}\n.nex-nav-burger.menu-open div:nth-child(2) {\n  opacity: 0;\n}\n.nex-nav-burger.menu-open div:nth-child(3) {\n  transform: rotate(-45deg) translate(5px, -5px);\n}\n@media (max-width: 768px) {\n  .nex-nav-burger {\n    display: flex;\n  }\n}";
-styleInject(css_248z$7);
-
-var classnames = {exports: {}};
-
-/*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
-*/
-(function (module) {
-  /* global define */
-
-  (function () {
-
-    var hasOwn = {}.hasOwnProperty;
-    function classNames() {
-      var classes = '';
-      for (var i = 0; i < arguments.length; i++) {
-        var arg = arguments[i];
-        if (arg) {
-          classes = appendClass(classes, parseValue(arg));
-        }
-      }
-      return classes;
-    }
-    function parseValue(arg) {
-      if (typeof arg === 'string' || typeof arg === 'number') {
-        return arg;
-      }
-      if (typeof arg !== 'object') {
-        return '';
-      }
-      if (Array.isArray(arg)) {
-        return classNames.apply(null, arg);
-      }
-      if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
-        return arg.toString();
-      }
-      var classes = '';
-      for (var key in arg) {
-        if (hasOwn.call(arg, key) && arg[key]) {
-          classes = appendClass(classes, key);
-        }
-      }
-      return classes;
-    }
-    function appendClass(value, newClass) {
-      if (!newClass) {
-        return value;
-      }
-      if (value) {
-        return value + ' ' + newClass;
-      }
-      return value + newClass;
-    }
-    if (module.exports) {
-      classNames.default = classNames;
-      module.exports = classNames;
-    } else {
-      window.classNames = classNames;
-    }
-  })();
-})(classnames);
-var classnamesExports = classnames.exports;
-var classNames = /*@__PURE__*/getDefaultExportFromCjs(classnamesExports);
-
-var css_248z$6 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🧭 NEX NAV ITEM\n * ========================================\n * \n * Ultra-slim, glassmorphic design inspired by iOS 16+\n * Professional minimalism with innovative effects\n * Consistent with LanguageSwitcher and UserMenu design philosophy\n */\n.nex-nav-item {\n  display: flex;\n  align-items: center;\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  cursor: pointer;\n  user-select: none;\n  outline: none;\n  /* Glassmorphic Design */\n  background: rgba(255, 255, 255, 0.02);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n  border: 1px solid rgba(255, 255, 255, 0.05);\n  border-radius: var(--nex-radius-md);\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Hover State - Subtle glassmorphic enhancement */\n  /* Focus State - Signature accent */\n  /* Active State - Signature immersion */\n  /* ================================\n     📝 LABEL STYLING\n     ================================ */\n}\n.nex-nav-item:hover {\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n  border-color: rgba(255, 255, 255, 0.08);\n}\n.nex-nav-item:focus-visible {\n  outline: 2px solid var(--nex-signature);\n  outline-offset: 2px;\n  background: rgba(255, 24, 1, 0.05);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n  border-color: rgba(255, 24, 1, 0.1);\n}\n.nex-nav-item:active {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(24px) saturate(220%);\n  -webkit-backdrop-filter: blur(24px) saturate(220%);\n  border-color: rgba(255, 24, 1, 0.15);\n}\n.nex-nav-item__label {\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-medium);\n  color: var(--nex-font-color);\n  letter-spacing: 0.01em;\n  transition: all var(--nex-transition-fast);\n  /* Active State - Bold where it counts */\n}\n.nex-nav-item__label.active {\n  font-weight: var(--nex-font-weight-bold);\n  color: var(--nex-signature);\n  text-shadow: 0 0 20px rgba(255, 24, 1, 0.3);\n}\n\n/* ================================\n   📱 MOBILE OPTIMIZATIONS\n   ================================ */\n@media (max-width: 768px) {\n  .nex-nav-item {\n    padding: var(--nex-spacing-md);\n  }\n  .nex-nav-item__label {\n    font-size: var(--nex-font-size-md);\n  }\n}\n/* ================================\n   🌒 DARK MODE ADJUSTMENTS\n   ================================ */\n[data-theme=dark] .nex-nav-item {\n  background: rgba(0, 0, 0, 0.1);\n  border-color: rgba(255, 255, 255, 0.03);\n}\n[data-theme=dark] .nex-nav-item:hover {\n  background: rgba(0, 0, 0, 0.15);\n  border-color: rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-nav-item:focus-visible {\n  background: rgba(255, 24, 1, 0.1);\n  border-color: rgba(255, 24, 1, 0.15);\n}\n[data-theme=dark] .nex-nav-item:active {\n  background: rgba(255, 24, 1, 0.15);\n  border-color: rgba(255, 24, 1, 0.2);\n}";
-styleInject(css_248z$6);
 
 const NavItem = ({
   label,
   onClick,
-  isActive = false
+  isActive = false,
+  disabled = false,
+  badge,
+  tooltip,
+  subItems,
+  description,
+  isAtTop = true
 }) => {
-  return /*#__PURE__*/React__default.createElement(motion.li, {
-    className: "nex-nav-item",
-    role: "menuitem",
-    tabIndex: 0,
-    onClick: onClick,
-    onKeyDown: e => e.key === 'Enter' && onClick(),
-    initial: false
-  }, /*#__PURE__*/React__default.createElement("span", {
-    className: classNames('nex-nav-item__label', {
-      active: isActive
-    })
-  }, label));
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const hasSubItems = subItems && subItems.length > 0;
+  useClickAway(dropdownRef, () => {
+    setIsDropdownOpen(false);
+  });
+  const handleKeyDown = e => {
+    if (disabled) return;
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        if (hasSubItems) {
+          setIsDropdownOpen(prev => !prev);
+        } else {
+          onClick?.();
+        }
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        if (hasSubItems && isDropdownOpen) {
+          // Focus first sub-item
+          const firstSubItem = dropdownRef.current?.querySelector('.nex-nav-sub-item');
+          firstSubItem?.focus();
+        } else {
+          // Focus next nav item
+          const nextElement = e.currentTarget.nextElementSibling;
+          if (nextElement?.classList.contains('nex-nav-item')) {
+            nextElement.focus();
+          }
+        }
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        // Focus previous nav item
+        const prevElement = e.currentTarget.previousElementSibling;
+        if (prevElement?.classList.contains('nex-nav-item')) {
+          prevElement.focus();
+        }
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (hasSubItems) {
+          setIsDropdownOpen(true);
+        }
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setIsDropdownOpen(false);
+        break;
+    }
+  };
+  const handleClick = () => {
+    if (disabled) return;
+    // If the nav item has sub-items, don't trigger the onClick
+    // The dropdown should be the only interaction
+    if (!hasSubItems) {
+      onClick?.();
+    }
+  };
+  const handleSubItemClick = subItem => {
+    if (!subItem.disabled) {
+      subItem.onClick();
+      setIsDropdownOpen(false);
+    }
+  };
+  const handleSubItemKeyDown = (e, subItem, index) => {
+    if (subItem.disabled) return;
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        handleSubItemClick(subItem);
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        const nextSubItem = e.currentTarget.nextElementSibling;
+        if (nextSubItem?.classList.contains('nex-nav-sub-item')) {
+          nextSubItem.focus();
+        }
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        const prevSubItem = e.currentTarget.previousElementSibling;
+        if (prevSubItem?.classList.contains('nex-nav-sub-item')) {
+          prevSubItem.focus();
+        } else {
+          // Focus back to main nav item
+          const navItem = e.currentTarget.parentElement?.parentElement?.querySelector('.nex-nav-item');
+          navItem?.focus();
+        }
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setIsDropdownOpen(false);
+        const navItem = e.currentTarget.parentElement?.parentElement?.querySelector('.nex-nav-item');
+        navItem?.focus();
+        break;
+    }
+  };
+  return /*#__PURE__*/jsxs("div", {
+    className: classNames('nex-nav-item-wrapper', {
+      'has-dropdown-open': isDropdownOpen && hasSubItems
+    }),
+    ref: dropdownRef,
+    onMouseEnter: () => {
+      if (hasSubItems && !disabled) {
+        setIsDropdownOpen(true);
+      }
+    },
+    onMouseLeave: () => {
+      if (hasSubItems) {
+        setIsDropdownOpen(false);
+      }
+    },
+    children: [/*#__PURE__*/jsx(motion.li, {
+      className: classNames('nex-nav-item', {
+        'active': isActive,
+        'disabled': disabled,
+        'has-dropdown': hasSubItems,
+        'dropdown-open': isDropdownOpen
+      }),
+      role: "menuitem",
+      "aria-haspopup": hasSubItems ? 'true' : undefined,
+      "aria-expanded": hasSubItems ? isDropdownOpen : undefined,
+      tabIndex: disabled ? -1 : 0,
+      onClick: handleClick,
+      onKeyDown: handleKeyDown,
+      "aria-label": tooltip || label,
+      "aria-disabled": disabled,
+      "aria-current": isActive ? 'page' : undefined,
+      initial: false,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      },
+      children: /*#__PURE__*/jsxs("div", {
+        className: "nex-nav-item-content",
+        children: [/*#__PURE__*/jsx("span", {
+          className: classNames('nex-nav-item__label', {
+            active: isActive
+          }),
+          children: label
+        }), badge && /*#__PURE__*/jsx("span", {
+          className: "nex-nav-item-badge",
+          "aria-label": `${badge} notifications`,
+          children: badge
+        }), hasSubItems && /*#__PURE__*/jsx(motion.span, {
+          className: "nex-nav-item-chevron",
+          animate: {
+            rotate: isDropdownOpen ? 180 : 0
+          },
+          transition: {
+            duration: 0.03,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          "aria-hidden": "true",
+          children: /*#__PURE__*/jsx(ChevronDown, {
+            size: 14
+          })
+        })]
+      })
+    }), /*#__PURE__*/jsx(AnimatePresence, {
+      children: isDropdownOpen && hasSubItems && /*#__PURE__*/jsx(motion.div, {
+        className: "nex-nav-dropdown",
+        initial: {
+          opacity: 0,
+          y: -8
+        },
+        animate: {
+          opacity: 1,
+          y: 0,
+          background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+          boxShadow: isAtTop ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)' : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+        },
+        exit: {
+          opacity: 0,
+          y: -8
+        },
+        transition: {
+          duration: 0,
+          ease: [0.4, 0, 0.2, 1]
+        },
+        style: {
+          transformOrigin: 'top center'
+        },
+        role: "menu",
+        "aria-label": `${label} submenu`,
+        children: /*#__PURE__*/jsx(motion.ul, {
+          className: "nex-nav-dropdown-list",
+          children: subItems.map((subItem, index) => /*#__PURE__*/jsx(motion.li, {
+            className: classNames('nex-nav-sub-item', {
+              'disabled': subItem.disabled
+            }),
+            role: "menuitem",
+            tabIndex: subItem.disabled ? -1 : 0,
+            onClick: () => handleSubItemClick(subItem),
+            onKeyDown: e => handleSubItemKeyDown(e, subItem),
+            "aria-disabled": subItem.disabled,
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              duration: 0.1,
+              delay: index * 0.02
+            },
+            children: /*#__PURE__*/jsxs("div", {
+              className: "nex-nav-sub-item-content",
+              children: [/*#__PURE__*/jsxs("div", {
+                className: "nex-nav-sub-item-text",
+                children: [/*#__PURE__*/jsx("span", {
+                  className: "nex-nav-sub-item-label",
+                  children: subItem.label
+                }), subItem.description && /*#__PURE__*/jsx("span", {
+                  className: "nex-nav-sub-item-description",
+                  children: subItem.description
+                })]
+              }), subItem.badge && /*#__PURE__*/jsx("span", {
+                className: "nex-nav-sub-item-badge",
+                "aria-label": `${subItem.badge} notifications`,
+                children: subItem.badge
+              })]
+            })
+          }, `${subItem.label}-${index}`))
+        })
+      })
+    })]
+  });
 };
 
-var css_248z$5 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 👤 NEX USER MENU\n * ========================================\n * \n * Ultra-slim, glassmorphic design inspired by iOS 16+\n * Professional minimalism with innovative effects\n * Consistent with LanguageSwitcher design philosophy\n */\n.nex-user-menu {\n  position: relative;\n  display: flex;\n  align-items: center;\n  /* ================================\n     🎯 TRIGGER BUTTON - Ultra Slim\n     ================================ */\n  /* ================================\n     🖼️ AVATAR STYLING - Clean\n     ================================ */\n  /* ================================\n     📋 DROPDOWN CONTAINER - Glassmorphic\n     ================================ */\n  /* ================================\n     📝 MENU SECTIONS\n     ================================ */\n  /* ================================\n     📝 MENU ITEMS - Glassmorphic\n     ================================ */\n}\n.nex-user-menu .nex-user-menu-trigger {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 36px;\n  height: 36px;\n  padding: 0;\n  cursor: pointer;\n  /* Glassmorphic Design */\n  background: rgba(255, 255, 255, 0.08);\n  backdrop-filter: blur(20px) saturate(180%);\n  -webkit-backdrop-filter: blur(20px) saturate(180%);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: var(--nex-radius-full);\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Reset */\n  outline: none;\n  user-select: none;\n  /* Hover State - Subtle glassmorphic enhancement */\n  /* Focus State - Signature accent */\n  /* Active State - Signature immersion */\n}\n.nex-user-menu .nex-user-menu-trigger:hover {\n  background: rgba(255, 255, 255, 0.12);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n  border-color: rgba(255, 255, 255, 0.15);\n}\n.nex-user-menu .nex-user-menu-trigger:focus-visible {\n  outline: 2px solid var(--nex-signature);\n  outline-offset: 2px;\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n}\n.nex-user-menu .nex-user-menu-trigger:active {\n  background: rgba(255, 24, 1, 0.15);\n  backdrop-filter: blur(28px) saturate(220%);\n  -webkit-backdrop-filter: blur(28px) saturate(220%);\n  border-color: rgba(255, 24, 1, 0.2);\n}\n.nex-user-menu .nex-user-menu-avatar {\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n  border-radius: var(--nex-radius-full);\n  display: block;\n}\n.nex-user-menu .nex-user-menu-dropdown {\n  list-style: none;\n  margin: 0;\n  padding: var(--nex-spacing-sm) 0;\n  position: absolute;\n  top: calc(100% + var(--nex-spacing-sm));\n  right: 0;\n  min-width: 200px;\n  max-width: 280px;\n  /* Advanced Glassmorphic Design */\n  background: rgba(255, 255, 255, 0.08);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: var(--nex-radius-lg);\n  /* Subtle shadow for depth */\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);\n  /* Layout */\n  z-index: var(--nex-z-index-popover);\n  /* Responsive */\n  /* Mobile optimization */\n}\n@media (max-width: 768px) {\n  .nex-user-menu .nex-user-menu-dropdown {\n    right: calc(-1 * var(--nex-spacing-md));\n    min-width: 220px;\n  }\n}\n@media (max-width: 480px) {\n  .nex-user-menu .nex-user-menu-dropdown {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    right: auto;\n    transform: translate(-50%, -50%);\n    width: calc(100vw - 2rem);\n    max-width: 320px;\n    max-height: 70vh;\n  }\n}\n.nex-user-menu .nex-user-menu-section {\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  border-bottom: 1px solid rgba(255, 255, 255, 0.08);\n}\n.nex-user-menu .nex-user-menu-header {\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-medium);\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: var(--nex-spacing-sm);\n  color: var(--nex-font-color);\n}\n.nex-user-menu .badge {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n  color: var(--nex-signature);\n  padding: var(--nex-spacing-xs) var(--nex-spacing-sm);\n  border-radius: var(--nex-radius-sm);\n  font-size: var(--nex-font-size-xs);\n  font-weight: var(--nex-font-weight-bold);\n  text-transform: uppercase;\n  letter-spacing: 0.02em;\n  border: 1px solid rgba(255, 24, 1, 0.2);\n}\n.nex-user-menu .nex-user-menu-item {\n  display: flex;\n  align-items: center;\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  /* Typography */\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-regular);\n  color: var(--nex-font-color);\n  /* Layout */\n  cursor: pointer;\n  user-select: none;\n  outline: none;\n  border: none;\n  background: none;\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Hover State - Subtle glassmorphic enhancement */\n  /* Focus State */\n  /* Active State */\n  /* Danger State - Signature glassmorphic */\n  /* Sign Up CTA - Bold glassmorphic */\n}\n.nex-user-menu .nex-user-menu-item:hover {\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n}\n.nex-user-menu .nex-user-menu-item:focus-visible {\n  background: rgba(255, 255, 255, 0.08);\n  outline: 2px solid var(--nex-signature);\n  outline-offset: -2px;\n}\n.nex-user-menu .nex-user-menu-item:active {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n}\n.nex-user-menu .nex-user-menu-item.danger {\n  color: var(--nex-signature);\n  font-weight: var(--nex-font-weight-medium);\n}\n.nex-user-menu .nex-user-menu-item.danger:hover {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n}\n.nex-user-menu .nex-user-menu-item.danger:active {\n  background: rgba(255, 24, 1, 0.15);\n  backdrop-filter: blur(24px) saturate(220%);\n  -webkit-backdrop-filter: blur(24px) saturate(220%);\n}\n.nex-user-menu .nex-user-menu-item.sign-up-cta {\n  font-weight: var(--nex-font-weight-bold);\n  text-align: center;\n  color: var(--nex-signature);\n  background: rgba(255, 24, 1, 0.05);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n  border: 1px solid rgba(255, 24, 1, 0.1);\n  border-radius: var(--nex-radius-md);\n  margin: var(--nex-spacing-sm) var(--nex-spacing-md);\n}\n.nex-user-menu .nex-user-menu-item.sign-up-cta:hover {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n  border-color: rgba(255, 24, 1, 0.2);\n}\n.nex-user-menu .nex-user-menu-item.sign-up-cta:active {\n  background: rgba(255, 24, 1, 0.15);\n  backdrop-filter: blur(24px) saturate(220%);\n  -webkit-backdrop-filter: blur(24px) saturate(220%);\n}\n\n/* ================================\n   📱 MOBILE OPTIMIZATIONS\n   ================================ */\n@media (max-width: 768px) {\n  .nex-user-menu .nex-user-menu-trigger {\n    width: 32px;\n    height: 32px;\n  }\n  .nex-user-menu .nex-user-menu-dropdown .nex-user-menu-item {\n    padding: var(--nex-spacing-md);\n    font-size: var(--nex-font-size-md);\n  }\n}\n/* ================================\n   🌒 DARK MODE ADJUSTMENTS\n   ================================ */\n[data-theme=dark] .nex-user-menu .nex-user-menu-trigger {\n  background: rgba(0, 0, 0, 0.2);\n  border-color: rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-trigger:hover {\n  background: rgba(0, 0, 0, 0.25);\n  border-color: rgba(255, 255, 255, 0.08);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-dropdown {\n  background: rgba(0, 0, 0, 0.3);\n  border-color: rgba(255, 255, 255, 0.05);\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-section {\n  border-bottom-color: rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-item:hover {\n  background: rgba(255, 255, 255, 0.03);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-item.danger:hover {\n  background: rgba(255, 24, 1, 0.15);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-item.sign-up-cta {\n  background: rgba(255, 24, 1, 0.1);\n  border-color: rgba(255, 24, 1, 0.15);\n}\n[data-theme=dark] .nex-user-menu .nex-user-menu-item.sign-up-cta:hover {\n  background: rgba(255, 24, 1, 0.15);\n  border-color: rgba(255, 24, 1, 0.25);\n}";
-styleInject(css_248z$5);
-
-const UserMenu = ({
-  user,
-  onLogout,
-  onProfile,
-  onEndorsementsClick,
-  onSubscriptionClick,
-  onActivityLogClick,
-  onSecurityClick,
-  onIntegrationsClick,
-  onAdminPanelClick,
-  onSignUpClick,
-  endorsementCount,
-  subscription,
-  enableEndorsements,
-  enableSubscriptionInfo,
-  enableAuditLog,
-  enableSecuritySettings,
-  enableIntegrations,
-  enableAdminPanel
-}) => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-  useClickAway(ref, () => setOpen(false));
-  const toggleMenu = () => setOpen(prev => !prev);
-  const initials = user?.name?.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || '';
-  const avatarSrc = user?.avatarUrl || `https://api.dicebear.com/7.x/initials/svg?seed=${initials}`;
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-user-menu",
-    ref: ref
-  }, /*#__PURE__*/React__default.createElement(motion.button, {
-    className: "nex-user-menu-trigger",
-    onClick: toggleMenu,
-    "aria-haspopup": "true",
-    "aria-expanded": open,
-    "aria-label": "User menu"
-  }, /*#__PURE__*/React__default.createElement("img", {
-    src: avatarSrc,
-    alt: "User Avatar",
-    className: "nex-user-menu-avatar"
-  })), /*#__PURE__*/React__default.createElement(AnimatePresence, null, open && /*#__PURE__*/React__default.createElement(motion.ul, {
-    className: "nex-user-menu-dropdown",
-    initial: {
-      opacity: 0,
-      y: -8
-    },
-    animate: {
-      opacity: 1,
-      y: 0
-    },
-    exit: {
-      opacity: 0,
-      y: -8
-    },
-    transition: {
-      duration: 0.15
-    },
-    role: "menu"
-  }, user ? /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-user-menu-section"
-  }, /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-header"
-  }, /*#__PURE__*/React__default.createElement("span", null, user.name), user.role && /*#__PURE__*/React__default.createElement("span", {
-    className: "badge"
-  }, user.role))), onProfile && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    role: "menuitem",
-    onClick: () => {
-      setOpen(false);
-      onProfile();
-    }
-  }, "Profile"), enableEndorsements && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    role: "menuitem",
-    onClick: () => {
-      setOpen(false);
-      onEndorsementsClick?.();
-    }
-  }, "Endorsements (", endorsementCount ?? 0, ")"), enableSubscriptionInfo && subscription && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    role: "menuitem",
-    onClick: () => {
-      setOpen(false);
-      onSubscriptionClick?.();
-    }
-  }, "Subscription: ", subscription.tier), enableAuditLog && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    onClick: () => {
-      setOpen(false);
-      onActivityLogClick?.();
-    }
-  }, "Activity Log"), enableSecuritySettings && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    onClick: () => {
-      setOpen(false);
-      onSecurityClick?.();
-    }
-  }, "Security Settings"), enableIntegrations && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    onClick: () => {
-      setOpen(false);
-      onIntegrationsClick?.();
-    }
-  }, "Manage Integrations"), enableAdminPanel && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item",
-    onClick: () => {
-      setOpen(false);
-      onAdminPanelClick?.();
-    }
-  }, "Admin Panel"), onLogout && /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item danger",
-    onClick: () => {
-      setOpen(false);
-      onLogout();
-    }
-  }, "Log out")) : /*#__PURE__*/React__default.createElement("li", {
-    className: "nex-user-menu-item sign-up-cta",
-    onClick: () => {
-      setOpen(false);
-      onSignUpClick?.();
-    }
-  }, /*#__PURE__*/React__default.createElement(motion.div, {
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    exit: {
-      opacity: 0
-    },
-    transition: {
-      duration: 0.3
-    }
-  }, "Sign up to personalize")))));
+const getResponsiveConstants = containerWidth => {
+  if (containerWidth <= 400) {
+    return {
+      minItemWidth: 50,
+      moreButtonWidth: 40,
+      itemGap: 2,
+      safetyMargin: 2
+    };
+  } else if (containerWidth <= 600) {
+    return {
+      minItemWidth: 60,
+      moreButtonWidth: 45,
+      itemGap: 3,
+      safetyMargin: 3
+    };
+  } else if (containerWidth <= 800) {
+    return {
+      minItemWidth: 65,
+      moreButtonWidth: 50,
+      itemGap: 4,
+      safetyMargin: 4
+    };
+  } else if (containerWidth <= 1200) {
+    return {
+      minItemWidth: 70,
+      moreButtonWidth: 55,
+      itemGap: 6,
+      safetyMargin: 6
+    };
+  } else {
+    return {
+      minItemWidth: 75,
+      moreButtonWidth: 60,
+      itemGap: 8,
+      safetyMargin: 8
+    };
+  }
 };
-
-var css_248z$4 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n/**\n * ========================================\n * 🌍 NEX LANGUAGE SWITCHER\n * ========================================\n * \n * Ultra-slim, glassmorphic design inspired by iOS 16+\n * Professional minimalism with innovative effects\n */\n.nex-lang-switcher {\n  position: relative;\n  display: flex;\n  align-items: center;\n  /* ================================\n     🎯 TRIGGER BUTTON - Ultra Slim\n     ================================ */\n  /* ================================\n     🔽 CHEVRON ICON - Minimal\n     ================================ */\n  /* ================================\n     🏳️ FLAG & ICON STYLING - Clean\n     ================================ */\n  /* ================================\n     📋 DROPDOWN CONTAINER - Glassmorphic\n     ================================ */\n  /* ================================\n     🔍 SEARCH INPUT - Glassmorphic\n     ================================ */\n  /* ================================\n     📜 SCROLLABLE LIST\n     ================================ */\n  /* ================================\n     📝 LANGUAGE ITEMS - Glassmorphic\n     ================================ */\n}\n.nex-lang-switcher .nex-lang-current {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  gap: var(--nex-spacing-xs);\n  padding: var(--nex-spacing-xs) var(--nex-spacing-sm);\n  height: 32px;\n  min-width: 60px;\n  /* Typography */\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-medium);\n  line-height: 1;\n  letter-spacing: 0.02em;\n  /* Glassmorphic Design */\n  background: rgba(255, 255, 255, 0.08);\n  backdrop-filter: blur(20px) saturate(180%);\n  -webkit-backdrop-filter: blur(20px) saturate(180%);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: var(--nex-radius-full);\n  /* Color */\n  color: var(--nex-font-color);\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Layout */\n  justify-content: center;\n  user-select: none;\n  outline: none;\n  /* Hover State - Subtle glassmorphic enhancement */\n  /* Focus State - Signature accent */\n  /* Active State - Signature immersion */\n}\n.nex-lang-switcher .nex-lang-current:hover {\n  background: rgba(255, 255, 255, 0.12);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n  border-color: rgba(255, 255, 255, 0.15);\n}\n.nex-lang-switcher .nex-lang-current:focus-visible {\n  outline: 2px solid var(--nex-signature);\n  outline-offset: 2px;\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n}\n.nex-lang-switcher .nex-lang-current:active {\n  background: rgba(255, 24, 1, 0.15);\n  backdrop-filter: blur(28px) saturate(220%);\n  -webkit-backdrop-filter: blur(28px) saturate(220%);\n  border-color: rgba(255, 24, 1, 0.2);\n}\n.nex-lang-switcher .nex-lang-chevron {\n  width: 0.6rem;\n  height: 0.6rem;\n  margin-left: var(--nex-spacing-xs);\n  color: var(--nex-muted-font-color);\n  flex-shrink: 0;\n  transition: transform var(--nex-transition-fast);\n  opacity: 0.7;\n}\n.nex-lang-switcher .nex-lang-chevron.open {\n  transform: rotate(180deg);\n  color: var(--nex-signature);\n  opacity: 1;\n}\n.nex-lang-switcher .nex-lang-icon {\n  width: 1rem;\n  height: 1rem;\n  object-fit: cover;\n  border-radius: var(--nex-radius-sm);\n  display: block;\n}\n.nex-lang-switcher .nex-lang-emoji {\n  font-size: 1rem;\n  line-height: 1;\n  display: block;\n}\n.nex-lang-switcher .nex-lang-label {\n  white-space: nowrap;\n  font-weight: var(--nex-font-weight-medium);\n  font-size: var(--nex-font-size-sm);\n  letter-spacing: 0.02em;\n}\n.nex-lang-switcher .nex-lang-dropdown {\n  position: absolute;\n  top: calc(100% + var(--nex-spacing-sm));\n  right: 0;\n  min-width: 140px;\n  max-width: 240px;\n  /* Advanced Glassmorphic Design */\n  background: rgba(255, 255, 255, 0.08);\n  backdrop-filter: blur(24px) saturate(200%);\n  -webkit-backdrop-filter: blur(24px) saturate(200%);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: var(--nex-radius-lg);\n  /* Subtle shadow for depth */\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);\n  /* Layout */\n  padding: var(--nex-spacing-sm) 0;\n  z-index: var(--nex-z-index-popover);\n  /* Responsive */\n  /* Mobile optimization */\n}\n@media (max-width: 768px) {\n  .nex-lang-switcher .nex-lang-dropdown {\n    right: calc(-1 * var(--nex-spacing-md));\n    min-width: 180px;\n  }\n}\n@media (max-width: 480px) {\n  .nex-lang-switcher .nex-lang-dropdown {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    right: auto;\n    transform: translate(-50%, -50%);\n    width: calc(100vw - 2rem);\n    max-width: 280px;\n    max-height: 60vh;\n  }\n}\n.nex-lang-switcher .nex-lang-search {\n  width: calc(100% - 2rem);\n  margin: 0 var(--nex-spacing-md) var(--nex-spacing-sm) var(--nex-spacing-md);\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  /* Typography */\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-regular);\n  /* Glassmorphic Input */\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  border-radius: var(--nex-radius-md);\n  color: var(--nex-font-color);\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Reset */\n  outline: none;\n  box-sizing: border-box;\n  /* Placeholder */\n  /* Focus State */\n}\n.nex-lang-switcher .nex-lang-search::placeholder {\n  color: var(--nex-muted-font-color);\n  font-weight: var(--nex-font-weight-regular);\n}\n.nex-lang-switcher .nex-lang-search:focus {\n  background: rgba(255, 255, 255, 0.08);\n  border-color: var(--nex-signature);\n  box-shadow: 0 0 0 3px rgba(255, 24, 1, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);\n}\n.nex-lang-switcher .nex-lang-scroll {\n  max-height: var(--nex-lang-dropdown-max-height);\n  overflow-y: auto;\n  display: flex;\n  flex-direction: column;\n  /* Custom Scrollbar */\n}\n.nex-lang-switcher .nex-lang-scroll::-webkit-scrollbar {\n  width: 3px;\n}\n.nex-lang-switcher .nex-lang-scroll::-webkit-scrollbar-track {\n  background: transparent;\n}\n.nex-lang-switcher .nex-lang-scroll::-webkit-scrollbar-thumb {\n  background: rgba(255, 255, 255, 0.2);\n  border-radius: var(--nex-radius-sm);\n}\n.nex-lang-switcher .nex-lang-scroll::-webkit-scrollbar-thumb:hover {\n  background: rgba(255, 255, 255, 0.3);\n}\n.nex-lang-switcher .nex-lang-item {\n  display: flex;\n  align-items: center;\n  gap: var(--nex-spacing-sm);\n  padding: var(--nex-spacing-sm) var(--nex-spacing-md);\n  /* Typography */\n  font-size: var(--nex-font-size-sm);\n  font-weight: var(--nex-font-weight-regular);\n  color: var(--nex-font-color);\n  /* Layout */\n  cursor: pointer;\n  user-select: none;\n  outline: none;\n  border: none;\n  background: none;\n  /* Transitions */\n  transition: all var(--nex-transition-fast);\n  /* Hover State - Subtle glassmorphic enhancement */\n  /* Focus State */\n  /* Selected State - Signature glassmorphic */\n  /* Active State */\n}\n.nex-lang-switcher .nex-lang-item:hover {\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n}\n.nex-lang-switcher .nex-lang-item:focus-visible {\n  background: rgba(255, 255, 255, 0.08);\n  outline: 2px solid var(--nex-signature);\n  outline-offset: -2px;\n}\n.nex-lang-switcher .nex-lang-item[aria-selected=true] {\n  background: rgba(255, 24, 1, 0.1);\n  backdrop-filter: blur(20px) saturate(200%);\n  -webkit-backdrop-filter: blur(20px) saturate(200%);\n  color: var(--nex-signature);\n  font-weight: var(--nex-font-weight-bold);\n  /* Subtle glow effect */\n  box-shadow: inset 0 0 0 1px rgba(255, 24, 1, 0.2);\n}\n.nex-lang-switcher .nex-lang-item:active {\n  background: rgba(255, 24, 1, 0.15);\n  backdrop-filter: blur(24px) saturate(220%);\n  -webkit-backdrop-filter: blur(24px) saturate(220%);\n}\n\n/* ================================\n   📱 MOBILE OPTIMIZATIONS\n   ================================ */\n@media (max-width: 768px) {\n  .nex-lang-switcher .nex-lang-current {\n    min-width: 48px;\n    padding: var(--nex-spacing-xs);\n    height: 28px;\n  }\n  .nex-lang-switcher .nex-lang-current .nex-lang-label {\n    display: none; /* Show only flag on mobile */\n  }\n  .nex-lang-switcher .nex-lang-dropdown .nex-lang-item {\n    padding: var(--nex-spacing-sm);\n    font-size: var(--nex-font-size-sm);\n  }\n}\n/* ================================\n   🌒 DARK MODE ADJUSTMENTS\n   ================================ */\n[data-theme=dark] .nex-lang-switcher .nex-lang-current {\n  background: rgba(0, 0, 0, 0.2);\n  border-color: rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-current:hover {\n  background: rgba(0, 0, 0, 0.25);\n  border-color: rgba(255, 255, 255, 0.08);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-dropdown {\n  background: rgba(0, 0, 0, 0.3);\n  border-color: rgba(255, 255, 255, 0.05);\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-search {\n  background: rgba(0, 0, 0, 0.2);\n  border-color: rgba(255, 255, 255, 0.05);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-search:focus {\n  background: rgba(0, 0, 0, 0.25);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-item:hover {\n  background: rgba(255, 255, 255, 0.03);\n}\n[data-theme=dark] .nex-lang-switcher .nex-lang-item[aria-selected=true] {\n  background: rgba(255, 24, 1, 0.15);\n}";
-styleInject(css_248z$4);
+// Debounce function for performance
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+const NavItems = ({
+  navItems,
+  isAtTop,
+  onItemClick
+}) => {
+  const [visibleItems, setVisibleItems] = useState([]);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [lastContainerWidth, setLastContainerWidth] = useState(0);
+  const navListRef = useRef(null);
+  const moreDropdownRef = useRef(null);
+  useAnimationConfig();
+  // Calculate item width with responsive considerations
+  const calculateItemWidth = useCallback((item, element, containerWidth) => {
+    const constants = getResponsiveConstants(containerWidth || window.innerWidth);
+    if (element) {
+      const itemWidth = element.offsetWidth;
+      const hasSubItems = item.subItems && item.subItems.length > 0;
+      const extraWidth = hasSubItems ? 8 : 0;
+      return itemWidth + extraWidth + constants.itemGap;
+    }
+    // Fallback calculation
+    const baseWidth = constants.minItemWidth;
+    const hasSubItems = item.subItems && item.subItems.length > 0;
+    const extraWidth = hasSubItems ? 8 : 0;
+    const labelLength = item.label.length;
+    let estimatedWidth = baseWidth;
+    if (containerWidth && containerWidth <= 400) {
+      estimatedWidth = Math.max(baseWidth, labelLength * 6 + extraWidth + 12);
+    } else if (containerWidth && containerWidth <= 600) {
+      estimatedWidth = Math.max(baseWidth, labelLength * 7 + extraWidth + 16);
+    } else if (containerWidth && containerWidth <= 800) {
+      estimatedWidth = Math.max(baseWidth, labelLength * 8 + extraWidth + 20);
+    } else if (containerWidth && containerWidth <= 1200) {
+      estimatedWidth = Math.max(baseWidth, labelLength * 9 + extraWidth + 24);
+    } else {
+      estimatedWidth = Math.max(baseWidth, labelLength * 10 + extraWidth + 28);
+    }
+    const badgeSpace = containerWidth && containerWidth <= 400 ? 8 : containerWidth && containerWidth <= 600 ? 10 : containerWidth && containerWidth <= 800 ? 12 : 16;
+    const descriptionSpace = containerWidth && containerWidth <= 400 ? 4 : containerWidth && containerWidth <= 600 ? 6 : containerWidth && containerWidth <= 800 ? 8 : 10;
+    if (item.badge) {
+      estimatedWidth += badgeSpace;
+    }
+    if (item.description) {
+      estimatedWidth += descriptionSpace;
+    }
+    return estimatedWidth + constants.itemGap;
+  }, []);
+  // Calculate visible items with optimized logic
+  const calculateVisibleItems = useCallback(() => {
+    if (!navListRef.current || isCalculating) return;
+    setIsCalculating(true);
+    requestAnimationFrame(() => {
+      if (!navListRef.current) {
+        setIsCalculating(false);
+        return;
+      }
+      const container = navListRef.current;
+      const containerWidth = container.offsetWidth;
+      const itemElements = container.querySelectorAll('.nex-nav-item');
+      const constants = getResponsiveConstants(containerWidth);
+      // Hysteresis to prevent oscillation
+      const widthChange = Math.abs(containerWidth - lastContainerWidth);
+      const hysteresisThreshold = 20;
+      if (widthChange < hysteresisThreshold && visibleItems.length > 0) {
+        setIsCalculating(false);
+        return;
+      }
+      // Calculate all item widths upfront
+      const itemWidths = [];
+      for (let i = 0; i < navItems.length; i++) {
+        const item = navItems[i];
+        const itemElement = itemElements[i];
+        const width = calculateItemWidth(item, itemElement, containerWidth);
+        itemWidths.push(width);
+      }
+      // Determine if we should use condensation
+      const shouldCondense = containerWidth < 800 || navItems.length > 4;
+      if (!shouldCondense) {
+        const newVisibleItems = Array.from({
+          length: navItems.length
+        }, (_, i) => i);
+        setVisibleItems(newVisibleItems);
+        setLastContainerWidth(containerWidth);
+        setIsCalculating(false);
+        return;
+      }
+      // Aggressive condensation logic
+      const availableSpace = containerWidth - constants.safetyMargin;
+      const moreButtonSpace = constants.moreButtonWidth;
+      const spaceWithMore = availableSpace - moreButtonSpace;
+      let totalWidth = 0;
+      let visibleCount = 0;
+      for (let i = 0; i < navItems.length; i++) {
+        const itemWidth = itemWidths[i];
+        if (totalWidth + itemWidth <= spaceWithMore) {
+          totalWidth += itemWidth;
+          visibleCount = i + 1;
+        } else {
+          break;
+        }
+      }
+      // Apply condensation rules
+      let finalVisibleCount = visibleCount;
+      if (navItems.length > 3) {
+        finalVisibleCount = Math.min(finalVisibleCount, 3);
+      }
+      if (containerWidth <= 600) {
+        finalVisibleCount = Math.min(finalVisibleCount, 2);
+      }
+      if (containerWidth <= 400) {
+        finalVisibleCount = Math.min(finalVisibleCount, 1);
+      }
+      finalVisibleCount = Math.max(1, finalVisibleCount);
+      const newVisibleItems = Array.from({
+        length: finalVisibleCount
+      }, (_, i) => i);
+      setVisibleItems(newVisibleItems);
+      setLastContainerWidth(containerWidth);
+      setIsCalculating(false);
+    });
+  }, [navItems, calculateItemWidth, isCalculating, lastContainerWidth, visibleItems.length]);
+  // Debounced resize handler
+  const debouncedCalculateVisibleItems = useMemo(() => debounce(calculateVisibleItems, 30), [calculateVisibleItems]);
+  // Recalculate on resize
+  useEffect(() => {
+    const handleResize = () => {
+      debouncedCalculateVisibleItems();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [debouncedCalculateVisibleItems]);
+  // Recalculate when nav items change
+  useEffect(() => {
+    const timer = setTimeout(calculateVisibleItems, 100);
+    return () => clearTimeout(timer);
+  }, [navItems, calculateVisibleItems]);
+  // Initial calculation
+  useEffect(() => {
+    calculateVisibleItems();
+  }, [calculateVisibleItems]);
+  // Close more dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = e => {
+      const target = e.target;
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(target)) {
+        setIsMoreOpen(false);
+      }
+    };
+    if (isMoreOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMoreOpen]);
+  // Memoize nav items with proper accessibility
+  const memoizedNavItems = useMemo(() => {
+    return navItems.map((item, i) => ({
+      ...item,
+      key: `nav-item-${i}`,
+      'aria-label': item.label,
+      'aria-current': undefined
+    }));
+  }, [navItems]);
+  // Separate visible items and overflow items
+  const visibleNavItems = useMemo(() => {
+    return visibleItems.map(index => memoizedNavItems[index]).filter(Boolean);
+  }, [memoizedNavItems, visibleItems]);
+  const overflowNavItems = useMemo(() => {
+    return memoizedNavItems.filter((_, index) => !visibleItems.includes(index));
+  }, [memoizedNavItems, visibleItems]);
+  const hasOverflow = overflowNavItems.length > 0;
+  return /*#__PURE__*/jsxs(motion.ul, {
+    className: "nex-nav-list",
+    role: "menubar",
+    "aria-label": "Main menu",
+    ref: navListRef,
+    children: [(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => /*#__PURE__*/jsx(motion.li, {
+      variants: ANIMATION_VARIANTS.mobileNav.navItem,
+      children: /*#__PURE__*/jsx(NavItem, {
+        label: item.label,
+        onClick: () => onItemClick?.(item),
+        isActive: false,
+        disabled: item.disabled,
+        badge: item.badge,
+        subItems: item.subItems,
+        description: item.description,
+        isAtTop: isAtTop
+      })
+    }, item.key || i)), hasOverflow && visibleItems.length > 0 && /*#__PURE__*/jsx(motion.li, {
+      variants: ANIMATION_VARIANTS.mobileNav.navItem,
+      style: {
+        position: 'relative'
+      },
+      children: /*#__PURE__*/jsxs("div", {
+        className: "nex-nav-item-wrapper",
+        style: {
+          position: 'relative'
+        },
+        ref: moreDropdownRef,
+        children: [/*#__PURE__*/jsx(motion.button, {
+          className: classNames('nex-nav-item', {
+            'has-dropdown': true,
+            'dropdown-open': isMoreOpen
+          }),
+          role: "menuitem",
+          "aria-haspopup": "true",
+          "aria-expanded": isMoreOpen,
+          tabIndex: 0,
+          onClick: e => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsMoreOpen(prev => !prev);
+          },
+          onKeyDown: e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setIsMoreOpen(prev => !prev);
+            }
+          },
+          type: "button",
+          initial: false,
+          transition: {
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          children: /*#__PURE__*/jsxs("div", {
+            className: "nex-nav-item-content",
+            children: [/*#__PURE__*/jsx("span", {
+              className: "nex-nav-item__label",
+              style: {
+                fontSize: 'var(--nex-font-size-xs)'
+              },
+              children: "More"
+            }), /*#__PURE__*/jsx("span", {
+              className: "nex-nav-item-badge",
+              "aria-label": `${overflowNavItems.length} additional items`,
+              children: overflowNavItems.length
+            }), /*#__PURE__*/jsx(motion.span, {
+              className: "nex-nav-item-chevron",
+              animate: {
+                rotate: isMoreOpen ? 180 : 0
+              },
+              transition: {
+                duration: 0.03,
+                ease: [0.4, 0, 0.2, 1]
+              },
+              "aria-hidden": "true",
+              children: /*#__PURE__*/jsx(ChevronDown, {
+                size: 14
+              })
+            })]
+          })
+        }), /*#__PURE__*/jsx(AnimatePresence, {
+          children: isMoreOpen && /*#__PURE__*/jsx(motion.div, {
+            className: "nex-nav-dropdown",
+            initial: {
+              opacity: 0,
+              y: -8
+            },
+            animate: {
+              opacity: 1,
+              y: 0,
+              background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+              boxShadow: isAtTop ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)' : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+            },
+            exit: {
+              opacity: 0,
+              y: -8
+            },
+            transition: {
+              duration: 0,
+              ease: [0.4, 0, 0.2, 1]
+            },
+            style: {
+              transformOrigin: 'top center',
+              right: 0,
+              left: 'auto'
+            },
+            role: "menu",
+            "aria-label": "More options submenu",
+            children: /*#__PURE__*/jsx(motion.ul, {
+              className: "nex-nav-dropdown-list",
+              children: overflowNavItems.map((item, index) => {
+                // If item has subitems, render them directly
+                if (item.subItems && item.subItems.length > 0) {
+                  return item.subItems.map((subItem, subIndex) => /*#__PURE__*/jsx(motion.li, {
+                    className: classNames('nex-nav-sub-item', {
+                      'disabled': subItem.disabled,
+                      'from-parent': true
+                    }),
+                    role: "menuitem",
+                    tabIndex: subItem.disabled ? -1 : 0,
+                    onClick: () => {
+                      if (!subItem.disabled && subItem.onClick) {
+                        subItem.onClick();
+                        setIsMoreOpen(false);
+                      }
+                    },
+                    "aria-disabled": subItem.disabled,
+                    initial: {
+                      opacity: 0
+                    },
+                    animate: {
+                      opacity: 1
+                    },
+                    transition: {
+                      duration: 0.1,
+                      delay: (index * item.subItems.length + subIndex) * 0.02
+                    },
+                    children: /*#__PURE__*/jsxs("div", {
+                      className: "nex-nav-sub-item-content",
+                      children: [/*#__PURE__*/jsxs("div", {
+                        className: "nex-nav-sub-item-text",
+                        children: [/*#__PURE__*/jsx("span", {
+                          className: "nex-nav-sub-item-label",
+                          children: subItem.label
+                        }), subItem.description && /*#__PURE__*/jsx("span", {
+                          className: "nex-nav-sub-item-description",
+                          children: subItem.description
+                        }), /*#__PURE__*/jsx("span", {
+                          className: "nex-nav-sub-item-parent",
+                          children: item.label
+                        })]
+                      }), subItem.badge && /*#__PURE__*/jsx("span", {
+                        className: "nex-nav-sub-item-badge",
+                        "aria-label": `${subItem.badge} notifications`,
+                        children: subItem.badge
+                      })]
+                    })
+                  }, `${subItem.label}-${subIndex}`));
+                }
+                // Regular item without subitems
+                return /*#__PURE__*/jsx(motion.li, {
+                  className: classNames('nex-nav-sub-item', {
+                    'disabled': item.disabled
+                  }),
+                  role: "menuitem",
+                  tabIndex: item.disabled ? -1 : 0,
+                  onClick: () => {
+                    if (!item.disabled && item.onClick) {
+                      item.onClick();
+                      setIsMoreOpen(false);
+                    }
+                  },
+                  "aria-disabled": item.disabled,
+                  initial: {
+                    opacity: 0
+                  },
+                  animate: {
+                    opacity: 1
+                  },
+                  transition: {
+                    duration: 0.1,
+                    delay: index * 0.02
+                  },
+                  children: /*#__PURE__*/jsxs("div", {
+                    className: "nex-nav-sub-item-content",
+                    children: [/*#__PURE__*/jsxs("div", {
+                      className: "nex-nav-sub-item-text",
+                      children: [/*#__PURE__*/jsx("span", {
+                        className: "nex-nav-sub-item-label",
+                        children: item.label
+                      }), item.description && /*#__PURE__*/jsx("span", {
+                        className: "nex-nav-sub-item-description",
+                        children: item.description
+                      })]
+                    }), item.badge && /*#__PURE__*/jsx("span", {
+                      className: "nex-nav-sub-item-badge",
+                      "aria-label": `${item.badge} notifications`,
+                      children: item.badge
+                    })]
+                  })
+                }, item.key || `overflow-${index}`);
+              })
+            })
+          })
+        })]
+      })
+    })]
+  });
+};
 
 const getFlagEmoji = code => {
   const iso = code.slice(0, 2).toUpperCase();
@@ -16955,31 +7526,79 @@ const getLanguageName = code => {
   };
   return nameMap[code.toLowerCase()] || code.toUpperCase().slice(0, 2);
 };
-const ChevronIcon = ({
-  open
-}) => /*#__PURE__*/React__default.createElement("svg", {
-  className: `nex-lang-chevron${open ? ' open' : ''}`,
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  "aria-hidden": "true"
-}, /*#__PURE__*/React__default.createElement("path", {
-  d: "M4 6l4 4 4-4",
-  stroke: "currentColor",
-  strokeWidth: "1.5",
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-}));
 const LanguageSwitcher = ({
   currentLocale,
   options,
-  onChange
+  onChange,
+  isAtTop = true,
+  open = false,
+  onOpen,
+  onClose,
+  theme = 'auto'
 }) => {
-  const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
   const ref = useRef(null);
   const searchRef = useRef(null);
-  const current = options.find(opt => opt.code === currentLocale);
+  // Detect current theme
+  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+  const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
+  // Theme-aware animation configurations
+  const getHoverAnimation = () => {
+    if (isDarkMode) {
+      if (isBlackGlass) {
+        return {
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.12)',
+          transition: {
+            duration: 0.08,
+            ease: [0.25, 0.46, 0.45, 0.94]
+          }
+        };
+      } else {
+        return {
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.1)',
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          transition: {
+            duration: 0.08,
+            ease: [0.25, 0.46, 0.45, 0.94]
+          }
+        };
+      }
+    } else {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.85)',
+        borderColor: 'rgba(255, 255, 255, 0.15)',
+        transition: {
+          duration: 0.08,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }
+      };
+    }
+  };
+  const getTapAnimation = () => {
+    if (isDarkMode) {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.12)' : 'rgba(255,24,1,0.15)',
+        borderColor: 'rgba(255, 24, 1, 0.15)',
+        transition: {
+          duration: 0.08,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }
+      };
+    } else {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.15)' : 'rgba(255,24,1,0.2)',
+        borderColor: 'rgba(255, 24, 1, 0.2)',
+        transition: {
+          duration: 0.08,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }
+      };
+    }
+  };
+  const hoverAnimation = getHoverAnimation();
+  const tapAnimation = getTapAnimation();
+  options.find(opt => opt.code === currentLocale);
   const showSearch = options.length > 5;
   // Filtered options
   const filtered = options.filter(opt => {
@@ -16987,7 +7606,9 @@ const LanguageSwitcher = ({
     const searchLower = search.toLowerCase();
     return opt.label?.toLowerCase().includes(searchLower) || opt.code.toLowerCase().includes(searchLower) || getLanguageName(opt.code).toLowerCase().includes(searchLower);
   });
-  useClickAway(ref, () => setOpen(false));
+  useClickAway(ref, () => {
+    onClose && onClose();
+  });
   useEffect(() => {
     if (!open) {
       setSearch('');
@@ -17003,100 +7624,855 @@ const LanguageSwitcher = ({
   useEffect(() => {
     const handler = e => {
       if (e.key === 'Escape' && open) {
-        setOpen(false);
+        onClose && onClose();
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [open]);
-  const toggle = () => setOpen(prev => !prev);
-  return /*#__PURE__*/React__default.createElement("div", {
+  }, [open, onClose]);
+  const handleToggle = () => {
+    // Always call onOpen which now handles the toggle logic
+    onOpen && onOpen();
+  };
+  return /*#__PURE__*/jsxs("div", {
     className: "nex-lang-switcher",
-    ref: ref
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-lang-current",
-    onClick: toggle,
-    role: "button",
-    tabIndex: 0,
-    "aria-haspopup": "listbox",
-    "aria-expanded": open,
-    onKeyDown: e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
-      }
-    }
-  }, current?.icon ? /*#__PURE__*/React__default.createElement("img", {
-    src: current.icon,
-    alt: "",
-    className: "nex-lang-icon"
-  }) : /*#__PURE__*/React__default.createElement("span", {
-    className: "nex-lang-emoji"
-  }, getFlagEmoji(currentLocale)), /*#__PURE__*/React__default.createElement(ChevronIcon, {
-    open: open
-  })), /*#__PURE__*/React__default.createElement(AnimatePresence, null, open && /*#__PURE__*/React__default.createElement(motion.div, {
-    className: "nex-lang-dropdown",
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    exit: {
-      opacity: 0
-    },
-    transition: {
-      duration: 0.15
-    },
-    role: "listbox"
-  }, showSearch && /*#__PURE__*/React__default.createElement("input", {
-    className: "nex-lang-search",
-    ref: searchRef,
-    type: "text",
-    placeholder: "Search languages...",
-    value: search,
-    onChange: e => setSearch(e.target.value),
-    "aria-label": "Search language"
-  }), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-lang-scroll"
-  }, filtered.length === 0 && /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-lang-item",
-    style: {
-      opacity: 0.6,
-      cursor: 'default'
-    }
-  }, "No languages found"), filtered.map((option, index) => /*#__PURE__*/React__default.createElement(motion.div, {
-    key: option.code,
-    className: "nex-lang-item",
-    role: "option",
-    "aria-selected": option.code === currentLocale,
-    onClick: () => {
-      onChange(option.code);
-      setOpen(false);
-    },
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: 0.1,
-      delay: index * 0.02
-    }
-  }, option.icon ? /*#__PURE__*/React__default.createElement("img", {
-    src: option.icon,
-    alt: "",
-    className: "nex-lang-icon"
-  }) : /*#__PURE__*/React__default.createElement("span", {
-    className: "nex-lang-emoji"
-  }, getFlagEmoji(option.code)), /*#__PURE__*/React__default.createElement("span", {
-    className: "nex-lang-label"
-  }, option.label || getLanguageName(option.code))))))));
+    ref: ref,
+    children: [/*#__PURE__*/jsxs(motion.div, {
+      className: "nex-lang-current",
+      onClick: handleToggle,
+      role: "button",
+      tabIndex: 0,
+      "aria-haspopup": "listbox",
+      "aria-expanded": open,
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleToggle();
+        }
+      },
+      whileHover: hoverAnimation,
+      whileTap: tapAnimation,
+      children: [/*#__PURE__*/jsx("span", {
+        className: "nex-lang-code",
+        children: currentLocale.toUpperCase()
+      }), /*#__PURE__*/jsx(motion.span, {
+        className: "nex-lang-chevron",
+        animate: {
+          rotate: open ? 180 : 0
+        },
+        transition: {
+          duration: 0.15,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        },
+        "aria-hidden": "true",
+        children: /*#__PURE__*/jsx(ChevronDown, {
+          size: 14
+        })
+      })]
+    }), /*#__PURE__*/jsx(AnimatePresence, {
+      children: open && /*#__PURE__*/jsxs(motion.div, {
+        className: "nex-lang-dropdown",
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+          boxShadow: isAtTop ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)' : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+        },
+        exit: {
+          opacity: 0
+        },
+        transition: {
+          duration: 0.2,
+          ease: [0.4, 0, 0.2, 1]
+        },
+        role: "listbox",
+        children: [showSearch && /*#__PURE__*/jsx("input", {
+          className: "nex-lang-search",
+          ref: searchRef,
+          type: "text",
+          placeholder: "Search languages...",
+          value: search,
+          onChange: e => setSearch(e.target.value),
+          "aria-label": "Search language"
+        }), /*#__PURE__*/jsxs("div", {
+          className: "nex-lang-scroll",
+          children: [filtered.length === 0 && /*#__PURE__*/jsx("div", {
+            className: "nex-lang-item",
+            style: {
+              opacity: 0.6,
+              cursor: 'default'
+            },
+            children: "No languages found"
+          }), filtered.map((option, index) => /*#__PURE__*/jsxs(motion.div, {
+            className: "nex-lang-item",
+            role: "option",
+            "aria-selected": option.code === currentLocale,
+            onClick: () => {
+              onChange(option.code);
+              onClose && onClose();
+            },
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              duration: 0.1,
+              delay: index * 0.02
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: [option.icon ? /*#__PURE__*/jsx("img", {
+              src: option.icon,
+              alt: "",
+              className: "nex-lang-icon"
+            }) : /*#__PURE__*/jsx("span", {
+              className: "nex-lang-emoji",
+              children: getFlagEmoji(option.code)
+            }), /*#__PURE__*/jsx("span", {
+              className: "nex-lang-label",
+              children: option.label || getLanguageName(option.code)
+            })]
+          }, option.code))]
+        })]
+      })
+    })]
+  });
 };
 
-var css_248z$3 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-mobile-nav {\n  position: fixed;\n  inset: 0;\n  background: var(--nex-surface-color);\n  z-index: var(--nex-z-index-modal);\n  display: flex;\n  flex-direction: column;\n  padding-block: 120px 30px;\n  overflow-y: auto;\n  box-shadow: var(--nex-shadow-lg);\n  transition: background var(--nex-transition-fast);\n}\n\n.nex-mobile-nav-inner {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  padding-inline: 1.5rem;\n}\n\n.nex-mobile-nav-list,\n.nex-mobile-nav-section {\n  display: flex;\n  flex-direction: column;\n  gap: 1.25rem;\n}\n\n.nex-mobile-nav-item {\n  font-size: var(--nex-font-size-md);\n  color: var(--nex-font-color);\n  padding: 0.75rem 1rem;\n  border-radius: var(--nex-radius-md);\n  background-color: transparent;\n  transition: background var(--nex-transition-fast), color var(--nex-transition-fast);\n  display: flex;\n  align-items: center;\n  gap: 0.6rem;\n  cursor: pointer;\n  user-select: none;\n}\n.nex-mobile-nav-item:hover, .nex-mobile-nav-item:focus-visible {\n  background-color: var(--nex-nav-link-hover-bg, rgba(0, 0, 0, 0.05));\n  outline: none;\n}\n.nex-mobile-nav-item.active {\n  font-weight: var(--nex-font-weight-bold);\n  background-color: var(--nex-primary-light);\n  color: var(--nex-primary-contrast-color);\n}\n.nex-mobile-nav-item.danger {\n  color: var(--nex-danger);\n}\n\n.nex-mobile-lang-icon {\n  width: 1rem;\n  height: 1rem;\n  object-fit: cover;\n  border-radius: 50%;\n}\n\n.nex-mobile-lang-emoji {\n  font-size: 1rem;\n  line-height: 1;\n}";
-styleInject(css_248z$3);
+const UserMenu = ({
+  user,
+  onLogout,
+  onProfile,
+  onEndorsementsClick,
+  onSubscriptionClick,
+  onActivityLogClick,
+  onSecurityClick,
+  onIntegrationsClick,
+  onAdminPanelClick,
+  onSignUpClick,
+  endorsementCount,
+  subscription,
+  enableEndorsements,
+  enableSubscriptionInfo,
+  enableAuditLog,
+  enableSecuritySettings,
+  enableIntegrations,
+  enableAdminPanel,
+  isAtTop = true,
+  open = false,
+  onOpen,
+  onClose,
+  theme = 'auto'
+}) => {
+  const ref = useRef(null);
+  // Optimized animation configurations
+  const hoverAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.85)',
+    transition: {
+      duration: 0.08,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  };
+  const tapAnimation = {
+    background: isAtTop ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.9)',
+    transition: {
+      duration: 0.05,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  };
+  const dangerHoverAnimation = {
+    background: isAtTop ? 'rgba(255,180,180,0.18)' : 'rgba(255,180,180,0.85)',
+    transition: {
+      duration: 0.08,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  };
+  const dangerTapAnimation = {
+    background: isAtTop ? 'rgba(255,180,180,0.22)' : 'rgba(255,180,180,0.9)',
+    transition: {
+      duration: 0.05,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  };
+  useClickAway(ref, () => {
+    onClose && onClose();
+  });
+  const handleToggle = () => {
+    // Always call onOpen which now handles the toggle logic
+    onOpen && onOpen();
+  };
+  const initials = user?.name?.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || '';
+  user?.avatarUrl || `https://api.dicebear.com/7.x/initials/svg?seed=${initials}`;
+  return /*#__PURE__*/jsxs("div", {
+    className: "nex-user-menu",
+    ref: ref,
+    children: [/*#__PURE__*/jsx(motion.button, {
+      className: "nex-user-menu-trigger",
+      onClick: handleToggle,
+      "aria-haspopup": "true",
+      "aria-expanded": open,
+      "aria-label": "User menu",
+      children: user?.avatarUrl ? /*#__PURE__*/jsx("img", {
+        src: user.avatarUrl,
+        alt: "User Avatar",
+        className: "nex-user-menu-avatar"
+      }) : /*#__PURE__*/jsx("span", {
+        className: "nex-user-menu-avatar nex-user-menu-avatar-fallback",
+        children: /*#__PURE__*/jsxs("div", {
+          className: "nex-user-menu-avatar-inner",
+          children: [/*#__PURE__*/jsx("div", {
+            className: "nex-user-menu-avatar-background"
+          }), /*#__PURE__*/jsx("span", {
+            className: "nex-user-menu-avatar-text",
+            children: initials
+          })]
+        })
+      })
+    }), /*#__PURE__*/jsx(AnimatePresence, {
+      children: open && /*#__PURE__*/jsx(motion.ul, {
+        className: "nex-user-menu-dropdown",
+        initial: {
+          opacity: 0,
+          y: -8
+        },
+        animate: {
+          opacity: 1,
+          y: 0,
+          background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
+          borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+          boxShadow: isAtTop ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)' : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+        },
+        exit: {
+          opacity: 0,
+          y: -8
+        },
+        transition: {
+          duration: 0.2,
+          ease: [0.4, 0, 0.2, 1]
+        },
+        role: "menu",
+        children: user ? /*#__PURE__*/jsxs(Fragment, {
+          children: [/*#__PURE__*/jsx("div", {
+            className: "nex-user-menu-section",
+            children: /*#__PURE__*/jsxs("li", {
+              className: "nex-user-menu-header",
+              children: [/*#__PURE__*/jsx("span", {
+                children: user.name
+              }), user.role && /*#__PURE__*/jsx("span", {
+                className: "badge",
+                children: user.role
+              })]
+            })
+          }), onProfile && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item",
+            role: "menuitem",
+            onClick: () => {
+              onClose && onClose();
+              onProfile();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Profile"
+          }), enableEndorsements && /*#__PURE__*/jsxs(motion.li, {
+            className: "nex-user-menu-item",
+            role: "menuitem",
+            onClick: () => {
+              onClose && onClose();
+              onEndorsementsClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: ["Endorsements (", endorsementCount ?? 0, ")"]
+          }), enableSubscriptionInfo && subscription && /*#__PURE__*/jsxs(motion.li, {
+            className: "nex-user-menu-item",
+            role: "menuitem",
+            onClick: () => {
+              onClose && onClose();
+              onSubscriptionClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: ["Subscription: ", subscription.tier]
+          }), enableAuditLog && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item",
+            onClick: () => {
+              onClose && onClose();
+              onActivityLogClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Activity Log"
+          }), enableSecuritySettings && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item",
+            onClick: () => {
+              onClose && onClose();
+              onSecurityClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Security Settings"
+          }), enableIntegrations && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item",
+            onClick: () => {
+              onClose && onClose();
+              onIntegrationsClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Manage Integrations"
+          }), enableAdminPanel && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item",
+            onClick: () => {
+              onClose && onClose();
+              onAdminPanelClick?.();
+            },
+            whileHover: hoverAnimation,
+            whileTap: tapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Admin Panel"
+          }), onLogout && /*#__PURE__*/jsx(motion.li, {
+            className: "nex-user-menu-item danger",
+            onClick: () => {
+              onClose && onClose();
+              onLogout();
+            },
+            whileHover: dangerHoverAnimation,
+            whileTap: dangerTapAnimation,
+            style: {
+              cursor: 'pointer'
+            },
+            children: "Log out"
+          })]
+        }) : /*#__PURE__*/jsx(motion.li, {
+          className: "nex-user-menu-item sign-up-cta",
+          onClick: () => {
+            onClose && onClose();
+            onSignUpClick?.();
+          },
+          whileHover: hoverAnimation,
+          whileTap: tapAnimation,
+          style: {
+            cursor: 'pointer'
+          },
+          children: /*#__PURE__*/jsx(motion.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            exit: {
+              opacity: 0
+            },
+            transition: {
+              duration: 0.3
+            },
+            children: "Sign up to personalize"
+          })
+        })
+      })
+    })]
+  });
+};
+
+const ThemeContext = /*#__PURE__*/createContext(undefined);
+const ThemeProvider = ({
+  children
+}) => {
+  const [isDark, setIsDark] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('nex-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let shouldBeDark = false;
+    if (savedTheme) {
+      shouldBeDark = savedTheme === 'dark' || savedTheme === 'black-glass';
+    } else {
+      shouldBeDark = systemPrefersDark;
+    }
+    setIsDark(shouldBeDark);
+    applyTheme(shouldBeDark);
+    setIsInitialized(true);
+  }, []);
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = e => {
+      if (!localStorage.getItem('nex-theme')) {
+        setIsDark(e.matches);
+        applyTheme(e.matches);
+      }
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+  const applyTheme = dark => {
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme-variant', 'black-glass');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.documentElement.removeAttribute('data-theme-variant');
+    }
+  };
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    // Update localStorage
+    localStorage.setItem('nex-theme', newTheme ? 'black-glass' : 'light');
+    // Apply theme to document
+    applyTheme(newTheme);
+  };
+  const value = {
+    isDark,
+    toggleTheme,
+    theme: isDark ? 'black-glass' : 'light'
+  };
+  if (!isInitialized) {
+    return null; // Don't render until theme is initialized
+  }
+  return /*#__PURE__*/jsx(ThemeContext.Provider, {
+    value: value,
+    children: children
+  });
+};
+const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
+
+const ThemeToggle = ({
+  isAtTop = true,
+  className = '',
+  theme = 'auto'
+}) => {
+  const {
+    isDark,
+    toggleTheme
+  } = useTheme();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const handleToggle = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    toggleTheme();
+    // Reset animation flag after animation completes
+    setTimeout(() => setIsAnimating(false), 600);
+  };
+  const handleKeyDown = e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleTheme();
+    }
+  };
+  return /*#__PURE__*/jsxs(motion.button, {
+    className: `nex-theme-toggle ${className}`,
+    onClick: handleToggle,
+    onKeyDown: handleKeyDown,
+    role: "switch",
+    "aria-checked": isDark,
+    "aria-label": `Switch to ${isDark ? 'light' : 'dark'} mode`,
+    tabIndex: 0,
+    disabled: isAnimating,
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    whileHover: {
+      transition: {
+        duration: 0.12,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    whileTap: {
+      transition: {
+        duration: 0.08,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    whileFocus: {
+      outline: "2px solid var(--nex-signature)",
+      outlineOffset: "2px",
+      transition: {
+        duration: 0.12,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    children: [/*#__PURE__*/jsx(motion.div, {
+      className: "nex-theme-toggle__icon-container",
+      animate: {
+        rotate: isDark ? 180 : 0
+      },
+      transition: {
+        type: "spring",
+        stiffness: 600,
+        damping: 25,
+        mass: 0.6,
+        restDelta: 0.001
+      },
+      children: /*#__PURE__*/jsx(AnimatePresence, {
+        mode: "wait",
+        children: !isDark ? /*#__PURE__*/jsx(motion.div, {
+          className: "nex-theme-toggle__icon nex-theme-toggle__icon--sun",
+          initial: {
+            opacity: 0,
+            rotate: -90
+          },
+          animate: {
+            opacity: 1,
+            rotate: 0
+          },
+          exit: {
+            opacity: 0,
+            rotate: 90
+          },
+          transition: {
+            duration: 0.12,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          children: /*#__PURE__*/jsx(Sun, {
+            size: 16
+          })
+        }, "sun") : /*#__PURE__*/jsx(motion.div, {
+          className: "nex-theme-toggle__icon nex-theme-toggle__icon--moon",
+          initial: {
+            opacity: 0,
+            rotate: -90
+          },
+          animate: {
+            opacity: 1,
+            rotate: 0
+          },
+          exit: {
+            opacity: 0,
+            rotate: 90
+          },
+          transition: {
+            duration: 0.12,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          children: /*#__PURE__*/jsx(Moon, {
+            size: 16
+          })
+        }, "moon")
+      })
+    }), /*#__PURE__*/jsx(AnimatePresence, {
+      children: isAnimating && /*#__PURE__*/jsx(motion.div, {
+        className: "nex-theme-toggle__ripple",
+        initial: {
+          opacity: 0.8
+        },
+        animate: {
+          opacity: 0
+        },
+        exit: {
+          opacity: 0
+        },
+        transition: {
+          duration: 0.12,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      })
+    })]
+  });
+};
+
+const NavControls = ({
+  isAuthenticated,
+  user,
+  onLogin,
+  onLogout,
+  onProfile,
+  languageOptions,
+  currentLocale,
+  onLocaleChange,
+  isLanguageOpen,
+  onLanguageToggle,
+  onLanguageClose,
+  isUserOpen,
+  onUserToggle,
+  onUserClose,
+  isAtTop,
+  endorsementCount,
+  subscription,
+  onEndorsementsClick,
+  onSubscriptionClick,
+  onActivityLogClick,
+  onSecurityClick,
+  onIntegrationsClick,
+  onAdminPanelClick,
+  theme = 'auto'
+}) => {
+  const {
+    timing,
+    spring
+  } = useAnimationConfig();
+  const handleLoginClick = () => {
+    if (onLogin) {
+      onLogin();
+    }
+  };
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: "nex-nav-right",
+    role: "group",
+    "aria-label": "User controls",
+    variants: ANIMATION_VARIANTS.mobileNav.navItem,
+    children: [/*#__PURE__*/jsx(motion.div, {
+      variants: ANIMATION_VARIANTS.mobileNav.navItem,
+      children: /*#__PURE__*/jsx(ThemeToggle, {
+        isAtTop: isAtTop,
+        theme: theme
+      })
+    }), /*#__PURE__*/jsx(motion.div, {
+      variants: ANIMATION_VARIANTS.mobileNav.navItem,
+      children: /*#__PURE__*/jsx(LanguageSwitcher, {
+        currentLocale: currentLocale,
+        options: languageOptions,
+        onChange: onLocaleChange,
+        isAtTop: isAtTop,
+        open: isLanguageOpen,
+        onOpen: onLanguageToggle,
+        onClose: onLanguageClose,
+        theme: theme
+      })
+    }), isAuthenticated && user && onLogout && onProfile ? /*#__PURE__*/jsx(motion.div, {
+      variants: ANIMATION_VARIANTS.mobileNav.navItem,
+      children: /*#__PURE__*/jsx(UserMenu, {
+        user: user,
+        onLogout: onLogout,
+        onProfile: onProfile,
+        endorsementCount: endorsementCount,
+        subscription: subscription,
+        onEndorsementsClick: onEndorsementsClick,
+        onSubscriptionClick: onSubscriptionClick,
+        onActivityLogClick: onActivityLogClick,
+        onSecurityClick: onSecurityClick,
+        onIntegrationsClick: onIntegrationsClick,
+        onAdminPanelClick: onAdminPanelClick,
+        isAtTop: isAtTop,
+        open: isUserOpen,
+        onOpen: onUserToggle,
+        onClose: onUserClose,
+        theme: theme
+      })
+    }) : /*#__PURE__*/jsxs(motion.button, {
+      className: "nex-nav-login-button",
+      onClick: handleLoginClick,
+      role: "button",
+      tabIndex: 0,
+      "aria-label": "Sign in to your account",
+      onKeyDown: e => e.key === 'Enter' && handleLoginClick(),
+      initial: {
+        opacity: 0
+      },
+      animate: {
+        opacity: 1
+      },
+      whileFocus: {
+        outline: "2px solid var(--nex-signature)",
+        outlineOffset: "2px",
+        transition: {
+          duration: 0.12,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      },
+      transition: spring.responsive,
+      children: [/*#__PURE__*/jsx(LogIn, {
+        size: 16,
+        "aria-hidden": "true"
+      }), /*#__PURE__*/jsx("span", {
+        children: "Sign In"
+      })]
+    })]
+  });
+};
+
+const NavLogo = ({
+  logoSrc,
+  displayName,
+  onHomeClick,
+  left
+}) => {
+  const {
+    timing
+  } = useAnimationConfig();
+  return /*#__PURE__*/jsx(motion.div, {
+    className: "nex-nav-mobile-logo",
+    initial: {
+      opacity: 0,
+      y: -20
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      left
+    },
+    transition: timing.medium,
+    style: {
+      position: 'fixed',
+      top: 'var(--nex-spacing-md)',
+      zIndex: 'calc(var(--nex-z-index-modal) + 10)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 'auto',
+      height: '44px',
+      cursor: 'pointer',
+      left
+    },
+    onClick: onHomeClick,
+    role: "button",
+    tabIndex: 0,
+    "aria-label": `${displayName} - Go to home`,
+    onKeyDown: e => e.key === 'Enter' && onHomeClick(),
+    whileHover: {
+      transition: timing.fast
+    },
+    whileTap: {
+      transition: timing.fast
+    },
+    children: logoSrc ? /*#__PURE__*/jsxs(motion.div, {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        padding: '8px',
+        boxSizing: 'border-box'
+      },
+      whileHover: {
+        transition: timing.fast
+      },
+      children: [/*#__PURE__*/jsx(motion.img, {
+        src: logoSrc,
+        alt: displayName,
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1
+        },
+        transition: timing.medium,
+        style: {
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          filter: 'brightness(0.9) contrast(1.1)',
+          maxWidth: '24px',
+          maxHeight: '24px'
+        },
+        onError: e => {
+          // Fallback to text if image fails to load
+          e.currentTarget.style.display = 'none';
+          e.currentTarget.nextElementSibling?.classList.remove('fallback-hidden');
+        }
+      }), /*#__PURE__*/jsx(motion.div, {
+        className: "fallback-hidden",
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1
+        },
+        transition: timing.medium,
+        style: {
+          position: 'absolute',
+          fontSize: 'var(--nex-font-size-xs)',
+          fontWeight: 'var(--nex-font-weight-medium)',
+          color: 'var(--nex-font-color)',
+          textAlign: 'center',
+          lineHeight: 1,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: '28px',
+          display: 'none'
+        },
+        children: displayName?.slice(0, 2)
+      })]
+    }) : /*#__PURE__*/jsx(motion.div, {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        padding: '4px 12px',
+        boxSizing: 'border-box'
+      },
+      whileHover: {
+        transition: timing.fast
+      },
+      children: /*#__PURE__*/jsx(motion.div, {
+        initial: {
+          opacity: 0,
+          x: -10
+        },
+        animate: {
+          opacity: 1,
+          x: 0
+        },
+        transition: timing.medium,
+        style: {
+          fontSize: '0.9rem',
+          fontWeight: 600,
+          color: 'var(--nex-font-color)',
+          textAlign: 'center',
+          lineHeight: 1.2,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: 'none',
+          fontFamily: 'var(--nex-font-family-primary)',
+          letterSpacing: '0.02em',
+          textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+          textRendering: 'optimizeLegibility'
+        },
+        children: displayName || 'NexComponent'
+      })
+    })
+  });
+};
 
 const MobileNav = ({
   isOpen,
@@ -17109,72 +8485,729 @@ const MobileNav = ({
   onProfile,
   currentLocale,
   languageOptions,
-  onLocaleChange
+  onLocaleChange,
+  endorsementCount,
+  subscription,
+  onEndorsementsClick,
+  onSubscriptionClick,
+  onActivityLogClick,
+  onSecurityClick,
+  onIntegrationsClick,
+  onAdminPanelClick,
+  theme = 'auto'
 }) => {
-  return /*#__PURE__*/React__default.createElement(AnimatePresence, null, isOpen && /*#__PURE__*/React__default.createElement(motion.div, {
-    className: "nex-mobile-nav",
-    initial: {
-      y: '-100%',
-      opacity: 0
+  // Check for black glass theme variant
+  const [currentThemeVariant, setCurrentThemeVariant] = useState(null);
+  useEffect(() => {
+    const checkThemeVariant = () => {
+      const variant = document.documentElement.getAttribute('data-theme-variant');
+      setCurrentThemeVariant(variant);
+    };
+    // Initial check
+    checkThemeVariant();
+    // Create a mutation observer to watch for theme changes
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme-variant') {
+          checkThemeVariant();
+        }
+      });
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme-variant']
+    });
+    return () => observer.disconnect();
+  }, []);
+  // Get current theme state directly from DOM to ensure accuracy
+  const currentThemeVariantFromDOM = document.documentElement.getAttribute('data-theme-variant');
+  const isBlackGlass = theme === 'black-glass' || currentThemeVariant === 'black-glass' || currentThemeVariantFromDOM === 'black-glass';
+  // State management
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [openNavItems, setOpenNavItems] = useState(new Set());
+  const [hoveredItem, setHoveredItem] = useState(null);
+  // Enterprise animation configuration
+  const {
+    timing,
+    spring,
+    stagger,
+    shouldReduceMotion,
+    variants,
+    colors,
+    performance
+  } = useAnimationConfig();
+  // Toggle handlers with exclusivity logic
+  const handleProfileToggle = () => {
+    setOpenDropdown(openDropdown === 'profile' ? null : 'profile');
+  };
+  const handleLanguageToggle = () => {
+    setOpenDropdown(openDropdown === 'language' ? null : 'language');
+  };
+  const handleSettingsToggle = () => {
+    setOpenDropdown(openDropdown === 'settings' ? null : 'settings');
+  };
+  const handleNavItemToggle = index => {
+    setOpenNavItems(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.clear();
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+  // Close all dropdowns when mobile nav closes
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenDropdown(null);
+      setOpenNavItems(new Set());
+      setHoveredItem(null);
+    }
+  }, [isOpen]);
+  const currentLanguage = languageOptions.find(lang => lang.code === currentLocale);
+  const hasHome = navItems.some(item => item.label.toLowerCase() === 'home');
+  // Prevent body scroll when mobile nav is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('nex-lock-scroll');
+    } else {
+      document.body.classList.remove('nex-lock-scroll');
+    }
+    return () => {
+      document.body.classList.remove('nex-lock-scroll');
+    };
+  }, [isOpen]);
+  return /*#__PURE__*/jsx(motion.div, {
+    className: `nex-mobile-nav${isBlackGlass ? ' nex-mobile-nav--black-glass' : ''}`,
+    variants: variants.mobileNav.container,
+    initial: "initial",
+    animate: "animate",
+    exit: "exit",
+    style: {
+      overflow: 'hidden',
+      position: 'fixed',
+      top: '71.99px',
+      left: 0,
+      right: 0,
+      width: '100%',
+      height: 'calc(100dvh - 71.99px)',
+      zIndex: 'var(--nex-z-index-modal)',
+      display: 'flex',
+      flexDirection: 'column',
+      // Only apply default styles when NOT black glass
+      ...(!isBlackGlass ? {
+        background: colors.mobileNav.background.primary,
+        backdropFilter: colors.mobileNav.backdrop.medium,
+        WebkitBackdropFilter: colors.mobileNav.backdrop.medium,
+        borderBottom: colors.mobileNav.border.medium,
+        boxShadow: colors.mobileNav.shadow.medium
+      } : {}),
+      ...performance.hardwareAcceleration
     },
-    animate: {
-      y: 0,
-      opacity: 1
-    },
-    exit: {
-      y: '-100%',
-      opacity: 0
-    },
-    transition: {
-      duration: 0.3
-    }
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-inner"
-  }, /*#__PURE__*/React__default.createElement("ul", {
-    className: "nex-mobile-nav-list"
-  }, navItems.map((item, index) => /*#__PURE__*/React__default.createElement("li", {
-    key: index,
-    className: "nex-mobile-nav-item",
-    onClick: () => {
-      item.onClick();
-      onClose();
-    }
-  }, item.label))), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-section"
-  }, isAuthenticated ? /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-item",
-    onClick: () => {
-      onProfile?.();
-      onClose();
-    }
-  }, "Profile"), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-item danger",
-    onClick: () => {
-      onLogout?.();
-      onClose();
-    }
-  }, "Log Out")) : /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-item",
-    onClick: () => {
-      onLogin?.();
-      onClose();
-    }
-  }, "Log In")), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-mobile-nav-section"
-  }, languageOptions.map(lang => /*#__PURE__*/React__default.createElement("div", {
-    key: lang.code,
-    className: `nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`,
-    onClick: () => {
-      onLocaleChange(lang.code);
-      onClose();
-    }
-  }, lang.icon ? /*#__PURE__*/React__default.createElement("img", {
-    src: lang.icon,
-    alt: lang.label,
-    className: "nex-mobile-lang-icon"
-  }) : /*#__PURE__*/React__default.createElement("span", {
-    className: "nex-mobile-lang-emoji"
-  }, String.fromCodePoint(...lang.code.slice(0, 2).toUpperCase().split('').map(char => 127397 + char.charCodeAt(0)))), lang.label))))));
+    children: /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-mobile-nav-inner",
+      variants: variants.fade.in,
+      initial: "initial",
+      animate: "animate",
+      exit: "exit",
+      transition: timing.medium,
+      style: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'auto',
+        ...performance.hardwareAcceleration
+      },
+      children: [/*#__PURE__*/jsx(motion.div, {
+        className: "nex-mobile-nav-header",
+        variants: variants.mobileNav.header,
+        initial: "initial",
+        animate: "animate",
+        exit: "exit",
+        children: /*#__PURE__*/jsxs("div", {
+          className: "nex-mobile-nav-header-content",
+          children: [isAuthenticated && user ? /*#__PURE__*/jsxs(Fragment, {
+            children: [user.avatarUrl ? /*#__PURE__*/jsx(motion.img, {
+              src: user.avatarUrl,
+              alt: user.name,
+              className: "nex-mobile-nav-user-avatar",
+              variants: variants.mobileNav.avatar,
+              initial: "initial",
+              animate: "animate",
+              exit: "exit"
+            }) : /*#__PURE__*/jsx(motion.span, {
+              className: "nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback",
+              variants: variants.mobileNav.avatar,
+              initial: "initial",
+              animate: "animate",
+              exit: "exit",
+              children: /*#__PURE__*/jsxs("svg", {
+                width: "40",
+                height: "40",
+                viewBox: "0 0 40 40",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg",
+                children: [/*#__PURE__*/jsxs("defs", {
+                  children: [/*#__PURE__*/jsxs("radialGradient", {
+                    id: "mobileAvatarGradient",
+                    cx: "50%",
+                    cy: "50%",
+                    r: "50%",
+                    children: [/*#__PURE__*/jsx("stop", {
+                      offset: "0%",
+                      stopColor: "#fff",
+                      stopOpacity: "0.8"
+                    }), /*#__PURE__*/jsx("stop", {
+                      offset: "100%",
+                      stopColor: "#e0e7ef",
+                      stopOpacity: "0.95"
+                    })]
+                  }), /*#__PURE__*/jsxs("linearGradient", {
+                    id: "mobileAvatarShimmer",
+                    x1: "0",
+                    y1: "0",
+                    x2: "40",
+                    y2: "40",
+                    gradientUnits: "userSpaceOnUse",
+                    children: [/*#__PURE__*/jsx("stop", {
+                      stopColor: "#fff",
+                      stopOpacity: "0.2"
+                    }), /*#__PURE__*/jsx("stop", {
+                      offset: "0.5",
+                      stopColor: "#ff1801",
+                      stopOpacity: "0.12"
+                    }), /*#__PURE__*/jsx("stop", {
+                      offset: "1",
+                      stopColor: "#00b8ff",
+                      stopOpacity: "0.12"
+                    })]
+                  })]
+                }), /*#__PURE__*/jsx("circle", {
+                  cx: "20",
+                  cy: "20",
+                  r: "20",
+                  fill: "url(#mobileAvatarGradient)"
+                }), /*#__PURE__*/jsx(motion.rect, {
+                  x: "-40",
+                  y: "0",
+                  width: "40",
+                  height: "40",
+                  fill: "url(#mobileAvatarShimmer)",
+                  animate: {
+                    x: [-40, 40]
+                  },
+                  transition: {
+                    repeat: Infinity,
+                    duration: shouldReduceMotion ? 0 : 4.5,
+                    ease: 'linear'
+                  },
+                  style: {
+                    mixBlendMode: 'lighten'
+                  }
+                }), /*#__PURE__*/jsx("text", {
+                  x: "50%",
+                  y: "54%",
+                  textAnchor: "middle",
+                  fill: "#3a4256",
+                  fontSize: "18",
+                  fontWeight: "bold",
+                  fontFamily: "inherit",
+                  dominantBaseline: "middle",
+                  style: {
+                    letterSpacing: 1
+                  },
+                  children: user.name?.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+                })]
+              })
+            }), /*#__PURE__*/jsxs(motion.div, {
+              className: "nex-mobile-nav-user-info",
+              variants: variants.fade.in,
+              initial: "initial",
+              animate: "animate",
+              transition: {
+                ...timing.medium,
+                delay: 0.1
+              },
+              children: [/*#__PURE__*/jsx("h3", {
+                className: "nex-mobile-nav-user-name",
+                children: user.name
+              }), /*#__PURE__*/jsx(motion.div, {
+                className: "nex-mobile-nav-user-tier",
+                onClick: onSubscriptionClick,
+                transition: spring.fast,
+                children: subscription?.tier === 'pro' ? 'Pro' : 'Free'
+              })]
+            })]
+          }) : /*#__PURE__*/jsxs(motion.div, {
+            className: "nex-mobile-nav-guest-content",
+            variants: variants.fade.in,
+            initial: "initial",
+            animate: "animate",
+            transition: {
+              ...timing.medium,
+              delay: 0.15
+            },
+            children: [/*#__PURE__*/jsx(motion.button, {
+              className: "nex-mobile-nav-signup-btn",
+              onClick: onLogin,
+              whileHover: {
+                backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
+                borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
+                boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)"
+              },
+              whileTap: {
+                backgroundColor: "rgba(255, 24, 1, 0.15)",
+                borderColor: "rgba(255, 24, 1, 0.2)"
+              },
+              transition: spring.responsive,
+              children: "Sign Up"
+            }), /*#__PURE__*/jsx(motion.button, {
+              className: "nex-mobile-nav-login-link",
+              onClick: onLogin,
+              whileHover: {
+                opacity: 0.8
+              },
+              transition: spring.fast,
+              children: "Already have an account? Sign in"
+            })]
+          }), /*#__PURE__*/jsx(motion.div, {
+            className: "nex-mobile-nav-theme-toggle",
+            variants: variants.fade.in,
+            initial: "initial",
+            animate: "animate",
+            transition: {
+              ...timing.medium,
+              delay: 0.2
+            },
+            children: /*#__PURE__*/jsx(ThemeToggle, {
+              isAtTop: false
+            })
+          })]
+        })
+      }), /*#__PURE__*/jsxs(motion.div, {
+        className: "nex-mobile-nav-list",
+        variants: stagger.container,
+        initial: "initial",
+        animate: "animate",
+        style: performance.hardwareAcceleration,
+        children: [/*#__PURE__*/jsxs(motion.div, {
+          className: "nex-mobile-nav-section",
+          variants: variants.mobileNav.navItem,
+          children: [/*#__PURE__*/jsx(motion.h4, {
+            className: "nex-mobile-nav-section-title",
+            variants: variants.mobileNav.sectionTitle,
+            children: "Navigation"
+          }), !hasHome && /*#__PURE__*/jsx(motion.div, {
+            className: "nex-mobile-nav-item",
+            variants: variants.mobileNav.navItem,
+            whileHover: variants.interactive.navItem.hover,
+            whileTap: variants.interactive.navItem.active,
+            transition: spring.responsive,
+            children: /*#__PURE__*/jsx("span", {
+              className: "nex-mobile-nav-text",
+              children: "Home"
+            })
+          }), navItems.map((item, index) => /*#__PURE__*/jsxs(motion.div, {
+            style: {
+              marginBottom: 'var(--nex-spacing-xs)'
+            },
+            variants: variants.mobileNav.navItem,
+            children: [/*#__PURE__*/jsxs(motion.div, {
+              className: "nex-mobile-nav-item",
+              onClick: e => {
+                e.stopPropagation();
+                if (item.subItems && item.subItems.length > 0) {
+                  handleNavItemToggle(index);
+                } else if (item.onClick) {
+                  item.onClick();
+                }
+              },
+              whileHover: variants.interactive.navItem.hover,
+              whileTap: variants.interactive.navItem.active,
+              transition: spring.responsive,
+              children: [/*#__PURE__*/jsx("span", {
+                className: "nex-mobile-nav-text",
+                children: item.label
+              }), item.subItems && item.subItems.length > 0 && /*#__PURE__*/jsx(motion.div, {
+                animate: openNavItems.has(index) ? "open" : "closed",
+                variants: variants.mobileNav.iconRotate,
+                transition: spring.fast,
+                children: /*#__PURE__*/jsx(ChevronDown, {
+                  className: "nex-mobile-nav-icon"
+                })
+              })]
+            }), /*#__PURE__*/jsx(AnimatePresence, {
+              children: item.subItems && item.subItems.length > 0 && openNavItems.has(index) && /*#__PURE__*/jsx(motion.div, {
+                variants: variants.mobileNav.dropdownContainer,
+                initial: "initial",
+                animate: "animate",
+                exit: "exit",
+                style: {
+                  overflow: 'hidden',
+                  marginTop: 'var(--nex-spacing-sm)'
+                },
+                children: /*#__PURE__*/jsx(motion.div, {
+                  variants: stagger.dropdown,
+                  initial: "initial",
+                  animate: "animate",
+                  children: item.subItems.map((subItem, subIndex) => /*#__PURE__*/jsxs(motion.div, {
+                    className: `nex-mobile-nav-item ${subItem.disabled ? 'disabled' : ''}`,
+                    onClick: e => {
+                      e.stopPropagation();
+                      if (!subItem.disabled) {
+                        subItem.onClick();
+                      }
+                    },
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: subItem.label
+                    }), subItem.badge && /*#__PURE__*/jsx(motion.span, {
+                      className: "nex-mobile-nav-badge",
+                      variants: variants.mobileNav.badge,
+                      initial: "initial",
+                      animate: "animate",
+                      exit: "exit",
+                      children: subItem.badge
+                    })]
+                  }, subIndex))
+                })
+              })
+            })]
+          }, index))]
+        }), /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-mobile-nav-section",
+          variants: variants.mobileNav.navItem,
+          children: [/*#__PURE__*/jsx(motion.h4, {
+            className: "nex-mobile-nav-section-title",
+            variants: variants.mobileNav.sectionTitle,
+            children: "Language"
+          }), /*#__PURE__*/jsxs(motion.div, {
+            className: "nex-mobile-nav-item",
+            onClick: handleLanguageToggle,
+            variants: variants.mobileNav.navItem,
+            whileHover: variants.interactive.navItem.hover,
+            whileTap: variants.interactive.navItem.active,
+            transition: spring.responsive,
+            children: [/*#__PURE__*/jsx("span", {
+              className: "nex-mobile-lang-abbr",
+              children: currentLocale.toUpperCase()
+            }), /*#__PURE__*/jsx("span", {
+              className: "nex-mobile-nav-text",
+              children: currentLanguage?.label || currentLocale.toUpperCase()
+            }), /*#__PURE__*/jsx(motion.div, {
+              animate: openDropdown === 'language' ? "open" : "closed",
+              variants: variants.mobileNav.iconRotate,
+              transition: spring.fast,
+              children: /*#__PURE__*/jsx(ChevronDown, {
+                className: "nex-mobile-nav-icon"
+              })
+            })]
+          }), /*#__PURE__*/jsx(AnimatePresence, {
+            children: openDropdown === 'language' && /*#__PURE__*/jsx(motion.div, {
+              variants: variants.mobileNav.dropdownContainer,
+              initial: "initial",
+              animate: "animate",
+              exit: "exit",
+              style: {
+                overflow: 'hidden'
+              },
+              children: /*#__PURE__*/jsx(motion.div, {
+                variants: stagger.dropdown,
+                initial: "initial",
+                animate: "animate",
+                children: languageOptions.map(lang => /*#__PURE__*/jsxs(motion.div, {
+                  className: `nex-mobile-nav-item ${lang.code === currentLocale ? 'active' : ''}`,
+                  onClick: () => {
+                    onLocaleChange(lang.code);
+                    setOpenDropdown(null);
+                  },
+                  style: {
+                    marginLeft: 'var(--nex-spacing-md)',
+                    marginBottom: 'var(--nex-spacing-xs)'
+                  },
+                  variants: variants.mobileNav.dropdownItem,
+                  whileHover: variants.interactive.navItem.hover,
+                  whileTap: variants.interactive.navItem.active,
+                  transition: spring.responsive,
+                  children: [/*#__PURE__*/jsx("span", {
+                    className: "nex-mobile-lang-abbr",
+                    children: lang.code.toUpperCase()
+                  }), /*#__PURE__*/jsx("span", {
+                    className: "nex-mobile-nav-text",
+                    children: lang.label
+                  })]
+                }, lang.code))
+              })
+            })
+          })]
+        }), isAuthenticated && user && /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-mobile-nav-section",
+          variants: variants.mobileNav.navItem,
+          children: [/*#__PURE__*/jsx(motion.h4, {
+            className: "nex-mobile-nav-section-title",
+            variants: variants.mobileNav.sectionTitle,
+            children: "Profile"
+          }), /*#__PURE__*/jsxs(motion.div, {
+            style: {
+              marginBottom: 'var(--nex-spacing-xs)'
+            },
+            variants: variants.mobileNav.navItem,
+            children: [/*#__PURE__*/jsxs(motion.div, {
+              className: "nex-mobile-nav-item",
+              onClick: handleProfileToggle,
+              variants: variants.mobileNav.navItem,
+              whileHover: variants.interactive.navItem.hover,
+              whileTap: variants.interactive.navItem.active,
+              transition: spring.responsive,
+              children: [/*#__PURE__*/jsx(User, {
+                className: "nex-mobile-nav-icon"
+              }), /*#__PURE__*/jsx("span", {
+                className: "nex-mobile-nav-text",
+                children: "Profile"
+              }), /*#__PURE__*/jsx(motion.div, {
+                animate: openDropdown === 'profile' ? "open" : "closed",
+                variants: variants.mobileNav.iconRotate,
+                transition: spring.fast,
+                children: /*#__PURE__*/jsx(ChevronDown, {
+                  className: "nex-mobile-nav-icon"
+                })
+              })]
+            }), /*#__PURE__*/jsx(AnimatePresence, {
+              children: openDropdown === 'profile' && /*#__PURE__*/jsx(motion.div, {
+                variants: variants.mobileNav.dropdownContainer,
+                initial: "initial",
+                animate: "animate",
+                exit: "exit",
+                style: {
+                  overflow: 'hidden',
+                  marginTop: 'var(--nex-spacing-sm)'
+                },
+                children: /*#__PURE__*/jsxs(motion.div, {
+                  variants: stagger.fast,
+                  initial: "initial",
+                  animate: "animate",
+                  children: [onProfile && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onProfile,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(User, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "View Profile"
+                    })]
+                  }), onEndorsementsClick && endorsementCount !== undefined && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onEndorsementsClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Fingerprint, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Endorsements"
+                    }), /*#__PURE__*/jsx(motion.span, {
+                      className: "nex-mobile-nav-badge",
+                      variants: variants.mobileNav.badge,
+                      initial: "initial",
+                      animate: "animate",
+                      exit: "exit",
+                      children: endorsementCount
+                    })]
+                  }), onSubscriptionClick && subscription && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onSubscriptionClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Zap, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Subscription"
+                    }), /*#__PURE__*/jsx(motion.span, {
+                      className: "nex-mobile-nav-badge",
+                      variants: variants.mobileNav.badge,
+                      initial: "initial",
+                      animate: "animate",
+                      exit: "exit",
+                      children: subscription.tier === 'pro' ? 'Pro' : 'Free'
+                    })]
+                  })]
+                })
+              })
+            })]
+          })]
+        }), isAuthenticated && (onActivityLogClick || onSecurityClick || onIntegrationsClick || onAdminPanelClick) && /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-mobile-nav-section",
+          variants: variants.mobileNav.navItem,
+          children: [/*#__PURE__*/jsx(motion.h4, {
+            className: "nex-mobile-nav-section-title",
+            variants: variants.mobileNav.sectionTitle,
+            children: "Settings"
+          }), /*#__PURE__*/jsxs(motion.div, {
+            style: {
+              marginBottom: 'var(--nex-spacing-xs)'
+            },
+            variants: variants.mobileNav.navItem,
+            children: [/*#__PURE__*/jsxs(motion.div, {
+              className: "nex-mobile-nav-item",
+              onClick: handleSettingsToggle,
+              variants: variants.mobileNav.navItem,
+              whileHover: variants.interactive.navItem.hover,
+              whileTap: variants.interactive.navItem.active,
+              transition: spring.responsive,
+              children: [/*#__PURE__*/jsx(Settings, {
+                className: "nex-mobile-nav-icon"
+              }), /*#__PURE__*/jsx("span", {
+                className: "nex-mobile-nav-text",
+                children: "Settings"
+              }), /*#__PURE__*/jsx(motion.div, {
+                animate: openDropdown === 'settings' ? "open" : "closed",
+                variants: variants.mobileNav.iconRotate,
+                transition: spring.fast,
+                children: /*#__PURE__*/jsx(ChevronDown, {
+                  className: "nex-mobile-nav-icon"
+                })
+              })]
+            }), /*#__PURE__*/jsx(AnimatePresence, {
+              children: openDropdown === 'settings' && /*#__PURE__*/jsx(motion.div, {
+                variants: variants.mobileNav.dropdownContainer,
+                initial: "initial",
+                animate: "animate",
+                exit: "exit",
+                style: {
+                  overflow: 'hidden',
+                  marginTop: 'var(--nex-spacing-sm)'
+                },
+                children: /*#__PURE__*/jsxs(motion.div, {
+                  variants: stagger.fast,
+                  initial: "initial",
+                  animate: "animate",
+                  children: [onActivityLogClick && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onActivityLogClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Activity, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Activity Log"
+                    })]
+                  }), onSecurityClick && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onSecurityClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Shield, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Security"
+                    })]
+                  }), onIntegrationsClick && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onIntegrationsClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)',
+                      marginBottom: 'var(--nex-spacing-xs)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Globe, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Integrations"
+                    })]
+                  }), onAdminPanelClick && /*#__PURE__*/jsxs(motion.div, {
+                    className: "nex-mobile-nav-item",
+                    onClick: onAdminPanelClick,
+                    style: {
+                      marginLeft: 'var(--nex-spacing-md)'
+                    },
+                    variants: variants.mobileNav.dropdownItem,
+                    whileHover: variants.interactive.navItem.hover,
+                    whileTap: variants.interactive.navItem.active,
+                    transition: spring.responsive,
+                    children: [/*#__PURE__*/jsx(Crown, {
+                      className: "nex-mobile-nav-icon"
+                    }), /*#__PURE__*/jsx("span", {
+                      className: "nex-mobile-nav-text",
+                      children: "Admin Panel"
+                    })]
+                  })]
+                })
+              })
+            })]
+          })]
+        }), isAuthenticated && onLogout && /*#__PURE__*/jsx(motion.div, {
+          className: "nex-mobile-nav-section",
+          variants: variants.mobileNav.navItem,
+          children: /*#__PURE__*/jsxs(motion.div, {
+            className: "nex-mobile-nav-item danger",
+            onClick: onLogout,
+            variants: variants.mobileNav.navItem,
+            whileHover: {
+              backgroundColor: "rgba(255, 24, 1, 0.1)"
+            },
+            whileTap: {
+              backgroundColor: "rgba(255, 24, 1, 0.15)"
+            },
+            transition: spring.responsive,
+            children: [/*#__PURE__*/jsx(LogOut, {
+              className: "nex-mobile-nav-icon"
+            }), /*#__PURE__*/jsx("span", {
+              className: "nex-mobile-nav-text",
+              children: "Log Out"
+            })]
+          })
+        })]
+      })]
+    })
+  });
 };
 
 const LANG_KEY = 'nex-locale';
@@ -17182,7 +9215,27 @@ const getDefaultLocale = () => {
   const lang = navigator.language || 'en';
   return lang.split('-')[0];
 };
-const NexNav = ({
+// Responsive left position hook
+function useResponsiveLeft() {
+  const [left, setLeft] = useState('var(--nex-spacing-md)');
+  useEffect(() => {
+    function updateLeft() {
+      const width = window.innerWidth;
+      if (width <= 768) {
+        setLeft('var(--nex-spacing-md)');
+      } else if (width <= 1440) {
+        setLeft('var(--nex-spacing-lg)');
+      } else {
+        setLeft(`calc((100vw - 1440px) / 2 + var(--nex-spacing-lg))`);
+      }
+    }
+    updateLeft();
+    window.addEventListener('resize', updateLeft);
+    return () => window.removeEventListener('resize', updateLeft);
+  }, []);
+  return left;
+}
+const NexNavInner = ({
   logoSrc,
   displayName,
   homeButtonHandler,
@@ -17200,14 +9253,123 @@ const NexNav = ({
   onActivityLogClick,
   onSecurityClick,
   onIntegrationsClick,
-  onAdminPanelClick
+  onAdminPanelClick,
+  theme = 'auto'
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [locale, setLocale] = useState('en');
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [currentThemeVariant, setCurrentThemeVariant] = useState(null);
   const menuRef = useRef(null);
+  const navRef = useRef(null);
+  // Use centralized animation configuration
+  const {
+    timing,
+    spring,
+    stagger,
+    shouldReduceMotion,
+    variants
+  } = useAnimationConfig();
+  // Ensure only one dropdown is open at a time
+  useEffect(() => {
+    if (isLanguageOpen && isUserOpen) {
+      setIsUserOpen(false);
+    }
+  }, [isLanguageOpen]);
+  useEffect(() => {
+    if (isUserOpen && isLanguageOpen) {
+      setIsLanguageOpen(false);
+    }
+  }, [isUserOpen]);
+  // Memoize scroll handler for performance
+  const handleScroll = useCallback(() => {
+    const scrollPosition = window.scrollY;
+    setIsAtTop(scrollPosition === 0);
+  }, []);
+  // Memoize resize handler for performance
+  const handleResize = useCallback(() => {
+    // Only close mobile menu on resize, don't interfere with condensation
+    if (window.innerWidth > 767) {
+      setIsMenuOpen(false);
+    }
+    // Don't reset condensation state - let calculateVisibleItems handle it
+  }, []);
+  // Memoize locale change handler
+  const handleLocaleChange = useCallback(code => {
+    setLocale(code);
+    localStorage.setItem(LANG_KEY, code);
+  }, []);
+  // Memoize menu toggle handler with animation
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+  // Memoize close menu handler
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+  // Memoize home button handler
+  const handleHomeClick = useCallback(() => {
+    if (homeButtonHandler) {
+      homeButtonHandler();
+    }
+  }, [homeButtonHandler]);
+  // Memoize login handler
+  useCallback(() => {
+    if (onLogin) {
+      onLogin();
+    }
+  }, [onLogin]);
+  // Use centralized animation variants
+  const shimmerVariants = {
+    hidden: {
+      opacity: 0,
+      x: '-100%'
+    },
+    visible: {
+      opacity: shouldReduceMotion ? 0 : 0.6,
+      x: '0%',
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  // Nav container variants
+  const navVariants = {
+    initial: {
+      y: -100,
+      opacity: 0
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.4,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: shouldReduceMotion ? 0 : 0.05
+      }
+    }
+  };
+  // Background state variants with mobile nav integration
+  const backgroundVariants = {
+    atTop: {
+      ...variants.background.transparent,
+      transition: timing.medium
+    },
+    scrolled: {
+      ...variants.background.light,
+      transition: timing.medium
+    },
+    mobileOpen: {
+      ...variants.background.medium,
+      transition: timing.medium
+    }
+  };
   useClickAway(menuRef, e => {
-    if (!e.target.closest('.nex-nav-burger')) {
+    if (!e.target.closest('.nex-nav-burger') && !e.target.closest('.nex-mobile-nav')) {
       setIsMenuOpen(false);
     }
   });
@@ -17220,468 +9382,1370 @@ const NexNav = ({
       setLocale(fallback);
       localStorage.setItem(LANG_KEY, fallback);
     }
+    setIsInitialized(true);
   }, [languageOptions]);
-  const handleLocaleChange = code => {
-    setLocale(code);
-    localStorage.setItem(LANG_KEY, code);
-  };
+  // Listen for theme changes
   useEffect(() => {
-    const handleScroll = () => setIsAtTop(window.scrollY === 0);
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) setIsMenuOpen(false);
+    const checkThemeVariant = () => {
+      const variant = document.documentElement.getAttribute('data-theme-variant');
+      setCurrentThemeVariant(variant);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Initial check
+    checkThemeVariant();
+    // Create a mutation observer to watch for theme changes
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme-variant') {
+          checkThemeVariant();
+        }
+      });
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme-variant']
+    });
+    return () => observer.disconnect();
   }, []);
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-nav ${!isAtTop ? 'not-at-top' : ''}`
-  }, /*#__PURE__*/React__default.createElement("nav", {
-    className: "nex-nav-inner-wrapper"
-  }, logoSrc ? /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-nav-client-logo",
-    onClick: homeButtonHandler
-  }, /*#__PURE__*/React__default.createElement("img", {
-    src: logoSrc,
-    alt: displayName,
-    className: "nex-nav-logo"
-  })) : /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-nav-client-name",
-    onClick: homeButtonHandler
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "client-name"
-  }, displayName)), /*#__PURE__*/React__default.createElement("ul", {
-    className: "nex-nav-list",
-    role: "menubar"
-  }, navItems.map((item, i) => /*#__PURE__*/React__default.createElement(NavItem, {
-    key: i,
-    label: item.label,
-    onClick: item.onClick
-  }))), /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-nav-right"
-  }, /*#__PURE__*/React__default.createElement(LanguageSwitcher, {
-    currentLocale: locale,
-    options: languageOptions,
-    onChange: handleLocaleChange
-  }), isAuthenticated && user && onLogout && onProfile ? /*#__PURE__*/React__default.createElement(UserMenu, {
-    user: user,
-    onLogout: onLogout,
-    onProfile: onProfile,
-    endorsementCount: endorsementCount,
-    subscription: subscription,
-    onEndorsementsClick: onEndorsementsClick,
-    onSubscriptionClick: onSubscriptionClick,
-    onActivityLogClick: onActivityLogClick,
-    onSecurityClick: onSecurityClick,
-    onIntegrationsClick: onIntegrationsClick,
-    onAdminPanelClick: onAdminPanelClick
-  }) : /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-nav-login-button",
-    onClick: onLogin
-  }, "Log In")))), /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-nav-burger ${isMenuOpen ? 'menu-open' : ''}`,
-    onClick: () => setIsMenuOpen(!isMenuOpen)
-  }, /*#__PURE__*/React__default.createElement("div", null), /*#__PURE__*/React__default.createElement("div", null), /*#__PURE__*/React__default.createElement("div", null)), /*#__PURE__*/React__default.createElement(AnimatePresence, null, isMenuOpen && /*#__PURE__*/React__default.createElement(MobileNav, {
-    isOpen: isMenuOpen,
-    onClose: () => setIsMenuOpen(false),
-    navItems: navItems,
-    user: user,
-    isAuthenticated: isAuthenticated,
-    onLogin: onLogin,
-    onLogout: onLogout,
-    onProfile: onProfile,
-    currentLocale: locale,
-    languageOptions: languageOptions,
-    onLocaleChange: handleLocaleChange
-  })));
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, {
+      passive: true
+    });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, {
+      passive: true
+    });
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
+  // Keyboard navigation for the entire nav
+  useCallback(e => {
+    if (e.key === 'Escape') {
+      setIsMenuOpen(false);
+    }
+  }, []);
+  return /*#__PURE__*/jsxs(Fragment, {
+    children: [/*#__PURE__*/jsxs(motion.nav, {
+      className: `nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}${theme === 'black-glass' || currentThemeVariant === 'black-glass' ? ' nex-nav--black-glass' : ''}`,
+      ref: navRef,
+      initial: "initial",
+      animate: isInitialized ? "animate" : "initial",
+      variants: navVariants,
+      style: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        zIndex: 'var(--nex-z-index-sticky)',
+        overflow: 'visible'
+      },
+      role: "banner",
+      "aria-label": "Main navigation",
+      children: [theme !== 'black-glass' && currentThemeVariant !== 'black-glass' && /*#__PURE__*/jsx(motion.div, {
+        style: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          pointerEvents: 'none',
+          zIndex: 0
+        },
+        initial: "atTop",
+        animate: isAtTop && !isMenuOpen ? "atTop" : isMenuOpen ? "mobileOpen" : "scrolled",
+        variants: backgroundVariants
+      }), theme !== 'black-glass' && currentThemeVariant !== 'black-glass' && /*#__PURE__*/jsx(motion.div, {
+        className: "nex-nav-shimmer",
+        variants: shimmerVariants,
+        initial: "hidden",
+        animate: isAtTop && !isMenuOpen ? "hidden" : "visible",
+        style: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          pointerEvents: 'none',
+          zIndex: 1,
+          background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 30%, rgba(255,24,1,0.08) 60%, rgba(0,184,255,0.08) 100%)',
+          filter: 'blur(6px)',
+          willChange: 'transform, opacity'
+        },
+        "aria-hidden": "true"
+      }), /*#__PURE__*/jsxs(motion.div, {
+        className: "nex-nav-inner-wrapper",
+        variants: stagger,
+        style: {
+          position: 'relative',
+          zIndex: 2
+        },
+        children: [/*#__PURE__*/jsx(motion.div, {
+          className: "nex-nav-logo-placeholder",
+          variants: variants.mobileNav.navItem,
+          style: {
+            width: 'calc(100px + var(--nex-spacing-md) * 2)',
+            height: '44px',
+            flexShrink: 0,
+            marginLeft: 'var(--nex-spacing-md)'
+          }
+        }), /*#__PURE__*/jsx(NavItems, {
+          navItems: navItems,
+          isAtTop: isAtTop,
+          onItemClick: item => item.onClick?.()
+        }), /*#__PURE__*/jsx(NavControls, {
+          isAuthenticated: isAuthenticated,
+          user: user,
+          onLogin: onLogin,
+          onLogout: onLogout,
+          onProfile: onProfile,
+          languageOptions: languageOptions,
+          currentLocale: locale,
+          onLocaleChange: handleLocaleChange,
+          isLanguageOpen: isLanguageOpen,
+          onLanguageToggle: () => setIsLanguageOpen(!isLanguageOpen),
+          onLanguageClose: () => setIsLanguageOpen(false),
+          isUserOpen: isUserOpen,
+          onUserToggle: () => setIsUserOpen(!isUserOpen),
+          onUserClose: () => setIsUserOpen(false),
+          isAtTop: isAtTop,
+          endorsementCount: endorsementCount,
+          subscription: subscription,
+          onEndorsementsClick: onEndorsementsClick,
+          onSubscriptionClick: onSubscriptionClick,
+          onActivityLogClick: onActivityLogClick,
+          onSecurityClick: onSecurityClick,
+          onIntegrationsClick: onIntegrationsClick,
+          onAdminPanelClick: onAdminPanelClick,
+          theme: theme
+        }), /*#__PURE__*/jsx(motion.button, {
+          className: "nex-nav-burger-btn",
+          "aria-label": isMenuOpen ? 'Close menu' : 'Open menu',
+          "aria-expanded": isMenuOpen,
+          "aria-controls": "mobile-nav-menu",
+          onClick: toggleMenu,
+          type: "button",
+          variants: variants.interactive.hamburger.container,
+          animate: isMenuOpen ? "open" : "closed",
+          whileHover: {
+            backgroundColor: "rgba(255, 255, 255, 0.12)",
+            borderColor: "rgba(255, 255, 255, 0.15)",
+            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+            transition: timing.fast
+          },
+          whileTap: {
+            backgroundColor: "rgba(255, 24, 1, 0.12)",
+            borderColor: "rgba(255, 24, 1, 0.2)",
+            transition: timing.fast
+          },
+          whileFocus: {
+            outline: "2px solid var(--nex-signature)",
+            outlineOffset: "2px",
+            transition: timing.fast
+          },
+          children: /*#__PURE__*/jsxs(motion.div, {
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            },
+            initial: false,
+            children: [/*#__PURE__*/jsx(motion.div, {
+              variants: variants.interactive.hamburger.menuIcon,
+              animate: isMenuOpen ? "open" : "closed",
+              style: {
+                position: 'absolute'
+              },
+              children: /*#__PURE__*/jsx(Menu, {
+                size: 20,
+                "aria-hidden": "true"
+              })
+            }, "menu"), /*#__PURE__*/jsx(motion.div, {
+              variants: variants.interactive.hamburger.closeIcon,
+              animate: isMenuOpen ? "open" : "closed",
+              style: {
+                position: 'absolute'
+              },
+              children: /*#__PURE__*/jsx(X, {
+                size: 20,
+                "aria-hidden": "true"
+              })
+            }, "close")]
+          })
+        })]
+      })]
+    }), /*#__PURE__*/jsx(AnimatePresence, {
+      mode: "wait",
+      children: isMenuOpen && /*#__PURE__*/jsx(MobileNav, {
+        isOpen: isMenuOpen,
+        onClose: closeMenu,
+        navItems: navItems,
+        user: user,
+        isAuthenticated: isAuthenticated,
+        onLogin: onLogin,
+        onLogout: onLogout,
+        onProfile: onProfile,
+        currentLocale: locale,
+        languageOptions: languageOptions,
+        onLocaleChange: handleLocaleChange,
+        endorsementCount: endorsementCount,
+        subscription: subscription,
+        onEndorsementsClick: onEndorsementsClick,
+        onSubscriptionClick: onSubscriptionClick,
+        onActivityLogClick: onActivityLogClick,
+        onSecurityClick: onSecurityClick,
+        onIntegrationsClick: onIntegrationsClick,
+        onAdminPanelClick: onAdminPanelClick,
+        theme: theme
+      })
+    }), /*#__PURE__*/jsx(NavLogo, {
+      logoSrc: logoSrc,
+      displayName: displayName,
+      onHomeClick: handleHomeClick,
+      left: useResponsiveLeft()
+    })]
+  });
+};
+const NexNav = props => {
+  return /*#__PURE__*/jsx(ThemeProvider, {
+    children: /*#__PURE__*/jsx(NexNavInner, {
+      ...props
+    })
+  });
 };
 
-var faYelp = {
-  prefix: 'fab',
-  iconName: 'yelp',
-  icon: [384, 512, [], "f1e9", "M42.9 240.32l99.62 48.61c19.2 9.4 16.2 37.51-4.5 42.71L30.5 358.45a22.79 22.79 0 0 1-28.21-19.6 197.16 197.16 0 0 1 9-85.32 22.8 22.8 0 0 1 31.61-13.21zm44 239.25a199.45 199.45 0 0 0 79.42 32.11A22.78 22.78 0 0 0 192.94 490l3.9-110.82c.7-21.3-25.5-31.91-39.81-16.1l-74.21 82.4a22.82 22.82 0 0 0 4.09 34.09zm145.34-109.92l58.81 94a22.93 22.93 0 0 0 34 5.5 198.36 198.36 0 0 0 52.71-67.61A23 23 0 0 0 364.17 370l-105.42-34.26c-20.31-6.5-37.81 15.8-26.51 33.91zm148.33-132.23a197.44 197.44 0 0 0-50.41-69.31 22.85 22.85 0 0 0-34 4.4l-62 91.92c-11.9 17.7 4.7 40.61 25.2 34.71L366 268.63a23 23 0 0 0 14.61-31.21zM62.11 30.18a22.86 22.86 0 0 0-9.9 32l104.12 180.44c11.7 20.2 42.61 11.9 42.61-11.4V22.88a22.67 22.67 0 0 0-24.5-22.8 320.37 320.37 0 0 0-112.33 30.1z"]
-};
-var faMicrosoft = {
-  prefix: 'fab',
-  iconName: 'microsoft',
-  icon: [448, 512, [], "f3ca", "M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z"]
-};
-var faQq = {
-  prefix: 'fab',
-  iconName: 'qq',
-  icon: [448, 512, [], "f1d6", "M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"]
-};
-var faDrupal = {
-  prefix: 'fab',
-  iconName: 'drupal',
-  icon: [448, 512, [], "f1a9", "M303.973,108.136C268.2,72.459,234.187,38.35,224.047,0c-9.957,38.35-44.25,72.459-80.019,108.136C90.467,161.7,29.716,222.356,29.716,313.436c-2.337,107.3,82.752,196.18,190.053,198.517S415.948,429.2,418.285,321.9q.091-4.231,0-8.464C418.285,222.356,357.534,161.7,303.973,108.136Zm-174.326,223a130.282,130.282,0,0,0-15.211,24.153,4.978,4.978,0,0,1-3.319,2.766h-1.659c-4.333,0-9.219-8.481-9.219-8.481h0c-1.29-2.028-2.489-4.149-3.687-6.361l-.83-1.752c-11.247-25.72-1.475-62.318-1.475-62.318h0a160.585,160.585,0,0,1,23.231-49.873A290.8,290.8,0,0,1,138.5,201.613l9.219,9.219,43.512,44.434a4.979,4.979,0,0,1,0,6.638L145.78,312.33h0Zm96.612,127.311a67.2,67.2,0,0,1-49.781-111.915c14.2-16.871,31.528-33.464,50.334-55.313,22.309,23.785,36.875,40.1,51.164,57.986a28.413,28.413,0,0,1,2.95,4.425,65.905,65.905,0,0,1,11.984,37.981,66.651,66.651,0,0,1-66.466,66.836ZM352.371,351.6h0a7.743,7.743,0,0,1-6.176,5.347H344.9a11.249,11.249,0,0,1-6.269-5.07h0a348.21,348.21,0,0,0-39.456-48.952L281.387,284.49,222.3,223.185a497.888,497.888,0,0,1-35.4-36.322,12.033,12.033,0,0,0-.922-1.382,35.4,35.4,0,0,1-4.7-9.219V174.51a31.346,31.346,0,0,1,9.218-27.656c11.432-11.431,22.955-22.954,33.833-34.939,11.984,13.275,24.8,26,37.428,38.627h0a530.991,530.991,0,0,1,69.6,79.1,147.494,147.494,0,0,1,27.011,83.8A134.109,134.109,0,0,1,352.371,351.6Z"]
-};
-var faVk = {
-  prefix: 'fab',
-  iconName: 'vk',
-  icon: [448, 512, [], "f189", "M31.4907 63.4907C0 94.9813 0 145.671 0 247.04V264.96C0 366.329 0 417.019 31.4907 448.509C62.9813 480 113.671 480 215.04 480H232.96C334.329 480 385.019 480 416.509 448.509C448 417.019 448 366.329 448 264.96V247.04C448 145.671 448 94.9813 416.509 63.4907C385.019 32 334.329 32 232.96 32H215.04C113.671 32 62.9813 32 31.4907 63.4907ZM75.6 168.267H126.747C128.427 253.76 166.133 289.973 196 297.44V168.267H244.16V242C273.653 238.827 304.64 205.227 315.093 168.267H363.253C359.313 187.435 351.46 205.583 340.186 221.579C328.913 237.574 314.461 251.071 297.733 261.227C316.41 270.499 332.907 283.63 346.132 299.751C359.357 315.873 369.01 334.618 374.453 354.747H321.44C316.555 337.262 306.614 321.61 292.865 309.754C279.117 297.899 262.173 290.368 244.16 288.107V354.747H238.373C136.267 354.747 78.0267 284.747 75.6 168.267Z"]
-};
-var faVimeoV = {
-  prefix: 'fab',
-  iconName: 'vimeo-v',
-  icon: [448, 512, [], "f27d", "M447.8 153.6c-2 43.6-32.4 103.3-91.4 179.1-60.9 79.2-112.4 118.8-154.6 118.8-26.1 0-48.2-24.1-66.3-72.3C100.3 250 85.3 174.3 56.2 174.3c-3.4 0-15.1 7.1-35.2 21.1L0 168.2c51.6-45.3 100.9-95.7 131.8-98.5 34.9-3.4 56.3 20.5 64.4 71.5 28.7 181.5 41.4 208.9 93.6 126.7 18.7-29.6 28.8-52.1 30.2-67.6 4.8-45.9-35.8-42.8-63.3-31 22-72.1 64.1-107.1 126.2-105.1 45.8 1.2 67.5 31.1 64.9 89.4z"]
-};
-var faDiaspora = {
-  prefix: 'fab',
-  iconName: 'diaspora',
-  icon: [512, 512, [], "f791", "M251.64 354.55c-1.4 0-88 119.9-88.7 119.9S76.34 414 76 413.25s86.6-125.7 86.6-127.4c0-2.2-129.6-44-137.6-47.1-1.3-.5 31.4-101.8 31.7-102.1.6-.7 144.4 47 145.5 47 .4 0 .9-.6 1-1.3.4-2 1-148.6 1.7-149.6.8-1.2 104.5-.7 105.1-.3 1.5 1 3.5 156.1 6.1 156.1 1.4 0 138.7-47 139.3-46.3.8.9 31.9 102.2 31.5 102.6-.9.9-140.2 47.1-140.6 48.8-.3 1.4 82.8 122.1 82.5 122.9s-85.5 63.5-86.3 63.5c-1-.2-89-125.5-90.9-125.5z"]
-};
-var faFoursquare = {
-  prefix: 'fab',
-  iconName: 'foursquare',
-  icon: [368, 512, [], "f180", "M323.1 3H49.9C12.4 3 0 31.3 0 49.1v433.8c0 20.3 12.1 27.7 18.2 30.1 6.2 2.5 22.8 4.6 32.9-7.1C180 356.5 182.2 354 182.2 354c3.1-3.4 3.4-3.1 6.8-3.1h83.4c35.1 0 40.6-25.2 44.3-39.7l48.6-243C373.8 25.8 363.1 3 323.1 3zm-16.3 73.8l-11.4 59.7c-1.2 6.5-9.5 13.2-16.9 13.2H172.1c-12 0-20.6 8.3-20.6 20.3v13c0 12 8.6 20.6 20.6 20.6h90.4c8.3 0 16.6 9.2 14.8 18.2-1.8 8.9-10.5 53.8-11.4 58.8-.9 4.9-6.8 13.5-16.9 13.5h-73.5c-13.5 0-17.2 1.8-26.5 12.6 0 0-8.9 11.4-89.5 108.3-.9.9-1.8.6-1.8-.3V75.9c0-7.7 6.8-16.6 16.6-16.6h219c8.2 0 15.6 7.7 13.5 17.5z"]
-};
-var faStackOverflow = {
-  prefix: 'fab',
-  iconName: 'stack-overflow',
-  icon: [384, 512, [], "f16c", "M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"]
-};
-var faGoogle = {
-  prefix: 'fab',
-  iconName: 'google',
-  icon: [488, 512, [], "f1a0", "M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"]
-};
-var faLinkedinIn = {
-  prefix: 'fab',
-  iconName: 'linkedin-in',
-  icon: [448, 512, [], "f0e1", "M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"]
-};
-var faWeixin = {
-  prefix: 'fab',
-  iconName: 'weixin',
-  icon: [576, 512, [], "f1d7", "M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"]
-};
-var faMeetup = {
-  prefix: 'fab',
-  iconName: 'meetup',
-  icon: [512, 512, [], "f2e0", "M99 414.3c1.1 5.7-2.3 11.1-8 12.3-5.4 1.1-10.9-2.3-12-8-1.1-5.4 2.3-11.1 7.7-12.3 5.4-1.2 11.1 2.3 12.3 8zm143.1 71.4c-6.3 4.6-8 13.4-3.7 20 4.6 6.6 13.4 8.3 20 3.7 6.3-4.6 8-13.4 3.4-20-4.2-6.5-13.1-8.3-19.7-3.7zm-86-462.3c6.3-1.4 10.3-7.7 8.9-14-1.1-6.6-7.4-10.6-13.7-9.1-6.3 1.4-10.3 7.7-9.1 14 1.4 6.6 7.6 10.6 13.9 9.1zM34.4 226.3c-10-6.9-23.7-4.3-30.6 6-6.9 10-4.3 24 5.7 30.9 10 7.1 23.7 4.6 30.6-5.7 6.9-10.4 4.3-24.1-5.7-31.2zm272-170.9c10.6-6.3 13.7-20 7.7-30.3-6.3-10.6-19.7-14-30-7.7s-13.7 20-7.4 30.6c6 10.3 19.4 13.7 29.7 7.4zm-191.1 58c7.7-5.4 9.4-16 4.3-23.7s-15.7-9.4-23.1-4.3c-7.7 5.4-9.4 16-4.3 23.7 5.1 7.8 15.6 9.5 23.1 4.3zm372.3 156c-7.4 1.7-12.3 9.1-10.6 16.9 1.4 7.4 8.9 12.3 16.3 10.6 7.4-1.4 12.3-8.9 10.6-16.6-1.5-7.4-8.9-12.3-16.3-10.9zm39.7-56.8c-1.1-5.7-6.6-9.1-12-8-5.7 1.1-9.1 6.9-8 12.6 1.1 5.4 6.6 9.1 12.3 8 5.4-1.5 9.1-6.9 7.7-12.6zM447 138.9c-8.6 6-10.6 17.7-4.9 26.3 5.7 8.6 17.4 10.6 26 4.9 8.3-6 10.3-17.7 4.6-26.3-5.7-8.7-17.4-10.9-25.7-4.9zm-6.3 139.4c26.3 43.1 15.1 100-26.3 129.1-17.4 12.3-37.1 17.7-56.9 17.1-12 47.1-69.4 64.6-105.1 32.6-1.1.9-2.6 1.7-3.7 2.9-39.1 27.1-92.3 17.4-119.4-22.3-9.7-14.3-14.6-30.6-15.1-46.9-65.4-10.9-90-94-41.1-139.7-28.3-46.9.6-107.4 53.4-114.9C151.6 70 234.1 38.6 290.1 82c67.4-22.3 136.3 29.4 130.9 101.1 41.1 12.6 52.8 66.9 19.7 95.2zm-70 74.3c-3.1-20.6-40.9-4.6-43.1-27.1-3.1-32 43.7-101.1 40-128-3.4-24-19.4-29.1-33.4-29.4-13.4-.3-16.9 2-21.4 4.6-2.9 1.7-6.6 4.9-11.7-.3-6.3-6-11.1-11.7-19.4-12.9-12.3-2-17.7 2-26.6 9.7-3.4 2.9-12 12.9-20 9.1-3.4-1.7-15.4-7.7-24-11.4-16.3-7.1-40 4.6-48.6 20-12.9 22.9-38 113.1-41.7 125.1-8.6 26.6 10.9 48.6 36.9 47.1 11.1-.6 18.3-4.6 25.4-17.4 4-7.4 41.7-107.7 44.6-112.6 2-3.4 8.9-8 14.6-5.1 5.7 3.1 6.9 9.4 6 15.1-1.1 9.7-28 70.9-28.9 77.7-3.4 22.9 26.9 26.6 38.6 4 3.7-7.1 45.7-92.6 49.4-98.3 4.3-6.3 7.4-8.3 11.7-8 3.1 0 8.3.9 7.1 10.9-1.4 9.4-35.1 72.3-38.9 87.7-4.6 20.6 6.6 41.4 24.9 50.6 11.4 5.7 62.5 15.7 58.5-11.1zm5.7 92.3c-10.3 7.4-12.9 22-5.7 32.6 7.1 10.6 21.4 13.1 32 6 10.6-7.4 13.1-22 6-32.6-7.4-10.6-21.7-13.5-32.3-6z"]
-};
-var faMix = {
-  prefix: 'fab',
-  iconName: 'mix',
-  icon: [448, 512, [], "f3cb", "M0 64v348.9c0 56.2 88 58.1 88 0V174.3c7.9-52.9 88-50.4 88 6.5v175.3c0 57.9 96 58 96 0V240c5.3-54.7 88-52.5 88 4.3v23.8c0 59.9 88 56.6 88 0V64H0z"]
-};
-var faSteam = {
-  prefix: 'fab',
-  iconName: 'steam',
-  icon: [496, 512, [], "f1b6", "M496 256c0 137-111.2 248-248.4 248-113.8 0-209.6-76.3-239-180.4l95.2 39.3c6.4 32.1 34.9 56.4 68.9 56.4 39.2 0 71.9-32.4 70.2-73.5l84.5-60.2c52.1 1.3 95.8-40.9 95.8-93.5 0-51.6-42-93.5-93.7-93.5s-93.7 42-93.7 93.5v1.2L176.6 279c-15.5-.9-30.7 3.4-43.5 12.1L0 236.1C10.2 108.4 117.1 8 247.6 8 384.8 8 496 119 496 256zM155.7 384.3l-30.5-12.6a52.79 52.79 0 0 0 27.2 25.8c26.9 11.2 57.8-1.6 69-28.4 5.4-13 5.5-27.3.1-40.3-5.4-13-15.5-23.2-28.5-28.6-12.9-5.4-26.7-5.2-38.9-.6l31.5 13c19.8 8.2 29.2 30.9 20.9 50.7-8.3 19.9-31 29.2-50.8 21zm173.8-129.9c-34.4 0-62.4-28-62.4-62.3s28-62.3 62.4-62.3 62.4 28 62.4 62.3-27.9 62.3-62.4 62.3zm.1-15.6c25.9 0 46.9-21 46.9-46.8 0-25.9-21-46.8-46.9-46.8s-46.9 21-46.9 46.8c.1 25.8 21.1 46.8 46.9 46.8z"]
-};
-var faWeibo = {
-  prefix: 'fab',
-  iconName: 'weibo',
-  icon: [512, 512, [], "f18a", "M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"]
-};
-var faSkype = {
-  prefix: 'fab',
-  iconName: 'skype',
-  icon: [448, 512, [], "f17e", "M424.7 299.8c2.9-14 4.7-28.9 4.7-43.8 0-113.5-91.9-205.3-205.3-205.3-14.9 0-29.7 1.7-43.8 4.7C161.3 40.7 137.7 32 112 32 50.2 32 0 82.2 0 144c0 25.7 8.7 49.3 23.3 68.2-2.9 14-4.7 28.9-4.7 43.8 0 113.5 91.9 205.3 205.3 205.3 14.9 0 29.7-1.7 43.8-4.7 19 14.6 42.6 23.3 68.2 23.3 61.8 0 112-50.2 112-112 .1-25.6-8.6-49.2-23.2-68.1zm-194.6 91.5c-65.6 0-120.5-29.2-120.5-65 0-16 9-30.6 29.5-30.6 31.2 0 34.1 44.9 88.1 44.9 25.7 0 42.3-11.4 42.3-26.3 0-18.7-16-21.6-42-28-62.5-15.4-117.8-22-117.8-87.2 0-59.2 58.6-81.1 109.1-81.1 55.1 0 110.8 21.9 110.8 55.4 0 16.9-11.4 31.8-30.3 31.8-28.3 0-29.2-33.5-75-33.5-25.7 0-42 7-42 22.5 0 19.8 20.8 21.8 69.1 33 41.4 9.3 90.7 26.8 90.7 77.6 0 59.1-57.1 86.5-112 86.5z"]
-};
-var faBehance = {
-  prefix: 'fab',
-  iconName: 'behance',
-  icon: [576, 512, [], "f1b4", "M232 237.2c31.8-15.2 48.4-38.2 48.4-74 0-70.6-52.6-87.8-113.3-87.8H0v354.4h171.8c64.4 0 124.9-30.9 124.9-102.9 0-44.5-21.1-77.4-64.7-89.7zM77.9 135.9H151c28.1 0 53.4 7.9 53.4 40.5 0 30.1-19.7 42.2-47.5 42.2h-79v-82.7zm83.3 233.7H77.9V272h84.9c34.3 0 56 14.3 56 50.6 0 35.8-25.9 47-57.6 47zm358.5-240.7H376V94h143.7v34.9zM576 305.2c0-75.9-44.4-139.2-124.9-139.2-78.2 0-131.3 58.8-131.3 135.8 0 79.9 50.3 134.7 131.3 134.7 61.3 0 101-27.6 120.1-86.3H509c-6.7 21.9-34.3 33.5-55.7 33.5-41.3 0-63-24.2-63-65.3h185.1c.3-4.2.6-8.7.6-13.2zM390.4 274c2.3-33.7 24.7-54.8 58.5-54.8 35.4 0 53.2 20.8 56.2 54.8H390.4z"]
-};
-var faDiscord = {
-  prefix: 'fab',
-  iconName: 'discord',
-  icon: [640, 512, [], "f392", "M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"]
-};
-var faAmazon = {
-  prefix: 'fab',
-  iconName: 'amazon',
-  icon: [448, 512, [], "f270", "M257.2 162.7c-48.7 1.8-169.5 15.5-169.5 117.5 0 109.5 138.3 114 183.5 43.2 6.5 10.2 35.4 37.5 45.3 46.8l56.8-56S341 288.9 341 261.4V114.3C341 89 316.5 32 228.7 32 140.7 32 94 87 94 136.3l73.5 6.8c16.3-49.5 54.2-49.5 54.2-49.5 40.7-.1 35.5 29.8 35.5 69.1zm0 86.8c0 80-84.2 68-84.2 17.2 0-47.2 50.5-56.7 84.2-57.8v40.6zm136 163.5c-7.7 10-70 67-174.5 67S34.2 408.5 9.7 379c-6.8-7.7 1-11.3 5.5-8.3C88.5 415.2 203 488.5 387.7 401c7.5-3.7 13.3 2 5.5 12zm39.8 2.2c-6.5 15.8-16 26.8-21.2 31-5.5 4.5-9.5 2.7-6.5-3.8s19.3-46.5 12.7-55c-6.5-8.3-37-4.3-48-3.2-10.8 1-13 2-14-.3-2.3-5.7 21.7-15.5 37.5-17.5 15.7-1.8 41-.8 46 5.7 3.7 5.1 0 27.1-6.5 43.1z"]
-};
-var faApple = {
-  prefix: 'fab',
-  iconName: 'apple',
-  icon: [384, 512, [], "f179", "M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"]
-};
-var faWordpress = {
-  prefix: 'fab',
-  iconName: 'wordpress',
-  icon: [512, 512, [], "f19a", "M61.7 169.4l101.5 278C92.2 413 43.3 340.2 43.3 256c0-30.9 6.6-60.1 18.4-86.6zm337.9 75.9c0-26.3-9.4-44.5-17.5-58.7-10.8-17.5-20.9-32.4-20.9-49.9 0-19.6 14.8-37.8 35.7-37.8.9 0 1.8.1 2.8.2-37.9-34.7-88.3-55.9-143.7-55.9-74.3 0-139.7 38.1-177.8 95.9 5 .2 9.7.3 13.7.3 22.2 0 56.7-2.7 56.7-2.7 11.5-.7 12.8 16.2 1.4 17.5 0 0-11.5 1.3-24.3 2l77.5 230.4L249.8 247l-33.1-90.8c-11.5-.7-22.3-2-22.3-2-11.5-.7-10.1-18.2 1.3-17.5 0 0 35.1 2.7 56 2.7 22.2 0 56.7-2.7 56.7-2.7 11.5-.7 12.8 16.2 1.4 17.5 0 0-11.5 1.3-24.3 2l76.9 228.7 21.2-70.9c9-29.4 16-50.5 16-68.7zm-139.9 29.3l-63.8 185.5c19.1 5.6 39.2 8.7 60.1 8.7 24.8 0 48.5-4.3 70.6-12.1-.6-.9-1.1-1.9-1.5-2.9l-65.4-179.2zm183-120.7c.9 6.8 1.4 14 1.4 21.9 0 21.6-4 45.8-16.2 76.2l-65 187.9C426.2 403 468.7 334.5 468.7 256c0-37-9.4-71.8-26-102.1zM504 256c0 136.8-111.3 248-248 248C119.2 504 8 392.7 8 256 8 119.2 119.2 8 256 8c136.7 0 248 111.2 248 248zm-11.4 0c0-130.5-106.2-236.6-236.6-236.6C125.5 19.4 19.4 125.5 19.4 256S125.6 492.6 256 492.6c130.5 0 236.6-106.1 236.6-236.6z"]
-};
-var faGoodreads = {
-  prefix: 'fab',
-  iconName: 'goodreads',
-  icon: [448, 512, [], "f3a8", "M299.9 191.2c5.1 37.3-4.7 79-35.9 100.7-22.3 15.5-52.8 14.1-70.8 5.7-37.1-17.3-49.5-58.6-46.8-97.2 4.3-60.9 40.9-87.9 75.3-87.5 46.9-.2 71.8 31.8 78.2 78.3zM448 88v336c0 30.9-25.1 56-56 56H56c-30.9 0-56-25.1-56-56V88c0-30.9 25.1-56 56-56h336c30.9 0 56 25.1 56 56zM330 313.2s-.1-34-.1-217.3h-29v40.3c-.8.3-1.2-.5-1.6-1.2-9.6-20.7-35.9-46.3-76-46-51.9.4-87.2 31.2-100.6 77.8-4.3 14.9-5.8 30.1-5.5 45.6 1.7 77.9 45.1 117.8 112.4 115.2 28.9-1.1 54.5-17 69-45.2.5-1 1.1-1.9 1.7-2.9.2.1.4.1.6.2.3 3.8.2 30.7.1 34.5-.2 14.8-2 29.5-7.2 43.5-7.8 21-22.3 34.7-44.5 39.5-17.8 3.9-35.6 3.8-53.2-1.2-21.5-6.1-36.5-19-41.1-41.8-.3-1.6-1.3-1.3-2.3-1.3h-26.8c.8 10.6 3.2 20.3 8.5 29.2 24.2 40.5 82.7 48.5 128.2 37.4 49.9-12.3 67.3-54.9 67.4-106.3z"]
-};
-var faHouzz = {
-  prefix: 'fab',
-  iconName: 'houzz',
-  icon: [448, 512, [], "f27c", "M275.9 330.7H171.3V480H17V32h109.5v104.5l305.1 85.6V480H275.9z"]
-};
-var faXing = {
-  prefix: 'fab',
-  iconName: 'xing',
-  icon: [384, 512, [], "f168", "M162.7 210c-1.8 3.3-25.2 44.4-70.1 123.5-4.9 8.3-10.8 12.5-17.7 12.5H9.8c-7.7 0-12.1-7.5-8.5-14.4l69-121.3c.2 0 .2-.1 0-.3l-43.9-75.6c-4.3-7.8.3-14.1 8.5-14.1H100c7.3 0 13.3 4.1 18 12.2l44.7 77.5zM382.6 46.1l-144 253v.3L330.2 466c3.9 7.1.2 14.1-8.5 14.1h-65.2c-7.6 0-13.6-4-18-12.2l-92.4-168.5c3.3-5.8 51.5-90.8 144.8-255.2 4.6-8.1 10.4-12.2 17.5-12.2h65.7c8 0 12.3 6.7 8.5 14.1z"]
-};
-var faPlaystation = {
-  prefix: 'fab',
-  iconName: 'playstation',
-  icon: [576, 512, [], "f3df", "M570.9 372.3c-11.3 14.2-38.8 24.3-38.8 24.3L327 470.2v-54.3l150.9-53.8c17.1-6.1 19.8-14.8 5.8-19.4-13.9-4.6-39.1-3.3-56.2 2.9L327 381.1v-56.4c23.2-7.8 47.1-13.6 75.7-16.8 40.9-4.5 90.9.6 130.2 15.5 44.2 14 49.2 34.7 38 48.9zm-224.4-92.5v-139c0-16.3-3-31.3-18.3-35.6-11.7-3.8-19 7.1-19 23.4v347.9l-93.8-29.8V32c39.9 7.4 98 24.9 129.2 35.4C424.1 94.7 451 128.7 451 205.2c0 74.5-46 102.8-104.5 74.6zM43.2 410.2c-45.4-12.8-53-39.5-32.3-54.8 19.1-14.2 51.7-24.9 51.7-24.9l134.5-47.8v54.5l-96.8 34.6c-17.1 6.1-19.7 14.8-5.8 19.4 13.9 4.6 39.1 3.3 56.2-2.9l46.4-16.9v48.8c-51.6 9.3-101.4 7.3-153.9-10z"]
-};
-var faRedditAlien = {
-  prefix: 'fab',
-  iconName: 'reddit-alien',
-  icon: [512, 512, [], "f281", "M373 138.6c-25.2 0-46.3-17.5-51.9-41l0 0c-30.6 4.3-54.2 30.7-54.2 62.4l0 .2c47.4 1.8 90.6 15.1 124.9 36.3c12.6-9.7 28.4-15.5 45.5-15.5c41.3 0 74.7 33.4 74.7 74.7c0 29.8-17.4 55.5-42.7 67.5c-2.4 86.8-97 156.6-213.2 156.6S45.5 410.1 43 323.4C17.6 311.5 0 285.7 0 255.7c0-41.3 33.4-74.7 74.7-74.7c17.2 0 33 5.8 45.7 15.6c34-21.1 76.8-34.4 123.7-36.4l0-.3c0-44.3 33.7-80.9 76.8-85.5C325.8 50.2 347.2 32 373 32c29.4 0 53.3 23.9 53.3 53.3s-23.9 53.3-53.3 53.3zM157.5 255.3c-20.9 0-38.9 20.8-40.2 47.9s17.1 38.1 38 38.1s36.6-9.8 37.8-36.9s-14.7-49.1-35.7-49.1zM395 303.1c-1.2-27.1-19.2-47.9-40.2-47.9s-36.9 22-35.7 49.1c1.2 27.1 16.9 36.9 37.8 36.9s39.3-11 38-38.1zm-60.1 70.8c1.5-3.6-1-7.7-4.9-8.1c-23-2.3-47.9-3.6-73.8-3.6s-50.8 1.3-73.8 3.6c-3.9 .4-6.4 4.5-4.9 8.1c12.9 30.8 43.3 52.4 78.7 52.4s65.8-21.6 78.7-52.4z"]
-};
-var faPatreon = {
-  prefix: 'fab',
-  iconName: 'patreon',
-  icon: [512, 512, [], "f3d9", "M489.7 153.8c-.1-65.4-51-119-110.7-138.3C304.8-8.5 207-5 136.1 28.4C50.3 68.9 23.3 157.7 22.3 246.2C21.5 319 28.7 510.6 136.9 512c80.3 1 92.3-102.5 129.5-152.3c26.4-35.5 60.5-45.5 102.4-55.9c72-17.8 121.1-74.7 121-150z"]
-};
-var faFacebookF = {
-  prefix: 'fab',
-  iconName: 'facebook-f',
-  icon: [320, 512, [], "f39e", "M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"]
-};
-var faPeriscope = {
-  prefix: 'fab',
-  iconName: 'periscope',
-  icon: [448, 512, [], "f3da", "M370 63.6C331.4 22.6 280.5 0 226.6 0 111.9 0 18.5 96.2 18.5 214.4c0 75.1 57.8 159.8 82.7 192.7C137.8 455.5 192.6 512 226.6 512c41.6 0 112.9-94.2 120.9-105 24.6-33.1 82-118.3 82-192.6 0-56.5-21.1-110.1-59.5-150.8zM226.6 493.9c-42.5 0-190-167.3-190-279.4 0-107.4 83.9-196.3 190-196.3 100.8 0 184.7 89 184.7 196.3.1 112.1-147.4 279.4-184.7 279.4zM338 206.8c0 59.1-51.1 109.7-110.8 109.7-100.6 0-150.7-108.2-92.9-181.8v.4c0 24.5 20.1 44.4 44.8 44.4 24.7 0 44.8-19.9 44.8-44.4 0-18.2-11.1-33.8-26.9-40.7 76.6-19.2 141 39.3 141 112.4z"]
-};
-var faSpotify = {
-  prefix: 'fab',
-  iconName: 'spotify',
-  icon: [496, 512, [], "f1bc", "M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"]
-};
-var faBlogger = {
-  prefix: 'fab',
-  iconName: 'blogger',
-  icon: [448, 512, [], "f37c", "M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2 0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6 0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9 0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8 0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3 0 256.3 0 93.2 0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8 0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3 0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8 0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"]
-};
-var faFlickr = {
-  prefix: 'fab',
-  iconName: 'flickr',
-  icon: [448, 512, [], "f16e", "M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM144.5 319c-35.1 0-63.5-28.4-63.5-63.5s28.4-63.5 63.5-63.5 63.5 28.4 63.5 63.5-28.4 63.5-63.5 63.5zm159 0c-35.1 0-63.5-28.4-63.5-63.5s28.4-63.5 63.5-63.5 63.5 28.4 63.5 63.5-28.4 63.5-63.5 63.5z"]
-};
-var faSoundcloud = {
-  prefix: 'fab',
-  iconName: 'soundcloud',
-  icon: [640, 512, [], "f1be", "M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z"]
-};
-var faXbox = {
-  prefix: 'fab',
-  iconName: 'xbox',
-  icon: [512, 512, [], "f412", "M369.9 318.2c44.3 54.3 64.7 98.8 54.4 118.7-7.9 15.1-56.7 44.6-92.6 55.9-29.6 9.3-68.4 13.3-100.4 10.2-38.2-3.7-76.9-17.4-110.1-39C93.3 445.8 87 438.3 87 423.4c0-29.9 32.9-82.3 89.2-142.1 32-33.9 76.5-73.7 81.4-72.6 9.4 2.1 84.3 75.1 112.3 109.5zM188.6 143.8c-29.7-26.9-58.1-53.9-86.4-63.4-15.2-5.1-16.3-4.8-28.7 8.1-29.2 30.4-53.5 79.7-60.3 122.4-5.4 34.2-6.1 43.8-4.2 60.5 5.6 50.5 17.3 85.4 40.5 120.9 9.5 14.6 12.1 17.3 9.3 9.9-4.2-11-.3-37.5 9.5-64 14.3-39 53.9-112.9 120.3-194.4zm311.6 63.5C483.3 127.3 432.7 77 425.6 77c-7.3 0-24.2 6.5-36 13.9-23.3 14.5-41 31.4-64.3 52.8C367.7 197 427.5 283.1 448.2 346c6.8 20.7 9.7 41.1 7.4 52.3-1.7 8.5-1.7 8.5 1.4 4.6 6.1-7.7 19.9-31.3 25.4-43.5 7.4-16.2 15-40.2 18.6-58.7 4.3-22.5 3.9-70.8-.8-93.4zM141.3 43C189 40.5 251 77.5 255.6 78.4c.7.1 10.4-4.2 21.6-9.7 63.9-31.1 94-25.8 107.4-25.2-63.9-39.3-152.7-50-233.9-11.7-23.4 11.1-24 11.9-9.4 11.2z"]
-};
-var faTiktok = {
-  prefix: 'fab',
-  iconName: 'tiktok',
-  icon: [448, 512, [], "e07b", "M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"]
-};
-var faDropbox = {
-  prefix: 'fab',
-  iconName: 'dropbox',
-  icon: [528, 512, [], "f16b", "M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z"]
-};
-var faInstagram = {
-  prefix: 'fab',
-  iconName: 'instagram',
-  icon: [448, 512, [], "f16d", "M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"]
-};
-var faWhatsapp = {
-  prefix: 'fab',
-  iconName: 'whatsapp',
-  icon: [448, 512, [], "f232", "M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"]
-};
-var faSnapchat = {
-  prefix: 'fab',
-  iconName: 'snapchat',
-  icon: [512, 512, [62124, "snapchat-ghost"], "f2ab", "M496.926,366.6c-3.373-9.176-9.8-14.086-17.112-18.153-1.376-.806-2.641-1.451-3.72-1.947-2.182-1.128-4.414-2.22-6.634-3.373-22.8-12.09-40.609-27.341-52.959-45.42a102.889,102.889,0,0,1-9.089-16.12c-1.054-3.013-1-4.724-.248-6.287a10.221,10.221,0,0,1,2.914-3.038c3.918-2.591,7.96-5.22,10.7-6.993,4.885-3.162,8.754-5.667,11.246-7.44,9.362-6.547,15.909-13.5,20-21.278a42.371,42.371,0,0,0,2.1-35.191c-6.2-16.318-21.613-26.449-40.287-26.449a55.543,55.543,0,0,0-11.718,1.24c-1.029.224-2.059.459-3.063.72.174-11.16-.074-22.94-1.066-34.534-3.522-40.758-17.794-62.123-32.674-79.16A130.167,130.167,0,0,0,332.1,36.443C309.515,23.547,283.91,17,256,17S202.6,23.547,180,36.443a129.735,129.735,0,0,0-33.281,26.783c-14.88,17.038-29.152,38.44-32.673,79.161-.992,11.594-1.24,23.435-1.079,34.533-1-.26-2.021-.5-3.051-.719a55.461,55.461,0,0,0-11.717-1.24c-18.687,0-34.125,10.131-40.3,26.449a42.423,42.423,0,0,0,2.046,35.228c4.105,7.774,10.652,14.731,20.014,21.278,2.48,1.736,6.361,4.24,11.246,7.44,2.641,1.711,6.5,4.216,10.28,6.72a11.054,11.054,0,0,1,3.3,3.311c.794,1.624.818,3.373-.36,6.6a102.02,102.02,0,0,1-8.94,15.785c-12.077,17.669-29.363,32.648-51.434,44.639C32.355,348.608,20.2,352.75,15.069,366.7c-3.868,10.528-1.339,22.506,8.494,32.6a49.137,49.137,0,0,0,12.4,9.387,134.337,134.337,0,0,0,30.342,12.139,20.024,20.024,0,0,1,6.126,2.741c3.583,3.137,3.075,7.861,7.849,14.78a34.468,34.468,0,0,0,8.977,9.127c10.019,6.919,21.278,7.353,33.207,7.811,10.776.41,22.989.881,36.939,5.481,5.778,1.91,11.78,5.605,18.736,9.92C194.842,480.951,217.707,495,255.973,495s61.292-14.123,78.118-24.428c6.907-4.24,12.872-7.9,18.489-9.758,13.949-4.613,26.163-5.072,36.939-5.481,11.928-.459,23.187-.893,33.206-7.812a34.584,34.584,0,0,0,10.218-11.16c3.434-5.84,3.348-9.919,6.572-12.771a18.971,18.971,0,0,1,5.753-2.629A134.893,134.893,0,0,0,476.02,408.71a48.344,48.344,0,0,0,13.019-10.193l.124-.149C498.389,388.5,500.708,376.867,496.926,366.6Zm-34.013,18.277c-20.745,11.458-34.533,10.23-45.259,17.137-9.114,5.865-3.72,18.513-10.342,23.076-8.134,5.617-32.177-.4-63.239,9.858-25.618,8.469-41.961,32.822-88.038,32.822s-62.036-24.3-88.076-32.884c-31-10.255-55.092-4.241-63.239-9.858-6.609-4.563-1.24-17.211-10.341-23.076-10.739-6.907-24.527-5.679-45.26-17.075-13.206-7.291-5.716-11.8-1.314-13.937,75.143-36.381,87.133-92.552,87.666-96.719.645-5.046,1.364-9.014-4.191-14.148-5.369-4.96-29.189-19.7-35.8-24.316-10.937-7.638-15.748-15.264-12.2-24.638,2.48-6.485,8.531-8.928,14.879-8.928a27.643,27.643,0,0,1,5.965.67c12,2.6,23.659,8.617,30.392,10.242a10.749,10.749,0,0,0,2.48.335c3.6,0,4.86-1.811,4.612-5.927-.768-13.132-2.628-38.725-.558-62.644,2.84-32.909,13.442-49.215,26.04-63.636,6.051-6.932,34.484-36.976,88.857-36.976s82.88,29.92,88.931,36.827c12.611,14.421,23.225,30.727,26.04,63.636,2.071,23.919.285,49.525-.558,62.644-.285,4.327,1.017,5.927,4.613,5.927a10.648,10.648,0,0,0,2.48-.335c6.745-1.624,18.4-7.638,30.4-10.242a27.641,27.641,0,0,1,5.964-.67c6.386,0,12.4,2.48,14.88,8.928,3.546,9.374-1.24,17-12.189,24.639-6.609,4.612-30.429,19.343-35.8,24.315-5.568,5.134-4.836,9.1-4.191,14.149.533,4.228,12.511,60.4,87.666,96.718C468.629,373.011,476.119,377.524,462.913,384.877Z"]
-};
-var faSnapchatGhost = faSnapchat;
-var faDeviantart = {
-  prefix: 'fab',
-  iconName: 'deviantart',
-  icon: [320, 512, [], "f1bd", "M320 93.2l-98.2 179.1 7.4 9.5H320v127.7H159.1l-13.5 9.2-43.7 84c-.3 0-8.6 8.6-9.2 9.2H0v-93.2l93.2-179.4-7.4-9.2H0V102.5h156l13.5-9.2 43.7-84c.3 0 8.6-8.6 9.2-9.2H320v93.1z"]
-};
-var faGithub = {
-  prefix: 'fab',
-  iconName: 'github',
-  icon: [496, 512, [], "f09b", "M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"]
-};
-var faYoutube = {
-  prefix: 'fab',
-  iconName: 'youtube',
-  icon: [576, 512, [61802], "f167", "M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"]
-};
-var faTwitter = {
-  prefix: 'fab',
-  iconName: 'twitter',
-  icon: [512, 512, [], "f099", "M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"]
-};
-var faPinterest = {
-  prefix: 'fab',
-  iconName: 'pinterest',
-  icon: [496, 512, [], "f0d2", "M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3.8-3.4 5-20.3 6.9-28.1.6-2.5.3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 51.6-.9 71.2C65.4 450.9 0 361.1 0 256 0 119 111 8 248 8s248 111 248 248z"]
-};
-var faDribbble = {
-  prefix: 'fab',
-  iconName: 'dribbble',
-  icon: [512, 512, [], "f17d", "M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z"]
-};
-var faTelegram = {
-  prefix: 'fab',
-  iconName: 'telegram',
-  icon: [496, 512, [62462, "telegram-plane"], "f2c6", "M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"]
-};
-var faTelegramPlane = faTelegram;
-var faSlack = {
-  prefix: 'fab',
-  iconName: 'slack',
-  icon: [448, 512, [62447, "slack-hash"], "f198", "M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"]
-};
-var faTumblr = {
-  prefix: 'fab',
-  iconName: 'tumblr',
-  icon: [320, 512, [], "f173", "M309.8 480.3c-13.6 14.5-50 31.7-97.4 31.7-120.8 0-147-88.8-147-140.6v-144H17.9c-5.5 0-10-4.5-10-10v-68c0-7.2 4.5-13.6 11.3-16 62-21.8 81.5-76 84.3-117.1.8-11 6.5-16.3 16.1-16.3h70.9c5.5 0 10 4.5 10 10v115.2h83c5.5 0 10 4.4 10 9.9v81.7c0 5.5-4.5 10-10 10h-83.4V360c0 34.2 23.7 53.6 68 35.8 4.8-1.9 9-3.2 12.7-2.2 3.5.9 5.8 3.4 7.4 7.9l22 64.3c1.8 5 3.3 10.6-.4 14.5z"]
-};
-var faQuora = {
-  prefix: 'fab',
-  iconName: 'quora',
-  icon: [448, 512, [], "f2c4", "M440.5 386.7h-29.3c-1.5 13.5-10.5 30.8-33 30.8-20.5 0-35.3-14.2-49.5-35.8 44.2-34.2 74.7-87.5 74.7-153C403.5 111.2 306.8 32 205 32 105.3 32 7.3 111.7 7.3 228.7c0 134.1 131.3 221.6 249 189C276 451.3 302 480 351.5 480c81.8 0 90.8-75.3 89-93.3zM297 329.2C277.5 300 253.3 277 205.5 277c-30.5 0-54.3 10-69 22.8l12.2 24.3c6.2-3 13-4 19.8-4 35.5 0 53.7 30.8 69.2 61.3-10 3-20.7 4.2-32.7 4.2-75 0-107.5-53-107.5-156.7C97.5 124.5 130 71 205 71c76.2 0 108.7 53.5 108.7 157.7.1 41.8-5.4 75.6-16.7 100.5z"]
-};
-var faMedium = {
-  prefix: 'fab',
-  iconName: 'medium',
-  icon: [640, 512, [62407, "medium-m"], "f23a", "M180.5,74.262C80.813,74.262,0,155.633,0,256S80.819,437.738,180.5,437.738,361,356.373,361,256,280.191,74.262,180.5,74.262Zm288.25,10.646c-49.845,0-90.245,76.619-90.245,171.095s40.406,171.1,90.251,171.1,90.251-76.619,90.251-171.1H559C559,161.5,518.6,84.908,468.752,84.908Zm139.506,17.821c-17.526,0-31.735,68.628-31.735,153.274s14.2,153.274,31.735,153.274S640,340.631,640,256C640,171.351,625.785,102.729,608.258,102.729Z"]
-};
-var faJoomla = {
-  prefix: 'fab',
-  iconName: 'joomla',
-  icon: [448, 512, [], "f1aa", "M.6 92.1C.6 58.8 27.4 32 60.4 32c30 0 54.5 21.9 59.2 50.2 32.6-7.6 67.1.6 96.5 30l-44.3 44.3c-20.5-20.5-42.6-16.3-55.4-3.5-14.3 14.3-14.3 37.9 0 52.2l99.5 99.5-44 44.3c-87.7-87.2-49.7-49.7-99.8-99.7-26.8-26.5-35-64.8-24.8-98.9C20.4 144.6.6 120.7.6 92.1zm129.5 116.4l44.3 44.3c10-10 89.7-89.7 99.7-99.8 14.3-14.3 37.6-14.3 51.9 0 12.8 12.8 17 35-3.5 55.4l44 44.3c31.2-31.2 38.5-67.6 28.9-101.2 29.2-4.1 51.9-29.2 51.9-59.5 0-33.2-26.8-60.1-59.8-60.1-30.3 0-55.4 22.5-59.5 51.6-33.8-9.9-71.7-1.5-98.3 25.1-18.3 19.1-71.1 71.5-99.6 99.9zm266.3 152.2c8.2-32.7-.9-68.5-26.3-93.9-11.8-12.2 5 4.7-99.5-99.7l-44.3 44.3 99.7 99.7c14.3 14.3 14.3 37.6 0 51.9-12.8 12.8-35 17-55.4-3.5l-44 44.3c27.6 30.2 68 38.8 102.7 28 5.5 27.4 29.7 48.1 58.9 48.1 33 0 59.8-26.8 59.8-60.1 0-30.2-22.5-55-51.6-59.1zm-84.3-53.1l-44-44.3c-87 86.4-50.4 50.4-99.7 99.8-14.3 14.3-37.6 14.3-51.9 0-13.1-13.4-16.9-35.3 3.2-55.4l-44-44.3c-30.2 30.2-38 65.2-29.5 98.3-26.7 6-46.2 29.9-46.2 58.2C0 453.2 26.8 480 59.8 480c28.6 0 52.5-19.8 58.6-46.7 32.7 8.2 68.5-.6 94.2-26 32.1-32 12.2-12.4 99.5-99.7z"]
-};
-var faMastodon = {
-  prefix: 'fab',
-  iconName: 'mastodon',
-  icon: [448, 512, [], "f4f6", "M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"]
-};
-var faTeamspeak = {
-  prefix: 'fab',
-  iconName: 'teamspeak',
-  icon: [576, 512, [], "f4f9", "M152.8 37.2c-32.2 38.1-56.1 82.6-69.9 130.5c0 .2-.1 .3-.1 .5C43.5 184.4 16 223 16 268c0 59.6 48.4 108 108 108s108-48.4 108-108c0-53.5-38.9-97.9-90-106.5c15.7-41.8 40.4-79.6 72.3-110.7c1.8-1.6 4-2.6 6.3-3.1c37.2-11.5 76.7-13.3 114.8-5.2C454.7 67.6 534 180.7 517.1 301.3c-8.4 62.6-38.6 112.7-87.7 151.4c-50.1 39.7-107.5 54.3-170.2 52.2l-24-1c12.4 2.8 25 4.9 37.6 6.3c40.7 4.2 81.4 2.1 120.1-12.5c94-35.5 149.3-102.3 162.9-202.5c4.8-52.6-5.8-105.4-30.8-152C454.6 11.3 290.8-38.4 159 32c-2.4 1.4-4.5 3.1-6.3 5.2zM309.4 433.9c-2.1 11.5-4.2 21.9-14.6 31.3c53.2-1 123.2-29.2 161.8-97.1c39.7-69.9 37.6-139.9-6.3-207.8C413.8 105 360.5 77.9 293.7 73.7c1.5 2.3 3.2 4.4 5.2 6.3l5.2 6.3c25.1 31.3 37.6 67.9 42.8 107.5c2.1 15.7-1 30.3-13.6 41.8c-4.2 3.1-5.2 6.3-4.2 10.4l7.3 17.7L365.7 318c5.2 11.5 4.2 19.8-6.3 28.2c-3.2 2.5-6.7 4.6-10.4 6.3l-18.8 8.4 3.1 13.6c3.1 6.3 1 12.5-3.1 17.7c-2.5 2.4-3.8 5.9-3.1 9.4c2.1 11.5-2.1 19.8-12.5 25.1c-2.1 1-4.2 5.2-5.2 7.3zm-133.6-3.1c16.7 11.5 34.5 20.9 53.2 26.1c24 5.2 41.8-6.3 44.9-30.3c1-8.4 5.2-14.6 12.5-17.7c7.3-4.2 8.4-7.3 2.1-13.6l-9.4-8.4 13.6-4.2c6.3-2.1 7.3-5.2 5.2-11.5c-1.4-3-2.4-6.2-3.1-9.4c-3.1-14.6-2.1-15.7 11.5-18.8c8.4-3.1 15.7-6.3 21.9-12.5c3.1-2.1 3.1-4.2 1-8.4l-16.7-30.3c-1-1.9-2.1-3.8-3.1-5.7c-6.4-11.7-13-23.6-15.7-37.1c-2.1-9.4-1-17.7 8.4-24c5.2-4.2 8.4-9.4 8.4-16.7c-.4-10.1-1.5-20.3-3.1-30.3c-6.3-37.6-23-68.9-51.2-95c-5.2-4.2-9.4-6.3-16.7-4.2L203.9 91.5c2 1.2 4 2.4 6 3.6l0 0c6.3 3.7 12.2 7.3 17 12.1c30.3 26.1 41.8 61.6 45.9 100.2c1 8.4 0 16.7-7.3 21.9c-8.4 5.2-10.4 12.5-7.3 20.9c4.9 13.2 10.4 26 16.7 38.6L291.6 318c-6.3 8.4-13.6 11.5-21.9 14.6c-12.5 3.1-14.6 7.3-10.4 20.9c.6 1.5 1.4 2.8 2.1 4.2c2.1 5.2 1 8.4-4.2 10.4l-12.5 3.1 5.2 4.2 4.2 4.2c4.2 5.2 4.2 8.4-2.1 10.4c-7.3 4.2-11.5 9.4-11.5 17.7c0 12.5-7.3 19.8-18.8 24c-3.8 1-7.6 1.5-11.5 1l-34.5-2.1z"]
+const FooterContainer = ({
+  children,
+  variant = 'default',
+  theme = 'auto',
+  className = ''
+}) => {
+  const {
+    timing,
+    shouldReduceMotion
+  } = useAnimationConfig();
+  // Get theme-aware styles
+  const getThemeStyles = () => {
+    if (theme === 'black-glass') {
+      return {
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.92) 50%, rgba(0, 0, 0, 0.95) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 10, 0.3) 30%, rgba(20, 20, 20, 0.2) 60%, rgba(0, 0, 0, 0.1) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
+        gradientOverlay: `
+          radial-gradient(circle at 20% 40%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 40%, transparent 70%),
+          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 80%)
+        `
+      };
+    } else {
+      // Light theme (default)
+      return {
+        background: 'linear-gradient(120deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%), linear-gradient(90deg, rgba(255,24,1,0.12) 0%, rgba(0,184,255,0.12) 100%)',
+        backgroundLayer: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.01) 100%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+        shimmer: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)',
+        gradientOverlay: `
+          radial-gradient(circle at 20% 40%, rgba(255,24,1,0.15) 0%, rgba(255,24,1,0.08) 40%, transparent 70%),
+          radial-gradient(circle at 80% 60%, rgba(0,184,255,0.12) 0%, rgba(0,184,255,0.08) 40%, transparent 70%),
+          radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 80%)
+        `
+      };
+    }
+  };
+  const themeStyles = getThemeStyles();
+  // Background variants matching NexNav approach
+  const backgroundVariants = {
+    initial: {
+      backdropFilter: 'blur(0px) saturate(100%)',
+      background: 'rgba(255, 255, 255, 0)'
+    },
+    animate: {
+      backdropFilter: 'blur(24px) saturate(180%)',
+      background: themeStyles.background,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  // Shimmer effect variants
+  const shimmerVariants = {
+    initial: {
+      opacity: 0,
+      x: '-100%',
+      scale: 0.8
+    },
+    animate: {
+      opacity: shouldReduceMotion ? 0 : 0.6,
+      x: '0%',
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.8,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  const containerClass = `nex-footer-container nex-footer-container--${variant} ${theme !== 'auto' ? `nex-footer-container--${theme}` : ''} ${className}`;
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: containerClass,
+    initial: "initial",
+    animate: "animate",
+    variants: backgroundVariants,
+    style: {
+      position: 'relative',
+      width: '100%',
+      fontFamily: 'var(--nex-font-family-primary)',
+      willChange: 'transform, opacity, backdrop-filter',
+      overflow: 'hidden'
+    },
+    children: [/*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-background",
+      style: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: themeStyles.backgroundLayer,
+        backdropFilter: 'blur(24px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+        borderTop: themeStyles.borderTop,
+        pointerEvents: 'none',
+        zIndex: 0
+      },
+      variants: backgroundVariants
+    }), /*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-shimmer",
+      style: {
+        position: 'absolute',
+        top: 0,
+        left: '-100%',
+        width: '100%',
+        height: '100%',
+        background: themeStyles.shimmer,
+        pointerEvents: 'none',
+        zIndex: 0
+      },
+      variants: shimmerVariants,
+      animate: {
+        x: shouldReduceMotion ? '-100%' : '100%',
+        transition: {
+          duration: shouldReduceMotion ? 0 : 12,
+          ease: [0.4, 0, 0.2, 1],
+          repeat: shouldReduceMotion ? 0 : Infinity,
+          repeatDelay: shouldReduceMotion ? 0 : 4
+        }
+      }
+    }), /*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-gradient-overlay",
+      style: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: themeStyles.gradientOverlay,
+        opacity: 0.8,
+        filter: 'blur(8px)',
+        pointerEvents: 'none',
+        zIndex: 0
+      },
+      animate: {
+        opacity: shouldReduceMotion ? 0.4 : 0.8,
+        transition: {
+          duration: shouldReduceMotion ? 0 : 8,
+          ease: [0.4, 0, 0.2, 1],
+          repeat: shouldReduceMotion ? 0 : Infinity,
+          repeatType: 'reverse'
+        }
+      }
+    }), /*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-content-wrapper",
+      style: {
+        position: 'relative',
+        zIndex: 1
+      },
+      variants: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: {
+            duration: shouldReduceMotion ? 0.2 : 0.4,
+            ease: [0.4, 0, 0.2, 1],
+            delay: shouldReduceMotion ? 0 : 0.1
+          }
+        }
+      },
+      children: children
+    })]
+  });
 };
 
-var css_248z$2 = "@charset \"UTF-8\";\n@import url(\"https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap\");\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-footer-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper {\n  flex: 1;\n  display: grid;\n  min-height: 4.4444444444rem;\n  max-width: 70rem;\n  margin: 0.5rem 2.4rem;\n  padding: 3.2rem 2.4rem 1.6rem;\n  border-radius: 0.8888888889rem;\n  background-color: var(--nex-font-color);\n}\n@media (max-width: 768px) {\n  .nex-footer-wrapper .nex-footer-inner-wrapper {\n    margin: 0.5rem 0 0 0;\n    padding: 3.2rem 2.4rem;\n    border-radius: 0;\n  }\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .utility-content-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  gap: 0.7rem;\n  grid-area: span 1/span 2/span 1/span 2;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .utility-content-wrapper .nex-footer-client-logo img {\n  max-height: 2.2222222222rem;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .utility-content-wrapper .nex-footer-client-name {\n  font-size: 1.0666666667rem;\n  font-weight: 600;\n  color: #fff;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .utility-content-wrapper .copyright {\n  font-size: 0.8em;\n  color: rgba(255, 255, 255, 0.7);\n  line-height: 1.5;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper {\n  display: grid;\n  grid-template-columns: repeat(3, 42px);\n  grid-column-gap: 0.4444444444rem;\n  grid-row-gap: 0.5333333333rem;\n  justify-content: flex-start;\n  align-items: center;\n  margin-top: 1rem;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 1.8666666667rem;\n  width: 1.8666666667rem;\n  border: 0.0888888889rem solid rgba(255, 255, 255, 0.7);\n  border-radius: 50%;\n  color: #fff;\n  transition: all 100ms ease-in-out;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover {\n  background-color: transparent;\n  border-color: transparent;\n  color: #fff;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.facebook:hover {\n  background-color: #1877f2;\n  border-color: #1877f2;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.twitter:hover {\n  background-color: #1da1f2;\n  border-color: #1da1f2;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.instagram:hover {\n  background-color: #c13584;\n  border-color: #c13584;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.linkedin:hover {\n  background-color: #0077b5;\n  border-color: #0077b5;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.github:hover {\n  background-color: #333;\n  border-color: #333;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.youtube:hover {\n  background-color: #ff0000;\n  border-color: #ff0000;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.pinterest:hover {\n  background-color: #bd081c;\n  border-color: #bd081c;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.snapchat:hover {\n  background-color: #fffc00;\n  border-color: #fffc00;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.tiktok:hover {\n  background-color: #000;\n  border-color: #000;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.reddit:hover {\n  background-color: #ff4500;\n  border-color: #ff4500;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.tumblr:hover {\n  background-color: #36465d;\n  border-color: #36465d;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.medium:hover {\n  background-color: #00ab6c;\n  border-color: #00ab6c;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.vimeo:hover {\n  background-color: #1ab7ea;\n  border-color: #1ab7ea;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.stackoverflow:hover {\n  background-color: #f48024;\n  border-color: #f48024;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.behance:hover {\n  background-color: #1769ff;\n  border-color: #1769ff;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.dribbble:hover {\n  background-color: #ea4c89;\n  border-color: #ea4c89;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.flickr:hover {\n  background-color: #0063dc;\n  border-color: #0063dc;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.whatsapp:hover {\n  background-color: #25d366;\n  border-color: #25d366;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.telegram:hover {\n  background-color: #0088cc;\n  border-color: #0088cc;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.slack:hover {\n  background-color: #4a154b;\n  border-color: #4a154b;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.discord:hover {\n  background-color: #7289da;\n  border-color: #7289da;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.spotify:hover {\n  background-color: #1ed760;\n  border-color: #1ed760;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.quora:hover {\n  background-color: #b92b27;\n  border-color: #b92b27;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.soundcloud:hover {\n  background-color: #ff5500;\n  border-color: #ff5500;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.apple:hover {\n  background-color: #000;\n  border-color: #000;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.google:hover {\n  background-color: #4285f4;\n  border-color: #4285f4;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.amazon:hover {\n  background-color: #ff9900;\n  border-color: #ff9900;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.microsoft:hover {\n  background-color: #00a1f1;\n  border-color: #00a1f1;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.dropbox:hover {\n  background-color: #007ee5;\n  border-color: #007ee5;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.wordpress:hover {\n  background-color: #21759b;\n  border-color: #21759b;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.blogger:hover {\n  background-color: #f57d00;\n  border-color: #f57d00;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.tripadvisor:hover {\n  background-color: #00af87;\n  border-color: #00af87;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.weibo:hover {\n  background-color: #e6162d;\n  border-color: #e6162d;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.wechat:hover {\n  background-color: #7bb32e;\n  border-color: #7bb32e;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.xing:hover {\n  background-color: #006567;\n  border-color: #006567;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.qq:hover {\n  background-color: #eb6101;\n  border-color: #eb6101;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.vk:hover {\n  background-color: #4a76a8;\n  border-color: #4a76a8;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.patreon:hover {\n  background-color: #f96854;\n  border-color: #f96854;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.deviantart:hover {\n  background-color: #05cc47;\n  border-color: #05cc47;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.drupal:hover {\n  background-color: #0077c0;\n  border-color: #0077c0;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.joomla:hover {\n  background-color: #f44321;\n  border-color: #f44321;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.mastodon:hover {\n  background-color: #2b90d9;\n  border-color: #2b90d9;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.mix:hover {\n  background-color: #ff6600;\n  border-color: #ff6600;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.foursquare:hover {\n  background-color: #f94877;\n  border-color: #f94877;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.meetup:hover {\n  background-color: #e0393e;\n  border-color: #e0393e;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.steam:hover {\n  background-color: #171a21;\n  border-color: #171a21;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.xbox:hover {\n  background-color: #107c10;\n  border-color: #107c10;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.playstation:hover {\n  background-color: #003087;\n  border-color: #003087;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.skype:hover {\n  background-color: #00aff0;\n  border-color: #00aff0;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.teamspeak:hover {\n  background-color: #5e8d91;\n  border-color: #5e8d91;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.goodreads:hover {\n  background-color: #553b08;\n  border-color: #553b08;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.houzz:hover {\n  background-color: #7ac143;\n  border-color: #7ac143;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.yelp:hover {\n  background-color: #c41200;\n  border-color: #c41200;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.myspace:hover {\n  background-color: #000;\n  border-color: #000;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.periscope:hover {\n  background-color: #3aa4c6;\n  border-color: #3aa4c6;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .socials-wrapper .social-icon:hover.diaspora:hover {\n  background-color: #545454;\n  border-color: #545454;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .secondary-task-content-wrapper {\n  grid-area: span 1/span 4/span 1/span 4;\n}\n.nex-footer-wrapper .nex-footer-inner-wrapper .cinzel {\n  font-family: \"Cinzel\", serif;\n  font-optical-sizing: auto;\n  font-weight: 700;\n  font-style: normal;\n}";
-styleInject(css_248z$2);
+const FooterBranding = ({
+  logoSrc,
+  displayName,
+  tagline,
+  showLogoText = true,
+  newsletter,
+  variant = 'default',
+  theme = 'auto'
+}) => {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const {
+    timing,
+    shouldReduceMotion
+  } = useAnimationConfig();
+  // Newsletter submission handler
+  const handleNewsletterSubmit = useCallback(async e => {
+    e.preventDefault();
+    if (!email.trim() || !newsletter?.onSubmit) return;
+    setIsSubmitting(true);
+    setError('');
+    try {
+      await newsletter.onSubmit(email.trim());
+      setIsSubmitted(true);
+      setEmail('');
+      // Reset success state after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      setError('Failed to subscribe. Please try again.');
+      console.error('Newsletter subscription failed:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [email, newsletter]);
+  // Simplified section variants for clean entrance
+  const sectionVariants = {
+    initial: {
+      opacity: 0,
+      y: 8
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.3,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: shouldReduceMotion ? 0 : 0.04
+      }
+    }
+  };
+  // Simplified item variants for clean animations
+  const itemVariants = {
+    initial: {
+      opacity: 0,
+      y: 4
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  // Simplified message variants
+  const messageVariants = {
+    initial: {
+      opacity: 0,
+      y: -4
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -4,
+      transition: {
+        duration: 0.15
+      }
+    }
+  };
+  const brandingClass = `nex-footer-branding ${variant === 'contact' ? 'nex-footer-branding--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-branding--black-glass' : ''}`;
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: brandingClass,
+    variants: sectionVariants,
+    initial: "initial",
+    animate: "animate",
+    children: [logoSrc ? /*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-branding__logo",
+      variants: itemVariants,
+      whileHover: {
+        opacity: 0.9
+      },
+      whileTap: {
+        opacity: 0.8
+      },
+      transition: timing.fast,
+      children: /*#__PURE__*/jsx("img", {
+        src: logoSrc,
+        alt: displayName
+      })
+    }) : showLogoText && /*#__PURE__*/jsx(motion.div, {
+      className: "nex-footer-branding__name",
+      variants: itemVariants,
+      whileHover: {
+        color: theme === 'black-glass' ? '#ff6b35' : undefined,
+        opacity: 0.9
+      },
+      transition: timing.fast,
+      children: /*#__PURE__*/jsx("span", {
+        children: displayName
+      })
+    }), tagline && showLogoText && /*#__PURE__*/jsx(motion.p, {
+      className: "nex-footer-branding__tagline",
+      variants: itemVariants,
+      whileHover: {
+        color: theme === 'black-glass' ? '#ffffff' : undefined,
+        opacity: 0.9
+      },
+      transition: timing.fast,
+      children: tagline
+    }), newsletter?.enabled && variant !== 'contact' && /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-footer-branding__newsletter-container",
+      variants: itemVariants,
+      children: [/*#__PURE__*/jsxs(AnimatePresence, {
+        children: [isSubmitted && /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-footer-branding__message nex-footer-branding__message--success",
+          variants: messageVariants,
+          initial: "initial",
+          animate: "animate",
+          exit: "exit",
+          children: [/*#__PURE__*/jsx(CheckCircle, {
+            size: 14
+          }), /*#__PURE__*/jsx("span", {
+            children: "Successfully subscribed!"
+          })]
+        }), error && /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-footer-branding__message nex-footer-branding__message--error",
+          variants: messageVariants,
+          initial: "initial",
+          animate: "animate",
+          exit: "exit",
+          children: [/*#__PURE__*/jsx(AlertCircle, {
+            size: 14
+          }), /*#__PURE__*/jsx("span", {
+            children: error
+          })]
+        })]
+      }), /*#__PURE__*/jsxs(motion.form, {
+        className: "nex-footer-branding__newsletter",
+        onSubmit: handleNewsletterSubmit,
+        variants: itemVariants,
+        children: [/*#__PURE__*/jsxs(motion.div, {
+          className: "nex-footer-branding__newsletter-input",
+          whileHover: {
+            opacity: 0.9,
+            backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.1)' : undefined
+          },
+          transition: timing.fast,
+          children: [/*#__PURE__*/jsx(Mail, {
+            size: 16
+          }), /*#__PURE__*/jsx("input", {
+            type: "email",
+            placeholder: newsletter.placeholder || "Stay updated",
+            value: email,
+            onChange: e => setEmail(e.target.value),
+            required: true,
+            disabled: isSubmitting
+          })]
+        }), /*#__PURE__*/jsx(motion.button, {
+          type: "submit",
+          disabled: isSubmitting || !email.trim(),
+          className: "nex-footer-branding__newsletter-button",
+          whileHover: {
+            opacity: 0.9,
+            backgroundColor: theme === 'black-glass' ? 'rgba(255, 107, 53, 0.2)' : undefined
+          },
+          whileTap: {
+            opacity: 0.8
+          },
+          transition: timing.fast,
+          children: /*#__PURE__*/jsx(AnimatePresence, {
+            mode: "wait",
+            children: isSubmitting ? /*#__PURE__*/jsx(motion.div, {
+              initial: {
+                opacity: 0
+              },
+              animate: {
+                opacity: 1
+              },
+              exit: {
+                opacity: 0
+              },
+              transition: timing.fast,
+              className: "nex-footer-branding__button-spinner",
+              children: /*#__PURE__*/jsx("div", {
+                className: "spinner"
+              })
+            }, "loading") : /*#__PURE__*/jsx(motion.span, {
+              initial: {
+                opacity: 0
+              },
+              animate: {
+                opacity: 1
+              },
+              exit: {
+                opacity: 0
+              },
+              transition: timing.fast,
+              children: "Subscribe"
+            }, "subscribe")
+          })
+        })]
+      })]
+    })]
+  });
+};
+
+// Footer-specific animation configurations using common animation config
+const FOOTER_ANIMATIONS = {
+  // Container entrance animations using common timing
+  container: {
+    initial: {
+      opacity: 0,
+      y: 20
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: 0.06,
+        delayChildren: 0.1
+      }
+    }
+  },
+  // Section entrance animations using common timing
+  section: {
+    initial: {
+      opacity: 0,
+      y: 10
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+  // Link entrance animations using common timing
+  link: {
+    initial: {
+      opacity: 0,
+      x: -5
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+  // Form field animations using common timing
+  formField: {
+    initial: {
+      opacity: 0,
+      y: 8
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+  // Button animations using common spring config
+  button: {
+    initial: {
+      opacity: 0,
+      y: 5
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  },
+  // Message animations using common spring config
+  message: {
+    initial: {
+      opacity: 0,
+      y: -8
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -8,
+      transition: {
+        duration: 0.2
+      }
+    }
+  },
+  // Hover animations - no transform/scale to avoid layout shifts
+  hover: {
+    opacity: 0.8,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1]
+    }
+  },
+  // Tap animations - no transform/scale to avoid layout shifts
+  tap: {
+    opacity: 0.7,
+    transition: {
+      duration: 0.1,
+      ease: [0.4, 0, 0.2, 1]
+    }
+  },
+  // Spring configurations for interactive elements
+  spring: {
+    responsive: {
+      type: "spring",
+      stiffness: 450,
+      damping: 28,
+      mass: 0.8,
+      restDelta: 0.001
+    },
+    fast: {
+      type: "spring",
+      stiffness: 600,
+      damping: 25,
+      mass: 0.6,
+      restDelta: 0.001
+    },
+    smooth: {
+      type: "spring",
+      stiffness: 300,
+      damping: 35,
+      mass: 1.0,
+      restDelta: 0.001
+    }
+  },
+  // Stagger animations for lists using common config
+  stagger: {
+    container: {
+      animate: {
+        transition: {
+          staggerChildren: 0.04,
+          delayChildren: 0.08
+        }
+      }
+    },
+    item: {
+      initial: {
+        opacity: 0,
+        x: -8
+      },
+      animate: {
+        opacity: 1,
+        x: 0,
+        transition: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      }
+    }
+  }
+};
+// Hook for footer animations with reduced motion support
+const useFooterAnimations = () => {
+  const {
+    shouldReduceMotion,
+    timing,
+    spring
+  } = useAnimationConfig();
+  // Return simplified animations if reduced motion is preferred
+  if (shouldReduceMotion) {
+    return {
+      container: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.fast
+        }
+      },
+      section: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.fast
+        }
+      },
+      link: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.instant
+        }
+      },
+      formField: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.fast
+        }
+      },
+      button: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.fast
+        }
+      },
+      message: {
+        initial: {
+          opacity: 0
+        },
+        animate: {
+          opacity: 1,
+          transition: timing.fast
+        },
+        exit: {
+          opacity: 0,
+          transition: timing.instant
+        }
+      },
+      hover: {},
+      tap: {},
+      spring: spring,
+      stagger: {
+        container: {
+          animate: {}
+        },
+        item: {
+          initial: {
+            opacity: 0
+          },
+          animate: {
+            opacity: 1,
+            transition: timing.instant
+          }
+        }
+      }
+    };
+  }
+  return FOOTER_ANIMATIONS;
+};
+
+const FooterSections = ({
+  sections,
+  variant = 'default',
+  theme = 'auto'
+}) => {
+  const animations = useFooterAnimations();
+  // Limit sections to maximum of 4 for better layout control
+  const limitedSections = sections.slice(0, 4);
+  // Determine if we have many sections for class-based styling
+  const hasManySections = limitedSections.length >= 3;
+  const sectionsClass = `nex-footer-sections ${variant === 'contact' ? 'nex-footer-sections--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-sections--black-glass' : ''} ${hasManySections ? 'nex-footer-sections--many-sections' : ''}`;
+  // Optimize animation delays based on number of sections
+  const getStaggerDelay = index => {
+    if (limitedSections.length <= 2) {
+      return index * 0.05;
+    } else if (limitedSections.length <= 3) {
+      return index * 0.03;
+    } else {
+      return index * 0.02;
+    }
+  };
+  return /*#__PURE__*/jsx(motion.div, {
+    className: sectionsClass,
+    variants: animations.section,
+    initial: "initial",
+    animate: "animate",
+    children: limitedSections.map((section, index) => /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-footer-sections__section",
+      variants: animations.stagger.item,
+      initial: "initial",
+      animate: "animate",
+      transition: {
+        delay: getStaggerDelay(index)
+      },
+      children: [/*#__PURE__*/jsx(motion.h3, {
+        className: "nex-footer-sections__title",
+        whileHover: {
+          opacity: 0.9
+        },
+        transition: animations.hover,
+        children: section.title
+      }), /*#__PURE__*/jsx(motion.ul, {
+        className: "nex-footer-sections__links",
+        variants: animations.stagger.container,
+        initial: "initial",
+        animate: "animate",
+        transition: {
+          delayChildren: getStaggerDelay(index),
+          staggerChildren: limitedSections.length > 3 ? 0.02 : 0.03
+        },
+        children: section.links.slice(0, 6).map((link, linkIndex) => /*#__PURE__*/jsx(motion.li, {
+          variants: animations.stagger.item,
+          children: /*#__PURE__*/jsx(motion.a, {
+            href: link.url,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "nex-footer-sections__link",
+            whileHover: {
+              opacity: 0.8
+            },
+            whileTap: {
+              opacity: 0.7
+            },
+            transition: animations.hover,
+            children: link.label
+          })
+        }, linkIndex))
+      })]
+    }, index))
+  });
+};
 
 const socialIcons = {
-  facebook: faFacebookF,
-  twitter: faTwitter,
-  instagram: faInstagram,
-  linkedin: faLinkedinIn,
-  github: faGithub,
-  youtube: faYoutube,
-  pinterest: faPinterest,
-  snapchat: faSnapchatGhost,
-  tiktok: faTiktok,
-  reddit: faRedditAlien,
-  tumblr: faTumblr,
-  medium: faMedium,
-  vimeo: faVimeoV,
-  stackoverflow: faStackOverflow,
-  behance: faBehance,
-  dribbble: faDribbble,
-  flickr: faFlickr,
-  whatsapp: faWhatsapp,
-  telegram: faTelegramPlane,
-  slack: faSlack,
-  discord: faDiscord,
-  spotify: faSpotify,
-  quora: faQuora,
-  soundcloud: faSoundcloud,
-  apple: faApple,
-  google: faGoogle,
-  amazon: faAmazon,
-  microsoft: faMicrosoft,
-  dropbox: faDropbox,
-  wordpress: faWordpress,
-  blogger: faBlogger,
-  weibo: faWeibo,
-  wechat: faWeixin,
-  xing: faXing,
-  qq: faQq,
-  vk: faVk,
-  patreon: faPatreon,
-  deviantart: faDeviantart,
-  drupal: faDrupal,
-  joomla: faJoomla,
-  mastodon: faMastodon,
-  mix: faMix,
-  foursquare: faFoursquare,
-  meetup: faMeetup,
-  steam: faSteam,
-  xbox: faXbox,
-  playstation: faPlaystation,
-  skype: faSkype,
-  teamspeak: faTeamspeak,
-  goodreads: faGoodreads,
-  houzz: faHouzz,
-  yelp: faYelp,
-  periscope: faPeriscope,
-  diaspora: faDiaspora
+  github: () => /*#__PURE__*/jsx("svg", {
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    width: "16",
+    height: "16",
+    children: /*#__PURE__*/jsx("path", {
+      d: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+    })
+  }),
+  twitter: () => /*#__PURE__*/jsx("svg", {
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    width: "16",
+    height: "16",
+    children: /*#__PURE__*/jsx("path", {
+      d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+    })
+  }),
+  linkedin: () => /*#__PURE__*/jsx("svg", {
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    width: "16",
+    height: "16",
+    children: /*#__PURE__*/jsx("path", {
+      d: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+    })
+  }),
+  youtube: () => /*#__PURE__*/jsx("svg", {
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    width: "16",
+    height: "16",
+    children: /*#__PURE__*/jsx("path", {
+      d: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+    })
+  }),
+  discord: () => /*#__PURE__*/jsx("svg", {
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    width: "16",
+    height: "16",
+    children: /*#__PURE__*/jsx("path", {
+      d: "M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.019 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z"
+    })
+  })
 };
-/**
- * NexFooter component
- *
- * A footer component displaying a logo, display name, copyright information, and social media icons.
- *
- * @param {string} logoSrc - The source URL for the logo image.
- * @param {string} displayName - The display name to be shown if the logo is not available.
- * @param {Array<{ type: string, url: string }>} socials - The list of social media icons and URLs to be displayed.
- * @param {string} className - Additional class names for styling the footer.
- */
+const FooterBottom = ({
+  displayName,
+  socials = [],
+  variant = 'default',
+  theme = 'auto'
+}) => {
+  const {
+    timing,
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const currentYear = new Date().getFullYear();
+  // Simplified section variants for clean entrance
+  const sectionVariants = {
+    initial: {
+      opacity: 0,
+      y: 8
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  const bottomClass = `nex-footer-bottom ${variant === 'contact' ? 'nex-footer-bottom--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-bottom--black-glass' : ''}`;
+  return /*#__PURE__*/jsx(motion.div, {
+    className: bottomClass,
+    variants: sectionVariants,
+    children: /*#__PURE__*/jsxs("div", {
+      className: "nex-footer-bottom__container",
+      children: [/*#__PURE__*/jsxs(motion.div, {
+        className: "nex-footer-bottom__copyright",
+        whileHover: {
+          opacity: 0.9
+        },
+        transition: timing.fast,
+        children: ["\xA9 ", currentYear, " ", displayName, ". All rights reserved."]
+      }), socials.length > 0 && /*#__PURE__*/jsx(motion.div, {
+        className: "nex-footer-bottom__socials",
+        initial: {
+          opacity: 0,
+          y: 4
+        },
+        animate: {
+          opacity: 1,
+          y: 0
+        },
+        transition: {
+          delay: 0.1,
+          ...timing.medium
+        },
+        children: socials.map((social, index) => {
+          const IconComponent = socialIcons[social.type];
+          if (!IconComponent) return null;
+          return /*#__PURE__*/jsx(motion.a, {
+            href: social.url,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: `nex-footer-bottom__social-link ${social.type}`,
+            "aria-label": `Follow us on ${social.type}`,
+            whileHover: {
+              opacity: 0.9,
+              color: theme === 'black-glass' ? '#ffffff' : undefined
+            },
+            whileTap: {
+              opacity: 0.7
+            },
+            transition: {
+              duration: 0.2,
+              ease: [0.4, 0, 0.2, 1]
+            },
+            children: /*#__PURE__*/jsx(IconComponent, {})
+          }, index);
+        })
+      })]
+    })
+  });
+};
+
+const FooterContactForm = ({
+  contact,
+  variant = 'contact',
+  theme = 'auto'
+}) => {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [focusedField, setFocusedField] = useState(null);
+  const animations = useFooterAnimations();
+  // Contact form submission handler
+  const handleContactSubmit = useCallback(async e => {
+    e.preventDefault();
+    if (!email.trim() || !message.trim() || !contact?.onSubmit) return;
+    setIsSubmitting(true);
+    setError('');
+    try {
+      await contact.onSubmit({
+        email: email.trim(),
+        message: message.trim()
+      });
+      setIsSubmitted(true);
+      setEmail('');
+      setMessage('');
+      // Reset success state after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      setError('Failed to send message. Please try again.');
+      console.error('Contact submission failed:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [email, message, contact]);
+  const formClass = `nex-footer-contact-form ${variant === 'contact' ? 'nex-footer-contact-form--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-contact-form--black-glass' : ''}`;
+  return /*#__PURE__*/jsxs(motion.div, {
+    className: formClass,
+    variants: animations.formField,
+    initial: "initial",
+    animate: "animate",
+    children: [/*#__PURE__*/jsx(motion.h3, {
+      className: "nex-footer-contact-form__title",
+      variants: animations.link,
+      whileHover: {
+        opacity: 0.9,
+        color: theme === 'black-glass' ? '#ff6b35' : undefined
+      },
+      transition: animations.hover,
+      children: contact.title || 'Get in Touch'
+    }), contact.description && /*#__PURE__*/jsx(motion.p, {
+      className: "nex-footer-contact-form__description",
+      variants: animations.link,
+      whileHover: {
+        opacity: 0.9,
+        color: theme === 'black-glass' ? '#ffffff' : undefined
+      },
+      transition: animations.hover,
+      children: contact.description
+    }), /*#__PURE__*/jsxs(AnimatePresence, {
+      children: [isSubmitted && /*#__PURE__*/jsxs(motion.div, {
+        className: "nex-footer-contact-form__message nex-footer-contact-form__message--success",
+        variants: animations.message,
+        initial: "initial",
+        animate: "animate",
+        exit: "exit",
+        children: [/*#__PURE__*/jsx(CheckCircle, {
+          size: 16
+        }), /*#__PURE__*/jsx("span", {
+          children: "Message sent successfully!"
+        })]
+      }), error && /*#__PURE__*/jsxs(motion.div, {
+        className: "nex-footer-contact-form__message nex-footer-contact-form__message--error",
+        variants: animations.message,
+        initial: "initial",
+        animate: "animate",
+        exit: "exit",
+        children: [/*#__PURE__*/jsx(AlertCircle, {
+          size: 16
+        }), /*#__PURE__*/jsx("span", {
+          children: error
+        })]
+      })]
+    }), /*#__PURE__*/jsxs(motion.form, {
+      onSubmit: handleContactSubmit,
+      className: "nex-footer-contact-form__form",
+      variants: animations.formField,
+      children: [/*#__PURE__*/jsxs(motion.div, {
+        className: `nex-footer-contact-form__input ${focusedField === 'email' ? 'nex-footer-contact-form__input--focused' : ''}`,
+        variants: animations.formField,
+        whileHover: {
+          opacity: 0.9
+        },
+        transition: animations.hover,
+        children: [/*#__PURE__*/jsx(Mail, {
+          size: 16
+        }), /*#__PURE__*/jsx("input", {
+          type: "email",
+          placeholder: "Your email address",
+          value: email,
+          onChange: e => setEmail(e.target.value),
+          onFocus: () => setFocusedField('email'),
+          onBlur: () => setFocusedField(null),
+          required: true,
+          disabled: isSubmitting
+        })]
+      }), /*#__PURE__*/jsxs(motion.div, {
+        className: `nex-footer-contact-form__textarea ${focusedField === 'message' ? 'nex-footer-contact-form__textarea--focused' : ''}`,
+        variants: animations.formField,
+        whileHover: {
+          opacity: 0.9
+        },
+        transition: animations.hover,
+        children: [/*#__PURE__*/jsx(MessageCircle, {
+          size: 16
+        }), /*#__PURE__*/jsx("textarea", {
+          placeholder: contact.placeholder || "Tell us about your project or inquiry...",
+          value: message,
+          onChange: e => setMessage(e.target.value),
+          onFocus: () => setFocusedField('message'),
+          onBlur: () => setFocusedField(null),
+          required: true,
+          disabled: isSubmitting,
+          rows: 2
+        })]
+      }), /*#__PURE__*/jsx(motion.button, {
+        type: "submit",
+        disabled: isSubmitting || !email.trim() || !message.trim(),
+        className: "nex-footer-contact-form__button",
+        variants: animations.button,
+        whileHover: {
+          opacity: 0.9
+        },
+        whileTap: {
+          opacity: 0.8
+        },
+        transition: animations.hover,
+        children: /*#__PURE__*/jsx(AnimatePresence, {
+          mode: "wait",
+          children: isSubmitting ? /*#__PURE__*/jsx(motion.div, {
+            initial: {
+              opacity: 0,
+              rotate: -90
+            },
+            animate: {
+              opacity: 1,
+              rotate: 0
+            },
+            exit: {
+              opacity: 0,
+              rotate: 90
+            },
+            transition: animations.hover,
+            className: "nex-footer-contact-form__button-spinner",
+            children: /*#__PURE__*/jsx("div", {
+              className: "spinner"
+            })
+          }, "loading") : /*#__PURE__*/jsxs(motion.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            exit: {
+              opacity: 0
+            },
+            transition: animations.hover,
+            className: "nex-footer-contact-form__button-content",
+            children: [/*#__PURE__*/jsx(Send, {
+              size: 16
+            }), /*#__PURE__*/jsx("span", {
+              children: "Send Message"
+            })]
+          }, "send")
+        })
+      })]
+    })]
+  });
+};
+
 const NexFooter = ({
   logoSrc,
   displayName,
-  socials,
-  className
+  tagline,
+  showLogoText = true,
+  sections = [],
+  newsletter,
+  contact,
+  socials = [],
+  variant = 'default',
+  theme = 'auto',
+  className = ''
 }) => {
-  const currentYear = new Date().getFullYear();
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-footer-wrapper ${className || ''}`
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-footer-inner-wrapper"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "utility-content-wrapper"
-  }, logoSrc ? /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-footer-client-logo"
-  }, /*#__PURE__*/React__default.createElement("img", {
-    src: logoSrc,
-    alt: displayName,
-    className: "nex-nav-logo"
-  })) : /*#__PURE__*/React__default.createElement("div", {
-    className: "nex-footer-client-name"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "client-name"
-  }, displayName)), /*#__PURE__*/React__default.createElement("div", {
-    className: "copyright"
-  }, "\xA9 ", displayName, ". ", currentYear, " \u2014 All rights reserved."), /*#__PURE__*/React__default.createElement("div", {
-    className: "socials-wrapper"
-  }, socials && socials.map((social, index) => /*#__PURE__*/React__default.createElement("a", {
-    key: index,
-    href: social.url,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: `social-icon ${social.type}`
-  }, /*#__PURE__*/React__default.createElement(FontAwesomeIcon, {
-    icon: socialIcons[social.type]
-  })))))));
+  const animations = useFooterAnimations();
+  // Determine theme class
+  const themeClass = theme === 'black-glass' ? 'nex-footer-container--black-glass' : '';
+  // Determine variant class
+  const variantClass = variant === 'contact' ? 'nex-footer-container--contact' : !logoSrc && !displayName && sections.length > 0 ? 'nex-footer-container--sections-only' : '';
+  // Add contact class when contact form is present
+  const contactClass = contact?.enabled ? 'nex-footer-container--has-contact' : '';
+  return /*#__PURE__*/jsx(motion.footer, {
+    className: `nex-footer ${className}`,
+    initial: "initial",
+    animate: "animate",
+    variants: animations.container,
+    style: {
+      position: 'relative',
+      width: '100%',
+      zIndex: 1
+    },
+    children: /*#__PURE__*/jsxs(FooterContainer, {
+      variant: variant,
+      theme: theme,
+      className: `${className} ${themeClass} ${variantClass} ${contactClass}`,
+      children: [/*#__PURE__*/jsx(motion.div, {
+        className: "nex-footer-content",
+        variants: animations.section,
+        children: /*#__PURE__*/jsxs(motion.div, {
+          className: "nex-footer-inner",
+          variants: animations.stagger.container,
+          children: [/*#__PURE__*/jsx(motion.div, {
+            variants: animations.stagger.item,
+            children: /*#__PURE__*/jsx(FooterBranding, {
+              logoSrc: logoSrc,
+              displayName: displayName,
+              tagline: tagline,
+              showLogoText: showLogoText,
+              newsletter: newsletter,
+              variant: variant,
+              theme: theme
+            })
+          }), /*#__PURE__*/jsx(AnimatePresence, {
+            children: sections.length > 0 && variant !== 'contact' && /*#__PURE__*/jsx(motion.div, {
+              variants: animations.stagger.item,
+              initial: "initial",
+              animate: "animate",
+              exit: "initial",
+              children: /*#__PURE__*/jsx(FooterSections, {
+                sections: sections,
+                variant: variant,
+                theme: theme
+              })
+            }, "footer-sections")
+          }), /*#__PURE__*/jsx(AnimatePresence, {
+            children: contact?.enabled && /*#__PURE__*/jsx(motion.div, {
+              variants: animations.stagger.item,
+              initial: "initial",
+              animate: "animate",
+              exit: "initial",
+              className: `nex-footer-contact-side ${theme === 'black-glass' ? 'nex-footer-contact-side--black-glass' : ''}`,
+              children: /*#__PURE__*/jsx(FooterContactForm, {
+                contact: contact,
+                variant: variant,
+                theme: theme
+              })
+            }, "footer-contact")
+          })]
+        })
+      }), /*#__PURE__*/jsx(motion.div, {
+        variants: animations.section,
+        transition: {
+          delay: 0.15
+        },
+        children: /*#__PURE__*/jsx(FooterBottom, {
+          displayName: displayName,
+          socials: socials,
+          variant: variant,
+          theme: theme
+        })
+      })]
+    })
+  });
 };
-
-var css_248z$1 = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-separator {\n  position: relative;\n  margin: 0.4444444444rem 0;\n}\n.nex-separator .separator-line {\n  width: 100%;\n  border-top: 0.0444444444rem solid var(--nex-complimentary-color);\n}\n.nex-separator .separator-text {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  padding: 0 0.4444444444rem;\n  color: var(--nex-font-color);\n  background: transparent;\n}";
-styleInject(css_248z$1);
 
 /**
  * NexSeparator component
@@ -17701,40 +10765,30 @@ const NexSeparator = ({
   fontSize = 14,
   color
 }) => {
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: `nex-separator ${className || ''}`
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: "separator-line",
-    style: {
-      borderColor: color
-    }
-  }), text && /*#__PURE__*/React__default.createElement("span", {
-    className: "separator-text",
-    style: {
-      backgroundColor,
-      fontSize,
-      color
-    }
-  }, text), /*#__PURE__*/React__default.createElement("div", {
-    className: "separator-line",
-    style: {
-      borderColor: color
-    }
-  }));
+  return /*#__PURE__*/jsxs("div", {
+    className: `nex-separator ${className || ''}`,
+    children: [/*#__PURE__*/jsx("div", {
+      className: "separator-line",
+      style: {
+        borderColor: color
+      }
+    }), text && /*#__PURE__*/jsx("span", {
+      className: "separator-text",
+      style: {
+        backgroundColor,
+        fontSize,
+        color
+      },
+      children: text
+    }), /*#__PURE__*/jsx("div", {
+      className: "separator-line",
+      style: {
+        borderColor: color
+      }
+    })]
+  });
 };
 
-var css_248z = "@charset \"UTF-8\";\n/**\n * ========================================\n * 🎨 NEXCOMPONENT DESIGN SYSTEM TOKENS\n * ========================================\n * \n * Professional, minimal, and bold where it counts.\n * Built for scalable systems that work with everything.\n * \n * Design Philosophy:\n * - Clean yet packed with functionality\n * - Beautiful design that sells\n * - Professional minimalism with bold accents\n * - Apple-inspired innovation and quality\n * \n * Usage:\n * - Use tokens for all styling to maintain consistency\n * - Scale from 3 languages to enterprise-level\n * - Works in navigation bars, mobile, and future contexts\n * - Maintainable single library for all clients\n */\n@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap\");\n:root {\n  /* ================================\n     🎯 CORE BRAND IDENTITY\n     ================================ */\n  /* NEX Signature - FF1801 Formula Red */\n  --nex-signature: #FF1801;\n  --nex-signature-light: #FF4D33;\n  --nex-signature-dark: #CC1301;\n  --nex-signature-contrast: #FFFFFF;\n  /* ================================\n     🎨 Core Brand Colors (Light Mode)\n     ================================ */\n  --nex-primary-color: #1A1F36;\n  --nex-primary-light: #3C4369;\n  --nex-primary-dark: #111527;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #8A94A6;\n  --nex-secondary-light: #B5BDCB;\n  --nex-secondary-dark: #5A6170;\n  --nex-secondary-contrast-color: #ffffff;\n  --nex-tertiary-color: #E6EDF4;\n  --nex-tertiary-dark: #CAD5E2;\n  --nex-tertiary-contrast-color: #1C1C1E;\n  --nex-quaternary-color: #D4D4D4;\n  --nex-quaternary-contrast-color: #1C1C1E;\n  /* ================================\n     🛑 State Colors\n     ================================ */\n  --nex-success: #4CAF50;\n  --nex-info: #2196F3;\n  --nex-warning: #FFC107;\n  --nex-danger: #F44336;\n  /* ================================\n     🖤 Grayscale & Surface\n     ================================ */\n  --nex-font-color: #1C1C1E;\n  --nex-muted-font-color: #707070;\n  --nex-background-color: #FAFAFC;\n  --nex-surface-color: #ffffff;\n  --nex-border-color: #D4D4D4;\n  --nex-complimentary-color: #9A9A9A;\n  /* ================================\n     🔠 Typography System\n     ================================ */\n  /* Font Family - Inter for professional, clean look */\n  font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  /* Font Weights - Balanced hierarchy */\n  --nex-font-weight-light: 300; /* Subtle emphasis */\n  --nex-font-weight-regular: 400; /* Body text */\n  --nex-font-weight-medium: 500; /* Semi-bold emphasis */\n  --nex-font-weight-bold: 700; /* Strong emphasis */\n  /* Font Sizes - Scalable system */\n  --nex-font-size-xs: 0.75rem; /* 12px - Captions, labels */\n  --nex-font-size-sm: 0.875rem; /* 14px - Small text, buttons */\n  --nex-font-size-md: 1rem; /* 16px - Body text */\n  --nex-font-size-lg: 1.25rem; /* 20px - Headings */\n  --nex-font-size-xl: 1.5rem; /* 24px - Large headings */\n  --nex-font-size-2xl: 2rem; /* 32px - Hero text */\n  /* Line Heights - Optimal readability */\n  --nex-line-height-tight: 1.2; /* Headings, tight spacing */\n  --nex-line-height-base: 1.5; /* Body text, comfortable reading */\n  --nex-line-height-loose: 1.75; /* Large text, relaxed spacing */\n  /* ================================\n     📐 Spacing System\n     ================================ */\n  /* 4px base unit system for consistent spacing */\n  --nex-spacing-xs: 0.25rem; /* 4px - Micro spacing */\n  --nex-spacing-sm: 0.5rem; /* 8px - Small gaps */\n  --nex-spacing-md: 1rem; /* 16px - Standard spacing */\n  --nex-spacing-lg: 1.5rem; /* 24px - Large spacing */\n  --nex-spacing-xl: 2rem; /* 32px - Extra large */\n  --nex-spacing-2xl: 3rem; /* 48px - Hero spacing */\n  /* ================================\n     🌀 Elevation & Radius System\n     ================================ */\n  /* Border Radius - Consistent rounding */\n  --nex-radius-sm: 4px; /* Small elements, inputs */\n  --nex-radius-md: 8px; /* Cards, buttons */\n  --nex-radius-lg: 16px; /* Large cards, modals */\n  --nex-radius-full: 9999px; /* Pills, avatars */\n  /* Shadows - Subtle depth system */\n  --nex-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle elevation */\n  --nex-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small elevation */\n  --nex-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium elevation */\n  --nex-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1); /* Large elevation */\n  --nex-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15); /* Hero elevation */\n  /* ================================\n     ⚡ Transitions & Z-index System\n     ================================ */\n  /* Transitions - Smooth, purposeful animations */\n  --nex-transition-fast: 150ms ease-in-out; /* Micro-interactions */\n  --nex-transition-base: 300ms ease; /* Standard transitions */\n  --nex-transition-slow: 500ms ease; /* Complex animations */\n  /* Z-index - Layered system */\n  --nex-z-index-dropdown: 1000; /* Dropdowns, menus */\n  --nex-z-index-sticky: 1020; /* Sticky headers */\n  --nex-z-index-fixed: 1030; /* Fixed elements */\n  --nex-z-index-modal: 1050; /* Modals, overlays */\n  --nex-z-index-popover: 1060; /* Tooltips, popovers */\n  --nex-z-index-tooltip: 1070; /* Highest priority */\n  /* ================================\n     🎯 COMPONENT-SPECIFIC TOKENS\n     ================================ */\n  /* Navigation-specific tokens */\n  --nex-nav-height: 64px;\n  --nex-nav-padding: var(--nex-spacing-md);\n  --nex-nav-link-hover-bg: rgba(0, 0, 0, 0.05);\n  /* Language Switcher specific */\n  --nex-lang-switcher-height: 40px;\n  --nex-lang-switcher-width: 120px;\n  --nex-lang-dropdown-max-height: 300px;\n}\n\n/* ================================\n   🌒 Dark Mode Overrides\n   ================================ */\n[data-theme=dark] {\n  /* Dark mode color adjustments */\n  --nex-background-color: #121212;\n  --nex-surface-color: #1E1E1E;\n  --nex-font-color: #f3f3f3;\n  --nex-muted-font-color: #999;\n  /* Adjusted brand colors for dark mode */\n  --nex-primary-color: #3D4DE1;\n  --nex-primary-light: #5965e8;\n  --nex-primary-dark: #1f265b;\n  --nex-primary-contrast-color: #ffffff;\n  --nex-secondary-color: #A3ACC2;\n  --nex-secondary-light: #C5CCDA;\n  --nex-secondary-dark: #717A8C;\n  --nex-secondary-contrast-color: #1C1C1E;\n  --nex-tertiary-color: #2E2E2E;\n  --nex-tertiary-contrast-color: #f3f3f3;\n  --nex-quaternary-color: #3A3A3A;\n  --nex-quaternary-contrast-color: #f3f3f3;\n  --nex-border-color: #2e2e2e;\n  --nex-complimentary-color: #7a7a7a;\n  /* Enhanced shadows for dark mode */\n  --nex-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.7);\n  --nex-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.8);\n}\n\n/**\n * ========================================\n * 📋 USAGE GUIDELINES\n * ========================================\n * \n * 1. Always use tokens for colors, spacing, typography\n * 2. Scale from 3 languages to enterprise seamlessly\n * 3. Maintain professional minimalism with bold accents\n * 4. Use --nex-signature sparingly for maximum impact\n * 5. Test in both light and dark modes\n * 6. Ensure accessibility compliance\n * 7. Optimize for mobile and desktop contexts\n */\n.nex-version-wrapper {\n  position: relative;\n  display: flex;\n  align-items: center;\n  height: 2.6666666667rem;\n  gap: 0.8888888889rem;\n  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-version-wrapper .nex-version {\n  position: relative;\n  padding: 0.4444444444rem 0.4444444444rem;\n  border-radius: 0.3555555556rem;\n  background-color: var(--nex-primary-color);\n  color: #fff;\n  cursor: pointer;\n  z-index: 1;\n  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.nex-version-wrapper .nex-version.clicked {\n  position: relative;\n  z-index: 1;\n}\n.nex-version-wrapper .nex-version::after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 0;\n  height: 0.0888888889rem;\n  background-color: #fff;\n  transform: translateY(-50%);\n  transition: width 0.2s ease-in-out;\n}\n.nex-version-wrapper .nex-version.clicked::after {\n  width: 100%;\n}\n.nex-version-wrapper .nex-version-edit-wrapper {\n  opacity: 0;\n  display: flex;\n  align-items: center;\n  gap: 0.8888888889rem;\n  transition: opacity 300ms ease-in-out;\n}\n.nex-version-wrapper .arrow-icon {\n  color: var(--nex-primary-color);\n}";
-styleInject(css_248z);
-
-/**
- * NexVersion component
- *
- * Component to display and edit a version number.
- *
- * @param {NexVersionProps} props - Component properties
- * @param {string} props.version - Current version number to display and edit
- * @param {(newVersion: string) => void} props.handleSave - Function to handle saving the edited version
- */
 const NexVersion = ({
   version,
   handleSave
@@ -17769,48 +10823,51 @@ const NexVersion = ({
     setIsEditing(false);
     setOriginalVersion(newVersion);
   };
-  return /*#__PURE__*/React__default.createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     className: "nex-version-wrapper",
-    ref: wrapperRef
-  }, /*#__PURE__*/React__default.createElement(motion.div, {
-    className: `nex-version ${isEditing ? 'clicked' : ''}`,
-    onClick: handleClick,
-    initial: {
-      opacity: 1
-    },
-    animate: {
-      opacity: isEditing ? 0.5 : 1
-    },
-    transition: {
-      duration: 0.3
-    }
-  }, originalVersion), isEditing && /*#__PURE__*/React__default.createElement(motion.div, {
-    className: "nex-version-edit-wrapper",
-    initial: {
-      opacity: 0,
-      x: -20
-    },
-    animate: {
-      opacity: 1,
-      x: 0
-    },
-    transition: {
-      duration: 0.3
-    }
-  }, /*#__PURE__*/React__default.createElement(FontAwesomeIcon, {
-    icon: faArrowRight,
-    className: "arrow-icon"
-  }), /*#__PURE__*/React__default.createElement(NexInput, {
-    type: "text",
-    placeholder: newVersion,
-    onChange: handleInputChange,
-    fieldSize: "small",
-    width: 80
-  }), /*#__PURE__*/React__default.createElement(NexButton, {
-    onClick: handleSaveClick,
-    text: "Save",
-    type: "success"
-  })));
+    ref: wrapperRef,
+    children: [/*#__PURE__*/jsx(motion.div, {
+      className: `nex-version ${isEditing ? 'clicked' : ''}`,
+      onClick: handleClick,
+      initial: {
+        opacity: 1
+      },
+      animate: {
+        opacity: isEditing ? 0.5 : 1
+      },
+      transition: {
+        duration: 0.3
+      },
+      children: originalVersion
+    }), isEditing && /*#__PURE__*/jsxs(motion.div, {
+      className: "nex-version-edit-wrapper",
+      initial: {
+        opacity: 0,
+        x: -20
+      },
+      animate: {
+        opacity: 1,
+        x: 0
+      },
+      transition: {
+        duration: 0.3
+      },
+      children: [/*#__PURE__*/jsx(FontAwesomeIcon, {
+        icon: faArrowRight,
+        className: "arrow-icon"
+      }), /*#__PURE__*/jsx(NexInput, {
+        type: "text",
+        placeholder: newVersion,
+        onChange: handleInputChange,
+        fieldSize: "small",
+        width: 80
+      }), /*#__PURE__*/jsx(NexButton, {
+        onClick: handleSaveClick,
+        text: "Save",
+        type: "success"
+      })]
+    })]
+  });
 };
 
 export { NexAlert, NexAlertsProvider, NexAlertsWrapper, NexButton, NexCard, NexCarousel, NexCopyToClipboard, NexFooter, NexHeroCard, NexInfoPanel, NexInput, NexLoader, NexModal, NexNav, NexSeparator, NexSimpleTextCard, NexVersion, useAlerts };

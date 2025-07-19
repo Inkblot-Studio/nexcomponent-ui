@@ -30,8 +30,8 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "verbatimModuleSyntax": true
+    "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": false
   },
   "include": [
     "src/**/*.tsx", 

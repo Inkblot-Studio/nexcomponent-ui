@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { CardHeaderProps } from './CardHeader.types';
+import type { CardHeaderProps } from './CardHeader.types';
 import './CardHeader.scss';
 
 /**

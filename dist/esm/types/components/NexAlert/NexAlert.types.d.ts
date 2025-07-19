@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 export interface NexAlertProps {
     id: string;
     type: 'error' | 'success' | 'info' | 'warning';
@@ -14,3 +14,4 @@ export interface AlertsContextType {
 export interface NexAlertsProviderProps {
     children: ReactNode;
 }
+//# sourceMappingURL=NexAlert.types.d.ts.map

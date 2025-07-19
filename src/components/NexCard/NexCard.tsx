@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../utils/animationConfig';
-import { NexCardProps } from './NexCard.types';
+import type { NexCardProps } from './NexCard.types';
 import CardHeader from './components/CardHeader/CardHeader';
 import CardImage from './components/CardImage/CardImage';
 import CardContent from './components/CardContent/CardContent';

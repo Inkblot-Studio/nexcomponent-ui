@@ -4,3 +4,4 @@ export interface NexSimpleTextCardProps {
     border?: boolean;
     className?: string;
 }
+//# sourceMappingURL=NexSimpleTextCard.types.d.ts.map

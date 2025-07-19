@@ -16,3 +16,4 @@ import './NexHeroCard.scss';
  */
 declare const NexHeroCard: React.FC<NexHeroCardProps>;
 export default NexHeroCard;
+//# sourceMappingURL=NexHeroCard.d.ts.map

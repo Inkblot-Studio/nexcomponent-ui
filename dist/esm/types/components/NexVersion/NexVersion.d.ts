@@ -12,3 +12,4 @@ import './NexVersion.scss';
  */
 declare const NexVersion: React.FC<NexVersionProps>;
 export default NexVersion;
+//# sourceMappingURL=NexVersion.d.ts.map

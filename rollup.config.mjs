@@ -4,7 +4,9 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
-import packageJson from './package.json' assert { type: 'json' };
+import { readFileSync } from 'fs';
+
+const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 export default [
   {

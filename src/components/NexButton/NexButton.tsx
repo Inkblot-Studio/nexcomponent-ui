@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../utils/animationConfig';
 import './NexButton.scss';
-import { NexButtonProps } from './NexButton.types';
+import type { NexButtonProps } from './NexButton.types';
 
 /**
  * NexButton component - Enterprise Grade

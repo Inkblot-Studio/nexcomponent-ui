@@ -43,7 +43,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --exit-zero-on-changes",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "publish": "npm run build && npm publish",
+    "publish:patch": "npm version patch && npm run publish",
+    "publish:minor": "npm version minor && npm run publish",
+    "publish:major": "npm version major && npm run publish"
   },
   "author": {
     "name": "Georgi Dryanovski"

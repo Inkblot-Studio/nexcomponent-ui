@@ -1,9 +1,14 @@
-/// <reference types="react" />
-export interface NexCarouselProps {
-    children: React.ReactNode[];
-    className?: string;
-    navButtons?: boolean;
-    navigationPosition?: 'top' | 'bottom';
-    line?: boolean;
-    interval?: number;
+export interface CarouselSlide {
+    imageUrl?: string;
+    title?: string;
+    content?: string;
 }
+export interface NexCarouselProps {
+    slides?: CarouselSlide[];
+    autoPlay?: boolean;
+    autoPlayInterval?: number;
+    showControls?: boolean;
+    showIndicators?: boolean;
+    className?: string;
+}
+//# sourceMappingURL=NexCarousel.types.d.ts.map

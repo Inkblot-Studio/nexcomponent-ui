@@ -26,4 +26,10 @@ export interface UserMenuProps {
     enableSecuritySettings?: boolean;
     enableIntegrations?: boolean;
     enableAdminPanel?: boolean;
+    isAtTop?: boolean;
+    open?: boolean;
+    onOpen?: () => void;
+    onClose?: () => void;
+    theme?: 'light' | 'auto' | 'black-glass';
 }
+//# sourceMappingURL=UserMenu.types.d.ts.map

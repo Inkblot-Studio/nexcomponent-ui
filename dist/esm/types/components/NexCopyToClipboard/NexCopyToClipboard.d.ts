@@ -13,3 +13,4 @@ import { NexCopyToClipboardProps } from './NexCopyToClipboard.types';
  */
 declare const NexCopyToClipboard: React.FC<NexCopyToClipboardProps>;
 export default NexCopyToClipboard;
+//# sourceMappingURL=NexCopyToClipboard.d.ts.map

@@ -15,3 +15,4 @@ import './NexInput.scss';
  */
 declare const NexInput: React.FC<NexInputProps>;
 export default NexInput;
+//# sourceMappingURL=NexInput.d.ts.map

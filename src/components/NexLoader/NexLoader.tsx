@@ -1,5 +1,5 @@
 import React from "react";
-import { NexLoaderProps } from "./NexLoader.types";
+import type { NexLoaderProps } from "./NexLoader.types";
 import "./NexLoader.scss"
 
 /**
@@ -11,15 +11,18 @@ import "./NexLoader.scss"
  * @param {string} [color] - The color of the loader circle.
  */
 const NexLoader: React.FC<NexLoaderProps> = ({ size, color }) => {
-  const style: React.CSSProperties = {};
+  const style: React.CSSProperties & {
+    '--nex-loader-size'?: string;
+    '--nex-loader-color'?: string;
+  } = {};
 
   if (size) {
-    style["--nex-loader-size" as any] =
+    style['--nex-loader-size'] =
       typeof size === "number" ? `${size}px` : size;
   }
 
   if (color) {
-    style["--nex-loader-color" as any] = color;
+    style['--nex-loader-color'] = color;
   }
 
   return (

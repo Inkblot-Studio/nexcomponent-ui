@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { CardImageProps } from './CardImage.types';
+import type { CardImageProps } from './CardImage.types';
 import './CardImage.scss';
 
 /**

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, FC, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NexAlert.scss';
-import { NexAlertProps } from './NexAlert.types';
+import type { FC, ReactNode } from 'react';
+import type { NexAlertProps } from './NexAlert.types';
 
 /**
  * NexAlert component
@@ -32,6 +33,7 @@ const NexAlert: FC<NexAlertProps> = ({ message = '', type = 'info', timeout = 0,
       }, timeout * 1000);
       return () => clearTimeout(dismissTimer);
     }
+    return undefined; // Explicit return for when condition is false
   }, [timeout, handleDismiss])
 
   const dismissAlert = (e: React.MouseEvent<HTMLButtonElement>) => {

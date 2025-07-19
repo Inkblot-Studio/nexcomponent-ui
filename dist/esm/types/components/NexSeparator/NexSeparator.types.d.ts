@@ -5,3 +5,4 @@ export interface NexSeparatorProps {
     fontSize?: number;
     color?: string;
 }
+//# sourceMappingURL=NexSeparator.types.d.ts.map

@@ -1,5 +1,5 @@
 import React from "react";
-import { NexLoaderProps } from "./NexLoader.types";
+import type { NexLoaderProps } from "./NexLoader.types";
 import "./NexLoader.scss";
 /**
  * NexLoader component
@@ -11,3 +11,4 @@ import "./NexLoader.scss";
  */
 declare const NexLoader: React.FC<NexLoaderProps>;
 export default NexLoader;
+//# sourceMappingURL=NexLoader.d.ts.map

@@ -1,10 +1,14 @@
 /// <reference types="react" />
 export interface NexCardProps {
     title?: string;
-    imageUrl?: string;
-    type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass') | string;
     content?: string;
+    imageUrl?: string;
     actions?: React.ReactNode;
-    border?: boolean;
+    badge?: string;
+    type?: 'primary' | 'secondary' | 'glass' | 'enterprise';
+    interactive?: boolean;
+    onClick?: () => void;
+    elevated?: boolean;
     className?: string;
 }
+//# sourceMappingURL=NexCard.types.d.ts.map

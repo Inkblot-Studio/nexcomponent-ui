@@ -1,9 +1,10 @@
-import React, { createContext, useState, useContext, useRef, FC, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useRef } from 'react';
 import { NexAlertsWrapper } from './NexAlert';
 
-import { NexAlertProps } from './NexAlert.types';
-import { AlertsContextType } from './NexAlert.types';
-import { NexAlertsProviderProps } from './NexAlert.types';
+import type { FC, ReactNode } from 'react';
+import type { NexAlertProps } from './NexAlert.types';
+import type { AlertsContextType } from './NexAlert.types';
+import type { NexAlertsProviderProps } from './NexAlert.types';
 import { NexAlert } from './NexAlert';
 
 const NexAlertsContext = createContext<AlertsContextType | undefined>(undefined);
@@ -14,7 +15,10 @@ const NexAlertsProvider: FC<NexAlertsProviderProps> = ({ children }) => {
   const addAlert = (alert: Omit<NexAlertProps, 'id'>): string => {
     const id = Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
     if (alerts.length >= 4) {
-      dismissAlert(alerts[alerts.length - 1].id);
+      const lastAlert = alerts[alerts.length - 1];
+      if (lastAlert) {
+        dismissAlert(lastAlert.id);
+      }
     }
     setAlerts((prev) => [{ ...alert, id: id }, ...prev]);
     return id;

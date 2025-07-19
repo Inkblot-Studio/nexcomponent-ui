@@ -4,7 +4,7 @@ import { LogIn, Sparkles } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import UserMenu from '../UserMenu';
 import ThemeToggle from '../ThemeToggle';
-import { NexNavProps } from '../../NexNav.types';
+import type { NexNavProps } from '../../NexNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../../../utils/animationConfig';
 
 interface NavControlsProps {

@@ -1,18 +1,23 @@
 import React from 'react';
-import { NexCardProps } from './NexCard.types';
+import type { NexCardProps } from './NexCard.types';
 import './NexCard.scss';
 /**
- * NexCard component
+ * NexCard - Enterprise Grade Card Component
  *
- * A versatile card component that can display a title, content, image, and actions.
+ * A clean, simple card component designed for lead generation and conversion.
+ * Features smooth animations, professional styling, and compelling visuals.
  *
- * @param {string} title - The title of the card.
- * @param {string} content - The content or body text of the card.
- * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | string} type - The type of the card which determines its style.
- * @param {string} imageUrl - The URL of the image to display in the card.
- * @param {React.ReactNode} actions - The actions or buttons to display in the card.
- * @param {boolean} [border=true] - Whether to display a border around the card
- * @param {string} className -  Additional class names to apply to the button.
+ * @param {string} title - Compelling title for lead generation
+ * @param {string} content - Persuasive content that drives action
+ * @param {string} imageUrl - Hero image to capture attention
+ * @param {React.ReactNode} actions - Call-to-action buttons
+ * @param {string} badge - Status badge (e.g., "New", "Featured", "Premium")
+ * @param {'primary' | 'secondary' | 'glass' | 'enterprise'} type - Card styling variant
+ * @param {boolean} interactive - Whether card is clickable
+ * @param {() => void} onClick - Click handler for interactive cards
+ * @param {boolean} elevated - Enhanced shadow effects
+ * @param {string} className - Additional CSS classes
  */
 declare const NexCard: React.FC<NexCardProps>;
 export default NexCard;
+//# sourceMappingURL=NexCard.d.ts.map

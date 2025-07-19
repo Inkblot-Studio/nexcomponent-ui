@@ -13,3 +13,4 @@ import './NexSimpleTextCard.scss';
  */
 declare const NexSimpleTextCard: React.FC<NexSimpleTextCardProps>;
 export default NexSimpleTextCard;
+//# sourceMappingURL=NexSimpleTextCard.d.ts.map

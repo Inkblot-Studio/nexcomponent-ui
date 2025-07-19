@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../utils/animationConfig';
-import { NexCarouselProps } from './NexCarousel.types';
+import type { NexCarouselProps } from './NexCarousel.types';
 import CarouselContainer from './components/CarouselContainer/CarouselContainer';
 import CarouselSlide from './components/CarouselSlide/CarouselSlide';
 import CarouselControls from './components/CarouselControls/CarouselControls';
@@ -95,6 +95,11 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
   }
 
   const currentSlideData = slides[currentSlide];
+
+  // Safety check for currentSlideData
+  if (!currentSlideData) {
+    return null;
+  }
 
   return (
     <motion.div
