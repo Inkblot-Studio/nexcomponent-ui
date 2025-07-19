@@ -666,11 +666,11 @@
    ================================ */
 
 .nex-nav--black-glass.not-at-top .nex-nav-dropdown {
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: none;
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
   
   &::before {
     background: linear-gradient(
@@ -678,21 +678,21 @@
       transparent,
       rgba(255, 255, 255, 0.05),
       transparent
-    );
+    ) !important;
   }
 }
 
 .nex-nav--black-glass.not-at-top .nex-nav-sub-item {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.95) !important;
   
   &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(24px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
   }
   
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15) !important;
   }
 }
 
