@@ -122,6 +122,11 @@
       display: flex !important;
       justify-content: center !important;
     }
+    
+    /* Desktop: Add right margin to prevent touching edge */
+    @media (min-width: 1025px) {
+      margin-right: var(--nex-spacing-xl);
+    }
   }
 
   /* ================================
