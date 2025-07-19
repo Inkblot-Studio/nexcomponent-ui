@@ -5,7 +5,7 @@
      PREMIUM THEME TOGGLE STYLES
      ================================ */
   
-  /* Core Button */
+  /* Core Button - Single Plate Design */
   position: relative;
   display: flex;
   align-items: center;
@@ -14,7 +14,6 @@
   height: 36px;
   border: none;
   border-radius: var(--nex-radius-full);
-  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   overflow: hidden;
   user-select: none;
@@ -22,42 +21,19 @@
   box-sizing: border-box;
   will-change: transform, background-color, border-color, box-shadow;
   
-  /* Enhanced Glassmorphic Design - Matching Language Switcher */
+  /* Single Glassmorphic Plate */
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.04);
   
   /* Transitions */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* ================================
-     BACKGROUND CIRCLE
-     ================================ */
-  
-  &__background {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.2) 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      rgba(255, 255, 255, 0.15) 100%);
-    backdrop-filter: blur(12px) saturate(200%);
-    -webkit-backdrop-filter: blur(12px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.05);
-    z-index: 1;
-  }
+
   
   /* ================================
      ICON CONTAINER
@@ -139,28 +115,14 @@
      ================================ */
   
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 
       0 4px 16px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      0 2px 8px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
-    
-    .nex-theme-toggle__background {
-      background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.25) 0%, 
-        rgba(255, 255, 255, 0.1) 50%, 
-        rgba(255, 255, 255, 0.2) 100%);
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(12px) saturate(200%);
-      -webkit-backdrop-filter: blur(12px) saturate(200%);
-    }
     
     .nex-theme-toggle__icon {
       &--sun {
@@ -202,16 +164,7 @@
     border-color: rgba(255, 24, 1, 0.25);
     transform: translateY(0);
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    
-    .nex-theme-toggle__background {
-      background: linear-gradient(135deg, 
-        rgba(255, 24, 1, 0.2) 0%, 
-        rgba(255, 24, 1, 0.1) 50%, 
-        rgba(255, 24, 1, 0.15) 100%);
-      border-color: rgba(255, 24, 1, 0.3);
-    }
+      0 2px 8px rgba(0, 0, 0, 0.15);
   }
   
   /* ================================
@@ -227,8 +180,7 @@
       transform: none;
       box-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 1px 3px rgba(0, 0, 0, 0.06);
     }
   }
   

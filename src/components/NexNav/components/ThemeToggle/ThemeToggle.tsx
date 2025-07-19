@@ -79,19 +79,6 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
         transition: { duration: 0.2 }
       }}
     >
-      {/* Background circle that rotates */}
-      <motion.div
-        className="nex-theme-toggle__background"
-        animate={{
-          rotate: isDark ? 180 : 0,
-          scale: isAnimating ? 1.1 : 1
-        }}
-        transition={{
-          rotate: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
-          scale: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-        }}
-      />
-
       {/* Icon container */}
       <motion.div
         className="nex-theme-toggle__icon-container"
