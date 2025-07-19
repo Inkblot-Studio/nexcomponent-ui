@@ -268,6 +268,22 @@
   --nex-glass-shadow-dark: rgba(0, 0, 0, 0.95);
 }
 
+/* ================================
+   ☀️ Light Mode Override - Ensure font color resets
+   ================================ */
+
+/* Default light theme (when no data-theme attribute is present) */
+:root {
+  --nex-font-color: #1C1C1E;
+  --nex-muted-font-color: #5A6170;
+}
+
+/* Also ensure light theme when explicitly set */
+[data-theme="light"] {
+  --nex-font-color: #1C1C1E;
+  --nex-muted-font-color: #5A6170;
+}
+
 /**
  * ========================================
  * 📋 USAGE GUIDELINES

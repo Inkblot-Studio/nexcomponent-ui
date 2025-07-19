@@ -72,7 +72,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  const isBlackGlass = theme === 'black-glass' || currentThemeVariant === 'black-glass';
+  // Get current theme state directly from DOM to ensure accuracy
+  const currentThemeVariantFromDOM = document.documentElement.getAttribute('data-theme-variant');
+  const isBlackGlass = theme === 'black-glass' || currentThemeVariant === 'black-glass' || currentThemeVariantFromDOM === 'black-glass';
   // State management
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openNavItems, setOpenNavItems] = useState<Set<number>>(new Set());
