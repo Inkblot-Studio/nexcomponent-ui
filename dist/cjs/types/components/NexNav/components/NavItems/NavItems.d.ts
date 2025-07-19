@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavItem as NavItemType } from '../../NexNav.types';
+import type { NavItem as NavItemType } from '../../NexNav.types';
 interface NavItemsProps {
     navItems: NavItemType[];
     isAtTop: boolean;

@@ -7071,6 +7071,7 @@ const NavItems = ({
       const itemWidths = [];
       for (let i = 0; i < navItems.length; i++) {
         const item = navItems[i];
+        if (!item) continue; // Skip undefined items
         const itemElement = itemElements[i];
         const width = calculateItemWidth(item, itemElement, containerWidth);
         itemWidths.push(width);
@@ -7094,7 +7095,7 @@ const NavItems = ({
       let visibleCount = 0;
       for (let i = 0; i < navItems.length; i++) {
         const itemWidth = itemWidths[i];
-        if (totalWidth + itemWidth <= spaceWithMore) {
+        if (itemWidth !== undefined && totalWidth + itemWidth <= spaceWithMore) {
           totalWidth += itemWidth;
           visibleCount = i + 1;
         } else {
@@ -7177,19 +7178,22 @@ const NavItems = ({
     role: "menubar",
     "aria-label": "Main menu",
     ref: navListRef,
-    children: [(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => /*#__PURE__*/jsx(motion.li, {
-      variants: ANIMATION_VARIANTS.mobileNav.navItem,
-      children: /*#__PURE__*/jsx(NavItem, {
-        label: item.label,
-        onClick: () => onItemClick?.(item),
-        isActive: false,
-        disabled: item.disabled,
-        badge: item.badge,
-        subItems: item.subItems,
-        description: item.description,
-        isAtTop: isAtTop
-      })
-    }, item.key || i)), hasOverflow && visibleItems.length > 0 && /*#__PURE__*/jsx(motion.li, {
+    children: [(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => {
+      if (!item) return null; // Skip undefined items
+      return /*#__PURE__*/jsx(motion.li, {
+        variants: ANIMATION_VARIANTS.mobileNav.navItem,
+        children: /*#__PURE__*/jsx(NavItem, {
+          label: item.label,
+          onClick: () => onItemClick?.(item),
+          isActive: false,
+          disabled: item.disabled,
+          badge: item.badge,
+          subItems: item.subItems,
+          description: item.description,
+          isAtTop: isAtTop
+        })
+      }, item.key || i);
+    }), hasOverflow && /*#__PURE__*/jsx(motion.li, {
       variants: ANIMATION_VARIANTS.mobileNav.navItem,
       style: {
         position: 'relative'
@@ -7287,6 +7291,7 @@ const NavItems = ({
             children: /*#__PURE__*/jsx(motion.ul, {
               className: "nex-nav-dropdown-list",
               children: overflowNavItems.map((item, index) => {
+                if (!item) return null; // Skip undefined items
                 // If item has subitems, render them directly
                 if (item.subItems && item.subItems.length > 0) {
                   return item.subItems.map((subItem, subIndex) => /*#__PURE__*/jsx(motion.li, {
@@ -9213,7 +9218,8 @@ const MobileNav = ({
 const LANG_KEY = 'nex-locale';
 const getDefaultLocale = () => {
   const lang = navigator.language || 'en';
-  return lang.split('-')[0];
+  const parts = lang.split('-');
+  return parts[0] || 'en';
 };
 // Responsive left position hook
 function useResponsiveLeft() {

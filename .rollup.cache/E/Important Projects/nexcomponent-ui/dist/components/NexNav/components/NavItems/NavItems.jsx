@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import classNames from 'classnames';
 import NavItem from '../NavItem';
-import { NavItem as NavItemType } from '../../NexNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../../../utils/animationConfig';
 // Responsive constants based on container width
 const getResponsiveConstants = (containerWidth) => {
@@ -108,6 +107,8 @@ const NavItems = ({ navItems, isAtTop, onItemClick }) => {
             const itemWidths = [];
             for (let i = 0; i < navItems.length; i++) {
                 const item = navItems[i];
+                if (!item)
+                    continue; // Skip undefined items
                 const itemElement = itemElements[i];
                 const width = calculateItemWidth(item, itemElement, containerWidth);
                 itemWidths.push(width);
@@ -129,7 +130,7 @@ const NavItems = ({ navItems, isAtTop, onItemClick }) => {
             let visibleCount = 0;
             for (let i = 0; i < navItems.length; i++) {
                 const itemWidth = itemWidths[i];
-                if (totalWidth + itemWidth <= spaceWithMore) {
+                if (itemWidth !== undefined && totalWidth + itemWidth <= spaceWithMore) {
                     totalWidth += itemWidth;
                     visibleCount = i + 1;
                 }
@@ -208,12 +209,16 @@ const NavItems = ({ navItems, isAtTop, onItemClick }) => {
     const hasOverflow = overflowNavItems.length > 0;
     return (<motion.ul className="nex-nav-list" role="menubar" aria-label="Main menu" ref={navListRef}>
       {/* Show all items initially, then filter based on calculation */}
-      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => (<motion.li key={item.key || i} variants={ANIMATION_VARIANTS.mobileNav.navItem}>
-          <NavItem label={item.label} onClick={() => onItemClick?.(item)} isActive={false} disabled={item.disabled} badge={item.badge} subItems={item.subItems} description={item.description} isAtTop={isAtTop}/>
-        </motion.li>))}
+      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => {
+            if (!item)
+                return null; // Skip undefined items
+            return (<motion.li key={item.key || i} variants={ANIMATION_VARIANTS.mobileNav.navItem}>
+            <NavItem label={item.label} onClick={() => onItemClick?.(item)} isActive={false} disabled={item.disabled} badge={item.badge} subItems={item.subItems} description={item.description} isAtTop={isAtTop}/>
+          </motion.li>);
+        })}
       
       {/* More dropdown for overflow items */}
-      {hasOverflow && visibleItems.length > 0 && (<motion.li variants={ANIMATION_VARIANTS.mobileNav.navItem} style={{ position: 'relative' }}>
+      {hasOverflow && (<motion.li variants={ANIMATION_VARIANTS.mobileNav.navItem} style={{ position: 'relative' }}>
           <div className="nex-nav-item-wrapper" style={{ position: 'relative' }} ref={moreDropdownRef}>
             <motion.button className={classNames('nex-nav-item', {
                 'has-dropdown': true,
@@ -266,6 +271,8 @@ const NavItems = ({ navItems, isAtTop, onItemClick }) => {
                 }} role="menu" aria-label="More options submenu">
                   <motion.ul className="nex-nav-dropdown-list">
                     {overflowNavItems.map((item, index) => {
+                    if (!item)
+                        return null; // Skip undefined items
                     // If item has subitems, render them directly
                     if (item.subItems && item.subItems.length > 0) {
                         return item.subItems.map((subItem, subIndex) => (<motion.li key={`${subItem.label}-${subIndex}`} className={classNames('nex-nav-sub-item', {

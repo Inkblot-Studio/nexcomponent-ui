@@ -20,7 +20,8 @@ const LANG_KEY = 'nex-locale';
 
 const getDefaultLocale = (): string => {
   const lang = navigator.language || 'en';
-  return lang.split('-')[0];
+  const parts = lang.split('-');
+  return parts[0] || 'en';
 };
 
 // Responsive left position hook

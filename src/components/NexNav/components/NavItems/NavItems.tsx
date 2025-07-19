@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import classNames from 'classnames';
 import NavItem from '../NavItem';
-import { NavItem as NavItemType } from '../../NexNav.types';
+import type { NavItem as NavItemType } from '../../NexNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../../../utils/animationConfig';
 
 interface NavItemsProps {
@@ -126,6 +126,8 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       const itemWidths: number[] = [];
       for (let i = 0; i < navItems.length; i++) {
         const item = navItems[i];
+        if (!item) continue; // Skip undefined items
+        
         const itemElement = itemElements[i] as HTMLElement;
         const width = calculateItemWidth(item, itemElement, containerWidth);
         itemWidths.push(width);
@@ -152,7 +154,7 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       
       for (let i = 0; i < navItems.length; i++) {
         const itemWidth = itemWidths[i];
-        if (totalWidth + itemWidth <= spaceWithMore) {
+        if (itemWidth !== undefined && totalWidth + itemWidth <= spaceWithMore) {
           totalWidth += itemWidth;
           visibleCount = i + 1;
         } else {
@@ -260,26 +262,30 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       ref={navListRef}
     >
       {/* Show all items initially, then filter based on calculation */}
-      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => (
-        <motion.li
-          key={item.key || i}
-          variants={ANIMATION_VARIANTS.mobileNav.navItem}
-        >
-          <NavItem 
-            label={item.label} 
-            onClick={() => onItemClick?.(item)}
-            isActive={false}
-            disabled={item.disabled}
-            badge={item.badge}
-            subItems={item.subItems}
-            description={item.description}
-            isAtTop={isAtTop}
-          />
-        </motion.li>
-      ))}
+      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => {
+        if (!item) return null; // Skip undefined items
+        
+        return (
+          <motion.li
+            key={item.key || i}
+            variants={ANIMATION_VARIANTS.mobileNav.navItem}
+          >
+            <NavItem 
+              label={item.label} 
+              onClick={() => onItemClick?.(item)}
+              isActive={false}
+              disabled={item.disabled}
+              badge={item.badge}
+              subItems={item.subItems}
+              description={item.description}
+              isAtTop={isAtTop}
+            />
+          </motion.li>
+        );
+      })}
       
       {/* More dropdown for overflow items */}
-      {hasOverflow && visibleItems.length > 0 && (
+      {hasOverflow && (
         <motion.li
           variants={ANIMATION_VARIANTS.mobileNav.navItem}
           style={{ position: 'relative' }}
@@ -339,10 +345,10 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
               {isMoreOpen && (
                 <motion.div
                   className="nex-nav-dropdown"
-                              initial={{ opacity: 0, y: -8 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0,
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
                     background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
                     backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
                     WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
@@ -366,6 +372,8 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
                 >
                   <motion.ul className="nex-nav-dropdown-list">
                     {overflowNavItems.map((item, index) => {
+                      if (!item) return null; // Skip undefined items
+                      
                       // If item has subitems, render them directly
                       if (item.subItems && item.subItems.length > 0) {
                         return item.subItems.map((subItem, subIndex) => (
