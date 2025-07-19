@@ -156,11 +156,7 @@ Unauthenticated.args = {
   onAdminPanelClick: undefined,
 };
 
-export const BlackGlassTheme = Template.bind({});
-BlackGlassTheme.args = {
-  ...AuthenticatedFull.args,
-  theme: 'black-glass',
-};
+
 
 export const WithDropdowns = Template.bind({});
 WithDropdowns.args = {
