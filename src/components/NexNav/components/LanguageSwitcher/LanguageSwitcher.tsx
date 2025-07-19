@@ -164,18 +164,53 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Optimized animation configurations - avoiding backdrop-filter changes to prevent text blurring
-  const hoverAnimation = {
-    backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.85)',
-    borderColor: 'rgba(255, 255, 255, 0.15)',
-    transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
+  // Detect current theme
+  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+  const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
+
+  // Theme-aware animation configurations
+  const getHoverAnimation = () => {
+    if (isDarkMode) {
+      if (isBlackGlass) {
+        return {
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.12)',
+          transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+        };
+      } else {
+        return {
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.1)',
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+        };
+      }
+    } else {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.85)',
+        borderColor: 'rgba(255, 255, 255, 0.15)',
+        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+      };
+    }
   };
 
-  const tapAnimation = {
-    backgroundColor: isAtTop ? 'rgba(255,24,1,0.15)' : 'rgba(255,24,1,0.2)',
-    borderColor: 'rgba(255, 24, 1, 0.2)',
-    transition: { duration: 0.08, ease: [0.4, 0, 0.2, 1] }
+  const getTapAnimation = () => {
+    if (isDarkMode) {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.12)' : 'rgba(255,24,1,0.15)',
+        borderColor: 'rgba(255, 24, 1, 0.15)',
+        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+      };
+    } else {
+      return {
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.15)' : 'rgba(255,24,1,0.2)',
+        borderColor: 'rgba(255, 24, 1, 0.2)',
+        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+      };
+    }
   };
+
+  const hoverAnimation = getHoverAnimation();
+  const tapAnimation = getTapAnimation();
 
   const current = options.find(opt => opt.code === currentLocale);
   const showSearch = options.length > 5;
