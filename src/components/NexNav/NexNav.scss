@@ -649,9 +649,9 @@
   &.not-at-top {
     /* Override the default white background */
     background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.95) 0%, 
-      rgba(10, 10, 10, 0.92) 50%,
-      rgba(0, 0, 0, 0.95) 100%) !important;
+      rgba(0, 0, 0, 0.85) 0%, 
+      rgba(10, 10, 10, 0.82) 50%,
+      rgba(0, 0, 0, 0.85) 100%) !important;
     backdrop-filter: blur(28px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -739,7 +739,7 @@
   
   /* Black glass dropdown when not at top */
   &.not-at-top .nex-nav-dropdown {
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.15);
