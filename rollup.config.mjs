@@ -74,24 +74,6 @@ export default [
       'styled-components'
     ],
   },
-  {
-    input: 'dist/esm/types/index.d.ts',
-    output: [{ 
-      file: 'dist/index.d.ts', 
-      format: 'esm',
-      sourcemap: true,
-    }],
-    plugins: [
-      dts({
-        respectExternal: true,
-        compilerOptions: {
-          baseUrl: './',
-          paths: {
-            '@/*': ['src/*']
-          }
-        }
-      })
-    ],
-    external: [/\.scss$/, /\.css$/],
-  },
+  // Type declarations are handled by TypeScript compiler directly
+  // The dist/index.d.ts is created by the TypeScript compiler
 ];
