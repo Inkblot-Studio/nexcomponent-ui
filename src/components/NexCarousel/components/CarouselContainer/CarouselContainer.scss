@@ -1,0 +1,99 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-carousel-container {
+  position: relative;
+  width: 100%;
+  height: calculate(500px);
+  overflow: hidden;
+  border-radius: var(--nex-radius-2xl);
+  background: var(--nex-surface-color);
+  box-shadow: 
+    var(--nex-shadow-lg),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transform: translateZ(0);
+
+  .nex-carousel-slide-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform, opacity, filter;
+  }
+
+  .nex-carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 1;
+  }
+
+  .nex-carousel-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  /* Enhanced hover effects */
+  &:hover {
+    box-shadow: 
+      var(--nex-shadow-xl),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    background: var(--nex-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--nex-glass-border);
+    box-shadow: 
+      var(--nex-shadow-lg),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: var(--nex-glass-bg-light);
+      box-shadow: 
+        var(--nex-shadow-xl),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .nex-carousel-background {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+    }
+  }
+
+  /* Mobile responsiveness */
+  @include mobile {
+    height: calculate(400px);
+    border-radius: var(--nex-radius-xl);
+  }
+
+  /* Tablet responsiveness */
+  @include tablet {
+    height: calculate(450px);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .nex-carousel-slide-wrapper {
+      will-change: auto;
+    }
+  }
+} 

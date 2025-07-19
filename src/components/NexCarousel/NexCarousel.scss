@@ -1,95 +1,111 @@
 @import "../../utils/mixin.scss";
 
 .nex-carousel {
-    position: relative;
-    overflow: hidden;
-    padding: calculate(20px) 0;
+  position: relative;
+  width: 100%;
+  max-width: calculate(900px);
+  margin: 0 auto;
+  border-radius: var(--nex-radius-2xl);
+  overflow: hidden;
+  box-shadow: 
+    var(--nex-shadow-xl),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transform: translateZ(0);
 
-    &.nex-carousel-dots-top {
-      margin-top: calculate(20px);
+  /* Slide Counter */
+  .nex-carousel-counter {
+    position: absolute;
+    top: var(--nex-spacing-xl);
+    right: var(--nex-spacing-xl);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--nex-radius-full);
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-semibold);
+    font-family: var(--nex-font-family-display);
+    z-index: 30;
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all var(--nex-transition-base);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  /* Enhanced hover effects */
+  &:hover {
+    box-shadow: 
+      var(--nex-shadow-2xl),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    background: var(--nex-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--nex-glass-border);
+    box-shadow: 
+      var(--nex-shadow-xl),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: var(--nex-glass-bg-light);
+      box-shadow: 
+        var(--nex-shadow-2xl),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
     }
 
-    &.nex-carousel-dots-bottom {
-      margin-bottom: calculate(20px);
-    }
-
-    .nex-slides {
-      display: flex;
-      gap: calculate(20px);
-      transition: transform 0.7s cubic-bezier(.215,.61,.355,1);
-    }
-    
-    .nex-slide {
-      flex: 0 0 calc(100% - calculate(20px));
-    }
-    
-    .nex-carousel-line {
-      position: relative;
-      top: 100%;
-      left: 0;
-      height: calculate(6px);
-      border-radius: calculate(8px);
-      background-color: var(--nex-primary-color);
-      transition: width 0.5s ease;
-    }
-    
-    .nex-carousel-nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: calculate(25px);
-      padding: calculate(8px);
-      border: none;
-      border-radius: 50%;
-      background: rgba( 255, 255, 255, 0.25 );
-      backdrop-filter: blur( 4px );
-      -webkit-backdrop-filter: blur( 4px );
-      border-radius: calculate(8px);
-      border: calculate(1px) solid rgba( 255, 255, 255, 0.18 );
-      color: var(--nex-font-color);
-      cursor: pointer;
-      transition: color .2s cubic-bezier(.215,.61,.355,1);
+    .nex-carousel-counter {
+      background: rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.15);
 
       &:hover {
-        color: var(--nex-primary-color);
+        background: rgba(0, 0, 0, 0.6);
+        border-color: rgba(255, 255, 255, 0.25);
       }
     }
-    
-    .nex-prev {
-      left: 0;
-    }
-    
-    .nex-next {
-      right: 0;
-    }
-    
-    .nex-carousel-dots {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
+  }
 
-      &.top {
-        top: 0;
-      }
+  /* Mobile responsiveness */
+  @include mobile {
+    max-width: 100%;
+    border-radius: var(--nex-radius-xl);
 
-      &.bottom {
-        bottom: 0;
+    .nex-carousel-counter {
+      top: var(--nex-spacing-lg);
+      right: var(--nex-spacing-lg);
+      font-size: var(--nex-font-size-xs);
+      padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    }
+  }
+
+  /* Tablet responsiveness */
+  @include tablet {
+    max-width: calculate(800px);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .nex-carousel-counter {
+      transition: none !important;
+
+      &:hover {
+        transform: none !important;
       }
     }
-    
-    .nex-carousel-dot {
-      width: calculate(12px);
-      height: calculate(12px);
-      border-radius: 50%;
-      background-color: var(--nex-complimentary-color);
-      margin: 0 calculate(23px);
-      cursor: pointer;
-    }
-    
-    .nex-carousel-dot.active {
-      background-color: var(--nex-primary-color);
-    }
+  }
 }
   
   

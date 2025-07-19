@@ -1,0 +1,62 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-input-field {
+  width: 100%;
+  padding: var(--nex-spacing-md);
+  background: var(--nex-surface-color);
+  border: 1px solid var(--nex-border-color);
+  border-radius: var(--nex-radius-lg);
+  font-size: var(--nex-font-size-md);
+  font-family: var(--nex-font-family-display);
+  font-weight: var(--nex-font-weight-regular);
+  line-height: var(--nex-line-height-base);
+  color: var(--nex-font-color);
+  transition: var(--nex-transition-base);
+  box-shadow: var(--nex-shadow-xs);
+
+  &::placeholder {
+    color: var(--nex-font-color-muted);
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--nex-signature);
+    box-shadow: 0 0 0 2px rgba(255, 24, 1, 0.1);
+  }
+
+  &:hover:not(:focus):not(:disabled) {
+    border-color: var(--nex-border-color-hover);
+    box-shadow: var(--nex-shadow-sm);
+  }
+
+  &:disabled {
+    background: var(--nex-tertiary-color);
+    color: var(--nex-font-color-muted);
+    cursor: not-allowed;
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    background: var(--nex-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: var(--nex-glass-border);
+
+    &:focus {
+      border-color: var(--nex-signature);
+      background: var(--nex-glass-bg-light);
+    }
+
+    &:hover:not(:focus):not(:disabled) {
+      border-color: var(--nex-glass-border);
+      background: var(--nex-glass-bg-light);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @include mobile {
+    padding: var(--nex-spacing-sm);
+    font-size: var(--nex-font-size-base);
+  }
+} 

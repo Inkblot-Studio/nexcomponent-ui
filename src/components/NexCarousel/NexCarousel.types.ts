@@ -1,8 +1,14 @@
+export interface CarouselSlide {
+  imageUrl?: string;
+  title?: string;
+  content?: string;
+}
+
 export interface NexCarouselProps {
-    children: React.ReactNode[];
-    className?: string;
-    navButtons?: boolean;
-    navigationPosition?: 'top' | 'bottom';
-    line?: boolean;
-    interval?: number;
+  slides?: CarouselSlide[];
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  showControls?: boolean;
+  showIndicators?: boolean;
+  className?: string;
 }

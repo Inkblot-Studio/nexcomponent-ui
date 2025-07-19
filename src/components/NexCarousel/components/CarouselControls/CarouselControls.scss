@@ -1,0 +1,145 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--nex-spacing-xl);
+  z-index: 20;
+  pointer-events: none;
+
+  .nex-carousel-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calculate(56px);
+    height: calculate(56px);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--nex-radius-full);
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all var(--nex-transition-base);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: translateZ(0);
+
+    /* Enhanced hover effects */
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Active state */
+    &:active:not(:disabled) {
+      transform: translateY(0) scale(0.95);
+      transition: all 0.1s ease;
+    }
+
+    /* Disabled state */
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Focus state for accessibility */
+    &:focus-visible {
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 0 4px rgba(255, 24, 1, 0.2);
+    }
+
+    /* Icon styling */
+    svg {
+      width: calculate(24px);
+      height: calculate(24px);
+      transition: transform var(--nex-transition-base);
+    }
+
+    &:hover:not(:disabled) svg {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    .nex-carousel-control {
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.8);
+
+      &:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+      }
+    }
+  }
+
+  /* Mobile responsiveness */
+  @include mobile {
+    padding: 0 var(--nex-spacing-lg);
+
+    .nex-carousel-control {
+      width: calculate(48px);
+      height: calculate(48px);
+
+      svg {
+        width: calculate(20px);
+        height: calculate(20px);
+      }
+    }
+  }
+
+  /* Tablet responsiveness */
+  @include tablet {
+    padding: 0 var(--nex-spacing-xl);
+
+    .nex-carousel-control {
+      width: calculate(52px);
+      height: calculate(52px);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .nex-carousel-control {
+      transition: none !important;
+
+      &:hover:not(:disabled) {
+        transform: none !important;
+      }
+
+      &:active:not(:disabled) {
+        transform: none !important;
+      }
+
+      svg {
+        transition: none !important;
+      }
+
+      &:hover:not(:disabled) svg {
+        transform: none !important;
+      }
+    }
+  }
+} 

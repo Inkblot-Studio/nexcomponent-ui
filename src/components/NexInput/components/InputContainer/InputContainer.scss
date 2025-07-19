@@ -1,0 +1,45 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nex-spacing-xs);
+
+  &.focused {
+    .nex-input-field {
+      border-color: var(--nex-signature);
+      box-shadow: 0 0 0 2px rgba(255, 24, 1, 0.1);
+    }
+  }
+
+  &.error {
+    .nex-input-field {
+      border-color: var(--nex-danger);
+      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+
+    .nex-input-field {
+      background: var(--nex-tertiary-color);
+      cursor: not-allowed;
+    }
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    &.focused .nex-input-field {
+      border-color: var(--nex-signature);
+      background: var(--nex-glass-bg-light);
+    }
+
+    &.error .nex-input-field {
+      border-color: var(--nex-danger);
+    }
+  }
+} 

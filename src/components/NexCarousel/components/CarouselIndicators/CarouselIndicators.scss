@@ -1,0 +1,134 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-carousel-indicators {
+  position: absolute;
+  bottom: var(--nex-spacing-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--nex-spacing-md);
+  z-index: 20;
+  padding: var(--nex-spacing-sm);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--nex-radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  .nex-carousel-indicator {
+    width: calculate(12px);
+    height: calculate(12px);
+    border-radius: var(--nex-radius-full);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all var(--nex-transition-base);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transform: translateZ(0);
+
+    /* Enhanced hover effects */
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.7);
+      transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Active state */
+    &:active {
+      transform: scale(0.9);
+      transition: all 0.1s ease;
+    }
+
+    /* Current slide indicator */
+    &.active {
+      background: var(--nex-signature);
+      border-color: var(--nex-signature);
+      box-shadow: 
+        0 0 0 2px rgba(255, 24, 1, 0.3),
+        0 2px 8px rgba(255, 24, 1, 0.4);
+      transform: scale(1.1);
+
+      &:hover {
+        background: var(--nex-signature);
+        border-color: var(--nex-signature);
+        transform: scale(1.3);
+        box-shadow: 
+          0 0 0 3px rgba(255, 24, 1, 0.4),
+          0 4px 12px rgba(255, 24, 1, 0.5);
+      }
+    }
+
+    /* Focus state for accessibility */
+    &:focus-visible {
+      outline: 2px solid var(--nex-signature);
+      outline-offset: 2px;
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(255, 24, 1, 0.2);
+    }
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    .nex-carousel-indicator {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      &.active {
+        background: var(--nex-signature);
+        border-color: var(--nex-signature);
+      }
+    }
+  }
+
+  /* Mobile responsiveness */
+  @include mobile {
+    bottom: var(--nex-spacing-lg);
+    gap: var(--nex-spacing-sm);
+    padding: var(--nex-spacing-xs);
+
+    .nex-carousel-indicator {
+      width: calculate(10px);
+      height: calculate(10px);
+    }
+  }
+
+  /* Tablet responsiveness */
+  @include tablet {
+    bottom: var(--nex-spacing-xl);
+    gap: var(--nex-spacing-md);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .nex-carousel-indicator {
+      transition: none !important;
+
+      &:hover {
+        transform: none !important;
+      }
+
+      &:active {
+        transform: none !important;
+      }
+
+      &.active {
+        transform: none !important;
+
+        &:hover {
+          transform: none !important;
+        }
+      }
+    }
+  }
+} 

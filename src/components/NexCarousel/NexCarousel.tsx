@@ -1,85 +1,156 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useAnimationConfig } from '../../utils/animationConfig';
 import { NexCarouselProps } from './NexCarousel.types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import CarouselContainer from './components/CarouselContainer/CarouselContainer';
+import CarouselSlide from './components/CarouselSlide/CarouselSlide';
+import CarouselControls from './components/CarouselControls/CarouselControls';
+import CarouselIndicators from './components/CarouselIndicators/CarouselIndicators';
 import './NexCarousel.scss';
 
 /**
- * NexCarousel component
+ * NexCarousel - Enterprise Grade Carousel Component
  *
- * A carousel component to display slides with optional navigation buttons, dots, and automatic slide transition.
+ * A clean, simple carousel component designed for compelling visual presentations.
+ * Features smooth animations, professional styling, and intuitive navigation.
  *
- * @param {React.ReactNode[]} children - The slides to display in the carousel.
- * @param {string} className - Additional class names to apply to the carousel.
- * @param {boolean} [navButtons=false] - Whether to display navigation buttons.
- * @param {'top' | 'bottom' | 'left' | 'right'} [navigationPosition='bottom'] - The position of the navigation dots.
- * @param {boolean} [line] - Whether to display a progress line indicating the current slide.
- * @param {number} [interval] - The time in seconds between automatic slide transitions.
+ * @param {Array} slides - Array of slide data with imageUrl, title, and content
+ * @param {boolean} autoPlay - Whether to automatically advance slides
+ * @param {number} autoPlayInterval - Interval between auto-advance (in milliseconds)
+ * @param {boolean} showControls - Whether to show navigation controls
+ * @param {boolean} showIndicators - Whether to show slide indicators
+ * @param {string} className - Additional CSS classes
  */
-const NexCarousel: React.FC<NexCarouselProps> = ({ children, className, navButtons = false, navigationPosition = 'bottom', line, interval }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const NexCarousel: React.FC<NexCarouselProps> = ({ 
+  slides = [], 
+  autoPlay = false,
+  autoPlayInterval = 5000,
+  showControls = true,
+  showIndicators = true,
+  className,
+  ...rest
+}) => {
+  const { shouldReduceMotion } = useAnimationConfig();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
 
-  // Function to handle next slide
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === children.length - 1 ? 0 : prevIndex + 1));
-  };
+  const totalSlides = slides.length;
+  const hasPrevious = currentSlide > 0;
+  const hasNext = currentSlide < totalSlides - 1;
 
-  // Function to handle previous slide
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? children.length - 1 : prevIndex - 1));
-  };
-
-  // Function to jump to a specific slide
-  const handleJumpToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  // Effect to handle automatic carousel movement
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout | null = null;
-    
-    // Start automatic carousel movement if interval is provided
-    if (interval && interval > 0) {
-      intervalId = setInterval(() => {
-        handleNext();
-      }, interval * 1000);
+  const goToSlide = useCallback((index: number) => {
+    if (index >= 0 && index < totalSlides) {
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
     }
+  }, [currentSlide, totalSlides]);
 
-    // Clean up interval when component unmounts or interval changes
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
+  const goToPrevious = useCallback(() => {
+    if (hasPrevious) {
+      setDirection(-1);
+      setCurrentSlide(currentSlide - 1);
+    }
+  }, [currentSlide, hasPrevious]);
+
+  const goToNext = useCallback(() => {
+    if (hasNext) {
+      setDirection(1);
+      setCurrentSlide(currentSlide + 1);
+    }
+  }, [currentSlide, hasNext]);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!autoPlay || totalSlides <= 1) return;
+
+    const interval = setInterval(() => {
+      if (hasNext) {
+        goToNext();
+      } else {
+        goToSlide(0);
+      }
+    }, autoPlayInterval);
+
+    return () => clearInterval(interval);
+  }, [autoPlay, autoPlayInterval, hasNext, goToNext, goToSlide, totalSlides]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPrevious();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToNext();
       }
     };
-  }, [interval]);
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [goToPrevious, goToNext]);
+
+  if (totalSlides === 0) {
+    return null;
+  }
+
+  const currentSlideData = slides[currentSlide];
 
   return (
-    <div className={`nex-carousel nex-carousel-dots-${navigationPosition} ${className ? className : '' }`}>
-      <div className="nex-slides" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {children.map((child, index) => (
-          <div className="nex-slide" key={index}>
-            {child}
-          </div>
-        ))}
-      </div>
+    <motion.div
+      className={`nex-carousel ${className || ''}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ 
+        duration: shouldReduceMotion ? 0.1 : 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }}
+      role="region"
+      aria-label="Carousel"
+      aria-roledescription="carousel"
+      aria-live="polite"
+      {...rest}
+    >
+      <CarouselContainer 
+        currentSlide={currentSlide}
+        direction={direction}
+      >
+        <CarouselSlide 
+          imageUrl={currentSlideData.imageUrl}
+          title={currentSlideData.title}
+          content={currentSlideData.content}
+        />
+      </CarouselContainer>
 
-      {line && (
-        <div className="nex-carousel-line" style={{ width: `${((currentIndex + 1) / children.length) * 100}%` }}></div>
+      {/* Navigation Controls */}
+      {showControls && (
+        <CarouselControls
+          onPrevious={goToPrevious}
+          onNext={goToNext}
+          hasPrevious={hasPrevious}
+          hasNext={hasNext}
+        />
       )}
 
-      { navButtons && (
-        <>
-          <FontAwesomeIcon icon={faChevronLeft} className="nex-carousel-nav-button nex-prev" onClick={handlePrev}/>
-          <FontAwesomeIcon icon={faChevronRight} className="nex-carousel-nav-button nex-next" onClick={handleNext}/>
-        </>
+      {/* Slide Indicators */}
+      {showIndicators && (
+        <CarouselIndicators
+          totalSlides={totalSlides}
+          currentSlide={currentSlide}
+          onSlideChange={goToSlide}
+        />
       )}
-      
-      <div className={`nex-carousel-dots ${navigationPosition}`}>
-        {children.map((_, index) => (
-          <div className={`nex-carousel-dot ${index === currentIndex ? 'active' : ''}`} key={index} onClick={() => handleJumpToSlide(index)}></div>
-        ))}
-      </div>
-    </div>
+
+      {/* Slide Counter */}
+      <motion.div 
+        className="nex-carousel-counter"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: shouldReduceMotion ? 0 : 0.7 }}
+      >
+        {currentSlide + 1} / {totalSlides}
+      </motion.div>
+    </motion.div>
   );
 };
 

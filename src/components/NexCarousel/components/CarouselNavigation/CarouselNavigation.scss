@@ -1,0 +1,139 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-carousel-navigation {
+  position: absolute;
+  bottom: var(--nex-spacing-lg);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--nex-spacing-md);
+
+  .nex-carousel-navigation-controls {
+    display: flex;
+    gap: var(--nex-spacing-md);
+
+    .nex-carousel-nav-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calculate(40px);
+      height: calculate(40px);
+      background: var(--nex-glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--nex-glass-border);
+      border-radius: var(--nex-radius-full);
+      color: var(--nex-font-color-inverse);
+      font-size: var(--nex-font-size-lg);
+      font-weight: var(--nex-font-weight-bold);
+      cursor: pointer;
+      transition: var(--nex-transition-base);
+      box-shadow: var(--nex-shadow-md);
+
+      &:hover:not(:disabled) {
+        background: var(--nex-glass-bg-light);
+        border-color: var(--nex-signature);
+        box-shadow: var(--nex-shadow-lg);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--nex-signature);
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  .nex-carousel-navigation-indicators {
+    display: flex;
+    gap: var(--nex-spacing-sm);
+
+    .nex-carousel-nav-indicator {
+      width: calculate(10px);
+      height: calculate(10px);
+      border-radius: var(--nex-radius-full);
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--nex-transition-base);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.8);
+      }
+
+      &.active {
+        background: var(--nex-signature);
+        border-color: var(--nex-signature);
+        box-shadow: 0 0 0 2px rgba(255, 24, 1, 0.3);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--nex-signature);
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    .nex-carousel-navigation-controls .nex-carousel-nav-button {
+      background: var(--nex-glass-bg);
+      border-color: var(--nex-glass-border);
+
+      &:hover:not(:disabled) {
+        background: var(--nex-glass-bg-light);
+        border-color: var(--nex-glass-border);
+      }
+    }
+
+    .nex-carousel-navigation-indicators .nex-carousel-nav-indicator {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      &.active {
+        background: var(--nex-signature);
+        border-color: var(--nex-signature);
+      }
+    }
+  }
+
+  /* Mobile responsiveness */
+  @include mobile {
+    bottom: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
+
+    .nex-carousel-navigation-controls {
+      gap: var(--nex-spacing-sm);
+
+      .nex-carousel-nav-button {
+        width: calculate(36px);
+        height: calculate(36px);
+        font-size: var(--nex-font-size-md);
+      }
+    }
+
+    .nex-carousel-navigation-indicators {
+      gap: var(--nex-spacing-xs);
+
+      .nex-carousel-nav-indicator {
+        width: calculate(8px);
+        height: calculate(8px);
+      }
+    }
+  }
+} 
