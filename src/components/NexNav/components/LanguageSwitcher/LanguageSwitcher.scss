@@ -96,6 +96,15 @@
     display: block;
   }
 
+  .nex-lang-code {
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-regular);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--nex-font-color);
+    white-space: nowrap;
+  }
+
   .nex-lang-label {
     white-space: nowrap;
     font-weight: var(--nex-font-weight-medium);
@@ -291,8 +300,8 @@
       padding: var(--nex-spacing-xs);
       height: 32px;
       
-      .nex-lang-label {
-        display: none; /* Show only flag on mobile */
+      .nex-lang-code {
+        font-size: var(--nex-font-size-xs);
       }
     }
     

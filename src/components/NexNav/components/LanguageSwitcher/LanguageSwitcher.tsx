@@ -241,12 +241,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         whileHover={hoverAnimation}
         whileTap={tapAnimation}
       >
-        {/* Show flag/icon + language code only */}
-        {current?.icon ? (
-          <img src={current.icon} alt="" className="nex-lang-icon" />
-        ) : (
-          <span className="nex-lang-emoji">{getFlagEmoji(currentLocale)}</span>
-        )}
+        {/* Show language code letters */}
+        <span className="nex-lang-code">{currentLocale.toUpperCase()}</span>
         <motion.span 
           className="nex-lang-chevron"
           animate={{ rotate: open ? 180 : 0 }}
