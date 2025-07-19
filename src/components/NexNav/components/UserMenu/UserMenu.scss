@@ -125,9 +125,7 @@
     border-radius: var(--nex-radius-lg);
     
     /* Subtle shadow for depth */
-    box-shadow: 
-      0 4px 20px -4px rgba(0, 0, 0, 0.08),
-      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    box-shadow: none;
     
     /* Layout */
     z-index: var(--nex-z-index-popover);
@@ -313,10 +311,7 @@
   .nex-user-menu-dropdown {
     background: rgba(0, 0, 0, 0.3);
     border-color: rgba(255, 255, 255, 0.05);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: none;
   }
   
   .nex-user-menu-section {
@@ -364,10 +359,7 @@
   .nex-user-menu-dropdown {
     background: rgba(0, 0, 0, 0.3);
     border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.8),
-      0 2px 8px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: none;
   }
   
   .nex-user-menu-section {
@@ -406,41 +398,40 @@
    ================================ */
 
 .nex-nav--black-glass.not-at-top .nex-user-menu-dropdown {
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.9),
-    0 2px 8px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
 }
 
 .nex-nav--black-glass.not-at-top .nex-user-menu-item {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.95) !important;
   
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06) !important;
   }
   
   &.danger {
-    color: var(--nex-signature);
+    color: var(--nex-signature) !important;
     
     &:hover {
-      background: rgba(255, 24, 1, 0.15);
+      background: rgba(255, 24, 1, 0.15) !important;
     }
   }
   
   &.sign-up-cta {
-    background: rgba(255, 24, 1, 0.1);
-    border-color: rgba(255, 24, 1, 0.15);
+    background: rgba(255, 24, 1, 0.1) !important;
+    border-color: rgba(255, 24, 1, 0.15) !important;
     
     &:hover {
-      background: rgba(255, 24, 1, 0.15);
-      border-color: rgba(255, 24, 1, 0.25);
+      background: rgba(255, 24, 1, 0.15) !important;
+      border-color: rgba(255, 24, 1, 0.25) !important;
     }
   }
 }
+
+
 
 .nex-user-menu-avatar,
 .nex-user-menu-avatar-fallback {
