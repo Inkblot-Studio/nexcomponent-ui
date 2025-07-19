@@ -552,4 +552,194 @@ body.nex-lock-scroll {
   pointer-events: none;
 }
 
+/* ================================
+   🌑 BLACK GLASS PREMIUM THEME
+   ================================ */
+
+.nex-mobile-nav--black-glass {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(10, 10, 10, 0.92) 50%,
+    rgba(0, 0, 0, 0.95) 100%);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.4) 0%, 
+      rgba(10, 10, 10, 0.3) 30%, 
+      rgba(20, 20, 20, 0.2) 60%,
+      rgba(0, 0, 0, 0.1) 100%);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    transition: left 8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  &:hover::after {
+    left: 100%;
+  }
+
+  .nex-mobile-nav-header {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 4px 20px -4px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  }
+
+  .nex-mobile-nav-user-name {
+    color: #ffffff;
+  }
+
+  .nex-mobile-nav-user-tier {
+    color: var(--nex-signature);
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 24, 1, 0.2);
+    
+    &:hover {
+      background: rgba(255, 24, 1, 0.15);
+      border-color: rgba(255, 24, 1, 0.3);
+    }
+  }
+
+  .nex-mobile-nav-section-title {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nex-mobile-nav-item {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px) saturate(220%);
+      -webkit-backdrop-filter: blur(24px) saturate(220%);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+
+    &:active {
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(24px) saturate(220%);
+      -webkit-backdrop-filter: blur(24px) saturate(220%);
+    }
+
+    &.active {
+      background: rgba(255, 24, 1, 0.15);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      color: var(--nex-signature);
+      border-color: rgba(255, 24, 1, 0.25);
+
+      &:hover {
+        background: rgba(255, 24, 1, 0.2);
+        border-color: rgba(255, 24, 1, 0.3);
+      }
+    }
+
+    &.danger {
+      color: var(--nex-signature);
+      border-color: rgba(255, 24, 1, 0.2);
+      
+      &:hover {
+        background: rgba(255, 24, 1, 0.1);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        border-color: rgba(255, 24, 1, 0.3);
+      }
+    }
+
+    &.primary {
+      background: rgba(255, 24, 1, 0.1);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--nex-signature);
+      font-weight: var(--nex-font-weight-medium);
+      border-color: rgba(255, 24, 1, 0.15);
+
+      &:hover {
+        background: rgba(255, 24, 1, 0.15);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        border-color: rgba(255, 24, 1, 0.25);
+      }
+    }
+  }
+
+  .nex-mobile-nav-badge {
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    color: var(--nex-signature);
+    border: 1px solid rgba(255, 24, 1, 0.2);
+  }
+
+  .nex-mobile-nav-divider {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .nex-mobile-nav-signup-btn {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+  }
+
+  .nex-mobile-nav-login-link {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nex-mobile-nav-glass-overlay {
+    background: 
+      radial-gradient(
+        circle at 30% 20%,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 70% 80%,
+        rgba(255, 255, 255, 0.03) 0%,
+        transparent 50%
+      );
+  }
+}
+
 

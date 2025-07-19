@@ -63,7 +63,8 @@ const NexNav: React.FC<NexNavProps> = ({
   onActivityLogClick,
   onSecurityClick,
   onIntegrationsClick,
-  onAdminPanelClick
+  onAdminPanelClick,
+  theme = 'auto'
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -229,7 +230,7 @@ const NexNav: React.FC<NexNavProps> = ({
   return (
     <>
       <motion.nav
-        className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}`}
+        className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}${theme === 'black-glass' ? ' nex-nav--black-glass' : ''}`}
         ref={navRef}
         initial="initial"
         animate={isInitialized ? "animate" : "initial"}
@@ -246,38 +247,42 @@ const NexNav: React.FC<NexNavProps> = ({
         role="banner"
         aria-label="Main navigation"
       >
-        {/* Background state animation */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            pointerEvents: 'none',
-            zIndex: 0
-          }}
-          initial="atTop"
-          animate={isAtTop && !isMenuOpen ? "atTop" : isMenuOpen ? "mobileOpen" : "scrolled"}
-          variants={backgroundVariants}
-        />
-        {/* Optimized Shimmer Effect */}
-        <motion.div
-          className="nex-nav-shimmer"
-          variants={shimmerVariants}
-          initial="hidden"
-          animate={isAtTop && !isMenuOpen ? "hidden" : "visible"}
-          style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            pointerEvents: 'none',
-            zIndex: 1,
-            background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 30%, rgba(255,24,1,0.08) 60%, rgba(0,184,255,0.08) 100%)',
-            filter: 'blur(6px)',
-            willChange: 'transform, opacity'
-          }}
-          aria-hidden="true"
-        />
+        {/* Background state animation - hidden for black glass theme */}
+        {theme !== 'black-glass' && (
+          <motion.div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              pointerEvents: 'none',
+              zIndex: 0
+            }}
+            initial="atTop"
+            animate={isAtTop && !isMenuOpen ? "atTop" : isMenuOpen ? "mobileOpen" : "scrolled"}
+            variants={backgroundVariants}
+          />
+        )}
+        {/* Optimized Shimmer Effect - hidden for black glass theme */}
+        {theme !== 'black-glass' && (
+          <motion.div
+            className="nex-nav-shimmer"
+            variants={shimmerVariants}
+            initial="hidden"
+            animate={isAtTop && !isMenuOpen ? "hidden" : "visible"}
+            style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0, bottom: 0,
+              pointerEvents: 'none',
+              zIndex: 1,
+              background: 'linear-gradient(120deg, rgba(255,255,255,0.15) 30%, rgba(255,24,1,0.08) 60%, rgba(0,184,255,0.08) 100%)',
+              filter: 'blur(6px)',
+              willChange: 'transform, opacity'
+            }}
+            aria-hidden="true"
+          />
+        )}
 
         <motion.div
           className="nex-nav-inner-wrapper"
@@ -331,6 +336,7 @@ const NexNav: React.FC<NexNavProps> = ({
             onSecurityClick={onSecurityClick}
             onIntegrationsClick={onIntegrationsClick}
             onAdminPanelClick={onAdminPanelClick}
+            theme={theme}
           />
             
           {/* Hamburger Button with Enterprise Animations */}
@@ -410,6 +416,7 @@ const NexNav: React.FC<NexNavProps> = ({
             onSecurityClick={onSecurityClick}
             onIntegrationsClick={onIntegrationsClick}
             onAdminPanelClick={onAdminPanelClick}
+            theme={theme}
           />
         )}
       </AnimatePresence>

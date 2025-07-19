@@ -34,4 +34,5 @@ export interface UserMenuProps {
   open?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  theme?: 'light' | 'auto' | 'black-glass';
 }

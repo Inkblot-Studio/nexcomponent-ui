@@ -40,7 +40,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onActivityLogClick,
   onSecurityClick,
   onIntegrationsClick,
-  onAdminPanelClick
+  onAdminPanelClick,
+  theme = 'auto'
 }) => {
   // State management
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -110,7 +111,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
 
   return (
     <motion.div
-      className="nex-mobile-nav"
+      className={`nex-mobile-nav${theme === 'black-glass' ? ' nex-mobile-nav--black-glass' : ''}`}
       variants={variants.mobileNav.container}
       initial="initial"
       animate="animate"
@@ -126,11 +127,13 @@ const MobileNav: React.FC<MobileNavProps> = ({
         zIndex: 'var(--nex-z-index-modal)',
         display: 'flex',
         flexDirection: 'column',
-        background: colors.mobileNav.background.primary,
-        backdropFilter: colors.mobileNav.backdrop.medium,
-        WebkitBackdropFilter: colors.mobileNav.backdrop.medium,
-        borderBottom: colors.mobileNav.border.medium,
-        boxShadow: colors.mobileNav.shadow.medium,
+        ...(theme !== 'black-glass' ? {
+          background: colors.mobileNav.background.primary,
+          backdropFilter: colors.mobileNav.backdrop.medium,
+          WebkitBackdropFilter: colors.mobileNav.backdrop.medium,
+          borderBottom: colors.mobileNav.border.medium,
+          boxShadow: colors.mobileNav.shadow.medium,
+        } : {}),
         ...performance.hardwareAcceleration
       }}
     >
@@ -240,9 +243,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   className="nex-mobile-nav-signup-btn"
                   onClick={onLogin}
                   whileHover={{
-                    backgroundColor: "rgba(255, 255, 255, 0.15)",
-                    borderColor: "rgba(255, 255, 255, 0.2)",
-                    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+                    backgroundColor: theme === 'black-glass' ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
+                    borderColor: theme === 'black-glass' ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
+                    boxShadow: theme === 'black-glass' ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)",
                     scale: 1.02
                   }}
                   whileTap={{

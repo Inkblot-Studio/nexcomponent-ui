@@ -28,7 +28,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
   isAtTop = true,
   open = false,
   onOpen,
-  onClose
+  onClose,
+  theme = 'auto'
 }) => {
   const ref = useRef(null);
 

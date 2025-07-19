@@ -157,7 +157,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   isAtTop = true,
   open = false,
   onOpen,
-  onClose
+  onClose,
+  theme = 'auto'
 }) => {
   const [search, setSearch] = useState('');
   const ref = useRef<HTMLDivElement>(null);

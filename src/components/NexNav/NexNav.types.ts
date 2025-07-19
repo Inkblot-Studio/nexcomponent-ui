@@ -54,4 +54,7 @@ export type NexNavProps = {
   onSecurityClick?: () => void;
   onIntegrationsClick?: () => void;
   onAdminPanelClick?: () => void;
+
+  // Theme customization
+  theme?: 'light' | 'auto' | 'black-glass';
 };

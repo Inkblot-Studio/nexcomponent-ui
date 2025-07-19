@@ -31,6 +31,7 @@ interface NavControlsProps {
   onSecurityClick?: () => void;
   onIntegrationsClick?: () => void;
   onAdminPanelClick?: () => void;
+  theme?: 'light' | 'auto' | 'black-glass';
 }
 
 const NavControls: React.FC<NavControlsProps> = ({
@@ -56,7 +57,8 @@ const NavControls: React.FC<NavControlsProps> = ({
   onActivityLogClick,
   onSecurityClick,
   onIntegrationsClick,
-  onAdminPanelClick
+  onAdminPanelClick,
+  theme = 'auto'
 }) => {
   const { timing, spring } = useAnimationConfig();
 
@@ -74,7 +76,7 @@ const NavControls: React.FC<NavControlsProps> = ({
       variants={ANIMATION_VARIANTS.mobileNav.navItem}
     >
       <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
-        <ThemeToggle isAtTop={isAtTop} />
+        <ThemeToggle isAtTop={isAtTop} theme={theme} />
       </motion.div>
       
       <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
@@ -86,6 +88,7 @@ const NavControls: React.FC<NavControlsProps> = ({
           open={isLanguageOpen}
           onOpen={onLanguageToggle}
           onClose={onLanguageClose}
+          theme={theme}
         />
       </motion.div>
       
@@ -107,6 +110,7 @@ const NavControls: React.FC<NavControlsProps> = ({
             open={isUserOpen}
             onOpen={onUserToggle}
             onClose={onUserClose}
+            theme={theme}
           />
         </motion.div>
       ) : (

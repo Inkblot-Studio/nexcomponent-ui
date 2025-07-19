@@ -12,4 +12,5 @@ export type LanguageSwitcherProps = {
   open?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  theme?: 'light' | 'auto' | 'black-glass';
 };

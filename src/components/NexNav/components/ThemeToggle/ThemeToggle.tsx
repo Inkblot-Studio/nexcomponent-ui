@@ -6,11 +6,13 @@ import './ThemeToggle.scss';
 interface ThemeToggleProps {
   isAtTop?: boolean;
   className?: string;
+  theme?: 'light' | 'auto' | 'black-glass';
 }
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ 
   isAtTop = true,
-  className = ''
+  className = '',
+  theme = 'auto'
 }) => {
   const [isDark, setIsDark] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
