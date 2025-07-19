@@ -45,8 +45,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       tabIndex={0}
       disabled={isAnimating}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       whileHover={{
         transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
       }}

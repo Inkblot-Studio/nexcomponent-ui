@@ -143,13 +143,11 @@ const NexNavInner: React.FC<NexNavProps> = ({
   const shimmerVariants = {
     hidden: { 
       opacity: 0,
-      x: '-100%',
-      scale: 0.8
+      x: '-100%'
     },
     visible: { 
       opacity: shouldReduceMotion ? 0 : 0.6,
       x: '0%',
-      scale: 1,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.8,
         ease: [0.4, 0, 0.2, 1]

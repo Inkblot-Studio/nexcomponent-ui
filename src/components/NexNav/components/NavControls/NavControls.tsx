@@ -121,8 +121,8 @@ const NavControls: React.FC<NavControlsProps> = ({
           tabIndex={0}
           aria-label="Sign in to your account"
           onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
 
           whileFocus={{
             outline: "2px solid var(--nex-signature)",

@@ -205,8 +205,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                   />
                 ) : (
                   <motion.span 
@@ -215,8 +213,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                   >
                     {/* Premium animated SVG avatar with initials */}
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -256,8 +252,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   <motion.div 
                     className="nex-mobile-nav-user-tier"
                     onClick={onSubscriptionClick}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     transition={spring.fast}
                   >
                     {subscription?.tier === 'pro' ? 'Pro' : 'Free'}
@@ -278,13 +272,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
                               whileHover={{
               backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
               borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
-              boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)",
-                    scale: 1.02
+              boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)"
                   }}
                   whileTap={{
                     backgroundColor: "rgba(255, 24, 1, 0.15)",
-                    borderColor: "rgba(255, 24, 1, 0.2)",
-                    scale: 0.98
+                    borderColor: "rgba(255, 24, 1, 0.2)"
                   }}
                   transition={spring.responsive}
                 >
@@ -294,11 +286,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   className="nex-mobile-nav-login-link"
                   onClick={onLogin}
                   whileHover={{ 
-                    opacity: 0.8,
-                    scale: 1.02
-                  }}
-                  whileTap={{ 
-                    scale: 0.98
+                    opacity: 0.8
                   }}
                   transition={spring.fast}
                 >
@@ -747,12 +735,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 onClick={onLogout}
                 variants={variants.mobileNav.navItem}
                 whileHover={{ 
-                  backgroundColor: "rgba(255, 24, 1, 0.1)",
-                  scale: 1.02
+                  backgroundColor: "rgba(255, 24, 1, 0.1)"
                 }}
                 whileTap={{ 
-                  backgroundColor: "rgba(255, 24, 1, 0.15)",
-                  scale: 0.98
+                  backgroundColor: "rgba(255, 24, 1, 0.15)"
                 }}
                 transition={spring.responsive}
               >

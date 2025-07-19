@@ -334,7 +334,6 @@
       animation: nex-badge-pulse 2.5s ease-in-out infinite;
       
       &:hover {
-        transform: scale(1.15);
         box-shadow: 
           0 4px 16px rgba(255, 24, 1, 0.4),
           0 2px 8px rgba(0, 0, 0, 0.15),
@@ -370,7 +369,6 @@
   /* Enhanced badge pulse animation */
   @keyframes nex-badge-pulse {
     0%, 100% {
-      transform: scale(1);
       opacity: 1;
       box-shadow: 
         0 3px 12px rgba(255, 24, 1, 0.3),
@@ -378,7 +376,6 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
     50% {
-      transform: scale(1.08);
       opacity: 0.9;
       box-shadow: 
         0 4px 16px rgba(255, 24, 1, 0.4),
@@ -499,23 +496,23 @@
 @keyframes nex-nav-subtle-shimmer {
   0% {
     opacity: 0.6;
-    transform: translateX(-10%) scale(1) rotate(-1deg);
+    transform: translateX(-10%) rotate(-1deg);
   }
   25% {
     opacity: 0.7;
-    transform: translateX(5%) scale(1.02, 0.98) rotate(1deg);
+    transform: translateX(5%) rotate(1deg);
   }
   50% {
     opacity: 0.8;
-    transform: translateX(10%) scale(1.04, 0.96) rotate(-1deg);
+    transform: translateX(10%) rotate(-1deg);
   }
   75% {
     opacity: 0.7;
-    transform: translateX(0%) scale(1.01, 1.02) rotate(1deg);
+    transform: translateX(0%) rotate(1deg);
   }
   100% {
     opacity: 0.6;
-    transform: translateX(-10%) scale(1) rotate(-1deg);
+    transform: translateX(-10%) rotate(-1deg);
   }
 }
 
@@ -781,10 +778,7 @@
 [data-theme="dark"] .nex-nav-dropdown {
   background: rgba(26, 31, 54, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: none;
   
   &::before {
     background: linear-gradient(
