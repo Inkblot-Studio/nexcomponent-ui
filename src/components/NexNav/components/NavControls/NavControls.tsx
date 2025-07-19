@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Fingerprint } from 'lucide-react';
+import { LogIn, Sparkles } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import UserMenu from '../UserMenu';
 import ThemeToggle from '../ThemeToggle';
@@ -114,34 +114,26 @@ const NavControls: React.FC<NavControlsProps> = ({
           />
         </motion.div>
       ) : (
-        <motion.div 
+        <motion.button 
           className="nex-nav-login-button" 
           onClick={handleLoginClick}
           role="button"
           tabIndex={0}
           aria-label="Sign in to your account"
           onKeyDown={(e) => e.key === 'Enter' && handleLoginClick()}
-          variants={ANIMATION_VARIANTS.mobileNav.navItem}
-          whileHover={ANIMATION_VARIANTS.interactive.button.hover}
-          whileTap={ANIMATION_VARIANTS.interactive.button.tap}
-          whileFocus={ANIMATION_VARIANTS.interactive.button.focus}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+
+          whileFocus={{
+            outline: "2px solid var(--nex-signature)",
+            outlineOffset: "2px",
+            transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
+          }}
           transition={spring.responsive}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={timing.fast}
-          >
-            <Fingerprint size={16} aria-hidden="true" />
-          </motion.div>
-          <motion.span
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ ...timing.fast, delay: 0.05 }}
-          >
-            Login
-          </motion.span>
-        </motion.div>
+          <LogIn size={16} aria-hidden="true" />
+          <span>Sign In</span>
+        </motion.button>
       )}
     </motion.div>
   );

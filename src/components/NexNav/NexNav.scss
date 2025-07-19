@@ -169,7 +169,7 @@
   }
 
   /* ================================
-     🔐 LOGIN BUTTON - Enterprise Style
+     🔐 LOGIN BUTTON - Clean Enterprise Style
      ================================ */
   
   .nex-nav-login-button {
@@ -177,26 +177,28 @@
     display: flex;
     align-items: center;
     gap: var(--nex-spacing-xs);
-    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    padding: var(--nex-spacing-xs) var(--nex-spacing-md);
     height: 36px;
-    min-width: 60px;
-    max-width: 120px;
+    min-width: 80px;
+    max-width: 140px;
     border-radius: var(--nex-radius-full);
-    overflow: hidden;
     
     /* Typography */
     font-size: var(--nex-font-size-sm);
-    font-weight: var(--nex-font-weight-medium);
+    font-weight: var(--nex-font-weight-semibold);
     font-family: var(--nex-font-family-primary);
     line-height: 1;
     letter-spacing: 0.02em;
     
-    /* Glassmorphic Design - Matching Language Switcher */
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Modern Glassmorphic Design */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     
     /* Color */
     color: var(--nex-font-color);
@@ -211,13 +213,16 @@
     box-sizing: border-box;
     will-change: transform, background-color, border-color, box-shadow;
     
-    /* Hover State - Subtle glassmorphic enhancement */
+    /* Hover State - Enhanced glassmorphic effect */
     &:hover {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-      border-color: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
     
     /* Focus State - Signature accent */
@@ -225,31 +230,31 @@
       outline: 2px solid var(--nex-signature);
       outline-offset: 2px;
       background: rgba(255, 24, 1, 0.1);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
     }
     
     /* Active State - Signature immersion */
     &:active {
       background: rgba(255, 24, 1, 0.15);
-      backdrop-filter: blur(28px) saturate(220%);
-      -webkit-backdrop-filter: blur(28px) saturate(220%);
-      border-color: rgba(255, 24, 1, 0.2);
+      backdrop-filter: blur(32px) saturate(240%);
+      -webkit-backdrop-filter: blur(32px) saturate(240%);
+      border-color: rgba(255, 24, 1, 0.25);
     }
-
+    
     /* Icon styling */
     svg {
       width: 16px;
       height: 16px;
       color: inherit;
-      opacity: 0.8;
+      opacity: 0.9;
       flex-shrink: 0;
     }
-
+    
     /* Text styling */
     span {
       white-space: nowrap;
-      font-weight: var(--nex-font-weight-medium);
+      font-weight: var(--nex-font-weight-semibold);
       font-size: var(--nex-font-size-sm);
       letter-spacing: 0.02em;
     }
