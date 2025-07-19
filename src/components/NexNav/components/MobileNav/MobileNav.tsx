@@ -149,7 +149,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
           ...performance.hardwareAcceleration
         }}
       >
-        {/* Header with User Info */}
+        {/* Header with User Info and Theme Toggle */}
         <motion.div 
           className="nex-mobile-nav-header"
           variants={variants.mobileNav.header}
@@ -157,118 +157,131 @@ const MobileNav: React.FC<MobileNavProps> = ({
           animate="animate"
           exit="exit"
         >
-          {isAuthenticated && user ? (
-            <>
-              {user.avatarUrl ? (
-                <motion.img
-                  src={user.avatarUrl}
-                  alt={user.name}
-                  className="nex-mobile-nav-user-avatar"
-                  variants={variants.mobileNav.avatar}
+          <div className="nex-mobile-nav-header-content">
+            {isAuthenticated && user ? (
+              <>
+                {user.avatarUrl ? (
+                  <motion.img
+                    src={user.avatarUrl}
+                    alt={user.name}
+                    className="nex-mobile-nav-user-avatar"
+                    variants={variants.mobileNav.avatar}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  />
+                ) : (
+                  <motion.span 
+                    className="nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback"
+                    variants={variants.mobileNav.avatar}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Premium animated SVG avatar with initials */}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <radialGradient id="mobileAvatarGradient" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stopColor="#fff" stopOpacity="0.8"/>
+                          <stop offset="100%" stopColor="#e0e7ef" stopOpacity="0.95"/>
+                        </radialGradient>
+                        <linearGradient id="mobileAvatarShimmer" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#fff" stopOpacity="0.2"/>
+                          <stop offset="0.5" stopColor="#ff1801" stopOpacity="0.12"/>
+                          <stop offset="1" stopColor="#00b8ff" stopOpacity="0.12"/>
+                        </linearGradient>
+                      </defs>
+                      <circle cx="20" cy="20" r="20" fill="url(#mobileAvatarGradient)"/>
+                      <motion.rect
+                        x="-40" y="0" width="40" height="40"
+                        fill="url(#mobileAvatarShimmer)"
+                        animate={{ x: [ -40, 40 ] }}
+                        transition={{ repeat: Infinity, duration: shouldReduceMotion ? 0 : 4.5, ease: 'linear' }}
+                        style={{ mixBlendMode: 'lighten' }}
+                      />
+                      <text x="50%" y="54%" textAnchor="middle" fill="#3a4256" fontSize="18" fontWeight="bold" fontFamily="inherit" dominantBaseline="middle" style={{ letterSpacing: 1 }}>
+                        {user.name?.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase()}
+                      </text>
+                    </svg>
+                  </motion.span>
+                )}
+                <motion.div 
+                  className="nex-mobile-nav-user-info"
+                  variants={variants.fade.in}
                   initial="initial"
                   animate="animate"
-                  exit="exit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                />
-              ) : (
-                <motion.span 
-                  className="nex-mobile-nav-user-avatar nex-mobile-nav-avatar-fallback"
-                  variants={variants.mobileNav.avatar}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ ...timing.medium, delay: 0.1 }}
                 >
-                  {/* Premium animated SVG avatar with initials */}
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <radialGradient id="mobileAvatarGradient" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#fff" stopOpacity="0.8"/>
-                        <stop offset="100%" stopColor="#e0e7ef" stopOpacity="0.95"/>
-                      </radialGradient>
-                      <linearGradient id="mobileAvatarShimmer" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#fff" stopOpacity="0.2"/>
-                        <stop offset="0.5" stopColor="#ff1801" stopOpacity="0.12"/>
-                        <stop offset="1" stopColor="#00b8ff" stopOpacity="0.12"/>
-                      </linearGradient>
-                    </defs>
-                    <circle cx="20" cy="20" r="20" fill="url(#mobileAvatarGradient)"/>
-                    <motion.rect
-                      x="-40" y="0" width="40" height="40"
-                      fill="url(#mobileAvatarShimmer)"
-                      animate={{ x: [ -40, 40 ] }}
-                      transition={{ repeat: Infinity, duration: shouldReduceMotion ? 0 : 4.5, ease: 'linear' }}
-                      style={{ mixBlendMode: 'lighten' }}
-                    />
-                    <text x="50%" y="54%" textAnchor="middle" fill="#3a4256" fontSize="18" fontWeight="bold" fontFamily="inherit" dominantBaseline="middle" style={{ letterSpacing: 1 }}>
-                      {user.name?.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase()}
-                    </text>
-                  </svg>
-                </motion.span>
-              )}
+                  <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
+                  <motion.div 
+                    className="nex-mobile-nav-user-tier"
+                    onClick={onSubscriptionClick}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={spring.fast}
+                  >
+                    {subscription?.tier === 'pro' ? 'Pro' : 'Free'}
+                  </motion.div>
+                </motion.div>
+              </>
+            ) : (
               <motion.div 
-                className="nex-mobile-nav-user-info"
+                className="nex-mobile-nav-guest-content"
                 variants={variants.fade.in}
                 initial="initial"
                 animate="animate"
-                transition={{ ...timing.medium, delay: 0.1 }}
+                transition={{ ...timing.medium, delay: 0.15 }}
               >
-                <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
-                <motion.div 
-                  className="nex-mobile-nav-user-tier"
-                  onClick={onSubscriptionClick}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <motion.button
+                  className="nex-mobile-nav-signup-btn"
+                  onClick={onLogin}
+                  whileHover={{
+                    backgroundColor: "rgba(255, 255, 255, 0.15)",
+                    borderColor: "rgba(255, 255, 255, 0.2)",
+                    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+                    scale: 1.02
+                  }}
+                  whileTap={{
+                    backgroundColor: "rgba(255, 24, 1, 0.15)",
+                    borderColor: "rgba(255, 24, 1, 0.2)",
+                    scale: 0.98
+                  }}
+                  transition={spring.responsive}
+                >
+                  Sign Up
+                </motion.button>
+                <motion.button 
+                  className="nex-mobile-nav-login-link"
+                  onClick={onLogin}
+                  whileHover={{ 
+                    opacity: 0.8,
+                    scale: 1.02
+                  }}
+                  whileTap={{ 
+                    scale: 0.98
+                  }}
                   transition={spring.fast}
                 >
-                  {subscription?.tier === 'pro' ? 'Pro' : 'Free'}
-                </motion.div>
+                  Already have an account? Sign in
+                </motion.button>
               </motion.div>
-            </>
-          ) : (
-            <motion.div 
-              className="nex-mobile-nav-guest-content"
+            )}
+            
+            {/* Theme Toggle in Header */}
+            <motion.div
+              className="nex-mobile-nav-theme-toggle"
               variants={variants.fade.in}
               initial="initial"
               animate="animate"
-              transition={{ ...timing.medium, delay: 0.15 }}
+              transition={{ ...timing.medium, delay: 0.2 }}
             >
-              <motion.button
-                className="nex-mobile-nav-signup-btn"
-                onClick={onLogin}
-                whileHover={{
-                  backgroundColor: "rgba(255, 255, 255, 0.15)",
-                  borderColor: "rgba(255, 255, 255, 0.2)",
-                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
-                  scale: 1.02
-                }}
-                whileTap={{
-                  backgroundColor: "rgba(255, 24, 1, 0.15)",
-                  borderColor: "rgba(255, 24, 1, 0.2)",
-                  scale: 0.98
-                }}
-                transition={spring.responsive}
-              >
-                Sign Up
-              </motion.button>
-              <motion.button 
-                className="nex-mobile-nav-login-link"
-                onClick={onLogin}
-                whileHover={{ 
-                  opacity: 0.8,
-                  scale: 1.02
-                }}
-                whileTap={{ 
-                  scale: 0.98
-                }}
-                transition={spring.fast}
-              >
-                Already have an account? Sign in
-              </motion.button>
+              <ThemeToggle isAtTop={false} />
             </motion.div>
-          )}
+          </div>
         </motion.div>
 
         {/* Navigation Items */}
@@ -457,42 +470,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
             </AnimatePresence>
           </motion.div>
 
-          {/* Theme Toggle - Grid Layout */}
-          <motion.div 
-            className="nex-mobile-nav-section"
-            variants={variants.mobileNav.navItem}
-          >
-            <motion.h4 
-              className="nex-mobile-nav-section-title"
-              variants={variants.mobileNav.sectionTitle}
-            >
-              Theme
-            </motion.h4>
-            <motion.div 
-              className="nex-mobile-nav-theme-grid"
-              variants={variants.mobileNav.navItem}
-            >
-              <motion.div 
-                className="nex-mobile-nav-item"
-                variants={variants.mobileNav.navItem}
-                whileHover={variants.interactive.navItem.hover}
-                whileTap={variants.interactive.navItem.active}
-                transition={spring.responsive}
-              >
-                <span className="nex-mobile-nav-text">Toggle Theme</span>
-              </motion.div>
-              <motion.div
-                variants={variants.mobileNav.navItem}
-                style={{ 
-                  display: 'flex', 
-                  justifyContent: 'center', 
-                  alignItems: 'center'
-                }}
-              >
-                <ThemeToggle isAtTop={false} />
-              </motion.div>
-            </motion.div>
-          </motion.div>
+
 
           {/* Profile Section */}
           {isAuthenticated && user && (
