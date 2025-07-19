@@ -415,7 +415,7 @@
     min-width: 220px;
     max-width: 320px;
     
-    /* Advanced Glassmorphic Design */
+    /* Advanced Glassmorphic Design - Light Theme Default */
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(20px) saturate(200%);
     -webkit-backdrop-filter: blur(20px) saturate(200%);
@@ -465,6 +465,9 @@
     flex-direction: column;
     gap: 1px;
   }
+}
+
+
 
   /* ================================
      📱 RESPONSIVE DROPDOWN POSITIONING
@@ -483,7 +486,6 @@
       max-width: 240px;
     }
   }
-}
 
 /* ================================
    🎨 ANIMATIONS - Optimized Performance
@@ -734,13 +736,45 @@
   }
 
   .nex-nav-dropdown {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px) saturate(200%);
-    -webkit-backdrop-filter: blur(20px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     box-shadow: 
-      0 4px 20px -4px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      0 8px 32px rgba(0, 0, 0, 0.9),
+      0 2px 8px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    
+    /* Enhanced shimmer for black glass */
+    &::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+      ) !important;
+    }
+  }
+  
+  /* Black glass dropdown when not at top */
+  &.not-at-top .nex-nav-dropdown {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.9),
+      0 2px 8px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    
+    &::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+      );
+    }
   }
 
   .nex-nav-burger-btn {
@@ -754,5 +788,51 @@
       background: rgba(255, 24, 1, 0.08);
       border-color: rgba(255, 24, 1, 0.15);
     }
+  }
+}
+
+/* ================================
+   🌒 DARK MODE DROPDOWN SUPPORT
+   ================================ */
+
+[data-theme="dark"] .nex-nav-dropdown {
+  background: rgba(26, 31, 54, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  &::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+  }
+}
+
+/* ================================
+   🌑 BLACK GLASS DROPDOWN SUPPORT (Global)
+   ================================ */
+
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav-dropdown {
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  
+  &::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    ) !important;
   }
 }
