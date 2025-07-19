@@ -1,0 +1,20 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-card-content {
+  font-size: var(--nex-font-size-md);
+  font-family: var(--nex-font-family-primary);
+  font-weight: var(--nex-font-weight-regular);
+  line-height: var(--nex-line-height-base);
+  color: var(--nex-font-color);
+  opacity: 0.9;
+  margin-bottom: var(--nex-spacing-md);
+
+  @include mobile {
+    font-size: var(--nex-font-size-lg);
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    color: var(--nex-font-color);
+  }
+} 

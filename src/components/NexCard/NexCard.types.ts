@@ -1,15 +1,12 @@
 export interface NexCardProps {
-    title?: string;
-    imageUrl?: string;
-    type?: ('primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | 'glass' | 'enterprise') | string;
-    content?: string;
-    actions?: React.ReactNode;
-    border?: boolean;
-    className?: string;
-    elevated?: boolean;
-    interactive?: boolean;
-    onClick?: () => void;
-    icon?: React.ReactNode;
-    badge?: string;
-    loading?: boolean;
+  title?: string;
+  content?: string;
+  imageUrl?: string;
+  actions?: React.ReactNode;
+  badge?: string;
+  type?: 'primary' | 'secondary' | 'glass' | 'enterprise';
+  interactive?: boolean;
+  onClick?: () => void;
+  elevated?: boolean;
+  className?: string;
 }

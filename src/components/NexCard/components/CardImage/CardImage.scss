@@ -1,0 +1,36 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-card-image {
+  position: relative;
+  width: 100%;
+  height: calculate(200px);
+  border-radius: var(--nex-radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--nex-spacing-md);
+
+  .nex-card-image-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--nex-transition-slow);
+  }
+
+  &:hover .nex-card-image-element {
+    transform: scale(1.05);
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    .nex-card-image-element {
+      filter: brightness(0.9);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .nex-card-image-element {
+      transition: none !important;
+    }
+  }
+} 

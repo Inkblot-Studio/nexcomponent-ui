@@ -1,0 +1,13 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nex-spacing-sm);
+  width: 100%;
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    /* Inherit parent styling */
+  }
+} 

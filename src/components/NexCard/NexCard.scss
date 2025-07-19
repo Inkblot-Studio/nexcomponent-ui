@@ -1,18 +1,14 @@
 @import "../../utils/mixin.scss";
 
-.nex-card-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calculate(440px);
-  min-height: calculate(454px);
+.nex-card {
+  position: relative;
+  width: calculate(400px);
+  background: var(--nex-surface-color);
   border: 1px solid var(--nex-border-color);
   border-radius: var(--nex-radius-xl);
-  position: relative;
-  overflow: hidden;
-  background: var(--nex-surface-color);
   box-shadow: var(--nex-shadow-sm);
-  will-change: transform, box-shadow, background-color;
+  overflow: hidden;
+  will-change: transform, box-shadow;
   transition: var(--nex-transition-base);
 
   /* Interactive states */
@@ -22,7 +18,6 @@
 
     &:hover {
       box-shadow: var(--nex-shadow-md);
-      transform: translateY(-2px);
     }
 
     &:focus-visible {
@@ -40,191 +35,9 @@
     }
   }
 
-  /* Loading state */
-  &.loading {
-    pointer-events: none;
-    
-    .nex-card-inner-wrapper {
-      opacity: 0.7;
-    }
-  }
-
-  &:hover {
-    .background-blob {
-      transform: scale(7);
-    }
-
-    .nex-card-inner-wrapper .nex-card-image:before {
-      transform: scale(1.1);
-    }
-  }
-
-  &:not(.has-image) {
-    justify-content: flex-end;
-    min-height: calculate(220px);
-  }
-
-  &:hover:not(.has-image) {
-    .nex-card-inner-wrapper {
-      color: #fff;
-    }
-  }
-
-  @include mobile {
-    width: 100%;
-  }
-  
-  .nex-card-inner-wrapper {
-    z-index: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    width: calculate(420px);
+  /* Card body */
+  .nex-card-body {
     padding: var(--nex-spacing-lg);
-    color: var(--nex-font-color);
-    transition: color var(--nex-transition-base);
-    position: relative;
-
-    /* Header section */
-    .nex-card-header {
-      display: flex;
-      align-items: center;
-      gap: var(--nex-spacing-sm);
-      margin-bottom: var(--nex-spacing-md);
-      width: 100%;
-
-      .nex-card-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calculate(32px);
-        height: calculate(32px);
-        border-radius: var(--nex-radius-md);
-        background: var(--nex-tertiary-color);
-        border: 1px solid var(--nex-border-color);
-        flex-shrink: 0;
-
-        svg {
-          width: calculate(18px);
-          height: calculate(18px);
-          color: var(--nex-font-color);
-        }
-      }
-
-      .nex-card-title {
-        margin: 0;
-        font-size: var(--nex-font-size-xl);
-        font-weight: var(--nex-font-weight-bold);
-        font-family: var(--nex-font-family-primary);
-        line-height: var(--nex-line-height-tight);
-        letter-spacing: 0.02em;
-        flex: 1;
-        min-width: 0;
-
-        @include mobile {
-          font-size: var(--nex-font-size-2xl);
-        }
-      }
-
-      .nex-card-badge {
-        padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
-        background: var(--nex-primary-color);
-        color: var(--nex-primary-contrast-color);
-        border-radius: var(--nex-radius-full);
-        font-size: var(--nex-font-size-xs);
-        font-weight: var(--nex-font-weight-semibold);
-        line-height: 1;
-        flex-shrink: 0;
-        box-shadow: var(--nex-shadow-xs);
-      }
-    }
-
-    .nex-card-image {
-      position: relative;
-      width: 100%;
-      height: calculate(274px);
-      border-radius: var(--nex-radius-lg);
-      overflow: hidden;
-      margin-bottom: var(--nex-spacing-md);
-
-      &:before {
-        z-index: 0;
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-image: var(--background-url);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-radius: var(--nex-radius-lg);
-        transition: transform var(--nex-transition-slow);
-      }
-    }
-
-    .nex-card-title {
-      margin-top: var(--nex-spacing-md);
-      margin-bottom: var(--nex-spacing-sm);
-      font-size: var(--nex-font-size-xl);
-      font-weight: var(--nex-font-weight-bold);
-      font-family: var(--nex-font-family-primary);
-      line-height: var(--nex-line-height-tight);
-      letter-spacing: 0.02em;
-
-      @include mobile {
-        font-size: var(--nex-font-size-2xl);
-      }
-    }
-
-    .nex-card-text {
-      font-size: var(--nex-font-size-md);
-      font-family: var(--nex-font-family-primary);
-      font-weight: var(--nex-font-weight-regular);
-      line-height: var(--nex-line-height-base);
-      margin: var(--nex-spacing-sm) 0;
-      color: var(--nex-font-color);
-      opacity: 0.9;
-
-      @include mobile {
-        font-size: var(--nex-font-size-lg);
-      }
-    }
-    
-    .nex-card-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--nex-spacing-sm);
-      margin-top: var(--nex-spacing-md);
-      width: 100%;
-    }
-  }
-
-  /* Loading overlay */
-  .nex-card-loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--nex-glass-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    border-radius: var(--nex-radius-xl);
-  }
-
-  .nex-card-spinner {
-    width: calculate(32px);
-    height: calculate(32px);
-    border: 3px solid var(--nex-border-color);
-    border-top: 3px solid var(--nex-primary-color);
-    border-radius: 50%;
   }
 
   /* Ripple effect */
@@ -241,74 +54,15 @@
     z-index: 5;
   }
 
-  .background-blob {
-    height: calculate(160px);
-    width: calculate(160px);
-    background: var(--nex-primary-color);
-    z-index: 0;
-    position: absolute;
-    top: calculate(-100px);
-    right: calculate(-100px);
-    border-radius: 50%;
-    transition: all var(--nex-transition-slow);
-    box-shadow: var(--nex-shadow-sm);
-  }
-
   /* Type variants */
   &--primary {
-    .background-blob {
-      background: var(--nex-primary-color);
-      box-shadow: var(--nex-shadow-sm);
-    }
+    background: var(--nex-surface-color);
+    border-color: var(--nex-border-color);
   }
 
   &--secondary {
-    .background-blob {
-      background: var(--nex-secondary-color);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--tertiary {
-    .background-blob {
-      background: var(--nex-tertiary-color);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--quaternary {
-    .background-blob {
-      background: var(--nex-quaternary-color);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--success {
-    .background-blob {
-      background: var(--nex-success);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--info {
-    .background-blob {
-      background: var(--nex-info);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--warning {
-    .background-blob {
-      background: var(--nex-warning);
-      box-shadow: var(--nex-shadow-sm);
-    }
-  }
-
-  &--danger {
-    .background-blob {
-      background: var(--nex-danger);
-      box-shadow: var(--nex-shadow-sm);
-    }
+    background: var(--nex-tertiary-color);
+    border-color: var(--nex-tertiary-dark);
   }
 
   &--glass {
@@ -316,21 +70,12 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-color: var(--nex-glass-border);
-
-    .background-blob {
-      background: var(--nex-glass-bg-light);
-      box-shadow: var(--nex-shadow-xs);
-    }
   }
 
   &--enterprise {
     background: var(--nex-surface-color);
     border-color: var(--nex-signature);
-
-    .background-blob {
-      background: var(--nex-signature);
-      box-shadow: var(--nex-shadow-sm);
-    }
+    box-shadow: var(--nex-shadow-sm), 0 0 0 1px rgba(255, 24, 1, 0.1);
   }
 
   /* Black glass theme support */
@@ -343,7 +88,7 @@
       border-color: var(--nex-glass-border);
     }
 
-    &.nex-card-wrapper--glass {
+    &.nex-card--glass {
       background: var(--nex-glass-bg);
       border-color: var(--nex-glass-border);
 
@@ -357,18 +102,12 @@
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     transition: none !important;
-    
-    .nex-card-spinner {
-      animation: none !important;
-    }
+  }
 
-    .background-blob {
-      transition: none !important;
-    }
-
-    .nex-card-image:before {
-      transition: none !important;
-    }
+  /* Mobile responsiveness */
+  @include mobile {
+    width: 100%;
+    max-width: calculate(400px);
   }
 }
   

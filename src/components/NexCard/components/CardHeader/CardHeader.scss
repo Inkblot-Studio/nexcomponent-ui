@@ -1,0 +1,50 @@
+@import "../../../../utils/mixin.scss";
+
+.nex-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nex-spacing-sm);
+  margin-bottom: var(--nex-spacing-md);
+  width: 100%;
+
+  .nex-card-title {
+    margin: 0;
+    font-size: var(--nex-font-size-xl);
+    font-weight: var(--nex-font-weight-bold);
+    font-family: var(--nex-font-family-primary);
+    line-height: var(--nex-line-height-tight);
+    letter-spacing: 0.02em;
+    color: var(--nex-font-color);
+    flex: 1;
+    min-width: 0;
+
+    @include mobile {
+      font-size: var(--nex-font-size-2xl);
+    }
+  }
+
+  .nex-card-badge {
+    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    background: var(--nex-signature);
+    color: var(--nex-signature-contrast);
+    border-radius: var(--nex-radius-full);
+    font-size: var(--nex-font-size-xs);
+    font-weight: var(--nex-font-weight-semibold);
+    line-height: 1;
+    flex-shrink: 0;
+    box-shadow: var(--nex-shadow-xs);
+  }
+
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    .nex-card-title {
+      color: var(--nex-font-color);
+    }
+
+    .nex-card-badge {
+      background: var(--nex-signature);
+      color: var(--nex-signature-contrast);
+    }
+  }
+} 
