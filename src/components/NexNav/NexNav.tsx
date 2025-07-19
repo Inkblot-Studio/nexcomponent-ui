@@ -14,6 +14,7 @@ import {
 import { NexNavProps } from './NexNav.types';
 import { Menu, X } from 'lucide-react';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../utils/animationConfig';
+import { ThemeProvider } from './ThemeContext';
 
 const LANG_KEY = 'nex-locale';
 
@@ -45,7 +46,7 @@ function useResponsiveLeft() {
   return left;
 }
 
-const NexNav: React.FC<NexNavProps> = ({
+const NexNavInner: React.FC<NexNavProps> = ({
   logoSrc,
   displayName,
   homeButtonHandler,
@@ -457,6 +458,14 @@ const NexNav: React.FC<NexNavProps> = ({
         left={useResponsiveLeft()}
       />
     </>
+  );
+};
+
+const NexNav: React.FC<NexNavProps> = (props) => {
+  return (
+    <ThemeProvider>
+      <NexNavInner {...props} />
+    </ThemeProvider>
   );
 };
 

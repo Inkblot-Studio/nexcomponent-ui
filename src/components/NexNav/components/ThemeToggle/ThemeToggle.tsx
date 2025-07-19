@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../ThemeContext';
 import './ThemeToggle.scss';
 
 interface ThemeToggleProps {
@@ -14,48 +15,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   className = '',
   theme = 'auto'
 }) => {
-  const [isDark, setIsDark] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('nex-theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-      const isDarkMode = savedTheme === 'dark' || savedTheme === 'black-glass';
-      setIsDark(isDarkMode);
-      document.documentElement.setAttribute('data-theme', 'dark');
-      if (isDarkMode) {
-        document.documentElement.setAttribute('data-theme-variant', 'black-glass');
-      }
-    } else {
-      setIsDark(systemPrefersDark);
-      document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
-      if (systemPrefersDark) {
-        document.documentElement.setAttribute('data-theme-variant', 'black-glass');
-      }
-    }
-  }, []);
-
-  const toggleTheme = () => {
+  const handleToggle = () => {
     if (isAnimating) return;
     
     setIsAnimating(true);
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    
-    // Update localStorage
-    localStorage.setItem('nex-theme', newTheme ? 'black-glass' : 'light');
-    
-    // Update document attributes
-    if (newTheme) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      document.documentElement.setAttribute('data-theme-variant', 'black-glass');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      document.documentElement.removeAttribute('data-theme-variant');
-    }
+    toggleTheme();
     
     // Reset animation flag after animation completes
     setTimeout(() => setIsAnimating(false), 600);
@@ -71,7 +38,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   return (
     <motion.button
       className={`nex-theme-toggle ${className}`}
-      onClick={toggleTheme}
+      onClick={handleToggle}
       onKeyDown={handleKeyDown}
       role="switch"
       aria-checked={isDark}

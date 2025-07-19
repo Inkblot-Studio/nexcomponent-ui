@@ -209,6 +209,30 @@
       border-color: rgba(255, 24, 1, 0.3);
     }
   }
+
+  /* ================================
+     🌑 BLACK GLASS THEME SUPPORT
+     ================================ */
+
+  [data-theme="dark"][data-theme-variant="black-glass"] & {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    
+    &:focus-visible {
+      background: rgba(255, 24, 1, 0.15);
+      border-color: rgba(255, 24, 1, 0.25);
+    }
+    
+    &:active {
+      background: rgba(255, 24, 1, 0.2);
+      border-color: rgba(255, 24, 1, 0.3);
+    }
+  }
   
   /* ================================
      ACCESSIBILITY ENHANCEMENTS

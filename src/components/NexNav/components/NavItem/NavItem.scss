@@ -633,6 +633,108 @@
 }
 
 /* ================================
+   🌑 BLACK GLASS THEME SUPPORT
+   ================================ */
+
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  &:hover:not(.disabled),
+  &:focus-visible:not(.disabled),
+  &:active:not(.disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  &:focus-visible:not(.disabled) {
+    background: rgba(255, 24, 1, 0.15);
+    border: 1px solid rgba(255, 24, 1, 0.3);
+  }
+  
+  &:active:not(.disabled) {
+    background: rgba(255, 24, 1, 0.2);
+    border: 1px solid rgba(255, 24, 1, 0.4);
+  }
+  
+  &.dropdown-open {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav-dropdown {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.8),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  &::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+  }
+}
+
+/* ================================
+   🌑 BLACK GLASS DROPDOWN - NOT AT TOP
+   ================================ */
+
+.nex-nav--black-glass.not-at-top .nex-nav-dropdown {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  
+  &::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+  }
+}
+
+.nex-nav--black-glass.not-at-top .nex-nav-sub-item {
+  color: rgba(255, 255, 255, 0.95);
+  
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+  }
+  
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav-sub-item {
+  color: rgba(255, 255, 255, 0.9);
+  
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+  }
+  
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* ================================
    ♿ ACCESSIBILITY ENHANCEMENTS
    ================================ */
 

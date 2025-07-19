@@ -126,7 +126,7 @@ const NavLogo: React.FC<NavLogoProps> = ({
             style={{
               fontSize: '0.9rem',
               fontWeight: 600,
-              color: 'var(--nex-color-text-primary)',
+              color: 'var(--nex-font-color)',
               textAlign: 'center',
               lineHeight: 1.2,
               whiteSpace: 'nowrap',
