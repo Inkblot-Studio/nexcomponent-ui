@@ -65,7 +65,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         className="nex-footer-contact-form__title"
         variants={animations.link}
         whileHover={{ 
-          x: 1,
+          opacity: 0.9,
           color: theme === 'black-glass' ? '#ff6b35' : undefined
         }}
         transition={animations.hover}
@@ -79,7 +79,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           className="nex-footer-contact-form__description"
           variants={animations.link}
           whileHover={{ 
-            x: 1,
+            opacity: 0.9,
             color: theme === 'black-glass' ? '#ffffff' : undefined
           }}
           transition={animations.hover}
@@ -128,7 +128,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           className={`nex-footer-contact-form__input ${focusedField === 'email' ? 'nex-footer-contact-form__input--focused' : ''}`}
           variants={animations.formField}
           whileHover={{ 
-            y: -1
+            opacity: 0.9
           }}
           transition={animations.hover}
         >
@@ -150,7 +150,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           className={`nex-footer-contact-form__textarea ${focusedField === 'message' ? 'nex-footer-contact-form__textarea--focused' : ''}`}
           variants={animations.formField}
           whileHover={{ 
-            y: -1
+            opacity: 0.9
           }}
           transition={animations.hover}
         >
@@ -174,13 +174,12 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           className="nex-footer-contact-form__button"
           variants={animations.button}
           whileHover={{ 
-            y: -1
+            opacity: 0.9
           }}
           whileTap={{ 
-            y: 0,
-            scale: 0.98
+            opacity: 0.8
           }}
-          transition={animations.spring?.responsive || animations.hover}
+          transition={animations.hover}
         >
           <AnimatePresence mode="wait">
             {isSubmitting ? (

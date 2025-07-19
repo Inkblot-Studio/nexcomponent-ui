@@ -1,18 +1,19 @@
 @import '../../../utils/mixin.scss';
 
 /* ================================
-   FOOTER CONTAINER - Simplified Grid System
+   FOOTER CONTAINER - Enterprise Grid System
    ================================
    
-   Simplified footer container with clean, consistent layout
+   Enterprise-grade footer container with clean, consistent layout
    that works reliably across all device sizes.
    
    Design Philosophy:
    - Simple, predictable grid layouts
    - Consistent spacing and sizing
-   - No ridiculous mobile scaling
+   - No layout shifts on hover
    - Clean responsive breakpoints
    - Maintainable and readable code
+   - Enterprise-grade polish
  */
 
 .nex-footer-container {
@@ -40,7 +41,7 @@
   }
 
   /* ================================
-     SIMPLIFIED GRID LAYOUT SYSTEM
+     ENTERPRISE GRID LAYOUT SYSTEM
      ================================ */
   
   .nex-footer-inner {
@@ -64,8 +65,7 @@
       grid-template-areas: 
         "branding"
         "sections"
-        "contact"
-        "tools";
+        "contact";
       gap: var(--nex-spacing-xl);
       padding: 0 var(--nex-spacing-lg);
     }
@@ -75,8 +75,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-areas: 
         "branding sections"
-        "contact contact"
-        "tools tools";
+        "contact contact";
       gap: var(--nex-spacing-xl);
     }
     
@@ -84,8 +83,7 @@
     @media (min-width: 1025px) {
       grid-template-columns: minmax(280px, 1fr) minmax(400px, 2fr) minmax(320px, 1fr);
       grid-template-areas: 
-        "branding sections contact"
-        "tools tools tools";
+        "branding sections contact";
       gap: var(--nex-spacing-2xl) var(--nex-spacing-xl);
     }
     
@@ -114,12 +112,6 @@
   /* Contact area */
   .nex-footer-contact-side {
     grid-area: contact;
-    align-self: start;
-  }
-  
-  /* Developer tools area */
-  .nex-footer-developer-tools {
-    grid-area: tools;
     align-self: start;
   }
 
@@ -164,8 +156,7 @@
       grid-template-columns: 1fr;
       grid-template-areas: 
         "branding"
-        "contact"
-        "tools";
+        "contact";
       max-width: 1200px;
       gap: var(--nex-spacing-2xl);
       
@@ -194,8 +185,7 @@
     .nex-footer-inner {
       grid-template-columns: 1fr;
       grid-template-areas: 
-        "sections"
-        "tools";
+        "sections";
       max-width: 1200px;
       gap: var(--nex-spacing-xl);
       
@@ -249,47 +239,42 @@
         radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 80%);
       opacity: 0.6;
     }
-
-    /* Enhanced content styling for black glass */
-    .nex-footer-content {
-      color: #ffffff;
-    }
-
-    .nex-footer-inner {
-      color: #ffffff;
-    }
-
-    /* Side contact styling for black glass */
-    .nex-footer-contact-side--black-glass {
-      .nex-footer-contact-form {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(16px) saturate(180%);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
-      }
-    }
   }
 
   /* ================================
-     ACCESSIBILITY & PERFORMANCE
+     ENTERPRISE POLISH
      ================================ */
   
-  /* Ensure proper focus management */
-  &:focus-within {
-    outline: none;
+  /* Consistent spacing */
+  .nex-footer-content {
+    box-sizing: border-box;
   }
   
-  /* Optimize for reduced motion */
+  /* Professional typography */
+  * {
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+  
+  /* Smooth transitions */
+  * {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* ================================
+     ACCESSIBILITY ENHANCEMENTS
+     ================================ */
+  
   @media (prefers-reduced-motion: reduce) {
-    .nex-footer-inner {
-      transition: none;
+    * {
+      transition: none !important;
+      animation: none !important;
     }
   }
   
   /* High contrast mode support */
   @media (prefers-contrast: high) {
-    .nex-footer-inner {
-      gap: var(--nex-spacing-lg);
+    .nex-footer-background {
+      background: var(--nex-background-color) !important;
     }
   }
 } 

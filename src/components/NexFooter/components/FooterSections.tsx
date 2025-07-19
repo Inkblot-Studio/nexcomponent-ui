@@ -17,16 +17,19 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
 }) => {
   const animations = useFooterAnimations();
 
+  // Limit sections to maximum of 4 for better layout control
+  const limitedSections = sections.slice(0, 4);
+  
   // Determine if we have many sections for class-based styling
-  const hasManySections = sections.length >= 6;
+  const hasManySections = limitedSections.length >= 3;
 
   const sectionsClass = `nex-footer-sections ${variant === 'compact' ? 'nex-footer-sections--compact' : ''} ${variant === 'contact' ? 'nex-footer-sections--contact' : ''} ${theme === 'black-glass' ? 'nex-footer-sections--black-glass' : ''} ${hasManySections ? 'nex-footer-sections--many-sections' : ''}`;
 
   // Optimize animation delays based on number of sections
   const getStaggerDelay = (index: number) => {
-    if (sections.length <= 4) {
+    if (limitedSections.length <= 2) {
       return index * 0.05;
-    } else if (sections.length <= 6) {
+    } else if (limitedSections.length <= 3) {
       return index * 0.03;
     } else {
       return index * 0.02;
@@ -40,7 +43,7 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
       initial="initial"
       animate="animate"
     >
-      {sections.map((section, index) => (
+      {limitedSections.map((section, index) => (
         <motion.div 
           key={index} 
           className="nex-footer-sections__section"
@@ -65,10 +68,10 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
             animate="animate"
             transition={{ 
               delayChildren: getStaggerDelay(index), 
-              staggerChildren: sections.length > 6 ? 0.02 : 0.03 
+              staggerChildren: limitedSections.length > 3 ? 0.02 : 0.03 
             }}
           >
-            {section.links.map((link, linkIndex) => (
+            {section.links.slice(0, 6).map((link, linkIndex) => (
               <motion.li 
                 key={linkIndex}
                 variants={animations.stagger.item}
@@ -79,12 +82,10 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
                   rel="noopener noreferrer"
                   className="nex-footer-sections__link"
                   whileHover={{ 
-                    opacity: 0.8,
-                    y: -1
+                    opacity: 0.8
                   }}
                   whileTap={{ 
-                    opacity: 0.7,
-                    y: 0
+                    opacity: 0.7
                   }}
                   transition={animations.hover}
                 >

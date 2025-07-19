@@ -45,13 +45,6 @@ export interface NexFooterProps {
   // Social Media
   socials?: SocialLink[];
   
-  // Developer Tools
-  developerTools?: {
-    copyCommands?: boolean;
-    npmPackage?: string;
-    githubUrl?: string;
-  };
-  
   // Variants
   variant?: 'default' | 'compact' | 'contact';
   

@@ -4,7 +4,6 @@ import { NexFooterProps } from './NexFooter.types';
 import FooterContainer from './components/FooterContainer';
 import FooterBranding from './components/FooterBranding';
 import FooterSections from './components/FooterSections';
-import FooterDeveloperTools from './components/FooterDeveloperTools';
 import FooterBottom from './components/FooterBottom';
 import FooterContactForm from './components/FooterContactForm';
 import { useFooterAnimations } from './animations';
@@ -19,7 +18,6 @@ const NexFooter: React.FC<NexFooterProps> = ({
   newsletter,
   contact,
   socials = [],
-  developerTools,
   variant = 'default',
   theme = 'auto',
   className = ''
@@ -105,25 +103,6 @@ const NexFooter: React.FC<NexFooterProps> = ({
                 >
                   <FooterContactForm
                     contact={contact}
-                    variant={variant}
-                    theme={theme}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Developer Tools - Only show if not contact variant */}
-            <AnimatePresence>
-              {developerTools && variant !== 'contact' && (
-                <motion.div
-                  key="footer-developer-tools"
-                  variants={animations.stagger.item}
-                  initial="initial"
-                  animate="animate"
-                  exit="initial"
-                >
-                  <FooterDeveloperTools
-                    developerTools={developerTools}
                     variant={variant}
                     theme={theme}
                   />

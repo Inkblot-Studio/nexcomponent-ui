@@ -61,54 +61,49 @@ export const FOOTER_ANIMATIONS = {
 
   // Button animations using common spring config
   button: {
-    initial: { opacity: 0, scale: 0.95 },
+    initial: { opacity: 0, y: 5 },
     animate: { 
       opacity: 1, 
-      scale: 1,
+      y: 0,
       transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 30
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
       }
     }
   },
 
   // Message animations using common spring config
   message: {
-    initial: { opacity: 0, y: -8, scale: 0.95 },
+    initial: { opacity: 0, y: -8 },
     animate: { 
       opacity: 1, 
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 30
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
       }
     },
     exit: { 
       opacity: 0, 
       y: -8,
-      scale: 0.95,
       transition: {
         duration: 0.2
       }
     }
   },
 
-  // Hover animations using common timing
+  // Hover animations - no transform/scale to avoid layout shifts
   hover: {
-    y: -1,
+    opacity: 0.8,
     transition: {
       duration: 0.2,
       ease: [0.4, 0, 0.2, 1]
     }
   },
 
-  // Tap animations using common timing
+  // Tap animations - no transform/scale to avoid layout shifts
   tap: {
-    y: 0,
-    scale: 0.98,
+    opacity: 0.7,
     transition: {
       duration: 0.1,
       ease: [0.4, 0, 0.2, 1]

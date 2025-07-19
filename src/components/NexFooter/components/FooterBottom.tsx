@@ -82,11 +82,9 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                   aria-label={`Follow us on ${social.type}`}
                   whileHover={{ 
                     opacity: 0.9,
-                    scale: 1.05,
                     color: theme === 'black-glass' ? '#ffffff' : undefined
                   }}
                   whileTap={{ 
-                    scale: 0.95,
                     opacity: 0.7 
                   }}
                   transition={{ 
