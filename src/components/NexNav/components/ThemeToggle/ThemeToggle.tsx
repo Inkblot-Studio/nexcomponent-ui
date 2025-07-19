@@ -23,11 +23,18 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      const isDarkMode = savedTheme === 'dark' || savedTheme === 'black-glass';
+      setIsDark(isDarkMode);
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (isDarkMode) {
+        document.documentElement.setAttribute('data-theme-variant', 'black-glass');
+      }
     } else {
       setIsDark(systemPrefersDark);
       document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
+      if (systemPrefersDark) {
+        document.documentElement.setAttribute('data-theme-variant', 'black-glass');
+      }
     }
   }, []);
 
@@ -39,10 +46,16 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     setIsDark(newTheme);
     
     // Update localStorage
-    localStorage.setItem('nex-theme', newTheme ? 'dark' : 'light');
+    localStorage.setItem('nex-theme', newTheme ? 'black-glass' : 'light');
     
-    // Update document attribute
-    document.documentElement.setAttribute('data-theme', newTheme ? 'dark' : 'light');
+    // Update document attributes
+    if (newTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme-variant', 'black-glass');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.documentElement.removeAttribute('data-theme-variant');
+    }
     
     // Reset animation flag after animation completes
     setTimeout(() => setIsAnimating(false), 600);
@@ -93,7 +106,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
           restDelta: 0.001
         }}
       >
-        {/* Sun icon */}
+        {/* Theme icon */}
         <AnimatePresence mode="wait">
           {!isDark ? (
             <motion.div

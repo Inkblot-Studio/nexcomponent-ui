@@ -556,6 +556,8 @@ body.nex-lock-scroll {
    🌑 BLACK GLASS PREMIUM THEME
    ================================ */
 
+/* Override dark mode styles with black glass */
+[data-theme="dark"] .nex-mobile-nav--black-glass,
 .nex-mobile-nav--black-glass {
   background: linear-gradient(135deg, 
     rgba(0, 0, 0, 0.95) 0%, 

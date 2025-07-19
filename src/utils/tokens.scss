@@ -242,6 +242,32 @@
   --nex-glass-shadow-dark: rgba(0, 0, 0, 0.6);
 }
 
+/* ================================
+   🌑 Black Glass Theme Variant
+   ================================ */
+
+[data-theme="dark"][data-theme-variant="black-glass"] {
+  /* Enhanced black glass effects for premium feel */
+  --nex-background-color: #000000;
+  --nex-surface-color: #0a0a0a;
+  --nex-font-color: #ffffff;
+  --nex-muted-font-color: #a0a0a0;
+
+  /* Premium black glass shadows */
+  --nex-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.8);
+  --nex-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.9);
+
+  /* Black glass specific glassmorphic effects */
+  --nex-glass-bg: rgba(0, 0, 0, 0.95);
+  --nex-glass-bg-light: rgba(10, 10, 10, 0.92);
+  --nex-glass-bg-lighter: rgba(20, 20, 20, 0.85);
+  --nex-glass-bg-lightest: rgba(30, 30, 30, 0.7);
+  --nex-glass-border: rgba(255, 255, 255, 0.1);
+  --nex-glass-border-light: rgba(255, 255, 255, 0.05);
+  --nex-glass-shadow: rgba(0, 0, 0, 0.8);
+  --nex-glass-shadow-dark: rgba(0, 0, 0, 0.95);
+}
+
 /**
  * ========================================
  * 📋 USAGE GUIDELINES
@@ -254,4 +280,5 @@
  * 5. Test in both light and dark modes
  * 6. Ensure accessibility compliance
  * 7. Optimize for mobile and desktop contexts
+ * 8. Black glass theme provides premium dark experience
  */

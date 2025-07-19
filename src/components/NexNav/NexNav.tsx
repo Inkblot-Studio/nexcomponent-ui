@@ -72,6 +72,7 @@ const NexNav: React.FC<NexNavProps> = ({
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [currentThemeVariant, setCurrentThemeVariant] = useState<string | null>(null);
 
   const menuRef = useRef(null);
   const navRef = useRef<HTMLElement>(null);
@@ -209,6 +210,33 @@ const NexNav: React.FC<NexNavProps> = ({
     setIsInitialized(true);
   }, [languageOptions]);
 
+  // Listen for theme changes
+  useEffect(() => {
+    const checkThemeVariant = () => {
+      const variant = document.documentElement.getAttribute('data-theme-variant');
+      setCurrentThemeVariant(variant);
+    };
+
+    // Initial check
+    checkThemeVariant();
+
+    // Create a mutation observer to watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme-variant') {
+          checkThemeVariant();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme-variant']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
@@ -230,7 +258,7 @@ const NexNav: React.FC<NexNavProps> = ({
   return (
     <>
       <motion.nav
-        className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}${theme === 'black-glass' ? ' nex-nav--black-glass' : ''}`}
+        className={`nex-nav${!isAtTop || isMenuOpen ? ' not-at-top' : ''}${theme === 'black-glass' || currentThemeVariant === 'black-glass' ? ' nex-nav--black-glass' : ''}`}
         ref={navRef}
         initial="initial"
         animate={isInitialized ? "animate" : "initial"}
@@ -248,7 +276,7 @@ const NexNav: React.FC<NexNavProps> = ({
         aria-label="Main navigation"
       >
         {/* Background state animation - hidden for black glass theme */}
-        {theme !== 'black-glass' && (
+        {theme !== 'black-glass' && currentThemeVariant !== 'black-glass' && (
           <motion.div
             style={{
               position: 'absolute',
@@ -265,7 +293,7 @@ const NexNav: React.FC<NexNavProps> = ({
           />
         )}
         {/* Optimized Shimmer Effect - hidden for black glass theme */}
-        {theme !== 'black-glass' && (
+        {theme !== 'black-glass' && currentThemeVariant !== 'black-glass' && (
           <motion.div
             className="nex-nav-shimmer"
             variants={shimmerVariants}

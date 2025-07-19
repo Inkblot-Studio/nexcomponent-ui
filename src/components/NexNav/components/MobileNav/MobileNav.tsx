@@ -43,6 +43,36 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onAdminPanelClick,
   theme = 'auto'
 }) => {
+  // Check for black glass theme variant
+  const [currentThemeVariant, setCurrentThemeVariant] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkThemeVariant = () => {
+      const variant = document.documentElement.getAttribute('data-theme-variant');
+      setCurrentThemeVariant(variant);
+    };
+
+    // Initial check
+    checkThemeVariant();
+
+    // Create a mutation observer to watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme-variant') {
+          checkThemeVariant();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme-variant']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isBlackGlass = theme === 'black-glass' || currentThemeVariant === 'black-glass';
   // State management
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openNavItems, setOpenNavItems] = useState<Set<number>>(new Set());
@@ -111,7 +141,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
 
   return (
     <motion.div
-      className={`nex-mobile-nav${theme === 'black-glass' ? ' nex-mobile-nav--black-glass' : ''}`}
+      className={`nex-mobile-nav${isBlackGlass ? ' nex-mobile-nav--black-glass' : ''}`}
       variants={variants.mobileNav.container}
       initial="initial"
       animate="animate"
@@ -127,7 +157,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
         zIndex: 'var(--nex-z-index-modal)',
         display: 'flex',
         flexDirection: 'column',
-        ...(theme !== 'black-glass' ? {
+        // Only apply default styles when NOT black glass
+        ...(!isBlackGlass ? {
           background: colors.mobileNav.background.primary,
           backdropFilter: colors.mobileNav.backdrop.medium,
           WebkitBackdropFilter: colors.mobileNav.backdrop.medium,
@@ -242,10 +273,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 <motion.button
                   className="nex-mobile-nav-signup-btn"
                   onClick={onLogin}
-                  whileHover={{
-                    backgroundColor: theme === 'black-glass' ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
-                    borderColor: theme === 'black-glass' ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
-                    boxShadow: theme === 'black-glass' ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)",
+                              whileHover={{
+              backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
+              borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
+              boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)",
                     scale: 1.02
                   }}
                   whileTap={{
