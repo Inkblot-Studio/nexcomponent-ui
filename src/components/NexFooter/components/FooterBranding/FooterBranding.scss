@@ -21,6 +21,11 @@
   gap: var(--nex-spacing-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
+  /* Desktop: Add right margin for spacing from sections */
+  @media (min-width: 1025px) {
+    margin-right: var(--nex-spacing-xl);
+  }
+  
   /* ================================
      LOGO STYLING
      ================================ */
@@ -122,6 +127,7 @@
     flex-direction: column;
     gap: var(--nex-spacing-sm);
     margin-top: var(--nex-spacing-md);
+    margin-bottom: var(--nex-spacing-lg);
   }
   
   &__newsletter {
