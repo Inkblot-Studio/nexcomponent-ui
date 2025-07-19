@@ -3,10 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import './NexNav.scss';
 
-import NavItems from './components/NavItems';
-import NavControls from './components/NavControls';
-import NavLogo from './components/NavLogo';
-import MobileNav from './components/MobileNav';
+import {
+  NavItems,
+  NavControls,
+  NavLogo,
+  MobileNav,
+  ThemeToggle
+} from './components';
 
 import { NexNavProps } from './NexNav.types';
 import { Menu, X } from 'lucide-react';

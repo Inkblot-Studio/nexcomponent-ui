@@ -1,0 +1,373 @@
+@import '../../../../utils/mixin.scss';
+
+.nex-theme-toggle {
+  /* ================================
+     PREMIUM THEME TOGGLE STYLES
+     ================================ */
+  
+  /* Core Button */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--nex-radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  outline: none;
+  box-sizing: border-box;
+  will-change: transform, background-color, border-color, box-shadow;
+  
+  /* Enhanced Glassmorphic Design - Matching Language Switcher */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  /* Transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* ================================
+     BACKGROUND CIRCLE
+     ================================ */
+  
+  &__background {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      rgba(255, 255, 255, 0.15) 100%);
+    backdrop-filter: blur(12px) saturate(200%);
+    -webkit-backdrop-filter: blur(12px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+  }
+  
+  /* ================================
+     ICON CONTAINER
+     ================================ */
+  
+  &__icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  /* ================================
+     ICONS
+     ================================ */
+  
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    color: var(--nex-font-color);
+    transition: color 0.3s ease;
+    
+    /* Sun Icon */
+    &--sun {
+      color: #fbbf24;
+      filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.4));
+      
+      svg {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+      }
+    }
+    
+    /* Moon Icon */
+    &--moon {
+      color: #8b5cf6;
+      filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.4));
+      
+      svg {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+      }
+    }
+    
+    svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+      transition: all 0.3s ease;
+    }
+  }
+  
+  /* ================================
+     RIPPLE EFFECT
+     ================================ */
+  
+  &__ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+      rgba(255, 255, 255, 0.3) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      transparent 100%);
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  
+  /* ================================
+     HOVER STATES
+     ================================ */
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    
+    .nex-theme-toggle__background {
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.25) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        rgba(255, 255, 255, 0.2) 100%);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px) saturate(200%);
+      -webkit-backdrop-filter: blur(12px) saturate(200%);
+    }
+    
+    .nex-theme-toggle__icon {
+      &--sun {
+        color: #f59e0b;
+        filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+      }
+      
+      &--moon {
+        color: #7c3aed;
+        filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.6));
+      }
+    }
+  }
+  
+  /* ================================
+     FOCUS STATES
+     ================================ */
+  
+  &:focus-visible {
+    outline: 2px solid var(--nex-signature);
+    outline-offset: 2px;
+    background: rgba(255, 24, 1, 0.1);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border-color: rgba(255, 24, 1, 0.2);
+    box-shadow: 
+      0 4px 20px rgba(255, 24, 1, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  /* ================================
+     ACTIVE STATES
+     ================================ */
+  
+  &:active {
+    background: rgba(255, 24, 1, 0.15);
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    border-color: rgba(255, 24, 1, 0.25);
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    
+    .nex-theme-toggle__background {
+      background: linear-gradient(135deg, 
+        rgba(255, 24, 1, 0.2) 0%, 
+        rgba(255, 24, 1, 0.1) 50%, 
+        rgba(255, 24, 1, 0.15) 100%);
+      border-color: rgba(255, 24, 1, 0.3);
+    }
+  }
+  
+  /* ================================
+     DISABLED STATE
+     ================================ */
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    
+    &:hover {
+      transform: none;
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* ================================
+     RESPONSIVE BEHAVIOR
+     ================================ */
+  
+  @include mobile {
+    width: 32px;
+    height: 32px;
+    
+    &__icon {
+      width: 12px;
+      height: 12px;
+      
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+  
+  @include tablet {
+    width: 36px;
+    height: 36px;
+    
+    &__icon {
+      width: 14px;
+      height: 14px;
+      
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+  
+  /* ================================
+     DARK MODE ADAPTATIONS
+     ================================ */
+  
+  [data-theme="dark"] & {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    &__background {
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.03) 50%, 
+        rgba(255, 255, 255, 0.08) 100%);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      
+      .nex-theme-toggle__background {
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.15) 0%, 
+          rgba(255, 255, 255, 0.06) 50%, 
+          rgba(255, 255, 255, 0.12) 100%);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+    
+    &:focus-visible {
+      background: rgba(255, 24, 1, 0.15);
+      border-color: rgba(255, 24, 1, 0.25);
+      box-shadow: 
+        0 4px 20px rgba(255, 24, 1, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+    
+    &:active {
+      background: rgba(255, 24, 1, 0.2);
+      border-color: rgba(255, 24, 1, 0.3);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+  
+  /* ================================
+     ACCESSIBILITY ENHANCEMENTS
+     ================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    
+    &__background,
+    &__icon-container,
+    &__icon {
+      transition: none;
+    }
+    
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  /* ================================
+     ANIMATION KEYFRAMES
+     ================================ */
+  
+  @keyframes theme-toggle-glow {
+    0%, 100% {
+      box-shadow: 
+        0 0 4px rgba(251, 191, 36, 0.4),
+        0 0 8px rgba(251, 191, 36, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 0 6px rgba(251, 191, 36, 0.6),
+        0 0 12px rgba(251, 191, 36, 0.3);
+    }
+  }
+  
+  @keyframes theme-toggle-moon-glow {
+    0%, 100% {
+      box-shadow: 
+        0 0 4px rgba(139, 92, 246, 0.4),
+        0 0 8px rgba(139, 92, 246, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 0 6px rgba(139, 92, 246, 0.6),
+        0 0 12px rgba(139, 92, 246, 0.3);
+    }
+  }
+} 

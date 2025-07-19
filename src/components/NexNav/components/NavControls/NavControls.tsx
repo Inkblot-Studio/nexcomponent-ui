@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Fingerprint } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import UserMenu from '../UserMenu';
+import ThemeToggle from '../ThemeToggle';
 import { NexNavProps } from '../../NexNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../../../utils/animationConfig';
 
@@ -72,6 +73,10 @@ const NavControls: React.FC<NavControlsProps> = ({
       aria-label="User controls"
       variants={ANIMATION_VARIANTS.mobileNav.navItem}
     >
+      <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
+        <ThemeToggle isAtTop={isAtTop} />
+      </motion.div>
+      
       <motion.div variants={ANIMATION_VARIANTS.mobileNav.navItem}>
         <LanguageSwitcher
           currentLocale={currentLocale}

@@ -161,6 +161,26 @@ body.nex-lock-scroll {
   gap: var(--nex-spacing-sm);
 }
 
+.nex-mobile-nav-theme-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--nex-spacing-sm);
+  align-items: center;
+  
+  /* Enhanced glassmorphic container */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--nex-radius-md);
+  padding: var(--nex-spacing-xs);
+  
+  @include mobile {
+    grid-template-columns: 1fr auto;
+    gap: var(--nex-spacing-xs);
+  }
+}
+
 .nex-mobile-nav-section-title {
   font-size: var(--nex-font-size-xs);
   font-weight: var(--nex-font-weight-medium);
@@ -192,6 +212,19 @@ body.nex-lock-scroll {
   user-select: none;
   position: relative;
   overflow: hidden;
+  
+  /* Theme Grid Specific Styling */
+  .nex-mobile-nav-theme-grid & {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+  }
 
   &:hover,
   &:focus-visible {

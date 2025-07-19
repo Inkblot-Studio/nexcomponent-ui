@@ -19,6 +19,7 @@ import {
 import './MobileNav.scss';
 import { MobileNavProps } from './MobileNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONFIG } from '../../../../utils/animationConfig';
+import ThemeToggle from '../ThemeToggle';
 
 const MobileNav: React.FC<MobileNavProps> = ({
   isOpen,
@@ -454,6 +455,43 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 </motion.div>
               )}
             </AnimatePresence>
+          </motion.div>
+
+          {/* Theme Toggle - Grid Layout */}
+          <motion.div 
+            className="nex-mobile-nav-section"
+            variants={variants.mobileNav.navItem}
+          >
+            <motion.h4 
+              className="nex-mobile-nav-section-title"
+              variants={variants.mobileNav.sectionTitle}
+            >
+              Theme
+            </motion.h4>
+            <motion.div 
+              className="nex-mobile-nav-theme-grid"
+              variants={variants.mobileNav.navItem}
+            >
+              <motion.div 
+                className="nex-mobile-nav-item"
+                variants={variants.mobileNav.navItem}
+                whileHover={variants.interactive.navItem.hover}
+                whileTap={variants.interactive.navItem.active}
+                transition={spring.responsive}
+              >
+                <span className="nex-mobile-nav-text">Toggle Theme</span>
+              </motion.div>
+              <motion.div
+                variants={variants.mobileNav.navItem}
+                style={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center'
+                }}
+              >
+                <ThemeToggle isAtTop={false} />
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Profile Section */}
