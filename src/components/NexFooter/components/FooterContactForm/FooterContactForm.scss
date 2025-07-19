@@ -24,7 +24,7 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   width: 100%;
-  padding: var(--nex-spacing-lg);
+  padding: var(--nex-spacing-md);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--nex-radius-xl);
@@ -232,8 +232,8 @@
       font-family: var(--nex-font-family-primary);
       line-height: var(--nex-line-height-base);
       resize: vertical;
-      min-height: 80px;
-      max-height: 120px;
+      min-height: 60px;
+      max-height: 80px;
       transition: all var(--nex-transition-base);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       
@@ -379,8 +379,8 @@
   /* Contact Variant */
   &--contact {
     max-width: 320px;
-    padding: var(--nex-spacing-lg);
-    gap: var(--nex-spacing-md);
+    padding: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
   }
 
   /* ================================
@@ -445,15 +445,17 @@
   /* Tablet: Maintain consistent sizing */
   @media (max-width: 1024px) {
     max-width: 400px;
-    padding: var(--nex-spacing-lg);
-    gap: var(--nex-spacing-md);
+    padding: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
   }
   
   /* Mobile: Maintain consistent sizing, no ridiculous scaling */
   @include mobile {
     max-width: 100%;
-    padding: var(--nex-spacing-lg);
-    gap: var(--nex-spacing-md);
+    padding: var(--nex-spacing-md);
+    gap: var(--nex-spacing-sm);
+    margin: 0 auto;
+    justify-self: center;
     
     &__title {
       font-size: var(--nex-font-size-lg); /* Keep readable size */

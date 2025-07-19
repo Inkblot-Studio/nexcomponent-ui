@@ -47,7 +47,7 @@
   .nex-footer-inner {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 var(--nex-spacing-lg);
+    padding: var(--nex-spacing-xl) var(--nex-spacing-lg);
     display: grid;
     gap: var(--nex-spacing-2xl);
     align-items: start;
@@ -67,7 +67,7 @@
         "sections"
         "contact";
       gap: var(--nex-spacing-xl);
-      padding: 0 var(--nex-spacing-lg);
+      padding: var(--nex-spacing-lg) var(--nex-spacing-lg);
     }
     
     /* Tablet: Two column layout */
@@ -113,6 +113,12 @@
   .nex-footer-contact-side {
     grid-area: contact;
     align-self: start;
+    
+    @include mobile {
+      justify-self: center;
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   /* ================================
@@ -147,6 +153,18 @@
       @include mobile {
         max-width: 100%;
         gap: var(--nex-spacing-lg);
+      }
+    }
+  }
+  
+  /* Contact form present - Two column layout on desktop */
+  &--has-contact {
+    .nex-footer-inner {
+      @media (min-width: 1025px) {
+        grid-template-columns: 1fr minmax(320px, 1fr);
+        grid-template-areas: 
+          "branding contact";
+        gap: var(--nex-spacing-2xl);
       }
     }
   }

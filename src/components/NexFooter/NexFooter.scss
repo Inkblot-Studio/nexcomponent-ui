@@ -104,9 +104,11 @@
     justify-self: center;
   }
   
-  /* Mobile: Full width */
+  /* Mobile: Centered with max width */
   @include mobile {
     max-width: 100%;
+    justify-self: center;
+    margin: 0 auto;
   }
 }
 

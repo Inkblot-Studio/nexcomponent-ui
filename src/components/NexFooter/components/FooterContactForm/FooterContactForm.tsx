@@ -157,7 +157,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
             onBlur={() => setFocusedField(null)}
             required
             disabled={isSubmitting}
-            rows={3}
+            rows={2}
           />
         </motion.div>
         

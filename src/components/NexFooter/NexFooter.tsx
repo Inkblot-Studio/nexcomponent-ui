@@ -30,6 +30,9 @@ const NexFooter: React.FC<NexFooterProps> = ({
   // Determine variant class
   const variantClass = variant === 'contact' ? 'nex-footer-container--contact' :
                       (!logoSrc && !displayName && sections.length > 0) ? 'nex-footer-container--sections-only' : '';
+  
+  // Add contact class when contact form is present
+  const contactClass = contact?.enabled ? 'nex-footer-container--has-contact' : '';
 
   return (
     <motion.footer
@@ -46,7 +49,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
       <FooterContainer
         variant={variant}
         theme={theme}
-        className={`${className} ${themeClass} ${variantClass}`}
+        className={`${className} ${themeClass} ${variantClass} ${contactClass}`}
       >
         <motion.div 
           className="nex-footer-content"

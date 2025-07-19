@@ -50,13 +50,17 @@ export default {
 const Template: StoryFn<typeof NexFooter> = (args) => (
   <div
     style={{
-      height: '200vh',
+      minHeight: '100vh',
       backgroundImage: `url(${storyBackground})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
       fontFamily: 'Inter, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
     }}
   >
+    <div style={{ flex: 1 }} />
     <NexFooter {...args} />
   </div>
 );
