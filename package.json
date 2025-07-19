@@ -11,8 +11,31 @@
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "style": "dist/css/style.css",
   "types": "dist/index.d.ts",
+  "style": "dist/style.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./style.css": "./dist/style.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "typescript",
+    "framer-motion",
+    "glassmorphism",
+    "enterprise"
+  ],
   "scripts": {
     "dev": "rollup -c --watch",
     "build": "rollup -c",
@@ -26,6 +49,10 @@
     "name": "Georgi Dryanovski"
   },
   "license": "ISC",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
