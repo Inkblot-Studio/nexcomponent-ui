@@ -90,33 +90,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
           />
         ) : (
           <span className="nex-user-menu-avatar nex-user-menu-avatar-fallback">
-            {/* Premium animated SVG avatar with initials */}
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="userMenuAvatarGradient" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#fff" stopOpacity="0.8"/>
-                  <stop offset="60%" stopColor="#e0e7ef" stopOpacity="0.95"/>
-                  <stop offset="100%" stopColor="#e0f3ff" stopOpacity="1"/>
-                </radialGradient>
-                <linearGradient id="userMenuAvatarShimmer" x1="0" y1="0" x2="54" y2="36" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#fff" stopOpacity="0.2"/>
-                  <stop offset="0.3" stopColor="#ff1801" stopOpacity="0.25"/>
-                  <stop offset="0.7" stopColor="#00b8ff" stopOpacity="0.25"/>
-                  <stop offset="1" stopColor="#fff" stopOpacity="0.18"/>
-                </linearGradient>
-              </defs>
-              <circle cx="18" cy="18" r="18" fill="url(#userMenuAvatarGradient)"/>
-              <motion.rect
-                x="-54" y="0" width="54" height="36"
-                fill="url(#userMenuAvatarShimmer)"
-                animate={{ x: [ -54, 36 ] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: 'linear' }}
-                style={{ mixBlendMode: 'lighten', opacity: 0.7 }}
-              />
-              <text x="50%" y="54%" textAnchor="middle" fill="#3a4256" fontSize="16" fontWeight="bold" fontFamily="inherit" dominantBaseline="middle" style={{ letterSpacing: 1 }}>
-                {initials}
-              </text>
-            </svg>
+            {/* Theme-aware clean avatar with initials */}
+            <div className="nex-user-menu-avatar-inner">
+              <div className="nex-user-menu-avatar-background"></div>
+              <span className="nex-user-menu-avatar-text">{initials}</span>
+            </div>
           </span>
         )}
 
