@@ -250,27 +250,7 @@
   }
 }
 
-.nex-footer-inner {
-  display: grid;
-  gap: var(--nex-spacing-xl);
-  align-items: start;
-  
-  /* Responsive grid layout */
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: var(--nex-spacing-lg);
-  }
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    grid-template-columns: 1fr auto;
-    gap: var(--nex-spacing-lg);
-  }
-  
-  @media (min-width: 1025px) {
-    grid-template-columns: 1fr auto;
-    gap: var(--nex-spacing-xl);
-  }
-}
+
 
 /* Professional typography */
 .nex-footer {

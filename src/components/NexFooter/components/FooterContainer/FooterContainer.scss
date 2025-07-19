@@ -115,9 +115,12 @@
     align-self: start;
     
     @include mobile {
-      justify-self: center;
-      width: 100%;
-      max-width: 100%;
+      justify-self: center !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
     }
   }
 
