@@ -1,0 +1,398 @@
+@import "../../utils/mixin.scss";
+
+/* ================================
+   🎨 NEXALERT PREMIUM STYLES
+   ================================ */
+
+.nexAlert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--nex-spacing-md);
+  min-height: 60px;
+  max-width: 480px;
+  padding: var(--nex-spacing-md) var(--nex-spacing-lg);
+  background: var(--nex-alert-bg, var(--nex-surface-color));
+  border: 1px solid var(--nex-alert-border, var(--nex-border-color));
+  border-radius: var(--nex-alert-radius, var(--nex-radius-xl));
+  box-shadow: var(--nex-alert-shadow, var(--nex-shadow-lg));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--nex-font-family-primary);
+  overflow: hidden;
+  will-change: transform, opacity;
+  transition: all var(--nex-transition-base);
+  
+  /* Size variants */
+  &.sizeSm {
+    min-height: 48px;
+    padding: var(--nex-spacing-sm) var(--nex-spacing-md);
+    max-width: 360px;
+  }
+  
+  &.sizeMd {
+    min-height: 60px;
+    padding: var(--nex-spacing-md) var(--nex-spacing-lg);
+    max-width: 480px;
+  }
+  
+  &.sizeLg {
+    min-height: 80px;
+    padding: var(--nex-spacing-lg) var(--nex-spacing-xl);
+    max-width: 600px;
+  }
+  
+  /* Variant styles */
+  &.variantDefault {
+    background: var(--nex-alert-bg-default, var(--nex-surface-color));
+    border-color: var(--nex-alert-border-default, var(--nex-border-color));
+  }
+  
+  &.variantGlass {
+    background: var(--nex-alert-bg-glass, rgba(255, 255, 255, 0.85));
+    border-color: var(--nex-alert-border-glass, rgba(255, 255, 255, 0.2));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  &.variantPremium {
+    background: var(--nex-alert-bg-premium, linear-gradient(135deg, var(--nex-surface-color) 0%, rgba(255, 255, 255, 0.95) 100%));
+    border-color: var(--nex-alert-border-premium, var(--nex-signature));
+    box-shadow: var(--nex-alert-shadow-premium, var(--nex-shadow-lg), 0 0 0 1px rgba(255, 24, 1, 0.1));
+  }
+  
+  &.variantMinimal {
+    background: var(--nex-alert-bg-minimal, transparent);
+    border-color: var(--nex-alert-border-minimal, transparent);
+    box-shadow: none;
+  }
+  
+  /* Type styles */
+  &.typeError {
+    --nex-alert-icon-color: var(--nex-danger);
+    --nex-alert-border-color: var(--nex-danger);
+    --nex-alert-bg-tint: rgba(244, 67, 54, 0.1);
+  }
+  
+  &.typeSuccess {
+    --nex-alert-icon-color: var(--nex-success);
+    --nex-alert-border-color: var(--nex-success);
+    --nex-alert-bg-tint: rgba(76, 175, 80, 0.1);
+  }
+  
+  &.typeInfo {
+    --nex-alert-icon-color: var(--nex-info);
+    --nex-alert-border-color: var(--nex-info);
+    --nex-alert-bg-tint: rgba(33, 150, 243, 0.1);
+  }
+  
+  &.typeWarning {
+    --nex-alert-icon-color: var(--nex-warning);
+    --nex-alert-border-color: var(--nex-warning);
+    --nex-alert-bg-tint: rgba(255, 193, 7, 0.1);
+  }
+  
+  &.typeNeutral {
+    --nex-alert-icon-color: var(--nex-muted-font-color);
+    --nex-alert-border-color: var(--nex-border-color);
+    --nex-alert-bg-tint: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Content layout */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--nex-spacing-xs);
+    min-width: 0;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: var(--nex-spacing-sm);
+  }
+  
+  .icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--nex-alert-icon-color);
+    
+    &.sizeSm {
+      width: 16px;
+      height: 16px;
+    }
+    
+    &.sizeLg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .title {
+    margin: 0;
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-semibold);
+    line-height: var(--nex-line-height-tight);
+    color: var(--nex-alert-title-color, var(--nex-font-color));
+    
+    &.sizeSm {
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &.sizeLg {
+      font-size: var(--nex-font-size-md);
+    }
+  }
+  
+  .message {
+    margin: 0;
+    font-size: var(--nex-font-size-sm);
+    font-weight: var(--nex-font-weight-regular);
+    line-height: var(--nex-line-height-base);
+    color: var(--nex-alert-message-color, var(--nex-font-color));
+    
+    &.sizeSm {
+      font-size: var(--nex-font-size-xs);
+    }
+    
+    &.sizeLg {
+      font-size: var(--nex-font-size-md);
+    }
+  }
+  
+  .description {
+    margin: 0;
+    font-size: var(--nex-font-size-xs);
+    font-weight: var(--nex-font-weight-regular);
+    line-height: var(--nex-line-height-base);
+    color: var(--nex-alert-description-color, var(--nex-muted-font-color));
+  }
+  
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--nex-spacing-sm);
+    margin-top: var(--nex-spacing-sm);
+  }
+  
+  .actionButton {
+    padding: var(--nex-spacing-xs) var(--nex-spacing-sm);
+    border: 1px solid var(--nex-alert-border-color);
+    border-radius: var(--nex-radius-sm);
+    background: transparent;
+    color: var(--nex-alert-icon-color);
+    font-size: var(--nex-font-size-xs);
+    font-weight: var(--nex-font-weight-medium);
+    cursor: pointer;
+    transition: all var(--nex-transition-fast);
+    
+    &:hover:not(:disabled) {
+      background: var(--nex-alert-icon-color);
+      color: white;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    &.primary {
+      background: var(--nex-alert-icon-color);
+      color: white;
+      
+      &:hover:not(:disabled) {
+        background: var(--nex-alert-icon-color);
+        opacity: 0.9;
+      }
+    }
+  }
+  
+  /* Dismiss button */
+  .dismissButton {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: var(--nex-alert-icon-color);
+    cursor: pointer;
+    border-radius: var(--nex-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--nex-transition-fast);
+    
+    &:hover {
+      background: var(--nex-alert-bg-tint);
+    }
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  /* Progress bar for auto-dismiss */
+  .progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--nex-alert-icon-color);
+    opacity: 0.3;
+    transform-origin: left;
+  }
+  
+  /* Swipe to dismiss indicator */
+  .swipeIndicator {
+    position: absolute;
+    top: 50%;
+    right: var(--nex-spacing-sm);
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--nex-alert-icon-color);
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+  
+  /* Hover effects */
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--nex-alert-shadow-hover, var(--nex-shadow-xl));
+  }
+  
+  /* Focus styles */
+  &:focus-visible {
+    outline: 2px solid var(--nex-alert-icon-color);
+    outline-offset: 2px;
+  }
+  
+  /* Dark theme support */
+  [data-theme="dark"] & {
+    --nex-alert-bg: var(--nex-alert-bg-dark, #1a1a1a);
+    --nex-alert-border: var(--nex-alert-border-dark, #333);
+    --nex-alert-title-color: var(--nex-alert-title-color-dark, #ffffff);
+    --nex-alert-message-color: var(--nex-alert-message-color-dark, #e0e0e0);
+    --nex-alert-description-color: var(--nex-alert-description-color-dark, #a0a0a0);
+    
+    &.variantGlass {
+      --nex-alert-bg-glass: rgba(26, 26, 26, 0.85);
+      --nex-alert-border-glass: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* Black glass theme support */
+  [data-theme-variant="black-glass"] & {
+    background: var(--nex-glass-bg);
+    border-color: var(--nex-glass-border);
+    
+    &.variantGlass {
+      background: var(--nex-glass-bg);
+      border-color: var(--nex-glass-border);
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    
+    .progressBar {
+      animation: none !important;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @include mobile {
+    max-width: calc(100vw - var(--nex-spacing-lg) * 2);
+    margin: 0 var(--nex-spacing-md);
+  }
+}
+
+/* Alert container/group */
+.alertGroup {
+  position: fixed;
+  z-index: var(--nex-z-index-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nex-spacing-md);
+  pointer-events: none;
+  
+  /* Position variants */
+  &.positionTop {
+    top: var(--nex-spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  &.positionBottom {
+    bottom: var(--nex-spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  &.positionTopRight {
+    top: var(--nex-spacing-lg);
+    right: var(--nex-spacing-lg);
+  }
+  
+  &.positionBottomRight {
+    bottom: var(--nex-spacing-lg);
+    right: var(--nex-spacing-lg);
+  }
+  
+  &.positionCenter {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Make alerts clickable */
+  .nexAlert {
+    pointer-events: auto;
+  }
+}
+
+/* Progress animation */
+@keyframes progress-shrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.progressBar {
+  animation: progress-shrink linear forwards;
+}
+
+/* CSS Custom Properties for theming */
+:root {
+  --nex-alert-bg: var(--nex-surface-color);
+  --nex-alert-border: var(--nex-border-color);
+  --nex-alert-radius: var(--nex-radius-xl);
+  --nex-alert-shadow: var(--nex-shadow-lg);
+  --nex-alert-shadow-hover: var(--nex-shadow-xl);
+  --nex-alert-title-color: var(--nex-font-color);
+  --nex-alert-message-color: var(--nex-font-color);
+  --nex-alert-description-color: var(--nex-muted-font-color);
+  
+  /* Variant backgrounds */
+  --nex-alert-bg-default: var(--nex-surface-color);
+  --nex-alert-bg-glass: rgba(255, 255, 255, 0.85);
+  --nex-alert-bg-premium: linear-gradient(135deg, var(--nex-surface-color) 0%, rgba(255, 255, 255, 0.95) 100%);
+  --nex-alert-bg-minimal: transparent;
+  
+  /* Variant borders */
+  --nex-alert-border-default: var(--nex-border-color);
+  --nex-alert-border-glass: rgba(255, 255, 255, 0.2);
+  --nex-alert-border-premium: var(--nex-signature);
+  --nex-alert-border-minimal: transparent;
+  
+  /* Variant shadows */
+  --nex-alert-shadow-premium: var(--nex-shadow-lg), 0 0 0 1px rgba(255, 24, 1, 0.1);
+} 
