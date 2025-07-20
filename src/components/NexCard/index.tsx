@@ -1,5 +1,3 @@
-import NexCard from "./NexCard";
-
-export default NexCard;
-export * from './NexCard'
-export * from './NexCard.types'
+export { default as NexCard } from './NexCard';
+export { useNexCard } from './NexCard';
+export type { NexCardProps, NexCardElevation, NexCardLayout, NexCardVariant, NexCardContextValue } from './NexCard.types';

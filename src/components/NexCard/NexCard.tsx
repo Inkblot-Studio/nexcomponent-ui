@@ -1,133 +1,321 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { createContext, useContext, useMemo, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAnimationConfig } from '../../utils/animationConfig';
-import type { NexCardProps } from './NexCard.types';
-import CardHeader from './components/CardHeader/CardHeader';
-import CardImage from './components/CardImage/CardImage';
-import CardContent from './components/CardContent/CardContent';
-import CardActions from './components/CardActions/CardActions';
-import './NexCard.scss';
+import type { NexCardProps, NexCardContextValue } from './NexCard.types';
+import styles from './NexCard.module.scss';
+
+// Context for sub-components
+const NexCardContext = createContext<NexCardContextValue | null>(null);
+
+export const useNexCard = () => {
+  const context = useContext(NexCardContext);
+  if (!context) {
+    throw new Error('useNexCard must be used within a NexCard component');
+  }
+  return context;
+};
 
 /**
- * NexCard - Enterprise Grade Card Component
+ * NexCard - Premium Enterprise Card Component
  *
- * A clean, simple card component designed for lead generation and conversion.
- * Features smooth animations, professional styling, and compelling visuals.
+ * A sophisticated, animated card component with Apple-like design principles.
+ * Features smooth animations, multiple elevation levels, responsive layouts,
+ * and comprehensive accessibility support.
  *
- * @param {string} title - Compelling title for lead generation
- * @param {string} content - Persuasive content that drives action
- * @param {string} imageUrl - Hero image to capture attention
- * @param {React.ReactNode} actions - Call-to-action buttons
- * @param {string} badge - Status badge (e.g., "New", "Featured", "Premium")
- * @param {'primary' | 'secondary' | 'glass' | 'enterprise'} type - Card styling variant
- * @param {boolean} interactive - Whether card is clickable
- * @param {() => void} onClick - Click handler for interactive cards
- * @param {boolean} elevated - Enhanced shadow effects
- * @param {string} className - Additional CSS classes
+ * @example
+ * ```tsx
+ * <NexCard
+ *   title="Premium Feature"
+ *   subtitle="Enterprise Grade"
+ *   description="Advanced functionality for professional users"
+ *   elevation="interactive"
+ *   onClick={() => console.log('Card clicked')}
+ * />
+ * ```
  */
-const NexCard: React.FC<NexCardProps> = ({ 
-  title, 
-  content, 
-  imageUrl, 
-  actions, 
-  badge,
-  type = 'primary',
+const NexCard: React.FC<NexCardProps> = ({
+  // Content
+  title,
+  subtitle,
+  description,
+  children,
+  
+  // Media
+  image,
+  icon,
+  
+  // Layout & Styling
+  variant = 'default',
+  elevation = 'flat',
+  layout = 'vertical',
+  size = 'md',
+  
+  // Interactive Features
   interactive = false,
+  clickable = false,
+  href,
+  as,
   onClick,
-  elevated = false,
+  
+  // States
+  loading = false,
+  disabled = false,
+  
+  // Custom Slots
+  header,
+  footer,
+  actions,
+  
+  // Accessibility
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  
+  // Styling
   className,
+  style,
+  
+  // Animation
+  animate = true,
+  delay = 0,
+  
+  // Legacy support
+  content,
+  imageUrl,
+  badge,
+  type,
+  elevated,
+  
   ...rest
 }) => {
   const { shouldReduceMotion } = useAnimationConfig();
-
-  const cardClasses = `nex-card nex-card--${type} ${elevated ? 'elevated' : ''} ${interactive ? 'interactive' : ''} ${className || ''}`;
-
-  const handleClick = () => {
-    if (interactive && onClick) {
-      onClick();
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (interactive && onClick) {
-        onClick();
-      }
-    }
-  };
-
-  // Animation variants - clean and simple
+  const [isPressed, setIsPressed] = useState(false);
+  const [rippleKey, setRippleKey] = useState(0);
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Legacy prop mapping
+  const finalDescription = description || content;
+  const finalImage = image || (imageUrl ? { src: imageUrl } : undefined);
+  const finalVariant = variant || (type === 'glass' ? 'glass' : type === 'enterprise' ? 'premium' : 'default');
+  const finalElevation = elevation || (elevated ? 'raised' : 'flat');
+  const finalInteractive = interactive || clickable || !!onClick || !!href;
+  
+  // Determine the element type
+  const Element = as || (href ? 'a' : finalInteractive ? 'button' : 'div');
+  
+  // Context value
+  const contextValue: NexCardContextValue = useMemo(() => ({
+    variant: finalVariant,
+    elevation: finalElevation,
+    layout,
+    size,
+    interactive: finalInteractive,
+    clickable: finalInteractive,
+    loading,
+    disabled,
+  }), [finalVariant, finalElevation, layout, size, finalInteractive, loading, disabled]);
+  
+  // Animation variants
   const cardVariants = {
     initial: { 
       opacity: 0, 
-      y: 20
+      y: 20,
+      scale: 0.98
     },
     animate: { 
       opacity: 1, 
       y: 0,
+      scale: 1,
       transition: {
         duration: shouldReduceMotion ? 0.2 : 0.4,
+        delay: shouldReduceMotion ? 0 : delay * 0.1,
         ease: [0.4, 0, 0.2, 1]
       }
     },
-    hover: interactive ? {
-      y: shouldReduceMotion ? 0 : -8,
+    hover: finalInteractive && !loading && !disabled ? {
+      y: shouldReduceMotion ? 0 : -4,
+      scale: 1.02,
       transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
     } : {},
-    tap: interactive ? {
-      y: shouldReduceMotion ? 0 : -4,
+    tap: finalInteractive && !loading && !disabled ? {
+      y: shouldReduceMotion ? 0 : -2,
+      scale: 0.98,
       transition: { duration: 0.1, ease: [0.4, 0, 0.2, 1] }
     } : {}
   };
-
-  return (
-    <motion.div
-      className={cardClasses}
-      variants={cardVariants}
-      initial="initial"
-      animate="animate"
-      whileHover={interactive ? "hover" : {}}
-      whileTap={interactive ? "tap" : {}}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      role={interactive ? "button" : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      aria-label={interactive ? title : undefined}
-      {...rest}
-    >
-      {/* Hero Image */}
-      <CardImage src={imageUrl} alt={title} />
-
-      {/* Card Content */}
-      <div className="nex-card-body">
-        {/* Header with Title and Badge */}
-        <CardHeader title={title} badge={badge} />
-
-        {/* Main Content */}
-        <CardContent>
-          {content}
-        </CardContent>
-
-        {/* Call-to-Action Buttons */}
-        <CardActions>
-          {actions}
-        </CardActions>
+  
+  // Ripple animation variants
+  const rippleVariants = {
+    initial: { scale: 0, opacity: 0 },
+    animate: {
+      scale: 2,
+      opacity: [0, 0.3, 0],
+      transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+    }
+  };
+  
+  // Event handlers
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (loading || disabled) return;
+    
+    if (finalInteractive) {
+      // Create ripple effect
+      setRippleKey((prev: number) => prev + 1);
+      
+      // Call onClick if provided
+      if (onClick) {
+        onClick(event);
+      }
+    }
+  };
+  
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (finalInteractive && !loading && !disabled) {
+        handleClick(event as any);
+      }
+    }
+  };
+  
+  const handleMouseDown = () => {
+    if (finalInteractive && !loading && !disabled) {
+      setIsPressed(true);
+    }
+  };
+  
+  const handleMouseUp = () => {
+    setIsPressed(false);
+  };
+  
+  // Build class names
+  const cardClasses = [
+    styles.nexCard,
+    styles[`size${size.charAt(0).toUpperCase() + size.slice(1)}`],
+    styles[`layout${layout.charAt(0).toUpperCase() + layout.slice(1)}`],
+    styles[`elevation${finalElevation.charAt(0).toUpperCase() + finalElevation.slice(1)}`],
+    styles[`variant${finalVariant.charAt(0).toUpperCase() + finalVariant.slice(1)}`],
+    loading && styles.loading,
+    disabled && styles.disabled,
+    className
+  ].filter(Boolean).join(' ');
+  
+  // Accessibility props
+  const accessibilityProps = {
+    role: Element === 'button' ? 'button' : Element === 'a' ? 'link' : undefined,
+    tabIndex: finalInteractive ? 0 : undefined,
+    'aria-label': ariaLabel || (finalInteractive ? title : undefined),
+    'aria-describedby': ariaDescribedBy,
+    'aria-disabled': disabled || loading,
+    'aria-busy': loading,
+  };
+  
+  // Element props
+  const elementProps = {
+    href: Element === 'a' ? href : undefined,
+    type: Element === 'button' ? 'button' : undefined,
+  };
+  
+  // Render skeleton loading state
+  if (loading) {
+    return (
+      <div className={cardClasses} style={style} {...rest}>
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <div className={styles.headerContent}>
+              <div className={`${styles.skeleton} ${styles.skeletonTitle}`} />
+              {subtitle && <div className={`${styles.skeleton} ${styles.skeletonDescription}`} />}
+            </div>
+            {icon && <div className={styles.icon}>{icon}</div>}
+          </div>
+          <div className={styles.body}>
+            <div className={`${styles.skeleton} ${styles.skeletonDescription}`} />
+            <div className={`${styles.skeleton} ${styles.skeletonDescription}`} />
+            <div className={`${styles.skeleton} ${styles.skeletonDescription}`} />
+          </div>
+        </div>
       </div>
-
-      {/* Ripple effect for interactive cards */}
-      {interactive && (
-        <motion.div
-          className="nex-card-ripple"
-          initial={{ scale: 0, opacity: 0 }}
-          whileTap={{
-            scale: 2,
-            opacity: [0, 0.2, 0],
-            transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
-          }}
-        />
-      )}
-    </motion.div>
+    );
+  }
+  
+  return (
+    <NexCardContext.Provider value={contextValue}>
+      <motion.div
+        ref={cardRef}
+        className={cardClasses}
+        style={style}
+        variants={animate ? cardVariants : undefined}
+        initial="initial"
+        animate="animate"
+        whileHover={finalInteractive && !loading && !disabled ? "hover" : undefined}
+        whileTap={finalInteractive && !loading && !disabled ? "tap" : undefined}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        {...accessibilityProps}
+        {...elementProps}
+        {...rest}
+      >
+        {/* Media Section */}
+        {finalImage && (
+          <div className={styles.media}>
+            <img
+              src={finalImage.src}
+              alt={finalImage.alt || title || 'Card image'}
+              className={`${styles.image} ${styles[`aspectRatio${finalImage.aspectRatio ? finalImage.aspectRatio.charAt(0).toUpperCase() + finalImage.aspectRatio.slice(1) : 'Auto'}`]}`}
+            />
+            <div className={styles.imageOverlay} />
+          </div>
+        )}
+        
+        {/* Content Section */}
+        <div className={styles.content}>
+          {/* Header */}
+          {(header || title || subtitle || icon) && (
+            <div className={styles.header}>
+              <div className={styles.headerContent}>
+                {header || (
+                  <>
+                    {title && <h3 className={styles.title}>{title}</h3>}
+                    {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+                  </>
+                )}
+              </div>
+              {icon && <div className={styles.icon}>{icon}</div>}
+            </div>
+          )}
+          
+          {/* Body */}
+          <div className={styles.body}>
+            {finalDescription && <p className={styles.description}>{finalDescription}</p>}
+            {children}
+          </div>
+          
+          {/* Footer */}
+          {(footer || actions) && (
+            <div className={styles.footer}>
+              {footer}
+              {actions && <div className={styles.actions}>{actions}</div>}
+            </div>
+          )}
+        </div>
+        
+        {/* Ripple Effect */}
+        <AnimatePresence>
+          {finalInteractive && isPressed && (
+            <motion.div
+              key={rippleKey}
+              className={styles.ripple}
+              variants={rippleVariants}
+              initial="initial"
+              animate="animate"
+              exit={{ opacity: 0 }}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </NexCardContext.Provider>
   );
 };
 

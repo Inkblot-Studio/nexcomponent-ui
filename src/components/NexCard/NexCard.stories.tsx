@@ -1,258 +1,407 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import React, { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { motion } from 'framer-motion';
 import NexCard from './NexCard';
-import { NexCardProps } from './NexCard.types';
 import NexButton from '../NexButton';
-import storyHeroSection from '../../assets/img/story_hero_section.jpg';
 
-export default {
-  title: 'NexComponent/NexCard',
+const meta: Meta<typeof NexCard> = {
+  title: 'Components/NexCard',
   component: NexCard,
-  tags: ['autodocs'],
   parameters: {
-    docs: {
-      description: {
-        component: `
-# NexCard - Lead Generation Card Component
-
-A clean, simple card component designed for lead generation and conversion.
-Features compelling visuals, smooth animations, and professional styling.
-
-## 🚀 Key Features
-
-- **Lead Generation Focus**: Designed to capture attention and drive conversions
-- **Clean Design**: Simple, professional styling using design tokens
-- **Black Glass Theme**: Full support for the iconic black glass theme
-- **Interactive Cards**: Clickable cards with smooth hover effects
-- **Hero Images**: Compelling visuals that capture attention
-- **Call-to-Actions**: Built-in support for conversion buttons
-- **Accessibility First**: Full keyboard navigation and screen reader support
-- **Performance Optimized**: Hardware acceleration and reduced motion support
-
-## 🎨 Design Variants
-
-- **Primary**: Clean, professional styling
-- **Secondary**: Alternative brand styling
-- **Glass**: Transparent glassmorphic variant
-- **Enterprise**: Premium variant with signature colors
-        `
-      }
-    }
-  }
-} as Meta<NexCardProps>;
-
-const Template: StoryFn<NexCardProps> = (args) => (
-  <div style={{ 
-    margin: '20px', 
-    padding: '40px',
-    background: 'var(--nex-background-color)',
-    borderRadius: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '20px',
-    flexWrap: 'wrap'
-  }}>
-    <NexCard {...args} />
-  </div>
-);
-
-// Lead generation showcase
-export const LeadGeneration: StoryFn<NexCardProps> = Template.bind({});
-LeadGeneration.args = {
-  title: 'Transform Your Business',
-  content: 'Join thousands of companies using our platform to scale their operations and increase revenue by 300%.',
-  type: 'enterprise',
-  badge: 'Limited Time',
-  elevated: true,
-  interactive: true,
-  onClick: () => alert('Lead captured!'),
-  actions: (
-    <>
-      <NexButton text="Get Started" type="enterprise" />
-      <NexButton text="Learn More" type="glass" inverted={true} />
-    </>
-  ),
+    layout: 'centered',
+  },
+  argTypes: {
+    variant: {
+      control: { type: 'select' },
+      options: ['default', 'glass', 'premium', 'minimal'],
+      description: 'Visual variant of the card',
+    },
+    elevation: {
+      control: { type: 'select' },
+      options: ['flat', 'raised', 'hoverable', 'interactive'],
+      description: 'Elevation level and interaction behavior',
+    },
+    layout: {
+      control: { type: 'select' },
+      options: ['vertical', 'horizontal', 'auto'],
+      description: 'Layout direction of the card',
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: 'Size of the card',
+    },
+    interactive: {
+      control: { type: 'boolean' },
+      description: 'Whether the card is interactive',
+    },
+    loading: {
+      control: { type: 'boolean' },
+      description: 'Show loading skeleton state',
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'Disable the card',
+    },
+  },
 };
 
-// Hero image showcase
-export const HeroImage: StoryFn<NexCardProps> = Template.bind({});
-HeroImage.args = {
-  title: 'Amazing Product',
-  content: 'Discover the revolutionary features that will change how you work forever.',
-  imageUrl: storyHeroSection,
-  type: 'glass',
-  badge: 'New',
-  interactive: true,
-  onClick: () => alert('Product viewed!'),
-  actions: (
-    <>
-      <NexButton text="Try Demo" type="primary" />
-      <NexButton text="Watch Video" type="glass" />
-    </>
-  ),
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// Base story with all controls
+export const Default: Story = {
+  args: {
+    title: 'Premium Card',
+    subtitle: 'Enterprise Grade',
+    description: 'This is a sophisticated card component with premium styling and smooth animations.',
+    variant: 'default',
+    elevation: 'raised',
+    size: 'md',
+    interactive: false,
+  },
 };
 
-// Simple card
-export const SimpleCard: StoryFn<NexCardProps> = Template.bind({});
-SimpleCard.args = {
-  title: 'Simple & Clean',
-  content: 'Sometimes less is more. This card focuses on the essentials.',
-  type: 'primary',
-  actions: (
-    <NexButton text="Learn More" type="primary" />
-  ),
+// Interactive card with click handler
+export const Interactive: Story = {
+  args: {
+    title: 'Clickable Card',
+    subtitle: 'Interactive Example',
+    description: 'This card responds to clicks and hover interactions with smooth animations.',
+    elevation: 'interactive',
+    interactive: true,
+    onClick: () => alert('Card clicked!'),
+  },
 };
 
-// Interactive showcase
-export const InteractiveShowcase: StoryFn<NexCardProps> = (args) => (
-  <div style={{ 
-    margin: '20px', 
-    padding: '40px',
-    background: 'var(--nex-background-color)',
-    borderRadius: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '20px',
-    flexWrap: 'wrap'
-  }}>
-    <NexCard 
-      {...args} 
-      title="Click Me" 
-      content="Interactive card with smooth hover effects"
-      type="enterprise" 
-      interactive={true}
-      onClick={() => alert('Card clicked!')}
-      actions={<NexButton text="Action" type="enterprise" />}
-    />
-    <NexCard 
-      {...args} 
-      title="Elevated" 
-      content="Card with enhanced shadow effects"
-      type="glass" 
-      elevated={true}
-      actions={<NexButton text="Action" type="glass" />}
-    />
-  </div>
-);
-
-// Type variants
-export const PrimaryCard: StoryFn<NexCardProps> = Template.bind({});
-PrimaryCard.args = {
-  title: 'Primary Card',
-  content: 'Clean, professional styling with primary brand colors.',
-  type: 'primary',
-  actions: (
-    <NexButton text="Action" type="primary" />
-  ),
+// Glass variant
+export const Glass: Story = {
+  args: {
+    title: 'Glass Effect',
+    subtitle: 'Modern Design',
+    description: 'A beautiful glassmorphic card with backdrop blur effects.',
+    variant: 'glass',
+    elevation: 'hoverable',
+    size: 'lg',
+  },
+  parameters: {
+    backgrounds: {
+      default: 'gradient',
+    },
+  },
 };
 
-export const SecondaryCard: StoryFn<NexCardProps> = Template.bind({});
-SecondaryCard.args = {
-  title: 'Secondary Card',
-  content: 'Alternative styling with secondary brand colors.',
-  type: 'secondary',
-  actions: (
-    <NexButton text="Action" type="secondary" />
-  ),
+// Premium variant
+export const Premium: Story = {
+  args: {
+    title: 'Premium Feature',
+    subtitle: 'Exclusive Access',
+    description: 'Premium styling with signature accent colors and enhanced shadows.',
+    variant: 'premium',
+    elevation: 'interactive',
+    size: 'lg',
+    interactive: true,
+  },
 };
 
-export const GlassCard: StoryFn<NexCardProps> = Template.bind({});
-GlassCard.args = {
-  title: 'Glass Effect',
-  content: 'Modern glassmorphic styling with backdrop blur effects.',
-  type: 'glass',
-  actions: (
-    <NexButton text="Action" type="glass" />
-  ),
+// Minimal variant
+export const Minimal: Story = {
+  args: {
+    title: 'Minimal Design',
+    subtitle: 'Clean & Simple',
+    description: 'A minimal card with subtle styling and clean typography.',
+    variant: 'minimal',
+    elevation: 'flat',
+    size: 'md',
+  },
 };
 
-export const EnterpriseCard: StoryFn<NexCardProps> = Template.bind({});
-EnterpriseCard.args = {
-  title: 'Enterprise Solution',
-  content: 'Premium enterprise styling with signature colors.',
-  type: 'enterprise',
-  badge: 'Premium',
-  elevated: true,
-  actions: (
-    <NexButton text="Launch" type="enterprise" />
-  ),
+// Card with image
+export const WithImage: Story = {
+  args: {
+    title: 'Featured Content',
+    subtitle: 'With Hero Image',
+    description: 'This card includes a beautiful hero image with proper aspect ratio handling.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
+      alt: 'Mountain landscape',
+      aspectRatio: 'video',
+    },
+    elevation: 'hoverable',
+    size: 'lg',
+  },
 };
 
-// Content showcase
-export const ContentShowcase: StoryFn<NexCardProps> = (args) => (
-  <div style={{ 
-    margin: '20px', 
-    padding: '40px',
-    background: 'var(--nex-background-color)',
-    borderRadius: '16px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '20px'
-  }}>
-    <NexCard 
-      {...args} 
-      title="Short Content" 
-      content="Brief, impactful message."
-      type="primary"
-      actions={<NexButton text="Action" type="primary" />}
-    />
-    <NexCard 
-      {...args} 
-      title="Medium Content" 
-      content="A bit more detail to engage the user and provide value while maintaining readability."
-      type="glass"
-      actions={<NexButton text="Action" type="glass" />}
-    />
-    <NexCard 
-      {...args} 
-      title="Longer Content" 
-      content="More comprehensive content that provides detailed information about the product or service, helping users make informed decisions about their next steps."
-      type="enterprise"
-      badge="Featured"
-      actions={<NexButton text="Action" type="enterprise" />}
-    />
-  </div>
-);
+// Horizontal layout
+export const Horizontal: Story = {
+  args: {
+    title: 'Horizontal Layout',
+    subtitle: 'Side-by-side content',
+    description: 'Content and media are arranged horizontally for better space utilization.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=200&h=200&fit=crop',
+      alt: 'Abstract design',
+      aspectRatio: 'square',
+    },
+    layout: 'horizontal',
+    elevation: 'raised',
+    size: 'lg',
+  },
+};
 
-// Badge showcase
-export const BadgeShowcase: StoryFn<NexCardProps> = (args) => (
-  <div style={{ 
-    margin: '20px', 
-    padding: '40px',
-    background: 'var(--nex-background-color)',
-    borderRadius: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '20px',
-    flexWrap: 'wrap'
-  }}>
-    <NexCard 
-      {...args} 
-      title="New Feature" 
-      content="Check out our latest addition."
-      badge="New"
-      type="primary"
-      actions={<NexButton text="Explore" type="primary" />}
-    />
-    <NexCard 
-      {...args} 
-      title="Limited Time" 
-      content="Don't miss this exclusive offer."
-      badge="Limited"
-      type="enterprise"
-      elevated={true}
-      actions={<NexButton text="Claim" type="enterprise" />}
-    />
-    <NexCard 
-      {...args} 
-      title="Popular Choice" 
-      content="Join thousands of satisfied customers."
-      badge="Popular"
-      type="glass"
-      actions={<NexButton text="Join" type="glass" />}
-    />
-  </div>
-);
+// Auto layout (responsive)
+export const AutoLayout: Story = {
+  args: {
+    title: 'Responsive Layout',
+    subtitle: 'Auto-adapting',
+    description: 'This card automatically switches between vertical and horizontal layouts based on screen size.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=200&fit=crop',
+      alt: 'Business meeting',
+      aspectRatio: 'wide',
+    },
+    layout: 'auto',
+    elevation: 'hoverable',
+    size: 'lg',
+  },
+};
+
+// Loading state
+export const Loading: Story = {
+  args: {
+    title: 'Loading Card',
+    subtitle: 'Skeleton State',
+    description: 'This card shows a skeleton loading state while content is being fetched.',
+    loading: true,
+    elevation: 'raised',
+    size: 'md',
+  },
+};
+
+// Disabled state
+export const Disabled: Story = {
+  args: {
+    title: 'Disabled Card',
+    subtitle: 'Not Available',
+    description: 'This card is disabled and shows a visual indication of its state.',
+    disabled: true,
+    elevation: 'raised',
+    size: 'md',
+  },
+};
+
+// Card with custom header
+export const CustomHeader: Story = {
+  args: {
+    header: (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ 
+          width: '32px', 
+          height: '32px', 
+          borderRadius: '50%', 
+          background: 'var(--nex-signature)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontSize: '14px',
+          fontWeight: 'bold'
+        }}>
+          N
+        </div>
+        <div>
+          <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600' }}>Custom Header</h3>
+          <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: 'var(--nex-muted-font-color)' }}>
+            With custom content
+          </p>
+        </div>
+      </div>
+    ),
+    description: 'This card uses a custom header slot for more complex layouts.',
+    elevation: 'raised',
+    size: 'md',
+  },
+};
+
+// Card with actions
+export const WithActions: Story = {
+  args: {
+    title: 'Card with Actions',
+    subtitle: 'Interactive Elements',
+    description: 'This card includes action buttons in the footer area.',
+         actions: (
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <NexButton size="small" type="glass" text="Cancel" />
+         <NexButton size="small" text="Confirm" />
+       </div>
+     ),
+    elevation: 'raised',
+    size: 'md',
+  },
+};
+
+// Card with icon
+export const WithIcon: Story = {
+  args: {
+    title: 'Card with Icon',
+    subtitle: 'Visual Enhancement',
+    description: 'This card includes an icon in the header for better visual hierarchy.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    ),
+    elevation: 'hoverable',
+    size: 'md',
+  },
+};
+
+// Link card
+export const LinkCard: Story = {
+  args: {
+    title: 'Link Card',
+    subtitle: 'Navigation Example',
+    description: 'This card behaves like a link and can be used for navigation.',
+    href: 'https://example.com',
+    elevation: 'interactive',
+    size: 'md',
+  },
+};
+
+// Different sizes
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+      <NexCard
+        title="Small Card"
+        description="Compact size for tight spaces"
+        size="sm"
+        elevation="raised"
+      />
+      <NexCard
+        title="Medium Card"
+        description="Standard size for most use cases"
+        size="md"
+        elevation="raised"
+      />
+      <NexCard
+        title="Large Card"
+        description="Generous size for featured content"
+        size="lg"
+        elevation="raised"
+      />
+      <NexCard
+        title="Extra Large Card"
+        description="Maximum size for hero content"
+        size="xl"
+        elevation="raised"
+      />
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+// Elevation comparison
+export const Elevations: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+      <NexCard
+        title="Flat"
+        description="No elevation, clean and minimal"
+        elevation="flat"
+      />
+      <NexCard
+        title="Raised"
+        description="Subtle shadow for depth"
+        elevation="raised"
+      />
+      <NexCard
+        title="Hoverable"
+        description="Elevates on hover"
+        elevation="hoverable"
+      />
+      <NexCard
+        title="Interactive"
+        description="Full interaction with ripple"
+        elevation="interactive"
+        interactive
+        onClick={() => alert('Interactive card clicked!')}
+      />
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+// Animated entrance
+export const AnimatedEntrance: Story = {
+  render: () => {
+    const [cards, setCards] = useState([1, 2, 3]);
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+                 <NexButton 
+           onClick={() => setCards(prev => [...prev, prev.length + 1])}
+           text="Add Card"
+         />
+        {cards.map((card, index) => (
+          <motion.div
+            key={card}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <NexCard
+              title={`Card ${card}`}
+              description={`This card has a staggered entrance animation with delay ${index * 0.1}s`}
+              elevation="hoverable"
+              size="md"
+              delay={index}
+            />
+          </motion.div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+// Complex example with all features
+export const ComplexExample: Story = {
+  args: {
+    title: 'Enterprise Solution',
+    subtitle: 'Premium Package',
+    description: 'A comprehensive solution that includes advanced features, priority support, and enterprise-grade security.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
+      alt: 'Enterprise workspace',
+      aspectRatio: 'video',
+    },
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+      </svg>
+    ),
+    variant: 'premium',
+    elevation: 'interactive',
+    layout: 'auto',
+    size: 'xl',
+    interactive: true,
+         actions: (
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <NexButton size="small" type="glass" text="Learn More" />
+         <NexButton size="small" text="Get Started" />
+       </div>
+     ),
+    onClick: () => alert('Premium card clicked!'),
+  },
+  parameters: {
+    layout: 'padded',
+  },
+};
