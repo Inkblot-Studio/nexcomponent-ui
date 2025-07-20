@@ -1,9 +1,8 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import React, { useState } from 'react';
+import { StoryFn, Meta, StoryObj } from '@storybook/react';
+import { motion } from 'framer-motion';
 import NexCarousel from './NexCarousel';
-import { NexCarouselProps } from './NexCarousel.types';
-import storyHeroSection from '../../assets/img/story_hero_section.jpg';
-import storyBackground from '../../assets/img/story_background.jpg';
+import { NexCarouselProps, CarouselSlide } from './NexCarousel.types';
 
 export default {
   title: 'NexComponent/NexCarousel',
@@ -13,34 +12,40 @@ export default {
     docs: {
       description: {
         component: `
-# NexCarousel - Enterprise Grade Carousel Component
+# NexCarousel - Apple-Inspired Carousel Component
 
-A clean, simple carousel component designed for compelling visual presentations.
-Features smooth animations, professional styling, and intuitive navigation.
+A clean, minimal carousel with Apple-like design principles:
+- **Elegant Simplicity**: Clean lines and minimal distractions
+- **Smooth Animations**: Fluid transitions with Framer Motion and Apple's signature easing
+- **Premium Feel**: High-quality visuals and interactions
+- **Intuitive Interactions**: Natural, responsive controls
+- **Beautiful Typography**: Apple-style typography hierarchy with proper font system
+
+## 🎨 Design Philosophy
+
+Inspired by Apple's design language, this carousel emphasizes:
+- **Clarity**: Clear visual hierarchy and readable content
+- **Elegance**: Sophisticated styling with subtle details
+- **Performance**: Smooth, optimized animations with Framer Motion
+- **Accessibility**: Full keyboard and screen reader support
+- **Responsiveness**: Perfect on all devices and screen sizes
 
 ## 🚀 Key Features
 
-- **Lead Generation Focus**: Designed to capture attention and drive engagement
-- **Clean Design**: Simple, professional styling using design tokens
-- **Black Glass Theme**: Full support for the iconic black glass theme
-- **Smooth Animations**: Professional slide transitions with Framer Motion
-- **Auto-Play**: Automatic slide advancement with configurable intervals
-- **Keyboard Navigation**: Full keyboard support for accessibility
-- **Touch Support**: Mobile-friendly touch interactions
-- **Accessibility First**: Full ARIA support and screen reader compatibility
-
-## 🎨 Design Features
-
-- **Hero Images**: Compelling visuals that capture attention
-- **Content Overlays**: Professional text overlays with backdrop blur
-- **Navigation Controls**: Intuitive arrow buttons and indicators
-- **Slide Counter**: Clear position indicator
-- **Responsive Design**: Optimized for all screen sizes
+- **Multiple Variants**: Default, Hero, Gallery, Minimal
+- **Framer Motion**: Smooth, performant animations throughout
+- **Auto-play**: Intelligent auto-advance with pause on hover
+- **Infinite Scrolling**: Seamless loop navigation
+- **Content Overlays**: Elegant text overlays with gradients
+- **Interactive Controls**: Hover effects and smooth interactions
+- **Beautiful Typography**: Proper font system with antialiasing
         `
       }
     }
   }
 } as Meta<NexCarouselProps>;
+
+type Story = StoryObj<typeof NexCarousel>;
 
 const Template: StoryFn<NexCarouselProps> = (args) => (
   <div style={{ 
@@ -53,134 +58,430 @@ const Template: StoryFn<NexCarouselProps> = (args) => (
   </div>
 );
 
-// Sample slides data
-const sampleSlides = [
+// Apple-inspired sample slides
+const appleSlides: CarouselSlide[] = [
   {
-    imageUrl: storyHeroSection,
-    title: 'Transform Your Business',
-    content: 'Join thousands of companies using our platform to scale their operations and increase revenue by 300%.'
+    imageUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=600&fit=crop',
+    title: 'Think Different',
+    subtitle: 'Innovation at its finest',
+    description: 'Experience the future of technology with our revolutionary platform.',
+    ctaText: 'Learn More',
+    ctaUrl: '#'
   },
   {
-    imageUrl: storyBackground,
-    title: 'Amazing Features',
-    content: 'Discover the revolutionary features that will change how you work forever.'
+    imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&h=600&fit=crop',
+    title: 'Designed for You',
+    subtitle: 'Every detail matters',
+    description: 'Crafted with precision and care, designed to enhance your experience.',
+    ctaText: 'Explore',
+    ctaUrl: '#'
   },
   {
-    imageUrl: storyHeroSection,
-    title: 'Enterprise Solution',
-    content: 'Premium enterprise-grade solution with signature styling and professional design.'
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
+    title: 'Premium Quality',
+    subtitle: 'Excellence in every pixel',
+    description: 'Premium materials, premium performance, premium experience.',
+    ctaText: 'Discover',
+    ctaUrl: '#'
   }
 ];
 
-// Basic carousel
-export const BasicCarousel: StoryFn<NexCarouselProps> = Template.bind({});
-BasicCarousel.args = {
-  slides: sampleSlides,
-  showControls: true,
-  showIndicators: true,
+// Minimal slides for gallery variant
+const gallerySlides: CarouselSlide[] = [
+  {
+    imageUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop',
+    title: 'Gallery One',
+    description: 'Beautiful imagery that speaks for itself.'
+  },
+  {
+    imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop',
+    title: 'Gallery Two',
+    description: 'Minimal design, maximum impact.'
+  },
+  {
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop',
+    title: 'Gallery Three',
+    description: 'Clean, elegant, timeless.'
+  }
+];
+
+// Default carousel
+export const Default: Story = {
+  args: {
+    slides: appleSlides,
+    variant: 'default',
+    size: 'md',
+    showControls: true,
+    showIndicators: true,
+    showCounter: true,
+  },
 };
 
-// Auto-play carousel
-export const AutoPlayCarousel: StoryFn<NexCarouselProps> = Template.bind({});
-AutoPlayCarousel.args = {
-  slides: sampleSlides,
-  autoPlay: true,
-  autoPlayInterval: 3000,
-  showControls: true,
-  showIndicators: true,
+// Hero carousel
+export const Hero: Story = {
+  args: {
+    slides: appleSlides,
+    variant: 'hero',
+    size: 'xl',
+    autoPlay: true,
+    autoPlayInterval: 4000,
+    pauseOnHover: true,
+    infinite: true,
+    showControls: true,
+    showIndicators: true,
+    showCounter: true,
+  },
 };
 
-// Controls only
-export const ControlsOnly: StoryFn<NexCarouselProps> = Template.bind({});
-ControlsOnly.args = {
-  slides: sampleSlides,
-  showControls: true,
-  showIndicators: false,
-};
-
-// Indicators only
-export const IndicatorsOnly: StoryFn<NexCarouselProps> = Template.bind({});
-IndicatorsOnly.args = {
-  slides: sampleSlides,
-  showControls: false,
-  showIndicators: true,
+// Gallery carousel
+export const Gallery: Story = {
+  args: {
+    slides: gallerySlides,
+    variant: 'gallery',
+    size: 'lg',
+    showControls: true,
+    showIndicators: true,
+    showCounter: true,
+  },
 };
 
 // Minimal carousel
-export const MinimalCarousel: StoryFn<NexCarouselProps> = Template.bind({});
-MinimalCarousel.args = {
-  slides: sampleSlides,
-  showControls: false,
-  showIndicators: false,
+export const Minimal: Story = {
+  args: {
+    slides: appleSlides,
+    variant: 'minimal',
+    size: 'md',
+    autoPlay: true,
+    autoPlayInterval: 3000,
+    pauseOnHover: true,
+    showControls: false,
+    showIndicators: true,
+    showCounter: false,
+  },
 };
 
-// Single slide
-export const SingleSlide: StoryFn<NexCarouselProps> = Template.bind({});
-SingleSlide.args = {
-  slides: [sampleSlides[0]],
-  showControls: true,
-  showIndicators: true,
+// Size showcase
+export const SizeShowcase: Story = {
+  render: () => {
+    const sizes = ['sm', 'md', 'lg', 'xl'] as const;
+    
+    return (
+      <div style={{ 
+        margin: '20px', 
+        padding: '40px',
+        background: 'var(--nex-background-color)',
+        borderRadius: '16px'
+      }}>
+        {sizes.map((size) => (
+          <div key={size} style={{ marginBottom: '40px' }}>
+            <h3 style={{ 
+              marginBottom: '20px', 
+              fontSize: '18px', 
+              fontWeight: 'var(--nex-font-weight-semibold)',
+              textTransform: 'uppercase',
+              color: 'var(--nex-font-color)',
+              fontFamily: 'var(--nex-font-family-primary)',
+              letterSpacing: '0.02em',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}>
+              {size.toUpperCase()} Size
+            </h3>
+            <NexCarousel
+              slides={appleSlides}
+              variant="default"
+              size={size}
+              showControls={true}
+              showIndicators={true}
+              autoPlay={false}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
 };
 
-// Long content slides
-export const LongContentSlides: StoryFn<NexCarouselProps> = Template.bind({});
-LongContentSlides.args = {
-  slides: [
-    {
-      imageUrl: storyHeroSection,
-      title: 'Comprehensive Business Solution',
-      content: 'Our platform provides everything you need to transform your business operations. From advanced analytics to seamless integrations, we offer the tools and insights necessary to drive growth and increase efficiency across all aspects of your organization.'
-    },
-    {
-      imageUrl: storyBackground,
-      title: 'Advanced Technology Stack',
-      content: 'Built with cutting-edge technology, our solution leverages the latest innovations in artificial intelligence, machine learning, and cloud computing to deliver unparalleled performance and reliability.'
-    },
-    {
-      imageUrl: storyHeroSection,
-      title: 'Global Enterprise Support',
-      content: 'With 24/7 support and a dedicated team of experts, we ensure your success at every step. Our comprehensive support system includes training, documentation, and personalized assistance.'
-    }
-  ],
-  showControls: true,
-  showIndicators: true,
+// Variant showcase
+export const VariantShowcase: Story = {
+  render: () => {
+    const variants = [
+      { key: 'default', label: 'Default', description: 'Clean and professional' },
+      { key: 'hero', label: 'Hero', description: 'Full-width hero style' },
+      { key: 'gallery', label: 'Gallery', description: 'Elegant gallery presentation' },
+      { key: 'minimal', label: 'Minimal', description: 'Simple and clean' }
+    ] as const;
+    
+    return (
+      <div style={{ 
+        margin: '20px', 
+        padding: '40px',
+        background: 'var(--nex-background-color)',
+        borderRadius: '16px'
+      }}>
+        {variants.map(({ key, label, description }) => (
+          <div key={key} style={{ marginBottom: '60px' }}>
+            <h3 style={{ 
+              marginBottom: '10px', 
+              fontSize: '24px', 
+              fontWeight: 'var(--nex-font-weight-bold)',
+              color: 'var(--nex-font-color)',
+              fontFamily: 'var(--nex-font-family-display)',
+              letterSpacing: '-0.01em',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}>
+              {label}
+            </h3>
+            <p style={{
+              marginBottom: '20px',
+              fontSize: '16px',
+              color: 'var(--nex-muted-font-color)',
+              lineHeight: 'var(--nex-line-height-base)',
+              fontFamily: 'var(--nex-font-family-primary)',
+              fontWeight: 'var(--nex-font-weight-regular)',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}>
+              {description}
+            </p>
+            <NexCarousel
+              slides={key === 'gallery' ? gallerySlides : appleSlides}
+              variant={key}
+              size={key === 'hero' ? 'xl' : 'lg'}
+              showControls={true}
+              showIndicators={true}
+              showCounter={true}
+              autoPlay={key === 'hero' || key === 'minimal'}
+              autoPlayInterval={4000}
+              pauseOnHover={true}
+              infinite={key === 'hero'}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
 };
 
-// Image-only slides
-export const ImageOnlySlides: StoryFn<NexCarouselProps> = Template.bind({});
-ImageOnlySlides.args = {
-  slides: [
-    {
-      imageUrl: storyHeroSection
-    },
-    {
-      imageUrl: storyBackground
-    },
-    {
-      imageUrl: storyHeroSection
-    }
-  ],
-  showControls: true,
-  showIndicators: true,
+// Interactive demo
+const CarouselDemo: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+
+  const handleSlideChange = (index: number) => {
+    setCurrentSlide(index);
+    console.log(`Slide changed to: ${index}`);
+  };
+
+  const handleSlideClick = (slide: CarouselSlide, index: number) => {
+    alert(`Clicked slide ${index + 1}: ${slide.title}`);
+  };
+
+  return (
+    <div style={{
+      padding: '40px',
+      background: 'linear-gradient(135deg, var(--nex-background-color) 0%, rgba(0, 0, 0, 0.02) 100%)',
+      borderRadius: '20px',
+      border: '1px solid var(--nex-border-color)'
+    }}>
+      <div style={{
+        marginBottom: '30px',
+        textAlign: 'center'
+      }}>
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          style={{
+            margin: '0 0 10px 0',
+            fontSize: '32px',
+            fontWeight: 'var(--nex-font-weight-bold)',
+            color: 'var(--nex-font-color)',
+            fontFamily: 'var(--nex-font-family-display)',
+            letterSpacing: '-0.02em',
+            lineHeight: 'var(--nex-line-height-tight)',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale'
+          }}
+        >
+          Apple-Inspired Carousel
+        </motion.h2>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          style={{
+            margin: '0 0 20px 0',
+            fontSize: '18px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: 'var(--nex-line-height-base)',
+            fontFamily: 'var(--nex-font-family-primary)',
+            fontWeight: 'var(--nex-font-weight-regular)',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale'
+          }}
+        >
+          Experience the elegance of Apple's design philosophy in this premium carousel component.
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{
+            display: 'flex',
+            gap: '10px',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            marginBottom: '20px'
+          }}
+        >
+          <motion.div 
+            style={{
+              padding: '8px 16px',
+              background: 'var(--nex-primary-color)',
+              color: 'white',
+              borderRadius: '12px',
+              fontSize: '14px',
+              fontWeight: 'var(--nex-font-weight-semibold)',
+              fontFamily: 'var(--nex-font-family-primary)',
+              letterSpacing: '0.02em',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Current Slide: {currentSlide + 1}
+          </motion.div>
+          
+          <motion.div 
+            style={{
+              padding: '8px 16px',
+              background: isAutoPlaying ? 'var(--nex-success)' : 'var(--nex-muted)',
+              color: 'white',
+              borderRadius: '12px',
+              fontSize: '14px',
+              fontWeight: 'var(--nex-font-weight-semibold)',
+              fontFamily: 'var(--nex-font-family-primary)',
+              letterSpacing: '0.02em',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Auto-play: {isAutoPlaying ? 'Active' : 'Paused'}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <NexCarousel
+        slides={appleSlides}
+        variant="hero"
+        size="xl"
+        autoPlay={true}
+        autoPlayInterval={4000}
+        pauseOnHover={true}
+        infinite={true}
+        showControls={true}
+        showIndicators={true}
+        showCounter={true}
+        onSlideChange={handleSlideChange}
+        onSlideClick={handleSlideClick}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        style={{
+          marginTop: '30px',
+          padding: '20px',
+          background: 'rgba(0, 0, 0, 0.02)',
+          borderRadius: '12px',
+          border: '1px solid var(--nex-border-color)'
+        }}
+      >
+        <h4 style={{
+          margin: '0 0 10px 0',
+          fontSize: '16px',
+          fontWeight: 'var(--nex-font-weight-semibold)',
+          color: 'var(--nex-font-color)',
+          fontFamily: 'var(--nex-font-family-primary)',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale'
+        }}>
+          🎯 Apple Design Principles
+        </h4>
+        <ul style={{
+          margin: '0',
+          paddingLeft: '20px',
+          color: 'var(--nex-muted-font-color)',
+          lineHeight: 'var(--nex-line-height-base)',
+          fontFamily: 'var(--nex-font-family-primary)',
+          fontWeight: 'var(--nex-font-weight-regular)',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale'
+        }}>
+          <li><strong>Clarity:</strong> Clear visual hierarchy and readable content</li>
+          <li><strong>Elegance:</strong> Sophisticated styling with subtle details</li>
+          <li><strong>Performance:</strong> Smooth, optimized animations with Framer Motion</li>
+          <li><strong>Accessibility:</strong> Full keyboard and screen reader support</li>
+          <li><strong>Responsiveness:</strong> Perfect on all devices and screen sizes</li>
+        </ul>
+      </motion.div>
+    </div>
+  );
 };
 
-// Text-only slides
-export const TextOnlySlides: StoryFn<NexCarouselProps> = Template.bind({});
-TextOnlySlides.args = {
-  slides: [
-    {
-      title: 'Welcome to Our Platform',
-      content: 'Experience the future of business management with our innovative solution.'
-    },
-    {
-      title: 'Powerful Features',
-      content: 'Discover tools that will revolutionize how you work and grow your business.'
-    },
-    {
-      title: 'Get Started Today',
-      content: 'Join thousands of satisfied customers who have transformed their operations.'
-    }
-  ],
-  showControls: true,
-  showIndicators: true,
+export const InteractiveDemo: Story = {
+  render: () => <CarouselDemo />,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
+
+// Auto-play demo
+export const AutoPlayDemo: Story = {
+  args: {
+    slides: appleSlides,
+    variant: 'default',
+    size: 'lg',
+    autoPlay: true,
+    autoPlayInterval: 3000,
+    pauseOnHover: true,
+    infinite: true,
+    showControls: true,
+    showIndicators: true,
+    showCounter: true,
+  },
+};
+
+// Infinite scrolling demo
+export const InfiniteScrolling: Story = {
+  args: {
+    slides: appleSlides,
+    variant: 'gallery',
+    size: 'md',
+    infinite: true,
+    showControls: true,
+    showIndicators: true,
+    showCounter: true,
+    autoPlay: false,
+  },
+};
+
+// Single slide demo
+export const SingleSlide: Story = {
+  args: {
+    slides: [appleSlides[0]],
+    variant: 'default',
+    size: 'md',
+    showControls: false,
+    showIndicators: false,
+    showCounter: false,
+  },
+}; 

@@ -6,16 +6,19 @@ import { CarouselControlsProps } from './CarouselControls.types';
 import './CarouselControls.scss';
 
 /**
- * CarouselControls - Clean, simple carousel controls
+ * CarouselControls - Premium carousel controls
  * 
- * A minimal controls component that provides navigation buttons.
- * Designed for intuitive carousel navigation.
+ * A premium controls component that provides navigation buttons with
+ * advanced positioning, styling, and accessibility features.
  */
 const CarouselControls: React.FC<CarouselControlsProps> = ({ 
   onPrevious, 
   onNext, 
   hasPrevious, 
   hasNext,
+  position = 'inside',
+  variant = 'default',
+  size = 'md',
   className 
 }) => {
   const { shouldReduceMotion } = useAnimationConfig();
@@ -33,9 +36,17 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
     }
   };
 
+  const containerClasses = [
+    'nex-carousel-controls',
+    `nex-carousel-controls--${position}`,
+    `nex-carousel-controls--${variant}`,
+    `nex-carousel-controls--${size}`,
+    className
+  ].filter(Boolean).join(' ');
+
   return (
     <motion.div 
-      className={`nex-carousel-controls ${className || ''}`}
+      className={containerClasses}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ 
@@ -54,8 +65,9 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
         whileHover="hover"
         whileTap="tap"
         aria-label="Previous slide"
+        aria-disabled={!hasPrevious}
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={size === 'sm' ? 20 : size === 'lg' ? 28 : size === 'xl' ? 32 : 24} />
       </motion.button>
 
       <motion.button
@@ -68,8 +80,9 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
         whileHover="hover"
         whileTap="tap"
         aria-label="Next slide"
+        aria-disabled={!hasNext}
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={size === 'sm' ? 20 : size === 'lg' ? 28 : size === 'xl' ? 32 : 24} />
       </motion.button>
     </motion.div>
   );
