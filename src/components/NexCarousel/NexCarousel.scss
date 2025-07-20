@@ -214,27 +214,32 @@
     pointer-events: none;
 
     .nex-carousel-nav-side {
-      flex: 1;
       position: relative;
       pointer-events: auto;
       cursor: pointer;
       transition: none;
 
-      &:hover {
-        .nex-carousel-nav-arrow {
-          opacity: 1;
-        }
-      }
-
       &.left {
+        width: 15%;
         .nex-carousel-nav-arrow {
           left: 16px;
         }
       }
 
       &.right {
+        width: 15%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
         .nex-carousel-nav-arrow {
           right: 16px;
+        }
+      }
+
+      &:hover {
+        .nex-carousel-nav-arrow {
+          opacity: 1;
         }
       }
 

@@ -41,22 +41,7 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
   const hasNext = infinite || currentSlide < totalSlides - 1;
 
   // Framer Motion variants
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 1
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? '100%' : '-100%',
-      opacity: 1
-    })
-  };
+
 
 
 
@@ -215,81 +200,72 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
 
       {/* Slides Container */}
       <div className="nex-carousel-slides">
-                          <AnimatePresence mode="wait" initial={false}>
-           <motion.div
-             key={currentSlide}
-             className="nex-carousel-slide"
-             onClick={() => handleSlideClick(currentSlideData, currentSlide)}
-             role="button"
-             tabIndex={0}
-             aria-label={`Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`}
-             onKeyDown={(e) => {
-               if (e.key === 'Enter' || e.key === ' ') {
-                 e.preventDefault();
-                 handleSlideClick(currentSlideData, currentSlide);
-               }
-             }}
-             variants={slideVariants}
-             initial="enter"
-             animate="center"
-             exit="exit"
-             transition={{
-               x: { 
-                 type: "tween", 
-                 duration: shouldReduceMotion ? 0 : 0.5,
-                 ease: [0.4, 0, 0.2, 1]
-               },
-               opacity: { 
-                 duration: shouldReduceMotion ? 0 : 0.3,
-                 ease: [0.4, 0, 0.2, 1]
-               }
-             }}
-             custom={1}
-           >
-            <img
-              src={currentSlideData.imageUrl}
-              alt={currentSlideData.title || `Slide ${currentSlide + 1}`}
-              className="nex-carousel-image"
-              loading={currentSlide === 0 ? 'eager' : 'lazy'}
-            />
-            
-            {/* Content Overlay */}
-            {(currentSlideData.title || currentSlideData.subtitle || currentSlideData.description || currentSlideData.ctaText) && (
-              <motion.div 
-                className="nex-carousel-content"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              >
-                {currentSlideData.title && (
-                  <h2 className="nex-carousel-title">
-                    {currentSlideData.title}
-                  </h2>
-                )}
-                {currentSlideData.subtitle && (
-                  <h3 className="nex-carousel-subtitle">
-                    {currentSlideData.subtitle}
-                  </h3>
-                )}
-                {currentSlideData.description && (
-                  <p className="nex-carousel-description">
-                    {currentSlideData.description}
-                  </p>
-                )}
-                {currentSlideData.ctaText && (
-                  <a
-                    href={currentSlideData.ctaUrl || '#'}
-                    className="nex-carousel-cta"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {currentSlideData.ctaText}
-                  </a>
-                )}
-              </motion.div>
-            )}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+          className="nex-carousel-slide"
+          onClick={() => handleSlideClick(currentSlideData, currentSlide)}
+          role="button"
+          tabIndex={0}
+          aria-label={`Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleSlideClick(currentSlideData, currentSlide);
+            }
+          }}
+                      key={currentSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.3,
+              ease: [0.4, 0, 0.2, 1]
+            }}
+        >
+          <img
+            src={currentSlideData.imageUrl}
+            alt={currentSlideData.title || `Slide ${currentSlide + 1}`}
+            className="nex-carousel-image"
+            loading={currentSlide === 0 ? 'eager' : 'lazy'}
+          />
+          
+          {/* Content Overlay */}
+          {(currentSlideData.title || currentSlideData.subtitle || currentSlideData.description || currentSlideData.ctaText) && (
+            <motion.div 
+              className="nex-carousel-content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {currentSlideData.title && (
+                <h2 className="nex-carousel-title">
+                  {currentSlideData.title}
+                </h2>
+              )}
+              {currentSlideData.subtitle && (
+                <h3 className="nex-carousel-subtitle">
+                  {currentSlideData.subtitle}
+                </h3>
+              )}
+              {currentSlideData.description && (
+                <p className="nex-carousel-description">
+                  {currentSlideData.description}
+                </p>
+              )}
+              {currentSlideData.ctaText && (
+                <a
+                  href={currentSlideData.ctaUrl || '#'}
+                  className="nex-carousel-cta"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {currentSlideData.ctaText}
+                </a>
+              )}
+            </motion.div>
+                      )}
           </motion.div>
         </AnimatePresence>
-      </div>
+        </div>
 
 
 
