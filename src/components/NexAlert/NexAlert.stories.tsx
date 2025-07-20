@@ -85,6 +85,50 @@ export const NeutralAlert: Story = {
   },
 };
 
+// Undo functionality example
+export const UndoExample: Story = {
+  args: {
+    id: 'undo-1',
+    type: 'success',
+    title: 'Item Deleted',
+    message: 'The item has been successfully deleted.',
+    variant: 'glass',
+    size: 'md',
+    dismissible: true,
+    onUndo: () => alert('Undo clicked! Item restored.'),
+    timeout: 8000,
+    pauseOnHover: true,
+  },
+};
+
+// Actions and Undo example
+export const ActionsAndUndoExample: Story = {
+  args: {
+    id: 'actions-undo-1',
+    type: 'warning',
+    title: 'Storage Space Low',
+    message: 'You\'re running out of storage space.',
+    description: 'Consider upgrading your plan or cleaning up unused files.',
+    variant: 'premium',
+    size: 'lg',
+    dismissible: true,
+    actions: [
+      {
+        label: 'Upgrade Plan',
+        onClick: () => alert('Upgrade plan clicked!'),
+        variant: 'primary',
+      },
+      {
+        label: 'Clean Up',
+        onClick: () => alert('Clean up clicked!'),
+        variant: 'secondary',
+      },
+    ],
+    onUndo: () => alert('Undo clicked! Action cancelled.'),
+    timeout: 0, // No auto-dismiss for this example
+  },
+};
+
 // Variant showcase
 export const Variants: Story = {
   render: () => (
@@ -290,52 +334,212 @@ const AlertDemo: React.FC = () => {
   } = useAlerts();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-      <h3>Interactive Alert Demo</h3>
-      <p>Click the buttons below to see different types of alerts in action.</p>
-      
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-        <NexButton 
-          text="Show Toast" 
-          onClick={() => createToast('This is a toast notification!')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Success" 
-          onClick={() => createSuccess('Operation completed successfully!')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Error" 
-          onClick={() => createError('Something went wrong!')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Info" 
-          onClick={() => showInfo('Here is some information for you.')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Warning" 
-          onClick={() => showWarning('Please proceed with caution.')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Banner" 
-          onClick={() => createBanner('This is an important banner message.')}
-          size="small"
-        />
-        <NexButton 
-          text="Show Notification" 
-          onClick={() => createNotification('This is a persistent notification.')}
-          size="small"
-        />
-        <NexButton 
-          text="Dismiss All" 
-          onClick={dismissAll}
-          size="small"
-          type="glass"
-        />
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '32px',
+      alignItems: 'center',
+      padding: '40px',
+      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+      borderRadius: '28px',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(24px)',
+      boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+      maxWidth: '800px',
+      margin: '0 auto'
+    }}>
+      {/* Header */}
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '16px'
+      }}>
+        <h3 style={{
+          margin: '0 0 12px 0',
+          fontSize: '32px',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, var(--nex-font-color) 0%, var(--nex-muted-font-color) 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          Interactive Alert Demo
+        </h3>
+        <p style={{
+          margin: '0',
+          fontSize: '18px',
+          color: 'var(--nex-muted-font-color)',
+          lineHeight: '1.6',
+          maxWidth: '500px'
+        }}>
+          Click the buttons below to see different types of alerts in action. Each button demonstrates a unique alert configuration.
+        </p>
+      </div>
+
+      {/* Button Grid */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '16px',
+        width: '100%',
+        maxWidth: '600px'
+      }}>
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="🍞 Show Toast" 
+            onClick={() => createToast('This is a toast notification!')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="✅ Show Success" 
+            onClick={() => createSuccess('Operation completed successfully!')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="❌ Show Error" 
+            onClick={() => createError('Something went wrong!')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="ℹ️ Show Info" 
+            onClick={() => showInfo('Here is some information for you.')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="⚠️ Show Warning" 
+            onClick={() => showWarning('Please proceed with caution.')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="🚩 Show Banner" 
+            onClick={() => createBanner('This is an important banner message.')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="📢 Show Notification" 
+            onClick={() => createNotification('This is a persistent notification.')}
+            size="normal"
+          />
+        </motion.div>
+        
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }} style={{ width: '100%' }}>
+          <NexButton 
+            text="🗑️ Dismiss All" 
+            onClick={dismissAll}
+            size="normal"
+            type="glass"
+          />
+        </motion.div>
+      </div>
+
+      {/* Feature Highlights */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '20px',
+        marginTop: '24px',
+        width: '100%'
+      }}>
+        <div style={{
+          padding: '20px',
+          background: 'rgba(76, 175, 80, 0.05)',
+          border: '1px solid rgba(76, 175, 80, 0.2)',
+          borderRadius: '16px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h4 style={{
+            margin: '0 0 8px 0',
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--nex-success)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <span>✨</span> Premium Features
+          </h4>
+          <p style={{
+            margin: '0',
+            fontSize: '14px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: '1.4'
+          }}>
+            Rich content, custom icons, action buttons, and smooth animations
+          </p>
+        </div>
+
+        <div style={{
+          padding: '20px',
+          background: 'rgba(33, 150, 243, 0.05)',
+          border: '1px solid rgba(33, 150, 243, 0.2)',
+          borderRadius: '16px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h4 style={{
+            margin: '0 0 8px 0',
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--nex-info)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <span>🎯</span> Smart Management
+          </h4>
+          <p style={{
+            margin: '0',
+            fontSize: '14px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: '1.4'
+          }}>
+            Auto-dismiss, pause on hover, undo functionality, and context-based state
+          </p>
+        </div>
+
+        <div style={{
+          padding: '20px',
+          background: 'rgba(255, 193, 7, 0.05)',
+          border: '1px solid rgba(255, 193, 7, 0.2)',
+          borderRadius: '16px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h4 style={{
+            margin: '0 0 8px 0',
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--nex-warning)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <span>♿</span> Accessibility
+          </h4>
+          <p style={{
+            margin: '0',
+            fontSize: '14px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: '1.4'
+          }}>
+            ARIA support, keyboard navigation, screen reader announcements
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -357,57 +561,222 @@ export const ComplexExample: Story = {
     const handleDelete = (itemName: string) => {
       setDeletedItems(prev => [...prev, itemName]);
       createSuccess(`${itemName} has been deleted`, {
+        title: 'File Deleted',
+        message: `${itemName} has been moved to trash`,
+        description: 'You can restore it within 30 days',
         onUndo: () => {
           setDeletedItems(prev => prev.filter(item => item !== itemName));
-          createSuccess(`${itemName} has been restored`);
+          createSuccess(`${itemName} has been restored to its original location`);
         },
-        timeout: 5000,
+        timeout: 8000,
         pauseOnHover: true,
       });
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <h3>File Management Demo</h3>
-        <p>Click delete to see the undo functionality in action.</p>
-        
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {['document.pdf', 'image.jpg', 'video.mp4'].map((file) => (
-            <div 
-              key={file}
-              style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '12px',
-                border: '1px solid var(--nex-border-color)',
-                borderRadius: '8px',
-                background: 'var(--nex-surface-color)'
-              }}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+        padding: '32px',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+        borderRadius: '24px',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(20px)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        maxWidth: '600px',
+        margin: '0 auto'
+      }}>
+        {/* Header Section */}
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '8px'
+        }}>
+          <h3 style={{
+            margin: '0 0 8px 0',
+            fontSize: '28px',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, var(--nex-font-color) 0%, var(--nex-muted-font-color) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            File Management Demo
+          </h3>
+          <p style={{
+            margin: '0',
+            fontSize: '16px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: '1.5'
+          }}>
+            Click delete to see the undo functionality in action
+          </p>
+        </div>
+
+        {/* File List */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px'
+        }}>
+          {[
+            { name: 'document.pdf', icon: '📄', type: 'PDF Document' },
+            { name: 'image.jpg', icon: '🖼️', type: 'Image File' },
+            { name: 'video.mp4', icon: '🎥', type: 'Video File' },
+            { name: 'presentation.pptx', icon: '📊', type: 'Presentation' },
+            { name: 'spreadsheet.xlsx', icon: '📈', type: 'Spreadsheet' }
+          ].map((file) => (
+            <motion.div 
+              key={file.name}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                             style={{ 
+                 display: 'flex', 
+                 justifyContent: 'space-between', 
+                 alignItems: 'center',
+                 padding: '16px 20px',
+                 border: '1px solid rgba(255, 255, 255, 0.1)',
+                 borderRadius: '16px',
+                 background: 'rgba(255, 255, 255, 0.05)',
+                 backdropFilter: 'blur(10px)',
+                 cursor: 'pointer'
+               }}
+               whileHover={{ 
+                 y: -2,
+                 background: 'rgba(255, 255, 255, 0.08)',
+                 borderColor: 'rgba(255, 255, 255, 0.2)',
+                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                 transition: { duration: 0.2 }
+               }}
             >
-              <span>{file}</span>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <span style={{
+                  fontSize: '24px',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                }}>
+                  {file.icon}
+                </span>
+                <div>
+                  <div style={{
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    color: 'var(--nex-font-color)',
+                    marginBottom: '2px'
+                  }}>
+                    {file.name}
+                  </div>
+                  <div style={{
+                    fontSize: '12px',
+                    color: 'var(--nex-muted-font-color)',
+                    opacity: 0.8
+                  }}>
+                    {file.type}
+                  </div>
+                </div>
+              </div>
               <NexButton
                 text="Delete"
-                onClick={() => handleDelete(file)}
+                onClick={() => handleDelete(file.name)}
                 size="small"
                 type="glass"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
         
+        {/* Deleted Items Section */}
         {deletedItems.length > 0 && (
-          <div style={{ marginTop: '16px' }}>
-            <h4>Deleted Items:</h4>
-            <ul>
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              marginTop: '24px',
+              padding: '20px',
+              background: 'rgba(244, 67, 54, 0.05)',
+              border: '1px solid rgba(244, 67, 54, 0.2)',
+              borderRadius: '16px',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            <h4 style={{
+              margin: '0 0 12px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: 'var(--nex-danger)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span style={{ fontSize: '20px' }}>🗑️</span>
+              Deleted Items ({deletedItems.length})
+            </h4>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '8px'
+            }}>
               {deletedItems.map((item, index) => (
-                <li key={index}>{item}</li>
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  style={{
+                    padding: '6px 12px',
+                    background: 'rgba(244, 67, 54, 0.1)',
+                    border: '1px solid rgba(244, 67, 54, 0.3)',
+                    borderRadius: '20px',
+                    fontSize: '14px',
+                    color: 'var(--nex-danger)',
+                    fontWeight: '500'
+                  }}
+                >
+                  {item}
+                </motion.span>
               ))}
-            </ul>
-          </div>
+            </div>
+          </motion.div>
         )}
+
+        {/* Instructions */}
+        <div style={{
+          textAlign: 'center',
+          padding: '16px',
+          background: 'rgba(33, 150, 243, 0.05)',
+          border: '1px solid rgba(33, 150, 243, 0.2)',
+          borderRadius: '12px',
+          marginTop: '16px'
+        }}>
+          <p style={{
+            margin: '0',
+            fontSize: '14px',
+            color: 'var(--nex-info)',
+            lineHeight: '1.4'
+          }}>
+            <strong>💡 Tip:</strong> When you delete a file, a success alert will appear with an "Undo" option. 
+            Click "Undo" to restore the file and see it removed from the deleted items list.
+          </p>
+        </div>
       </div>
     );
+  },
+  parameters: {
+    layout: 'padded',
+    backgrounds: {
+      default: 'gradient',
+      values: [
+        {
+          name: 'gradient',
+          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        },
+      ],
+    },
   },
 };
 
@@ -470,27 +839,255 @@ export const Performance: Story = {
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-        <h3>Performance Test</h3>
-        <p>Test the performance with multiple alerts appearing simultaneously.</p>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+        alignItems: 'center',
+        padding: '40px',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+        borderRadius: '28px',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(24px)',
+        boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+        maxWidth: '700px',
+        margin: '0 auto'
+      }}>
+        {/* Header */}
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '16px'
+        }}>
+          <h3 style={{
+            margin: '0 0 12px 0',
+            fontSize: '32px',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, var(--nex-font-color) 0%, var(--nex-muted-font-color) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            Performance Test
+          </h3>
+          <p style={{
+            margin: '0',
+            fontSize: '18px',
+            color: 'var(--nex-muted-font-color)',
+            lineHeight: '1.6',
+            maxWidth: '500px'
+          }}>
+            Test the performance with multiple alerts appearing simultaneously
+          </p>
+        </div>
+
+        {/* Test Button */}
+        <motion.div whileHover={{ y: -4 }} whileTap={{ y: -2 }}>
+          <NexButton
+            text="🚀 Add 10 Alerts"
+            onClick={addMultipleAlerts}
+            size="normal"
+          />
+        </motion.div>
         
-        <NexButton
-          text="Add 10 Alerts"
-          onClick={addMultipleAlerts}
-          size="normal"
-        />
-        
-        <div style={{ marginTop: '16px' }}>
-          <h4>Performance Features:</h4>
-          <ul style={{ textAlign: 'left', fontSize: '14px' }}>
-            <li>Optimized animations with Framer Motion</li>
-            <li>Efficient state management</li>
-            <li>Smart alert limiting (max 4 by default)</li>
-            <li>Memory leak prevention</li>
-            <li>Reduced motion support for accessibility</li>
-          </ul>
+        {/* Performance Features */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '20px',
+          width: '100%',
+          marginTop: '24px'
+        }}>
+          <div style={{
+            padding: '24px',
+            background: 'rgba(76, 175, 80, 0.05)',
+            border: '1px solid rgba(76, 175, 80, 0.2)',
+            borderRadius: '16px',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h4 style={{
+              margin: '0 0 12px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: 'var(--nex-success)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>⚡</span> Optimized Animations
+            </h4>
+            <p style={{
+              margin: '0',
+              fontSize: '14px',
+              color: 'var(--nex-muted-font-color)',
+              lineHeight: '1.5'
+            }}>
+              Framer Motion with hardware acceleration and efficient rendering
+            </p>
+          </div>
+
+          <div style={{
+            padding: '24px',
+            background: 'rgba(33, 150, 243, 0.05)',
+            border: '1px solid rgba(33, 150, 243, 0.2)',
+            borderRadius: '16px',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h4 style={{
+              margin: '0 0 12px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: 'var(--nex-info)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>🧠</span> Smart Management
+            </h4>
+            <p style={{
+              margin: '0',
+              fontSize: '14px',
+              color: 'var(--nex-muted-font-color)',
+              lineHeight: '1.5'
+            }}>
+              Efficient state management with automatic cleanup and memory optimization
+            </p>
+          </div>
+
+          <div style={{
+            padding: '24px',
+            background: 'rgba(255, 193, 7, 0.05)',
+            border: '1px solid rgba(255, 193, 7, 0.2)',
+            borderRadius: '16px',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h4 style={{
+              margin: '0 0 12px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: 'var(--nex-warning)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>🛡️</span> Memory Safe
+            </h4>
+            <p style={{
+              margin: '0',
+              fontSize: '14px',
+              color: 'var(--nex-muted-font-color)',
+              lineHeight: '1.5'
+            }}>
+              Smart alert limiting (max 4 by default) and memory leak prevention
+            </p>
+          </div>
+
+          <div style={{
+            padding: '24px',
+            background: 'rgba(156, 39, 176, 0.05)',
+            border: '1px solid rgba(156, 39, 176, 0.2)',
+            borderRadius: '16px',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h4 style={{
+              margin: '0 0 12px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: 'var(--nex-purple, #9c27b0)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span>♿</span> Accessibility
+            </h4>
+            <p style={{
+              margin: '0',
+              fontSize: '14px',
+              color: 'var(--nex-muted-font-color)',
+              lineHeight: '1.5'
+            }}>
+              Reduced motion support and optimized for screen readers
+            </p>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div style={{
+          display: 'flex',
+          gap: '24px',
+          marginTop: '24px',
+          padding: '20px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '16px',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--nex-success)',
+              marginBottom: '4px'
+            }}>
+              10
+            </div>
+            <div style={{
+              fontSize: '12px',
+              color: 'var(--nex-muted-font-color)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Alerts
+            </div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--nex-info)',
+              marginBottom: '4px'
+            }}>
+              100ms
+            </div>
+            <div style={{
+              fontSize: '12px',
+              color: 'var(--nex-muted-font-color)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Stagger
+            </div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--nex-warning)',
+              marginBottom: '4px'
+            }}>
+              4
+            </div>
+            <div style={{
+              fontSize: '12px',
+              color: 'var(--nex-muted-font-color)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Max Limit
+            </div>
+          </div>
         </div>
       </div>
     );
+  },
+  parameters: {
+    layout: 'padded',
+    backgrounds: {
+      default: 'gradient',
+      values: [
+        {
+          name: 'gradient',
+          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        },
+      ],
+    },
   },
 };

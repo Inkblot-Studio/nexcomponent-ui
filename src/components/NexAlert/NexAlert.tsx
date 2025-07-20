@@ -276,7 +276,7 @@ const NexAlert: React.FC<NexAlertProps> = ({
             )}
 
             {/* Actions */}
-            {actions.length > 0 && (
+            {(actions.length > 0 || onUndo) && (
               <div className={styles.actions}>
                 {actions.map((action, index) => (
                   <button

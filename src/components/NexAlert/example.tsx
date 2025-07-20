@@ -434,18 +434,87 @@ const UndoExample: React.FC = () => {
 export const NexAlertExamples: React.FC = () => {
   return (
     <NexAlertsProvider>
-      <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-        <h1>NexAlert Premium Examples</h1>
-        <p>Comprehensive showcase of the premium NexAlert component features</p>
-        
-        <BasicExamples />
-        <VariantsShowcase />
-        <SizeVariations />
-        <RichContentAlerts />
-        <AutoDismissExamples />
-        <CustomIconsExamples />
-        <ContextExample />
-        <UndoExample />
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: '40px 24px'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '32px',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(20px)',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)',
+          overflow: 'hidden'
+        }}>
+          {/* Header */}
+          <div style={{
+            padding: '48px 40px 32px 40px',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          }}>
+            <h1 style={{
+              margin: '0 0 16px 0',
+              fontSize: '48px',
+              fontWeight: '800',
+              background: 'linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              letterSpacing: '-0.02em'
+            }}>
+              NexAlert Premium
+            </h1>
+            <p style={{
+              margin: '0',
+              fontSize: '20px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              lineHeight: '1.6',
+              maxWidth: '600px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
+              Comprehensive showcase of the premium NexAlert component features with Apple-like design and enterprise-grade functionality
+            </p>
+          </div>
+
+          {/* Content */}
+          <div style={{
+            padding: '40px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '48px'
+          }}>
+            <BasicExamples />
+            <VariantsShowcase />
+            <SizeVariations />
+            <RichContentAlerts />
+            <AutoDismissExamples />
+            <CustomIconsExamples />
+            <ContextExample />
+            <UndoExample />
+          </div>
+
+          {/* Footer */}
+          <div style={{
+            padding: '32px 40px',
+            background: 'rgba(0, 0, 0, 0.1)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            textAlign: 'center'
+          }}>
+            <p style={{
+              margin: '0',
+              fontSize: '14px',
+              color: 'rgba(255, 255, 255, 0.6)',
+              fontWeight: '500'
+            }}>
+              Built with ❤️ using React, TypeScript, Framer Motion, and SCSS Modules
+            </p>
+          </div>
+        </div>
       </div>
     </NexAlertsProvider>
   );
