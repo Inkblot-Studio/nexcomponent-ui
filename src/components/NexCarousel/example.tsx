@@ -129,7 +129,7 @@ const NexCarouselExample: React.FC = () => {
             MozOsxFontSmoothing: 'grayscale'
           }}
         >
-          Experience the elegance of Apple's design philosophy in this premium carousel component.
+          Experience the elegance of Apple's design philosophy with magic hover navigation and perfect circle indicators.
         </motion.p>
 
         {/* Interactive Controls */}
@@ -190,7 +190,7 @@ const NexCarouselExample: React.FC = () => {
           autoPlayInterval={4000}
           pauseOnHover={true}
           infinite={true}
-          showControls={true}
+          showControls={false}
           showIndicators={true}
           showCounter={true}
           onSlideChange={handleSlideChange}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import { useAnimationConfig } from '../../utils/animationConfig';
 import { NexCarouselProps, CarouselSlide } from './NexCarousel.types';
 import './NexCarousel.scss';
@@ -58,70 +58,9 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
     })
   };
 
-  const contentVariants = {
-    hidden: { y: 100, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-        delay: 0.2
-      }
-    }
-  };
 
-  const controlVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1, 
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    },
-    hover: { 
-      scale: 1.1,
-      transition: {
-        duration: 0.2,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    },
-    tap: { 
-      scale: 0.95,
-      transition: {
-        duration: 0.1,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
 
-  const indicatorVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: { 
-      scale: 1, 
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    },
-    hover: { 
-      scale: 1.2,
-      transition: {
-        duration: 0.2,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    },
-    active: { 
-      scale: 1.3,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
+
 
   // Smooth slide navigation
   const goToSlide = useCallback((index: number) => {
@@ -236,7 +175,7 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
   ].filter(Boolean).join(' ');
 
   return (
-    <motion.div
+    <div
       className={carouselClasses}
       style={style}
       onMouseEnter={handleMouseEnter}
@@ -245,13 +184,35 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
       aria-label="Carousel"
       aria-roledescription="carousel"
       aria-live="polite"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ 
-        duration: 0.6, 
-        ease: [0.4, 0, 0.2, 1] 
-      }}
     >
+      {/* Magic Hover Navigation */}
+      {totalSlides > 1 && (
+        <div className="nex-carousel-hover-nav">
+          <div 
+            className="nex-carousel-nav-side left"
+            onClick={goToPrevious}
+            aria-label="Previous slide"
+          >
+            <div className="nex-carousel-nav-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </div>
+          </div>
+          <div 
+            className="nex-carousel-nav-side right"
+            onClick={goToNext}
+            aria-label="Next slide"
+          >
+            <div className="nex-carousel-nav-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Slides Container */}
       <div className="nex-carousel-slides">
         <AnimatePresence mode="wait">
@@ -275,89 +236,55 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
             transition={{
               x: { 
                 type: "spring", 
-                stiffness: 300, 
+                stiffness: 150, 
                 damping: 30,
-                duration: shouldReduceMotion ? 0 : 0.6
+                duration: shouldReduceMotion ? 0 : 0.4
               },
               opacity: { 
-                duration: shouldReduceMotion ? 0 : 0.3 
+                duration: shouldReduceMotion ? 0 : 0.3,
+                ease: [0.4, 0, 0.2, 1]
               }
             }}
             custom={1}
-            whileHover={{
-              scale: 1.02,
-              transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-            }}
           >
-            <motion.img
+            <img
               src={currentSlideData.imageUrl}
               alt={currentSlideData.title || `Slide ${currentSlide + 1}`}
               className="nex-carousel-image"
               loading={currentSlide === 0 ? 'eager' : 'lazy'}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
-              }}
             />
             
             {/* Content Overlay */}
             {(currentSlideData.title || currentSlideData.subtitle || currentSlideData.description || currentSlideData.ctaText) && (
               <motion.div 
                 className="nex-carousel-content"
-                variants={contentVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="visible"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
               >
                 {currentSlideData.title && (
-                  <motion.h2 
-                    className="nex-carousel-title"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                  >
+                  <h2 className="nex-carousel-title">
                     {currentSlideData.title}
-                  </motion.h2>
+                  </h2>
                 )}
                 {currentSlideData.subtitle && (
-                  <motion.h3 
-                    className="nex-carousel-subtitle"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                  >
+                  <h3 className="nex-carousel-subtitle">
                     {currentSlideData.subtitle}
-                  </motion.h3>
+                  </h3>
                 )}
                 {currentSlideData.description && (
-                  <motion.p 
-                    className="nex-carousel-description"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.5 }}
-                  >
+                  <p className="nex-carousel-description">
                     {currentSlideData.description}
-                  </motion.p>
+                  </p>
                 )}
                 {currentSlideData.ctaText && (
-                  <motion.a
+                  <a
                     href={currentSlideData.ctaUrl || '#'}
                     className="nex-carousel-cta"
                     onClick={(e) => e.stopPropagation()}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.5 }}
-                    whileHover={{ 
-                      y: -2,
-                      transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
-                    }}
-                    whileTap={{ 
-                      scale: 0.98,
-                      transition: { duration: 0.1, ease: [0.4, 0, 0.2, 1] }
-                    }}
                   >
                     {currentSlideData.ctaText}
-                  </motion.a>
+                  </a>
                 )}
               </motion.div>
             )}
@@ -365,101 +292,42 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
         </AnimatePresence>
       </div>
 
-      {/* Navigation Controls */}
-      {showControls && totalSlides > 1 && (
-        <div className="nex-carousel-controls">
-          <AnimatePresence>
-            {hasPrevious && (
-              <motion.button
-                className="nex-carousel-control"
-                onClick={goToPrevious}
-                aria-label="Previous slide"
-                variants={controlVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap="tap"
-                exit="hidden"
-              >
-                <ChevronLeft size={20} />
-              </motion.button>
-            )}
-          </AnimatePresence>
-          
-          <AnimatePresence>
-            {hasNext && (
-              <motion.button
-                className="nex-carousel-control"
-                onClick={goToNext}
-                aria-label="Next slide"
-                variants={controlVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap="tap"
-                exit="hidden"
-              >
-                <ChevronRight size={20} />
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+
 
       {/* Slide Indicators */}
       {showIndicators && totalSlides > 1 && (
-        <motion.div 
+        <div 
           className="nex-carousel-indicators" 
           role="tablist"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
         >
           {slides.map((_, index) => (
-            <motion.button
+            <button
               key={index}
               className={`nex-carousel-indicator ${index === currentSlide ? 'active' : ''}`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
               aria-selected={index === currentSlide}
               role="tab"
-              variants={indicatorVariants}
-              initial="hidden"
-              animate={index === currentSlide ? "active" : "visible"}
-              whileHover="hover"
-              whileTap={{ scale: 0.9 }}
-              transition={{
-                duration: 0.3,
-                ease: [0.4, 0, 0.2, 1]
-              }}
             />
           ))}
-        </motion.div>
+        </div>
       )}
 
       {/* Slide Counter */}
       {showCounter && totalSlides > 1 && (
-        <motion.div 
-          className="nex-carousel-counter"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
+        <div className="nex-carousel-counter">
           {currentSlide + 1} / {totalSlides}
-        </motion.div>
+        </div>
       )}
 
       {/* Auto-play Indicator */}
       {autoPlay && !isPaused && (
-        <motion.div 
+        <div 
           className="nex-carousel-autoplay" 
           aria-label="Auto-play active"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 
