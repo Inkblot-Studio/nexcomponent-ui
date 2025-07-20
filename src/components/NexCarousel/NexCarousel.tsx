@@ -43,8 +43,8 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
   // Framer Motion variants
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 1
     }),
     center: {
       zIndex: 1,
@@ -53,8 +53,8 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 1
     })
   };
 
@@ -215,38 +215,37 @@ const NexCarousel: React.FC<NexCarouselProps> = ({
 
       {/* Slides Container */}
       <div className="nex-carousel-slides">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            className="nex-carousel-slide"
-            onClick={() => handleSlideClick(currentSlideData, currentSlide)}
-            role="button"
-            tabIndex={0}
-            aria-label={`Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleSlideClick(currentSlideData, currentSlide);
-              }
-            }}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { 
-                type: "spring", 
-                stiffness: 150, 
-                damping: 30,
-                duration: shouldReduceMotion ? 0 : 0.4
-              },
-              opacity: { 
-                duration: shouldReduceMotion ? 0 : 0.3,
-                ease: [0.4, 0, 0.2, 1]
-              }
-            }}
-            custom={1}
-          >
+                          <AnimatePresence mode="wait" initial={false}>
+           <motion.div
+             key={currentSlide}
+             className="nex-carousel-slide"
+             onClick={() => handleSlideClick(currentSlideData, currentSlide)}
+             role="button"
+             tabIndex={0}
+             aria-label={`Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`}
+             onKeyDown={(e) => {
+               if (e.key === 'Enter' || e.key === ' ') {
+                 e.preventDefault();
+                 handleSlideClick(currentSlideData, currentSlide);
+               }
+             }}
+             variants={slideVariants}
+             initial="enter"
+             animate="center"
+             exit="exit"
+             transition={{
+               x: { 
+                 type: "tween", 
+                 duration: shouldReduceMotion ? 0 : 0.5,
+                 ease: [0.4, 0, 0.2, 1]
+               },
+               opacity: { 
+                 duration: shouldReduceMotion ? 0 : 0.3,
+                 ease: [0.4, 0, 0.2, 1]
+               }
+             }}
+             custom={1}
+           >
             <img
               src={currentSlideData.imageUrl}
               alt={currentSlideData.title || `Slide ${currentSlide + 1}`}
