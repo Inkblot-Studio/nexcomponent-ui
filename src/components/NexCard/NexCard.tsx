@@ -114,17 +114,15 @@ const NexCard: React.FC<NexCardProps> = ({
     disabled,
   }), [finalVariant, finalElevation, layout, size, finalInteractive, loading, disabled]);
   
-  // Animation variants
+  // Animation variants - Clean, elegant Apple-like animations
   const cardVariants = {
     initial: { 
       opacity: 0, 
-      y: 20,
-      scale: 0.98
+      y: 20
     },
     animate: { 
       opacity: 1, 
       y: 0,
-      scale: 1,
       transition: {
         duration: shouldReduceMotion ? 0.2 : 0.4,
         delay: shouldReduceMotion ? 0 : delay * 0.1,
@@ -132,24 +130,22 @@ const NexCard: React.FC<NexCardProps> = ({
       }
     },
     hover: finalInteractive && !loading && !disabled ? {
-      y: shouldReduceMotion ? 0 : -4,
-      scale: 1.02,
+      y: shouldReduceMotion ? 0 : -2,
       transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
     } : {},
     tap: finalInteractive && !loading && !disabled ? {
-      y: shouldReduceMotion ? 0 : -2,
-      scale: 0.98,
+      y: shouldReduceMotion ? 0 : -1,
       transition: { duration: 0.1, ease: [0.4, 0, 0.2, 1] }
     } : {}
   };
   
-  // Ripple animation variants
+  // Ripple animation variants - Subtle, elegant effect
   const rippleVariants = {
     initial: { scale: 0, opacity: 0 },
     animate: {
-      scale: 2,
-      opacity: [0, 0.3, 0],
-      transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+      scale: 1.5,
+      opacity: [0, 0.2, 0],
+      transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
     }
   };
   

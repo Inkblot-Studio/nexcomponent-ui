@@ -350,9 +350,9 @@ export const AnimatedEntrance: Story = {
         {cards.map((card, index) => (
           <motion.div
             key={card}
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ delay: index * 0.1 }}
           >
             <NexCard

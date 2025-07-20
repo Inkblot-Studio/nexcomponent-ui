@@ -35,7 +35,7 @@ export const NexCardExamples: React.FC = () => {
         <NexCard
           title="Clickable Feature"
           subtitle="Try it out"
-          description="This card responds to clicks and hover interactions with smooth animations."
+          description="This card responds to clicks and hover interactions with elegant, subtle animations."
           elevation="interactive"
           interactive
           onClick={() => alert('Card clicked!')}

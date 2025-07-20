@@ -89,7 +89,7 @@
     
     &:hover {
       box-shadow: var(--nex-card-shadow-hover, var(--nex-shadow-md));
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
   }
   
@@ -99,11 +99,11 @@
     
     &:hover {
       box-shadow: var(--nex-card-shadow-interactive-hover, var(--nex-shadow-lg));
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
     
     &:active {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: var(--nex-card-shadow-interactive-active, var(--nex-shadow-md));
     }
     
@@ -270,10 +270,6 @@
   /* Interactive effects */
   &.elevationInteractive .media .imageOverlay {
     opacity: 1;
-  }
-  
-  &.elevationInteractive:hover .media .image {
-    transform: scale(1.05);
   }
   
   /* Ripple effect */
