@@ -10,5 +10,5 @@ export interface ContactForm {
 export interface FooterContactFormProps {
   contact: ContactForm;
   variant?: 'default' | 'contact';
-  theme?: 'auto' | 'light' | 'dark' | 'black-glass';
+  theme?: 'auto' | 'light' | 'black-glass';
 } 
