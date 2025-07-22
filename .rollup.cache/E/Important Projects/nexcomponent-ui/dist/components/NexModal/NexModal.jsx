@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "./NexModal.scss";
-import { NexModalProps } from "./NexModal.types";
 import NexButton from "../NexButton";
 /**
  * NexModal component

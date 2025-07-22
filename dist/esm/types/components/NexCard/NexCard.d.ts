@@ -1,22 +1,23 @@
 import React from 'react';
-import type { NexCardProps } from './NexCard.types';
-import './NexCard.scss';
+import type { NexCardProps, NexCardContextValue } from './NexCard.types';
+export declare const useNexCard: () => NexCardContextValue;
 /**
- * NexCard - Enterprise Grade Card Component
+ * NexCard - Premium Enterprise Card Component
  *
- * A clean, simple card component designed for lead generation and conversion.
- * Features smooth animations, professional styling, and compelling visuals.
+ * A sophisticated, animated card component with Apple-like design principles.
+ * Features smooth animations, multiple elevation levels, responsive layouts,
+ * and comprehensive accessibility support.
  *
- * @param {string} title - Compelling title for lead generation
- * @param {string} content - Persuasive content that drives action
- * @param {string} imageUrl - Hero image to capture attention
- * @param {React.ReactNode} actions - Call-to-action buttons
- * @param {string} badge - Status badge (e.g., "New", "Featured", "Premium")
- * @param {'primary' | 'secondary' | 'glass' | 'enterprise'} type - Card styling variant
- * @param {boolean} interactive - Whether card is clickable
- * @param {() => void} onClick - Click handler for interactive cards
- * @param {boolean} elevated - Enhanced shadow effects
- * @param {string} className - Additional CSS classes
+ * @example
+ * ```tsx
+ * <NexCard
+ *   title="Premium Feature"
+ *   subtitle="Enterprise Grade"
+ *   description="Advanced functionality for professional users"
+ *   elevation="interactive"
+ *   onClick={() => console.log('Card clicked')}
+ * />
+ * ```
  */
 declare const NexCard: React.FC<NexCardProps>;
 export default NexCard;

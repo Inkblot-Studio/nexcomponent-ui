@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NexInputProps } from './NexInput.types';
 import './NexInput.scss';
 /**
  * NexInput component

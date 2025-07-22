@@ -1,3 +1,2 @@
-import { LanguageOption } from '../LanguageSwitcher/LanguageSwitcher.types';
-import { NavItem } from '../../NexNav.types';
+export {};
 //# sourceMappingURL=MobileNav.types.js.map

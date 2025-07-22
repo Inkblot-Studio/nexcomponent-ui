@@ -5,6 +5,7 @@ import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
 import { readFileSync } from 'fs';
+import { copyFileSync } from 'fs';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
@@ -61,7 +62,19 @@ export default [
           '@babel/preset-typescript'
         ],
         exclude: 'node_modules/**',
-      })
+      }),
+      // Copy CSS files to root dist directory for backward compatibility
+      {
+        name: 'copy-css-files',
+        writeBundle() {
+          try {
+            copyFileSync('dist/esm/style.css', 'dist/style.css');
+            copyFileSync('dist/esm/style.css.map', 'dist/style.css.map');
+          } catch (error) {
+            console.warn('Could not copy CSS files to root dist directory:', error.message);
+          }
+        }
+      }
     ],
     external: [
       'react', 

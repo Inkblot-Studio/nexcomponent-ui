@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
 import { ChevronDown } from 'lucide-react';
 import './LanguageSwitcher.scss';
-import { LanguageSwitcherProps } from './LanguageSwitcher.types';
 const getFlagEmoji = (code) => {
     const iso = code.slice(0, 2).toUpperCase();
     return iso.replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)));

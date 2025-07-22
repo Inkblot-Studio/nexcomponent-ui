@@ -1,5 +1,3 @@
-import NexCard from "./NexCard";
-export default NexCard;
-export * from './NexCard';
-export * from './NexCard.types';
+export { default } from './NexCard';
+export { useNexCard } from './NexCard';
 //# sourceMappingURL=index.jsx.map

@@ -1,150 +1,10 @@
 'use strict';
 
 var React = require('react');
-var jsxRuntime = require('react/jsx-runtime');
 var framerMotion = require('framer-motion');
+var jsxRuntime = require('react/jsx-runtime');
 var lucideReact = require('lucide-react');
 var classNames = require('classnames');
-
-const NexAlert = ({
-  message = '',
-  type = 'info',
-  timeout = 0,
-  handleDismiss = null
-}) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50); // Apply the fade-in effect with a slight delay to prevent flickering
-    return () => clearTimeout(timer);
-  }, []);
-  React.useEffect(() => {
-    if (timeout > 0 && handleDismiss) {
-      const dismissTimer = setTimeout(() => {
-        setIsVisible(false);
-        setTimeout(() => {
-          handleDismiss();
-        }, 300); // Delay dismissal to match the fade-out animation duration
-      }, timeout * 1000);
-      return () => clearTimeout(dismissTimer);
-    }
-    return undefined; // Explicit return for when condition is false
-  }, [timeout, handleDismiss]);
-  const dismissAlert = e => {
-    e.preventDefault();
-    setIsVisible(false);
-    if (handleDismiss) {
-      setTimeout(() => {
-        handleDismiss();
-      }, 300); // Delay dismissal to match the fade-out animation duration
-    }
-  };
-  const getAlertClass = type => {
-    switch (type) {
-      case 'error':
-        return 'nex-alert--error';
-      case 'success':
-        return 'nex-alert--success';
-      case 'info':
-        return 'nex-alert--info';
-      case 'warning':
-        return 'nex-alert--warning';
-      default:
-        return '';
-    }
-  };
-  const alertClass = `nex-alert ${getAlertClass(type)} ${isVisible ? 'visible' : 'hidden'}`;
-  return message?.length ? /*#__PURE__*/jsxRuntime.jsxs("div", {
-    className: alertClass,
-    children: [/*#__PURE__*/jsxRuntime.jsx("div", {
-      className: "nex-alert__message",
-      children: message
-    }), handleDismiss && /*#__PURE__*/jsxRuntime.jsx("button", {
-      className: "nex-alert__dismiss-button",
-      onClick: dismissAlert,
-      children: "Dismiss"
-    })]
-  }) : null;
-};
-/**
- * NexAlertsWrapper component
- *
- * A wrapper component for grouping multiple NexAlert components.
- *
- * @param {ReactNode} children - The child components to be wrapped inside the alerts wrapper.
- */
-const NexAlertsWrapper = ({
-  children
-}) => {
-  return /*#__PURE__*/jsxRuntime.jsx("div", {
-    className: "nex-alerts-wrapper",
-    children: children
-  });
-};
-
-const NexAlertsContext = /*#__PURE__*/React.createContext(undefined);
-const NexAlertsProvider = ({
-  children
-}) => {
-  const [alerts, setAlerts] = React.useState([]);
-  const addAlert = alert => {
-    const id = Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
-    if (alerts.length >= 4) {
-      const lastAlert = alerts[alerts.length - 1];
-      if (lastAlert) {
-        dismissAlert(lastAlert.id);
-      }
-    }
-    setAlerts(prev => [{
-      ...alert,
-      id: id
-    }, ...prev]);
-    return id;
-  };
-  const dismissAlert = id => {
-    setAlerts(prev => prev.filter(alert => alert.id !== id));
-  };
-  return /*#__PURE__*/jsxRuntime.jsxs(NexAlertsContext.Provider, {
-    value: {
-      alerts,
-      addAlert,
-      dismissAlert
-    },
-    children: [/*#__PURE__*/jsxRuntime.jsx(NexAlertsWrapper, {
-      children: alerts.map(alert => /*#__PURE__*/jsxRuntime.jsx(NexAlert, {
-        ...alert,
-        handleDismiss: () => dismissAlert(alert.id)
-      }, alert.id))
-    }), children]
-  });
-};
-const useAlerts = () => {
-  const [alertIds, setAlertIds] = React.useState([]);
-  const alertIdsRef = React.useRef(alertIds);
-  const context = React.useContext(NexAlertsContext);
-  if (!context) {
-    throw new Error('useAlerts must be used within a NexAlertsProvider');
-  }
-  const {
-    addAlert,
-    dismissAlert
-  } = context;
-  const addAlertWithId = alert => {
-    const id = addAlert(alert);
-    alertIdsRef.current.push(id);
-    setAlertIds([...alertIdsRef.current]); // Correcting the usage of setAlertIds
-  };
-  const clearAlerts = () => {
-    alertIdsRef.current.forEach(id => dismissAlert(id));
-    alertIdsRef.current = [];
-    setAlertIds([]);
-  };
-  return {
-    addAlert: addAlertWithId,
-    clearAlerts
-  };
-};
 
 // Enterprise Animation System - Comprehensive Configuration
 const ANIMATION_CONFIG = {
@@ -926,6 +786,615 @@ ANIMATION_CONFIG.timing.slower;
 ANIMATION_CONFIG.spring.responsive;
 ANIMATION_CONFIG.stagger.container;
 
+var styles$4 = {"nexAlert":"NexAlert-module_nexAlert__yf-EP","sizeSm":"NexAlert-module_sizeSm__75-5q","sizeMd":"NexAlert-module_sizeMd__3DIR2","sizeLg":"NexAlert-module_sizeLg__hKaSj","variantDefault":"NexAlert-module_variantDefault__nZGu8","variantGlass":"NexAlert-module_variantGlass__dG2Z9","variantPremium":"NexAlert-module_variantPremium__X9zau","variantMinimal":"NexAlert-module_variantMinimal__cyJ-s","typeError":"NexAlert-module_typeError__4JJvQ","typeSuccess":"NexAlert-module_typeSuccess__jkKPO","typeInfo":"NexAlert-module_typeInfo__4PVwl","typeWarning":"NexAlert-module_typeWarning__T5AJW","typeNeutral":"NexAlert-module_typeNeutral__YGSMH","content":"NexAlert-module_content__h-f2D","header":"NexAlert-module_header__-CLlQ","icon":"NexAlert-module_icon__ulim5","title":"NexAlert-module_title__tumVb","message":"NexAlert-module_message__32Mxx","description":"NexAlert-module_description__O5dZ1","actions":"NexAlert-module_actions__piUxm","actionButton":"NexAlert-module_actionButton__k3hTG","primary":"NexAlert-module_primary__yzE-Y","dismissButton":"NexAlert-module_dismissButton__y40Wl","progressBar":"NexAlert-module_progressBar__NGydb","swipeIndicator":"NexAlert-module_swipeIndicator__AvrcA","alertGroup":"NexAlert-module_alertGroup__MQxmj","positionTop":"NexAlert-module_positionTop__a-2GR","positionBottom":"NexAlert-module_positionBottom__kmCww","positionTopRight":"NexAlert-module_positionTopRight__TAV3L","positionBottomRight":"NexAlert-module_positionBottomRight__OWvBz","positionCenter":"NexAlert-module_positionCenter__XTdSk","progress-shrink":"NexAlert-module_progress-shrink__dKJFx"};
+
+const defaultIcons = {
+  error: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    children: [/*#__PURE__*/jsxRuntime.jsx("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "15",
+      y1: "9",
+      x2: "9",
+      y2: "15"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "9",
+      y1: "9",
+      x2: "15",
+      y2: "15"
+    })]
+  }),
+  success: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    children: [/*#__PURE__*/jsxRuntime.jsx("path", {
+      d: "M22 11.08V12a10 10 0 1 1-5.93-9.14"
+    }), /*#__PURE__*/jsxRuntime.jsx("polyline", {
+      points: "22,4 12,14.01 9,11.01"
+    })]
+  }),
+  info: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    children: [/*#__PURE__*/jsxRuntime.jsx("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "12",
+      y1: "16",
+      x2: "12",
+      y2: "12"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "12",
+      y1: "8",
+      x2: "12.01",
+      y2: "8"
+    })]
+  }),
+  warning: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    children: [/*#__PURE__*/jsxRuntime.jsx("path", {
+      d: "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "12",
+      y1: "9",
+      x2: "12",
+      y2: "13"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "12",
+      y1: "17",
+      x2: "12.01",
+      y2: "17"
+    })]
+  }),
+  neutral: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    children: [/*#__PURE__*/jsxRuntime.jsx("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), /*#__PURE__*/jsxRuntime.jsx("line", {
+      x1: "8",
+      y1: "12",
+      x2: "16",
+      y2: "12"
+    })]
+  })
+};
+/**
+ * NexAlert - Premium Enterprise Alert Component
+ *
+ * A sophisticated, animated alert component with Apple-like design principles.
+ * Features rich content support, multiple variants, progress indicators, and
+ * comprehensive accessibility support.
+ *
+ * @example
+ * ```tsx
+ * <NexAlert
+ *   id="alert-1"
+ *   type="success"
+ *   title="Success!"
+ *   message="Your changes have been saved"
+ *   variant="glass"
+ *   timeout={5000}
+ *   onDismiss={() => console.log('Alert dismissed')}
+ * />
+ * ```
+ */
+const NexAlert = ({
+  id,
+  type = 'info',
+  variant = 'default',
+  size = 'md',
+  title,
+  message,
+  description,
+  icon,
+  timeout = 0,
+  dismissible = true,
+  pauseOnHover = false,
+  persistent = false,
+  actions = [],
+  onUndo,
+  onDismiss,
+  onShow,
+  className,
+  style,
+  // Legacy support
+  handleDismiss
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [isPaused, setIsPaused] = React.useState(false);
+  const [progress, setProgress] = React.useState(100);
+  const timeoutRef = React.useRef(null);
+  const progressRef = React.useRef(null);
+  const startTimeRef = React.useRef(Date.now());
+  const totalDurationRef = React.useRef(timeout);
+  // Legacy support
+  const finalOnDismiss = onDismiss || handleDismiss;
+  // Auto-dismiss logic with pause on hover
+  React.useEffect(() => {
+    if (timeout > 0 && !persistent && finalOnDismiss) {
+      const startTimer = () => {
+        startTimeRef.current = Date.now();
+        totalDurationRef.current = timeout;
+        // Progress bar animation
+        if (!shouldReduceMotion) {
+          progressRef.current = setInterval(() => {
+            const elapsed = Date.now() - startTimeRef.current;
+            const remaining = Math.max(0, 100 - elapsed / timeout * 100);
+            setProgress(remaining);
+          }, 16); // ~60fps
+        }
+        // Dismiss timer
+        timeoutRef.current = setTimeout(() => {
+          if (!isPaused) {
+            finalOnDismiss();
+          }
+        }, timeout);
+      };
+      if (!isPaused) {
+        startTimer();
+      }
+      return () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        if (progressRef.current) clearInterval(progressRef.current);
+      };
+    }
+  }, [timeout, persistent, finalOnDismiss, isPaused, shouldReduceMotion]);
+  // Pause/resume on hover
+  const handleMouseEnter = React.useCallback(() => {
+    if (pauseOnHover && timeout > 0 && !persistent) {
+      setIsPaused(true);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (progressRef.current) clearInterval(progressRef.current);
+    }
+  }, [pauseOnHover, timeout, persistent]);
+  const handleMouseLeave = React.useCallback(() => {
+    if (pauseOnHover && timeout > 0 && !persistent) {
+      setIsPaused(false);
+      // Restart timer with remaining time
+      const elapsed = Date.now() - startTimeRef.current;
+      const remaining = Math.max(0, timeout - elapsed);
+      if (remaining > 0) {
+        timeoutRef.current = setTimeout(() => {
+          finalOnDismiss();
+        }, remaining);
+      }
+    }
+  }, [pauseOnHover, timeout, persistent, finalOnDismiss]);
+  // Show animation
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+      onShow?.();
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [onShow]);
+  // Dismiss handler
+  const dismissAlert = React.useCallback(() => {
+    setIsVisible(false);
+    if (finalOnDismiss) {
+      setTimeout(() => {
+        finalOnDismiss();
+      }, 300); // Match animation duration
+    }
+  }, [finalOnDismiss]);
+  // Action handler
+  const handleAction = React.useCallback(action => {
+    if (!action.disabled) {
+      action.onClick();
+      if (action.variant === 'primary') {
+        dismissAlert();
+      }
+    }
+  }, [dismissAlert]);
+  // Build class names
+  const alertClasses = [styles$4['nexAlert'], styles$4[`type${type.charAt(0).toUpperCase() + type.slice(1)}`], styles$4[`variant${variant.charAt(0).toUpperCase() + variant.slice(1)}`], styles$4[`size${size.charAt(0).toUpperCase() + size.slice(1)}`], className].filter(Boolean).join(' ');
+  // Animation variants
+  const alertVariants = {
+    initial: {
+      opacity: 0,
+      y: -20,
+      scale: 0.95
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      scale: 0.95,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+  // Get the appropriate icon
+  const alertIcon = icon || defaultIcons[type];
+  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.AnimatePresence, {
+    children: isVisible && /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
+      className: alertClasses,
+      style: style,
+      variants: alertVariants,
+      initial: "initial",
+      animate: "animate",
+      exit: "exit",
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      role: "alert",
+      "aria-live": "polite",
+      "aria-atomic": "true",
+      children: [/*#__PURE__*/jsxRuntime.jsx("div", {
+        className: `${styles$4.icon} ${styles$4[`size${size.charAt(0).toUpperCase() + size.slice(1)}`]}`,
+        children: alertIcon
+      }), /*#__PURE__*/jsxRuntime.jsxs("div", {
+        className: styles$4.content,
+        children: [(title || message) && /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$4.header,
+          children: [title && /*#__PURE__*/jsxRuntime.jsx("h4", {
+            className: `${styles$4.title} ${styles$4[`size${size.charAt(0).toUpperCase() + size.slice(1)}`]}`,
+            children: title
+          }), message && !title && /*#__PURE__*/jsxRuntime.jsx("p", {
+            className: `${styles$4.message} ${styles$4[`size${size.charAt(0).toUpperCase() + size.slice(1)}`]}`,
+            children: message
+          })]
+        }), message && title && /*#__PURE__*/jsxRuntime.jsx("p", {
+          className: `${styles$4.message} ${styles$4[`size${size.charAt(0).toUpperCase() + size.slice(1)}`]}`,
+          children: message
+        }), description && /*#__PURE__*/jsxRuntime.jsx("p", {
+          className: styles$4.description,
+          children: description
+        }), (actions.length > 0 || onUndo) && /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$4.actions,
+          children: [actions.map((action, index) => /*#__PURE__*/jsxRuntime.jsx("button", {
+            className: `${styles$4.actionButton} ${action.variant === 'primary' ? styles$4.primary : ''}`,
+            onClick: () => handleAction(action),
+            disabled: action.disabled,
+            children: action.label
+          }, index)), onUndo && /*#__PURE__*/jsxRuntime.jsx("button", {
+            className: styles$4.actionButton,
+            onClick: onUndo,
+            children: "Undo"
+          })]
+        })]
+      }), dismissible && /*#__PURE__*/jsxRuntime.jsx("button", {
+        className: styles$4.dismissButton,
+        onClick: handleDismiss,
+        "aria-label": "Dismiss alert",
+        children: /*#__PURE__*/jsxRuntime.jsxs("svg", {
+          width: "16",
+          height: "16",
+          viewBox: "0 0 24 24",
+          fill: "none",
+          stroke: "currentColor",
+          strokeWidth: "2",
+          children: [/*#__PURE__*/jsxRuntime.jsx("line", {
+            x1: "18",
+            y1: "6",
+            x2: "6",
+            y2: "18"
+          }), /*#__PURE__*/jsxRuntime.jsx("line", {
+            x1: "6",
+            y1: "6",
+            x2: "18",
+            y2: "18"
+          })]
+        })
+      }), timeout > 0 && !persistent && !shouldReduceMotion && /*#__PURE__*/jsxRuntime.jsx("div", {
+        className: styles$4.progressBar,
+        style: {
+          width: `${progress}%`,
+          animationDuration: `${timeout}ms`
+        }
+      })]
+    })
+  });
+};
+
+const NEX_ALERT_PRESETS = {
+  toast: {
+    type: 'info',
+    variant: 'glass',
+    size: 'sm',
+    timeout: 4000,
+    dismissible: true,
+    pauseOnHover: true
+  },
+  notification: {
+    type: 'info',
+    variant: 'default',
+    size: 'md',
+    timeout: 0,
+    dismissible: true,
+    pauseOnHover: false
+  },
+  banner: {
+    type: 'warning',
+    variant: 'premium',
+    size: 'lg',
+    timeout: 0,
+    dismissible: false,
+    pauseOnHover: false
+  },
+  error: {
+    type: 'error',
+    variant: 'default',
+    size: 'md',
+    timeout: 0,
+    dismissible: true,
+    pauseOnHover: false
+  },
+  success: {
+    type: 'success',
+    variant: 'default',
+    size: 'md',
+    timeout: 3000,
+    dismissible: true,
+    pauseOnHover: true
+  }
+};
+
+const NexAlertsContext = /*#__PURE__*/React.createContext(undefined);
+/**
+ * NexAlertsProvider - Premium Alert Management System
+ *
+ * Provides a comprehensive alert management system with global state,
+ * keyboard shortcuts, and advanced positioning options.
+ */
+const NexAlertsProvider = ({
+  children,
+  maxAlerts = 4,
+  defaultPosition = 'top',
+  defaultTimeout = 4000,
+  defaultVariant = 'default',
+  defaultSize = 'md',
+  enableKeyboardShortcuts = true,
+  enableClickOutside = true,
+  enableSwipeToDismiss = true
+}) => {
+  const {
+    shouldReduceMotion
+  } = useAnimationConfig();
+  const [alerts, setAlerts] = React.useState([]);
+  const containerRef = React.useRef(null);
+  // Add alert with smart management
+  const addAlert = React.useCallback(alert => {
+    const id = Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
+    // Apply defaults
+    const newAlert = {
+      id,
+      type: alert.type || 'info',
+      variant: alert.variant || defaultVariant,
+      size: alert.size || defaultSize,
+      timeout: alert.timeout ?? defaultTimeout,
+      dismissible: alert.dismissible ?? true,
+      pauseOnHover: alert.pauseOnHover ?? true,
+      ...alert
+    };
+    setAlerts(prev => {
+      const newAlerts = [newAlert, ...prev];
+      // Limit number of alerts
+      if (newAlerts.length > maxAlerts) {
+        return newAlerts.slice(0, maxAlerts);
+      }
+      return newAlerts;
+    });
+    return id;
+  }, [maxAlerts, defaultVariant, defaultSize, defaultTimeout]);
+  // Dismiss specific alert
+  const dismissAlert = React.useCallback(id => {
+    setAlerts(prev => prev.filter(alert => alert.id !== id));
+  }, []);
+  // Dismiss all alerts
+  const dismissAll = React.useCallback(() => {
+    setAlerts([]);
+  }, []);
+  // Update specific alert
+  const updateAlert = React.useCallback((id, updates) => {
+    setAlerts(prev => prev.map(alert => alert.id === id ? {
+      ...alert,
+      ...updates
+    } : alert));
+  }, []);
+  // Clear all alerts
+  const clearAlerts = React.useCallback(() => {
+    setAlerts([]);
+  }, []);
+  // Keyboard shortcuts
+  React.useEffect(() => {
+    if (!enableKeyboardShortcuts) return;
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        dismissAll();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [enableKeyboardShortcuts, dismissAll]);
+  // Click outside to dismiss
+  React.useEffect(() => {
+    if (!enableClickOutside) return;
+    const handleClickOutside = event => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        // Only dismiss non-persistent alerts
+        setAlerts(prev => prev.filter(alert => alert.persistent));
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [enableClickOutside]);
+  // Context value
+  const contextValue = {
+    alerts,
+    addAlert,
+    dismissAlert,
+    dismissAll,
+    updateAlert,
+    clearAlerts
+  };
+  // Animation variants for container
+  const containerVariants = {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        staggerChildren: shouldReduceMotion ? 0 : 0.1
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2
+      }
+    }
+  };
+  return /*#__PURE__*/jsxRuntime.jsxs(NexAlertsContext.Provider, {
+    value: contextValue,
+    children: [/*#__PURE__*/jsxRuntime.jsx(framerMotion.AnimatePresence, {
+      children: alerts.length > 0 && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
+        ref: containerRef,
+        className: `${styles$4['alertGroup']} ${styles$4[`position${defaultPosition.charAt(0).toUpperCase() + defaultPosition.slice(1)}`]}`,
+        variants: containerVariants,
+        initial: "initial",
+        animate: "animate",
+        exit: "exit",
+        children: alerts.map(alert => /*#__PURE__*/jsxRuntime.jsx(NexAlert, {
+          ...alert,
+          onDismiss: () => dismissAlert(alert.id)
+        }, alert.id))
+      })
+    }), children]
+  });
+};
+/**
+ * useAlerts - Hook for managing alerts
+ *
+ * Provides a convenient interface for adding and managing alerts
+ * with preset configurations and advanced features.
+ */
+const useAlerts = () => {
+  const context = React.useContext(NexAlertsContext);
+  if (!context) {
+    throw new Error('useAlerts must be used within a NexAlertsProvider');
+  }
+  const {
+    addAlert,
+    dismissAlert,
+    dismissAll,
+    updateAlert,
+    clearAlerts
+  } = context;
+  // Preset-based alert creators
+  const createToast = React.useCallback((message, options) => {
+    const preset = NEX_ALERT_PRESETS['toast'];
+    return addAlert({
+      ...preset,
+      message,
+      ...options
+    });
+  }, [addAlert]);
+  const createNotification = React.useCallback((message, options) => {
+    const preset = NEX_ALERT_PRESETS['notification'];
+    return addAlert({
+      ...preset,
+      message,
+      ...options
+    });
+  }, [addAlert]);
+  const createBanner = React.useCallback((message, options) => {
+    const preset = NEX_ALERT_PRESETS['banner'];
+    return addAlert({
+      ...preset,
+      message,
+      ...options
+    });
+  }, [addAlert]);
+  const createError = React.useCallback((message, options) => {
+    const preset = NEX_ALERT_PRESETS['error'];
+    return addAlert({
+      ...preset,
+      message,
+      ...options
+    });
+  }, [addAlert]);
+  const createSuccess = React.useCallback((message, options) => {
+    const preset = NEX_ALERT_PRESETS['success'];
+    return addAlert({
+      ...preset,
+      message,
+      ...options
+    });
+  }, [addAlert]);
+  return {
+    // Core functions
+    addAlert,
+    dismissAlert,
+    dismissAll,
+    updateAlert,
+    clearAlerts,
+    // Preset creators
+    createToast,
+    createNotification,
+    createBanner,
+    createError,
+    createSuccess,
+    // Quick actions
+    showSuccess: createSuccess,
+    showError: createError,
+    showInfo: (message, options) => addAlert({
+      type: 'info',
+      message,
+      ...options
+    }),
+    showWarning: (message, options) => addAlert({
+      type: 'warning',
+      message,
+      ...options
+    })
+  };
+};
+
 const NexButton = ({
   onClick,
   className,
@@ -1113,171 +1582,99 @@ const NexButton = ({
   });
 };
 
-const CardHeader = ({
-  title,
-  badge,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  if (!title && !badge) return null;
-  return /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-    className: `nex-card-header ${className || ''}`,
-    initial: {
-      opacity: 0,
-      y: -10
-    },
-    animate: {
-      opacity: 1,
-      y: 0
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: [title && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.h3, {
-      className: "nex-card-title",
-      initial: {
-        opacity: 0
-      },
-      animate: {
-        opacity: 1
-      },
-      transition: {
-        delay: shouldReduceMotion ? 0 : 0.1
-      },
-      children: title
-    }), badge && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-      className: "nex-card-badge",
-      initial: {
-        opacity: 0
-      },
-      animate: {
-        opacity: 1
-      },
-      transition: {
-        delay: shouldReduceMotion ? 0 : 0.2
-      },
-      children: badge
-    })]
-  });
-};
+var styles$3 = {"nexCard":"NexCard-module_nexCard__R-GNN","sizeSm":"NexCard-module_sizeSm__an0N3","sizeMd":"NexCard-module_sizeMd__65SfJ","sizeLg":"NexCard-module_sizeLg__mQIDI","sizeXl":"NexCard-module_sizeXl__F3pvi","layoutHorizontal":"NexCard-module_layoutHorizontal__mnQhY","content":"NexCard-module_content__de7gS","media":"NexCard-module_media__a-rqN","layoutAuto":"NexCard-module_layoutAuto__aXZfA","elevationFlat":"NexCard-module_elevationFlat__pP-hg","elevationRaised":"NexCard-module_elevationRaised__xuRdM","elevationHoverable":"NexCard-module_elevationHoverable__x609F","elevationInteractive":"NexCard-module_elevationInteractive__px3gA","variantDefault":"NexCard-module_variantDefault__pWbL-","variantGlass":"NexCard-module_variantGlass__8koFA","variantPremium":"NexCard-module_variantPremium__APZ-X","variantMinimal":"NexCard-module_variantMinimal__Yu9Kn","loading":"NexCard-module_loading__Eq9Kd","disabled":"NexCard-module_disabled__GZQBb","header":"NexCard-module_header__k1x2-","headerContent":"NexCard-module_headerContent__jeAey","icon":"NexCard-module_icon__OO6F0","title":"NexCard-module_title__2X8yw","subtitle":"NexCard-module_subtitle__1y0RW","description":"NexCard-module_description__gJYN4","body":"NexCard-module_body__CPZSu","footer":"NexCard-module_footer__rtvgr","actions":"NexCard-module_actions__QrzMI","image":"NexCard-module_image__-K2tb","aspectRatioSquare":"NexCard-module_aspectRatioSquare__E8FCT","aspectRatioVideo":"NexCard-module_aspectRatioVideo__ZSboW","aspectRatioWide":"NexCard-module_aspectRatioWide__BpNP4","aspectRatioAuto":"NexCard-module_aspectRatioAuto__RBIUQ","imageOverlay":"NexCard-module_imageOverlay__6BFUK","ripple":"NexCard-module_ripple__zYUIj","skeleton":"NexCard-module_skeleton__Gz-m6","skeleton-loading":"NexCard-module_skeleton-loading__Pw--n","skeletonTitle":"NexCard-module_skeletonTitle__VgOtV","skeletonDescription":"NexCard-module_skeletonDescription__xi-8Y"};
 
-const CardImage = ({
-  src,
-  alt,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  if (!src) return null;
-  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-    className: `nex-card-image ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.2 : 0.5,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: /*#__PURE__*/jsxRuntime.jsx("img", {
-      src: src,
-      alt: alt || 'Card image',
-      className: "nex-card-image-element"
-    })
-  });
-};
-
-const CardContent = ({
-  children,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  if (!children) return null;
-  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-    className: `nex-card-content ${className || ''}`,
-    initial: {
-      opacity: 0,
-      y: 10
-    },
-    animate: {
-      opacity: 1,
-      y: 0
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      delay: shouldReduceMotion ? 0 : 0.1,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: children
-  });
-};
-
-const CardActions = ({
-  children,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  if (!children) return null;
-  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-    className: `nex-card-actions ${className || ''}`,
-    initial: {
-      opacity: 0,
-      y: 10
-    },
-    animate: {
-      opacity: 1,
-      y: 0
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      delay: shouldReduceMotion ? 0 : 0.2,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: children
-  });
-};
-
+const NexCardContext = /*#__PURE__*/React.createContext(null);
+/**
+ * NexCard - Premium Enterprise Card Component
+ *
+ * A sophisticated, animated card component with Apple-like design principles.
+ * Features smooth animations, multiple elevation levels, responsive layouts,
+ * and comprehensive accessibility support.
+ *
+ * @example
+ * ```tsx
+ * <NexCard
+ *   title="Premium Feature"
+ *   subtitle="Enterprise Grade"
+ *   description="Advanced functionality for professional users"
+ *   elevation="interactive"
+ *   onClick={() => console.log('Card clicked')}
+ * />
+ * ```
+ */
 const NexCard = ({
+  // Content
   title,
+  subtitle,
+  description,
+  children,
+  // Media
+  image,
+  icon,
+  // Layout & Styling
+  variant = 'default',
+  elevation = 'flat',
+  layout = 'vertical',
+  size = 'md',
+  // Interactive Features
+  interactive = false,
+  clickable = false,
+  href,
+  as,
+  onClick,
+  // States
+  loading = false,
+  disabled = false,
+  // Custom Slots
+  header,
+  footer,
+  actions,
+  // Accessibility
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  // Styling
+  className,
+  style,
+  // Animation
+  animate = true,
+  delay = 0,
+  // Legacy support
   content,
   imageUrl,
-  actions,
   badge,
-  type = 'primary',
-  interactive = false,
-  onClick,
-  elevated = false,
-  className,
+  type,
+  elevated,
   ...rest
 }) => {
   const {
     shouldReduceMotion
   } = useAnimationConfig();
-  const cardClasses = `nex-card nex-card--${type} ${elevated ? 'elevated' : ''} ${interactive ? 'interactive' : ''} ${className || ''}`;
-  const handleClick = () => {
-    if (interactive && onClick) {
-      onClick();
-    }
-  };
-  const handleKeyDown = e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (interactive && onClick) {
-        onClick();
-      }
-    }
-  };
-  // Animation variants - clean and simple
+  const [isPressed, setIsPressed] = React.useState(false);
+  const [rippleKey, setRippleKey] = React.useState(0);
+  const cardRef = React.useRef(null);
+  // Legacy prop mapping
+  const finalDescription = description || content;
+  const finalImage = image || (imageUrl ? {
+    src: imageUrl
+  } : undefined);
+  const finalVariant = variant || (type === 'glass' ? 'glass' : type === 'enterprise' ? 'premium' : 'default');
+  const finalElevation = elevation || (elevated ? 'raised' : 'flat');
+  const finalInteractive = interactive || clickable || !!onClick || !!href;
+  // Determine the element type
+  const Element = as || (href ? 'a' : finalInteractive ? 'button' : 'div');
+  // Context value
+  const contextValue = React.useMemo(() => ({
+    variant: finalVariant,
+    elevation: finalElevation,
+    layout,
+    size,
+    interactive: finalInteractive,
+    clickable: finalInteractive,
+    loading,
+    disabled
+  }), [finalVariant, finalElevation, layout, size, finalInteractive, loading, disabled]);
+  // Animation variants - Clean, elegant Apple-like animations
   const cardVariants = {
     initial: {
       opacity: 0,
@@ -1288,65 +1685,190 @@ const NexCard = ({
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0.2 : 0.4,
+        delay: shouldReduceMotion ? 0 : delay * 0.1,
         ease: [0.4, 0, 0.2, 1]
       }
     },
-    hover: interactive ? {
-      y: shouldReduceMotion ? 0 : -8,
+    hover: finalInteractive && !loading && !disabled ? {
+      y: shouldReduceMotion ? 0 : -2,
       transition: {
         duration: 0.3,
         ease: [0.4, 0, 0.2, 1]
       }
     } : {},
-    tap: interactive ? {
-      y: shouldReduceMotion ? 0 : -4,
+    tap: finalInteractive && !loading && !disabled ? {
+      y: shouldReduceMotion ? 0 : -1,
       transition: {
         duration: 0.1,
         ease: [0.4, 0, 0.2, 1]
       }
     } : {}
   };
-  return /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-    className: cardClasses,
-    variants: cardVariants,
-    initial: "initial",
-    animate: "animate",
-    whileHover: interactive ? "hover" : {},
-    whileTap: interactive ? "tap" : {},
-    onClick: handleClick,
-    onKeyDown: handleKeyDown,
-    role: interactive ? "button" : undefined,
-    tabIndex: interactive ? 0 : undefined,
-    "aria-label": interactive ? title : undefined,
-    ...rest,
-    children: [/*#__PURE__*/jsxRuntime.jsx(CardImage, {
-      src: imageUrl,
-      alt: title
-    }), /*#__PURE__*/jsxRuntime.jsxs("div", {
-      className: "nex-card-body",
-      children: [/*#__PURE__*/jsxRuntime.jsx(CardHeader, {
-        title: title,
-        badge: badge
-      }), /*#__PURE__*/jsxRuntime.jsx(CardContent, {
-        children: content
-      }), /*#__PURE__*/jsxRuntime.jsx(CardActions, {
-        children: actions
-      })]
-    }), interactive && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-      className: "nex-card-ripple",
-      initial: {
-        scale: 0,
-        opacity: 0
-      },
-      whileTap: {
-        scale: 2,
-        opacity: [0, 0.2, 0],
-        transition: {
-          duration: 0.6,
-          ease: [0.4, 0, 0.2, 1]
-        }
+  // Ripple animation variants - Subtle, elegant effect
+  const rippleVariants = {
+    initial: {
+      scale: 0,
+      opacity: 0
+    },
+    animate: {
+      scale: 1.5,
+      opacity: [0, 0.2, 0],
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1]
       }
-    })]
+    }
+  };
+  // Event handlers
+  const handleClick = event => {
+    if (loading || disabled) return;
+    if (finalInteractive) {
+      // Create ripple effect
+      setRippleKey(prev => prev + 1);
+      // Call onClick if provided
+      if (onClick) {
+        onClick(event);
+      }
+    }
+  };
+  const handleKeyDown = event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (finalInteractive && !loading && !disabled) {
+        handleClick(event);
+      }
+    }
+  };
+  const handleMouseDown = () => {
+    if (finalInteractive && !loading && !disabled) {
+      setIsPressed(true);
+    }
+  };
+  const handleMouseUp = () => {
+    setIsPressed(false);
+  };
+  // Build class names
+  const cardClasses = [styles$3.nexCard, styles$3[`size${size.charAt(0).toUpperCase() + size.slice(1)}`], styles$3[`layout${layout.charAt(0).toUpperCase() + layout.slice(1)}`], styles$3[`elevation${finalElevation.charAt(0).toUpperCase() + finalElevation.slice(1)}`], styles$3[`variant${finalVariant.charAt(0).toUpperCase() + finalVariant.slice(1)}`], loading && styles$3.loading, disabled && styles$3.disabled, className].filter(Boolean).join(' ');
+  // Accessibility props
+  const accessibilityProps = {
+    role: Element === 'button' ? 'button' : Element === 'a' ? 'link' : undefined,
+    tabIndex: finalInteractive ? 0 : undefined,
+    'aria-label': ariaLabel || (finalInteractive ? title : undefined),
+    'aria-describedby': ariaDescribedBy,
+    'aria-disabled': disabled || loading,
+    'aria-busy': loading
+  };
+  // Element props
+  const elementProps = {
+    href: Element === 'a' ? href : undefined,
+    type: Element === 'button' ? 'button' : undefined
+  };
+  // Render skeleton loading state
+  if (loading) {
+    return /*#__PURE__*/jsxRuntime.jsx("div", {
+      className: cardClasses,
+      style: style,
+      ...rest,
+      children: /*#__PURE__*/jsxRuntime.jsxs("div", {
+        className: styles$3.content,
+        children: [/*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$3.header,
+          children: [/*#__PURE__*/jsxRuntime.jsxs("div", {
+            className: styles$3.headerContent,
+            children: [/*#__PURE__*/jsxRuntime.jsx("div", {
+              className: `${styles$3.skeleton} ${styles$3.skeletonTitle}`
+            }), subtitle && /*#__PURE__*/jsxRuntime.jsx("div", {
+              className: `${styles$3.skeleton} ${styles$3.skeletonDescription}`
+            })]
+          }), icon && /*#__PURE__*/jsxRuntime.jsx("div", {
+            className: styles$3.icon,
+            children: icon
+          })]
+        }), /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$3.body,
+          children: [/*#__PURE__*/jsxRuntime.jsx("div", {
+            className: `${styles$3.skeleton} ${styles$3.skeletonDescription}`
+          }), /*#__PURE__*/jsxRuntime.jsx("div", {
+            className: `${styles$3.skeleton} ${styles$3.skeletonDescription}`
+          }), /*#__PURE__*/jsxRuntime.jsx("div", {
+            className: `${styles$3.skeleton} ${styles$3.skeletonDescription}`
+          })]
+        })]
+      })
+    });
+  }
+  return /*#__PURE__*/jsxRuntime.jsx(NexCardContext.Provider, {
+    value: contextValue,
+    children: /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
+      ref: cardRef,
+      className: cardClasses,
+      style: style,
+      variants: animate ? cardVariants : undefined,
+      initial: "initial",
+      animate: "animate",
+      whileHover: finalInteractive && !loading && !disabled ? "hover" : undefined,
+      whileTap: finalInteractive && !loading && !disabled ? "tap" : undefined,
+      onClick: handleClick,
+      onKeyDown: handleKeyDown,
+      onMouseDown: handleMouseDown,
+      onMouseUp: handleMouseUp,
+      onMouseLeave: handleMouseUp,
+      ...accessibilityProps,
+      ...elementProps,
+      ...rest,
+      children: [finalImage && /*#__PURE__*/jsxRuntime.jsxs("div", {
+        className: styles$3.media,
+        children: [/*#__PURE__*/jsxRuntime.jsx("img", {
+          src: finalImage.src,
+          alt: finalImage.alt || title || 'Card image',
+          className: `${styles$3.image} ${styles$3[`aspectRatio${finalImage.aspectRatio ? finalImage.aspectRatio.charAt(0).toUpperCase() + finalImage.aspectRatio.slice(1) : 'Auto'}`]}`
+        }), /*#__PURE__*/jsxRuntime.jsx("div", {
+          className: styles$3.imageOverlay
+        })]
+      }), /*#__PURE__*/jsxRuntime.jsxs("div", {
+        className: styles$3.content,
+        children: [(header || title || subtitle || icon) && /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$3.header,
+          children: [/*#__PURE__*/jsxRuntime.jsx("div", {
+            className: styles$3.headerContent,
+            children: header || /*#__PURE__*/jsxRuntime.jsxs(jsxRuntime.Fragment, {
+              children: [title && /*#__PURE__*/jsxRuntime.jsx("h3", {
+                className: styles$3.title,
+                children: title
+              }), subtitle && /*#__PURE__*/jsxRuntime.jsx("p", {
+                className: styles$3.subtitle,
+                children: subtitle
+              })]
+            })
+          }), icon && /*#__PURE__*/jsxRuntime.jsx("div", {
+            className: styles$3.icon,
+            children: icon
+          })]
+        }), /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$3.body,
+          children: [finalDescription && /*#__PURE__*/jsxRuntime.jsx("p", {
+            className: styles$3.description,
+            children: finalDescription
+          }), children]
+        }), (footer || actions) && /*#__PURE__*/jsxRuntime.jsxs("div", {
+          className: styles$3.footer,
+          children: [footer, actions && /*#__PURE__*/jsxRuntime.jsx("div", {
+            className: styles$3.actions,
+            children: actions
+          })]
+        })]
+      }), /*#__PURE__*/jsxRuntime.jsx(framerMotion.AnimatePresence, {
+        children: finalInteractive && isPressed && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
+          className: styles$3.ripple,
+          variants: rippleVariants,
+          initial: "initial",
+          animate: "animate",
+          exit: {
+            opacity: 0
+          }
+        }, rippleKey)
+      })]
+    })
   });
 };
 
@@ -1417,15 +1939,6 @@ const NexSimpleTextCard = ({
   });
 };
 
-/**
- * NexInfoPanel component
- *
- * A panel component that displays a title, content, and an optional image.
- * @param {string} className - Additional class names to apply to the info panel.
- * @param {string} title - The title text to be displayed on the info panel.
- * @param {string} content - The content text to be displayed on the info panel.
- * @param {string} [imageUrl] - The URL for the background image of the info panel.
- */
 const NexInfoPanel = ({
   className,
   title,
@@ -1456,391 +1969,83 @@ const NexInfoPanel = ({
   });
 };
 
-const CarouselContainer = ({
-  children,
-  currentSlide,
-  direction,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  // Enhanced slide variants for better UX
-  const slideVariants = {
-    enter: direction => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0,
-      scale: 0.95,
-      filter: 'blur(4px)'
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.6,
-        ease: [0.4, 0, 0.2, 1],
-        opacity: {
-          duration: shouldReduceMotion ? 0.1 : 0.4
-        },
-        scale: {
-          duration: shouldReduceMotion ? 0.1 : 0.5
-        },
-        filter: {
-          duration: shouldReduceMotion ? 0.1 : 0.3
-        }
-      }
-    },
-    exit: direction => ({
-      x: direction < 0 ? '100%' : '-100%',
-      opacity: 0,
-      scale: 0.95,
-      filter: 'blur(4px)',
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.4,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    })
-  };
-  // Background blur effect for depth
-  const backgroundVariants = {
-    enter: {
-      opacity: 0,
-      scale: 1.1
-    },
-    center: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.8,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    },
-    exit: {
-      opacity: 0,
-      scale: 1.1,
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.4,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
-  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-    className: `nex-carousel-container ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.4,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: /*#__PURE__*/jsxRuntime.jsx(framerMotion.AnimatePresence, {
-      initial: false,
-      custom: direction,
-      mode: "wait",
-      children: /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-        custom: direction,
-        variants: slideVariants,
-        initial: "enter",
-        animate: "center",
-        exit: "exit",
-        className: "nex-carousel-slide-wrapper",
-        children: [/*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-          className: "nex-carousel-background",
-          variants: backgroundVariants,
-          initial: "enter",
-          animate: "center",
-          exit: "exit"
-        }), /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-          className: "nex-carousel-content",
-          initial: {
-            opacity: 0,
-            y: 20
-          },
-          animate: {
-            opacity: 1,
-            y: 0
-          },
-          transition: {
-            duration: shouldReduceMotion ? 0.1 : 0.5,
-            delay: shouldReduceMotion ? 0 : 0.2,
-            ease: [0.4, 0, 0.2, 1]
-          },
-          children: children
-        })]
-      }, currentSlide)
-    })
-  });
-};
-
-const CarouselSlide = ({
-  imageUrl,
-  title,
-  content,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  return /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-    className: `nex-carousel-slide ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.5,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: [imageUrl && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-      className: "nex-carousel-slide-image",
-      initial: {
-        scale: 1.1
-      },
-      animate: {
-        scale: 1
-      },
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.8,
-        ease: [0.4, 0, 0.2, 1]
-      },
-      children: /*#__PURE__*/jsxRuntime.jsx("img", {
-        src: imageUrl,
-        alt: title || 'Carousel slide'
-      })
-    }), (title || content) && /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-      className: "nex-carousel-slide-content",
-      initial: {
-        opacity: 0,
-        y: 20
-      },
-      animate: {
-        opacity: 1,
-        y: 0
-      },
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.5,
-        delay: shouldReduceMotion ? 0 : 0.3,
-        ease: [0.4, 0, 0.2, 1]
-      },
-      children: [title && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.h2, {
-        className: "nex-carousel-slide-title",
-        initial: {
-          opacity: 0
-        },
-        animate: {
-          opacity: 1
-        },
-        transition: {
-          delay: shouldReduceMotion ? 0 : 0.4
-        },
-        children: title
-      }), content && /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.p, {
-        className: "nex-carousel-slide-text",
-        initial: {
-          opacity: 0
-        },
-        animate: {
-          opacity: 1
-        },
-        transition: {
-          delay: shouldReduceMotion ? 0 : 0.5
-        },
-        children: content
-      })]
-    })]
-  });
-};
-
-const CarouselControls = ({
-  onPrevious,
-  onNext,
-  hasPrevious,
-  hasNext,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  const buttonVariants = {
-    initial: {
-      opacity: 0,
-      scale: 0.8
-    },
-    animate: {
-      opacity: 1,
-      scale: 1
-    },
-    hover: {
-      scale: shouldReduceMotion ? 1 : 1.1,
-      transition: {
-        duration: 0.2
-      }
-    },
-    tap: {
-      scale: shouldReduceMotion ? 1 : 0.95,
-      transition: {
-        duration: 0.1
-      }
-    }
-  };
-  return /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-    className: `nex-carousel-controls ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      delay: shouldReduceMotion ? 0 : 0.5,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: [/*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.button, {
-      className: "nex-carousel-control nex-carousel-control--prev",
-      onClick: onPrevious,
-      disabled: !hasPrevious,
-      variants: buttonVariants,
-      initial: "initial",
-      animate: "animate",
-      whileHover: "hover",
-      whileTap: "tap",
-      "aria-label": "Previous slide",
-      children: /*#__PURE__*/jsxRuntime.jsx(lucideReact.ChevronLeft, {
-        size: 24
-      })
-    }), /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.button, {
-      className: "nex-carousel-control nex-carousel-control--next",
-      onClick: onNext,
-      disabled: !hasNext,
-      variants: buttonVariants,
-      initial: "initial",
-      animate: "animate",
-      whileHover: "hover",
-      whileTap: "tap",
-      "aria-label": "Next slide",
-      children: /*#__PURE__*/jsxRuntime.jsx(lucideReact.ChevronRight, {
-        size: 24
-      })
-    })]
-  });
-};
-
-const CarouselIndicators = ({
-  totalSlides,
-  currentSlide,
-  onSlideChange,
-  className
-}) => {
-  const {
-    shouldReduceMotion
-  } = useAnimationConfig();
-  if (totalSlides <= 1) return null;
-  const indicatorVariants = {
-    initial: {
-      opacity: 0,
-      scale: 0.8
-    },
-    animate: {
-      opacity: 1,
-      scale: 1
-    },
-    hover: {
-      scale: shouldReduceMotion ? 1 : 1.2,
-      transition: {
-        duration: 0.2
-      }
-    },
-    tap: {
-      scale: shouldReduceMotion ? 1 : 0.9,
-      transition: {
-        duration: 0.1
-      }
-    }
-  };
-  return /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.div, {
-    className: `nex-carousel-indicators ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      delay: shouldReduceMotion ? 0 : 0.6,
-      ease: [0.4, 0, 0.2, 1]
-    },
-    children: Array.from({
-      length: totalSlides
-    }, (_, index) => /*#__PURE__*/jsxRuntime.jsx(framerMotion.motion.button, {
-      className: `nex-carousel-indicator ${index === currentSlide ? 'active' : ''}`,
-      onClick: () => onSlideChange(index),
-      variants: indicatorVariants,
-      initial: "initial",
-      animate: "animate",
-      whileHover: "hover",
-      whileTap: "tap",
-      "aria-label": `Go to slide ${index + 1}`,
-      "aria-current": index === currentSlide ? 'true' : 'false'
-    }, index))
-  });
-};
-
 const NexCarousel = ({
-  slides = [],
+  slides,
+  variant = 'default',
+  size = 'md',
   autoPlay = false,
   autoPlayInterval = 5000,
+  pauseOnHover = true,
+  infinite = false,
   showControls = true,
   showIndicators = true,
+  showCounter = true,
+  onSlideChange,
+  onSlideClick,
   className,
-  ...rest
+  style
 }) => {
   const {
     shouldReduceMotion
   } = useAnimationConfig();
   const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [direction, setDirection] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
+  const autoPlayRef = React.useRef(null);
   const totalSlides = slides.length;
-  const hasPrevious = currentSlide > 0;
-  const hasNext = currentSlide < totalSlides - 1;
+  const hasPrevious = infinite || currentSlide > 0;
+  const hasNext = infinite || currentSlide < totalSlides - 1;
+  // Framer Motion variants
+  // Smooth slide navigation
   const goToSlide = React.useCallback(index => {
     if (index >= 0 && index < totalSlides) {
-      setDirection(index > currentSlide ? 1 : -1);
       setCurrentSlide(index);
+      onSlideChange?.(index);
     }
-  }, [currentSlide, totalSlides]);
+  }, [totalSlides, onSlideChange]);
   const goToPrevious = React.useCallback(() => {
     if (hasPrevious) {
-      setDirection(-1);
-      setCurrentSlide(currentSlide - 1);
+      const newIndex = infinite && currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+      goToSlide(newIndex);
     }
-  }, [currentSlide, hasPrevious]);
+  }, [currentSlide, hasPrevious, infinite, totalSlides, goToSlide]);
   const goToNext = React.useCallback(() => {
     if (hasNext) {
-      setDirection(1);
-      setCurrentSlide(currentSlide + 1);
+      const newIndex = infinite && currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+      goToSlide(newIndex);
     }
-  }, [currentSlide, hasNext]);
+  }, [currentSlide, hasNext, infinite, totalSlides, goToSlide]);
   // Auto-play functionality
-  React.useEffect(() => {
-    if (!autoPlay || totalSlides <= 1) return;
-    const interval = setInterval(() => {
-      if (hasNext) {
-        goToNext();
-      } else {
-        goToSlide(0);
-      }
+  const startAutoPlay = React.useCallback(() => {
+    if (!autoPlay || totalSlides <= 1 || isPaused) return;
+    autoPlayRef.current = setInterval(() => {
+      goToNext();
     }, autoPlayInterval);
-    return () => clearInterval(interval);
-  }, [autoPlay, autoPlayInterval, hasNext, goToNext, goToSlide, totalSlides]);
+  }, [autoPlay, autoPlayInterval, totalSlides, isPaused, goToNext]);
+  const stopAutoPlay = React.useCallback(() => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  }, []);
+  const pauseAutoPlay = React.useCallback(() => {
+    setIsPaused(true);
+    stopAutoPlay();
+  }, [stopAutoPlay]);
+  const resumeAutoPlay = React.useCallback(() => {
+    setIsPaused(false);
+    if (autoPlay) {
+      startAutoPlay();
+    }
+  }, [autoPlay, startAutoPlay]);
+  // Auto-play management
+  React.useEffect(() => {
+    if (autoPlay) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
+    }
+    return () => stopAutoPlay();
+  }, [autoPlay, startAutoPlay, stopAutoPlay]);
   // Keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = e => {
@@ -1855,60 +2060,155 @@ const NexCarousel = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToPrevious, goToNext]);
+  // Mouse event handlers
+  const handleMouseEnter = React.useCallback(() => {
+    if (pauseOnHover) {
+      pauseAutoPlay();
+    }
+  }, [pauseOnHover, pauseAutoPlay]);
+  const handleMouseLeave = React.useCallback(() => {
+    if (pauseOnHover) {
+      resumeAutoPlay();
+    }
+  }, [pauseOnHover, resumeAutoPlay]);
+  // Slide click handler
+  const handleSlideClick = React.useCallback((slide, index) => {
+    onSlideClick?.(slide, index);
+  }, [onSlideClick]);
   if (totalSlides === 0) {
     return null;
   }
   const currentSlideData = slides[currentSlide];
-  // Safety check for currentSlideData
   if (!currentSlideData) {
     return null;
   }
-  return /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
-    className: `nex-carousel ${className || ''}`,
-    initial: {
-      opacity: 0
-    },
-    animate: {
-      opacity: 1
-    },
-    transition: {
-      duration: shouldReduceMotion ? 0.1 : 0.3,
-      ease: [0.4, 0, 0.2, 1]
-    },
+  // Build class names
+  const carouselClasses = ['nex-carousel', `nex-carousel--${variant}`, `nex-carousel--${size}`, className].filter(Boolean).join(' ');
+  return /*#__PURE__*/jsxRuntime.jsxs("div", {
+    className: carouselClasses,
+    style: style,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
     role: "region",
     "aria-label": "Carousel",
     "aria-roledescription": "carousel",
     "aria-live": "polite",
-    ...rest,
-    children: [/*#__PURE__*/jsxRuntime.jsx(CarouselContainer, {
-      currentSlide: currentSlide,
-      direction: direction,
-      children: /*#__PURE__*/jsxRuntime.jsx(CarouselSlide, {
-        imageUrl: currentSlideData.imageUrl,
-        title: currentSlideData.title,
-        content: currentSlideData.content
+    children: [totalSlides > 1 && /*#__PURE__*/jsxRuntime.jsxs("div", {
+      className: "nex-carousel-hover-nav",
+      children: [/*#__PURE__*/jsxRuntime.jsx("div", {
+        className: "nex-carousel-nav-side left",
+        onClick: goToPrevious,
+        "aria-label": "Previous slide",
+        children: /*#__PURE__*/jsxRuntime.jsx("div", {
+          className: "nex-carousel-nav-arrow",
+          children: /*#__PURE__*/jsxRuntime.jsx("svg", {
+            viewBox: "0 0 24 24",
+            fill: "none",
+            stroke: "currentColor",
+            strokeWidth: "2",
+            children: /*#__PURE__*/jsxRuntime.jsx("path", {
+              d: "M15 18l-6-6 6-6"
+            })
+          })
+        })
+      }), /*#__PURE__*/jsxRuntime.jsx("div", {
+        className: "nex-carousel-nav-side right",
+        onClick: goToNext,
+        "aria-label": "Next slide",
+        children: /*#__PURE__*/jsxRuntime.jsx("div", {
+          className: "nex-carousel-nav-arrow",
+          children: /*#__PURE__*/jsxRuntime.jsx("svg", {
+            viewBox: "0 0 24 24",
+            fill: "none",
+            stroke: "currentColor",
+            strokeWidth: "2",
+            children: /*#__PURE__*/jsxRuntime.jsx("path", {
+              d: "M9 18l6-6-6-6"
+            })
+          })
+        })
+      })]
+    }), /*#__PURE__*/jsxRuntime.jsx("div", {
+      className: "nex-carousel-slides",
+      children: /*#__PURE__*/jsxRuntime.jsx(framerMotion.AnimatePresence, {
+        mode: "wait",
+        initial: false,
+        children: /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
+          className: "nex-carousel-slide",
+          onClick: () => handleSlideClick(currentSlideData, currentSlide),
+          role: "button",
+          tabIndex: 0,
+          "aria-label": `Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`,
+          onKeyDown: e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleSlideClick(currentSlideData, currentSlide);
+            }
+          },
+          initial: {
+            opacity: 0
+          },
+          animate: {
+            opacity: 1
+          },
+          exit: {
+            opacity: 0
+          },
+          transition: {
+            duration: shouldReduceMotion ? 0 : 0.3,
+            ease: [0.4, 0, 0.2, 1]
+          },
+          children: [/*#__PURE__*/jsxRuntime.jsx("img", {
+            src: currentSlideData.imageUrl,
+            alt: currentSlideData.title || `Slide ${currentSlide + 1}`,
+            className: "nex-carousel-image",
+            loading: currentSlide === 0 ? 'eager' : 'lazy'
+          }), (currentSlideData.title || currentSlideData.subtitle || currentSlideData.description || currentSlideData.ctaText) && /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
+            className: "nex-carousel-content",
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              duration: 0.3,
+              ease: [0.4, 0, 0.2, 1]
+            },
+            children: [currentSlideData.title && /*#__PURE__*/jsxRuntime.jsx("h2", {
+              className: "nex-carousel-title",
+              children: currentSlideData.title
+            }), currentSlideData.subtitle && /*#__PURE__*/jsxRuntime.jsx("h3", {
+              className: "nex-carousel-subtitle",
+              children: currentSlideData.subtitle
+            }), currentSlideData.description && /*#__PURE__*/jsxRuntime.jsx("p", {
+              className: "nex-carousel-description",
+              children: currentSlideData.description
+            }), currentSlideData.ctaText && /*#__PURE__*/jsxRuntime.jsx("a", {
+              href: currentSlideData.ctaUrl || '#',
+              className: "nex-carousel-cta",
+              onClick: e => e.stopPropagation(),
+              children: currentSlideData.ctaText
+            })]
+          })]
+        }, currentSlide)
       })
-    }), showControls && /*#__PURE__*/jsxRuntime.jsx(CarouselControls, {
-      onPrevious: goToPrevious,
-      onNext: goToNext,
-      hasPrevious: hasPrevious,
-      hasNext: hasNext
-    }), showIndicators && /*#__PURE__*/jsxRuntime.jsx(CarouselIndicators, {
-      totalSlides: totalSlides,
-      currentSlide: currentSlide,
-      onSlideChange: goToSlide
-    }), /*#__PURE__*/jsxRuntime.jsxs(framerMotion.motion.div, {
+    }), showIndicators && totalSlides > 1 && /*#__PURE__*/jsxRuntime.jsx("div", {
+      className: "nex-carousel-indicators",
+      role: "tablist",
+      children: slides.map((_, index) => /*#__PURE__*/jsxRuntime.jsx("button", {
+        className: `nex-carousel-indicator ${index === currentSlide ? 'active' : ''}`,
+        onClick: () => goToSlide(index),
+        "aria-label": `Go to slide ${index + 1}`,
+        "aria-selected": index === currentSlide,
+        role: "tab"
+      }, index))
+    }), showCounter && totalSlides > 1 && /*#__PURE__*/jsxRuntime.jsxs("div", {
       className: "nex-carousel-counter",
-      initial: {
-        opacity: 0
-      },
-      animate: {
-        opacity: 1
-      },
-      transition: {
-        delay: shouldReduceMotion ? 0 : 0.7
-      },
       children: [currentSlide + 1, " / ", totalSlides]
+    }), autoPlay && !isPaused && /*#__PURE__*/jsxRuntime.jsx("div", {
+      className: "nex-carousel-autoplay",
+      "aria-label": "Auto-play active"
     })]
   });
 };
@@ -6518,16 +6818,6 @@ var faCopy = {
   icon: [448, 512, [], "f0c5", "M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"]
 };
 
-/**
- * NexCopyToClipboard component
- *
- * A button component that copies text to the clipboard when clicked.
- *
- * @param {string} className - Additional class names for styling the button.
- * @param {'small' | 'normal' | 'large'} size - The size of the button. Default is 'normal'.
- * @param {'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success' | 'info' | 'warning' | 'danger' | string} type - The type of the button which determines its color style.
- * @param {string} textToCopy - The text to be copied to the clipboard.
- */
 const NexCopyToClipboard = ({
   className,
   size = 'normal',
@@ -10755,17 +11045,6 @@ const NexFooter = ({
   });
 };
 
-/**
- * NexSeparator component
- *
- * Component to display a separator with optional text in between lines.
- *
- * @param {string} [className] - Additional CSS class names for customization.
- * @param {string} [text] - Text to display between separator lines.
- * @param {string} [backgroundColor='#fff'] - Background color of the text (if text is provided).
- * @param {number} [fontSize=14] - Font size of the text (if text is provided).
- * @param {string} [color] - Color of the text and separator lines.
- */
 const NexSeparator = ({
   className,
   text,
@@ -10880,7 +11159,6 @@ const NexVersion = ({
 
 exports.NexAlert = NexAlert;
 exports.NexAlertsProvider = NexAlertsProvider;
-exports.NexAlertsWrapper = NexAlertsWrapper;
 exports.NexButton = NexButton;
 exports.NexCard = NexCard;
 exports.NexCarousel = NexCarousel;

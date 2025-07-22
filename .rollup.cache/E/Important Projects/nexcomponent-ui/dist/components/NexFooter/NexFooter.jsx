@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NexFooterProps } from './NexFooter.types';
 import FooterContainer from './components/FooterContainer/index';
 import FooterBranding from './components/FooterBranding/index';
 import FooterSections from './components/FooterSections/index';

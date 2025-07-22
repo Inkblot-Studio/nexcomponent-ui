@@ -4,8 +4,6 @@ import { useClickAway } from 'react-use';
 import classNames from 'classnames';
 import { ChevronDown } from 'lucide-react';
 import './NavItem.scss';
-import { NavItemProps } from './NavItem.types';
-import { NavSubItem } from '../../NexNav.types';
 const NavItem = ({ label, onClick, isActive = false, disabled = false, badge, tooltip, subItems, description, isAtTop = true }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);

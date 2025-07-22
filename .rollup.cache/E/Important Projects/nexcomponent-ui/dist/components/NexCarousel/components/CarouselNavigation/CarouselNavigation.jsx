@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { CarouselNavigationProps } from './CarouselNavigation.types';
 import './CarouselNavigation.scss';
 /**
  * CarouselNavigation - Clean, simple carousel navigation

@@ -1,2 +1,2 @@
-import { InputHTMLAttributes } from 'react';
+export {};
 //# sourceMappingURL=NexInput.types.js.map

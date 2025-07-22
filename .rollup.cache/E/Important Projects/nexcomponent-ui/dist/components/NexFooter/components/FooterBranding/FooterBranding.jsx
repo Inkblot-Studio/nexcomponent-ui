@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { FooterBrandingProps } from './FooterBranding.types';
 import './FooterBranding.scss';
 const FooterBranding = ({ logoSrc, displayName, tagline, showLogoText = true, newsletter, variant = 'default', theme = 'auto' }) => {
     const [email, setEmail] = useState('');

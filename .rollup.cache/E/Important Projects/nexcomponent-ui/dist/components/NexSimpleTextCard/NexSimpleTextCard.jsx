@@ -1,5 +1,4 @@
 import React from 'react';
-import { NexSimpleTextCardProps } from './NexSimpleTextCard.types';
 import './NexSimpleTextCard.scss';
 /**
  * NexSimpleTextCard component

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Settings, User, LogOut, Shield, Activity, Zap, Crown, ChevronDown, ChevronUp, Globe, Fingerprint, Menu, X } from 'lucide-react';
+import { Settings, User, LogOut, Shield, Activity, Zap, Crown, ChevronDown, Globe, Fingerprint } from 'lucide-react';
 import './MobileNav.scss';
-import { MobileNavProps } from './MobileNav.types';
-import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONFIG } from '../../../../utils/animationConfig';
+import { useAnimationConfig } from '../../../../utils/animationConfig';
 import ThemeToggle from '../ThemeToggle';
 const MobileNav = ({ isOpen, onClose, navItems, user, isAuthenticated, onLogin, onLogout, onProfile, currentLocale, languageOptions, onLocaleChange, endorsementCount, subscription, onEndorsementsClick, onSubscriptionClick, onActivityLogClick, onSecurityClick, onIntegrationsClick, onAdminPanelClick, theme = 'auto' }) => {
     // Check for black glass theme variant

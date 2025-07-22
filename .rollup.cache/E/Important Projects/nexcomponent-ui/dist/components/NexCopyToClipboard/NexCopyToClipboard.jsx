@@ -2,7 +2,6 @@ import React from 'react';
 import './NexCopyToClipboard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
-import { NexCopyToClipboardProps } from './NexCopyToClipboard.types';
 /**
  * NexCopyToClipboard component
  *

@@ -1,6 +1,5 @@
 import React from 'react';
 import './NexSeparator.scss';
-import { NexSeparatorProps } from './NexSeparator.types';
 /**
  * NexSeparator component
  *

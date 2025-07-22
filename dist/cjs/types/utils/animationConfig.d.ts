@@ -642,7 +642,7 @@ export declare const COLOR_SCHEMES: {
     };
 };
 export declare const useAnimationConfig: () => {
-    shouldReduceMotion: boolean | null;
+    shouldReduceMotion: boolean;
     performance: {
         hardwareAcceleration: {
             transform: "translateZ(0)";

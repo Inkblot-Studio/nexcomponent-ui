@@ -1,5 +1,4 @@
 import React from 'react';
-import { NexHeroCardProps } from './NexHeroCard.types';
 import NexButton from '../NexButton';
 import './NexHeroCard.scss';
 /**

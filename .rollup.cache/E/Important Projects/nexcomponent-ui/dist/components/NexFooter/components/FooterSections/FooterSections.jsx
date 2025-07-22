@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useFooterAnimations } from '../../animations';
-import { FooterSectionsProps } from './FooterSections.types';
 import './FooterSections.scss';
 const FooterSections = ({ sections, variant = 'default', theme = 'auto' }) => {
     const animations = useFooterAnimations();

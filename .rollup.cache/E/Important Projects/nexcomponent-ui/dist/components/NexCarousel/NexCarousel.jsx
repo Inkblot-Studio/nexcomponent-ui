@@ -1,63 +1,79 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAnimationConfig } from '../../utils/animationConfig';
-import CarouselContainer from './components/CarouselContainer/CarouselContainer';
-import CarouselSlide from './components/CarouselSlide/CarouselSlide';
-import CarouselControls from './components/CarouselControls/CarouselControls';
-import CarouselIndicators from './components/CarouselIndicators/CarouselIndicators';
 import './NexCarousel.scss';
 /**
- * NexCarousel - Enterprise Grade Carousel Component
+ * NexCarousel - Apple-Inspired Carousel Component
  *
- * A clean, simple carousel component designed for compelling visual presentations.
- * Features smooth animations, professional styling, and intuitive navigation.
- *
- * @param {Array} slides - Array of slide data with imageUrl, title, and content
- * @param {boolean} autoPlay - Whether to automatically advance slides
- * @param {number} autoPlayInterval - Interval between auto-advance (in milliseconds)
- * @param {boolean} showControls - Whether to show navigation controls
- * @param {boolean} showIndicators - Whether to show slide indicators
- * @param {string} className - Additional CSS classes
+ * A clean, minimal carousel with Apple-like design principles:
+ * - Elegant simplicity
+ * - Smooth animations with Framer Motion
+ * - Premium feel
+ * - Intuitive interactions
+ * - Beautiful typography
  */
-const NexCarousel = ({ slides = [], autoPlay = false, autoPlayInterval = 5000, showControls = true, showIndicators = true, className, ...rest }) => {
+const NexCarousel = ({ slides, variant = 'default', size = 'md', autoPlay = false, autoPlayInterval = 5000, pauseOnHover = true, infinite = false, showControls = true, showIndicators = true, showCounter = true, onSlideChange, onSlideClick, className, style, }) => {
     const { shouldReduceMotion } = useAnimationConfig();
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [direction, setDirection] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const autoPlayRef = useRef(null);
     const totalSlides = slides.length;
-    const hasPrevious = currentSlide > 0;
-    const hasNext = currentSlide < totalSlides - 1;
+    const hasPrevious = infinite || currentSlide > 0;
+    const hasNext = infinite || currentSlide < totalSlides - 1;
+    // Framer Motion variants
+    // Smooth slide navigation
     const goToSlide = useCallback((index) => {
         if (index >= 0 && index < totalSlides) {
-            setDirection(index > currentSlide ? 1 : -1);
             setCurrentSlide(index);
+            onSlideChange?.(index);
         }
-    }, [currentSlide, totalSlides]);
+    }, [totalSlides, onSlideChange]);
     const goToPrevious = useCallback(() => {
         if (hasPrevious) {
-            setDirection(-1);
-            setCurrentSlide(currentSlide - 1);
+            const newIndex = infinite && currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+            goToSlide(newIndex);
         }
-    }, [currentSlide, hasPrevious]);
+    }, [currentSlide, hasPrevious, infinite, totalSlides, goToSlide]);
     const goToNext = useCallback(() => {
         if (hasNext) {
-            setDirection(1);
-            setCurrentSlide(currentSlide + 1);
+            const newIndex = infinite && currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+            goToSlide(newIndex);
         }
-    }, [currentSlide, hasNext]);
+    }, [currentSlide, hasNext, infinite, totalSlides, goToSlide]);
     // Auto-play functionality
-    useEffect(() => {
-        if (!autoPlay || totalSlides <= 1)
+    const startAutoPlay = useCallback(() => {
+        if (!autoPlay || totalSlides <= 1 || isPaused)
             return;
-        const interval = setInterval(() => {
-            if (hasNext) {
-                goToNext();
-            }
-            else {
-                goToSlide(0);
-            }
+        autoPlayRef.current = setInterval(() => {
+            goToNext();
         }, autoPlayInterval);
-        return () => clearInterval(interval);
-    }, [autoPlay, autoPlayInterval, hasNext, goToNext, goToSlide, totalSlides]);
+    }, [autoPlay, autoPlayInterval, totalSlides, isPaused, goToNext]);
+    const stopAutoPlay = useCallback(() => {
+        if (autoPlayRef.current) {
+            clearInterval(autoPlayRef.current);
+            autoPlayRef.current = null;
+        }
+    }, []);
+    const pauseAutoPlay = useCallback(() => {
+        setIsPaused(true);
+        stopAutoPlay();
+    }, [stopAutoPlay]);
+    const resumeAutoPlay = useCallback(() => {
+        setIsPaused(false);
+        if (autoPlay) {
+            startAutoPlay();
+        }
+    }, [autoPlay, startAutoPlay]);
+    // Auto-play management
+    useEffect(() => {
+        if (autoPlay) {
+            startAutoPlay();
+        }
+        else {
+            stopAutoPlay();
+        }
+        return () => stopAutoPlay();
+    }, [autoPlay, startAutoPlay, stopAutoPlay]);
     // Keyboard navigation
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -73,33 +89,102 @@ const NexCarousel = ({ slides = [], autoPlay = false, autoPlayInterval = 5000, s
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [goToPrevious, goToNext]);
+    // Mouse event handlers
+    const handleMouseEnter = useCallback(() => {
+        if (pauseOnHover) {
+            pauseAutoPlay();
+        }
+    }, [pauseOnHover, pauseAutoPlay]);
+    const handleMouseLeave = useCallback(() => {
+        if (pauseOnHover) {
+            resumeAutoPlay();
+        }
+    }, [pauseOnHover, resumeAutoPlay]);
+    // Slide click handler
+    const handleSlideClick = useCallback((slide, index) => {
+        onSlideClick?.(slide, index);
+    }, [onSlideClick]);
     if (totalSlides === 0) {
         return null;
     }
     const currentSlideData = slides[currentSlide];
-    // Safety check for currentSlideData
     if (!currentSlideData) {
         return null;
     }
-    return (<motion.div className={`nex-carousel ${className || ''}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
-            duration: shouldReduceMotion ? 0.1 : 0.3,
-            ease: [0.4, 0, 0.2, 1]
-        }} role="region" aria-label="Carousel" aria-roledescription="carousel" aria-live="polite" {...rest}>
-      <CarouselContainer currentSlide={currentSlide} direction={direction}>
-        <CarouselSlide imageUrl={currentSlideData.imageUrl} title={currentSlideData.title} content={currentSlideData.content}/>
-      </CarouselContainer>
+    // Build class names
+    const carouselClasses = [
+        'nex-carousel',
+        `nex-carousel--${variant}`,
+        `nex-carousel--${size}`,
+        className
+    ].filter(Boolean).join(' ');
+    return (<div className={carouselClasses} style={style} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} role="region" aria-label="Carousel" aria-roledescription="carousel" aria-live="polite">
+      {/* Magic Hover Navigation */}
+      {totalSlides > 1 && (<div className="nex-carousel-hover-nav">
+          <div className="nex-carousel-nav-side left" onClick={goToPrevious} aria-label="Previous slide">
+            <div className="nex-carousel-nav-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </div>
+          </div>
+          <div className="nex-carousel-nav-side right" onClick={goToNext} aria-label="Next slide">
+            <div className="nex-carousel-nav-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+          </div>
+        </div>)}
 
-      {/* Navigation Controls */}
-      {showControls && (<CarouselControls onPrevious={goToPrevious} onNext={goToNext} hasPrevious={hasPrevious} hasNext={hasNext}/>)}
+      {/* Slides Container */}
+      <div className="nex-carousel-slides">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div className="nex-carousel-slide" onClick={() => handleSlideClick(currentSlideData, currentSlide)} role="button" tabIndex={0} aria-label={`Slide ${currentSlide + 1}: ${currentSlideData.title || 'Image'}`} onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleSlideClick(currentSlideData, currentSlide);
+            }
+        }} key={currentSlide} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{
+            duration: shouldReduceMotion ? 0 : 0.3,
+            ease: [0.4, 0, 0.2, 1]
+        }}>
+          <img src={currentSlideData.imageUrl} alt={currentSlideData.title || `Slide ${currentSlide + 1}`} className="nex-carousel-image" loading={currentSlide === 0 ? 'eager' : 'lazy'}/>
+          
+          {/* Content Overlay */}
+          {(currentSlideData.title || currentSlideData.subtitle || currentSlideData.description || currentSlideData.ctaText) && (<motion.div className="nex-carousel-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>
+              {currentSlideData.title && (<h2 className="nex-carousel-title">
+                  {currentSlideData.title}
+                </h2>)}
+              {currentSlideData.subtitle && (<h3 className="nex-carousel-subtitle">
+                  {currentSlideData.subtitle}
+                </h3>)}
+              {currentSlideData.description && (<p className="nex-carousel-description">
+                  {currentSlideData.description}
+                </p>)}
+              {currentSlideData.ctaText && (<a href={currentSlideData.ctaUrl || '#'} className="nex-carousel-cta" onClick={(e) => e.stopPropagation()}>
+                  {currentSlideData.ctaText}
+                </a>)}
+            </motion.div>)}
+          </motion.div>
+        </AnimatePresence>
+        </div>
+
+
 
       {/* Slide Indicators */}
-      {showIndicators && (<CarouselIndicators totalSlides={totalSlides} currentSlide={currentSlide} onSlideChange={goToSlide}/>)}
+      {showIndicators && totalSlides > 1 && (<div className="nex-carousel-indicators" role="tablist">
+          {slides.map((_, index) => (<button key={index} className={`nex-carousel-indicator ${index === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(index)} aria-label={`Go to slide ${index + 1}`} aria-selected={index === currentSlide} role="tab"/>))}
+        </div>)}
 
       {/* Slide Counter */}
-      <motion.div className="nex-carousel-counter" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: shouldReduceMotion ? 0 : 0.7 }}>
-        {currentSlide + 1} / {totalSlides}
-      </motion.div>
-    </motion.div>);
+      {showCounter && totalSlides > 1 && (<div className="nex-carousel-counter">
+          {currentSlide + 1} / {totalSlides}
+        </div>)}
+
+      {/* Auto-play Indicator */}
+      {autoPlay && !isPaused && (<div className="nex-carousel-autoplay" aria-label="Auto-play active"/>)}
+    </div>);
 };
 export default NexCarousel;
 //# sourceMappingURL=NexCarousel.jsx.map

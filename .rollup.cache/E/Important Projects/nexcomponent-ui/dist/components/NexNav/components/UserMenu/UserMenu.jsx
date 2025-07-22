@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useClickAway } from 'react-use';
-import classNames from 'classnames';
 import './UserMenu.scss';
-import { UserMenuProps } from './UserMenu.types';
 const UserMenu = ({ user, onLogout, onProfile, onEndorsementsClick, onSubscriptionClick, onActivityLogClick, onSecurityClick, onIntegrationsClick, onAdminPanelClick, onSignUpClick, endorsementCount, subscription, enableEndorsements, enableSubscriptionInfo, enableAuditLog, enableSecuritySettings, enableIntegrations, enableAdminPanel, isAtTop = true, open = false, onOpen, onClose, theme = 'auto' }) => {
     const ref = useRef(null);
     // Optimized animation configurations

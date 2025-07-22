@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { FooterContainerProps } from './FooterContainer.types';
 import './FooterContainer.scss';
 const FooterContainer = ({ children, variant = 'default', theme = 'auto', className = '' }) => {
     const { timing, shouldReduceMotion } = useAnimationConfig();

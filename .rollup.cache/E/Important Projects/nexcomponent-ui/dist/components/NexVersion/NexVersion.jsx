@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NexVersionProps } from './NexVersion.types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import NexInput from '../NexInput';

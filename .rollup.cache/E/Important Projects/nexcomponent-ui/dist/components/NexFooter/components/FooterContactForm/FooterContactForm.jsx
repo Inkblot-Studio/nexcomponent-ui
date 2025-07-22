@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { useFooterAnimations } from '../../animations';
-import { FooterContactFormProps } from './FooterContactForm.types';
 import './FooterContactForm.scss';
 const FooterContactForm = ({ contact, variant = 'contact', theme = 'auto' }) => {
     const [email, setEmail] = useState('');

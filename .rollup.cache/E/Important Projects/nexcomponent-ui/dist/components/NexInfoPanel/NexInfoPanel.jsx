@@ -1,6 +1,5 @@
 import React from 'react';
 import './NexInfoPanel.scss';
-import { NexInfoPanelProps } from './NexInfoPanel.types';
 /**
  * NexInfoPanel component
  *

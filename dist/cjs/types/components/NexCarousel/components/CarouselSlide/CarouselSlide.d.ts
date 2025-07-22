@@ -2,10 +2,10 @@ import React from 'react';
 import { CarouselSlideProps } from './CarouselSlide.types';
 import './CarouselSlide.scss';
 /**
- * CarouselSlide - Clean, simple carousel slide
+ * CarouselSlide - Premium carousel slide component
  *
- * A minimal slide component that displays content with smooth animations.
- * Designed for compelling visual presentations.
+ * A premium slide component that displays content with advanced animations,
+ * lazy loading, and enhanced visual effects for compelling presentations.
  */
 declare const CarouselSlide: React.FC<CarouselSlideProps>;
 export default CarouselSlide;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { InputContainerProps } from './InputContainer.types';
 import './InputContainer.scss';
 /**
  * InputContainer - Clean, simple input container

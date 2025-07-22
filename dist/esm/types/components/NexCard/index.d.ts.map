@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/NexCard/index.tsx"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,WAAW,CAAC;AAEhC,eAAe,OAAO,CAAC;AACvB,cAAc,WAAW,CAAA;AACzB,cAAc,iBAAiB,CAAA"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/NexCard/index.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AACpC,OAAO,EAAE,UAAU,EAAE,MAAM,WAAW,CAAC;AACvC,YAAY,EAAE,YAAY,EAAE,gBAAgB,EAAE,aAAa,EAAE,cAAc,EAAE,mBAAmB,EAAE,MAAM,iBAAiB,CAAC"}

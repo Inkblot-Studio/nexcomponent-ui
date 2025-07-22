@@ -1,7 +1,12 @@
+import { CarouselSlide as CarouselSlideType, CarouselVariant, CarouselSize } from '../../NexCarousel.types';
 export interface CarouselSlideProps {
-    imageUrl?: string;
-    title?: string;
-    content?: string;
+    slide: CarouselSlideType;
+    index: number;
+    variant?: CarouselVariant;
+    size?: CarouselSize;
+    lazy?: boolean;
+    isLoaded?: boolean;
+    onClick?: (slide: CarouselSlideType, index: number) => void;
     className?: string;
 }
 //# sourceMappingURL=CarouselSlide.types.d.ts.map

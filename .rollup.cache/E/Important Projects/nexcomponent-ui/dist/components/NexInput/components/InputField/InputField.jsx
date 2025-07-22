@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
-import { InputFieldProps } from './InputField.types';
 import './InputField.scss';
 /**
  * InputField - Clean, simple input field
