@@ -66,7 +66,8 @@ const NexNavInner: React.FC<NexNavProps> = ({
   onSecurityClick,
   onIntegrationsClick,
   onAdminPanelClick,
-  theme = 'auto'
+  theme = 'auto',
+  onThemeChange
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -462,7 +463,7 @@ const NexNavInner: React.FC<NexNavProps> = ({
 
 const NexNav: React.FC<NexNavProps> = (props) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider onThemeChange={props.onThemeChange}>
       <NexNavInner {...props} />
     </ThemeProvider>
   );
