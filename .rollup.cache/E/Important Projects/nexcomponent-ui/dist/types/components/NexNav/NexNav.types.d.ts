@@ -159,5 +159,7 @@ export type NexNavProps = {
     onAdminPanelClick?: () => void;
     /** Theme variant for the navigation */
     theme?: 'light' | 'auto' | 'black-glass';
+    /** Callback function called when theme changes */
+    onThemeChange?: (theme: 'light' | 'black-glass') => void;
 };
 //# sourceMappingURL=NexNav.types.d.ts.map

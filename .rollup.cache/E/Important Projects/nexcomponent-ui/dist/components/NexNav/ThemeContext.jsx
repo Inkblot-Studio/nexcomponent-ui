@@ -1,6 +1,39 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 const ThemeContext = createContext(undefined);
-export const ThemeProvider = ({ children }) => {
+// Custom event emitter for theme changes
+class ThemeEventEmitter {
+    constructor() {
+        this.listeners = new Map();
+    }
+    on(event, callback) {
+        if (!this.listeners.has(event)) {
+            this.listeners.set(event, new Set());
+        }
+        this.listeners.get(event).add(callback);
+    }
+    off(event, callback) {
+        const eventListeners = this.listeners.get(event);
+        if (eventListeners) {
+            eventListeners.delete(callback);
+        }
+    }
+    emit(event, theme) {
+        const eventListeners = this.listeners.get(event);
+        if (eventListeners) {
+            eventListeners.forEach(callback => {
+                try {
+                    callback(theme);
+                }
+                catch (error) {
+                    console.error('Error in theme event listener:', error);
+                }
+            });
+        }
+    }
+}
+// Global theme event emitter instance
+export const themeEventEmitter = new ThemeEventEmitter();
+export const ThemeProvider = ({ children, onThemeChange }) => {
     const [isDark, setIsDark] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     // Initialize theme from localStorage or system preference
@@ -30,7 +63,8 @@ export const ThemeProvider = ({ children }) => {
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
-    const applyTheme = (dark) => {
+    const applyTheme = useCallback((dark) => {
+        const theme = dark ? 'black-glass' : 'light';
         if (dark) {
             document.documentElement.setAttribute('data-theme', 'dark');
             document.documentElement.setAttribute('data-theme-variant', 'black-glass');
@@ -39,19 +73,27 @@ export const ThemeProvider = ({ children }) => {
             document.documentElement.setAttribute('data-theme', 'light');
             document.documentElement.removeAttribute('data-theme-variant');
         }
-    };
-    const toggleTheme = () => {
+        // Emit theme change event
+        themeEventEmitter.emit('themeChange', theme);
+    }, []);
+    const toggleTheme = useCallback(() => {
         const newTheme = !isDark;
         setIsDark(newTheme);
+        const themeValue = newTheme ? 'black-glass' : 'light';
         // Update localStorage
-        localStorage.setItem('nex-theme', newTheme ? 'black-glass' : 'light');
+        localStorage.setItem('nex-theme', themeValue);
         // Apply theme to document
         applyTheme(newTheme);
-    };
+        // Call the onThemeChange callback if provided
+        if (onThemeChange) {
+            onThemeChange(themeValue);
+        }
+    }, [isDark, applyTheme, onThemeChange]);
     const value = {
         isDark,
         toggleTheme,
-        theme: isDark ? 'black-glass' : 'light'
+        theme: isDark ? 'black-glass' : 'light',
+        onThemeChange
     };
     if (!isInitialized) {
         return null; // Don't render until theme is initialized
@@ -66,5 +108,12 @@ export const useTheme = () => {
         throw new Error('useTheme must be used within a ThemeProvider');
     }
     return context;
+};
+// Hook to listen for theme changes from outside the provider
+export const useThemeListener = (callback) => {
+    useEffect(() => {
+        themeEventEmitter.on('themeChange', callback);
+        return () => themeEventEmitter.off('themeChange', callback);
+    }, [callback]);
 };
 //# sourceMappingURL=ThemeContext.jsx.map

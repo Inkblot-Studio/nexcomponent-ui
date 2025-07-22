@@ -34,7 +34,7 @@ function useResponsiveLeft() {
     }, []);
     return left;
 }
-const NexNavInner = ({ logoSrc, displayName, homeButtonHandler, navItems, user, isAuthenticated, onLogin, onLogout, onProfile, languageOptions, subscription, endorsementCount, onEndorsementsClick, onSubscriptionClick, onActivityLogClick, onSecurityClick, onIntegrationsClick, onAdminPanelClick, theme = 'auto' }) => {
+const NexNavInner = ({ logoSrc, displayName, homeButtonHandler, navItems, user, isAuthenticated, onLogin, onLogout, onProfile, languageOptions, subscription, endorsementCount, onEndorsementsClick, onSubscriptionClick, onActivityLogClick, onSecurityClick, onIntegrationsClick, onAdminPanelClick, theme = 'auto', onThemeChange }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAtTop, setIsAtTop] = useState(true);
     const [locale, setLocale] = useState('en');
@@ -284,7 +284,7 @@ const NexNavInner = ({ logoSrc, displayName, homeButtonHandler, navItems, user, 
     </>);
 };
 const NexNav = (props) => {
-    return (<ThemeProvider>
+    return (<ThemeProvider onThemeChange={props.onThemeChange}>
       <NexNavInner {...props}/>
     </ThemeProvider>);
 };
