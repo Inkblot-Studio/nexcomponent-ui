@@ -9,6 +9,6 @@ export interface FooterBrandingProps {
         onSubmit?: (email: string) => void;
     };
     variant?: 'default' | 'contact';
-    theme?: 'auto' | 'light' | 'dark' | 'black-glass';
+    theme?: 'auto' | 'light' | 'black-glass';
 }
 //# sourceMappingURL=FooterBranding.types.d.ts.map

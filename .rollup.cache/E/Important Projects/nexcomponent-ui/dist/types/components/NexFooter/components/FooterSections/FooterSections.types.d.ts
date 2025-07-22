@@ -9,6 +9,6 @@ export interface FooterSection {
 export interface FooterSectionsProps {
     sections: FooterSection[];
     variant?: 'default' | 'contact';
-    theme?: 'auto' | 'light' | 'dark' | 'black-glass';
+    theme?: 'auto' | 'light' | 'black-glass';
 }
 //# sourceMappingURL=FooterSections.types.d.ts.map

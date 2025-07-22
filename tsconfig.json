@@ -22,7 +22,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "noEmit": false,
-    "incremental": true,
     "composite": false,
     "removeComments": false,
     "preserveConstEnums": true,
