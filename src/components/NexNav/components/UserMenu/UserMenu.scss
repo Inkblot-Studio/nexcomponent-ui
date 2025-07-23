@@ -26,12 +26,16 @@
     padding: 0;
     cursor: pointer;
     
-    /* Glassmorphic Design */
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Enhanced Frosted Glass Design */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--nex-radius-full);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     
     /* Transitions */
     transition: all var(--nex-transition-fast);
@@ -299,12 +303,24 @@
 
 [data-theme="dark"] .nex-user-menu {
   .nex-user-menu-trigger {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
     
     &:hover {
-      background: rgba(0, 0, 0, 0.25);
-      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(28px) saturate(240%);
+      -webkit-backdrop-filter: blur(28px) saturate(240%);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.2),
+        0 3px 10px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
   }
   
@@ -347,12 +363,24 @@
 
 [data-theme="dark"][data-theme-variant="black-glass"] .nex-user-menu {
   .nex-user-menu-trigger {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.25),
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(28px) saturate(240%);
+      -webkit-backdrop-filter: blur(28px) saturate(240%);
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.35),
+        0 3px 10px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
   }
   

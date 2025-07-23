@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MoreHorizontal } from 'lucide-react';
 import classNames from 'classnames';
 import NavItem from '../NavItem';
 import type { NavItem as NavItemType } from '../../NexNav.types';
@@ -303,6 +303,7 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
               role="menuitem"
               aria-haspopup="true"
               aria-expanded={isMoreOpen}
+              aria-label={`More options (${overflowNavItems.length} additional items)`}
               tabIndex={0}
               onClick={(e) => {
                 e.preventDefault();
@@ -323,8 +324,8 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
               }}
             >
               <div className="nex-nav-item-content">
-                <span className="nex-nav-item__label" style={{ fontSize: 'var(--nex-font-size-xs)' }}>
-                  More
+                <span className="nex-nav-item__icon" aria-hidden="true">
+                  <MoreHorizontal size={16} />
                 </span>
                 <span className="nex-nav-item-badge" aria-label={`${overflowNavItems.length} additional items`}>
                   {overflowNavItems.length}
