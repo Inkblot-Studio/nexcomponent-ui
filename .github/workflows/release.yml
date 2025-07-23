@@ -16,19 +16,21 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
+          cache: 'npm'
       - name: Install dependencies
-        run: npm clean-install
+        run: npm ci
 
       - name: Build project
-        run: npm run build
+        run: npm run build:check
 
       - name: Pack for GitHub
         run: npm pack
@@ -40,4 +42,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+          NODE_ENV: production
+        run: npx semantic-release --debug
