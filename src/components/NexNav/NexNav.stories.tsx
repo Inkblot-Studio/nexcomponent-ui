@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import storyBackground from '../../assets/img/story_background.jpg';
-import storyLogo from '../../assets/img/nex_logo.svg';
+import storyLogo from '../../assets/img/nk_logo.svg';
 import NexNav from './NexNav';
 
 export default {

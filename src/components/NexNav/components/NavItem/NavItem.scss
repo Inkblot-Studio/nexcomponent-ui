@@ -39,15 +39,10 @@
   cursor: pointer;
   user-select: none;
   outline: none;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: var(--nex-radius-full);
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: none;
   font-family: var(--nex-font-family-primary);
   position: relative;
   overflow: hidden;
@@ -56,10 +51,36 @@
   will-change: transform, opacity, background-color, border-color, box-shadow;
 
   /* ================================
-     🎯 HOVER & FOCUS STATES - Frosted Glass
+     🎯 DEFAULT & HOVER STATES - Conditional Frosted Glass
      ================================ */
 
-  &:hover:not(.disabled) {
+  /* When nav is at top - show background by default */
+  .nex-nav:not(.not-at-top) & {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.06),
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* When nav is at top - enhanced background on hover */
+  .nex-nav:not(.not-at-top) &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* When nav is not at top - transparent by default, background on hover */
+  .nex-nav.not-at-top &:hover:not(.disabled) {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
@@ -601,10 +622,11 @@
 }
 
 /* ================================
-   🌒 DARK MODE ADJUSTMENTS
+   🌒 DARK MODE CONDITIONAL STYLES
    ================================ */
 
-[data-theme="dark"] .nex-nav-item {
+/* Dark theme - when nav is at top */
+[data-theme="dark"] .nex-nav:not(.not-at-top) .nex-nav-item {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px) saturate(200%);
   -webkit-backdrop-filter: blur(20px) saturate(200%);
@@ -613,6 +635,29 @@
     0 2px 8px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Black glass theme - when nav is at top */
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) .nex-nav-item {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ================================
+   🌒 DARK MODE ADJUSTMENTS
+   ================================ */
+
+[data-theme="dark"] .nex-nav-item {
+  /* Default state - will be overridden by conditional styles */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
   
   &:hover:not(.disabled) {
     background: rgba(255, 255, 255, 0.08);
@@ -701,14 +746,10 @@
    ================================ */
 
 [data-theme="dark"][data-theme-variant="black-glass"] .nex-nav-item {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  /* Default state - will be overridden by conditional styles */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
   
   &:hover:not(.disabled) {
     background: rgba(255, 255, 255, 0.1);
