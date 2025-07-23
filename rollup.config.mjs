@@ -4,8 +4,8 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
-import { readFileSync } from 'fs';
-import { copyFileSync } from 'fs';
+import { readFileSync, copyFileSync, existsSync } from 'fs';
+import { join } from 'path';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
@@ -68,10 +68,21 @@ export default [
         name: 'copy-css-files',
         writeBundle() {
           try {
-            copyFileSync('dist/esm/style.css', 'dist/style.css');
-            copyFileSync('dist/esm/style.css.map', 'dist/style.css.map');
+            // Check if the CSS file exists before copying
+            const cssPath = join('dist', 'esm', 'style.css');
+            const cssMapPath = join('dist', 'esm', 'style.css.map');
+            
+            if (existsSync(cssPath)) {
+              copyFileSync(cssPath, 'dist/style.css');
+              console.log('✅ CSS file copied to dist/style.css');
+            }
+            
+            if (existsSync(cssMapPath)) {
+              copyFileSync(cssMapPath, 'dist/style.css.map');
+              console.log('✅ CSS map file copied to dist/style.css.map');
+            }
           } catch (error) {
-            console.warn('Could not copy CSS files to root dist directory:', error.message);
+            console.warn('⚠️ Could not copy CSS files to root dist directory:', error.message);
           }
         }
       }

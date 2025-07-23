@@ -45,7 +45,7 @@
     "build:clean": "rm -rf dist && npm run build",
     "build:check": "npm run build && npm run test:types",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:types": "tsc --noEmit",
+    "test:types": "tsc --project tsconfig.check.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --exit-zero-on-changes",

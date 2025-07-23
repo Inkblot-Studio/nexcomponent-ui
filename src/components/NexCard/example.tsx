@@ -1,5 +1,5 @@
 import React from 'react';
-import { NexCard } from './index';
+import NexCard from './index';
 import NexButton from '../NexButton';
 
 /**

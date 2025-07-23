@@ -12,11 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Better build process with type checking
 - Versioning fix script
 - Dedicated release configuration file
+- Main styles file for proper CSS bundling
 
 ### Fixed
 - Duplicate git tags issue
 - Version mismatch between package.json and git tags
 - Semantic release configuration for proper versioning
+- TypeScript configuration conflicts
+- CSS file copying in build process
+- NexCard import/export issues
 
 ## [2.2.0] - 2024-12-19
 
