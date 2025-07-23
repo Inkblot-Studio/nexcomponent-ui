@@ -1,6 +1,6 @@
 {
   "name": "@nexcomponent/lib",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "React UI Library - Fixed import and CSS issues",
   "repository": {
     "type": "git",
@@ -180,7 +180,10 @@
             }
           ],
           "parserOpts": {
-            "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
           }
         }
       ],
