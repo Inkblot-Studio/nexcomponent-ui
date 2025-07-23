@@ -1,7 +1,3 @@
-// Main styles file for NexComponent UI Library
-// This file imports all component styles
-
-// Import all component styles
 @import '../components/NexAlert/NexAlert.module.scss';
 @import '../components/NexButton/NexButton.scss';
 @import '../components/NexCard/NexCard.module.scss';
@@ -14,10 +10,16 @@
 @import '../components/NexLoader/NexLoader.scss';
 @import '../components/NexModal/NexModal.scss';
 @import '../components/NexNav/NexNav.scss';
+@import '../components/NexNav/components/NavItem/NavItem.scss';
+@import '../components/NexNav/components/ThemeToggle/ThemeToggle.scss';
+@import '../components/NexNav/components/LanguageSwitcher/LanguageSwitcher.scss';
+@import '../components/NexNav/components/UserMenu/UserMenu.scss';
+@import '../components/NexNav/components/MobileNav/MobileNav.scss';
 @import '../components/NexFooter/NexFooter.scss';
 @import '../components/NexSeparator/NexSeparator.scss';
 @import '../components/NexVersion/NexVersion.scss';
-
-// Import utility styles
 @import '../utils/tokens.scss';
-@import '../utils/mixin.scss'; 
+@import '../utils/mixin.scss';
+
+/* Main styles file for NexComponent UI Library */
+/* This file imports all component styles */ 
