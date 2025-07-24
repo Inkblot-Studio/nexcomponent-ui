@@ -162,19 +162,25 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
         }
       }
       
-      // Apply condensation rules
+      // Apply condensation rules - disable compression for less than 3 items
       let finalVisibleCount = visibleCount;
       
-      if (navItems.length > 3) {
-        finalVisibleCount = Math.min(finalVisibleCount, 3);
-      }
-      
-      if (containerWidth <= 600) {
-        finalVisibleCount = Math.min(finalVisibleCount, 2);
-      }
-      
-      if (containerWidth <= 400) {
-        finalVisibleCount = Math.min(finalVisibleCount, 1);
+      // Only apply condensation if there are 3 or more nav items
+      if (navItems.length >= 3) {
+        if (navItems.length > 3) {
+          finalVisibleCount = Math.min(finalVisibleCount, 3);
+        }
+        
+        if (containerWidth <= 600) {
+          finalVisibleCount = Math.min(finalVisibleCount, 2);
+        }
+        
+        if (containerWidth <= 400) {
+          finalVisibleCount = Math.min(finalVisibleCount, 1);
+        }
+      } else {
+        // For less than 3 items, show all items without compression
+        finalVisibleCount = navItems.length;
       }
       
       finalVisibleCount = Math.max(1, finalVisibleCount);
@@ -344,20 +350,20 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
             {/* More dropdown menu */}
             <AnimatePresence>
               {isMoreOpen && (
-                <motion.div
-                  className="nex-nav-dropdown"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
-                    backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
-                    WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
-                    borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
-                    boxShadow: isAtTop 
-                      ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                      : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
-                  }}
+                            <motion.div
+              className="nex-nav-dropdown"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                background: isAtTop ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
+                WebkitBackdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
+                borderColor: isAtTop ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+                boxShadow: isAtTop 
+                  ? '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+                  : '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ 
                     duration: 0,

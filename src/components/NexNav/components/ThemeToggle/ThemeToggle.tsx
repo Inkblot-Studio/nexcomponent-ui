@@ -59,8 +59,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     },
     hover: {
       scale: 1.02,
-      backgroundColor: "rgba(255, 255, 255, 0.08)",
-      borderColor: "rgba(255, 255, 255, 0.15)",
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+      borderColor: "rgba(255, 255, 255, 0.25)",
       transition: { 
         duration: 0.2, 
         ease: [0.4, 0, 0.2, 1]

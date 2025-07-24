@@ -26,15 +26,15 @@
     padding: 0;
     cursor: pointer;
     
-    /* Enhanced Ultra Dense Frosted Glass Design */
+    /* Enhanced Crisp Glass Design */
     background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--nex-radius-full);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.15),
       0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.4),
       inset 0 -1px 0 rgba(255, 255, 255, 0.2);
     
@@ -48,8 +48,8 @@
     /* Hover State - Subtle glassmorphic enhancement */
     &:hover {
       background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
       border-color: rgba(255, 255, 255, 0.15);
     }
     
@@ -58,15 +58,15 @@
       outline: 2px solid var(--nex-signature);
       outline-offset: 2px;
       background: rgba(255, 24, 1, 0.1);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
     }
     
     /* Active State - Signature immersion */
     &:active {
       background: rgba(255, 24, 1, 0.15);
-      backdrop-filter: blur(28px) saturate(220%);
-      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      backdrop-filter: blur(24px) saturate(220%);
+      -webkit-backdrop-filter: blur(24px) saturate(220%);
       border-color: rgba(255, 24, 1, 0.2);
     }
   }
@@ -305,23 +305,23 @@
 [data-theme="dark"] .nex-user-menu {
   .nex-user-menu-trigger {
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
       0 4px 16px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       inset 0 -1px 0 rgba(255, 255, 255, 0.1);
     
     &:hover {
       background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(56px) saturate(320%);
-      -webkit-backdrop-filter: blur(56px) saturate(320%);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
       border-color: rgba(255, 255, 255, 0.2);
       box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.5),
         0 6px 20px rgba(0, 0, 0, 0.4),
+        0 3px 10px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.25),
         inset 0 -1px 0 rgba(255, 255, 255, 0.15);
     }
@@ -367,23 +367,23 @@
 [data-theme="dark"][data-theme-variant="black-glass"] .nex-user-menu {
   .nex-user-menu-trigger {
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.5),
       0 4px 16px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.25),
       inset 0 -1px 0 rgba(255, 255, 255, 0.15);
     
     &:hover {
       background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(56px) saturate(320%);
-      -webkit-backdrop-filter: blur(56px) saturate(320%);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
       border-color: rgba(255, 255, 255, 0.25);
       box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.6),
         0 6px 20px rgba(0, 0, 0, 0.5),
+        0 3px 10px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
     }

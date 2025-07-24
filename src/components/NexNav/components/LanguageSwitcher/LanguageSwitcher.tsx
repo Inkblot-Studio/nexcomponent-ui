@@ -186,8 +186,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     if (isDarkMode) {
       if (isBlackGlass) {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.08)',
-          borderColor: 'rgba(255, 255, 255, 0.12)',
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.15)',
+          borderColor: 'rgba(255, 255, 255, 0.35)',
           scale: 1.01,
           transform: 'translateY(-1px)',
           transition: { 
@@ -197,8 +197,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         };
       } else {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.08)',
-          borderColor: 'rgba(255, 255, 255, 0.12)',
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.3)',
           scale: 1.01,
           transform: 'translateY(-1px)',
           transition: { 
@@ -209,8 +209,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
       }
     } else {
       return {
-        backgroundColor: isAtTop ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.12)',
-        borderColor: 'rgba(255, 255, 255, 0.45)',
+        backgroundColor: isAtTop ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.25)',
+        borderColor: 'rgba(255, 255, 255, 0.55)',
         scale: 1.01,
         transform: 'translateY(-1px)',
         transition: { 

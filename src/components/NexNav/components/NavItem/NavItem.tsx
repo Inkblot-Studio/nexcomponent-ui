@@ -206,13 +206,13 @@ const NavItem: React.FC<NavItemProps> = ({
             animate={{ 
               opacity: 1, 
               y: 0,
-              background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
-              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+              background: isAtTop ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
+              WebkitBackdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
+              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.2)',
               boxShadow: isAtTop 
-                ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
+                ? '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+                : '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
             }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ 

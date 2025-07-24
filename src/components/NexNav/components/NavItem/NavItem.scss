@@ -51,46 +51,46 @@
   will-change: transform, opacity, background-color, border-color, box-shadow;
 
   /* ================================
-     🎯 DEFAULT & HOVER STATES - Conditional Frosted Glass
+     🎯 DEFAULT & HOVER STATES - Crisp Glass Effect
      ================================ */
 
-  /* When nav is at top - show ultra dense frosting background by default */
+  /* When nav is at top - show crisp glass background by default */
   .nex-nav:not(.not-at-top) & {
     background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.15),
       0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.4),
       inset 0 -1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  /* When nav is at top - enhanced ultra dense frosting on hover */
+  /* When nav is at top - enhanced crisp glass on hover */
   .nex-nav:not(.not-at-top) &:hover:not(.disabled) {
     background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(56px) saturate(320%);
-    -webkit-backdrop-filter: blur(56px) saturate(320%);
-    border-color: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.2),
       0 6px 20px rgba(0, 0, 0, 0.15),
+      0 3px 10px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.5),
       inset 0 -1px 0 rgba(255, 255, 255, 0.3);
     transform: translateY(-1px);
   }
 
-  /* When nav is not at top - transparent by default, background on hover */
+  /* When nav is not at top - transparent by default, crisp glass on hover */
   .nex-nav.not-at-top &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.25);
     box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      0 2px 8px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transform: translateY(-1px);
   }
 
@@ -98,8 +98,8 @@
     outline: 2px solid var(--nex-signature);
     outline-offset: 2px;
     background: rgba(255, 24, 1, 0.12);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     border-color: rgba(255, 24, 1, 0.2);
     box-shadow: 
       0 4px 20px rgba(255, 24, 1, 0.15),
@@ -108,8 +108,8 @@
 
   &:active:not(.disabled) {
     background: rgba(255, 24, 1, 0.18);
-    backdrop-filter: blur(32px) saturate(240%);
-    -webkit-backdrop-filter: blur(32px) saturate(240%);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
     border-color: rgba(255, 24, 1, 0.25);
     transform: translateY(0px);
     box-shadow: 
@@ -235,8 +235,8 @@
     height: auto;
     padding: 2px 6px;
     background: rgba(255, 24, 1, 0.1);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
     color: var(--nex-signature);
     border-radius: var(--nex-radius-sm);
     font-size: var(--nex-font-size-xs);
@@ -282,14 +282,14 @@
   }
 
   &.dropdown-open {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
-    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
       0 6px 20px rgba(0, 0, 0, 0.12),
       0 3px 10px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
     
     .nex-nav-item-chevron {
       opacity: 1;
@@ -297,22 +297,22 @@
     }
   }
 
-  /* Enhanced ultra dense frosting for dropdown-open when at top */
+  /* Enhanced crisp glass for dropdown-open when at top */
   .nex-nav:not(.not-at-top) &.dropdown-open {
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(64px) saturate(340%);
-    -webkit-backdrop-filter: blur(64px) saturate(340%);
-    border-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border-color: rgba(255, 255, 255, 0.45);
     box-shadow: 
-      0 16px 48px rgba(0, 0, 0, 0.25),
-      0 8px 24px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+      0 8px 24px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.3);
   }
 }
 
 /* ================================
-   📋 DROPDOWN CONTAINER - Glassmorphic
+   📋 DROPDOWN CONTAINER - Crisp Glass Effect
    ================================ */
 
 .nex-nav-dropdown {
@@ -322,17 +322,18 @@
   min-width: 220px;
   max-width: 320px;
   
-  /* Advanced Glassmorphic Design */
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  /* Crisp Glassmorphic Design */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--nex-radius-lg);
   
-
-  
   /* Subtle shadow for depth */
-  box-shadow: none;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   
   /* Layout */
   z-index: var(--nex-z-index-popover);
@@ -340,12 +341,6 @@
   
   /* Ensure dropdown appears above other elements */
   isolation: isolate;
-  
-  /* No shimmer effect for dropdowns */
-  
-
-  
-
 }
 
 .nex-nav-dropdown-list {
@@ -358,7 +353,7 @@
 }
 
 /* ================================
-   📋 SUB-ITEM STYLING - Glassmorphic
+   📋 SUB-ITEM STYLING - Crisp Glass Effect
    ================================ */
 
 .nex-nav-sub-item {
@@ -392,16 +387,16 @@
   
   /* Hover State - Subtle glassmorphic enhancement */
   &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   /* Focus State */
   &:focus-visible {
     outline: 2px solid var(--nex-signature);
     outline-offset: -2px;
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
   }
   
   &.disabled {
@@ -520,8 +515,8 @@
   height: auto;
   padding: 2px 6px;
   background: rgba(255, 24, 1, 0.1);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   color: var(--nex-signature);
   border-radius: var(--nex-radius-sm);
   font-size: var(--nex-font-size-xs);
@@ -620,30 +615,30 @@
    🌒 DARK MODE CONDITIONAL STYLES
    ================================ */
 
-/* Dark theme - when nav is at top (black limo glass) */
+/* Dark theme - when nav is at top (crisp dark glass) */
 [data-theme="dark"] .nex-nav:not(.not-at-top) .nex-nav-item {
   background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(48px) saturate(300%);
-  -webkit-backdrop-filter: blur(48px) saturate(300%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
-}
-
-/* Black glass theme - when nav is at top (ultra black limo glass) */
-[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) .nex-nav-item {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(48px) saturate(300%);
-  -webkit-backdrop-filter: blur(48px) saturate(300%);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Black glass theme - when nav is at top (crisp ultra dark glass) */
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) .nex-nav-item {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* ================================
@@ -656,22 +651,12 @@
   border: 1px solid transparent;
   box-shadow: none;
   
-  &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.2),
-      0 2px 8px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
-  }
+  /* Removed CSS hover styles to prevent conflicts with Framer Motion animations */
   
   &:focus-visible:not(.disabled) {
     background: rgba(255, 24, 1, 0.15);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     border: 1px solid rgba(255, 24, 1, 0.3);
     box-shadow: 
       0 4px 20px rgba(255, 24, 1, 0.2),
@@ -680,8 +665,8 @@
   
   &:active:not(.disabled) {
     background: rgba(255, 24, 1, 0.22);
-    backdrop-filter: blur(32px) saturate(240%);
-    -webkit-backdrop-filter: blur(32px) saturate(240%);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
     border: 1px solid rgba(255, 24, 1, 0.4);
     transform: translateY(0px);
     box-shadow: 
@@ -694,48 +679,52 @@
   }
   
   &.dropdown-open {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 
       0 6px 20px rgba(0, 0, 0, 0.25),
       0 3px 10px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 
-  /* Enhanced black limo glass for dropdown-open when at top (dark mode) */
+  /* Enhanced crisp dark glass for dropdown-open when at top (dark mode) */
   [data-theme="dark"] .nex-nav:not(.not-at-top) &.dropdown-open {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(64px) saturate(340%);
-    -webkit-backdrop-filter: blur(64px) saturate(340%);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
-      0 16px 48px rgba(0, 0, 0, 0.6),
-      0 8px 24px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.25);
   }
 }
 
 [data-theme="dark"] .nex-nav-dropdown {
-  background: rgba(26, 31, 54, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: none;
-  
-  /* No shimmer effect for dark mode dropdowns */
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 [data-theme="dark"] .nex-nav-sub-item {
   color: var(--nex-font-color);
   
   &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.04);
-    /* Removed backdrop-filter to prevent flickering */
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
   }
   
   &.disabled {
@@ -753,21 +742,12 @@
   border: 1px solid transparent;
   box-shadow: none;
   
-  &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.1);
-    /* Removed backdrop-filter to prevent twitching */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-  }
+  /* Removed CSS hover styles to prevent conflicts with Framer Motion animations */
   
   &:focus-visible:not(.disabled) {
     background: rgba(255, 24, 1, 0.18);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     border: 1px solid rgba(255, 24, 1, 0.35);
     box-shadow: 
       0 4px 20px rgba(255, 24, 1, 0.25),
@@ -776,8 +756,8 @@
   
   &:active:not(.disabled) {
     background: rgba(255, 24, 1, 0.25);
-    backdrop-filter: blur(32px) saturate(240%);
-    -webkit-backdrop-filter: blur(32px) saturate(240%);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
     border: 1px solid rgba(255, 24, 1, 0.45);
     transform: translateY(0px);
     box-shadow: 
@@ -786,56 +766,56 @@
   }
   
   &.dropdown-open {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
-    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-color: rgba(255, 255, 255, 0.25);
     box-shadow: 
       0 6px 20px rgba(0, 0, 0, 0.4),
       0 3px 10px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
-  /* Enhanced ultra black limo glass for dropdown-open when at top (black glass theme) */
+  /* Enhanced crisp ultra dark glass for dropdown-open when at top (black glass theme) */
   [data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) &.dropdown-open {
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(64px) saturate(340%);
-    -webkit-backdrop-filter: blur(64px) saturate(340%);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(24px) saturate(220%);
+    -webkit-backdrop-filter: blur(24px) saturate(220%);
+    border-color: rgba(255, 255, 255, 0.35);
     box-shadow: 
-      0 16px 48px rgba(0, 0, 0, 0.7),
-      0 8px 24px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.3);
   }
 }
-
-
 
 /* ================================
    🌑 BLACK GLASS DROPDOWN - NOT AT TOP
    ================================ */
 
 .nex-nav--black-glass.not-at-top .nex-nav-dropdown {
-  background: rgba(0, 0, 0, 0.85) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: none !important;
-  
-  /* No shimmer effect for black glass dropdowns */
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
 .nex-nav--black-glass.not-at-top .nex-nav-sub-item {
   color: rgba(255, 255, 255, 0.95) !important;
   
   &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.12) !important;
-    /* Removed backdrop-filter to prevent twitching */
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
   }
   
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
   }
 }
 
@@ -843,12 +823,13 @@
   color: rgba(255, 255, 255, 0.9);
   
   &:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.08);
-    /* Removed backdrop-filter to prevent twitching */
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
   }
   
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.25);
   }
 }
 
