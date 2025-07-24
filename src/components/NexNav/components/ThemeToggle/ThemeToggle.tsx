@@ -35,6 +35,76 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     }
   };
 
+  // Get initial background state based on theme and position
+  const getInitialBackground = () => {
+    if (isDark) {
+      // Check if black glass theme is active
+      const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
+      return isAtTop ? (isBlackGlass ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.4)') : 'transparent';
+    } else {
+      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'transparent';
+    }
+  };
+
+  // Enterprise-level hover animations with icon emphasis
+  const hoverVariants = {
+    idle: {
+      scale: 1,
+      backgroundColor: getInitialBackground(),
+      borderColor: "rgba(255, 255, 255, 0.12)",
+      transition: { 
+        duration: 0.2, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    hover: {
+      scale: 1.02,
+      backgroundColor: "rgba(255, 255, 255, 0.08)",
+      borderColor: "rgba(255, 255, 255, 0.15)",
+      transition: { 
+        duration: 0.2, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    tap: {
+      scale: 0.98,
+      backgroundColor: "rgba(255, 24, 1, 0.08)",
+      borderColor: "rgba(255, 24, 1, 0.12)",
+      transition: { 
+        duration: 0.15, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  // Icon-specific hover animations for enterprise feel
+  const iconHoverVariants = {
+    idle: {
+      scale: 1,
+      filter: "brightness(1)",
+      transition: { 
+        duration: 0.2, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    hover: {
+      scale: 1.1,
+      filter: "brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))",
+      transition: { 
+        duration: 0.2, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    tap: {
+      scale: 0.95,
+      filter: "brightness(1.1)",
+      transition: { 
+        duration: 0.15, 
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
   return (
     <motion.button
       className={`nex-theme-toggle ${className}`}
@@ -45,77 +115,91 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       tabIndex={0}
       disabled={isAnimating}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      whileHover={{
-        transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
-      }}
-      whileTap={{
-        transition: { duration: 0.08, ease: [0.4, 0, 0.2, 1] }
-      }}
+      initial="idle"
+      whileHover="hover"
+      whileTap="tap"
+      variants={hoverVariants}
       whileFocus={{
         outline: "2px solid var(--nex-signature)",
         outlineOffset: "2px",
-        transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] }
+        transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
       }}
     >
-      {/* Icon container */}
+      {/* Icon container with enterprise-level hover emphasis */}
       <motion.div
         className="nex-theme-toggle__icon-container"
         animate={{
           rotate: isDark ? 180 : 0
         }}
+        variants={iconHoverVariants}
+        initial="idle"
+        whileHover="hover"
+        whileTap="tap"
         transition={{
           type: "spring",
-          stiffness: 600,
-          damping: 25,
-          mass: 0.6,
+          stiffness: 400,
+          damping: 30,
+          mass: 0.8,
           restDelta: 0.001
         }}
       >
-        {/* Theme icon */}
+        {/* Theme icon with refined transitions */}
         <AnimatePresence mode="wait">
           {!isDark ? (
-            <motion.div
-              key="sun"
-              className="nex-theme-toggle__icon nex-theme-toggle__icon--sun"
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: 90 }}
-              transition={{
-                duration: 0.12,
-                ease: [0.4, 0, 0.2, 1]
-              }}
-            >
-              <Sun size={16} />
-            </motion.div>
+                         <motion.div
+               key="sun"
+               className="nex-theme-toggle__icon nex-theme-toggle__icon--sun"
+               initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
+               animate={{ opacity: 1, scale: 1, rotate: 0 }}
+               exit={{ opacity: 0, scale: 0.8, rotate: 15 }}
+               transition={{
+                 duration: 0.2,
+                 ease: [0.4, 0, 0.2, 1],
+                 scale: { duration: 0.15 }
+               }}
+               style={{
+                 color: '#fbbf24',
+                 filter: 'drop-shadow(0 0 4px rgba(251, 191, 36, 0.3))'
+               }}
+             >
+               <Sun size={16} />
+             </motion.div>
           ) : (
-            <motion.div
-              key="moon"
-              className="nex-theme-toggle__icon nex-theme-toggle__icon--moon"
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: 90 }}
-              transition={{
-                duration: 0.12,
-                ease: [0.4, 0, 0.2, 1]
-              }}
-            >
-              <Moon size={16} />
-            </motion.div>
+                         <motion.div
+               key="moon"
+               className="nex-theme-toggle__icon nex-theme-toggle__icon--moon"
+               initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
+               animate={{ opacity: 1, scale: 1, rotate: 0 }}
+               exit={{ opacity: 0, scale: 0.8, rotate: 15 }}
+               transition={{
+                 duration: 0.2,
+                 ease: [0.4, 0, 0.2, 1],
+                 scale: { duration: 0.15 }
+               }}
+               style={{
+                 color: '#8b5cf6',
+                 filter: 'drop-shadow(0 0 4px rgba(139, 92, 246, 0.3))'
+               }}
+             >
+               <Moon size={16} />
+             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
 
-      {/* Ripple effect on click */}
+      {/* Subtle ripple effect on click */}
       <AnimatePresence>
         {isAnimating && (
           <motion.div
             className="nex-theme-toggle__ripple"
-            initial={{ opacity: 0.8 }}
-            animate={{ opacity: 0 }}
+            initial={{ opacity: 0.6, scale: 0.8 }}
+            animate={{ opacity: 0, scale: 1.2 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.12, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ 
+              duration: 0.3, 
+              ease: [0.4, 0, 0.2, 1],
+              scale: { duration: 0.25 }
+            }}
           />
         )}
       </AnimatePresence>

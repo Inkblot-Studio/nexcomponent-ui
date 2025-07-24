@@ -48,8 +48,8 @@
     /* Color */
     color: var(--nex-font-color);
     
-    /* Transitions */
-    transition: all var(--nex-transition-fast);
+    /* Transitions - Handled by Framer Motion */
+    /* transition: all var(--nex-transition-fast); */
     
     /* Layout */
     justify-content: center;
@@ -182,8 +182,8 @@
     border-radius: var(--nex-radius-md);
     color: var(--nex-font-color);
     
-    /* Transitions */
-    transition: all var(--nex-transition-fast);
+    /* Transitions - Handled by Framer Motion */
+    /* transition: all var(--nex-transition-fast); */
     
     /* Reset */
     outline: none;
@@ -256,8 +256,8 @@
     border: none;
     background: none;
     
-    /* Transitions */
-    transition: all var(--nex-transition-fast);
+    /* Transitions - Handled by Framer Motion */
+    /* transition: all var(--nex-transition-fast); */
     
     /* Hover State - Removed to prevent conflict with Framer Motion */
     /* &:hover {
@@ -320,22 +320,47 @@
 }
 
 /* ================================
+   🌒 DARK MODE CONDITIONAL STYLES
+   ================================ */
+
+/* Dark theme - when nav is at top (black limo glass) */
+[data-theme="dark"] .nex-nav:not(.not-at-top) .nex-lang-switcher .nex-lang-current {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(48px) saturate(300%);
+  -webkit-backdrop-filter: blur(48px) saturate(300%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Black glass theme - when nav is at top (ultra black limo glass) */
+[data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) .nex-lang-switcher .nex-lang-current {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(48px) saturate(300%);
+  -webkit-backdrop-filter: blur(48px) saturate(300%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ================================
    🌒 DARK MODE ADJUSTMENTS
    ================================ */
 
 [data-theme="dark"] .nex-lang-switcher {
   .nex-lang-current {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    /* Default state - will be overridden by conditional styles */
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
     
-    &:hover {
+    /* &:hover {
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(56px) saturate(320%);
       -webkit-backdrop-filter: blur(56px) saturate(320%);
@@ -345,7 +370,7 @@
         0 6px 20px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.25),
         inset 0 -1px 0 rgba(255, 255, 255, 0.15);
-    }
+    } */
   }
   
   .nex-lang-dropdown {
@@ -364,9 +389,9 @@
   }
   
   .nex-lang-item {
-    &:hover {
+    /* &:hover {
       background: rgba(255, 255, 255, 0.05);
-    }
+    } */
     
     &[aria-selected='true'] {
       background: rgba(255, 24, 1, 0.15);
@@ -380,17 +405,12 @@
 
 [data-theme="dark"][data-theme-variant="black-glass"] .nex-lang-switcher {
   .nex-lang-current {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    /* Default state - will be overridden by conditional styles */
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
     
-    &:hover {
+    /* &:hover {
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(56px) saturate(320%);
       -webkit-backdrop-filter: blur(56px) saturate(320%);
@@ -400,7 +420,7 @@
         0 6px 20px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-    }
+    } */
   }
   
   .nex-lang-dropdown {
@@ -421,9 +441,9 @@
   .nex-lang-item {
     color: rgba(255, 255, 255, 0.9);
     
-    &:hover {
+    /* &:hover {
       background: rgba(255, 255, 255, 0.06);
-    }
+    } */
     
     &[aria-selected='true'] {
       background: rgba(255, 24, 1, 0.15);
@@ -447,9 +467,9 @@
 .nex-nav--black-glass.not-at-top .nex-lang-item {
   color: rgba(255, 255, 255, 0.95) !important;
   
-  &:hover {
+  /* &:hover {
     background: rgba(255, 255, 255, 0.06) !important;
-  }
+  } */
   
   &[aria-selected='true'] {
     background: rgba(255, 24, 1, 0.15) !important;

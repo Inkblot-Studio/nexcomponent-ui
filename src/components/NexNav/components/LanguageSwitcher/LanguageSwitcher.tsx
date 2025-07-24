@@ -168,27 +168,55 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
   const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
 
-  // Theme-aware animation configurations
+  // Optimized subtle hover animations for language switcher
+  // Get initial background state based on theme and position
+  const getInitialBackground = () => {
+    if (isDarkMode) {
+      if (isBlackGlass) {
+        return isAtTop ? 'rgba(0, 0, 0, 0.6)' : 'transparent';
+      } else {
+        return isAtTop ? 'rgba(0, 0, 0, 0.4)' : 'transparent';
+      }
+    } else {
+      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'transparent';
+    }
+  };
+
   const getHoverAnimation = () => {
     if (isDarkMode) {
       if (isBlackGlass) {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)',
-          borderColor: 'rgba(255, 255, 255, 0.12)',
-          transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.15)',
+          scale: 1.01,
+          transform: 'translateY(-1px)',
+          transition: { 
+            duration: 0.3, 
+            ease: [0.4, 0, 0.2, 1]
+          }
         };
       } else {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.1)',
-          borderColor: 'rgba(255, 255, 255, 0.08)',
-          transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.18)',
+          scale: 1.01,
+          transform: 'translateY(-1px)',
+          transition: { 
+            duration: 0.3, 
+            ease: [0.4, 0, 0.2, 1]
+          }
         };
       }
     } else {
       return {
-        backgroundColor: isAtTop ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.85)',
-        borderColor: 'rgba(255, 255, 255, 0.15)',
-        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+        backgroundColor: isAtTop ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.12)',
+        borderColor: 'rgba(255, 255, 255, 0.45)',
+        scale: 1.01,
+        transform: 'translateY(-1px)',
+        transition: { 
+          duration: 0.3, 
+          ease: [0.4, 0, 0.2, 1]
+        }
       };
     }
   };
@@ -196,21 +224,47 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const getTapAnimation = () => {
     if (isDarkMode) {
       return {
-        backgroundColor: isAtTop ? 'rgba(255,24,1,0.12)' : 'rgba(255,24,1,0.15)',
-        borderColor: 'rgba(255, 24, 1, 0.15)',
-        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.18)' : 'rgba(255,24,1,0.22)',
+        borderColor: 'rgba(255, 24, 1, 0.25)',
+        scale: 0.98,
+        transform: 'translateY(0px)',
+        transition: { 
+          duration: 0.15, 
+          ease: [0.4, 0, 0.2, 1]
+        }
       };
     } else {
       return {
-        backgroundColor: isAtTop ? 'rgba(255,24,1,0.15)' : 'rgba(255,24,1,0.2)',
-        borderColor: 'rgba(255, 24, 1, 0.2)',
-        transition: { duration: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }
+        backgroundColor: isAtTop ? 'rgba(255,24,1,0.18)' : 'rgba(255,24,1,0.22)',
+        borderColor: 'rgba(255, 24, 1, 0.25)',
+        scale: 0.98,
+        transform: 'translateY(0px)',
+        transition: { 
+          duration: 0.15, 
+          ease: [0.4, 0, 0.2, 1]
+        }
+      };
+    }
+  };
+
+  // Subtle hover animation for dropdown items
+  const getItemHoverAnimation = () => {
+    if (isDarkMode) {
+      return {
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+        transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
+      };
+    } else {
+      return {
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
       };
     }
   };
 
   const hoverAnimation = getHoverAnimation();
   const tapAnimation = getTapAnimation();
+  const itemHoverAnimation = getItemHoverAnimation();
 
   const current = options.find(opt => opt.code === currentLocale);
   const showSearch = options.length > 5;
@@ -273,6 +327,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
             handleToggle();
           }
         }}
+        initial={{ backgroundColor: getInitialBackground() }}
+        animate={{ backgroundColor: getInitialBackground() }}
         whileHover={hoverAnimation}
         whileTap={tapAnimation}
       >
@@ -281,7 +337,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         <motion.span 
           className="nex-lang-chevron"
           animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ 
+            duration: 0.25, 
+            ease: [0.4, 0, 0.2, 1]
+          }}
           aria-hidden="true"
         >
           <ChevronDown size={14} />
@@ -292,19 +351,28 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         {open && (
           <motion.div
             className="nex-lang-dropdown"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ 
               opacity: 1,
-              background: isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)',
+              y: 0,
+              background: isDarkMode 
+                ? (isAtTop ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.85)')
+                : (isAtTop ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.7)'),
               backdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
               WebkitBackdropFilter: isAtTop ? 'blur(24px) saturate(200%)' : 'blur(24px) saturate(180%)',
-              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)',
+              borderColor: isDarkMode 
+                ? (isAtTop ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.15)')
+                : (isAtTop ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.22)'),
               boxShadow: isAtTop 
                 ? '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 : '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.13)'
             }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ 
+              duration: 0.25, 
+              ease: [0.4, 0, 0.2, 1],
+              y: { duration: 0.2 }
+            }}
             role="listbox"
           >
             {showSearch && (
@@ -337,14 +405,14 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                     onChange(option.code);
                     onClose && onClose();
                   }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    duration: 0.1,
-                    delay: index * 0.02
+                    duration: 0.15,
+                    delay: index * 0.015,
+                    y: { duration: 0.12 }
                   }}
-                  whileHover={hoverAnimation}
-                  whileTap={tapAnimation}
+                  whileHover={itemHoverAnimation}
                   style={{ cursor: 'pointer' }}
                 >
                   {/* Show only emoji OR text, not both */}

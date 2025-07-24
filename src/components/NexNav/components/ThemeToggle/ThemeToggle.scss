@@ -32,8 +32,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.4),
     inset 0 -1px 0 rgba(255, 255, 255, 0.2);
   
-  /* Transitions - Fast Animation */
-  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Transitions - Handled by Framer Motion */
+  /* transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1); */
   
 
   
@@ -103,10 +103,10 @@
   }
   
   /* ================================
-     HOVER STATES
+     HOVER STATES - Handled by Framer Motion
      ================================ */
   
-  &:hover {
+  /* &:hover {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(20px) saturate(200%);
     -webkit-backdrop-filter: blur(20px) saturate(200%);
@@ -121,7 +121,7 @@
         color: #7c3aed;
       }
     }
-  }
+  } */
   
   /* ================================
      FOCUS STATES
@@ -137,15 +137,15 @@
   }
   
   /* ================================
-     ACTIVE STATES
+     ACTIVE STATES - Handled by Framer Motion
      ================================ */
   
-  &:active {
+  /* &:active {
     background: rgba(255, 24, 1, 0.15);
     backdrop-filter: blur(20px) saturate(220%);
     -webkit-backdrop-filter: blur(20px) saturate(220%);
     border-color: rgba(255, 24, 1, 0.25);
-  }
+  } */
   
   /* ================================
      DISABLED STATE
@@ -192,21 +192,46 @@
   }
   
   /* ================================
-     DARK MODE ADAPTATIONS
+     🌒 DARK MODE CONDITIONAL STYLES
      ================================ */
   
-  [data-theme="dark"] & {
+  /* Dark theme - when nav is at top (black limo glass) */
+  [data-theme="dark"] .nex-nav:not(.not-at-top) & {
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(48px) saturate(300%);
     -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 
       0 8px 32px rgba(0, 0, 0, 0.4),
       0 4px 16px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Black glass theme - when nav is at top (ultra black limo glass) */
+  [data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) & {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(48px) saturate(300%);
+    -webkit-backdrop-filter: blur(48px) saturate(300%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  /* ================================
+     DARK MODE ADAPTATIONS
+     ================================ */
+  
+  [data-theme="dark"] & {
+    /* Default state - will be overridden by conditional styles */
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
     
-    &:hover {
+    /* &:hover {
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(56px) saturate(320%);
       -webkit-backdrop-filter: blur(56px) saturate(320%);
@@ -216,7 +241,7 @@
         0 6px 20px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.25),
         inset 0 -1px 0 rgba(255, 255, 255, 0.15);
-    }
+    } */
     
     &:focus-visible {
       background: rgba(255, 24, 1, 0.18);
@@ -228,7 +253,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
     
-    &:active {
+    /* &:active {
       background: rgba(255, 24, 1, 0.25);
       backdrop-filter: blur(32px) saturate(260%);
       -webkit-backdrop-filter: blur(32px) saturate(260%);
@@ -236,7 +261,7 @@
       box-shadow: 
         0 2px 8px rgba(255, 24, 1, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    }
+    } */
   }
 
   /* ================================
@@ -244,17 +269,12 @@
      ================================ */
 
   [data-theme="dark"][data-theme-variant="black-glass"] & {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(48px) saturate(300%);
-    -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    /* Default state - will be overridden by conditional styles */
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
     
-    &:hover {
+    /* &:hover {
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(56px) saturate(320%);
       -webkit-backdrop-filter: blur(56px) saturate(320%);
@@ -264,7 +284,7 @@
         0 6px 20px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-    }
+    } */
     
     &:focus-visible {
       background: rgba(255, 24, 1, 0.22);
@@ -276,7 +296,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
     
-    &:active {
+    /* &:active {
       background: rgba(255, 24, 1, 0.3);
       backdrop-filter: blur(32px) saturate(260%);
       -webkit-backdrop-filter: blur(32px) saturate(260%);
@@ -284,7 +304,7 @@
       box-shadow: 
         0 2px 8px rgba(255, 24, 1, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    }
+    } */
   }
   
   /* ================================
