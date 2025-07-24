@@ -169,7 +169,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
 
   // Optimized subtle hover animations for language switcher
-  // Get initial background state based on theme and position
+  // Get initial background state based on theme and position - matching nav items exactly
   const getInitialBackground = () => {
     if (isDarkMode) {
       if (isBlackGlass) {
@@ -186,8 +186,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     if (isDarkMode) {
       if (isBlackGlass) {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.12)',
-          borderColor: 'rgba(255, 255, 255, 0.15)',
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.08)',
+          borderColor: 'rgba(255, 255, 255, 0.12)',
           scale: 1.01,
           transform: 'translateY(-1px)',
           transition: { 
@@ -197,8 +197,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         };
       } else {
         return {
-          backgroundColor: isAtTop ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.12)',
-          borderColor: 'rgba(255, 255, 255, 0.18)',
+          backgroundColor: isAtTop ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.08)',
+          borderColor: 'rgba(255, 255, 255, 0.12)',
           scale: 1.01,
           transform: 'translateY(-1px)',
           transition: { 

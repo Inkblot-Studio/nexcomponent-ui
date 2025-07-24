@@ -197,28 +197,20 @@
   
   /* Dark theme - when nav is at top (black limo glass) */
   [data-theme="dark"] .nex-nav:not(.not-at-top) & {
-    background: rgba(0, 0, 0, 0.4);
+    background: transparent;
     backdrop-filter: blur(48px) saturate(300%);
     -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    box-shadow: none;
   }
   
   /* Black glass theme - when nav is at top (ultra black limo glass) */
   [data-theme="dark"][data-theme-variant="black-glass"] .nex-nav:not(.not-at-top) & {
-    background: rgba(0, 0, 0, 0.6);
+    background: transparent;
     backdrop-filter: blur(48px) saturate(300%);
     -webkit-backdrop-filter: blur(48px) saturate(300%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid transparent;
+    box-shadow: none;
   }
   
   /* ================================
