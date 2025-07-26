@@ -9,6 +9,8 @@ export interface User {
   role?: 'Admin' | 'Pro' | 'Member';
 }
 
+import { NavTranslations } from '../../NexNav.types';
+
 export interface UserMenuProps {
   user?: User | null;
   onLogout?: () => void;
@@ -35,4 +37,7 @@ export interface UserMenuProps {
   onOpen?: () => void;
   onClose?: () => void;
   theme?: 'light' | 'auto' | 'black-glass';
+  
+  // Translation support
+  translations?: NavTranslations;
 }

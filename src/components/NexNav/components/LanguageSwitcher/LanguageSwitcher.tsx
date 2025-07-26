@@ -4,6 +4,7 @@ import { useClickAway } from 'react-use';
 import { ChevronDown } from 'lucide-react';
 import './LanguageSwitcher.scss';
 import { LanguageSwitcherProps } from './LanguageSwitcher.types';
+import { getTranslations } from '../../utils/translations';
 
 const getFlagEmoji = (code: string): string => {
   const iso = code.slice(0, 2).toUpperCase();
@@ -158,8 +159,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   open = false,
   onOpen,
   onClose,
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  // Get translations with defaults
+  const t = getTranslations(translations);
   const [search, setSearch] = useState('');
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -380,7 +384,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                 className="nex-lang-search"
                 ref={searchRef}
                 type="text"
-                placeholder="Search languages..."
+                placeholder={t.searchLanguages}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label="Search language"
@@ -392,7 +396,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                   className="nex-lang-item" 
                   style={{ opacity: 0.6, cursor: 'default' }}
                 >
-                  No languages found
+                  {t.noLanguagesFound}
                 </div>
               )}
               {filtered.map((option, index) => (

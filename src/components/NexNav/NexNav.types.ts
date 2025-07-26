@@ -92,6 +92,45 @@ export type SubscriptionInfo = {
   renewalDate: string;
 };
 
+export interface NavTranslations {
+  // Navigation sections
+  navigation?: string;
+  profile?: string;
+  settings?: string;
+  language?: string;
+  
+  // User actions
+  signUp?: string;
+  signIn?: string;
+  logOut?: string;
+  alreadyHaveAccount?: string;
+  
+  // Profile section
+  viewProfile?: string;
+  endorsements?: string;
+  subscription?: string;
+  
+  // Settings section
+  activityLog?: string;
+  security?: string;
+  integrations?: string;
+  adminPanel?: string;
+  
+  // Subscription tiers
+  pro?: string;
+  free?: string;
+  
+  // Language switcher
+  searchLanguages?: string;
+  noLanguagesFound?: string;
+  
+  // Accessibility
+  userMenu?: string;
+  openMenu?: string;
+  closeMenu?: string;
+  mainNavigation?: string;
+}
+
 /**
  * Props for the NexNav component
  * 
@@ -175,4 +214,7 @@ export type NexNavProps = {
   theme?: 'light' | 'auto' | 'black-glass';
   /** Callback function called when theme changes */
   onThemeChange?: (theme: 'light' | 'black-glass') => void;
+
+  // Translation support
+  translations?: NavTranslations;
 };

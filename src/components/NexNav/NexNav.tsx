@@ -68,7 +68,8 @@ const NexNavInner: React.FC<NexNavProps> = ({
   onIntegrationsClick,
   onAdminPanelClick,
   theme = 'auto',
-  onThemeChange
+  onThemeChange,
+  translations
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -278,8 +279,8 @@ const NexNavInner: React.FC<NexNavProps> = ({
           zIndex: 'var(--nex-z-index-sticky)',
           overflow: 'visible'
         }}
-        role="banner"
-        aria-label="Main navigation"
+              role="banner"
+      aria-label={translations?.mainNavigation || "Main navigation"}
       >
         {/* Background state animation - hidden for black glass theme */}
         {theme !== 'black-glass' && currentThemeVariant !== 'black-glass' && (
@@ -346,37 +347,38 @@ const NexNavInner: React.FC<NexNavProps> = ({
           />
 
           {/* Right Section */}
-          <NavControls
-            isAuthenticated={isAuthenticated}
-            user={user}
-            onLogin={onLogin}
-            onLogout={onLogout}
-            onProfile={onProfile}
-            languageOptions={languageOptions}
-            currentLocale={locale}
-            onLocaleChange={handleLocaleChange}
-            isLanguageOpen={isLanguageOpen}
-                            onLanguageToggle={() => setIsLanguageOpen(prev => !prev)}
-            onLanguageClose={() => setIsLanguageOpen(false)}
-            isUserOpen={isUserOpen}
-            onUserToggle={() => setIsUserOpen(prev => !prev)}
-            onUserClose={() => setIsUserOpen(false)}
-            isAtTop={isAtTop}
-            endorsementCount={endorsementCount}
-            subscription={subscription}
-            onEndorsementsClick={onEndorsementsClick}
-            onSubscriptionClick={onSubscriptionClick}
-            onActivityLogClick={onActivityLogClick}
-            onSecurityClick={onSecurityClick}
-            onIntegrationsClick={onIntegrationsClick}
-            onAdminPanelClick={onAdminPanelClick}
-            theme={theme}
-          />
+                  <NavControls
+          isAuthenticated={isAuthenticated}
+          user={user}
+          onLogin={onLogin}
+          onLogout={onLogout}
+          onProfile={onProfile}
+          languageOptions={languageOptions}
+          currentLocale={locale}
+          onLocaleChange={handleLocaleChange}
+          isLanguageOpen={isLanguageOpen}
+          onLanguageToggle={() => setIsLanguageOpen(prev => !prev)}
+          onLanguageClose={() => setIsLanguageOpen(false)}
+          isUserOpen={isUserOpen}
+          onUserToggle={() => setIsUserOpen(prev => !prev)}
+          onUserClose={() => setIsUserOpen(false)}
+          isAtTop={isAtTop}
+          endorsementCount={endorsementCount}
+          subscription={subscription}
+          onEndorsementsClick={onEndorsementsClick}
+          onSubscriptionClick={onSubscriptionClick}
+          onActivityLogClick={onActivityLogClick}
+          onSecurityClick={onSecurityClick}
+          onIntegrationsClick={onIntegrationsClick}
+          onAdminPanelClick={onAdminPanelClick}
+          theme={theme}
+          translations={translations}
+        />
             
           {/* Hamburger Button with Enterprise Animations */}
           <motion.button
             className="nex-nav-burger-btn"
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={isMenuOpen ? (translations?.closeMenu || 'Close menu') : (translations?.openMenu || 'Open menu')}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav-menu"
             onClick={toggleMenu}
@@ -430,28 +432,29 @@ const NexNavInner: React.FC<NexNavProps> = ({
       {/* Mobile Navigation with Optimized Animations */}
       <AnimatePresence mode="wait">
         {isMenuOpen && (
-          <MobileNav
-            isOpen={isMenuOpen}
-            onClose={closeMenu}
-            navItems={navItems}
-            user={user}
-            isAuthenticated={isAuthenticated}
-            onLogin={onLogin}
-            onLogout={onLogout}
-            onProfile={onProfile}
-            currentLocale={locale}
-            languageOptions={languageOptions}
-            onLocaleChange={handleLocaleChange}
-            endorsementCount={endorsementCount}
-            subscription={subscription}
-            onEndorsementsClick={onEndorsementsClick}
-            onSubscriptionClick={onSubscriptionClick}
-            onActivityLogClick={onActivityLogClick}
-            onSecurityClick={onSecurityClick}
-            onIntegrationsClick={onIntegrationsClick}
-            onAdminPanelClick={onAdminPanelClick}
-            theme={theme}
-          />
+                  <MobileNav
+          isOpen={isMenuOpen}
+          onClose={closeMenu}
+          navItems={navItems}
+          user={user}
+          isAuthenticated={isAuthenticated}
+          onLogin={onLogin}
+          onLogout={onLogout}
+          onProfile={onProfile}
+          currentLocale={locale}
+          languageOptions={languageOptions}
+          onLocaleChange={handleLocaleChange}
+          endorsementCount={endorsementCount}
+          subscription={subscription}
+          onEndorsementsClick={onEndorsementsClick}
+          onSubscriptionClick={onSubscriptionClick}
+          onActivityLogClick={onActivityLogClick}
+          onSecurityClick={onSecurityClick}
+          onIntegrationsClick={onIntegrationsClick}
+          onAdminPanelClick={onAdminPanelClick}
+          theme={theme}
+          translations={translations}
+        />
         )}
       </AnimatePresence>
 

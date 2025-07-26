@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import './UserMenu.scss';
 import { UserMenuProps } from './UserMenu.types';
+import { getTranslations } from '../../utils/translations';
 
 const UserMenu: React.FC<UserMenuProps> = ({
   user,
@@ -29,8 +30,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
   open = false,
   onOpen,
   onClose,
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  // Get translations with defaults
+  const t = getTranslations(translations);
   const ref = useRef(null);
 
   // Optimized animation configurations
@@ -80,7 +84,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         onClick={handleToggle}
         aria-haspopup="true"
         aria-expanded={open}
-        aria-label="User menu"
+        aria-label={t.userMenu}
       >
         {user?.avatarUrl ? (
           <img
@@ -143,7 +147,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Profile
+                    {t.profile}
                   </motion.li>
                 )}
 
@@ -159,7 +163,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Endorsements ({endorsementCount ?? 0})
+                    {t.endorsements} ({endorsementCount ?? 0})
                   </motion.li>
                 )}
 
@@ -175,7 +179,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Subscription: {subscription.tier}
+                    {t.subscription}: {subscription.tier === 'pro' ? t.pro : t.free}
                   </motion.li>
                 )}
 
@@ -190,7 +194,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Activity Log
+                    {t.activityLog}
                   </motion.li>
                 )}
 
@@ -205,7 +209,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Security Settings
+                    {t.security}
                   </motion.li>
                 )}
 
@@ -220,7 +224,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Manage Integrations
+                    {t.integrations}
                   </motion.li>
                 )}
 
@@ -235,7 +239,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={tapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Admin Panel
+                    {t.adminPanel}
                   </motion.li>
                 )}
 
@@ -250,7 +254,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     whileTap={dangerTapAnimation}
                     style={{ cursor: 'pointer' }}
                   >
-                    Log out
+                    {t.logOut}
                   </motion.li>
                 )}
               </>
@@ -271,7 +275,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  Sign up to personalize
+                  {t.signUp}
                 </motion.div>
               </motion.li>
             )}

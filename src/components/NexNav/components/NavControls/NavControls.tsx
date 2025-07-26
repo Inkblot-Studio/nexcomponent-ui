@@ -4,7 +4,7 @@ import { LogIn, Sparkles } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import UserMenu from '../UserMenu';
 import ThemeToggle from '../ThemeToggle';
-import type { NexNavProps } from '../../NexNav.types';
+import type { NexNavProps, NavTranslations } from '../../NexNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS } from '../../../../utils/animationConfig';
 
 interface NavControlsProps {
@@ -32,6 +32,9 @@ interface NavControlsProps {
   onIntegrationsClick?: () => void;
   onAdminPanelClick?: () => void;
   theme?: 'light' | 'auto' | 'black-glass';
+  
+  // Translation support
+  translations?: NavTranslations;
 }
 
 const NavControls: React.FC<NavControlsProps> = ({
@@ -58,7 +61,8 @@ const NavControls: React.FC<NavControlsProps> = ({
   onSecurityClick,
   onIntegrationsClick,
   onAdminPanelClick,
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
   const { timing, spring } = useAnimationConfig();
 
@@ -89,6 +93,7 @@ const NavControls: React.FC<NavControlsProps> = ({
           onOpen={onLanguageToggle}
           onClose={onLanguageClose}
           theme={theme}
+          translations={translations}
         />
       </motion.div>
       
@@ -111,6 +116,7 @@ const NavControls: React.FC<NavControlsProps> = ({
             onOpen={onUserToggle}
             onClose={onUserClose}
             theme={theme}
+            translations={translations}
           />
         </motion.div>
       ) : (
@@ -132,7 +138,7 @@ const NavControls: React.FC<NavControlsProps> = ({
           transition={spring.responsive}
         >
           <LogIn size={16} aria-hidden="true" />
-          <span>Sign In</span>
+          <span>{translations?.signIn || 'Sign In'}</span>
         </motion.button>
       )}
     </motion.div>

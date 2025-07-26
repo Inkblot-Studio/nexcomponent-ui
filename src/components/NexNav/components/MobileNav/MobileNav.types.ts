@@ -1,5 +1,5 @@
 import { LanguageOption } from '../LanguageSwitcher/LanguageSwitcher.types';
-import { NavItem } from '../../NexNav.types';
+import { NavItem, NavTranslations } from '../../NexNav.types';
 
 export type MobileNavProps = {
   isOpen: boolean;
@@ -33,4 +33,7 @@ export type MobileNavProps = {
 
   // Theme customization
   theme?: 'light' | 'auto' | 'black-glass';
+  
+  // Translation support
+  translations?: NavTranslations;
 };

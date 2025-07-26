@@ -19,6 +19,7 @@ import './MobileNav.scss';
 import { MobileNavProps } from './MobileNav.types';
 import { useAnimationConfig, ANIMATION_VARIANTS, COLOR_SCHEMES, PERFORMANCE_CONFIG } from '../../../../utils/animationConfig';
 import ThemeToggle from '../ThemeToggle';
+import { getTranslations } from '../../utils/translations';
 
 const MobileNav: React.FC<MobileNavProps> = ({
   isOpen,
@@ -40,8 +41,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
   onSecurityClick,
   onIntegrationsClick,
   onAdminPanelClick,
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  // Get translations with defaults
+  const t = getTranslations(translations);
   // Check for black glass theme variant
   const [currentThemeVariant, setCurrentThemeVariant] = useState<string | null>(null);
 
@@ -248,13 +252,13 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   transition={{ ...timing.medium, delay: 0.1 }}
                 >
                   <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
-                  <motion.div 
-                    className="nex-mobile-nav-user-tier"
-                    onClick={onSubscriptionClick}
-                    transition={spring.fast}
-                  >
-                    {subscription?.tier === 'pro' ? 'Pro' : 'Free'}
-                  </motion.div>
+                                     <motion.div 
+                     className="nex-mobile-nav-user-tier"
+                     onClick={onSubscriptionClick}
+                     transition={spring.fast}
+                   >
+                     {subscription?.tier === 'pro' ? t.pro : t.free}
+                   </motion.div>
                 </motion.div>
               </>
             ) : (
@@ -265,32 +269,32 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 animate="animate"
                 transition={{ ...timing.medium, delay: 0.15 }}
               >
-                <motion.button
-                  className="nex-mobile-nav-signup-btn"
-                  onClick={onLogin}
-                              whileHover={{
-              backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
-              borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
-              boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)"
-                  }}
-                  whileTap={{
-                    backgroundColor: "rgba(255, 24, 1, 0.15)",
-                    borderColor: "rgba(255, 24, 1, 0.2)"
-                  }}
-                  transition={spring.responsive}
-                >
-                  Sign Up
-                </motion.button>
-                <motion.button 
-                  className="nex-mobile-nav-login-link"
-                  onClick={onLogin}
-                  whileHover={{ 
-                    opacity: 0.8
-                  }}
-                  transition={spring.fast}
-                >
-                  Already have an account? Sign in
-                </motion.button>
+                                 <motion.button
+                   className="nex-mobile-nav-signup-btn"
+                   onClick={onLogin}
+                               whileHover={{
+               backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
+               borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
+               boxShadow: isBlackGlass ? "0 4px 15px rgba(0, 0, 0, 0.2)" : "0 4px 15px rgba(0, 0, 0, 0.1)"
+                   }}
+                   whileTap={{
+                     backgroundColor: "rgba(255, 24, 1, 0.15)",
+                     borderColor: "rgba(255, 24, 1, 0.2)"
+                   }}
+                   transition={spring.responsive}
+                 >
+                   {t.signUp}
+                 </motion.button>
+                 <motion.button 
+                   className="nex-mobile-nav-login-link"
+                   onClick={onLogin}
+                   whileHover={{ 
+                     opacity: 0.8
+                   }}
+                   transition={spring.fast}
+                 >
+                   {t.alreadyHaveAccount}
+                 </motion.button>
               </motion.div>
             )}
             
@@ -320,12 +324,12 @@ const MobileNav: React.FC<MobileNavProps> = ({
             className="nex-mobile-nav-section"
             variants={variants.mobileNav.navItem}
           >
-            <motion.h4 
-              className="nex-mobile-nav-section-title"
-              variants={variants.mobileNav.sectionTitle}
-            >
-              Navigation
-            </motion.h4>
+                         <motion.h4 
+               className="nex-mobile-nav-section-title"
+               variants={variants.mobileNav.sectionTitle}
+             >
+               {t.navigation}
+             </motion.h4>
 
             {navItems.map((item, index) => (
               <motion.div 
@@ -415,12 +419,12 @@ const MobileNav: React.FC<MobileNavProps> = ({
             className="nex-mobile-nav-section"
             variants={variants.mobileNav.navItem}
           >
-            <motion.h4 
-              className="nex-mobile-nav-section-title"
-              variants={variants.mobileNav.sectionTitle}
-            >
-              Language
-            </motion.h4>
+                         <motion.h4 
+               className="nex-mobile-nav-section-title"
+               variants={variants.mobileNav.sectionTitle}
+             >
+               {t.language}
+             </motion.h4>
             <motion.div 
               className="nex-mobile-nav-item"
               onClick={handleLanguageToggle}
@@ -491,12 +495,12 @@ const MobileNav: React.FC<MobileNavProps> = ({
               className="nex-mobile-nav-section"
               variants={variants.mobileNav.navItem}
             >
-              <motion.h4 
-                className="nex-mobile-nav-section-title"
-                variants={variants.mobileNav.sectionTitle}
-              >
-                Profile
-              </motion.h4>
+                           <motion.h4 
+               className="nex-mobile-nav-section-title"
+               variants={variants.mobileNav.sectionTitle}
+             >
+               {t.profile}
+             </motion.h4>
               <motion.div 
                 style={{ marginBottom: 'var(--nex-spacing-xs)' }}
                 variants={variants.mobileNav.navItem}
@@ -510,7 +514,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   transition={spring.responsive}
                 >
                   <User className="nex-mobile-nav-icon" />
-                  <span className="nex-mobile-nav-text">Profile</span>
+                                     <span className="nex-mobile-nav-text">{t.profile}</span>
                   <motion.div
                     animate={openDropdown === 'profile' ? "open" : "closed"}
                     variants={variants.mobileNav.iconRotate}
@@ -544,7 +548,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <User className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">View Profile</span>
+                                                         <span className="nex-mobile-nav-text">{t.viewProfile}</span>
                           </motion.div>
                         )}
                         {onEndorsementsClick && endorsementCount !== undefined && (
@@ -558,7 +562,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Fingerprint className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Endorsements</span>
+                                                         <span className="nex-mobile-nav-text">{t.endorsements}</span>
                             <motion.span 
                               className="nex-mobile-nav-badge"
                               variants={variants.mobileNav.badge}
@@ -581,7 +585,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Zap className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Subscription</span>
+                                                         <span className="nex-mobile-nav-text">{t.subscription}</span>
                             <motion.span 
                               className="nex-mobile-nav-badge"
                               variants={variants.mobileNav.badge}
@@ -589,7 +593,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                               animate="animate"
                               exit="exit"
                             >
-                              {subscription.tier === 'pro' ? 'Pro' : 'Free'}
+                                                             {subscription.tier === 'pro' ? t.pro : t.free}
                             </motion.span>
                           </motion.div>
                         )}
@@ -607,12 +611,12 @@ const MobileNav: React.FC<MobileNavProps> = ({
               className="nex-mobile-nav-section"
               variants={variants.mobileNav.navItem}
             >
-              <motion.h4 
-                className="nex-mobile-nav-section-title"
-                variants={variants.mobileNav.sectionTitle}
-              >
-                Settings
-              </motion.h4>
+                           <motion.h4 
+               className="nex-mobile-nav-section-title"
+               variants={variants.mobileNav.sectionTitle}
+             >
+               {t.settings}
+             </motion.h4>
               <motion.div 
                 style={{ marginBottom: 'var(--nex-spacing-xs)' }}
                 variants={variants.mobileNav.navItem}
@@ -626,7 +630,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   transition={spring.responsive}
                 >
                   <Settings className="nex-mobile-nav-icon" />
-                  <span className="nex-mobile-nav-text">Settings</span>
+                                     <span className="nex-mobile-nav-text">{t.settings}</span>
                   <motion.div
                     animate={openDropdown === 'settings' ? "open" : "closed"}
                     variants={variants.mobileNav.iconRotate}
@@ -660,7 +664,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Activity className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Activity Log</span>
+                                                         <span className="nex-mobile-nav-text">{t.activityLog}</span>
                           </motion.div>
                         )}
                         {onSecurityClick && (
@@ -674,7 +678,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Shield className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Security</span>
+                                                         <span className="nex-mobile-nav-text">{t.security}</span>
                           </motion.div>
                         )}
                         {onIntegrationsClick && (
@@ -688,7 +692,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Globe className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Integrations</span>
+                                                         <span className="nex-mobile-nav-text">{t.integrations}</span>
                           </motion.div>
                         )}
                         {onAdminPanelClick && (
@@ -702,7 +706,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                             transition={spring.responsive}
                           >
                             <Crown className="nex-mobile-nav-icon" />
-                            <span className="nex-mobile-nav-text">Admin Panel</span>
+                                                         <span className="nex-mobile-nav-text">{t.adminPanel}</span>
                           </motion.div>
                         )}
                       </motion.div>
@@ -732,7 +736,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 transition={spring.responsive}
               >
                 <LogOut className="nex-mobile-nav-icon" />
-                <span className="nex-mobile-nav-text">Log Out</span>
+                                 <span className="nex-mobile-nav-text">{t.logOut}</span>
               </motion.div>
             </motion.div>
           )}

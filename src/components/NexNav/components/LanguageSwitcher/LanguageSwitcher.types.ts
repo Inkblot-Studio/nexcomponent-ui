@@ -1,3 +1,5 @@
+import { NavTranslations } from '../../NexNav.types';
+
 export type LanguageOption = {
   code: string;
   label: string;
@@ -13,4 +15,7 @@ export type LanguageSwitcherProps = {
   onOpen?: () => void;
   onClose?: () => void;
   theme?: 'light' | 'auto' | 'black-glass';
+  
+  // Translation support
+  translations?: NavTranslations;
 };
