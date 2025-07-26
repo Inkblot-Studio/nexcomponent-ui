@@ -13,6 +13,7 @@ A modern, scalable footer component with glassmorphic styling that perfectly com
 - **Contact Form Integration**: Built-in contact form for lead generation and customer support
 - **Newsletter Signup**: Email subscription with validation and loading states
 - **Social Media Integration**: Properly sized social icons with platform-specific styling
+- **Agency Attribution**: Built-in agency credit with customizable links and text
 - **Multiple Variants**: Default, contact, and black glass layouts
 - **Responsive Design**: Mobile-first approach with adaptive grid layouts
 - **Accessibility**: WCAG compliant with reduced motion support
@@ -84,6 +85,75 @@ Comprehensive enterprise footer with multiple sections and features.
 Footer with only navigation sections, no branding.
 
 <Canvas of={NexFooterStories.SectionsOnly} />
+
+## Agency Attribution
+
+The NexFooter component includes a built-in agency attribution feature that allows you to credit your development agency or studio. This feature supports both clickable links and plain text display.
+
+### Agency Attribution Examples
+
+#### Basic Agency Attribution
+<Canvas of={NexFooterStories.WithAgencyAttribution} />
+
+#### Black Glass Theme with Agency Attribution
+<Canvas of={NexFooterStories.AgencyAttributionBlackGlass} />
+
+#### Agency Attribution Without Link
+<Canvas of={NexFooterStories.AgencyAttributionNoLink} />
+
+#### Custom Agency Attribution Text
+<Canvas of={NexFooterStories.AgencyAttributionWithCustomTranslation} />
+
+### Agency Attribution Configuration
+
+The `agencyAttribution` prop accepts the following configuration:
+
+```tsx
+interface AgencyAttribution {
+  /** Website URL for the agency link */
+  websiteUrl?: string;
+  /** Whether to open the link in a new tab */
+  openInNewTab?: boolean;
+}
+```
+
+#### Configuration Options
+
+- **`websiteUrl`** (optional): The URL that the agency attribution text will link to
+  - If provided: The attribution becomes clickable with hover effects
+  - If not provided: The attribution displays as plain text
+  - Example: `'https://inkblotstudio.com'`
+
+- **`openInNewTab`** (optional): Controls link behavior
+  - `true` (default): Opens the link in a new tab/window
+  - `false`: Opens the link in the same tab
+  - Only applies when `websiteUrl` is provided
+
+#### Visual Appearance
+
+The agency attribution automatically adapts to the footer theme:
+
+- **Default Theme**: Semi-transparent white background with dark text
+- **Black Glass Theme**: Semi-transparent black background with light text
+- **Hover Effects**: Smooth opacity transitions when clickable
+- **Animations**: Fades in with a delay for smooth entrance
+
+#### Customizing Agency Attribution Text
+
+You can customize the agency attribution text using the `translations` prop:
+
+```tsx
+<NexFooter
+  displayName="MyApp"
+  translations={{
+    madeByInkblotStudio: 'Crafted with passion by Inkblot Studio'
+  }}
+  agencyAttribution={{
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }}
+/>
+```
 
 ## Props
 
@@ -246,5 +316,33 @@ contact={{
     { type: 'github', url: 'https://github.com/myapp' },
     { type: 'linkedin', url: 'https://linkedin.com/company/myapp' }
   ]}
+/>
+```
+
+### With Agency Attribution
+```tsx
+<NexFooter
+  displayName="MyApp"
+  tagline="Building amazing experiences"
+  agencyAttribution={{
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }}
+  // ... other props
+/>
+```
+
+### Agency Attribution with Custom Text
+```tsx
+<NexFooter
+  displayName="MyApp"
+  translations={{
+    madeByInkblotStudio: 'Crafted with passion by Inkblot Studio'
+  }}
+  agencyAttribution={{
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }}
+  // ... other props
 />
 ```

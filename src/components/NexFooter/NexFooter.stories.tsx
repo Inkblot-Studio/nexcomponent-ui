@@ -229,3 +229,79 @@ SectionsOnly.args = {
   newsletter: undefined,
   socials: undefined
 };
+
+// Agency Attribution Stories
+export const WithAgencyAttribution = Template.bind({});
+WithAgencyAttribution.args = {
+  ...Default.args,
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
+
+export const AgencyAttributionBlackGlass = Template.bind({});
+AgencyAttributionBlackGlass.args = {
+  ...Default.args,
+  theme: 'black-glass',
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
+
+export const AgencyAttributionNoLink = Template.bind({});
+AgencyAttributionNoLink.args = {
+  ...Default.args,
+  agencyAttribution: {
+    // No websiteUrl provided - shows as plain text
+  }
+};
+
+export const AgencyAttributionSameTab = Template.bind({});
+AgencyAttributionSameTab.args = {
+  ...Default.args,
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: false // Opens in same tab
+  }
+};
+
+export const AgencyAttributionWithCustomTranslation = Template.bind({});
+AgencyAttributionWithCustomTranslation.args = {
+  ...Default.args,
+  translations: {
+    madeByInkblotStudio: 'Crafted with passion by Inkblot Studio'
+  },
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
+
+export const AgencyAttributionMinimal = Template.bind({});
+AgencyAttributionMinimal.args = {
+  ...Minimal.args,
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
+
+export const AgencyAttributionContact = Template.bind({});
+AgencyAttributionContact.args = {
+  ...Contact.args,
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
+
+export const AgencyAttributionEnterprise = Template.bind({});
+AgencyAttributionEnterprise.args = {
+  ...Enterprise.args,
+  agencyAttribution: {
+    websiteUrl: 'https://inkblotstudio.com',
+    openInNewTab: true
+  }
+};
