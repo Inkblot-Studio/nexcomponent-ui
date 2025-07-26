@@ -122,6 +122,16 @@ AuthenticatedFull.args = {
     { code: 'bg', label: 'Български' },
     { code: 'cs', label: 'Čeština' },
   ],
+  onLocaleChange: (code: string) => {
+    console.log('🌐 Language changed to:', code);
+    console.log('📅 Timestamp:', new Date().toISOString());
+    console.log('🔍 Available options:', [
+      { code: 'en', label: 'English' },
+      { code: 'bg', label: 'Български' },
+      { code: 'cs', label: 'Čeština' },
+    ]);
+    alert(`🌐 Language changed to: ${code}`);
+  },
 };
 
 export const AuthenticatedMinimal = Template.bind({});
@@ -283,6 +293,18 @@ WithDropdowns.args = {
     { code: 'de', label: 'Deutsch' },
     { code: 'zh', label: '中文' },
   ],
+  onLocaleChange: (code: string) => {
+    console.log('🌐 Language changed to:', code);
+    console.log('📅 Timestamp:', new Date().toISOString());
+    console.log('🔍 Available options:', [
+      { code: 'en', label: 'English' },
+      { code: 'es', label: 'Español' },
+      { code: 'fr', label: 'Français' },
+      { code: 'de', label: 'Deutsch' },
+      { code: 'zh', label: '中文' },
+    ]);
+    alert(`🌐 Language changed to: ${code}`);
+  },
 };
 
 export const DarkMode = Template.bind({});

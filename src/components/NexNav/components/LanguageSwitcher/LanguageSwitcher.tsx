@@ -401,10 +401,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                   className="nex-lang-item"
                   role="option"
                   aria-selected={option.code === currentLocale}
-                  onClick={() => {
-                    onChange(option.code);
-                    onClose && onClose();
-                  }}
+                                          onClick={() => {
+                          onChange(option.code);
+                          onClose && onClose();
+                        }}
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 

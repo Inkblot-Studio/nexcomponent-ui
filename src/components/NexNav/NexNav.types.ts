@@ -150,6 +150,8 @@ export type NexNavProps = {
 
   /** Available language options for the language switcher */
   languageOptions: LanguageOption[];
+  /** Callback function called when language/locale changes */
+  onLocaleChange?: (code: string) => void;
 
   /** Number of endorsements for the user (displays in user menu) */
   endorsementCount?: number;

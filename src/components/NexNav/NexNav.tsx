@@ -58,6 +58,7 @@ const NexNavInner: React.FC<NexNavProps> = ({
   onLogout,
   onProfile,
   languageOptions,
+  onLocaleChange,
   subscription,
   endorsementCount,
   onEndorsementsClick,
@@ -115,7 +116,11 @@ const NexNavInner: React.FC<NexNavProps> = ({
   const handleLocaleChange = useCallback((code: string) => {
     setLocale(code);
     localStorage.setItem(LANG_KEY, code);
-  }, []);
+    // Call the onLocaleChange prop if provided
+    if (onLocaleChange) {
+      onLocaleChange(code);
+    }
+  }, [onLocaleChange]);
 
   // Memoize menu toggle handler with animation
   const toggleMenu = useCallback(() => {
@@ -351,10 +356,10 @@ const NexNavInner: React.FC<NexNavProps> = ({
             currentLocale={locale}
             onLocaleChange={handleLocaleChange}
             isLanguageOpen={isLanguageOpen}
-            onLanguageToggle={() => setIsLanguageOpen(!isLanguageOpen)}
+                            onLanguageToggle={() => setIsLanguageOpen(prev => !prev)}
             onLanguageClose={() => setIsLanguageOpen(false)}
             isUserOpen={isUserOpen}
-            onUserToggle={() => setIsUserOpen(!isUserOpen)}
+            onUserToggle={() => setIsUserOpen(prev => !prev)}
             onUserClose={() => setIsUserOpen(false)}
             isAtTop={isAtTop}
             endorsementCount={endorsementCount}
