@@ -168,13 +168,16 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       // Apply condensation rules - ensure we never show less than 1 item
       let finalVisibleCount = Math.max(1, visibleCount);
       
-      // Apply responsive limits
-      if (containerWidth <= 400) {
-        finalVisibleCount = Math.min(finalVisibleCount, 1);
-      } else if (containerWidth <= 600) {
-        finalVisibleCount = Math.min(finalVisibleCount, 2);
-      } else if (containerWidth <= 800) {
-        finalVisibleCount = Math.min(finalVisibleCount, 3);
+      // Apply responsive limits only when condensation is active
+      // This prevents hiding items when there are fewer than 3 items
+      if (shouldCondense) {
+        if (containerWidth <= 400) {
+          finalVisibleCount = Math.min(finalVisibleCount, 1);
+        } else if (containerWidth <= 600) {
+          finalVisibleCount = Math.min(finalVisibleCount, 2);
+        } else if (containerWidth <= 800) {
+          finalVisibleCount = Math.min(finalVisibleCount, 3);
+        }
       }
       
       const newVisibleItems = Array.from({ length: finalVisibleCount }, (_, i) => i);
