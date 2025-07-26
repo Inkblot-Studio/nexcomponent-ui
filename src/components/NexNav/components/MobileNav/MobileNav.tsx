@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Home, 
   Settings, 
   User, 
   LogOut, 
@@ -127,7 +126,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
   }, [isOpen]);
 
   const currentLanguage = languageOptions.find(lang => lang.code === currentLocale);
-  const hasHome = navItems.some(item => item.label.toLowerCase() === 'home');
+
 
   // Prevent body scroll when mobile nav is open
   useEffect(() => {
@@ -327,17 +326,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
             >
               Navigation
             </motion.h4>
-            {!hasHome && (
-              <motion.div 
-                className="nex-mobile-nav-item"
-                variants={variants.mobileNav.navItem}
-                whileHover={variants.interactive.navItem.hover}
-                whileTap={variants.interactive.navItem.active}
-                transition={spring.responsive}
-              >
-                <span className="nex-mobile-nav-text">Home</span>
-              </motion.div>
-            )}
+
             {navItems.map((item, index) => (
               <motion.div 
                 key={index} 
