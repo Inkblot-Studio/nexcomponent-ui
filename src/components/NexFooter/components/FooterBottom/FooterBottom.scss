@@ -139,10 +139,6 @@
   &--contact {
     &__container {
       padding: var(--nex-spacing-xl) var(--nex-spacing-lg);
-      
-      @include mobile {
-        padding: var(--nex-spacing-lg) var(--nex-spacing-md);
-      }
     }
     
     &__copyright {
