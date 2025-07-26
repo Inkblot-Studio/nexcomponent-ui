@@ -205,21 +205,21 @@ const NavItem: React.FC<NavItemProps> = ({
             initial={{ opacity: 0, y: -8 }}
             animate={{ 
               opacity: 1, 
-              y: 0,
-              background: isAtTop ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
-              WebkitBackdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
-              borderColor: isAtTop ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.2)',
-              boxShadow: isAtTop 
-                ? '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
-                : '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              y: 0
             }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ 
-              duration: 0,
+              duration: 0.2,
               ease: [0.4, 0, 0.2, 1]
             }}
-            style={{ transformOrigin: 'top center' }}
+            style={{ 
+              transformOrigin: 'top center',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(16px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+            }}
             role="menu"
             aria-label={`${label} submenu`}
 

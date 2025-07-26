@@ -134,9 +134,12 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       }
       
       // Determine if we should use condensation
-      const shouldCondense = containerWidth < 800 || navItems.length > 4;
+      // Only condense if there are 3 or more nav items AND container is small
+      // This prevents the "More" button from appearing with less than 3 items
+      const shouldCondense = navItems.length >= 3 && (containerWidth < 800 || navItems.length > 4);
       
       if (!shouldCondense) {
+        // Show all items if no condensation needed
         const newVisibleItems = Array.from({ length: navItems.length }, (_, i) => i);
         setVisibleItems(newVisibleItems);
         setLastContainerWidth(containerWidth);
@@ -162,28 +165,17 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
         }
       }
       
-      // Apply condensation rules - disable compression for less than 3 items
-      let finalVisibleCount = visibleCount;
+      // Apply condensation rules - ensure we never show less than 1 item
+      let finalVisibleCount = Math.max(1, visibleCount);
       
-      // Only apply condensation if there are 3 or more nav items
-      if (navItems.length >= 3) {
-        if (navItems.length > 3) {
-          finalVisibleCount = Math.min(finalVisibleCount, 3);
-        }
-        
-        if (containerWidth <= 600) {
-          finalVisibleCount = Math.min(finalVisibleCount, 2);
-        }
-        
-        if (containerWidth <= 400) {
-          finalVisibleCount = Math.min(finalVisibleCount, 1);
-        }
-      } else {
-        // For less than 3 items, show all items without compression
-        finalVisibleCount = navItems.length;
+      // Apply responsive limits
+      if (containerWidth <= 400) {
+        finalVisibleCount = Math.min(finalVisibleCount, 1);
+      } else if (containerWidth <= 600) {
+        finalVisibleCount = Math.min(finalVisibleCount, 2);
+      } else if (containerWidth <= 800) {
+        finalVisibleCount = Math.min(finalVisibleCount, 3);
       }
-      
-      finalVisibleCount = Math.max(1, finalVisibleCount);
       
       const newVisibleItems = Array.from({ length: finalVisibleCount }, (_, i) => i);
       
@@ -258,7 +250,8 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
     return memoizedNavItems.filter((_, index) => !visibleItems.includes(index));
   }, [memoizedNavItems, visibleItems]);
 
-  const hasOverflow = overflowNavItems.length > 0;
+  // Only show overflow if there are 3 or more nav items and we have overflow
+  const hasOverflow = navItems.length >= 3 && overflowNavItems.length > 0;
 
   return (
     <motion.ul 
@@ -268,7 +261,8 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
       ref={navListRef}
     >
       {/* Show all items initially, then filter based on calculation */}
-      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, 5) : visibleNavItems).map((item, i) => {
+      {/* For less than 3 items, always show all items */}
+      {(visibleItems.length === 0 ? memoizedNavItems.slice(0, navItems.length < 3 ? navItems.length : 5) : visibleNavItems).map((item, i) => {
         if (!item) return null; // Skip undefined items
         
         return (
@@ -350,29 +344,27 @@ const NavItems: React.FC<NavItemsProps> = ({ navItems, isAtTop, onItemClick }) =
             {/* More dropdown menu */}
             <AnimatePresence>
               {isMoreOpen && (
-                            <motion.div
-              className="nex-nav-dropdown"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ 
-                opacity: 1, 
-                y: 0,
-                background: isAtTop ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.15)',
-                backdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
-                WebkitBackdropFilter: isAtTop ? 'blur(16px) saturate(180%)' : 'blur(16px) saturate(180%)',
-                borderColor: isAtTop ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.2)',
-                boxShadow: isAtTop 
-                  ? '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
-                  : '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
-              }}
+                <motion.div
+                  className="nex-nav-dropdown"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0
+                  }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ 
-                    duration: 0,
+                    duration: 0.2,
                     ease: [0.4, 0, 0.2, 1]
                   }}
                   style={{ 
                     transformOrigin: 'top center',
                     right: 0,
-                    left: 'auto'
+                    left: 'auto',
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(16px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
                   }}
                   role="menu"
                   aria-label="More options submenu"

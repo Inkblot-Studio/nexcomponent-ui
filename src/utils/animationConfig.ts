@@ -348,7 +348,7 @@ export const ANIMATION_VARIANTS = {
     // Nav item states (removed translateX for mobile nav)
     navItem: {
       idle: {
-        backgroundColor: "transparent"
+        backgroundColor: "rgba(255, 255, 255, 0)"
       },
       hover: {
         backgroundColor: "rgba(255, 255, 255, 0.06)"

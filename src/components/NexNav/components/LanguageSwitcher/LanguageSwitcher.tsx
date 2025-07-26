@@ -173,12 +173,12 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const getInitialBackground = () => {
     if (isDarkMode) {
       if (isBlackGlass) {
-        return isAtTop ? 'rgba(0, 0, 0, 0.6)' : 'transparent';
+        return isAtTop ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0)';
       } else {
-        return isAtTop ? 'rgba(0, 0, 0, 0.4)' : 'transparent';
+        return isAtTop ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0)';
       }
     } else {
-      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'transparent';
+      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0)';
     }
   };
 

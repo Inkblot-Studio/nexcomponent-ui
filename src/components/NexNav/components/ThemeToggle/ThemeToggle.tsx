@@ -40,9 +40,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     if (isDark) {
       // Check if black glass theme is active
       const isBlackGlass = document.documentElement.getAttribute('data-theme-variant') === 'black-glass';
-      return isAtTop ? (isBlackGlass ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.4)') : 'transparent';
+      return isAtTop ? (isBlackGlass ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.4)') : 'rgba(255, 255, 255, 0)';
     } else {
-      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'transparent';
+      return isAtTop ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0)';
     }
   };
 
