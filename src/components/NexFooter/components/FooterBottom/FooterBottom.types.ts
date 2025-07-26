@@ -1,3 +1,5 @@
+import type { FooterTranslations } from '../../NexFooter.types';
+
 export interface SocialLink {
   type: string;
   url: string;
@@ -8,4 +10,5 @@ export interface FooterBottomProps {
   socials?: SocialLink[];
   variant?: 'default' | 'contact';
   theme?: 'auto' | 'light' | 'black-glass';
+  translations?: FooterTranslations;
 } 

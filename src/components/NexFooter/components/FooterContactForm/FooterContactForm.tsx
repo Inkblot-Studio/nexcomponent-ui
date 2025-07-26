@@ -3,13 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { useFooterAnimations } from '../../animations';
 import { FooterContactFormProps } from './FooterContactForm.types';
+import { getTranslations } from '../../utils/translations';
 import './FooterContactForm.scss';
 
 const FooterContactForm: React.FC<FooterContactFormProps> = ({
   contact,
   variant = 'contact',
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  const t = getTranslations(translations);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,7 +67,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         }}
         transition={animations.hover}
       >
-        {contact.title || 'Get in Touch'}
+        {contact.title || t.getInTouch}
       </motion.h3>
       
       {/* Description */}
@@ -93,7 +96,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
             exit="exit"
           >
             <CheckCircle size={16} />
-            <span>Message sent successfully!</span>
+            <span>{t.messageSentSuccessfully}</span>
           </motion.div>
         )}
         
@@ -129,7 +132,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
           <Mail size={16} />
           <input
             type="email"
-            placeholder="Your email address"
+            placeholder={t.yourEmailAddress}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onFocus={() => setFocusedField('email')}
@@ -150,7 +153,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
         >
           <MessageCircle size={16} />
           <textarea
-            placeholder={contact.placeholder || "Tell us about your project or inquiry..."}
+            placeholder={contact.placeholder || t.tellUsAboutProject}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onFocus={() => setFocusedField('message')}
@@ -197,7 +200,7 @@ const FooterContactForm: React.FC<FooterContactFormProps> = ({
                 className="nex-footer-contact-form__button-content"
               >
                 <Send size={16} />
-                <span>Send Message</span>
+                <span>{t.sendMessage}</span>
               </motion.div>
             )}
           </AnimatePresence>

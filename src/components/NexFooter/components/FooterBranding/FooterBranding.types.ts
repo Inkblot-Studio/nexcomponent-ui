@@ -1,3 +1,5 @@
+import type { FooterTranslations } from '../../NexFooter.types';
+
 export interface FooterBrandingProps {
   logoSrc?: string;
   displayName: string;
@@ -10,4 +12,5 @@ export interface FooterBrandingProps {
   };
   variant?: 'default' | 'contact';
   theme?: 'auto' | 'light' | 'black-glass';
+  translations?: FooterTranslations;
 } 

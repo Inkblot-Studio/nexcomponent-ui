@@ -189,6 +189,8 @@ export type NexNavProps = {
 
   /** Available language options for the language switcher */
   languageOptions: LanguageOption[];
+  /** Current locale/language code */
+  currentLocale?: string;
   /** Callback function called when language/locale changes */
   onLocaleChange?: (code: string) => void;
 

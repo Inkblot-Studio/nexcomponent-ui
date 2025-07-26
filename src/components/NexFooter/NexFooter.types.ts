@@ -5,6 +5,30 @@ import type { ContactForm } from './components/FooterContactForm/FooterContactFo
 export type { SocialLink, FooterSection, FooterLink, ContactForm };
 
 /**
+ * Translation keys for the footer component
+ */
+export interface FooterTranslations {
+  // Footer bottom
+  allRightsReserved?: string;
+  followUsOn?: string;
+  
+  // Contact form
+  getInTouch?: string;
+  messageSentSuccessfully?: string;
+  yourEmailAddress?: string;
+  tellUsAboutProject?: string;
+  sendMessage?: string;
+  
+  // Newsletter
+  successfullySubscribed?: string;
+  stayUpdated?: string;
+  subscribe?: string;
+  
+  // Agency attribution
+  madeByInkblotStudio?: string;
+}
+
+/**
  * Props for the NexFooter component
  * 
  * A comprehensive footer component with branding, navigation sections,
@@ -84,4 +108,15 @@ export interface NexFooterProps {
   theme?: 'light' | 'auto' | 'black-glass';
   /** Additional CSS classes */
   className?: string;
+  
+  /** Optional translations for footer text */
+  translations?: FooterTranslations;
+  
+  /** Agency attribution configuration */
+  agencyAttribution?: {
+    /** Website URL for the agency link */
+    websiteUrl?: string;
+    /** Whether to open the link in a new tab */
+    openInNewTab?: boolean;
+  };
 }

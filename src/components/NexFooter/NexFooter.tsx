@@ -7,6 +7,7 @@ import FooterSections from './components/FooterSections/index';
 import FooterBottom from './components/FooterBottom/index';
 import FooterContactForm from './components/FooterContactForm/index';
 import { useFooterAnimations } from './animations';
+import { getTranslations } from './utils/translations';
 import './NexFooter.scss';
 
 const NexFooter: React.FC<NexFooterProps> = ({
@@ -20,8 +21,11 @@ const NexFooter: React.FC<NexFooterProps> = ({
   socials = [],
   variant = 'default',
   theme = 'auto',
-  className = ''
+  className = '',
+  translations,
+  agencyAttribution
 }) => {
+  const t = getTranslations(translations);
   const animations = useFooterAnimations();
 
   // Determine theme class
@@ -70,6 +74,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
                 newsletter={newsletter}
                 variant={variant}
                 theme={theme}
+                translations={translations}
               />
             </motion.div>
 
@@ -107,6 +112,7 @@ const NexFooter: React.FC<NexFooterProps> = ({
                     contact={contact}
                     variant={variant}
                     theme={theme}
+                    translations={translations}
                   />
                 </motion.div>
               )}
@@ -124,9 +130,50 @@ const NexFooter: React.FC<NexFooterProps> = ({
             socials={socials}
             variant={variant}
             theme={theme}
+            translations={translations}
           />
         </motion.div>
       </FooterContainer>
+      
+      {/* Agency Attribution */}
+      <motion.div
+        className="nex-footer-agency-attribution"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        style={{
+          textAlign: 'center',
+          padding: '1rem',
+          fontSize: '0.875rem',
+          color: theme === 'black-glass' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+          backgroundColor: theme === 'black-glass' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.8)',
+          borderTop: theme === 'black-glass' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)'
+        }}
+      >
+        {agencyAttribution?.websiteUrl ? (
+          <a
+            href={agencyAttribution.websiteUrl}
+            target={agencyAttribution.openInNewTab ? '_blank' : '_self'}
+            rel={agencyAttribution.openInNewTab ? 'noopener noreferrer' : undefined}
+            style={{
+              color: 'inherit',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              transition: 'opacity 0.2s ease-in-out'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.8';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
+            }}
+          >
+            {t.madeByInkblotStudio}
+          </a>
+        ) : (
+          t.madeByInkblotStudio
+        )}
+      </motion.div>
     </motion.footer>
   );
 };

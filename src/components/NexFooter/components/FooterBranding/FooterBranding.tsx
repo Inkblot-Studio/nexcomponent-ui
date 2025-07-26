@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
 import { FooterBrandingProps } from './FooterBranding.types';
+import { getTranslations } from '../../utils/translations';
 import './FooterBranding.scss';
 
 const FooterBranding: React.FC<FooterBrandingProps> = ({
@@ -12,8 +13,10 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
   showLogoText = true,
   newsletter,
   variant = 'default',
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  const t = getTranslations(translations);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -162,7 +165,7 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
                 exit="exit"
               >
                 <CheckCircle size={14} />
-                <span>Successfully subscribed!</span>
+                <span>{t.successfullySubscribed}</span>
               </motion.div>
             )}
             
@@ -196,7 +199,7 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
               <Mail size={16} />
               <input
                 type="email"
-                placeholder={newsletter.placeholder || "Stay updated"}
+                placeholder={newsletter.placeholder || t.stayUpdated}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -234,7 +237,7 @@ const FooterBranding: React.FC<FooterBrandingProps> = ({
                     exit={{ opacity: 0 }}
                     transition={timing.fast}
                   >
-                    Subscribe
+                    {t.subscribe}
                   </motion.span>
                 )}
               </AnimatePresence>

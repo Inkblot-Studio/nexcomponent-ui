@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useAnimationConfig } from '../../../../utils/animationConfig';
 import { FooterBottomProps } from './FooterBottom.types';
+import { getTranslations } from '../../utils/translations';
 import './FooterBottom.scss';
 
 // Social Icons Mapping with proper sizing
@@ -17,8 +18,10 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
   displayName,
   socials = [],
   variant = 'default',
-  theme = 'auto'
+  theme = 'auto',
+  translations
 }) => {
+  const t = getTranslations(translations);
   const { timing, shouldReduceMotion } = useAnimationConfig();
   const currentYear = new Date().getFullYear();
 
@@ -50,7 +53,7 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
           }}
           transition={timing.fast}
         >
-          © {currentYear} {displayName}. All rights reserved.
+          © {currentYear} {displayName}. {t.allRightsReserved}
         </motion.div>
 
         {/* Social Links */}
@@ -72,7 +75,7 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`nex-footer-bottom__social-link ${social.type}`}
-                  aria-label={`Follow us on ${social.type}`}
+                  aria-label={`${t.followUsOn} ${social.type}`}
                   whileHover={{ 
                     opacity: 0.9,
                     color: theme === 'black-glass' ? '#ffffff' : undefined
