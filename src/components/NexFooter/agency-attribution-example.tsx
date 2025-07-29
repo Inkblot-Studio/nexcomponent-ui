@@ -10,7 +10,7 @@ const AgencyAttributionExample: React.FC = () => {
   const [currentExample, setCurrentExample] = useState<'basic' | 'clickable' | 'custom-text' | 'no-link' | 'same-tab'>('basic');
 
   // Sample footer data
-  const baseFooterProps: Partial<NexFooterProps> = {
+  const baseFooterProps: Omit<NexFooterProps, 'displayName'> & { displayName: string } = {
     displayName: 'MyApp',
     tagline: 'Building amazing experiences with premium components',
     sections: [
