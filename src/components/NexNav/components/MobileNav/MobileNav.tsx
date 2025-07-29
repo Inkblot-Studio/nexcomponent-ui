@@ -254,7 +254,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   <h3 className="nex-mobile-nav-user-name">{user.name}</h3>
                                      <motion.div 
                      className="nex-mobile-nav-user-tier"
-                     onClick={onSubscriptionClick}
+                     onClick={() => {
+                       onSubscriptionClick();
+                       onClose();
+                     }}
                      transition={spring.fast}
                    >
                      {subscription?.tier === 'pro' ? t.pro : t.free}
@@ -271,7 +274,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
               >
                                  <motion.button
                    className="nex-mobile-nav-signup-btn"
-                   onClick={onLogin}
+                   onClick={() => {
+                     onLogin();
+                     onClose();
+                   }}
                                whileHover={{
                backgroundColor: isBlackGlass ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.15)",
                borderColor: isBlackGlass ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.2)",
@@ -287,7 +293,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                  </motion.button>
                  <motion.button 
                    className="nex-mobile-nav-login-link"
-                   onClick={onLogin}
+                   onClick={() => {
+                     onLogin();
+                     onClose();
+                   }}
                    whileHover={{ 
                      opacity: 0.8
                    }}
@@ -345,6 +354,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       handleNavItemToggle(index);
                     } else if (item.onClick) {
                       item.onClick();
+                      onClose();
                     }
                   }}
                   whileHover={variants.interactive.navItem.hover}
@@ -384,6 +394,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                               e.stopPropagation();
                               if (!subItem.disabled) {
                                 subItem.onClick();
+                                onClose();
                               }
                             }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
@@ -468,6 +479,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         onClick={() => {
                           onLocaleChange(lang.code);
                           setOpenDropdown(null);
+                          onClose();
                         }}
                         style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                         variants={variants.mobileNav.dropdownItem}
@@ -540,7 +552,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onProfile && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onProfile}
+                            onClick={() => {
+                              onProfile();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -554,7 +569,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onEndorsementsClick && endorsementCount !== undefined && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onEndorsementsClick}
+                            onClick={() => {
+                              onEndorsementsClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -577,7 +595,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onSubscriptionClick && subscription && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onSubscriptionClick}
+                            onClick={() => {
+                              onSubscriptionClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -656,7 +677,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onActivityLogClick && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onActivityLogClick}
+                            onClick={() => {
+                              onActivityLogClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -670,7 +694,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onSecurityClick && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onSecurityClick}
+                            onClick={() => {
+                              onSecurityClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -684,7 +711,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onIntegrationsClick && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onIntegrationsClick}
+                            onClick={() => {
+                              onIntegrationsClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)', marginBottom: 'var(--nex-spacing-xs)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -698,7 +728,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         {onAdminPanelClick && (
                           <motion.div
                             className="nex-mobile-nav-item"
-                            onClick={onAdminPanelClick}
+                            onClick={() => {
+                              onAdminPanelClick();
+                              onClose();
+                            }}
                             style={{ marginLeft: 'var(--nex-spacing-md)' }}
                             variants={variants.mobileNav.dropdownItem}
                             whileHover={variants.interactive.navItem.hover}
@@ -725,7 +758,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
             >
               <motion.div 
                 className="nex-mobile-nav-item danger"
-                onClick={onLogout}
+                onClick={() => {
+                  onLogout();
+                  onClose();
+                }}
                 variants={variants.mobileNav.navItem}
                 whileHover={{ 
                   backgroundColor: "rgba(255, 24, 1, 0.1)"
