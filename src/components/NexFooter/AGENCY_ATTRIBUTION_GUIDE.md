@@ -54,8 +54,8 @@ interface AgencyAttribution {
   - Example: `'https://inkblotstudio.com'`
 
 - **`openInNewTab`** (optional): Controls link behavior
-  - `true` (default): Opens the link in a new tab/window
-  - `false`: Opens the link in the same tab
+  - `true`: Opens the link in a new tab/window
+  - `false` (default): Opens the link in the same tab
   - Only applies when `websiteUrl` is provided
 
 ## Examples

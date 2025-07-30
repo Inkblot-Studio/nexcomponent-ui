@@ -72,8 +72,6 @@ const FooterBottom: React.FC<FooterBottomProps> = ({
                 <motion.a
                   key={index}
                   href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={`nex-footer-bottom__social-link ${social.type}`}
                   aria-label={`${t.followUsOn} ${social.type}`}
                   whileHover={{ 

@@ -72,8 +72,6 @@ const FooterSections: React.FC<FooterSectionsProps> = ({
               >
                 <motion.a 
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="nex-footer-sections__link"
                   whileHover={{ 
                     opacity: 0.8
